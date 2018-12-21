@@ -249,7 +249,7 @@ class DataGrid1 extends Component {
                 setValuesOfVisibleColumnConfig = {this.setValuesOfVisibleColumnConfig}
               />
             </div>
-            <div>
+            <div className = "advance-search">
               <AdvanceSearch
                 metaData = {this.state.metaData}
                 getAllStudentsAction = {this.props.getAllStudentsAction}
@@ -258,7 +258,7 @@ class DataGrid1 extends Component {
               />
             </div>
             <div className="advance-filter">
-              <button onClick={this.openAdvanceFilter}>Advance Filter</button>
+              {/*<button onClick={this.openAdvanceFilter}>Advance Filter</button>*/}
               {/*<AdvanceFilter
                 advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
                 closeAdvanceFilter = {this.closeAdvanceFilter}

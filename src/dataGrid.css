@@ -201,7 +201,7 @@ html,body {
 }
 .pagination-wrapper {
     display:block !important;
-    margin-left: 0px;
+    margin-left: 0px !important;
 }
 .page-number-arrow-for-margin {
     display:inline-block;
@@ -428,7 +428,7 @@ html,body {
     outline: none;
     cursor: pointer;
     text-transform: uppercase;
-    padding: 8px 10px !important;
+    padding: 13px 10px !important;
     height: auto !important;
     font-size: 14px !important;
     margin: 2px 0px 5px !important;
@@ -437,6 +437,7 @@ html,body {
 }
 .column-option-container:hover {
     transition: 0.3s all;
+    box-shadow: 1px 1.6px 2px #b0b0b0;
     border: 1px solid #d24c0c !important;
     background: #d24c0c !important;
 }
@@ -540,7 +541,7 @@ html,body {
     -webkit-box-shadow: 1px 2.2px 9px -3px #c6c7c7 !important;
     border-radius: 4px;
     box-shadow: 1px 2.2px 9px -3px #c6c7c7 !important;
-    margin: 10px 10px;
+    margin: 15px 10px 10px;
 }
 @media (max-width: 425px){
     .search-input-bar {
@@ -595,10 +596,14 @@ html,body {
 }
 .model{
     margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
+    display: -ms-flexbox;
+    display: block;
+    /* flex: 1; */
+    -ms-flex-pack: justify;
+    /* justify-content: flex-end; */
 }
 .column-option{
+    display:inline-block;
     margin-left: 10px;
 }
 .advance-filter{
@@ -616,4 +621,66 @@ html,body {
 }
 .table-drawer.table-drawer__bottom {
     margin: 0px 0 70px;
+}
+.search-input-advance {
+    color: #66727c;
+    padding:5px;
+    border: 1px solid #e6e4e4;
+    overflow: unset;
+    width: auto;
+    outline: none;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px 0px #e0dbdb;
+    -webkit-box-shadow: 0px 1px 3px 0px #e0dbdb;
+    background-color: #fff;
+}
+.search-input-advance:focus {
+    background-color: #fdfdfd !important;
+    box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 3px rgba(0, 0, 0, 0.1) !important;
+}
+.advance-search {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    border-radius: 4px;
+    padding: 5px 10px 4px 0px;
+    box-shadow: 1px 2.2px 9px -3px #c6c7c7 !important;
+    background: rgb(244, 248, 249) !important;
+}
+.advance-search-button {
+    border-radius: 4px ;
+    background-color: #f1771f;
+    border: 1px solid #f1771f;
+    color: white;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    height: 100%;
+    font-size: 14px;
+    margin-top: 0px;
+    -webkit-box-shadow: 1px 1.2px 3px 0px #b0b0b0;
+    box-shadow: 1px 1.2px 3px 0px #b0b0b0;
+}
+.advance-search-button:hover {
+    -webkit-transition: 0.2s all;
+    -o-transition: 0.2s all;
+    transition: 0.2s all;
+    -webkit-box-shadow: 1px 1.6px 2px #b0b0b0;
+    box-shadow: 1px 1.6px 2px #b0b0b0;
+    border: 1px solid #d24c0c !important;
+    background: #d24c0c !important;
+}
+.advance-input-radio {
+    display: inline-flex;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.advance-input-radio label:first-child {
+    margin-right:0px;
+}
+input[type = 'radio']:checked {
+    background:orange;
 }
