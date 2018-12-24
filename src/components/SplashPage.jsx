@@ -29,7 +29,10 @@ import {
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
-import {setRedirect} from './DataGrid';
+import { setRedirect } from './DataGrid';
+
+import Context from "./coreComponents/ConfigProvider";
+
 class SplashPage extends Component {
   constructor(props) {
     super(props);
@@ -211,26 +214,28 @@ class SplashPage extends Component {
     }
   }
 
+
   render() {
-    if (this.state.isURLParams) {
-      return <Switch><Redirect to={'/studentCorrection'} /></Switch>
-    }
-    return (
-      <div className={'landingPageContainer'}>
-        <h2>{yjsgHeader}</h2>
-        <div className={'landingPageContent'}>
-          <div className={'yjsgEventInfo'}>
-            <h5 className="primary-color">{eventDate}</h5>
-            <h5>{eventVenue}</h5>
+      if (this.state.isURLParams) {
+        return <Switch><Redirect to={'/studentCorrection'} /></Switch>
+      }
+      return (
+        <div className={'landingPageContainer'}>
+          <h2>{yjsgHeader}</h2>
+          <div className={'landingPageContent'}>
+            <div className={'yjsgEventInfo'}>
+              <h5 className="primary-color">{eventDate}</h5>
+              <h5>{eventVenue}</h5>
+            </div>
+            <div className={'landingPageLogo'}>
+              <img src={yjsgLogo} alt={'yjsg logo'} />
+            </div>
+            <div className={'landingPageButtonContainer'}>
+              {this.renderLoginField()}
+            </div>
           </div>
-          <div className={'landingPageLogo'}>
-            <img src={yjsgLogo} alt={'yjsg logo'} />
-          </div>
-          <div className={'landingPageButtonContainer'}>
-            {this.renderLoginField()}
-          </div>
-      </div>
-    </div>)
+        </div>
+      );
   }
 }
 

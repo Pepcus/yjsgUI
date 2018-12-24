@@ -1,12 +1,12 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 import Routes from './Routes';
 
 const AppContainer = () => (
-  <HashRouter>
-    <Routes />
-  </HashRouter>
+    <HashRouter>
+      <Route path={'/'} component={Routes}/>
+    </HashRouter>
 );
 
 export default AppContainer;

@@ -74,10 +74,10 @@ class StudentRegistrationCorrectionForm extends Component {
         optIn2018: {},
       },
     };
-
     this._submitStudentData = this.submitStudentData.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
   }
+
 
   checkError(studentData) {
     let errorMessageObject = extend(cloneDeep(this.state.errorMessage),
@@ -182,7 +182,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <h5>{infoUpdateSuccessMessage}</h5>
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath={'/splashPrePopulated'}
+              linkPath={this.props.context.previousLocation}
             />
           </div>
         </div>
@@ -195,7 +195,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <h5>{noInfoChangeMessage}</h5>
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath={'/splashPrePopulated'}
+              linkPath={this.props.context.previousLocation}
             />
           </div>
         </div>
@@ -205,7 +205,6 @@ class StudentRegistrationCorrectionForm extends Component {
 
   renderClassAttended2017() {
     if(this.props.studentData.classAttended2017) {
-      // Disable the field when student has entered previous class attended data
       return (
         <InputField
           type={'text'}
@@ -365,7 +364,7 @@ class StudentRegistrationCorrectionForm extends Component {
             />
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath={'/splashPrePopulated'}
+              linkPath={this.props.context.previousLocation}
             />
           </div>
         </div>
@@ -523,7 +522,7 @@ class StudentRegistrationCorrectionForm extends Component {
               />
               <LinkButton
                 buttonText={goBackBtnText}
-                linkPath={'/splashPrePopulated'}
+                linkPath={this.props.context.previousLocation}
               />
             </div>
           </div>
@@ -546,7 +545,7 @@ class StudentRegistrationCorrectionForm extends Component {
               <h5>{invalidIdMessage}</h5>
               <LinkButton
                 buttonText={goBackBtnText}
-                linkPath={'/splashPrePopulated'}
+                linkPath={this.props.context.previousLocation}
               />
             </div>
           </div>
