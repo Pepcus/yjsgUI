@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import SplashPage from '../SplashPage';
 import StudentRegistrationForm from '../StudentRegistrationForm';
