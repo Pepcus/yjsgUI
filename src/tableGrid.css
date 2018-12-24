@@ -93,7 +93,7 @@
     max-width: 65px;
 }
 .cell__address {
-    min-width: 395px;
+    min-width: 320px;
 }
 .cell__education {
     max-width: 120px;
@@ -104,21 +104,4 @@
 .cell__edit {
     max-width: 78px;
 }
-.input-radio {
-    padding: 4px 0 5px;
-    display: inline-block;
-    float:right;
-}
-.input-radio input-radio-container {
-    margin-right: 10px;
-}
-.input-radio input[type = 'radio'] {
-    height: 15px;
-    width: 16px;
-    margin: 5px 5px 0px 12px;
-}
-.input-radio label {
-    color: #707173;
-    margin-right:10px;
-    font-size: 18px;
-}
+

@@ -239,7 +239,7 @@ class DataGrid1 extends Component {
     if(!isEmpty(students) && this.props.redirect && this.props.adminLoginState) {
       return(
         <div>
-          <div className="model">
+          <div className="modal">
             <div className="column-option">
               <button className="column-option-container" onClick={this.openColumnOption}>Column Options</button>
               <ColumnConfig

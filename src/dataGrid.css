@@ -162,7 +162,7 @@ html,body {
     outline: none !important;
     border-radius: 4px !important;
     background-color: #fff !important;
-    box-shadow: none !important;
+    box-shadow: 0px 1px 1px 0px #edebeb !important;
 }
 .filter-column {
     margin: 0px 10px 0 0 !important;
@@ -239,11 +239,12 @@ html,body {
 .search-input-column {
     width: 100% !important;
     /*box-shadow: 0 -1px 8px -4px #777978 !important;*/
-    box-shadow: inset 0px 0px 0.2px rgba(0, 0, 0, 0.2) !important;
+    /*box-shadow: inset 0px 0px 0.2px rgba(0, 0, 0, 0.2) !important;*/
 }
 .search-input-column:focus {
-    background-color: #fdfdfd !important;
-    box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 3px rgba(0, 0, 0, 0.1) !important;
+    background-color: #fefefe !important;
+    -webkit-box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 3px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: inset 4px 6px 6px rgba(0, 0, 0, 0.01), 0px 1px 0.8px rgba(0, 0, 0, 0.1) !important;
 }
 .clearFilterButton {
     border-radius: 4px !important;
@@ -428,7 +429,7 @@ html,body {
     outline: none;
     cursor: pointer;
     text-transform: uppercase;
-    padding: 13px 10px !important;
+    padding: 15px 10px !important;
     height: auto !important;
     font-size: 14px !important;
     margin: 2px 0px 5px !important;
@@ -521,7 +522,7 @@ html,body {
 }
 .student-information-wrapper {
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
     padding: 30px;
     background-color: rgba(255,255,255,0.8);
     display: -ms-flexbox;
@@ -533,7 +534,10 @@ html,body {
     align-items: center;
 }
 .student-information-wrapper .buttonContainer {
-    margin:0;
+    display: inline-block;
+    width:auto;
+    transform: translate(0%,-50%);
+    margin-top: 20px;
 }
 .table-drawer__top {
     background: rgb(244, 248, 249) !important;
@@ -594,7 +598,7 @@ html,body {
 .save-buttom {
     margin-left: 5px;
 }
-.model{
+.modal{
     margin-top: 5px;
     display: -ms-flexbox;
     display: block;
@@ -674,7 +678,7 @@ html,body {
 }
 .advance-input-radio {
     display: inline-flex;
-    margin-right: 10px;
+    margin-right: 20px;
     justify-content: center;
     align-items: center;
 }
@@ -683,4 +687,25 @@ html,body {
 }
 input[type = 'radio']:checked {
     background:orange;
+}
+.search__rectangle {
+    bottom: 2px !important;
+}
+.input-radio {
+    padding: 4px 0 5px;
+    display: inline-block;
+    float:right;
+}
+.input-radio input-radio-container {
+    margin-right: 10px;
+}
+.input-radio input[type = 'radio'] {
+    height: 15px;
+    width: 16px;
+    margin: 5px 5px 0px 12px;
+}
+.input-radio label {
+    color: #707173;
+    /*margin-right:10px;*/
+    font-size: 18px;
 }
