@@ -257,15 +257,15 @@ class DataGrid1 extends Component {
                 onFiIlter = {this.onFiIlter}
               />
             </div>
-            <div className="advance-filter">
+            {/*<div className="advance-filter">
               {/*<button onClick={this.openAdvanceFilter}>Advance Filter</button>*/}
-              {/*<AdvanceFilter
+              <AdvanceFilter
                 advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
                 closeAdvanceFilter = {this.closeAdvanceFilter}
                 setInputValue = {this.setInputValue}
                 setStudentData = {this.setStudentData}
-              />*/}
-            </div>
+              />
+            </div>*/}
           </div>
           { this.redirectToStudentCorrection() }
           {this.renderDataGrid()}
