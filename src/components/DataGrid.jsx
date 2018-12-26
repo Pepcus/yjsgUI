@@ -150,6 +150,7 @@ class DataGrid1 extends Component {
     this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
     this.renderDataGrid = this.renderDataGrid.bind(this);
     this.onFiIlter = this.onFiIlter.bind(this);
+    this.redirectToStudentCorrection = this.redirectToStudentCorrection.bind(this);
   }
   componentWillMount(){
     this.setState({
@@ -202,7 +203,10 @@ class DataGrid1 extends Component {
 
   redirectToStudentCorrection() {
     if (this.state.isStudentDataSet){
-      return <Redirect to={'/studentCorrection'}/>
+      return (
+        <div>
+          <Redirect to={'/studentCorrection'}/>
+        </div> );
     }
     return null;
   }
@@ -258,7 +262,7 @@ class DataGrid1 extends Component {
               />
             </div>
             {/*<div className="advance-filter">
-              {/*<button onClick={this.openAdvanceFilter}>Advance Filter</button>*/}
+              <button onClick={this.openAdvanceFilter}>Advance Filter</button>
               <AdvanceFilter
                 advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
                 closeAdvanceFilter = {this.closeAdvanceFilter}
@@ -267,7 +271,7 @@ class DataGrid1 extends Component {
               />
             </div>*/}
           </div>
-          { this.redirectToStudentCorrection() }
+          {this.redirectToStudentCorrection()}
           {this.renderDataGrid()}
         </div>
       );
