@@ -31,7 +31,6 @@ html,body {
 }
 .landingPageButtonContainer .inputText {
     padding: 7px 5px;
-    /* height: 15px; */
 }
 .inputWrapperContainer label {
     font-size:14px;
@@ -40,7 +39,6 @@ html,body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*background-color: #fffcc9;*/   /*old background color*/
     background-color: #f4e9e338;
 }
 .landingPageContainer h2 {
@@ -59,7 +57,6 @@ html,body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*!*box-shadow: 0 2px 4px 0px #eeecec;*! box-shadow previous set*/
     box-shadow: 0 2px 1px 0px #eeecec;
     background-color: #ffffff;
     flex-direction: column;
@@ -78,7 +75,6 @@ html,body {
 }
 .linkButton {
     color: rgb(255, 255, 255);
-    /*background-color: #ee7c2a;*/
     background-color:#f9570a;
     outline:none;
     letter-spacing: 0.5px;
@@ -98,7 +94,6 @@ html,body {
 }
 .buttonOrange {
     color: rgb(255, 255, 255);
-    /*background-color: #ee7c2a;*/
     outline:none;
     background-color: #f9570a;
     box-shadow: 0 1px 2.5px 0px #777978;
@@ -122,7 +117,6 @@ html,body {
     padding: 0px !important;
     margin: 16px 10px 0 !important;
     border: 1px solid #cf4707 !important;
-    /* width: auto; */
     overflow: auto !important;
     display: grid !important;
 }
@@ -169,7 +163,6 @@ html,body {
     padding:5px;
     clear: both !important;
     overflow: hidden !important;
-    /* margin-left: 8px; */
     height:auto !important;
     width: auto !important;
 }
@@ -187,7 +180,6 @@ html,body {
     width: auto;
 }
 .wrapper-pagination-search {
-    /*padding: 4px 0;*/
     padding:0px !important;
 }
 .row {
@@ -197,7 +189,6 @@ html,body {
     align-items: center;
     border-bottom: 1px solid #cf4707 !important;
     border-left: 1px solid #c2c1bf !important;
-    /* height: auto; */
 }
 .pagination-wrapper {
     display:block !important;
@@ -238,8 +229,6 @@ html,body {
 }
 .search-input-column {
     width: 100% !important;
-    /*box-shadow: 0 -1px 8px -4px #777978 !important;*/
-    /*box-shadow: inset 0px 0px 0.2px rgba(0, 0, 0, 0.2) !important;*/
 }
 .search-input-column:focus {
     background-color: #fefefe !important;
@@ -256,7 +245,6 @@ html,body {
     outline:none;
     cursor: pointer;
     text-transform:uppercase;
-    /*padding: 0px 9px;*/
     padding: 0px 10px !important;
     height: 100% !important;
     font-size: 14px !important;
@@ -271,7 +259,6 @@ html,body {
     background: #d24c0c !important;
 }
 .link {
-    /* height: 65%; */
     height:auto !important;
     margin: 0px !important;
     font-size: 14px !important;
@@ -310,7 +297,6 @@ html,body {
     cursor:pointer;
     margin: 1px 3px !important;
     box-shadow: none !important;
-    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
     border-radius: 4px !important;
 }
 .page-number-arrow:hover {
@@ -325,7 +311,6 @@ html,body {
 .page-number-arrow:hover .arrowIcon {
     transition: 0.3s all;
     color: rgb(76, 76, 76) !important;
-    /*color: #fff !important;*/
 }
 .table-footer-cell {
     cursor:pointer;
@@ -358,7 +343,6 @@ html,body {
     width: 100% !important;
     overflow: hidden !important;
     background-color: rgb(244, 248, 249) !important;
-    /*background-color: rgb(242, 240, 229) !important;*/
 }
 .table-body-row:nth-child(2n+1) {
     font-size: 15px;
@@ -433,7 +417,6 @@ html,body {
     height: auto !important;
     font-size: 14px !important;
     margin: 2px 0px 5px !important;
-    /* margin-top: 5px; */
     box-shadow: 1px 1px 5px 0px #b0b0b0;
 }
 .column-option-container:hover {
@@ -574,7 +557,6 @@ html,body {
         height: 10px !important;
         padding: 8px !important;
         right:45px !important;
-        /* text-align: center; */
         display: inline-table !important;
         transition: transform .2s !important;
     }
@@ -591,7 +573,6 @@ html,body {
     display: flex;
     background-color: #f3f8fdd4;
     padding:20px;
-    /*align-items: center;*/
     justify-content: center;
     margin-left: 10px;
 }
@@ -599,12 +580,11 @@ html,body {
     margin-left: 5px;
 }
 .modal{
-    margin-top: 5px;
+    margin-top: 60px;
     display: -ms-flexbox;
-    display: block;
-    /* flex: 1; */
+    display: flex;
     -ms-flex-pack: justify;
-    /* justify-content: flex-end; */
+    justify-content: space-between;
 }
 .column-option{
     display:inline-block;
@@ -694,7 +674,6 @@ input[type = 'radio']:checked {
 .input-radio {
     padding: 4px 0 5px;
     display: inline-block;
-    float:right;
 }
 .input-radio input-radio-container {
     margin-right: 10px;
@@ -706,6 +685,29 @@ input[type = 'radio']:checked {
 }
 .input-radio label {
     color: #707173;
-    /*margin-right:10px;*/
     font-size: 18px;
+}
+html, body, #root, #root>div, .student-information-Container {
+    height: 100%;
+}
+.student-information-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fffcc9;
+}
+.student-information-Container h2 {
+    position: fixed;
+    top: 0;
+    background: #ee7c2a;
+    padding: 15px 0;
+    margin: 0;
+    color: #fff;
+    font-size: 26px;
+    width: 100%;
+    text-align: center;
+}
+.student-information-Container h2 {
+    font-size: 22px;
+    padding: 10px 0;
 }

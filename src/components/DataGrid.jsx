@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Redirect } from 'react-router-dom';
 
 import ColumnConfig from './ColumnConfig';
+import LinkButton from './commonComponents/LinkButton';
 import { allStudentsData } from '../reducers/studentRegistrationReducer';
 import { getAllStudentsAction, setStudentDataAction } from  '../actions/studentRegistrationActions';
 import {
@@ -12,6 +13,10 @@ import {
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
+import {
+  yjsgHeader,
+  goBackBtnText,
+} from '../utils/yjsgConstants';
 
 const gridMetaData = [
   {
@@ -88,7 +93,7 @@ const gridHeaderData = () => ({
   headerConfig: gridMetaData,
   topDrawer: {
     'pagination': false,
-    'globalSearch': true,
+    'globalSearch': false,
     'totalRecord': false,
     'clearButton': true,
     'exportButton': true,
@@ -151,6 +156,7 @@ class DataGrid1 extends Component {
     this.renderDataGrid = this.renderDataGrid.bind(this);
     this.onFiIlter = this.onFiIlter.bind(this);
     this.redirectToStudentCorrection = this.redirectToStudentCorrection.bind(this);
+    this.redirectToAdminLogin = this.redirectToAdminLogin.bind(this);
   }
   componentWillMount(){
     this.setState({
@@ -200,7 +206,6 @@ class DataGrid1 extends Component {
       });
     }
   }
-
   redirectToStudentCorrection() {
     if (this.state.isStudentDataSet){
       return (
@@ -214,9 +219,6 @@ class DataGrid1 extends Component {
     <div className = "btn-block"><button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
       Edit</button>
     </div>
-  );
-  DeleteButton = ({ rowData }) => (
-    <div><button onClick={() => { alert(`First Name: ${rowData.firstName}, Last Name: ${rowData.lastName}`); }}>Delete</button></div>
   );
   componentDidMount() {
     this.props.getAllStudentsAction();
@@ -238,12 +240,30 @@ class DataGrid1 extends Component {
       <DataGrid data={this.state.students}  metaData={this.state.metaData}  styles={getStyles()} />
     );
   }
+  redirectToAdminLogin(){
+    return <Redirect to={'/adminPanel'}/>
+  }
   render(){
     const { students, } = this.state;
     if(!isEmpty(students) && this.props.redirect && this.props.adminLoginState) {
       return(
         <div>
+        <div className={'student-information-Container'}>
+          <h2>{yjsgHeader}</h2>
+        </div>
           <div className="modal">
+            <LinkButton
+              buttonText={goBackBtnText}
+              linkPath={'/adminPanel'}
+            />
+            <div>
+              <AdvanceSearch
+                metaData = {this.state.metaData}
+                getAllStudentsAction = {this.props.getAllStudentsAction}
+                students = {this.props.students}
+                onFiIlter = {this.onFiIlter}
+              />
+            </div>
             <div className="column-option">
               <button className="column-option-container" onClick={this.openColumnOption}>Column Options</button>
               <ColumnConfig
@@ -253,15 +273,7 @@ class DataGrid1 extends Component {
                 setValuesOfVisibleColumnConfig = {this.setValuesOfVisibleColumnConfig}
               />
             </div>
-            <div className = "advance-search">
-              <AdvanceSearch
-                metaData = {this.state.metaData}
-                getAllStudentsAction = {this.props.getAllStudentsAction}
-                students = {this.props.students}
-                onFiIlter = {this.onFiIlter}
-              />
-            </div>
-            {/*<div className="advance-filter">
+            {/*<div>
               <button onClick={this.openAdvanceFilter}>Advance Filter</button>
               <AdvanceFilter
                 advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
@@ -275,15 +287,26 @@ class DataGrid1 extends Component {
           {this.renderDataGrid()}
         </div>
       );
-
     }
     if(isEmpty(students)){
       return(
-        <div> Student data is not present</div>
+        <div className={'errorPopupContainer'}>
+          <div className={"popup"}>
+            <div className={"popupContainer"}>
+              <h5>Student data is not present</h5>
+              <LinkButton
+                buttonText={goBackBtnText}
+                linkPath={'/dataGrid'}
+              />
+            </div>
+          </div>
+        </div>
       );
     }
     return(
-      <div> Please Login...</div>
+      <div>
+      { this.redirectToAdminLogin() }
+      </div>
     );
   }
 }

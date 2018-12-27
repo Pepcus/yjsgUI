@@ -12,14 +12,20 @@ class AdvanceSearch extends Component {
     this.onAdvanceSearchChange = this.onAdvanceSearchChange.bind(this);
     this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
   }
   setInputValue(e){
-    if(isEmpty(e.target.value)){
-      this.props.onFiIlter(this.props.students);
-    }
     this.setState({
       inputValue: e.target.value,
     });
+  }
+  clearFilter(){
+    if(!isEmpty(this.state.inputValue)) {
+      this.setState({
+        inputValue: '',
+      });
+    }
+    this.props.onFiIlter(this.props.students);
   }
   onChangeCheckBox(e) {
     this.setState({
@@ -51,10 +57,8 @@ class AdvanceSearch extends Component {
     return(
       <div className = "input-radio">
         <div className = "advance-input-radio">
-
             <div className="input-radio-container">
               <input type="radio" name="thresholdValue" value="0.0" onChange={this.onChangeCheckBox}  defaultChecked />
-              {/*<span className="label-text"></span>*/}
               <label htmlFor = "normal_search">Normal Search</label>
             </div>
             <div className="input-radio-container">
@@ -64,10 +68,15 @@ class AdvanceSearch extends Component {
         </div>
         <label htmlFor = "search_input">
           <input type="text" onChange={this.setInputValue} className = "search-input-advance"/>
-          <div className="search"><div className="search__circle"></div><div className="search__rectangle"></div></div>
+          <div className="search"><div className="search__circle"></div>
+            <div className="search__rectangle">
+
+            </div>
+          </div>
         </label>
 
         <button onClick={this.onAdvanceSearchChange} className = "advance-search-button">Search</button>
+        <button onClick={this.clearFilter}>Clear</button>
       </div>
     );
   }
