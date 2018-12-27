@@ -482,11 +482,6 @@ input[type=number]::-webkit-outer-spin-button {
   align-items: center;
   justify-content: space-around;
 }
-/*
-.adminResultsContent {
-  overflow: auto;
-  height: 400px;
-}*/
 
 .logoutButtonContainer {
   float: right;
@@ -507,40 +502,3 @@ input[type=number]::-webkit-outer-spin-button {
     top: 0;
     width: 100%;
 }
-/* CSS for DataGrid*/
-
-
-/*.search-input {
-  color: #713907 !important;
-  background-color: white !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.search-input:focus{
-  color: #713907 !important;
-  background-color: #f4fac2 !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.search-input-column{
-  color: #713907 !important;
-  background-color: white !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.search-input-column:focus{
-  color: #713907 !important;
-  background-color: #f4fac2 !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.page-number{
-  color: #713907 !important;
-}
-.page-number-arrow{
-  background-color: #ee7c2a !important;
-  color: rgba(255,255,255,255) !important;
-  border: 1px solid #a0430d !important;
-}*/
-/*.render-table {
-  height: 100% !important;
-}
-.table {
-  margin-bottom: 4%;
-}*/

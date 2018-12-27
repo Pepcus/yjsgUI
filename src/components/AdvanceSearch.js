@@ -68,13 +68,7 @@ class AdvanceSearch extends Component {
         </div>
         <label htmlFor = "search_input">
           <input type="text" onChange={this.setInputValue} className = "search-input-advance"/>
-          <div className="search"><div className="search__circle"></div>
-            <div className="search__rectangle">
-
-            </div>
-          </div>
         </label>
-
         <button onClick={this.onAdvanceSearchChange} className = "advance-search-button">Search</button>
         <button onClick={this.clearFilter}>Clear</button>
       </div>
