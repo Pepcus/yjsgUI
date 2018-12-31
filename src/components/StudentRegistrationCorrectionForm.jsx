@@ -20,7 +20,7 @@ import InputField from './formComponents/InputField';
 import TextAreaField from './formComponents/TextAreaField';
 import LinkButton from './commonComponents/LinkButton';
 import { yjsgHeader } from '../utils/yjsgConstants';
-import { updateStudentData } from '../actions/studentRegistrationActions';
+import { updateStudentData, isUpdatedResetAction } from '../actions/studentRegistrationActions';
 import {
 checkLevelValue,
 isDataCorrect,
@@ -182,6 +182,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <h5>{infoUpdateSuccessMessage}</h5>
             <LinkButton
               buttonText={goBackBtnText}
+              onClick={() => { this.props.isUpdatedResetAction()}}
               linkPath={this.props.context.previousLocation}
             />
           </div>
@@ -583,4 +584,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   updateStudentData,
+  isUpdatedResetAction,
 })(StudentRegistrationCorrectionForm);

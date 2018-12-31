@@ -13,6 +13,12 @@ class AdvanceSearch extends Component {
     this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  handleKeyPress(e){
+    if (e.key === 'Enter') {
+      this.onAdvanceSearchChange();
+    }
   }
   setInputValue(e){
     this.setState({
@@ -56,21 +62,24 @@ class AdvanceSearch extends Component {
   render(){
     return(
       <div className = "input-radio">
-        <div className = "advance-input-radio">
-            <div className="input-radio-container">
-              <input type="radio" name="thresholdValue" value="0.0" onChange={this.onChangeCheckBox}  defaultChecked />
-              <label htmlFor = "normal_search">Normal Search</label>
-            </div>
-            <div className="input-radio-container">
-              <input type="radio" name="thresholdValue" value="0.6" onChange={this.onChangeCheckBox} />
-              <label htmlFor="deep_search">Deep Search</label>
-            </div>
-        </div>
         <label htmlFor = "search_input">
-          <input type="text" onChange={this.setInputValue} className = "search-input-advance"/>
+          <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance"  onKeyPress={this.handleKeyPress}/>
+          <div className="search" onClick={this.onAdvanceSearchChange}>
+            <div className="search__circle" />
+            <div className="search__rectangle" />
+          </div>
         </label>
-        <button onClick={this.onAdvanceSearchChange} className = "advance-search-button">Search</button>
         <button onClick={this.clearFilter}>Clear</button>
+        <div className = "advance-input-radio">
+          <div className="input-radio-container">
+            <input type="radio" name="thresholdValue" value="0.0" onChange={this.onChangeCheckBox}  defaultChecked />
+            <label htmlFor = "normal_search">Normal Search</label>
+          </div>
+          <div className="input-radio-container">
+            <input type="radio" name="thresholdValue" value="0.6" onChange={this.onChangeCheckBox} />
+            <label htmlFor="deep_search">Deep Search</label>
+          </div>
+        </div>
       </div>
     );
   }

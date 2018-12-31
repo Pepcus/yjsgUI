@@ -21,9 +21,6 @@ import {
   isLoading,
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
-import {
-  setRedirectValue,
-} from '../actions/studentRegistrationActions';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Table from './commonComponents/Table';
 import Button from './commonComponents/Button';
@@ -34,6 +31,7 @@ import {
   fetchSearchResultsAction,
   setAdminCredentials,
   setAdminLoginState,
+  setRedirectValue,
 } from '../actions/studentRegistrationActions';
 import LinkButton from './commonComponents/LinkButton';
 
@@ -96,6 +94,14 @@ class AdminPanel extends Component {
       return <h5>{'No search records found'}</h5>;
     }
     return <h5>{'Your Search Results will appear here.'}</h5>;
+  }
+  componentWillMount(){
+    if (this.props.adminLoginState) {
+      this.setState({
+        redirect: true
+      });
+      this.props.setRedirectValue(true);
+    }
   }
   setRedirectValue() {
     if (this.props.adminLoginState) {

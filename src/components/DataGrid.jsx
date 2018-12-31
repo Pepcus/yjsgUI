@@ -2,12 +2,18 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
 import { allStudentsData } from '../reducers/studentRegistrationReducer';
-import { getAllStudentsAction, setStudentDataAction } from  '../actions/studentRegistrationActions';
+import {
+  getAllStudentsAction,
+  setStudentDataAction,
+  setAdminCredentials,
+  setAdminLoginState,
+  setRedirectValue,
+} from  '../actions/studentRegistrationActions';
 import {
   stateOfRedirect,
   stateOfAdminLogin,
@@ -157,11 +163,17 @@ class DataGrid1 extends Component {
     this.onFiIlter = this.onFiIlter.bind(this);
     this.redirectToStudentCorrection = this.redirectToStudentCorrection.bind(this);
     this.redirectToAdminLogin = this.redirectToAdminLogin.bind(this);
+    this.performLogout = this.performLogout.bind(this);
   }
   componentWillMount(){
     this.setState({
        metaData: this.formatMetaData(this.state.visibleColumnConfig)
     })
+  }
+  performLogout() {
+    this.props.setAdminCredentials('', '');
+    this.props.setAdminLoginState(false);
+    this.props.setRedirectValue(false);
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -250,11 +262,35 @@ class DataGrid1 extends Component {
         <div>
         <div className={'student-information-Container'}>
           <h2>{yjsgHeader}</h2>
+          <div className={'logoutButtonContainer'}>
+            <div className={'logoutLinkContainer'}>
+              <Link
+                to={'/'}
+                style={{
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  padding: '5px',
+                  padding: '5px 17px',
+                  border: '1px solid #fffefd',
+
+                  '&:hover': {
+                    color: '#000',
+                    backgroundColor: 'rgb(231, 104, 14)',
+                    transition: '0.3s all'
+                  }
+                }}
+                onClick={this.performLogout}
+              >
+                Logout
+              </Link>
+            </div>
+          </div>
         </div>
           <div className="modal">
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath={'/adminPanel'}
+              linkPath={'/'}
             />
             <div>
               <AdvanceSearch
@@ -318,4 +354,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllStudentsAction,
   setStudentDataAction,
+  setAdminCredentials,
+  setAdminLoginState,
+  setRedirectValue,
 })(DataGrid1);

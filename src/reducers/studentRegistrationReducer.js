@@ -114,7 +114,11 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         student: action.student,
         isFetched: true,
       };
-
+    case 'RESET_IS_UPDATE':
+      return{
+        ...state,
+        isUpdated: false,
+      };
     default: {
       return {
         ...state,

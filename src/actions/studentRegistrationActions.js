@@ -109,4 +109,8 @@ export const setStudentDataAction = (student) => ({
   student,
   isFetched: true,
 });
+export const isUpdatedResetAction = ()=>({
+  type: 'RESET_IS_UPDATE',
+  isUpdated: false,
+});
 
