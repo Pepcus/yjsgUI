@@ -16,6 +16,9 @@ class AdvanceSearch extends Component {
   }
 
   setInputValue(e){
+    if(isEmpty(e.target.value)){
+      this.props.onFilter(this.props.students);
+    }
     this.setState({
       inputValue: e.target.value,
     });
