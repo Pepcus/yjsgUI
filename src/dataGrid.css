@@ -697,6 +697,7 @@ html, body, #root, #root>div, .student-information-Container {
     background-color: #fffcc9;
 }
 .student-information-Container h2 {
+    z-index: 1;
     position: fixed;
     top: 0;
     background: #ee7c2a;

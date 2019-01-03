@@ -30,6 +30,7 @@ import {
   clearSearchResultsAction,
   fetchSearchResultsAction,
   setAdminCredentials,
+  resetAdminCredentials,
   setAdminLoginState,
   setRedirectValue,
 } from '../actions/studentRegistrationActions';
@@ -73,7 +74,7 @@ class AdminPanel extends Component {
   }
 
   performLogout() {
-    this.props.setAdminCredentials('', '');
+    this.props.resetAdminCredentials();
     this.props.setAdminLoginState(false);
     this.props.setRedirectValue(false);
   }
@@ -234,6 +235,7 @@ class AdminPanel extends Component {
 AdminPanel.propTypes = {
   fetchSearchResultsAction: PropTypes.func.isRequired,
   setAdminCredentials: PropTypes.func.isRequired,
+  resetAdminCredentials: PropTypes.func.isRequired,
   clearSearchResultsAction: PropTypes.func.isRequired,
   searchResults: PropTypes.object,
 };
@@ -255,7 +257,7 @@ export default connect(mapStateToProps, {
   fetchSearchResultsAction,
   setAdminCredentials,
   clearSearchResultsAction,
-  //getAllStudentsAction,
   setRedirectValue,
+  resetAdminCredentials,
   setAdminLoginState,
 })(AdminPanel);

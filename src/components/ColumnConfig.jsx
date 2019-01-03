@@ -41,20 +41,18 @@ class ColumnConfig extends Component{
   }
   checkAllColumns(){
     let temporaryVisibleColumnConfig = this.props.visibleColumnConfig;
-      Object.keys(temporaryVisibleColumnConfig).forEach(function(key) {
+      Object.keys(temporaryVisibleColumnConfig).forEach((key) => {
        temporaryVisibleColumnConfig[key]= true;
     });
-      console.log("check", temporaryVisibleColumnConfig);
     this.setState({
       visibleColumnConfig: temporaryVisibleColumnConfig,
     });
   }
   unCheckAllColumns(){
     let temporaryVisibleColumnConfig = this.props.visibleColumnConfig;
-    Object.keys(temporaryVisibleColumnConfig).forEach(function(key) {
+    Object.keys(temporaryVisibleColumnConfig).forEach((key) => {
       temporaryVisibleColumnConfig[key]= false;
     });
-    console.log("uncheck", temporaryVisibleColumnConfig);
     this.setState({
       visibleColumnConfig: temporaryVisibleColumnConfig,
     });
@@ -169,7 +167,7 @@ class ColumnConfig extends Component{
         <div className = "modal-save-container">
           <div>
             <button className="button-modal" onClick={() => this.checkAllColumns()}>Select All</button>
-            <button className="button-modal" onClick={() => this.unCheckAllColumns()}>Select Null</button>
+            <button className="button-modal" onClick={() => this.unCheckAllColumns()}>Select None</button>
           </div>
           <div>
             <button className="button-modal" onClick={this.props.closeColumnOption}>Close</button>

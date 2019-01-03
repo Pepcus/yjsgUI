@@ -9,17 +9,12 @@ class AdvanceSearch extends Component {
       thresholdValue: '0.0',
       inputValue:'',
     };
-    this.onAdvanceSearchChange = this.onAdvanceSearchChange.bind(this);
-    this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
+    this.advanceSearch = this.advanceSearch.bind(this);
+    this.onClickRadioButton = this.onClickRadioButton.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
-  handleKeyPress(e){
-    if (e.key === 'Enter') {
-      this.onAdvanceSearchChange();
-    }
-  }
+
   setInputValue(e){
     this.setState({
       inputValue: e.target.value,
@@ -31,14 +26,20 @@ class AdvanceSearch extends Component {
         inputValue: '',
       });
     }
-    this.props.onFiIlter(this.props.students);
+    this.setState({
+      thresholdValue: '0.0',
+    });
+    this.props.onFilter(this.props.students);
   }
-  onChangeCheckBox(e) {
+
+  onClickRadioButton(e) {
     this.setState({
       thresholdValue: e.target.value,
     });
   }
-  onAdvanceSearchChange() {
+
+  advanceSearch(e) {
+    e.preventDefault();
     const foundKeys = this.props.metaData.headerConfig.map((object) => {
         return object.key;
       }
@@ -55,32 +56,34 @@ class AdvanceSearch extends Component {
     if(!isEmpty(this.state.inputValue)) {
       const fuse = new Fuse(this.props.students, options);
       const result = fuse.search(this.state.inputValue);
-      this.props.onFiIlter(result);
+      this.props.onFilter(result);
     }
   }
 
   render(){
     return(
-      <div className = "input-radio">
+      <form id="advanceSearch">
+        <div className = "input-radio">
         <label htmlFor = "search_input">
-          <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance"  onKeyPress={this.handleKeyPress}/>
-          <div className="search" onClick={this.onAdvanceSearchChange}>
+          <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance" />
+          <button type="submit" form="advanceSearch" value="Submit" className="search" onClick={this.advanceSearch}>
             <div className="search__circle" />
             <div className="search__rectangle" />
-          </div>
+          </button>
         </label>
-        <button onClick={this.clearFilter}>Clear</button>
+        <button type="reset" value="Reset" onClick={this.clearFilter}>Clear</button>
         <div className = "advance-input-radio">
           <div className="input-radio-container">
-            <input type="radio" name="thresholdValue" value="0.0" onChange={this.onChangeCheckBox}  defaultChecked />
+            <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
             <label htmlFor = "normal_search">Normal Search</label>
           </div>
           <div className="input-radio-container">
-            <input type="radio" name="thresholdValue" value="0.6" onChange={this.onChangeCheckBox} />
+            <input type="radio" name="thresholdValue" value="0.6" onClick={this.onClickRadioButton} />
             <label htmlFor="deep_search">Deep Search</label>
           </div>
         </div>
       </div>
+      </form>
     );
   }
 }
