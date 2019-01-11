@@ -347,8 +347,8 @@ class DataGrid1 extends Component {
       );
     }
   }
-    formattedStudent() {
-     return this.props.students.map(item =>
+    formattedStudent(students) {
+     return students.map(item =>
         ({...item, studentId: String(item.id)})
       );
     }
