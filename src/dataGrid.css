@@ -74,6 +74,7 @@ html,body {
     margin: 0;
     color: #fff;
     font-size: 26px;
+    line-height:30px;
     width: 100%;
     text-align: center;
 }
@@ -386,18 +387,21 @@ html,body {
     background-color: rgb(248, 247, 247) !important;
 }
 .btn-block .btn-grid {
-    background: #f1771f;
+    background: #f9570a;
     border: none;
     cursor:pointer;
     color: #fff;
     outline:none;
     box-shadow: 0 1px 4px 0px #777978;
     border-radius: 3px;
-    padding: 7px 15px;
+    padding: 7px 8px;
 }
 .btn-block .btn-grid:hover {
     transition:0.3s all;
     background: #d24c0c;
+}
+.btn-grid .fa-edit {
+    margin-right:2px;
 }
 .footer {
 
@@ -437,7 +441,7 @@ html,body {
 }
 .inputText:focus , .textAreaText:focus {
     background: #f6f6f6;
-    outline-color: #f9570a;
+    outline-color: #e34c04;
 }
 .table-footer-row {
     margin-right: 5px !important;
@@ -455,11 +459,13 @@ html,body {
     height: auto !important;
     font-size: 14px !important;
     margin: 2px 0px 5px !important;
-    box-shadow: 1px 1px 5px 0px #b0b0b0;
+    /*box-shadow: 0 0 0 0px #f9570a, inset 0 0 0 0.5px #fff;*/
+    box-shadow: 1px 1px 3px 0px #b0b0b0;
 }
 .column-option-container:hover {
     transition: 0.3s all;
-    box-shadow: 1px 1.6px 2px #b0b0b0;
+    /*box-shadow: 0 0 3px 0px #f9570a, inset 0 0 0 0.5px #fff;*/
+    box-shadow: 1px 1.6px 3px #b0b0b0;
     border: 1px solid #d24c0c !important;
     background: #d24c0c !important;
 }
@@ -669,7 +675,8 @@ html,body {
     margin-top: 4px;
 }
 .column-group-wrapper {
-    background-color: rgb(236, 244, 245);
+    /*background-color: rgb(236, 244, 245);*/
+    background-color: rgb(241, 241, 241);
 }
 .column-group {
 
@@ -739,7 +746,7 @@ html,body {
     background: rgb(248, 247, 247) !important;
 }
 .advance-search-button {
-    border-radius: 4px ;
+    border-radius: 3px ;
     background-color: #f9570a;
     border: 1px solid #f9570a;
     color: white;
@@ -914,7 +921,7 @@ html, body, #root, #root>div, .student-information-Container {
     padding: 0 20px;
     font-size: 12px;
     letter-spacing: 0.4px;
-    color: #f64e1a;
+    color: #e34515;
     animation-name: validate-text;
     animation-duration:0.5s;
     transition: 0.4s height ease-in-out;
@@ -953,9 +960,51 @@ html, body, #root, #root>div, .student-information-Container {
 }
 .yjsg-logo {
     z-index: 2;
-    position: absolute;
-    left: 0;
-    top: 20px;
+    position: fixed;
+    left: 10px;
+    top: 2px;
+}
+.id-card-wrapper {
+    clear: both;
+    /*text-align: center;*/
+}
+.id-card-wrapper .buttons-wrapper {
+     width: 100%;
+    display: inline-block;
+     margin-left: 0px;
+     margin-right: 0px;
+     margin-top: 0px;
+}
+.id-card-wrapper .buttons-wrapper .buttonContainer {
+    width: auto;
+    margin:0 10px;
+}
+.id-card-wrapper .linkButton {
+    border:none;
+}
+.empty-column-message {
+    margin: 20px 10px;
+    color: #5d5b5b;
+    padding: 15px 20px;
+    border: 1px solid #dedddd;
+    animation-name: column-message;
+    animation-duration: 0.7s;
+    transition: 0.3s all;
+    background: rgb(242, 242, 244);
+}
+@keyframes column-message {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity:0.8;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.empty-column-message .circle-icon {
+    margin-right: 15px;
 }
 @media (max-width: 1200px) {
     .custom-modal {
