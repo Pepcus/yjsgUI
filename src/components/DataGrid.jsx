@@ -361,7 +361,7 @@ class DataGrid1 extends Component {
                       {/*<i className="fa fa-info-circle"></i>*/}
                       <i className="fa fa-exclamation-triangle"></i>
                   </span>
-                  You have chosen zero columns so there is no information available.
+                  आप शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
               </div>
           </div>
 

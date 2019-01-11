@@ -82,4 +82,14 @@
 .cell__edit {
     max-width: 78px;
 }
-
+.cell__studentId {
+    max-width: 70px;
+}
+.cell__column {
+    max-width: 55px;
+}
+.btn-block input[type = "checkbox"] {
+    height: 20px;
+    width: 20px;
+    box-shadow: none;
+}
