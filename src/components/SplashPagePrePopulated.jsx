@@ -113,7 +113,7 @@ class SplashPage extends Component {
           </div>
         );
       }
-      else return <Switch><Redirect to={'/studentInformation'}/></Switch>
+      else return <Switch><Redirect to={'/student-search'}/></Switch>
     }
     return null;
   }

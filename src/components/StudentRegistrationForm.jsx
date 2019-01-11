@@ -131,7 +131,7 @@ class StudentRegistrationForm extends Component {
             <p>शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |</p>
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath="/Home"
+              linkPath="/home"
             />
           </div>
         </div>

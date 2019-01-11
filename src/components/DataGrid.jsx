@@ -202,6 +202,7 @@ class DataGrid1 extends Component {
     this.handleEditCheckBoxClick = this.handleEditCheckBoxClick.bind(this);
     this.EditButton = this.EditButton.bind(this);
     this.CheckButton = this.CheckButton.bind(this);
+    this.formattedStudent = this.formattedStudent.bind(this);
   }
 
   componentWillMount() {
@@ -346,10 +347,12 @@ class DataGrid1 extends Component {
       );
     }
   }
-  renderDataGrid () {
-    const formattedStudent = this.state.students.map(item =>
-     ({...item, studentId: String(item.id)})
+  formattedStudent() {
+    return this.state.students.map(item =>
+      ({...item, studentId: String(item.id)})
     );
+  }
+  renderDataGrid () {
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
         <div>You have chosen zero columns so there is no information available.</div>
@@ -357,7 +360,7 @@ class DataGrid1 extends Component {
     }
     if (!isEmpty(this.state.students)) {
       return (
-        <DataGrid data={formattedStudent} metaData={this.state.metaData} styles={getStyles()}/>
+        <DataGrid data={this.formattedStudent()} metaData={this.state.metaData} styles={getStyles()}/>
       );
     }
   }
