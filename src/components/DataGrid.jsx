@@ -325,7 +325,7 @@ class DataGrid1 extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
-        students: nextProps.students,
+        students: this.formattedStudent(nextProps.students),
       });
     }
   }
@@ -347,11 +347,11 @@ class DataGrid1 extends Component {
       );
     }
   }
-  formattedStudent() {
-    return this.state.students.map(item =>
-      ({...item, studentId: String(item.id)})
-    );
-  }
+    formattedStudent() {
+     return this.props.students.map(item =>
+        ({...item, studentId: String(item.id)})
+      );
+    }
   renderDataGrid () {
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
@@ -360,7 +360,7 @@ class DataGrid1 extends Component {
     }
     if (!isEmpty(this.state.students)) {
       return (
-        <DataGrid data={this.formattedStudent()} metaData={this.state.metaData} styles={getStyles()}/>
+        <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
       );
     }
   }
