@@ -195,7 +195,7 @@ class AdminPanel extends Component {
                 <LinkButton
                   buttonText={'Student Information'}
                   onClick={this._setRedirectValue}
-                  linkPath={'/dataGrid'}
+                  linkPath={'/studentInformation'}
                 />
               </div>
             </div>

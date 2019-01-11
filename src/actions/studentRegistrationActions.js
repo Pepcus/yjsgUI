@@ -1,4 +1,3 @@
-
 export const checkValidUserInfo = (errorMessageObject) => ({
   type: 'CHECK_FOR_VALID_USER_INFO',
   errorMessageObject,
@@ -114,8 +113,16 @@ export const setStudentDataAction = (student) => ({
   student,
   isFetched: true,
 });
+export const updateStudentByAdmin = (id, secretKey) => ({
+  type: 'UPDATE_STUDENT_BY_ADMIN',
+  id,
+  secretKey,
+});
 export const isUpdatedResetAction = ()=>({
   type: 'RESET_IS_UPDATE',
   isUpdated: false,
+  id: '',
+  secretKey: '',
+  student: '',
 });
 

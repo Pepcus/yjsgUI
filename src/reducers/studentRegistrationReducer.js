@@ -121,10 +121,19 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         student: action.student,
         isFetched: true,
       };
+    case 'UPDATE_STUDENT_BY_ADMIN':
+      return{
+        ...state,
+        id: action.id,
+        secretKey: action.secretKey,
+      };
     case 'RESET_IS_UPDATE':
       return{
         ...state,
         isUpdated: false,
+        id: '',
+        secretKey: '',
+        student: '',
       };
     default: {
       return {

@@ -10,6 +10,7 @@ import { allStudentsData } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
+  updateStudentByAdmin,
   resetAdminCredentials,
   setAdminLoginState,
   setRedirectValue,
@@ -23,6 +24,7 @@ import IdCardWrapper from './IdCardWrapper';
 import {
   yjsgHeader,
   goBackBtnText,
+  adminPassword,
 } from '../utils/yjsgConstants';
 
 const gridMetaData = [
@@ -34,7 +36,7 @@ const gridMetaData = [
   },
   {
     'label': 'ID',
-    'key': 'id',
+    'key': 'studentId',
     'type': 'Number',
   },
   {
@@ -166,7 +168,7 @@ class DataGrid1 extends Component {
       advanceFilterIsOpen: false,
       visibleColumnConfig: {
         column: true,
-        id: true,
+        studentId: true,
         name: true,
         fatherName: true,
         mobile: true,
@@ -248,7 +250,7 @@ class DataGrid1 extends Component {
           })
         }else if (columnKey === 'column'){
           metaData.push({
-            ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey),
+            ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey ),
             customComponent: this.CheckButton
           })
         }
@@ -261,8 +263,10 @@ class DataGrid1 extends Component {
   };
 
   handleEditClick(rowData) {
+    const newRowData = {...rowData, id:rowData.studentId};
     if (!isEmpty(rowData)) {
-      this.props.setStudentDataAction(rowData);
+      this.props.setStudentDataAction(newRowData);
+      this.props.updateStudentByAdmin(rowData.studentId, adminPassword);
       this.setState({
         isStudentDataSet: true,
       });
@@ -343,6 +347,9 @@ class DataGrid1 extends Component {
     }
   }
   renderDataGrid () {
+    const formattedStudent = this.state.students.map(item =>
+     ({...item, studentId: String(item.id)})
+    );
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
         <div>You have chosen zero columns so there is no information available.</div>
@@ -350,7 +357,7 @@ class DataGrid1 extends Component {
     }
     if (!isEmpty(this.state.students)) {
       return (
-        <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
+        <DataGrid data={formattedStudent} metaData={this.state.metaData} styles={getStyles()}/>
       );
     }
   }
@@ -414,10 +421,10 @@ class DataGrid1 extends Component {
           </div>
         </div>
         <div className="modal">
-          {/*<LinkButton*/}
-            {/*buttonText={goBackBtnText}*/}
-            {/*linkPath={'/adminPanel'}*/}
-          {/*/>*/}
+         {/* <LinkButton
+            buttonText={goBackBtnText}
+            linkPath={'/adminPanel'}
+          />*/}
           <div>
             <AdvanceSearch
               metaData={this.state.metaData}
@@ -457,6 +464,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllStudentsAction,
   setStudentDataAction,
+  updateStudentByAdmin,
   resetAdminCredentials,
   setAdminLoginState,
   setRedirectValue,

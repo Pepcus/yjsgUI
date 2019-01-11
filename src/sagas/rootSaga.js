@@ -100,9 +100,8 @@ export function* getAllStudentsSaga(action) {
     const response = yield getAllStudentsAPI(action);
     if(response.students){
       yield put(getAllStdentsDataResultsSuccess(response.students));
-    }else {
-
     }
+
   }catch (e){
 
   }

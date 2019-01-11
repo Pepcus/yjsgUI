@@ -113,7 +113,7 @@ class SplashPage extends Component {
           </div>
         );
       }
-      else return <Switch><Redirect to={'/dataGrid'}/></Switch>
+      else return <Switch><Redirect to={'/studentInformation'}/></Switch>
     }
     return null;
   }
