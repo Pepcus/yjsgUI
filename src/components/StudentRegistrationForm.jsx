@@ -271,14 +271,16 @@ class StudentRegistrationForm extends Component {
               isRequired={false}
             />
             <div className="registrationFormButtonContainer">
-              <LinkButton
-                buttonText={goBackBtnText}
-                linkPath="/"
-              />
-              <Button
-                buttonText={formSubmitBtnText}
-                onClick={this._submitStudentData}
-              />
+              <div className = "button-wrapper">
+                  <LinkButton
+                      buttonText={goBackBtnText}
+                      linkPath="/"
+                  />
+                  <Button
+                      buttonText={formSubmitBtnText}
+                      onClick={this._submitStudentData}
+                  />
+              </div>
             </div>
           </div>
         </div>

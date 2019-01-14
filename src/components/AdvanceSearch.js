@@ -73,7 +73,9 @@ class AdvanceSearch extends Component {
               <i className="fa fa-search"></i>
           </button>
         </label>
-        <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button">Clear</button>
+        <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button">
+            <i className="fa fa-trash card-icon"></i>Clear
+        </button>
         <div className = "advance-input-radio">
           <div className="input-radio-container">
             <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />

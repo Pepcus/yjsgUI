@@ -73,7 +73,8 @@ html,body {
     padding: 15px 0;
     margin: 0;
     color: #fff;
-    font-size: 26px;
+    font-size: 25px;
+    line-height:30px;
     line-height:30px;
     width: 100%;
     text-align: center;
@@ -140,7 +141,7 @@ html,body {
 }
 .buttonOrange:hover {
     transition:0.3s all;
-    box-shadow: 0 2px 6px 0px #777978;
+    box-shadow: 0 2px 4px 0px #777978;
     background-color: #d24c0c;
     border: 2px solid #d24c0c;
 }
@@ -318,13 +319,14 @@ html,body {
     color: #085d66;
     font-size: 22px !important;
     cursor:pointer;
-    margin: 1px 3px !important;
+    /*margin: 1px 3px !important;*/
     box-shadow: none !important;
     border-radius: 4px !important;
 }
 .page-number-arrow:hover {
     background-color: transparent !important;
     transition: 0.3s all;
+    color: #085d66;
     border-radius: 4px !important;
     font-size: 22px !important;
 }
@@ -336,7 +338,8 @@ html,body {
 }
 .page-number-arrow:hover .arrowIcon {
     transition: 0.3s all;
-    color: rgb(116, 116, 116) !important;
+    /*color: rgb(116, 116, 116) !important;*/
+    color: rgb(77, 73, 73) !important;
 }
 .table-footer-cell {
 
@@ -410,6 +413,7 @@ html,body {
     height:auto !important;
     width:auto !important;
     margin-right:10px;
+    /*margin-left: 0px;*/
 }
 .table-footer {
     text-align:right !important;
@@ -461,6 +465,27 @@ html,body {
     margin: 2px 0px 5px !important;
     /*box-shadow: 0 0 0 0px #f9570a, inset 0 0 0 0.5px #fff;*/
     box-shadow: 1px 1px 3px 0px #b0b0b0;
+    transition:0.5s all;
+    position:relative;
+}
+.column-option-container::after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    font-size: 26px;
+    top: 6px;
+    right: 40px;
+    transition: 0.5s linear;
+}
+.column-option:hover .column-option-container {
+    cursor: pointer;
+    transition:0.3s all;
+    padding-right: 26px !important;
+}
+.column-option:hover .column-option-container::after {
+    opacity:1;
+    right:6px;
+    transition:0.5s all;
 }
 .column-option-container:hover {
     transition: 0.3s all;
@@ -642,6 +667,10 @@ html,body {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;
+    cursor: pointer;
+}
+.registrationFormButtonContainer .button-wrapper .buttonContainer:first-child {
+    margin-right: 30px;
 }
 .modal .buttonContainer {
     width: auto;
@@ -690,18 +719,17 @@ html,body {
 }
 .modal{
     margin-top: 65px;
-    display: -ms-flexbox;
-    display: block;
-    text-align:center;
-    /* flex: 1; */
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    position:relative;
 }
 .column-option{
     display: inline-block;
     margin: 10px 10px 0 0 ;
-    float: right;
+    position:absolute;
+    right:0px;
 }
+
 .advance-filter{
     margin-right: 10px;
 }
@@ -921,7 +949,7 @@ html, body, #root, #root>div, .student-information-Container {
     padding: 0 20px;
     font-size: 12px;
     letter-spacing: 0.4px;
-    color: #e34515;
+    color: red;
     animation-name: validate-text;
     animation-duration:0.5s;
     transition: 0.4s height ease-in-out;
@@ -965,8 +993,9 @@ html, body, #root, #root>div, .student-information-Container {
     top: 2px;
 }
 .id-card-wrapper {
-    clear: both;
-    /*text-align: center;*/
+    margin-top:20px;
+    position: relative;
+    z-index: 1;
 }
 .id-card-wrapper .buttons-wrapper {
      width: 100%;
@@ -977,10 +1006,12 @@ html, body, #root, #root>div, .student-information-Container {
 }
 .id-card-wrapper .buttons-wrapper .buttonContainer {
     width: auto;
-    margin:0 10px;
+    margin:0 0px 0px 10px;
+    cursor: pointer;
 }
 .id-card-wrapper .linkButton {
     border:none;
+    cursor:pointer;
 }
 .empty-column-message {
     margin: 20px 10px;
@@ -1005,6 +1036,41 @@ html, body, #root, #root>div, .student-information-Container {
 }
 .empty-column-message .circle-icon {
     margin-right: 15px;
+}
+.page-number-arrow-disabled {
+    font-size: 11px;
+    margin: 1px 1px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: none !important;
+    padding:0;
+    cursor: pointer;
+    /*margin: 1px 3px !important;*/
+    background: transparent !important;
+    font-size:22px !important;
+    animation-name: disabled-arrow;
+    animation-duration:0.5s;
+    transition: 0.3s all;
+}
+@keyframes disabled-arrow {
+    0% {
+        opacity:0.5;
+    }
+    50% {
+        opacity:0.7;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.page-number-arrow-disabled .arrowIcon {
+    color: rgb(193, 193, 193) !important;
+}
+.card-icon {
+    margin-right:5px;
+}
+.data-grid {
+    margin-top:-50px;
 }
 @media (max-width: 1200px) {
     .custom-modal {
@@ -1059,8 +1125,20 @@ html, body, #root, #root>div, .student-information-Container {
     .inputText, .textAreaText {
         max-width: 100%;
     }
+    .buttonContainer {
+        margin: 10px 0 0;
+        width: 100%;
+    }
+    .landingPageContainer h2 {
+        padding:10px 0;
+        font-size:24px;
+    }
+    .button-wrapper .buttonContainer:first-child {
+        /*margin-right:0px;*/
+    }
 
 }
+
 @media (max-width: 425px){
     .search-input-bar {
         margin-top:10px;

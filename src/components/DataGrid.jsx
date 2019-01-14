@@ -358,7 +358,7 @@ class DataGrid1 extends Component {
                       {/*<i className="fa fa-info-circle"></i>*/}
                       <i className="fa fa-exclamation-triangle"></i>
                   </span>
-                  आप शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
+                  आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
               </div>
           </div>
 
@@ -399,6 +399,7 @@ class DataGrid1 extends Component {
                   padding: '5px 17px',
                   border: '1px solid #fffefd',
                   marginRight: '10px',
+                    borderRadius: '3px',
 
                   '&:hover': {
                     color: '#000',
@@ -438,7 +439,10 @@ class DataGrid1 extends Component {
               onFilter={this.onFilter}
             />
           <div className="column-option">
-            <button className="column-option-container" onClick={this.openColumnOption}>Column Options</button>
+            <button className="column-option-container" onClick={this.openColumnOption}>
+                <i className="fa fa-filter card-icon"></i>
+                Configure
+            </button>
             {this.renderColumnConfig()}
           </div>
           </div>
