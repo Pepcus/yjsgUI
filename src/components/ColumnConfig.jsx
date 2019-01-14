@@ -72,6 +72,7 @@ class ColumnConfig extends Component{
       this.setState({
         visibleColumnConfig: {
           ...this.state.visibleColumnConfig,
+          column : true,
           [event.target.name]: true,
         },
       });
