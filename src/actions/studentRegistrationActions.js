@@ -57,12 +57,12 @@ export const updateStudentFailedAction = message => ({
   message,
 });
 
-export const setAdminCredentials = (id, password) => ({
+export const setAdminCredentialsAction = (id, password) => ({
   type: 'SET_ADMIN_CREDENTIALS',
   id,
   password
 });
-export const resetAdminCredentials = () => ({
+export const resetAdminCredentialsAction = () => ({
   type: 'RESET_ADMIN_CREDENTIALS',
   id: '',
   password: '',
@@ -96,24 +96,26 @@ export const setNoRecordsFoundMessageAction = message => ({
 export const getAllStudentsAction = () => ({
   type: 'GET_ALL_STUDENTS',
 });
-export const getAllStdentsDataResultsSuccess = (students) =>({
+export const getAllStudentsDataResultsSuccessAction = (students) =>({
   type: 'GET_ALL_STUDENTS_RESULTS_SUCCESS',
   students,
 });
-export const setRedirectValue = (redirect) => ({
+export const setRedirectValueAction = (redirect) => ({
   type: 'SET_REDIRECT_VALUE',
   redirect,
 });
-export const setAdminLoginState = (adminLoginState) => ({
+export const setAdminLoginStateAction = (adminLoginState) => {
+  return ({
   type: 'SET_ADMIN_LOGIN_STATE',
   adminLoginState,
-});
+})
+};
 export const setStudentDataAction = (student) => ({
   type: 'SET_STUDENT_DATA',
   student,
   isFetched: true,
 });
-export const updateStudentByAdmin = (id, secretKey) => ({
+export const updateStudentByAdminAction = (id, secretKey) => ({
   type: 'UPDATE_STUDENT_BY_ADMIN',
   id,
   secretKey,
@@ -124,5 +126,10 @@ export const isUpdatedResetAction = ()=>({
   id: '',
   secretKey: '',
   student: '',
+});
+export const setVisibleColumnConfigAction = (visibleColumnConfig, selectValue) => ({
+  type: 'SET_VISIBLE_COLUMN_CONFIG_DATA',
+  visibleColumnConfig,
+  selectValue,
 });
 

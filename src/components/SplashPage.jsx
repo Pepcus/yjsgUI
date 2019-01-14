@@ -11,8 +11,8 @@ import InputField from './formComponents/InputField';
 import {
   fetchStudentData,
   setStudentCredentials,
-  setAdminCredentials,
-  setAdminLoginState,
+  setAdminCredentialsAction,
+  setAdminLoginStateAction,
 } from '../actions/studentRegistrationActions';
 import {
   getAdminId,
@@ -107,6 +107,8 @@ class SplashPage extends Component {
     })
   }
   checkAdminCredential(){
+     let data = sessionStorage.getItem('isAdminLogin');
+    if (!data) {
       const {
         id,
         password,
@@ -119,17 +121,23 @@ class SplashPage extends Component {
             </div>
           );
         }
-        else return <Switch><Redirect to={'/student-search'}/></Switch>
+        else {
+          sessionStorage.setItem('isAdminLogin', 'yes');
+          return <Switch><Redirect to={'/student-search'}/></Switch>
+          }
       }
       return null;
-  }
+      }else {
+      return <Switch><Redirect to={'/student-search'}/></Switch>
+      }
+      }
   setAdminLogin() {
     this.setState({
       adminLoginState: true,
       message: true
     });
-    this.props.setAdminLoginState(true);
-    this.props.setAdminCredentials(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminLoginStateAction(true);
+    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 
   fetchStudentById () {
@@ -254,7 +262,7 @@ class SplashPage extends Component {
       if (this.state.isURLParams) {
         return <Switch><Redirect to={'/studentCorrection'} /></Switch>
       }
-      return (
+    return (
         <div className={'landingPageContainer'}>
           <h2>{yjsgHeader}</h2>
           <div className={'landingPageContent'}>
@@ -291,6 +299,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
-  setAdminCredentials,
-  setAdminLoginState,
+  setAdminCredentialsAction,
+  setAdminLoginStateAction,
 })(SplashPage);

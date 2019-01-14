@@ -190,6 +190,12 @@ export const allStudentsDataReducer = (state = {}, action) => {
         ...state,
         adminLoginState: action.adminLoginState,
       };
+    case 'SET_VISIBLE_COLUMN_CONFIG_DATA':
+      return {
+        ...state,
+        visibleColumnConfig: action.visibleColumnConfig,
+        selectValue: action.selectValue,
+      };
     default: {
       return {
         ...state,
@@ -228,3 +234,9 @@ export const stateOfRedirect = state => state.allStudentsDataReducer.redirect;
 export const stateOfAdminLogin = state => state.allStudentsDataReducer.adminLoginState;
 
 export const setStudentData = state => state.studentRegistrationReducer.student;
+
+export const getVisibleColumnConfig = state => state.allStudentsDataReducer.visibleColumnConfig;
+
+export const getSelectValue = state => state.allStudentsDataReducer.selectValue;
+
+

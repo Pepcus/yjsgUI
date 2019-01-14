@@ -6,26 +6,28 @@ import { Redirect, Link } from 'react-router-dom';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-import { allStudentsData } from '../reducers/studentRegistrationReducer';
+import { allStudentsData, getVisibleColumnConfig, getSelectValue } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
-  updateStudentByAdmin,
-  resetAdminCredentials,
-  setAdminLoginState,
-  setRedirectValue,
+  updateStudentByAdminAction,
+  resetAdminCredentialsAction,
+  setAdminLoginStateAction,
+  setRedirectValueAction,
+  setVisibleColumnConfigAction,
 } from  '../actions/studentRegistrationActions';
 import {
   stateOfRedirect,
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
-import IdCardWrapper from './IdCardWrapper';
+import IdCardButtons from './IdCardButtons';
 import {
   yjsgHeader,
   goBackBtnText,
   adminPassword,
 } from '../utils/yjsgConstants';
+import PropTypes from 'prop-types';
 
 const gridMetaData = [
   {
@@ -160,13 +162,13 @@ class DataGrid1 extends Component {
     this.state = {
       selectedStudents: [],
       selectedStudentsCheck: [],
-      selectValue: true,
+      selectValue: this.getSelectValue(),
       students:[],
       metaData: gridHeaderData(),
       columnOptionIsOpen:false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
-      visibleColumnConfig: {
+      visibleColumnConfig: this.getVisibleColumnConfigObject(),/* {
         column: true,
         studentId: true,
         name: true,
@@ -186,7 +188,7 @@ class DataGrid1 extends Component {
         marks2016: true,
         marks2017: true,
         edit: true,
-      }
+      }*/
     };
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
@@ -204,7 +206,44 @@ class DataGrid1 extends Component {
     this.CheckButton = this.CheckButton.bind(this);
     this.formattedStudent = this.formattedStudent.bind(this);
   }
-
+  getSelectValue(){
+    let DefaultSelectValue = true;
+    if(this.props.selectValue !== undefined) {
+      return this.props.selectValue;
+    }
+    else {
+      return DefaultSelectValue;
+    }
+  }
+  getVisibleColumnConfigObject() {
+    let OriginalVisibleColumnConfigObject = {
+      column: true,
+      studentId: true,
+      name: true,
+      fatherName: true,
+      mobile: true,
+      email: true,
+      gender: true,
+      age: true,
+      address: true,
+      education: true,
+      classAttended2016: true,
+      classAttended2017: true,
+      attendance2016: true,
+      attendance2017: true,
+      classRoomNo2016: true,
+      classRoomNo2017: true,
+      marks2016: true,
+      marks2017: true,
+      edit: true,
+    }
+    if(this.props.visibleColumnConfig !== undefined) {
+      return this.props.visibleColumnConfig;
+    }
+    else {
+      return OriginalVisibleColumnConfigObject;
+    }
+  };
   componentWillMount() {
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
@@ -217,9 +256,33 @@ class DataGrid1 extends Component {
     this.props.getAllStudentsAction();
   }
   performLogout() {
-    this.props.resetAdminCredentials();
-    this.props.setAdminLoginState(false);
-    this.props.setRedirectValue(false);
+    this.props.resetAdminCredentialsAction();
+    this.props.setAdminLoginStateAction(false);
+    this.props.setRedirectValueAction(false);
+    sessionStorage.removeItem('isAdminLogin');
+    let OriginalVisibleColumnConfigObject = {
+      column: true,
+      studentId: true,
+      name: true,
+      fatherName: true,
+      mobile: true,
+      email: true,
+      gender: true,
+      age: true,
+      address: true,
+      education: true,
+      classAttended2016: true,
+      classAttended2017: true,
+      attendance2016: true,
+      attendance2017: true,
+      classRoomNo2016: true,
+      classRoomNo2017: true,
+      marks2016: true,
+      marks2017: true,
+      edit: true,
+    }
+    let DefaultSelectValue = true;
+    this.props.setVisibleColumnConfigAction(OriginalVisibleColumnConfigObject, DefaultSelectValue);
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -234,11 +297,24 @@ class DataGrid1 extends Component {
     this.setState({advanceFilterIsOpen: false});
   }
   setValuesOfVisibleColumnConfig(values, selectValue){
+    let count = 0;
+    for(let k in values) {
+      if(values[k]){
+        count ++;
+      }
+      if(count>1){
+        values = {...values, column : true,};
+      }
+      else{
+        values = {...values, column : false,};
+      }
+    }
     this.setState({
       visibleColumnConfig : values,
       metaData: this.formatMetaData(values),
       selectValue: selectValue,
-    })
+    });
+    this.props.setVisibleColumnConfigAction(values, selectValue);
   }
   formatMetaData = (visibleColumnConfig) => {
     const metaData = [];
@@ -267,7 +343,7 @@ class DataGrid1 extends Component {
     const newRowData = {...rowData, id:rowData.studentId};
     if (!isEmpty(rowData)) {
       this.props.setStudentDataAction(newRowData);
-      this.props.updateStudentByAdmin(rowData.studentId, adminPassword);
+      this.props.updateStudentByAdminAction(rowData.studentId, adminPassword);
       this.setState({
         isStudentDataSet: true,
       });
@@ -321,12 +397,11 @@ class DataGrid1 extends Component {
       />
     </div>
   );
-
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
         students: this.formattedStudent(nextProps.students),
-      });
+        });
     }
   }
   onFilter(result){
@@ -377,7 +452,7 @@ class DataGrid1 extends Component {
     return <Redirect to={'/adminPanel'}/>
   }
   render() {
-    if(!(this.props.adminLoginState)) {
+    if(sessionStorage.getItem('isAdminLogin') !== 'yes' && !(this.props.adminLoginState)) {
       return (
         <div>
           <Redirect to={'/'}/>
@@ -462,22 +537,33 @@ class DataGrid1 extends Component {
            </div>*/}
         </div>
         {this.redirectToStudentCorrection()}
-        <IdCardWrapper/>
+        <IdCardButtons/>
         {this.renderDataGrid()}
       </div>
     );
   }
 }
+DataGrid.propTypes = {
+  adminLoginState: PropTypes.bool,
+};
+
+DataGrid.defaultProps = {
+  adminLoginState: false,
+};
+
 const mapStateToProps = state => ({
   students: allStudentsData(state),
+  visibleColumnConfig: getVisibleColumnConfig(state),
+  selectValue: getSelectValue(state),
   redirect: stateOfRedirect(state),
   adminLoginState: stateOfAdminLogin(state),
 });
 export default connect(mapStateToProps, {
   getAllStudentsAction,
   setStudentDataAction,
-  updateStudentByAdmin,
-  resetAdminCredentials,
-  setAdminLoginState,
-  setRedirectValue,
+  updateStudentByAdminAction,
+  resetAdminCredentialsAction,
+  setAdminLoginStateAction,
+  setRedirectValueAction,
+  setVisibleColumnConfigAction,
 })(DataGrid1);

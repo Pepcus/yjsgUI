@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import LinkButton from './commonComponents/LinkButton';
 import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
-import { fetchStudentData, setAdminCredentials, setStudentCredentials, setAdminLoginState, } from '../actions/studentRegistrationActions';
+import { fetchStudentData, setAdminCredentialsAction, setStudentCredentials, setAdminLoginStateAction, } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
 import { Redirect, Switch } from 'react-router-dom';
 import {
@@ -100,30 +100,37 @@ class SplashPage extends Component {
       isCorrection: false,
     })
   }
-  checkAdminCredential(){
-    const {
-      id,
-      password,
-    } = this.props;
-    if(this.state.message) {
-      if (id !== adminId || password !== adminPassword) {
-        return (
-          <div className={'errorPopupContainer'}>
-            <h5>{invalidAdminMsg}</h5>
-          </div>
-        );
+  checkAdminCredential() {
+    let data = sessionStorage.getItem('isAdminLogin');
+    if (!data) {
+      const {
+        id,
+        password,
+      } = this.props;
+      if (this.state.message) {
+        if (id !== adminId || password !== adminPassword) {
+          return (
+            <div className={'errorPopupContainer'}>
+              <h5>{invalidAdminMsg}</h5>
+            </div>
+          );
+        } else {
+          sessionStorage.setItem('isAdminLogin', 'yes');
+          return <Switch><Redirect to={'/student-search'}/></Switch>
+        }
       }
-      else return <Switch><Redirect to={'/student-search'}/></Switch>
+      return null;
+    }else {
+      return <Switch><Redirect to={'/student-search'}/></Switch>
     }
-    return null;
   }
   setAdminLogin() {
     this.setState({
       adminLoginState: true,
       message: true
     });
-    this.props.setAdminLoginState(true);
-    this.props.setAdminCredentials(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminLoginStateAction(true);
+    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 
   fetchStudentById () {
@@ -280,6 +287,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
-  setAdminCredentials,
-  setAdminLoginState,
+  setAdminCredentialsAction,
+  setAdminLoginStateAction,
 })(SplashPage);

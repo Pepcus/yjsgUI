@@ -17,7 +17,7 @@ import {
   setNoRecordsFoundMessageAction,
   updateStudentFailedAction,
   updateStudentSuccessAction,
-  getAllStdentsDataResultsSuccess,
+  getAllStudentsDataResultsSuccessAction,
 
 } from '../actions/studentRegistrationActions';
 
@@ -99,7 +99,7 @@ export function* getAllStudentsSaga(action) {
   try{
     const response = yield getAllStudentsAPI(action);
     if(response.students){
-      yield put(getAllStdentsDataResultsSuccess(response.students));
+      yield put(getAllStudentsDataResultsSuccessAction(response.students));
     }
 
   }catch (e){

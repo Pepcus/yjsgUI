@@ -29,10 +29,10 @@ import { setRegistrationData } from '../utils/registrationFormUtils';
 import {
   clearSearchResultsAction,
   fetchSearchResultsAction,
-  setAdminCredentials,
-  resetAdminCredentials,
-  setAdminLoginState,
-  setRedirectValue,
+  setAdminCredentialsAction,
+  resetAdminCredentialsAction,
+  setAdminLoginStateAction,
+  setRedirectValueAction,
 } from '../actions/studentRegistrationActions';
 import LinkButton from './commonComponents/LinkButton';
 
@@ -46,7 +46,7 @@ class AdminPanel extends Component {
       redirect: false
     };
     this.props.clearSearchResultsAction();
-    this._handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.populateResults = this.populateResults.bind(this);
     this.performLogout = this.performLogout.bind(this);
     this._checkValidKey = this.checkValidKey.bind(this);
@@ -63,9 +63,9 @@ class AdminPanel extends Component {
   }
 
   performLogout() {
-    this.props.resetAdminCredentials();
-    this.props.setAdminLoginState(false);
-    this.props.setRedirectValue(false);
+    this.props.resetAdminCredentialsAction();
+    this.props.setAdminLoginStateAction(false);
+    this.props.setRedirectValueAction(false);
   }
 
   populateResults() {
@@ -87,7 +87,7 @@ class AdminPanel extends Component {
   }
   componentWillMount() {
     if (this.props.adminLoginState) {
-      this.props.setRedirectValue(true);
+      this.props.setRedirectValueAction(true);
     }
   }
   setRedirectValue(){
@@ -95,7 +95,7 @@ class AdminPanel extends Component {
         this.setState({
           redirect: true
         });
-        this.props.setRedirectValue(true);
+        this.props.setRedirectValueAction(true);
       } else {
         alert('Invalid Admin')
       }
@@ -208,8 +208,8 @@ class AdminPanel extends Component {
 
 AdminPanel.propTypes = {
   fetchSearchResultsAction: PropTypes.func.isRequired,
-  setAdminCredentials: PropTypes.func.isRequired,
-  resetAdminCredentials: PropTypes.func.isRequired,
+  setAdminCredentialsAction: PropTypes.func.isRequired,
+  resetAdminCredentialsAction: PropTypes.func.isRequired,
   clearSearchResultsAction: PropTypes.func.isRequired,
   searchResults: PropTypes.object,
 };
@@ -228,9 +228,9 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchSearchResultsAction,
-  setAdminCredentials,
+  setAdminCredentialsAction,
   clearSearchResultsAction,
-  setRedirectValue,
-  resetAdminCredentials,
-  setAdminLoginState,
+  setRedirectValueAction,
+  resetAdminCredentialsAction,
+  setAdminLoginStateAction,
 })(AdminPanel);
