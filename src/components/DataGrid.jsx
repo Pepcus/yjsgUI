@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
@@ -21,13 +22,12 @@ import {
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
-import IdCardButtons from './IdCardButtons';
+import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
   goBackBtnText,
   adminPassword,
 } from '../utils/yjsgConstants';
-import PropTypes from 'prop-types';
 
 const gridMetaData = [
   {
@@ -162,33 +162,13 @@ class DataGrid1 extends Component {
     this.state = {
       selectedStudents: [],
       selectedStudentsCheck: [],
-      selectValue: this.getSelectValue(),
+      selectValue: this.props.selectValue,
       students:[],
       metaData: gridHeaderData(),
       columnOptionIsOpen:false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
-      visibleColumnConfig: this.getVisibleColumnConfigObject(),/* {
-        column: true,
-        studentId: true,
-        name: true,
-        fatherName: true,
-        mobile: true,
-        email: true,
-        gender: true,
-        age: true,
-        address: true,
-        education: true,
-        classAttended2016: true,
-        classAttended2017: true,
-        attendance2016: true,
-        attendance2017: true,
-        classRoomNo2016: true,
-        classRoomNo2017: true,
-        marks2016: true,
-        marks2017: true,
-        edit: true,
-      }*/
+      visibleColumnConfig: this.props.visibleColumnConfig,
     };
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
@@ -206,44 +186,7 @@ class DataGrid1 extends Component {
     this.CheckButton = this.CheckButton.bind(this);
     this.formattedStudent = this.formattedStudent.bind(this);
   }
-  getSelectValue(){
-    let DefaultSelectValue = true;
-    if(this.props.selectValue !== undefined) {
-      return this.props.selectValue;
-    }
-    else {
-      return DefaultSelectValue;
-    }
-  }
-  getVisibleColumnConfigObject() {
-    let OriginalVisibleColumnConfigObject = {
-      column: true,
-      studentId: true,
-      name: true,
-      fatherName: true,
-      mobile: true,
-      email: true,
-      gender: true,
-      age: true,
-      address: true,
-      education: true,
-      classAttended2016: true,
-      classAttended2017: true,
-      attendance2016: true,
-      attendance2017: true,
-      classRoomNo2016: true,
-      classRoomNo2017: true,
-      marks2016: true,
-      marks2017: true,
-      edit: true,
-    }
-    if(this.props.visibleColumnConfig !== undefined) {
-      return this.props.visibleColumnConfig;
-    }
-    else {
-      return OriginalVisibleColumnConfigObject;
-    }
-  };
+
   componentWillMount() {
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
@@ -260,7 +203,7 @@ class DataGrid1 extends Component {
     this.props.setAdminLoginStateAction(false);
     this.props.setRedirectValueAction(false);
     sessionStorage.removeItem('isAdminLogin');
-    let OriginalVisibleColumnConfigObject = {
+    let defaultColumnConfig  = {
       column: true,
       studentId: true,
       name: true,
@@ -281,8 +224,8 @@ class DataGrid1 extends Component {
       marks2017: true,
       edit: true,
     }
-    let DefaultSelectValue = true;
-    this.props.setVisibleColumnConfigAction(OriginalVisibleColumnConfigObject, DefaultSelectValue);
+    let defaultSelectValue = true;
+    this.props.setVisibleColumnConfigAction(defaultColumnConfig , defaultSelectValue);
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -298,8 +241,8 @@ class DataGrid1 extends Component {
   }
   setValuesOfVisibleColumnConfig(values, selectValue){
     let count = 0;
-    for(let k in values) {
-      if(values[k]){
+    for(let key in values) {
+      if(values[key]){
         count ++;
       }
       if(count>1){
@@ -537,7 +480,7 @@ class DataGrid1 extends Component {
            </div>*/}
         </div>
         {this.redirectToStudentCorrection()}
-        <IdCardButtons/>
+        <SelectedStudentsActionWrapper/>
         {this.renderDataGrid()}
       </div>
     );

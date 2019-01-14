@@ -101,8 +101,8 @@ class SplashPage extends Component {
     })
   }
   checkAdminCredential() {
-    let data = sessionStorage.getItem('isAdminLogin');
-    if (!data) {
+    let isAdminLogin  = sessionStorage.getItem('isAdminLogin');
+    if (!isAdminLogin ) {
       const {
         id,
         password,

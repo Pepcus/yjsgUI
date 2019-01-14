@@ -172,7 +172,32 @@ export const studentSearchReducer = (state = {}, action) => {
   }
 };
 
-export const allStudentsDataReducer = (state = {}, action) => {
+const allStudentsDataReducerInitialState = {
+  selectValue: true,
+  visibleColumnConfig: {
+    column: true,
+    studentId: true,
+    name: true,
+    fatherName: true,
+    mobile: true,
+    email: true,
+    gender: true,
+    age: true,
+    address: true,
+    education: true,
+    classAttended2016: true,
+    classAttended2017: true,
+    attendance2016: true,
+    attendance2017: true,
+    classRoomNo2016: true,
+    classRoomNo2017: true,
+    marks2016: true,
+    marks2017: true,
+    edit: true,
+  }
+};
+
+export const allStudentsDataReducer = (state = allStudentsDataReducerInitialState, action) => {
   switch (action.type) {
 
     case 'GET_ALL_STUDENTS_RESULTS_SUCCESS':

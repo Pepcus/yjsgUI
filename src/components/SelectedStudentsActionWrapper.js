@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class IdCardButtons extends Component{
+class SelectedStudentsActionWrapper extends Component{
 
   render(){
     return(
@@ -24,4 +24,4 @@ class IdCardButtons extends Component{
     );
   }
 }
-export default IdCardButtons;
+export default SelectedStudentsActionWrapper;

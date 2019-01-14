@@ -107,8 +107,8 @@ class SplashPage extends Component {
     })
   }
   checkAdminCredential(){
-     let data = sessionStorage.getItem('isAdminLogin');
-    if (!data) {
+     let isAdminLogin  = sessionStorage.getItem('isAdminLogin');
+    if (!isAdminLogin ) {
       const {
         id,
         password,
@@ -204,7 +204,6 @@ class SplashPage extends Component {
               placeholder={'Enter Admin ID'}
               onInputChange={this._handleInputChange}
               value={this.state.admin.adminId}
-              onclick={this.setAdminCredentialFalse}
             />
             <InputField
               type={'password'}
@@ -213,7 +212,6 @@ class SplashPage extends Component {
               placeholder={'Enter Admin Password'}
               onInputChange={this._handleInputChange}
               value={this.state.admin.adminPassword}
-              onclick={this.setAdminCredentialFals}
             />
               {this.checkAdminCredential()}
           </div>

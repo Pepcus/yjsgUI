@@ -27,7 +27,7 @@ class ColumnConfig extends Component{
     super(props);
     this.state = {
       visibleColumnConfig: {},
-      selectValue: true,
+      selectValue: '',
     };
     this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
     this.setCheckValue = this.setCheckValue.bind(this);
