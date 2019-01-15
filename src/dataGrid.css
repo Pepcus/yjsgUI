@@ -467,6 +467,8 @@ html,body {
     box-shadow: 1px 1px 3px 0px #b0b0b0;
     transition:0.5s all;
     position:relative;
+    transition:0.5s all;
+    position:relative;
 }
 .column-option-container::after {
     content: '\00bb';
