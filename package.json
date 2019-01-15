@@ -23,7 +23,6 @@
     "redux-saga": "^0.16.2",
     "router": "^1.3.3",
     "routes": "^2.1.0",
-    "save": "^2.3.3",
     "simple-react-data-grid": "2.1.1"
   },
   "scripts": {
