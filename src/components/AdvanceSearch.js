@@ -67,7 +67,7 @@ class AdvanceSearch extends Component {
     return(
       <form id="advanceSearch" className="advanceSearchForm">
         <div className = "input-radio">
-        <label htmlFor = "search_input">
+        <label htmlFor = "search_input" className = "input-text">
           <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance" />
           <button type="submit" form="advanceSearch" value="Submit" className="search" onClick={this.advanceSearch}>
               <i className="fa fa-search"></i>

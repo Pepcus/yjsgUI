@@ -390,43 +390,11 @@ class DataGrid1 extends Component {
           <h2>{yjsgHeader}</h2>
           <div className={'logoutButtonContainer'}>
             <div className={'logoutLinkContainer'}>
-              <Link
-                to={'/'}
-                style={{
-                  color: '#fff',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  padding: '5px 17px',
-                  border: '1px solid #fffefd',
-                  marginRight: '10px',
-                    borderRadius: '3px',
-
-                  '&:hover': {
-                    color: '#000',
-                    backgroundColor: 'rgb(231, 104, 14)',
-                    transition: '0.3s all',
-                  }
-                }}
+              <Link to = {'/'} className="logout-button"
               >Back </Link>
-              <Link
-                to={'/'}
-                style={{
-                  color: '#fff',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  padding: '5px 17px',
-                  border: '1px solid #fffefd',
-
-                  '&:hover': {
-                    color: '#000',
-                    backgroundColor: 'rgb(231, 104, 14)',
-                    transition: '0.3s all'
-                  }
-                }}
+              <Link to={'/'} className = "logout-button"
                 onClick={this.performLogout}
-              >
-                Logout
-              </Link>
+              >Logout</Link>
             </div>
           </div>
         </div>
