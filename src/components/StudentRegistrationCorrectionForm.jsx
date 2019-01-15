@@ -141,7 +141,6 @@ class StudentRegistrationCorrectionForm extends Component {
       this.updateStudentData();
     } else {
       this.checkError(this.state.student);
-
       if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
         this.setState({
           isSubmitTriggered: true,

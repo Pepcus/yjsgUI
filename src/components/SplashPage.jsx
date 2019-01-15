@@ -18,6 +18,8 @@ import {
   getAdminId,
   getAdminPassword,
   getSearchResults,
+  getStudent,
+  isFetched,
   isLoading,
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
@@ -26,16 +28,17 @@ import yjsgLogo from '../assets/yjsgLogo.png';
 import {
   adminId,
   adminPassword,
+  yjsgHeader,
   eventDate,
   eventVenue,
-  yjsgHeader,
   goBackBtnText,
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
   viewEditInfoBtnText,
-  adminLoginBtnText,
   loginBtnText,
+  adminLoginBtnText,
   invalidAdminMsg,
+  invalidIdMessage,
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
@@ -54,7 +57,8 @@ class SplashPage extends Component {
       admin: {},
       isURLParams: false,
       adminLoginState: false,
-      message: false,
+      adminCredentialErrorMessage: false,
+      registeredStudentCredentialErrorMessage:false,
     };
 
     this._enableEditInfo = this.enableEditInfo.bind(this);
@@ -65,6 +69,7 @@ class SplashPage extends Component {
     this._fetchStudentById = this.fetchStudentById.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
     this.checkAdminCredential = this.checkAdminCredential.bind(this);
+    this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
   }
 
   componentWillMount() {
@@ -113,7 +118,7 @@ class SplashPage extends Component {
         id,
         password,
       } = this.props;
-      if(this.state.message) {
+      if(this.state.adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
           return (
             <div className={'errorPopupContainer'}>
@@ -131,10 +136,26 @@ class SplashPage extends Component {
       return <Switch><Redirect to={'/student-search'}/></Switch>
       }
       }
+  checkRegisteredStudentCredential() {
+    if (this.state.registeredStudentCredentialErrorMessage) {
+     if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+        return (<div>
+          <h5>{invalidIdMessage}</h5>
+        </div>);
+      } else if (this.props.studentData && this.props.isFetched) {
+        return (
+          <div>
+            <Redirect to={'/studentCorrection'}/>
+          </div>
+        )
+      }
+    }
+      return null;
+  }
   setAdminLogin() {
     this.setState({
       adminLoginState: true,
-      message: true
+      adminCredentialErrorMessage: true
     });
     this.props.setAdminLoginStateAction(true);
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
@@ -145,6 +166,9 @@ class SplashPage extends Component {
       this.state.credentials.secretKey);
     this.props.fetchStudentData(this.state.credentials.studentId,
       this.state.credentials.secretKey);
+    this.setState({
+      registeredStudentCredentialErrorMessage: true,
+    });
   };
 
   handleInputChange(value, name) {
@@ -157,7 +181,8 @@ class SplashPage extends Component {
     this.setState({
       credentials: updatedData,
       admin: adminData,
-      message: false,
+      adminCredentialErrorMessage: false,
+      registeredStudentCredentialErrorMessage: false,
     });
   }
 
@@ -180,9 +205,9 @@ class SplashPage extends Component {
           onInputChange={this._handleInputChange}
           value={this.state.credentials.secretKey}
         />
-        <LinkButton
+        {this.checkRegisteredStudentCredential()}
+        <Button
           buttonText={viewEditInfoBtnText}
-          linkPath={'/studentCorrection'}
           onClick={this._fetchStudentById}
         />
         <Button
@@ -293,6 +318,8 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
   searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
+  studentData: getStudent(state),
+  isFetched: isFetched(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,

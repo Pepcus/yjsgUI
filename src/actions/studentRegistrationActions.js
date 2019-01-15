@@ -133,3 +133,7 @@ export const setVisibleColumnConfigAction = (visibleColumnConfig, selectValue) =
   selectValue,
 });
 
+export const resetVisibleColumnConfigAction = () => ({
+  type: 'RESET_VISIBLE_COLUMN_CONFIG_DATA',
+});
+

@@ -16,6 +16,7 @@ import {
   setAdminLoginStateAction,
   setRedirectValueAction,
   setVisibleColumnConfigAction,
+  resetVisibleColumnConfigAction,
 } from  '../actions/studentRegistrationActions';
 import {
   stateOfRedirect,
@@ -203,29 +204,7 @@ class DataGrid1 extends Component {
     this.props.setAdminLoginStateAction(false);
     this.props.setRedirectValueAction(false);
     sessionStorage.removeItem('isAdminLogin');
-    let defaultColumnConfig  = {
-      column: true,
-      studentId: true,
-      name: true,
-      fatherName: true,
-      mobile: true,
-      email: true,
-      gender: true,
-      age: true,
-      address: true,
-      education: true,
-      classAttended2016: true,
-      classAttended2017: true,
-      attendance2016: true,
-      attendance2017: true,
-      classRoomNo2016: true,
-      classRoomNo2017: true,
-      marks2016: true,
-      marks2017: true,
-      edit: true,
-    }
-    let defaultSelectValue = true;
-    this.props.setVisibleColumnConfigAction(defaultColumnConfig , defaultSelectValue);
+    this.props.resetVisibleColumnConfigAction();
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -451,10 +430,6 @@ class DataGrid1 extends Component {
           </div>
         </div>
         <div className="modal">
-         {/* <LinkButton
-            buttonText={goBackBtnText}
-            linkPath={'/adminPanel'}
-          />*/}
           <div>
             <AdvanceSearch
               metaData={this.state.metaData}
@@ -480,7 +455,10 @@ class DataGrid1 extends Component {
            </div>*/}
         </div>
         {this.redirectToStudentCorrection()}
-        <SelectedStudentsActionWrapper/>
+        <SelectedStudentsActionWrapper
+          selectedStudents = {this.state.selectedStudents}
+          metaData={this.state.metaData}
+        />
         {this.renderDataGrid()}
       </div>
     );
@@ -509,4 +487,5 @@ export default connect(mapStateToProps, {
   setAdminLoginStateAction,
   setRedirectValueAction,
   setVisibleColumnConfigAction,
+  resetVisibleColumnConfigAction,
 })(DataGrid1);

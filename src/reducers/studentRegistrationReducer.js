@@ -221,6 +221,12 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         visibleColumnConfig: action.visibleColumnConfig,
         selectValue: action.selectValue,
       };
+    case 'RESET_VISIBLE_COLUMN_CONFIG_DATA':
+      return {
+        ...state,
+        visibleColumnConfig: allStudentsDataReducerInitialState.visibleColumnConfig,
+        selectValue: allStudentsDataReducerInitialState.selectValue,
+      };
     default: {
       return {
         ...state,
