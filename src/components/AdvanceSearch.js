@@ -8,16 +8,19 @@ class AdvanceSearch extends Component {
     this.state = {
       thresholdValue: '0.0',
       inputValue:'',
+      isMultipleIdSearch: false,
+
     };
     this.advanceSearch = this.advanceSearch.bind(this);
     this.onClickRadioButton = this.onClickRadioButton.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
+    this.onClickMultipleIdSearchRadioButton = this.onClickMultipleIdSearchRadioButton.bind(this);
   }
 
   setInputValue(e){
     if(isEmpty(e.target.value)){
-      this.props.onFilter(this.props.students);
+      this.props.onFilter(this.props.formattedStudent(this.props.students));
     }
     this.setState({
       inputValue: e.target.value,
@@ -31,38 +34,55 @@ class AdvanceSearch extends Component {
     }
     this.setState({
       thresholdValue: '0.0',
+      isMultipleIdSearch: false,
     });
-    this.props.onFilter(this.props.students);
+    this.props.onFilter(this.props.formattedStudent(this.props.students));
   }
 
   onClickRadioButton(e) {
     this.setState({
       thresholdValue: e.target.value,
+      isMultipleIdSearch: false,
     });
   }
-
+  onClickMultipleIdSearchRadioButton(){
+    this.setState({
+      isMultipleIdSearch: true,
+    });
+  }
   advanceSearch(e) {
-    e.preventDefault();
-    const foundKeys = this.props.metaData.headerConfig.map((object) => {
-        return object.key;
+    if (!this.state.isMultipleIdSearch) {
+      e.preventDefault();
+      const foundKeys = this.props.metaData.headerConfig.map((object) => {
+          return object.key;
+        }
+      );
+      const options = {
+        shouldSort: true,
+        threshold: Number(this.state.thresholdValue),
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: foundKeys,
+      };
+      if (!isEmpty(this.state.inputValue)) {
+        const fuse = new Fuse(this.props.students, options);
+        const result = fuse.search(this.state.inputValue);
+        this.props.onFilter(this.props.formattedStudent(result));
       }
-    );
-    const options = {
-      shouldSort: true,
-      threshold: Number(this.state.thresholdValue),
-      location: 0,
-      distance: 100,
-      maxPatternLength: 32,
-      minMatchCharLength: 1,
-      keys: foundKeys,
-    };
-    if(!isEmpty(this.state.inputValue)) {
-      const fuse = new Fuse(this.props.students, options);
-      const result = fuse.search(this.state.inputValue);
-      this.props.onFilter(result);
+    }else{
+      let searchStudentsIds  = this.state.inputValue.split(',');
+      let searchResult = [];
+      for(let index in searchStudentsIds){
+        let result = this.props.students.filter(obj => {
+          return obj.id === Number(searchStudentsIds[index]);
+        });
+        searchResult.push(...result);
+      }
+      this.props.onFilter(this.props.formattedStudent(searchResult));
     }
   }
-
   render(){
     return(
       <form id="advanceSearch" className="advanceSearchForm">
@@ -82,6 +102,10 @@ class AdvanceSearch extends Component {
           <div className="input-radio-container">
             <input type="radio" name="thresholdValue" value="0.6" onClick={this.onClickRadioButton} />
             <label htmlFor="deep_search">Deep Search</label>
+          </div>
+          <div className="input-radio-container">
+            <input type="radio" name="thresholdValue" value={this.state.isMultipleIdSearch} onClick={this.onClickMultipleIdSearchRadioButton} />
+            <label htmlFor="deep_search">Multiple ID Search</label>
           </div>
         </div>
       </div>

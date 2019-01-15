@@ -436,6 +436,7 @@ class DataGrid1 extends Component {
               getAllStudentsAction={this.props.getAllStudentsAction}
               students={this.props.students}
               onFilter={this.onFilter}
+              formattedStudent = {this.formattedStudent}
             />
           <div className="column-option">
             <button className="column-option-container" onClick={this.openColumnOption}>Column Options</button>
