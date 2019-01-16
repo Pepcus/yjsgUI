@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
+import cloneDeep from 'lodash/cloneDeep';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -280,12 +281,12 @@ class DataGrid1 extends Component {
         ],
         selectedStudentsCheck: [
           ...this.state.selectedStudentsCheck,
-          rowData.id,
+          rowData.studentId,
         ],
       });
     } else if(!e.target.checked){
-      const removedStudent = this.state.selectedStudents.filter((item) => item.id !== e.target.name);
-      const removedSelectCheckBox = this.state.selectedStudentsCheck.filter((item) => item !== e.target.name);
+      const removedStudent = this.state.selectedStudents.filter((item) => item.studentId !== Number(e.target.name));
+      const removedSelectCheckBox = this.state.selectedStudentsCheck.filter((item) => item !== Number(e.target.name));
       this.setState({
         selectedStudents: removedStudent,
         selectedStudentsCheck: removedSelectCheckBox,
@@ -308,17 +309,19 @@ class DataGrid1 extends Component {
       </button>
     </div>
   );
-  CheckButton = ({ rowData }) => (
+  CheckButton = ({ rowData }) => {
+    return(
     <div className = "btn-block">
       <input
-        name={rowData.id}
+        name={String(rowData.studentId)}
         type="checkbox"
         onChange={(e) =>{this.handleEditCheckBoxClick(rowData, e)}}
         className="btn-grid"
-        checked={this.state.selectedStudentsCheck.includes(rowData.id) ? "checked": ""}
+        checked={this.state.selectedStudentsCheck.includes(rowData.studentId) ? "checked": ""}
       />
     </div>
   );
+}
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
@@ -328,7 +331,7 @@ class DataGrid1 extends Component {
   }
   onFilter(result){
     this.setState({
-      students: result,
+      students: this.formattedStudent(result),
     });
   }
   renderColumnConfig() {

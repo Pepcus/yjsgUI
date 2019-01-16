@@ -9,7 +9,6 @@ class AdvanceSearch extends Component {
       thresholdValue: '0.0',
       inputValue:'',
       isMultipleIdSearch: false,
-
     };
     this.advanceSearch = this.advanceSearch.bind(this);
     this.onClickRadioButton = this.onClickRadioButton.bind(this);

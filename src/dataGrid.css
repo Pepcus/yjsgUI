@@ -1335,8 +1335,35 @@ html, body, #root, #root>div, .student-information-Container {
     .custom-modal {
         width: 90% !important;
     }
-    .input-radio .input-text {
+}
+.student-Id-Cards{
+    border: 1px solid brown;
+    flex: 0 0 50%;
+}
+.students-Id-Card-Wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: fit-content;
+    max-height: 483px;
+    overflow-x: hidden;
+}
+.card-fields-wrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+.student-Id-Cards-header{
+    text-align: center;
+}
+.student-Id-Cards-footer{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+.input-radio .input-text {
         min-width: 60%;
         max-width: 100%;
     }
-}
