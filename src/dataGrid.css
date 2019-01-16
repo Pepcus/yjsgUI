@@ -1336,11 +1336,11 @@ html, body, #root, #root>div, .student-information-Container {
         width: 90% !important;
     }
 }
-.student-Id-Cards{
+.student-id-cards{
     border: 1px solid brown;
     flex: 0 0 50%;
 }
-.students-Id-Card-Wrapper {
+.students-id-card-wrapper {
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
@@ -1354,10 +1354,10 @@ html, body, #root, #root>div, .student-information-Container {
     margin-left: 14px;
     margin-right: 14px;
 }
-.student-Id-Cards-header{
+.student-id-cards-header{
     text-align: center;
 }
-.student-Id-Cards-footer{
+.student-id-cards-footer{
     display: flex;
     justify-content: space-between;
     margin-left: 14px;
