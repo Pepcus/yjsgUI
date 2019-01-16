@@ -305,7 +305,7 @@ class DataGrid1 extends Component {
   EditButton = ({ rowData }) => (
     <div className = "btn-block">
       <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
-          <i className="fa fa-edit"></i>Edit
+        <i className="fa fa-edit"/>Edit
       </button>
     </div>
   );
@@ -356,14 +356,13 @@ class DataGrid1 extends Component {
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
           <div>
-              <div className = "empty-column-message">
-                  <span className = "circle-icon">
-                      {/*<i className="fa fa-info-circle"></i>*/}
-                      <i className="fa fa-exclamation-triangle"></i>
-                  </span>
+            <div className = "empty-column-message">
+              <span className = "circle-icon">
+                <i className="fa fa-exclamation-triangle"/>
+                </span>
                   आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
               </div>
-          </div>
+            </div>
 
       );
     }
@@ -388,16 +387,13 @@ class DataGrid1 extends Component {
       <div>
         <div className={'student-information-Container'}>
           <div className= "yjsg-logo">
-              <img src="../../react-logo-13.png" alt="logo"/>
-          </div>
+            <img src="../../react-logo-13.png" alt="logo"/>
+            </div>
           <h2>{yjsgHeader}</h2>
           <div className={'logoutButtonContainer'}>
             <div className={'logoutLinkContainer'}>
-              <Link to = {'/'} className="logout-button"
-              >Back </Link>
-              <Link to={'/'} className = "logout-button"
-                onClick={this.performLogout}
-              >Logout</Link>
+              <Link to = {'/'} className="logout-button">Back</Link>
+              <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
             </div>
           </div>
         </div>
@@ -410,14 +406,14 @@ class DataGrid1 extends Component {
               onFilter={this.onFilter}
               formattedStudent = {this.formattedStudent}
             />
-          <div className="column-option">
-            <button className="column-option-container" onClick={this.openColumnOption}>
-                <i className="fa fa-filter card-icon"></i>
+            <div className="column-option">
+              <button className="column-option-container" onClick={this.openColumnOption}>
+                <i className="fa fa-filter card-icon"/>
                 Configure
-            </button>
-            {this.renderColumnConfig()}
-          </div>
-          </div>
+                </button>
+              {this.renderColumnConfig()}
+              </div>
+            </div>
           {/*
            Todo: This feature will be implemented in future scope.
           <div>

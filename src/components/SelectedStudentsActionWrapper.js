@@ -32,15 +32,15 @@ class SelectedStudentsActionWrapper extends Component{
         <div className="buttonContainer">
           <CSVLink headers={header} data={this.props.selectedStudents} >
             <button className="linkButton">
-                <i className="fa fa-download card-icon"/>Export
-            </button>
-          </CSVLink>
-        </div>
+              <i className="fa fa-download card-icon"/>Export
+              </button>
+            </CSVLink>
+          </div>
         <div className="buttonContainer">
           <button className="linkButton" onClick={this.openPrintOption}>
-              <i className="fa fa-print card-icon"/>Print Now
-          </button>
-        </div>
+            <i className="fa fa-print card-icon"/>Print Now
+            </button>
+          </div>
         <StudentIdCardModal
           printOptionIsOpen={this.state.printOptionIsOpen}
           closePrintOption={this.closePrintOption}
@@ -48,16 +48,16 @@ class SelectedStudentsActionWrapper extends Component{
         />
         <div className="buttonContainer">
           <button className="linkButton">
-              <i className="fa fa-print card-icon"/>Print Later
-          </button>
-        </div>
+            <i className="fa fa-print card-icon"/>Print Later
+            </button>
+          </div>
         <div className="buttonContainer">
           <button className="linkButton">
-              <i className="fa fa-user card-icon"/>Mark as Present
-          </button>
+            <i className="fa fa-user card-icon"/>Mark as Present
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 }
