@@ -23,7 +23,7 @@ import {
   stateOfRedirect,
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
-import AdvanceSearch from './AdvanceSearch'
+import AdvanceSearch from './AdvanceSearch';
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
