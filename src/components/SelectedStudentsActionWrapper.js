@@ -11,15 +11,13 @@ class SelectedStudentsActionWrapper extends Component{
       printOptionIsOpen:false,
     };
     this.openPrintOption = this.openPrintOption.bind(this);
-    this.closePrintOption = this.closePrintOption.bind(this);
+    this.printCards = this.printCards.bind(this);
   };
-
-  openPrintOption() {
-    this.setState({printOptionIsOpen: true});
+  printCards(){
+    window.print();
   }
-
-  closePrintOption() {
-    this.setState({printOptionIsOpen: false});
+  openPrintOption() {
+    this.setState({printOptionIsOpen: !this.state.printOptionIsOpen});
   }
 
   renderExportClassName(){
@@ -60,6 +58,7 @@ class SelectedStudentsActionWrapper extends Component{
     ({ label: item.label, key: item.key, disable: item.disable }),
   );
   return(
+    <div>
     <div className = "id-card-wrapper">
       <div className="buttons-wrapper">
         <div className="buttonContainer">
@@ -68,15 +67,10 @@ class SelectedStudentsActionWrapper extends Component{
           </CSVLink>
         </div>
         <div className="buttonContainer">
-          <button className={this.renderPrintNowClassName()} onClick={this.openPrintOption}>
+          <button className={this.renderPrintNowClassName()} onClick={this.printCards}>
             <i className="fa fa-print card-icon"/>Print Now
             </button>
           </div>
-        <StudentIdCardModal
-          printOptionIsOpen={this.state.printOptionIsOpen}
-          closePrintOption={this.closePrintOption}
-          selectedStudents={this.props.selectedStudents}
-        />
         <div className="buttonContainer">
           <button className={this.renderPrintNowClassName()}>
             <i className="fa fa-print card-icon"/>Print Later
@@ -89,6 +83,11 @@ class SelectedStudentsActionWrapper extends Component{
           </div>
         </div>
       </div>
+    <StudentIdCardModal
+      printOptionIsOpen={this.state.printOptionIsOpen}
+      selectedStudents={this.props.selectedStudents}
+    />
+    </div>
     );
   }
 }

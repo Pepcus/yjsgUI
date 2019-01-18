@@ -1341,7 +1341,6 @@ html, body, #root, #root>div, .student-information-Container {
     flex: 0 0 50%;
 }
 .students-id-card-wrapper {
-    display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
     height: fit-content;
@@ -1470,4 +1469,7 @@ html, body, #root, #root>div, .student-information-Container {
 .loader{
     text-align: center;
     margin-top: 12%;
+}
+.group-of-two-students{
+    display: flex;
 }
