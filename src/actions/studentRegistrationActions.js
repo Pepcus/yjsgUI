@@ -100,6 +100,9 @@ export const getAllStudentsDataResultsSuccessAction = (students) =>({
   type: 'GET_ALL_STUDENTS_RESULTS_SUCCESS',
   students,
 });
+export const getAllStudentsDataResultsFailureAction = () => ({
+  type: 'GET_ALL_STUDENTS_RESULTS_FAILURE',
+});
 export const setRedirectValueAction = (redirect) => ({
   type: 'SET_REDIRECT_VALUE',
   redirect,

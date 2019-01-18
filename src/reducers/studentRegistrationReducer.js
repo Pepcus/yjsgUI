@@ -194,16 +194,28 @@ const allStudentsDataReducerInitialState = {
     marks2016: true,
     marks2017: true,
     edit: true,
-  }
+  },
+  isLoading: false,
 };
 
 export const allStudentsDataReducer = (state = allStudentsDataReducerInitialState, action) => {
   switch (action.type) {
-
+    case 'GET_ALL_STUDENTS':
+      return {
+        ...state,
+        isLoading: true,
+      };
     case 'GET_ALL_STUDENTS_RESULTS_SUCCESS':
       return {
         ...state,
         students: action.students,
+        isLoading: false,
+      };
+    case 'GET_ALL_STUDENTS_RESULTS_FAILURE':
+      return {
+        ...state,
+        students: [],
+        isLoading: false,
       };
     case 'SET_REDIRECT_VALUE':
       return {
@@ -270,4 +282,4 @@ export const getVisibleColumnConfig = state => state.allStudentsDataReducer.visi
 
 export const getSelectValue = state => state.allStudentsDataReducer.selectValue;
 
-
+export const isGetAllStudentsLoading = state => state.allStudentsDataReducer.isLoading;

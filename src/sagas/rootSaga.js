@@ -18,7 +18,7 @@ import {
   updateStudentFailedAction,
   updateStudentSuccessAction,
   getAllStudentsDataResultsSuccessAction,
-
+  getAllStudentsDataResultsFailureAction,
 } from '../actions/studentRegistrationActions';
 
 
@@ -28,7 +28,6 @@ export default function* rootSaga () {
   yield takeLatest(['UPDATE_STUDENT'], updateStudentSaga);
   yield takeLatest(['FETCH_SEARCH_RESULTS'], searchStudentSaga);
   yield takeLatest(['GET_ALL_STUDENTS'], getAllStudentsSaga);
-
 }
 
 export function* createStudentSaga(action) {
@@ -100,9 +99,10 @@ export function* getAllStudentsSaga(action) {
     const response = yield getAllStudentsAPI(action);
     if(response.students){
       yield put(getAllStudentsDataResultsSuccessAction(response.students));
+    } else {
+      throw response;
     }
-
   }catch (e){
-
+    yield put(getAllStudentsDataResultsFailureAction());
   }
 }

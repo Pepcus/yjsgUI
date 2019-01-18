@@ -22,6 +22,7 @@ import {
 import {
   stateOfRedirect,
   stateOfAdminLogin,
+  isGetAllStudentsLoading,
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
@@ -171,7 +172,6 @@ class DataGrid1 extends Component {
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
-      loading: true,
     };
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
@@ -200,7 +200,6 @@ class DataGrid1 extends Component {
   }
   componentDidMount() {
     this.props.getAllStudentsAction();
-    setTimeout(() => this.setState({ loading: false }), 1000);
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
     }
@@ -326,7 +325,7 @@ class DataGrid1 extends Component {
       />
     </div>
   );
-}
+};
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
@@ -379,8 +378,7 @@ class DataGrid1 extends Component {
     return <Redirect to={'/adminPanel'}/>
   }
   render() {
-    const { loading } = this.state;
-    if(loading) {
+    if(this.props.isLoading) {
       return (<div className='loader'><img src="../../spinner.gif" alt="logo"/></div>);
     }
     if(sessionStorage.getItem('isAdminLogin') !== 'yes' && !(this.props.adminLoginState)) {
@@ -445,13 +443,24 @@ class DataGrid1 extends Component {
 }
 DataGrid.propTypes = {
   adminLoginState: PropTypes.bool,
+  students: PropTypes.array,
+  isLoading: PropTypes.bool,
+  visibleColumnConfig: PropTypes.object,
+  selectValue: PropTypes.bool,
+  redirect: PropTypes.bool,
 };
 
 DataGrid.defaultProps = {
   adminLoginState: false,
+  students: [],
+  isLoading: false,
+  selectValue: true,
+  redirect: false,
+  visibleColumnConfig: {},
 };
 
 const mapStateToProps = state => ({
+  isLoading: isGetAllStudentsLoading(state),
   students: allStudentsData(state),
   visibleColumnConfig: getVisibleColumnConfig(state),
   selectValue: getSelectValue(state),
