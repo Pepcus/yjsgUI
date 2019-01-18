@@ -191,6 +191,9 @@ class DataGrid1 extends Component {
   }
 
   componentWillMount() {
+    if (!this.props.redirect) {
+      this.redirectToAdminLogin();
+    }
     this.setState({
       metaData: this.formatMetaData(this.state.visibleColumnConfig),
     });
