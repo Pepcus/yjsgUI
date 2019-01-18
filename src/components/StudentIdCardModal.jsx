@@ -73,13 +73,6 @@ class StudentIdCardModal extends Component {
         </div>
       );
     }
-    else{
-      return(
-        <div>
-          <h3>Please select students </h3>
-        </div>
-      );
-    }
   }
 
   render() {

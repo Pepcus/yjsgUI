@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { CSVLink } from 'react-csv';
+import isEmpty from 'lodash/isEmpty';
 
 import StudentIdCardModal from './StudentIdCardModal';
 
@@ -21,6 +22,38 @@ class SelectedStudentsActionWrapper extends Component{
     this.setState({printOptionIsOpen: false});
   }
 
+  renderExportClassName(){
+    if(isEmpty(this.props.selectedStudents)) {
+      return "disable-link";
+    }
+    else {
+      return "export";
+    }
+  }
+  renderExportClassName(){
+    if(isEmpty(this.props.selectedStudents)) {
+      return "disable-link";
+    }
+    else {
+      return "export";
+    }
+  }
+  renderPrintNowClassName(){
+    if(isEmpty(this.props.selectedStudents)) {
+      return "disable-link-button";
+    }
+    else {
+      return "linkButton";
+    }
+  }
+  renderExportClassName(){
+    if(isEmpty(this.props.selectedStudents)) {
+      return "disable-link";
+    }
+    else {
+      return "export";
+    }
+  }
   render(){
   const filterHeader = this.props.metaData.headerConfig.filter(obj => obj.excludeFromExport !== true);
   const header = filterHeader.map(item =>
@@ -30,14 +63,12 @@ class SelectedStudentsActionWrapper extends Component{
     <div className = "id-card-wrapper">
       <div className="buttons-wrapper">
         <div className="buttonContainer">
-          <CSVLink headers={header} data={this.props.selectedStudents} >
-            <button className="linkButton">
-              <i className="fa fa-download card-icon"/>Export
-              </button>
-            </CSVLink>
-          </div>
+          <CSVLink headers={header} data={this.props.selectedStudents} className={this.renderExportClassName()}>
+            <i className="fa fa-download card-icon"/>Export
+          </CSVLink>
+        </div>
         <div className="buttonContainer">
-          <button className="linkButton" onClick={this.openPrintOption}>
+          <button className={this.renderPrintNowClassName()} onClick={this.openPrintOption}>
             <i className="fa fa-print card-icon"/>Print Now
             </button>
           </div>
@@ -47,12 +78,12 @@ class SelectedStudentsActionWrapper extends Component{
           selectedStudents={this.props.selectedStudents}
         />
         <div className="buttonContainer">
-          <button className="linkButton">
+          <button className={this.renderPrintNowClassName()}>
             <i className="fa fa-print card-icon"/>Print Later
             </button>
           </div>
         <div className="buttonContainer">
-          <button className="linkButton">
+          <button className={this.renderPrintNowClassName()}>
             <i className="fa fa-user card-icon"/>Mark as Present
             </button>
           </div>

@@ -171,6 +171,7 @@ class DataGrid1 extends Component {
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
+      loading: true,
     };
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
@@ -190,15 +191,16 @@ class DataGrid1 extends Component {
   }
 
   componentWillMount() {
-    if (!this.props.redirect) {
-      this.redirectToAdminLogin();
-    }
     this.setState({
       metaData: this.formatMetaData(this.state.visibleColumnConfig),
     });
   }
   componentDidMount() {
     this.props.getAllStudentsAction();
+    setTimeout(() => this.setState({ loading: false }), 1000);
+    if (!this.props.redirect) {
+      this.redirectToAdminLogin();
+    }
   }
   performLogout() {
     this.props.resetAdminCredentialsAction();
@@ -305,7 +307,7 @@ class DataGrid1 extends Component {
   EditButton = ({ rowData }) => (
     <div className = "btn-block">
       <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
-        <i className="fa fa-edit"/>Edit
+          <i className="fa fa-edit"/>Edit
       </button>
     </div>
   );
@@ -355,27 +357,29 @@ class DataGrid1 extends Component {
   renderDataGrid () {
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
-          <div>
-            <div className = "empty-column-message">
-              <span className = "circle-icon">
-                <i className="fa fa-exclamation-triangle"/>
-                </span>
-                  आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
-              </div>
+        <div>
+          <div className = "empty-column-message">
+            <span className = "circle-icon">
+              <i className="fa fa-exclamation-triangle"/>
+              </span>
+            आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
             </div>
-
+          </div>
       );
-    }
-    if (!isEmpty(this.state.students)) {
-      return (
-        <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
-      );
-    }
+        }
+    return (
+      <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
+    );
   }
-  redirectToAdminLogin(){
+
+  redirectToAdminLogin() {
     return <Redirect to={'/adminPanel'}/>
   }
   render() {
+    const { loading } = this.state;
+    if(loading) {
+      return (<div className='loader'><img src="../../spinner.gif" alt="logo"/></div>);
+    }
     if(sessionStorage.getItem('isAdminLogin') !== 'yes' && !(this.props.adminLoginState)) {
       return (
         <div>
@@ -406,8 +410,8 @@ class DataGrid1 extends Component {
               onFilter={this.onFilter}
               formattedStudent = {this.formattedStudent}
             />
-            <div className="column-option">
-              <button className="column-option-container" onClick={this.openColumnOption}>
+          <div className="column-option">
+            <button className="column-option-container" onClick={this.openColumnOption}>
                 <i className="fa fa-filter card-icon"/>
                 Configure
                 </button>

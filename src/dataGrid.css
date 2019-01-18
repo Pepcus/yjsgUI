@@ -1367,3 +1367,107 @@ html, body, #root, #root>div, .student-information-Container {
         min-width: 60%;
         max-width: 100%;
     }
+.export{
+    font-size: 14px;
+    padding: 12px 14px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: rgba(65, 67, 64, 0.15);
+    box-shadow: 0 1px 3px 0px #777978;
+    color: white;
+    background-color: #f9570a;
+ }
+.export:active {
+    background-color: #d24c0c;
+    color: white;
+    box-shadow: 0 1px 3px 0px #777978;
+    padding: 12px 14px 12px;
+    border-radius: 4px;
+    display:flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    text-decoration: none;
+    outline: medium none;
+}
+
+.export:hover{
+    transition:0.3s all;
+    box-shadow: 0 1px 3px 0px #777978;
+    background-color: #d24c0c;
+}
+.disable-link {
+    pointer-events: none;
+    font-size: 14px;
+    padding: 12px 14px 12px;
+    text-decoration: none;
+    outline: medium none;
+    border-radius: 4px;
+    background-color: #edeff1;
+    color: #707173;
+}
+.disable-link-button{
+    background-color: #edeff1;
+    pointer-events: none;
+    color: #707173;
+    outline:none;
+    letter-spacing: 0.5px;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+.buttons-wrapper .buttonContainer .disable-link-button {
+    position: relative;
+}
+.buttons-wrapper .buttonContainer .disable-link-button::after {
+    position: absolute;
+    content: 'Please select students...';
+    right: 0;
+    padding: 0px;
+    bottom: 0px;
+    color: #84827f;
+    z-index:1;
+    white-space: pre;
+    transform: translate(50%,100%);
+    background: white;
+    border: 1px solid #9d9898;
+    font-size: 12px;
+    opacity:0;
+}
+.buttons-wrapper .buttonContainer:hover .disable-link-button::after{
+    transition:0.2s all;
+    opacity:1;
+}
+
+.buttons-wrapper .buttonContainer.disable-link {
+    position: relative;
+}
+
+.buttons-wrapper .buttonContainer .disable-link::after {
+    position: absolute;
+    content: 'Please select students...';
+    left: 0%;
+    padding: 2px;
+    bottom: 0px;
+    color: #84827f;
+    z-index: 1;
+    white-space: pre;
+    transform: translate(30%,50%);
+    background: white;
+    border: 1px solid #9d9898;
+    font-size: 12px;
+    opacity: 0;
+}
+
+.buttons-wrapper .buttonContainer:hover .disable-link::after{
+    transition:0.2s all;
+    opacity:1;
+}
+.loader{
+    text-align: center;
+    margin-top: 12%;
+}
