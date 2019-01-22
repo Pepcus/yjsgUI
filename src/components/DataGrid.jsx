@@ -320,7 +320,6 @@ class DataGrid1 extends Component {
         name={String(rowData.studentId)}
         type="checkbox"
         onChange={(e) =>{this.handleEditCheckBoxClick(rowData, e)}}
-        className="btn-grid"
         checked={this.state.selectedStudentsCheck.includes(rowData.studentId) ? "checked": ""}
       />
     </div>
@@ -391,10 +390,12 @@ class DataGrid1 extends Component {
     return (
       <div>
         <div className={'student-information-Container'}>
-          <div className= "yjsg-logo">
-            <img src="../../react-logo-13.png" alt="logo"/>
+          <div className = "student-logo-header">
+            <div className= "yjsg-logo">
+              <img src="../../react-logo-13.png" alt="logo"/>
             </div>
-          <h2>{yjsgHeader}</h2>
+            <h2>{yjsgHeader}</h2>
+          </div>
           <div className={'logoutButtonContainer'}>
             <div className={'logoutLinkContainer'}>
               <Link to = {'/'} className="logout-button">Back</Link>

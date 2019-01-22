@@ -139,9 +139,11 @@ class SplashPage extends Component {
   checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
-        return (<div>
-          <h5>{invalidIdMessage}</h5>
-        </div>);
+        return (
+            <div className = "errorPopupContainer">
+              <h5 className = "error-message">{invalidIdMessage}</h5>
+          </div>
+        );
       } else if (this.props.studentData && this.props.isFetched) {
         return (
           <div>
@@ -189,31 +191,35 @@ class SplashPage extends Component {
   renderRegistrationCorrectionFields() {
     return (
       <div>
-        <InputField
-          type={'number'}
-          name={'studentId'}
-          label={'आई.डी. नं.'}
-          placeholder={'अपना आई.डी. नं. दर्ज करें'}
-          onInputChange={this._handleInputChange}
-          value={this.state.credentials.studentId}
-        />
-        <InputField
-          type={'text'}
-          name={'secretKey'}
-          label={'सीक्रेट कोड'}
-          placeholder={'अपना सीक्रेट कोड दर्ज करें'}
-          onInputChange={this._handleInputChange}
-          value={this.state.credentials.secretKey}
-        />
-        {this.checkRegisteredStudentCredential()}
-        <Button
-          buttonText={viewEditInfoBtnText}
-          onClick={this._fetchStudentById}
-        />
-        <Button
-          buttonText={goBackBtnText}
-          onClick={this._disableEditInfo}
-        />
+        <div className = "form-input-wrapper">
+            <InputField
+                type={'number'}
+                name={'studentId'}
+                label={'आई.डी. नं.'}
+                placeholder={'अपना आई.डी. नं. दर्ज करें'}
+                onInputChange={this._handleInputChange}
+                value={this.state.credentials.studentId}
+            />
+            <InputField
+                type={'text'}
+                name={'secretKey'}
+                label={'सीक्रेट कोड'}
+                placeholder={'अपना सीक्रेट कोड दर्ज करें'}
+                onInputChange={this._handleInputChange}
+                value={this.state.credentials.secretKey}
+            />
+            {this.checkRegisteredStudentCredential()}
+        </div>
+          <div className = "button-wrapper">
+              <Button
+                  buttonText={goBackBtnText}
+                  onClick={this._disableEditInfo}
+              />
+              <Button
+                buttonText={viewEditInfoBtnText}
+                onClick={this._fetchStudentById}
+            />
+          </div>
       </div>
     )
   }

@@ -60,7 +60,7 @@ class SelectedStudentsActionWrapper extends Component{
   return(
     <div>
       <div className = "id-card-wrapper">
-        <div className="buttons-wrapper">
+        <div className="selected-student-buttons">
           <div className="buttonContainer">
             <CSVLink headers={header} data={this.props.selectedStudents} className={this.renderExportClassName()}>
               <i className="fa fa-download card-icon"/>Export
@@ -82,7 +82,7 @@ class SelectedStudentsActionWrapper extends Component{
             </button>
           </div>
         </div>
-      </div>
+    </div>
       <StudentIdCardModal
         printOptionIsOpen={this.state.printOptionIsOpen}
         selectedStudents={this.props.selectedStudents}/>

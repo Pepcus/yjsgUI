@@ -1,0 +1,187 @@
+@media print {
+    body,html, #root {
+        height:100%;
+        width:100%;
+        /*-webkit-print-color-adjust: exact;*/
+    }
+    body,html {
+        height:100%;
+        width:100%;
+    }
+    .student-logo-header {
+        display:none !important;
+    }
+    .modal {
+        display:none !important;
+    }
+    .yjsg-logo img {
+        display: none !important;
+    }
+    .data-grid {
+       display: none !important;
+    }
+    .footer {
+       display:none;
+    }
+    .buttons-wrapper {
+        display:none;
+    }
+    .student-id-cards{
+        border: 1px solid #d94803;
+        width:48%;
+        box-sizing:border-box;
+        margin:30px 7px 7px;
+        /*float:left;*/
+        /*float:left;*/
+        /*display:inline-block;*/
+        /*justify-content: space-around;*/
+    }
+    .students-id-card-wrapper {
+       display:block;
+    }
+    .group-of-two-students {
+        display:flex;
+        flex-wrap:wrap;
+        overflow-y:hidden;
+        max-height: 100%;
+    }
+    .students-id-card-wrapper .group-of-two-students:nth-child(4n){
+        page-break-after: always;
+        /*page-break-inside: avoid;*/
+    }
+
+    .card-fields-wrapper{
+        display: flex;
+    }
+    .card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
+        font-weight: bold;
+        font-size: 11px;
+    }
+    .card-text-student .card-text-bold {
+        font-size:14px;
+        font-family: 'Roboto Condensed';
+    }
+    .card-text-name {
+        /*display: block;*/
+    }
+    .card-fields-wrapper .card-text {
+        z-index:1;
+        flex:1;
+        font-size:9px;
+        margin:4px 0px 10px;
+    }
+    .card-fields-wrapper .card-text-spacing {
+        flex:0.5 0 0;
+        margin:4px 0px 10px;
+    }
+    .student-id-cards-header{
+        text-align: center;
+        font-size: 18px;
+        color:#fff;
+        font-weight: bold;
+        font-family: 'Roboto Condensed';
+    }
+    .student-id-card-wrapper {
+        background-color: #f9570a !important;
+        color: white;
+        font-weight:550;
+        padding: 0px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-print-color-adjust: exact;
+    }
+    .student-id-cards-footer {
+        background-color: #fa8d19 !important;
+        color: white;
+        padding: 0px 5px;
+        min-height:25px;
+        max-height:100%;
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+        -webkit-print-color-adjust: exact;
+    }
+    .student-id-cards-footer .card-text {
+        font-size:10px;
+    }
+    .card-heading {
+        background-color: #f4f2f2 !important;
+        color: #565454;
+        padding: 15px;
+        font-size:18px;
+        font-weight:550;
+        -webkit-print-color-adjust: exact;
+    }
+    .image-id-card {
+        width: 40px;
+        margin-top: 2px;
+        margin-right: 10px;
+    }
+    .image-id-card img {
+        max-width:100%;
+    }
+    .card-content-wrapper {
+        /*padding:10px;*/
+        position:relative;
+        background-image:url('assets/grid-logo-yjsg.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-print-color-adjust: exact;
+    }
+    .card-content {
+        padding:5px;
+    }
+    .card-text-content {
+        text-transform: capitalize !important;
+    }
+    .card-content-wrapper::before {
+        content:'';
+        position:absolute;
+        height:100%;
+        width:100%;
+        background-color: rgba(255, 255, 255, 0.69) !important;
+        -webkit-print-color-adjust: exact;
+    }
+    .card-modal-footer {
+        text-align: right;
+        padding: 10px 30px;
+        background-color: #f4f2f2 !important;
+        -webkit-print-color-adjust: exact;
+    }
+    .card-modal-footer .button-close {
+        color:#565454;
+        border-color:#565454;
+        box-shadow:none !important;
+    }
+    .card-modal-footer .button-close:hover {
+        color:#565454;
+        border-color:#565454 !important;
+        box-shadow:none !important;
+    }
+    .id-card-wrapper {
+        display:none !important;
+    }
+    .logoutLinkContainer {
+        display:none;
+    }
+    /*.data-grid {*/
+        /*display: none !important;*/
+    /*}*/
+    #header, #nav, .noprint
+    {
+        display: none;
+    }
+
+}
+@page {
+    size: A4;
+    margin: 15px;
+}
+@media print and (color) {
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

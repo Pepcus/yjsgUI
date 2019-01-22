@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import './dataGrid.css';
 import './tableGrid.css';
+import './card-print.css';
 import AppContainer from './components/coreComponents/AppContainer';
 import store from './store/store';
 

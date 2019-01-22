@@ -57,7 +57,7 @@
     max-width:100%;
 }
 .cell__mobile {
-    min-width:120px;
+    min-width:100px;
     max-width:100%;
 }
 .cell__email {
@@ -65,10 +65,10 @@
     max-width:100%;
 }
 .cell__gender {
-    max-width: 95px;
+    max-width: 75px;
 }
 .cell__age {
-    max-width: 65px;
+    max-width: 50px;
 }
 .cell__address {
     min-width: 320px;
@@ -80,13 +80,13 @@
     max-width:110px;
 }
 .cell__edit {
-    max-width: 78px;
+    max-width: 76px;
 }
 .cell__studentId {
-    max-width: 70px;
+    max-width: 55px;
 }
 .cell__column {
-    max-width: 55px;
+    max-width: 50px;
 }
 .btn-block input[type = "checkbox"] {
     height: 20px;

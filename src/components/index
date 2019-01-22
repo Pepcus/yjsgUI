@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<style>
+    div {
+        padding: 200px 50px;
+    }
+    @media print {
+        p {
+            page-break-after: always;
+        }
+    }
+</style>
+<body>
+<div>
+    hello
+</div>
+<p style="page-break-after: always"></p>
+<div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div><div>
+    hello
+</div>
+</body>
+</html>
