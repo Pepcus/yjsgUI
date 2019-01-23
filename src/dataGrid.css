@@ -59,7 +59,20 @@ html,body {
     height:100%;
     background-color: rgba(244, 233, 227, 0.21);
 }
-.landingPageContainer h2 {
+/*.landingPageContainer h2 {*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*background:rgb(249, 87, 10);*/
+    /*padding: 15px 0;*/
+    /*margin: 0;*/
+    /*color: #fff;*/
+    /*font-size: 25px;*/
+    /*line-height:30px;*/
+    /*line-height:30px;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+/*}*/
+.landingPageContainer .student-heading {
     position: fixed;
     top: 0;
     background:rgb(249, 87, 10);
@@ -72,7 +85,6 @@ html,body {
     width: 100%;
     text-align: center;
 }
-
 .landingPageContent {
     display: flex;
     align-items: center;
@@ -139,7 +151,6 @@ html,body {
     border: 2px solid #d24c0c;
 }
 .render-table {
-
     padding: 0px !important;
     margin: 16px 10px 0 !important;
     border-top: 1px solid #c2c1bf !important;
@@ -833,10 +844,10 @@ html, body, #root, #root>div, .student-information-Container {
     text-align: center;
     left: 0;
 }
-.student-information-Container h2 {
+.student-information-Container .student-info-heading {
     padding:15px 0px;
 }
-.student-information-Container h2 {
+.student-information-Container .student-info-heading {
     font-size: 22px;
 }
 .input-radio-container input[type = 'radio'] {
@@ -1035,7 +1046,7 @@ html, body, #root, #root>div, .student-information-Container {
     margin-right:5px;
 }
 .data-grid {
-    margin-top:-50px;
+    margin-top:-38px;
 }
 .logout-button {
     color: #fff;
@@ -1066,14 +1077,13 @@ html, body, #root, #root>div, .student-information-Container {
     display:inline !important;
 }
 .id-card-wrapper  .selected-student-buttons {
+    margin-left:10px;
 }
 .id-card-wrapper .selected-student-buttons .buttonContainer {
     margin: 0 0px 10px 0px;
     display: inline-block;
-    width:auto ;
-    margin-top:0px;
-    margin-left:10px !important;
-    margin-right:10px !important;
+    width:auto;
+    margin: 0px 10px 0px 0px;
 }
 .group-of-two-students {
     display:none;
@@ -1082,29 +1092,43 @@ html, body, #root, #root>div, .student-information-Container {
     font-size: 14px;
     padding: 12px 14px 12px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 3px;
     background-color: rgba(65, 67, 64, 0.15);
-    box-shadow: 0 1px 3px 0px #777978;
-    color: white;
-    background-color: #f9570a;
+    box-shadow: 0 0.7px 3px 0px #aeaeae;
+    color: #5c5b5b;
+    background-color: #ebebec;
 }
-.export:active {
-    background-color: #d24c0c;
-    color: white;
-    box-shadow: 0 1px 3px 0px #777978;
-    padding: 12px 14px 12px;
-    border-radius: 4px;
-    display:flex;
-    justify-content: flex-end;
-    font-size: 14px;
-    text-decoration: none;
-    outline: medium none;
-}
+/*.export:active {*/
+    /*background-color: #d24c0c;*/
+    /*color: white;*/
+    /*box-shadow: 0 1px 3px 0px #777978;*/
+    /*padding: 12px 14px 12px;*/
+    /*border-radius: 4px;*/
+    /*display:flex;*/
+    /*justify-content: flex-end;*/
+    /*font-size: 14px;*/
+    /*text-decoration: none;*/
+    /*outline: medium none;*/
+/*}*/
 
 .export:hover{
     transition:0.3s all;
-    box-shadow: 0 1px 3px 0px #777978;
-    background-color: #d24c0c;
+    box-shadow: 0 1.50px 3px 0px #aeaeae;
+    background-color: #e1e1e4;
+}
+.disable-link-new {
+    font-size: 14px;
+    pointer-events: none;
+    padding: 12px 14px 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: rgba(65, 67, 64, 0.15);
+    box-shadow: 0 1px 2px 0px #d7d3d3;
+    border:none;
+    text-align:center;
+    background-color: #edeff1;
+    color: #d8d8d8;
+    display:block;
 }
 .disable-link {
     pointer-events: none;
@@ -1126,19 +1150,57 @@ html, body, #root, #root>div, .student-information-Container {
     text-align: center;
     line-height: 20px;
     padding: 10px;
+    box-shadow: 0 1px 2px 0px #d7d3d3;
+    border:none;
     font-size: 14px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
 }
-.buttons-wrapper .buttonContainer .disable-link-button {
+.disable-link-button-new {
+    background-color: #edeff1;
+    color: #d8d8d8;
+    outline: none;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 2px 0px #d7d3d3;
+    border:none;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    width:100%;
+}
+.selected-student-buttons .buttonContainer .linkButton {
+    color: #5c5b5b;
+    background-color: #ebebec;
+    outline: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 3px 0px #d4d0d0;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.selected-student-buttons .buttonContainer .linkButton:hover {
+    transition:0.3s all;
+    box-shadow: 0 1.50px 3px 0px #aeaeae;
+    background-color: #e1e1e4;
+}
+.selected-student-buttons .buttonContainer .disable-link-button-new {
     position: relative;
 }
-.buttons-wrapper .buttonContainer .disable-link-button::after {
+.selected-student-buttons .buttonContainer .disable-link-button-new::after {
     position: absolute;
     content: 'Please select students...';
     right: 0;
-    padding: 0px;
+    padding: 0px 6px;
     bottom: 0px;
     color: #84827f;
     z-index:1;
@@ -1149,21 +1211,19 @@ html, body, #root, #root>div, .student-information-Container {
     font-size: 12px;
     opacity:0;
 }
-.buttons-wrapper .buttonContainer:hover .disable-link-button::after{
+.selected-student-buttons .buttonContainer:hover .disable-link-button-new::after{
     transition:0.2s all;
     opacity:1;
 }
-
-.buttons-wrapper .buttonContainer.disable-link {
+.selected-student-buttons .buttonContainer.disable-link-new {
     position: relative;
 }
-
-.buttons-wrapper .buttonContainer .disable-link::after {
+.selected-student-buttons .buttonContainer .disable-link-new::after {
     position: absolute;
     content: 'Please select students...';
     left: 0%;
-    padding: 2px;
-    bottom: 0px;
+    padding:3px 6px;
+    bottom: -9px;
     color: #84827f;
     z-index: 1;
     white-space: pre;
@@ -1174,13 +1234,16 @@ html, body, #root, #root>div, .student-information-Container {
     opacity: 0;
 }
 
-.buttons-wrapper .buttonContainer:hover .disable-link::after{
+.selected-student-buttons .buttonContainer:hover .disable-link-new::after{
     transition:0.2s all;
     opacity:1;
 }
 .loader{
     text-align: center;
     margin-top: 12%;
+}
+.id-card-wrapper .selected-student-buttons {
+
 }
 @media (max-width: 1200px) {
     .custom-modal {
@@ -1302,7 +1365,7 @@ html, body, #root, #root>div, .student-information-Container {
         padding:10px 0;
         font-size:24px;
     }
-    .student-information-Container h2 {
+    .student-information-Container .student-info-heading {
         padding: 15px 20px 15px 100px;
         line-height: 20px;
         box-sizing: border-box;
@@ -1342,38 +1405,45 @@ html, body, #root, #root>div, .student-information-Container {
         margin:0 10px;
     }
     .data-grid {
-        margin-top: -7px;
+        margin-top: 0px;
     }
-    .id-card-wrapper {
-        margin-top:5px;
-    }
-    .id-card-wrapper .selected-student-buttons .buttonContainer {
-        width: 46%;
-        flex: 1 0 50%;
-        margin: 0 0px 10px 0px;
-        display: inline-block;
-        margin-top:0px;
-        margin-left:10px !important;
-        margin-right:0px !important;
-    }
-    .selected-student-buttons .buttonContainer {
-        flex: 1 0 50%;
-        margin: 0 0px 10px 0px;
-        display: inline-block;
-        margin-top:0px;
-        margin-left: 10px !important;
-        margin-right:10px !important;
-    }
-    .id-card-wrapper .linkButton {
-        width:100%;
-        padding: 8px;
+    /*.id-card-wrapper {*/
+        /*margin-top:5px;*/
+    /*}*/
+    /*.id-card-wrapper .selected-student-buttons .buttonContainer {*/
+        /*width: 46%;*/
+        /*flex: 1 0 50%;*/
+        /*margin: 0 0px 10px 0px;*/
+        /*display: inline-block;*/
+        /*margin-top:0px;*/
+        /*margin-left:10px;*/
+        /*margin-right:0px;*/
+    /*}*/
+    /*.id-card-wrapper .linkButton {*/
+        /*width:100%;*/
+        /*padding: 8px;*/
+    /*}*/
+    /*.id-card-wrapper {*/
+        /*width:100%;*/
+    /*}*/
+    /*.id-card-wrapper .buttonContainer:nth-child(1) {
+        !*padding-left:10px;*!
+        display:none;
     }
     .id-card-wrapper .buttonContainer:nth-child(2) {
-        padding-left:10px;
+        display:none;
+    }
+    .id-card-wrapper .buttonContainer:nth-child(3) {
+        display:none;
     }
     .id-card-wrapper .buttonContainer:nth-child(4) {
-        padding-left:10px;
-    }
+        width:100%;
+        display:block;
+        padding:0px 10px;
+    }*/
+    /*.id-card-wrapper .selected-student-buttons {*/
+        /*margin-left:0px;*/
+    /*}*/
     .search-input-advance {
         width:100% !important;
     }
@@ -1421,9 +1491,56 @@ html, body, #root, #root>div, .student-information-Container {
         text-align: center;
     }
     .render-table {
-        border-top: 1px solid !important;
+        border-top: 1px solid #c2c1bf !important;
     }
-
+    .id-card-wrapper {
+        width:100%;
+        margin-top:0px;
+    }
+    .id-card-wrapper .selected-student-buttons {
+        width:100%;
+        margin:5px 0px 0px 0px;
+        display:block;
+    }
+    .id-card-wrapper .selected-student-buttons .buttonContainer {
+        /*width: 45%;*/
+        flex: 1 0 50%;
+        margin: 0 0px 10px 0px;
+        display: inline-block;
+    }
+    /*.id-card-wrapper .disable-link {*/
+        /*width:100%;*/
+        /*display:inline-block;*/
+    /*}*/
+    /*.selected-student-buttons .buttonContainer .disable-link-button {*/
+        /*width:100%;*/
+    /*}*/
+    .id-card-wrapper .linkButton {
+        width:100%;
+        padding: 8px;
+    }
+    .id-card-wrapper .buttonContainer:nth-child(1) {
+        display:none;
+    }
+    .id-card-wrapper .buttonContainer:nth-child(2) {
+        display:none;
+    }
+    .id-card-wrapper .buttonContainer:nth-child(3) {
+        display:none;
+    }
+    .id-card-wrapper .buttonContainer:nth-child(4) {
+        display:block;
+        width:100%;
+        padding:0 10px;
+    }
+    .selected-student-buttons .buttonContainer .disable-link-button-new::after {
+        content:none;
+        display: none;
+    }
+    .selected-student-buttons .buttonContainer .disable-link-new::after {
+        content:none;
+        display: none;
+    }
 }
 @media (max-width: 480px){
     .search-input-bar {
