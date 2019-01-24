@@ -265,7 +265,6 @@ class DataGrid1 extends Component {
     }
     return {...this.state.metaData, headerConfig: metaData};
   };
-
   handleEditClick(rowData) {
     const newRowData = {...rowData, id:rowData.studentId};
     if (!isEmpty(rowData)) {
@@ -369,7 +368,9 @@ class DataGrid1 extends Component {
       );
         }
     return (
+      <div className="student-grid-none">
       <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
+      </div>
     );
   }
 
@@ -378,7 +379,13 @@ class DataGrid1 extends Component {
   }
   render() {
     if(this.props.isLoading) {
-      return (<div className='loader'><img src="../../spinner.gif" alt="logo"/></div>);
+      return (
+        <div className="loader-wrapper">
+          <div className='loader'>
+            <img src="../../spinner.gif" alt="logo" className="loader-img"/>
+          </div>
+        </div>
+      );
     }
     if(sessionStorage.getItem('isAdminLogin') !== 'yes' && !(this.props.adminLoginState)) {
       return (
@@ -388,39 +395,42 @@ class DataGrid1 extends Component {
       );
     }
     return (
-      <div>
-        <div className={'student-information-Container'}>
-          <div className = "student-logo-header">
-            <div className= "yjsg-logo">
-              <img src="../../react-logo-13.png" alt="logo"/>
-            </div>
-            <h2>{yjsgHeader}</h2>
-          </div>
-          <div className={'logoutButtonContainer'}>
-            <div className={'logoutLinkContainer'}>
-              <Link to = {'/'} className="logout-button">Back</Link>
-              <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
-            </div>
-          </div>
-        </div>
-        <div className="modal">
-          <div>
-            <AdvanceSearch
-              metaData={this.state.metaData}
-              getAllStudentsAction={this.props.getAllStudentsAction}
-              students={this.props.students}
-              onFilter={this.onFilter}
-              formattedStudent = {this.formattedStudent}
-            />
-          <div className="column-option">
-            <button className="column-option-container" onClick={this.openColumnOption}>
-                <i className="fa fa-filter card-icon"/>
-                Configure
-                </button>
-              {this.renderColumnConfig()}
+      <div className="grid-scroll-page-wrapper">
+        <div className="grid-scroll-wrapper">
+          <div className="student-grid-none">
+            <div className={'student-information-Container'}>
+              <div className = "student-logo-header">
+                <div className= "yjsg-logo">
+                  <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+                </div>
+                <h2 className="student-info-heading">{yjsgHeader}</h2>
+                <div className={'logoutButtonContainer'}>
+                  <div className={'logoutLinkContainer'}>
+                    <Link to = {'/'} className="logout-button">Back</Link>
+                    <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
+                  </div>
+                </div>
               </div>
+
             </div>
-          {/*
+            <div className="modal">
+              <div>
+                <AdvanceSearch
+                  metaData={this.state.metaData}
+                  getAllStudentsAction={this.props.getAllStudentsAction}
+                  students={this.props.students}
+                  onFilter={this.onFilter}
+                  formattedStudent = {this.formattedStudent}
+                />
+                <div className="column-option">
+                  <button className="column-option-container" onClick={this.openColumnOption}>
+                    <i className="fa fa-filter card-icon"/>
+                    Configure
+                  </button>
+                  {this.renderColumnConfig()}
+                </div>
+              </div>
+              {/*
            Todo: This feature will be implemented in future scope.
           <div>
            <button onClick={this.openAdvanceFilter}>Advance Filter</button>
@@ -431,14 +441,19 @@ class DataGrid1 extends Component {
            setStudentData = {this.setStudentData}
            />
            </div>*/}
+            </div>
+          </div>
+          <div>
+            {this.redirectToStudentCorrection()}
+            <SelectedStudentsActionWrapper
+              selectedStudents = {this.state.selectedStudents}
+              metaData={this.state.metaData}
+            />
+            {this.renderDataGrid()}
+          </div>
         </div>
-        {this.redirectToStudentCorrection()}
-        <SelectedStudentsActionWrapper
-          selectedStudents = {this.state.selectedStudents}
-          metaData={this.state.metaData}
-        />
-        {this.renderDataGrid()}
       </div>
+
     );
   }
 }

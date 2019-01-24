@@ -234,7 +234,13 @@ class StudentRegistrationCorrectionForm extends Component {
     return (
       <div className={'registrationFormContainer'}>
         {this.renderSuccessMessage()}
-        <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
+        <div className = "student-logo-header">
+          <div className= "yjsg-logo">
+            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+          </div>
+          <h2 className="student-info-heading">{yjsgHeader}</h2>
+        </div>
+        {/*<h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
         <div className="inputFieldContainerWrapper">
           <div className={'inputFieldContainer'}>
             <SelectListInputField
@@ -359,14 +365,16 @@ class StudentRegistrationCorrectionForm extends Component {
               isRequired={false}
             />
             <div className={'registrationFormButtonContainer'}>
-              <LinkButton
-                buttonText={goBackBtnText}
-                linkPath={this.props.context.previousLocation}
-              />
-              <Button
-                buttonText={formSubmitBtnText}
-                onClick={this._submitStudentData}
-              />
+              <div className="button-wrapper">
+                <LinkButton
+                  buttonText={goBackBtnText}
+                  linkPath={this.props.context.previousLocation}
+                />
+                <Button
+                  buttonText={formSubmitBtnText}
+                  onClick={this._submitStudentData}
+                />
+              </div>
             </div>
           </div>
         </div>

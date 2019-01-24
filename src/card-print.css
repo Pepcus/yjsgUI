@@ -1,40 +1,16 @@
 @media print {
-    body,html, #root {
-        height:100%;
-        width:100%;
-        /*-webkit-print-color-adjust: exact;*/
+    html,body,#root {
+        -webkit-print-color-adjust: exact;
+        /*font-family: 'Roboto Condensed';*/
     }
-    body,html {
-        height:100%;
-        width:100%;
-    }
-    .student-logo-header {
-        display:none !important;
-    }
-    .modal {
-        display:none !important;
-    }
-    .yjsg-logo img {
-        display: none !important;
-    }
-    .data-grid {
-       display: none !important;
-    }
-    .footer {
-       display:none;
-    }
-    .buttons-wrapper {
+    .student-grid-none {
         display:none;
     }
     .student-id-cards{
         border: 1px solid #d94803;
-        width:48%;
+        width:45%;
         box-sizing:border-box;
-        margin:30px 7px 7px;
-        /*float:left;*/
-        /*float:left;*/
-        /*display:inline-block;*/
-        /*justify-content: space-around;*/
+        margin:0px 15px 20px;
     }
     .students-id-card-wrapper {
        display:block;
@@ -47,22 +23,20 @@
     }
     .students-id-card-wrapper .group-of-two-students:nth-child(4n){
         page-break-after: always;
-        /*page-break-inside: avoid;*/
     }
-
     .card-fields-wrapper{
         display: flex;
     }
     .card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
         font-weight: bold;
-        font-size: 11px;
+        font-size: 9px;
     }
     .card-text-student .card-text-bold {
-        font-size:14px;
+        font-size:13px;
         font-family: 'Roboto Condensed';
     }
-    .card-text-name {
-        /*display: block;*/
+    .card-text-student .card-student-num {
+        font-size:13px;
     }
     .card-fields-wrapper .card-text {
         z-index:1;
@@ -77,13 +51,14 @@
     .student-id-cards-header{
         text-align: center;
         font-size: 18px;
-        color:#fff;
+        color: white !important;
         font-weight: bold;
         font-family: 'Roboto Condensed';
+        -webkit-print-color-adjust: exact;
     }
     .student-id-card-wrapper {
         background-color: #f9570a !important;
-        color: white;
+        color: white !important;
         font-weight:550;
         padding: 0px;
         display:flex;
@@ -122,9 +97,8 @@
         max-width:100%;
     }
     .card-content-wrapper {
-        /*padding:10px;*/
         position:relative;
-        background-image:url('assets/grid-logo-yjsg.png');
+        background-image:url('assets/LOGO.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -166,14 +140,17 @@
     .logoutLinkContainer {
         display:none;
     }
-    /*.data-grid {*/
-        /*display: none !important;*/
-    /*}*/
     #header, #nav, .noprint
     {
         display: none;
     }
-
+    .card-text-bus-stop {
+        height:10px;
+    }
+    .card-flex {
+        display: flex;
+        align-items: center;
+    }
 }
 @page {
     size: A4;
@@ -182,6 +159,6 @@
 @media print and (color) {
     * {
         -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        /*print-color-adjust: exact;*/
     }
 }

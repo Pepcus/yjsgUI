@@ -48,14 +48,23 @@ class StudentIdCardModal extends Component {
                 <div className = "card-text card-text-spacing"><span className="card-text-bold">Mobile No.:</span> {object.mobile}</div>
               </div>
               <div className="card-fields-wrapper">
-                <div className = "card-text"><span className="card-text-bold">Bus Stop:</span> </div>
+                <div className = "card-text card-text-bus-stop card-flex">
+                  <span className="card-text-bold">Bus Stop:</span>
+                  <span></span>
+                </div>
                 <div className = "card-text card-text-spacing"><span className="card-text-bold">Bus No.:</span> </div>
               </div>
               <div className="card-fields-wrapper">
-                <div className = "card-text"><span className="card-text-bold">Address:</span> {object.address}</div>
+                <div className = "card-text">
+                    <span className="card-text-bold">Address:</span> &nbsp;
+                    <span>{object.address}</span>
+                </div>
               </div>
               <div className="card-fields-wrapper">
-                <div className = "card-text card-text-student"><span className="card-text-bold">Student Id:</span> {object.studentId}</div>
+                <div className = "card-text card-text-student">
+                  <span className="card-text-bold">Student Id:</span>&nbsp;
+                  <span className="card-student-num">{object.studentId}</span>
+                  </div>
                 <div className = "card-text"></div>
               </div>
             </div>
