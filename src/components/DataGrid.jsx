@@ -398,20 +398,20 @@ class DataGrid1 extends Component {
       <div className="grid-scroll-page-wrapper">
         <div className="grid-scroll-wrapper">
           <div className="student-grid-none">
-            <div className={'student-information-Container'}>
+            <div className="student-information-Container">
               <div className = "student-logo-header">
                 <div className= "yjsg-logo">
                   <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
                 </div>
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
-                <div className={'logoutButtonContainer display-mobile-none'}>
-                  <div className={'logoutLinkContainer'}>
+                <div className="logoutButtonContainer display-mobile-none">
+                  <div className="logoutLinkContainer">
                     <Link to = {'/'} className="logout-button">Back</Link>
                     <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
                   </div>
                 </div>
-                <div className={'logoutButtonContainer display-logout-desktop'}>
-                  <div className={'logoutLinkContainer'}>
+                <div className="logoutButtonContainer display-logout-desktop">
+                  <div className="logoutLinkContainer">
                     <Link to = {'/'} className="logout-button">
                       <i className="fa fa-arrow-left"></i>
                     </Link>
