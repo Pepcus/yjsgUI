@@ -404,10 +404,24 @@ class DataGrid1 extends Component {
                   <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
                 </div>
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
-                <div className={'logoutButtonContainer'}>
+                <div className={'logoutButtonContainer display-mobile-none'}>
                   <div className={'logoutLinkContainer'}>
                     <Link to = {'/'} className="logout-button">Back</Link>
                     <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
+                  </div>
+                </div>
+                <div className={'logoutButtonContainer display-logout-desktop'}>
+                  <div className={'logoutLinkContainer'}>
+                    <Link to = {'/'} className="logout-button">
+                      <i className="fa fa-arrow-left"></i>
+                    </Link>
+                    <a className="logout-button" onClick={this.openColumnOption}>
+                      <i className="fa fa-cog"></i>
+                    </a>
+                    {this.renderColumnConfig()}
+                    <Link to={'/'} className = "logout-button" onClick={this.performLogout}>
+                      <i className="fa fa-sign-out"></i>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -422,7 +436,7 @@ class DataGrid1 extends Component {
                   onFilter={this.onFilter}
                   formattedStudent = {this.formattedStudent}
                 />
-                <div className="column-option">
+                <div className="column-option display-mobile-none">
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     <i className="fa fa-filter card-icon"/>
                     Configure

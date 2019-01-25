@@ -92,11 +92,11 @@ class AdvanceSearch extends Component {
             <i className="fa fa-search"/>
           </button>
         </label>
-        <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button">
+        <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button display-none">
           <i className="fa fa-trash card-icon"/>Clear
         </button>
         <div className = "advance-input-radio">
-          <div className="input-radio-container">
+          <div className="input-radio-container display-none">
             <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
             <label htmlFor = "normal_search">Normal Search</label>
           </div>
