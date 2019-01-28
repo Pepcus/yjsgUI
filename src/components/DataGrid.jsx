@@ -195,7 +195,6 @@ class DataGrid1 extends Component {
     });
   }
   componentDidMount() {
-    console.log("this.props.secretKey", this.props.secretKey);
     this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
