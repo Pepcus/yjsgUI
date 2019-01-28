@@ -283,13 +283,16 @@ class StudentRegistrationForm extends Component {
                       buttonText={goBackBtnText}
                       linkPath="/"
                   />
-                  <button
-                    type='submit'
-                    form='studentRegistrationForm'
-                    value='Submit'
+                  <div className="buttonContainer">
+                    <button
+                      type='submit'
+                      form='studentRegistrationForm'
+                      value='Submit'
                       /*buttonText={formSubmitBtnText}*/
                       onClick={this._submitStudentData}
-                  >Submit</button>
+                      className='linkButton mar-0-width-100'
+                    >Submit</button>
+                  </div>
               </div>
             </div>
           </form>

@@ -85,12 +85,18 @@
 .cell__studentId {
     max-width: 55px;
 }
-.cell__column {
+.cell__grid__select-column {
     max-width: 50px;
 }
-.btn-block input[type = "checkbox"] {
+.cell__grid__select-column input[type = "checkbox"] {
     height: 20px;
     width: 20px;
     cursor:pointer;
     box-shadow: none;
+}
+
+@media (max-width:990px) {
+    .btn-block input[type = "checkbox"] {
+        width:25px;
+    }
 }

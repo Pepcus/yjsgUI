@@ -1,8 +1,14 @@
 @media print {
-    html,body,#root {
-        -webkit-print-color-adjust: exact;
-        /*font-family: 'Roboto Condensed';*/
+    body,html, #root {
+        height:100%;
+        width:100%;
+        /*-webkit-print-color-adjust: exact;*/
     }
+    body,html {
+        height:100%;
+        width:100%;
+    }
+
     .student-grid-none {
         display:none;
     }
@@ -13,15 +19,19 @@
         margin:0px 15px 20px;
     }
     .students-id-card-wrapper {
-       display:block;
+        display:block
     }
     .group-of-two-students {
         display:flex;
         flex-wrap:wrap;
         overflow-y:hidden;
         max-height: 100%;
+        max-width: 100%;
+        /*clear:both;*/
     }
-    .students-id-card-wrapper .group-of-two-students:nth-child(4n){
+
+     .students-id-card-wrapper .group-of-two-students:nth-child(2){
+        /*display:block;*/
         page-break-after: always;
     }
     .card-fields-wrapper{
@@ -96,14 +106,7 @@
     .image-id-card img {
         max-width:100%;
     }
-    .card-content-wrapper {
-        position:relative;
-        background-image:url('assets/LOGO.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        -webkit-print-color-adjust: exact;
-    }
+
     .card-content {
         padding:5px;
     }

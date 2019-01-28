@@ -1248,6 +1248,7 @@ body,
 .group-of-two-students {
     display: none;
 }
+
 .export {
     font-size: 14px;
     padding: 10px;
@@ -1455,7 +1456,18 @@ body,
 .display-logout-desktop {
     display: none;
 }
-
+.mar-0-width-100 {
+    margin:0;
+    width:100%;
+}
+.card-content-wrapper {
+    position:relative;
+    background-image:url('assets/LOGO.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-print-color-adjust: exact;
+}
 @media (max-width: 1200px) {
     .custom-modal {
         width: 50% !important;
@@ -1607,6 +1619,7 @@ body,
         overflow-y: inherit;
         display: block;
         height: auto;
+        min-height:100%;
         /*margin-top:0px !important;*/
     }
     .yjsg-logo {
@@ -1990,6 +2003,9 @@ body,
     .table-drawer.table-drawer__bottom {
         /*margin: 0px 0 60px;*/
         margin: 0px 0px 20px;
+    }
+    .yjsgEventInfo {
+        margin:5px 0 0;
     }
 }
 
