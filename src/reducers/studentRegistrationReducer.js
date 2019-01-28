@@ -283,3 +283,6 @@ export const getVisibleColumnConfig = state => state.allStudentsDataReducer.visi
 export const getSelectValue = state => state.allStudentsDataReducer.selectValue;
 
 export const isGetAllStudentsLoading = state => state.allStudentsDataReducer.isLoading;
+
+export const getSecretKey = state => state.studentRegistrationReducer.adminPassword;
+

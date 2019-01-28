@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-import { allStudentsData, getVisibleColumnConfig, getSelectValue, getAdminPassword } from '../reducers/studentRegistrationReducer';
+import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
@@ -195,7 +195,8 @@ class DataGrid1 extends Component {
     });
   }
   componentDidMount() {
-    this.props.getAllStudentsAction({ secretKey: this.props.adminPassword });
+    console.log("this.props.secretKey", this.props.secretKey);
+    this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
     }
@@ -445,7 +446,7 @@ const mapStateToProps = state => ({
   selectValue: getSelectValue(state),
   redirect: stateOfRedirect(state),
   adminLoginState: stateOfAdminLogin(state),
-  adminPassword: getAdminPassword(state),
+  secretKey: getSecretKey(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
