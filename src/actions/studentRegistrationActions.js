@@ -93,15 +93,17 @@ export const setNoRecordsFoundMessageAction = message => ({
   type: 'SET_NO_RECORDS_FOUND_MESSAGE',
   message,
 });
-export const getAllStudentsAction = () => ({
+export const getAllStudentsAction = ({ secretKey }) => ({
   type: 'GET_ALL_STUDENTS',
+  secretKey,
 });
 export const getAllStudentsDataResultsSuccessAction = (students) =>({
   type: 'GET_ALL_STUDENTS_RESULTS_SUCCESS',
   students,
 });
-export const getAllStudentsDataResultsFailureAction = () => ({
+export const getAllStudentsDataResultsFailureAction = (errorMessage) => ({
   type: 'GET_ALL_STUDENTS_RESULTS_FAILURE',
+  errorMessage,
 });
 export const setRedirectValueAction = (redirect) => ({
   type: 'SET_REDIRECT_VALUE',

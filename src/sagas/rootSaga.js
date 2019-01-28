@@ -63,7 +63,7 @@ export function* fetchStudentSaga(action) {
 }
 
 export function* updateStudentSaga(action) {
-  const { id, secretKey,updatedStudent } = action;
+  const { id, secretKey, updatedStudent } = action;
   const errorMessage = 'Error updating student details.';
   try {
     const response = yield updateStudent(id, secretKey, updatedStudent);
@@ -95,14 +95,16 @@ export function* searchStudentSaga(action) {
 }
 
 export function* getAllStudentsSaga(action) {
+  const { secretKey } = action;
+  const errorMessage = 'Error getting student details.';
   try{
-    const response = yield getAllStudentsAPI(action);
+    const response = yield getAllStudentsAPI(secretKey);
     if(response.students){
       yield put(getAllStudentsDataResultsSuccessAction(response.students));
     } else {
       throw response;
     }
   }catch (e){
-    yield put(getAllStudentsDataResultsFailureAction());
+    yield put(getAllStudentsDataResultsFailureAction(errorMessage));
   }
 }

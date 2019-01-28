@@ -4,12 +4,13 @@ import {
   formatCreateStudentDataPayload,
 } from '../utils/apiUtils';
 
-export const updateStudent = (id, secretKey, updatedStudent) =>
-  PUT({
-    url: `/v1/students/${id}/${secretKey}`,
+export const updateStudent = (id, secretKey, updatedStudent) => {
+  return(PUT({
+    url: `/v1/students/${id}`,
+    secretKey: secretKey,
     body: formatUpdateStudentDataPayload(updatedStudent),
-  });
-
+  }));
+};
 export const createStudent = (student) =>
   POST({
     url: `/v1/students`,
@@ -18,15 +19,19 @@ export const createStudent = (student) =>
 
 export const fetchStudent = (id, secretKey) =>
   GET({
-    url: `/v1/students/${id}/${secretKey}`,
+    url: `/v1/students/${id}`,
+    secretKey: secretKey,
   });
 
 export const searchStudent = (adminKey, searchKey, searchValue) =>
   GET({
-    url: `/v1/students/${adminKey}/?${searchKey}=${searchValue}`,
+    url: `/v1/students?${searchKey}=${searchValue}`,
+    secretKey: adminKey,
   });
 
-export const getAllStudentsAPI = () =>
-  GET({
-    url: `/v1/students/451725?name= `,
-  });
+export const getAllStudentsAPI = (secretKey) => {
+  return(GET({
+    url: `/v1/students`,
+    secretKey: secretKey,
+  }));
+};

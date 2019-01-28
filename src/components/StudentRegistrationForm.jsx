@@ -88,7 +88,8 @@ class StudentRegistrationForm extends Component {
     return isValidUserInfo(this.state.errorMessage);
   }
 
-  submitStudentData() {
+  submitStudentData(e) {
+    e.preventDefault();
     this.checkError(this.state.student);
     if (this.isValidData()) {
       // This action call api
@@ -161,7 +162,7 @@ class StudentRegistrationForm extends Component {
         </div>
         {/*<h3 className="registrationFormHeading">{yjsgHeader}</h3>*/}
         <div className="inputFieldContainerWrapper">
-          <div className="inputFieldContainer">
+          <form id='studentRegistrationForm' className="inputFieldContainer">
             <InputField
               type="text"
               label="नाम"
@@ -282,13 +283,16 @@ class StudentRegistrationForm extends Component {
                       buttonText={goBackBtnText}
                       linkPath="/"
                   />
-                  <Button
-                      buttonText={formSubmitBtnText}
+                  <button
+                    type='submit'
+                    form='studentRegistrationForm'
+                    value='Submit'
+                      /*buttonText={formSubmitBtnText}*/
                       onClick={this._submitStudentData}
-                  />
+                  >Submit</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     );

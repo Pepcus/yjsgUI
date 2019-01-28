@@ -50,8 +50,8 @@ class AdvanceSearch extends Component {
     });
   }
   advanceSearch(e) {
+    e.preventDefault();
     if (!this.state.isMultipleIdSearch) {
-      e.preventDefault();
       const foundKeys = this.props.metaData.headerConfig.map((object) => {
           return object.key;
         }
@@ -86,30 +86,30 @@ class AdvanceSearch extends Component {
     return(
       <form id="advanceSearch" className="advanceSearchForm">
         <div className = "input-radio">
-        <label htmlFor = "search_input" className = "input-text">
-          <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance" />
-          <button type="submit" form="advanceSearch" value="Submit" className="search" onClick={this.advanceSearch}>
-            <i className="fa fa-search"/>
+          <label htmlFor = "search_input" className = "input-text">
+            <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className = "search-input-advance" />
+            <button type="submit" form="advanceSearch" value="Submit" className="search" onClick={this.advanceSearch}>
+              <i className="fa fa-search"/>
+            </button>
+          </label>
+          <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button display-none">
+            <i className="fa fa-trash card-icon"/>Clear
           </button>
-        </label>
-        <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button display-none">
-          <i className="fa fa-trash card-icon"/>Clear
-        </button>
-        <div className = "advance-input-radio">
-          <div className="input-radio-container display-none">
-            <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
-            <label htmlFor = "normal_search">Normal Search</label>
-          </div>
-          <div className="input-radio-container">
-            <input type="radio" name="thresholdValue" value="0.6" onClick={this.onClickRadioButton} />
-            <label htmlFor="deep_search">Deep Search</label>
-          </div>
-          <div className="input-radio-container">
-            <input type="radio" name="thresholdValue" value={this.state.isMultipleIdSearch} onClick={this.onClickMultipleIdSearchRadioButton} />
-            <label htmlFor="deep_search">Multiple ID Search</label>
+          <div className = "advance-input-radio">
+            <div className="input-radio-container display-none">
+              <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
+              <label htmlFor = "normal_search">Normal Search</label>
+            </div>
+            <div className="input-radio-container">
+              <input type="radio" name="thresholdValue" value="0.6" onClick={this.onClickRadioButton} />
+              <label htmlFor="deep_search">Deep Search</label>
+            </div>
+            <div className="input-radio-container">
+              <input type="radio" name="thresholdValue" value={this.state.isMultipleIdSearch} onClick={this.onClickMultipleIdSearchRadioButton} />
+              <label htmlFor="deep_search">Multiple ID Search</label>
+            </div>
           </div>
         </div>
-      </div>
       </form>
     );
   }

@@ -1,27 +1,22 @@
 /*CSS FOR DATAGRID*/
-/*@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');*/
-html,body {
-    font-family:'Poppins', sans-serif !important;
+html, body {
+    font-family: 'Poppins', sans-serif !important;
 }
-/*#root {*/
-    /*font-family: sans-serif !important;*/
-/*}*/
 #root>div {
     /*font-family: sans-serif !important;*/
-
 }
 .logoutLinkContainer {
     /*margin: 17px 0px;*/
-    display:flex;
+    display: flex;
 }
 .logoutButtonContainer {
-    z-index:2;
+    z-index: 2;
 }
 .backButtonContainer {
-    z-index:2;
+    z-index: 2;
 }
 .adminPanelHeading {
-    z-index:1;
+    z-index: 1;
     background-color: #f9570a;
 }
 .adminPanelContainer {
@@ -31,9 +26,10 @@ html,body {
     flex-direction: column;
     justify-content: center;
 }
+
 .logoutLinkContainer a:hover {
-    border-radius:4px;
-    border:1px solid rgb(218, 76, 8) !important;
+    border-radius: 4px;
+    border: 1px solid rgb(218, 76, 8) !important;
     background-color: rgb(218, 76, 8);
     transition: 0.3s all;
 }
@@ -50,7 +46,7 @@ html,body {
     padding: 7px 5px;
 }
 .inputWrapperContainer label {
-    font-size:14px;
+    font-size: 14px;
 }
 .inputWrapperContainer {
     padding: 12px 20px 5px;
@@ -59,32 +55,19 @@ html,body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100%;
+    height: 100%;
     background-color: rgba(244, 233, 227, 0.21);
 }
-/*.landingPageContainer h2 {*/
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*background:rgb(249, 87, 10);*/
-    /*padding: 15px 0;*/
-    /*margin: 0;*/
-    /*color: #fff;*/
-    /*font-size: 25px;*/
-    /*line-height:30px;*/
-    /*line-height:30px;*/
-    /*width: 100%;*/
-    /*text-align: center;*/
-/*}*/
 .landingPageContainer .student-heading {
     position: fixed;
     top: 0;
-    background:rgb(249, 87, 10);
+    background: rgb(249, 87, 10);
     padding: 15px 0;
     margin: 0;
     color: #fff;
     font-size: 25px;
-    line-height:30px;
-    line-height:30px;
+    line-height: 30px;
+    line-height: 30px;
     width: 100%;
     text-align: center;
 }
@@ -98,6 +81,7 @@ html,body {
     width: 600px;
     max-width: 97%;
 }
+
 .footer {
     background: #ee7c2a;
     text-align: center;
@@ -111,13 +95,14 @@ html,body {
     border-top: 1px solid #e8e6e6;
 }
 .footer .footer-text {
-    font-size:14px;
+    font-size: 14px;
     background: rgb(242, 242, 242);
 }
+
 .linkButton {
     color: rgb(255, 255, 255);
-    background-color:#f9570a;
-    outline:none;
+    background-color: #f9570a;
+    outline: none;
     letter-spacing: 0.5px;
     box-shadow: 0 1px 3px 0px #777978;
     display: block;
@@ -128,14 +113,16 @@ html,body {
     border-radius: 4px;
     cursor: pointer;
 }
+
 .linkButton:hover {
-    transition:0.3s all;
+    transition: 0.3s all;
     box-shadow: 0 1.6px 4px 0px #777978;
     background-color: #d24c0c;
 }
+
 .buttonOrange {
     color: rgb(255, 255, 255);
-    outline:none;
+    outline: none;
     background-color: #f9570a;
     box-shadow: 0 1px 2.5px 0px #777978;
     text-align: center;
@@ -147,31 +134,35 @@ html,body {
     width: 100%;
     border: 2px solid #f9570a;
 }
+
 .buttonOrange:hover {
-    transition:0.3s all;
+    transition: 0.3s all;
     box-shadow: 0 2px 4px 0px #777978;
     background-color: #d24c0c;
     border: 2px solid #d24c0c;
 }
+
 .render-table {
     padding: 0px !important;
     margin: 16px 10px 0 !important;
     border-top: 1px solid #c2c1bf !important;
-    border-right:1px solid #c2c1bf !important;
-    border-bottom:1px solid #c2c1bf !important;
+    border-right: 1px solid #c2c1bf !important;
+    border-bottom: 1px solid #c2c1bf !important;
     overflow: auto !important;
     display: grid !important;
 }
+
 .header-column {
     border-right: 0px solid #c2c1bf !important;
     border-left: 1px solid #c2c1bf !important;
     border-bottom: 0.7px solid #ebebec !important;
-    cursor:pointer;
+    cursor: pointer;
     border-top: 0px !important;
     width: auto !important;
     overflow: hidden !important;
     background-color: rgb(240, 241, 242) !important;
 }
+
 .search-input-column {
     color: #66727c !important;
     padding: 5px 5px 5px 10px;
@@ -183,19 +174,21 @@ html,body {
     background-color: #fff !important;
     box-shadow: 0px 1px 1px 0px #edebeb !important;
 }
+
 .filter-column {
     margin: 0px 0px 0 0 !important;
-    padding:5px;
+    padding: 5px;
     clear: both !important;
     overflow: hidden !important;
-    height:auto !important;
+    height: auto !important;
     width: auto !important;
 }
+
 .table-cell {
     font-size: 14px;
     color: rgb(76, 76, 76) !important;
-    padding:5px 10px !important;
-    height:auto !important;
+    padding: 5px 10px !important;
+    height: auto !important;
     border-right: 0px;
     border-top: 0px;
     border: none !important;
@@ -204,10 +197,11 @@ html,body {
     white-space: nowrap;
     width: auto;
 }
+
 .wrapper-pagination-search {
     width: 100%;
     display: inline-block !important;
-    padding:0px !important;
+    padding: 0px !important;
 }
 
 .row {
@@ -219,63 +213,73 @@ html,body {
     border-left: 1px solid #c2c1bf !important;
 }
 
-.pagination-wrapper{
+.pagination-wrapper {
     display: inline-block !important;
     verticalAlign: -webkit-baseline-middle;
     margin-left: 0px !important;
 }
+
 .page-number-arrow-for-margin {
-    display:inline-block !important;
+    display: inline-block !important;
 }
+
 .page-number-arrow {
-    outline:none;
-    padding:0;
+    outline: none;
+    padding: 0;
     font-size: 22px !important;
 }
+
 .search-bar {
-    padding:0 !important;
-    margin-top:0 !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
     margin-right: 16px !important;
 }
+
 .search-input {
-    padding:5px 0;
-    margin-left:16px !important;
+    padding: 5px 0;
+    margin-left: 16px !important;
     background-color: #fff !important;
-    border-radius:4px !important;
-    width:auto !important;
+    border-radius: 4px !important;
+    width: auto !important;
     box-shadow: 0px 1.9px 6px 0px #e0dbdb !important;
     -webkit-box-shadow: 0px 1.9px 6px 0px #e0dbdb !important;
 }
+
 .search-input:focus {
     box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 3px rgba(0, 0, 0, 0.1) !important;
     background-color: #fffffe !important;
 }
+
 .search-input-bar {
-    border-radius:4px !important;
+    border-radius: 4px !important;
     box-shadow: 0px 1.9px 6px 0px #e0dbdb !important;
     -webkit-box-shadow: 0px 1.9px 6px 0px #e0dbdb !important;
 }
+
 .search-input-bar:focus {
     background-color: #fffffe !important;
 }
+
 .search-input-column {
     width: 100% !important;
 }
+
 .search-input-column:focus {
     background-color: #fefefe !important;
     -webkit-box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 3px rgba(0, 0, 0, 0.1) !important;
     box-shadow: inset 4px 6px 6px rgba(0, 0, 0, 0.01), 0px 1px 0.8px rgba(0, 0, 0, 0.1) !important;
 }
+
 .clearFilterButton {
     border-radius: 4px !important;
     background-color: #f1771f !important;
     border: 1px solid #f1771f !important;
     color: white !important;
-    font-weight:600 !important;
+    font-weight: 600 !important;
     margin-right: 8px;
-    outline:none;
+    outline: none;
     cursor: pointer;
-    text-transform:uppercase;
+    text-transform: uppercase;
     padding: 0px 10px !important;
     height: 100% !important;
     font-size: 14px !important;
@@ -283,29 +287,13 @@ html,body {
     box-shadow: 1px 1.2px 3px 0px #b0b0b0;
     background: #f1771f !important;
 }
+
 .clearFilterButton:hover {
-    transition:0.2s all;
+    transition: 0.2s all;
     box-shadow: 1px 1.6px 2px #b0b0b0;
     border: 1px solid #d24c0c !important;
     background: #d24c0c !important;
 }
-/*.link {*/
-    /*height:auto !important;*/
-    /*margin: 0px !important;*/
-    /*font-size: 14px !important;*/
-    /*color: #085d66;*/
-    /*font-family: sans-serif !important;*/
-    /*padding: 5px 9px !important;*/
-    /*font-weight:600;*/
-    /*text-decoration: none;*/
-    /*border: none !important;*/
-    /*outline: none;*/
-    /*color: white !important;*/
-    /*border-radius: 4px !important;*/
-    /*background-color: #f9570a;*/
-    /*box-shadow: 1px 1.2px 3px 0px #b0b0b0;*/
-    /*background: #f9570a !important;*/
-/*}*/
 .link {
     height: auto !important;
     margin: 0px !important;
@@ -321,29 +309,34 @@ html,body {
     box-shadow: 0px 1.5px 2px #cbc9c9 !important;
     background: #ebebec !important;
 }
+
 .link:hover {
-    transition:0.2s all;
+    transition: 0.2s all;
     box-shadow: 0px 1.7px 2px #cbc9c9 !important;
     background: #e1e1e4 !important;
 }
+
 .grid-export {
     margin-top: 2px;
     float: right;
     display: block !important;
 }
+
 .page-number-arrow {
     background-color: transparent !important;
-    color: rgba(255,255,255,255) !important;
+    color: rgba(255, 255, 255, 255) !important;
     border: none !important;
 }
+
 .page-number-arrow {
     background-color: transparent !important;
     color: #085d66;
     font-size: 22px !important;
-    cursor:pointer;
+    cursor: pointer;
     box-shadow: none !important;
     border-radius: 4px !important;
 }
+
 .page-number-arrow:hover {
     background-color: transparent !important;
     transition: 0.3s all;
@@ -351,20 +344,24 @@ html,body {
     border-radius: 4px !important;
     font-size: 22px !important;
 }
+
 .arrowIcon:hover {
     color: #fff !important;
 }
+
 .page-number-arrow .arrowIcon {
     color: rgb(106, 104, 104) !important;
 }
+
 .page-number-arrow:hover .arrowIcon {
     transition: 0.3s all;
     color: rgb(77, 73, 73) !important;
 }
+
 .table-footer-cell {
     height: auto !important;
     margin-right: 0px !important;
-    float:right;
+    float: right;
     text-align: right;
     display: inline-block !important;
     border-radius: 3px;
@@ -375,102 +372,123 @@ html,body {
     border: none !important;
     background-color: transparent !important;
 }
+
 .table-footer-cell:hover {
-    transition:0.3s all;
+    transition: 0.3s all;
     border: none !important;
     background-color: transparent !important;
 }
+
 .table-heading {
     padding: 8px 6px 3px !important;
     color: #4c4c4c !important;
-    font-weight:500 !important;
+    font-weight: 500 !important;
 }
+
 .page-number-arrow-for-margin {
     margin-top: 0px !important;
 }
+
 .pagination-info {
     margin-top: 0px;
     fontSize: 13px;
     display: inline-block !important;
 }
+
 .header-column {
     width: 100% !important;
     overflow: hidden !important;
     background-color: rgb(242, 242, 244) !important;
 }
+
 .table-body-row:nth-child(2n+1) {
     font-size: 15px;
     background-color: rgba(249, 249, 249, 0.53) !important;
 }
+
 .table-body-row {
     font-size: 15px;
     background-color: rgb(248, 247, 247) !important;
 }
+
 .btn-block .btn-grid {
     background: #f9570a;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     color: #fff;
-    outline:none;
+    outline: none;
     box-shadow: 0 1px 4px 0px #777978;
     border-radius: 3px;
     padding: 7px 8px;
 }
+
 .btn-block .btn-grid:hover {
-    transition:0.3s all;
+    transition: 0.3s all;
     background: #d24c0c;
 }
+
 .btn-grid .fa-edit {
-    margin-right:2px;
+    margin-right: 2px;
 }
+
 .total-record-row {
-    height:auto !important;
-    width:auto !important;
-    margin-right:10px;
+    height: auto !important;
+    width: auto !important;
+    margin-right: 10px;
 }
+
 .table-footer {
-    text-align:right !important;
+    text-align: right !important;
 }
+
 .inputFieldContainer {
     box-shadow: 0 2px 4px 0px #eeecec;
     background-color: rgba(248, 247, 247, 0.93);
-    padding:30px 0;
+    padding: 30px 0;
     margin: 15px auto;
     -webkit-overflow-scrolling: touch;
 }
+
 .inputFieldContainerWrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-y:auto;
+    /*overflow-y:auto;*/
 }
+
 .registrationFormContainer {
     background-color: #fff;
     height: 100%;
     padding-top: 50px;
     padding-bottom: 35px;
 }
-.inputText, .textAreaText {
+
+.inputText,
+.textAreaText {
     width: 100%;
     max-width: 330px;
     padding: 5px;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
-    height:auto !important;
+    height: auto !important;
 }
-.inputText:focus , .textAreaText:focus {
-    background:#f9f9f9;
+
+.inputText:focus,
+.textAreaText:focus {
+    background: #f9f9f9;
     outline-color: #e34c04;
 }
+
 .table-footer-row {
     margin-right: 5px !important;
 }
+
 .column-option-container {
     border-radius: 4px !important;
     background-color: #f9570a !important;
     border: 1px solid #f9570a !important;
     color: white !important;
-    min-width:130px;
+    min-width: 130px;
     letter-spacing: 0.4px;
     margin-right: 8px;
     outline: none;
@@ -480,11 +498,12 @@ html,body {
     font-size: 14px !important;
     margin: 2px 0px 5px !important;
     box-shadow: 1px 1px 3px 0px #b0b0b0;
-    transition:0.5s all;
-    position:relative;
-    transition:0.5s all;
-    position:relative;
+    transition: 0.5s all;
+    position: relative;
+    transition: 0.5s all;
+    position: relative;
 }
+
 .column-option-container::after {
     content: '\00bb';
     position: absolute;
@@ -494,103 +513,124 @@ html,body {
     right: 40px;
     transition: 0.5s linear;
 }
+
 .column-option:hover .column-option-container {
     cursor: pointer;
-    transition:0.3s all;
+    transition: 0.3s all;
     padding-right: 26px !important;
 }
+
 .column-option:hover .column-option-container::after {
-    opacity:1;
-    right:7px;
-    transition:0.5s all;
+    opacity: 1;
+    right: 7px;
+    transition: 0.5s all;
 }
+
 .column-option-container:hover {
     transition: 0.3s all;
     box-shadow: 1px 1.6px 3px #b0b0b0;
     border: 1px solid #d24c0c !important;
     background: #d24c0c !important;
 }
+
 .column-modal {
     background: #f9570a;
     color: white;
     letter-spacing: 0.5px;
     padding: 20px;
 }
+
 .registrationFormHeading {
     background-color: #f9570a !important;
 }
-.sort-order-up , .sort-order-down {
-    font-size:12px;
-    margin-right:2px;
+
+.sort-order-up,
+.sort-order-down {
+    font-size: 12px;
+    margin-right: 2px;
 }
-.sort-order-up svg, .sort-order-down svg {
+
+.sort-order-up svg,
+.sort-order-down svg {
     animation-name: sort-order;
     animation-duration: 0.5s;
     transition: 0.4s ease-in-out;
 }
+
 @keyframes sort-order {
     0% {
-        width:0px;
+        width: 0px;
     }
     50% {
         width: 10px;
     }
     100% {
-        width:11px;
+        width: 11px;
     }
 }
+
 .page-number {
     margin-left: 0px !important;
     color: rgb(76, 76, 76) !important;
     font-weight: 500 !important;
 }
+
 .column-group .column-group-container:first-child {
-    margin-right:2em;
+    margin-right: 2em;
 }
+
 .column-group {
     padding: 10px 20px 20px;
 }
+
 .column-modal .column-modal-container {
-    font-size:20px;
+    font-size: 20px;
 }
+
 .label input {
-    margin-right:10px;
+    margin-right: 10px;
     cursor: pointer;
-    height:20px;
-    width:20px;
+    height: 20px;
+    width: 20px;
 }
+
 .label span {
     vertical-align: super;
     font-size: 18px;
 }
+
 .label {
     color: #6b6c6d;
-    cursor:pointer;
+    cursor: pointer;
     margin-top: 12px;
 }
+
 .modal-save-container {
     text-align: right;
     padding: 10px 30px 30px;
 }
+
 .modal-save-container .save-button {
     padding: 8px 16px;
 }
+
 .button-modal {
     margin-left: 16px;
     background: #f9570a;
     border: 1px solid #f9570a;
-    cursor:pointer;
+    cursor: pointer;
     color: white;
-    outline:none;
+    outline: none;
     box-shadow: 1px 1.5px 3px 0px #b0b0b0 !important;
-    font-size:14px;
-    letter-spacing:0.4px;
+    font-size: 14px;
+    letter-spacing: 0.4px;
     border-color: #f9570a;
     border-radius: 4px;
     padding: 6px 10px;
     font-weight: 600;
     box-shadow: none;
 }
+
 .button-modal:hover {
     -webkit-transition: 0.3s all;
     -o-transition: 0.3s all;
@@ -599,6 +639,7 @@ html,body {
     border: 1px solid #d24502 !important;
     background: #d24502 !important;
 }
+
 .student-registration-wrapper {
     background: url('/static/media/student-wrapper.bc3d710a.jpg');
     position: relative;
@@ -610,6 +651,7 @@ html,body {
     justify-content: center;
     background-size: cover;
 }
+
 .student-information-section {
     height: 100%;
     width: 100%;
@@ -620,24 +662,26 @@ html,body {
     align-items: center;
     justify-content: center;
 }
+
 .student-information-section::before {
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: rgba(61, 61, 61, 0.68);
 }
+
 .student-information-wrapper {
     position: absolute;
     bottom: 0;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 1.5px 4px 0px #818181;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-
 }
+
 .student-information-header {
     text-align: center;
     width: 100%;
@@ -647,6 +691,7 @@ html,body {
     letter-spacing: 0.4px;
     font-weight: 550;
 }
+
 .student-information-text {
     display: flex;
     width: 100%;
@@ -656,41 +701,48 @@ html,body {
     padding: 20px;
     align-items: center;
 }
+
 .student-information-text p {
-    text-align:center;
-    line-height:20px;
+    text-align: center;
+    line-height: 20px;
     color: #525151;
 }
+
 .student-information-wrapper .buttonContainer {
-    margin:0;
-    padding-top:30px;
+    margin: 0;
+    padding-top: 30px;
 }
+
 .buttonContainer {
     width: 170px;
     display: inline-block;
-
 }
+
 .button-wrapper .buttonContainer {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;
     cursor: pointer;
 }
+
 .registrationFormButtonContainer .button-wrapper .buttonContainer:first-child {
     margin-right: 30px;
 }
+
 .modal .buttonContainer {
     width: auto;
     float: left;
     display: inline-block;
     margin-left: 10px;
 }
+
 .table-drawer__top {
     background: transparent !important;
     padding: 4px 0px 0px;
     box-shadow: none;
     border-radius: 4px;
 }
+
 .custom-modal {
     top: 50% !important;
     left: 50% !important;
@@ -707,83 +759,97 @@ html,body {
     align-items: center;
     margin-top: 4px;
 }
+
 .column-group-wrapper {
     background-color: rgb(241, 241, 241);
 }
+
 .column-group {
     display: flex;
-    padding:0;
+    padding: 0;
     justify-content: center;
 }
+
 .save-buttom {
     margin-left: 5px;
 }
-.modal{
+
+.modal {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    position:relative;
+    position: relative;
 }
-.column-option{
+
+.column-option {
     display: inline-block;
-    margin: 10px 10px 0 0 ;
-    position:absolute;
-    right:0px;
+    margin: 10px 10px 0 0;
+    position: absolute;
+    right: 0px;
 }
-.advance-filter{
+
+.advance-filter {
     margin-right: 10px;
 }
-.filter-input-filed{
+
+.filter-input-filed {
     border: 1px solid #b4bfd2;
 }
-.column-left{
+
+.column-left {
     margin-left: 10px;
 }
-.column-right{
+
+.column-right {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 .table-drawer.table-drawer__bottom {
     margin: 0px 0 25px;
 }
+
 .search-input-advance {
     color: #66727c;
-    padding:5px;
-    width:100% !important;
+    padding: 5px;
+    width: 100% !important;
     padding-left: 10px;
     border: 1px solid #e6e4e4;
     overflow: unset;
     width: auto;
     outline: none;
     border-radius: 4px;
-    box-shadow:0px 1px 0.1px 0px #e0dbdb ;
+    box-shadow: 0px 1px 0.1px 0px #e0dbdb;
     -webkit-box-shadow: 0px 1px 0.1px 0px #e0dbdb;
     background-color: #fff;
 }
+
 .search-input-advance:focus {
     background-color: #fdfdfd !important;
     box-shadow: inset 0px 6px 6px rgba(0, 0, 0, 0.01), 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
 }
+
 .advance-search {
     display: inline-block;
-    margin-top:10px;
+    margin-top: 10px;
     margin-right: 0px;
     border-radius: 4px;
     padding: 5px 10px 5px 13px;
     box-shadow: 1px 1px 9px -4px #f0f0f0 !important;
     background: rgb(248, 247, 247) !important;
 }
+
 .advance-search-button {
-    border-radius: 3px ;
+    border-radius: 3px;
     /*display:inline;*/
-    display:none;
+    display: none;
     background-color: #f9570a;
     border: 1px solid #f9570a;
     color: white;
     font-weight: 500;
     outline: none;
     cursor: pointer;
-    letter-spacing:0.4px;
+    letter-spacing: 0.4px;
     padding: 7px 10px;
     height: 100%;
     font-size: 14px;
@@ -791,6 +857,7 @@ html,body {
     -webkit-box-shadow: 1px 1.2px 3px 0px #b0b0b0;
     box-shadow: 1px 1.2px 3px 0px #b0b0b0;
 }
+
 .advance-search-button:hover {
     -webkit-transition: 0.2s all;
     -o-transition: 0.2s all;
@@ -800,15 +867,18 @@ html,body {
     border: 1px solid #d24c0c !important;
     background: #d24c0c !important;
 }
+
 .advance-input-radio {
     display: block;
     text-align: left;
-    margin:5px 3px 0 10px;
+    margin: 5px 3px 0 10px;
     /*margin-right: 0px;*/
 }
+
 .advance-input-radio label:first-child {
-    margin-right:0px;
+    margin-right: 0px;
 }
+
 .input-radio {
     padding: 20px 25px;
     box-shadow: 0 1px 2px 0px #e9ecea;
@@ -816,54 +886,67 @@ html,body {
     background: #f8f8f8;
     display: inline-block;
 }
+
 .input-radio input-radio-container {
     margin-right: 10px;
 }
+
 .input-radio-container {
     margin: 5px 0 0 0px;
-    display:inline-flex;
+    display: inline-flex;
     align-items: center;
     /*display:inline-block;*/
 }
+
 .input-radio-container label {
     vertical-align: text-top;
 }
-.input-radio input[type = 'radio'] {
+
+.input-radio input[type='radio'] {
     height: 15px;
     width: 16px;
     cursor: pointer;
     margin: 5px 5px 0px 12px;
 }
+
 .input-radio label {
     color: #707173;
     font-size: 14px;
-    margin-right:10px;
-    display:inline-block;
-    position:relative;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
     letter-spacing: 0.4px;
     font-weight: 500;
 }
+
 .input-radio-container:first-child label {
-    margin-right:10px;
+    margin-right: 10px;
 }
-html, body, #root, #root>div, .student-information-Container {
+
+html,
+body,
+#root,
+#root>div,
+.student-information-Container {
     height: 100%;
 }
+
 .student-information-Container {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fffcc9;
 }
+
 .student-logo-header {
     position: fixed;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     top: 0;
     margin: 0;
-    z-index:2;
-    padding:0px 0;
+    z-index: 2;
+    padding: 0px 0;
     background: #f9570a;
     color: #fff;
     font-size: 26px;
@@ -871,91 +954,111 @@ html, body, #root, #root>div, .student-information-Container {
     text-align: center;
     left: 0;
 }
+
 .student-information-Container .student-info-heading {
-    padding:15px 0px;
+    padding: 15px 0px;
 }
+
 .student-information-Container .student-info-heading {
     font-size: 22px;
 }
-.input-radio-container input[type = 'radio'] {
+
+.input-radio-container input[type='radio'] {
     height: 15px;
     width: 16px;
     margin: 0px 5px 0px 0px;
 }
+
 .wrapper-pagination-search div:first-child {
-    display:inline-block;
+    display: inline-block;
 }
+
 .popup {
-    height:100%;
+    height: 100%;
     background: rgba(248, 248, 247, 0.75);
 }
+
 .popupContainer {
     background: rgb(249, 87, 10);
     box-shadow: 0 0.5px 3px 0px #a2a2a2;
 }
+
 .errorPopupContainer .popup .linkButton {
     color: #2a2a2a;
 }
+
 .errorPopupContainer .popup .linkButton:hover {
     transition: 0.3s all;
     background: #e3e0e0;
 }
+
 .search {
     position: absolute !important;
     top: 0 !important;
-    cursor:pointer;
+    cursor: pointer;
     right: 0 !important;
     padding: 6px 10px !important;
     width: auto !important;
     box-shadow: none;
-    border:none;
+    border: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     background: #e1dcdc !important;
     color: #6a6c6c;
 }
+
 .search:hover {
     transform: scale(1.00) !important;
-    transition:0.3s all;
-    background:#f9570a !important;
-    color:white;
+    transition: 0.3s all;
+    background: #f9570a !important;
+    color: white;
 }
+
 .search:focus {
     outline: none;
 }
+
 .advanceSearchForm {
-    display:inline-block;
+    display: inline-block;
 }
+
 .save-button-wrapper {
     display: inline-block;
 }
+
 .select-button-wrapper {
     padding: 20px 30px 10px;
 }
+
 .select-button-wrapper label .select-none-wrapper {
     font-size: 18px;
     color: #6b6c6d;
     font-weight: 550;
 }
+
 .adminButtonContainer {
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
 }
+
 .adminButtonContainer .buttonContainer {
-    margin:0;
+    margin: 0;
 }
+
 .button-wrapper {
     padding-top: 15px;
-    transition:0.3s all;
+    transition: 0.3s all;
     display: flex;
     justify-content: space-around;
 }
+
 .errorPopupContainer .error-message {
-    line-height:13px;
+    line-height: 13px;
 }
+
 .errorPopupContainer {
-    height:20px;
+    height: 20px;
     max-width: 400px;
     text-align: left;
     padding: 0 20px;
@@ -963,62 +1066,73 @@ html, body, #root, #root>div, .student-information-Container {
     letter-spacing: 0.4px;
     color: red;
     animation-name: validate-text;
-    animation-duration:0.5s;
+    animation-duration: 0.5s;
     transition: 0.4s height ease-in-out;
 }
+
 @keyframes validate-text {
     0% {
-        opacity:1;
+        opacity: 1;
     }
     50% {
-        opacity:0.7;
+        opacity: 0.7;
     }
     100% {
-        opacity:0.9;
+        opacity: 0.9;
     }
 }
+
 .form-input-wrapper {
     min-height: 90px;
 }
+
 .input-radio .input-text {
     min-width: 75%;
     max-width: 100%;
 }
+
 .button-close {
     background: transparent;
     color: #f9570a;
 }
+
 .button-close:hover {
     color: #da4802;
     background: transparent !important;
 }
+
 .yjsg-logo {
     z-index: 5;
     position: absolute;
     left: 10px;
     top: -5px;
 }
+
 .id-card-wrapper {
-    margin-top:20px;
+    margin-top: 20px;
     display: inline-block;
     position: relative;
     z-index: 1;
 }
+
 .id-card-wrapper .buttons-wrapper {
     display: inline-block;
-     margin-left: 0px;
-     margin-right: 0px;
-     margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
 }
+
 .id-card-wrapper .buttons-wrapper .buttonContainer {
     width: auto;
-    margin:0 0px 0px 10px;
+    margin: 0 0px 0px 10px;
     cursor: pointer;
 }
+
 .id-card-wrapper .linkButton {
-    border:none;
-    cursor:pointer;
+    border: none;
+    cursor: pointer;
 }
+
 .empty-column-message {
     margin: 20px 10px;
     color: #5d5b5b;
@@ -1029,96 +1143,112 @@ html, body, #root, #root>div, .student-information-Container {
     transition: 0.3s all;
     background: rgb(242, 242, 244);
 }
+
 @keyframes column-message {
     0% {
         opacity: 0.5;
     }
     50% {
-        opacity:0.8;
+        opacity: 0.8;
     }
     100% {
-        opacity:1;
+        opacity: 1;
     }
 }
+
 .empty-column-message .circle-icon {
     margin-right: 15px;
 }
+
 .page-number-arrow-disabled {
     font-size: 11px;
     margin: 1px 1px;
     border-radius: 8px;
     box-shadow: none;
     border: none !important;
-    padding:0;
+    padding: 0;
     cursor: pointer;
     background: transparent !important;
-    font-size:22px !important;
+    font-size: 22px !important;
     animation-name: disabled-arrow;
-    animation-duration:0.5s;
+    animation-duration: 0.5s;
     transition: 0.3s all;
 }
+
 @keyframes disabled-arrow {
     0% {
-        opacity:0.5;
+        opacity: 0.5;
     }
     50% {
-        opacity:0.7;
+        opacity: 0.7;
     }
     100% {
-        opacity:1;
+        opacity: 1;
     }
 }
+
 .page-number-arrow-disabled .arrowIcon {
     color: rgb(193, 193, 193) !important;
 }
+
 .card-icon {
-    margin-right:5px;
+    margin-right: 5px;
 }
+
 .data-grid {
-    margin-top:-30px;
+    margin-top: -30px;
 }
+
 .logout-button {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    font-size:16px;
+    font-size: 16px;
     padding: 5px 17px;
     border: 1px solid #fffefd;
     margin-right: 10px;
     border-radius: 3px;
 }
+
 .logout-button:hover {
     color: white;
     background-color: rgb(231, 104, 14);
     transition: 0.3s all;
 }
+
 .logoutLinkContainer {
     /*margin:17px 0px;*/
 }
+
 .logoutLinkContainer .logout-button:nth-child(2) {
-    margin-right:0px;
+    margin-right: 0px;
 }
+
 .input-radio .input-text {
     min-width: 100%;
     max-width: 100%;
 }
+
 .link:active {
     transform: translateY(0px) translateX(0px);
-    display:inline !important;
+    display: inline !important;
 }
-.id-card-wrapper  .selected-student-buttons {
-    margin-left:10px;
+
+.id-card-wrapper .selected-student-buttons {
+    margin-left: 10px;
 }
+
 .id-card-wrapper .selected-student-buttons .buttonContainer {
     margin: 0 0px 10px 0px;
     display: inline-block;
-    width:auto;
+    width: auto;
     margin: 0px 10px 0px 0px;
 }
+
 .group-of-two-students {
-    display:none;
+    display: none;
 }
-.export{
+.export {
     font-size: 14px;
     padding: 10px;
     text-decoration: none;
@@ -1128,24 +1258,12 @@ html, body, #root, #root>div, .student-information-Container {
     color: #5c5b5b;
     background-color: #ebebec;
 }
-/*.export:active {*/
-    /*background-color: #d24c0c;*/
-    /*color: white;*/
-    /*box-shadow: 0 1px 3px 0px #777978;*/
-    /*padding: 12px 14px 12px;*/
-    /*border-radius: 4px;*/
-    /*display:flex;*/
-    /*justify-content: flex-end;*/
-    /*font-size: 14px;*/
-    /*text-decoration: none;*/
-    /*outline: medium none;*/
-/*}*/
-
-.export:hover{
-    transition:0.3s all;
+.export:hover {
+    transition: 0.3s all;
     box-shadow: 0 1.50px 3px 0px #aeaeae;
     background-color: #e1e1e4;
 }
+
 .disable-link-new {
     font-size: 14px;
     pointer-events: none;
@@ -1154,12 +1272,13 @@ html, body, #root, #root>div, .student-information-Container {
     border-radius: 3px;
     background-color: rgba(65, 67, 64, 0.15);
     box-shadow: 0 1px 2px 0px #d7d3d3;
-    border:none;
-    text-align:center;
+    border: none;
+    text-align: center;
     background-color: #edeff1;
     color: #d8d8d8;
-    display:block;
+    display: block;
 }
+
 .disable-link {
     pointer-events: none;
     font-size: 14px;
@@ -1170,9 +1289,10 @@ html, body, #root, #root>div, .student-information-Container {
     background-color: #edeff1;
     color: #d8d8d8;
 }
-.disable-link-button{
+
+.disable-link-button {
     pointer-events: none;
-    outline:none;
+    outline: none;
     background-color: #edeff1;
     color: #d8d8d8;
     letter-spacing: 0.5px;
@@ -1181,12 +1301,13 @@ html, body, #root, #root>div, .student-information-Container {
     line-height: 20px;
     padding: 10px;
     box-shadow: 0 1px 2px 0px #d7d3d3;
-    border:none;
+    border: none;
     font-size: 14px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
 }
+
 .disable-link-button-new {
     background-color: #edeff1;
     color: #d8d8d8;
@@ -1194,7 +1315,7 @@ html, body, #root, #root>div, .student-information-Container {
     pointer-events: none;
     letter-spacing: 0.5px;
     box-shadow: 0 1px 2px 0px #d7d3d3;
-    border:none;
+    border: none;
     display: block;
     text-align: center;
     line-height: 20px;
@@ -1202,8 +1323,9 @@ html, body, #root, #root>div, .student-information-Container {
     font-size: 14px;
     border-radius: 3px;
     cursor: pointer;
-    width:100%;
+    width: 100%;
 }
+
 .selected-student-buttons .buttonContainer .linkButton {
     color: #5c5b5b;
     background-color: #ebebec;
@@ -1218,14 +1340,17 @@ html, body, #root, #root>div, .student-information-Container {
     border-radius: 3px;
     cursor: pointer;
 }
+
 .selected-student-buttons .buttonContainer .linkButton:hover {
-    transition:0.3s all;
+    transition: 0.3s all;
     box-shadow: 0 1.50px 3px 0px #aeaeae;
     background-color: #e1e1e4;
 }
+
 .selected-student-buttons .buttonContainer .disable-link-button-new {
     position: relative;
 }
+
 .selected-student-buttons .buttonContainer .disable-link-button-new::after {
     position: absolute;
     content: 'Please select students...';
@@ -1233,63 +1358,71 @@ html, body, #root, #root>div, .student-information-Container {
     padding: 0px 6px;
     bottom: 0px;
     color: #84827f;
-    z-index:1;
-    white-space: pre;
-    transform: translate(50%,100%);
-    background: white;
-    border: 1px solid #9d9898;
-    font-size: 12px;
-    opacity:0;
-}
-.selected-student-buttons .buttonContainer:hover .disable-link-button-new::after{
-    transition:0.2s all;
-    opacity:1;
-}
-.selected-student-buttons .buttonContainer.disable-link-new {
-    position: relative;
-}
-.selected-student-buttons .buttonContainer .disable-link-new::after {
-    position: absolute;
-    content: 'Please select students...';
-    left: 0%;
-    padding:3px 6px;
-    bottom: -9px;
-    color: #84827f;
     z-index: 1;
     white-space: pre;
-    transform: translate(30%,50%);
+    transform: translate(50%, 100%);
     background: white;
     border: 1px solid #9d9898;
     font-size: 12px;
     opacity: 0;
 }
 
-.selected-student-buttons .buttonContainer:hover .disable-link-new::after{
-    transition:0.2s all;
-    opacity:1;
+.selected-student-buttons .buttonContainer:hover .disable-link-button-new::after {
+    transition: 0.2s all;
+    opacity: 1;
 }
-.loader{
+
+.selected-student-buttons .buttonContainer.disable-link-new {
+    position: relative;
+}
+
+.selected-student-buttons .buttonContainer .disable-link-new::after {
+    position: absolute;
+    content: 'Please select students...';
+    left: 0%;
+    padding: 3px 6px;
+    bottom: -9px;
+    color: #84827f;
+    z-index: 1;
+    white-space: pre;
+    transform: translate(30%, 50%);
+    background: white;
+    border: 1px solid #9d9898;
+    font-size: 12px;
+    opacity: 0;
+}
+
+.selected-student-buttons .buttonContainer:hover .disable-link-new::after {
+    transition: 0.2s all;
+    opacity: 1;
+}
+
+.loader {
     position: absolute;
     top: 50%;
     left: 50%;
     margin: 0;
     display: inline;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
+
 .loader-wrapper {
     position: relative;
     height: 100%;
     background: white;
     z-index: 9999;
 }
+
 .student-logo-header .student-info-heading {
     padding: 15px 0px;
-    font-size:22px;
+    font-size: 22px;
 }
+
 .selectInputText:focus {
     background: #fdfbfb;
     outline-color: #f9570a;
 }
+
 .grid-scroll-page-wrapper {
     display: flex;
     flex-direction: column;
@@ -1299,6 +1432,7 @@ html, body, #root, #root>div, .student-information-Container {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
+
 .grid-scroll-wrapper {
     height: 100%;
     overflow-y: auto;
@@ -1308,31 +1442,36 @@ html, body, #root, #root>div, .student-information-Container {
     margin: 51px 0px 33px;
     flex-direction: column;
 }
+
 .card-text-student .card-text-bold {
     /*font-size:13px;*/
     /*font-family: 'Roboto Condensed';*/
 }
+
 .display-none {
-    display:none;
+    display: none;
 }
+
 .display-logout-desktop {
-    display:none;
+    display: none;
 }
+
 @media (max-width: 1200px) {
     .custom-modal {
         width: 50% !important;
     }
-    .inputFieldContainer{
+    .inputFieldContainer {
         max-width: 100%;
         padding: 45px 15px 30px;
     }
 }
+
 @media (max-width: 1024px) {
     .column-group {
         display: block;
-        padding:0;
+        padding: 0;
         margin-left: 20px;
-        overflow-y:auto;
+        overflow-y: auto;
     }
     .select-button-wrapper {
         padding: 20px 20px 10px;
@@ -1344,21 +1483,22 @@ html, body, #root, #root>div, .student-information-Container {
         margin: 0px 0 30px;
     }
 }
+
 @media (max-width: 990px) {
     .custom-modal {
         width: 50% !important;
     }
     .display-mobile-none {
-        display:none;
+        display: none;
     }
     .display-logout-desktop {
-        display:block;
+        display: block;
     }
     .logoutButtonContainer {
         position: absolute;
-        top: 20px;
-        right:0px;
-        z-index:1;
+        top: 66px;
+        right: 0px;
+        z-index: 1;
     }
     .logout-button {
         color: rgb(255, 255, 255);
@@ -1370,24 +1510,24 @@ html, body, #root, #root>div, .student-information-Container {
         text-align: center;
         line-height: 20px;
         padding: 10px;
-        box-shadow:none;
+        box-shadow: none;
         font-size: 14px;
-        margin-right:0px;
+        margin-right: 0px;
         border-radius: 4px;
     }
     .logoutLinkContainer {
         margin: 0px 10px;
     }
     .logoutLinkContainer .logout-button:first-child {
-        margin-right:10px;
+        margin-right: 10px;
     }
     .yjsg-logo {
-        position:fixed;
+        position: fixed;
         top: -5px;
         width: 80px;
     }
     .yjsg-logo-img {
-        max-width:100%;
+        max-width: 100%;
     }
     .student-information-Container .student-info-heading {
         position: fixed;
@@ -1404,24 +1544,25 @@ html, body, #root, #root>div, .student-information-Container {
         left: 0;
     }
     .student-information-Container .student-logo-header {
-        position:relative;
-        z-index:auto;
+        position: relative;
+        z-index: auto;
     }
     .logoutLinkContainer .logout-button:first-child {
-        margin-right:5px;
+        margin-right: 5px;
     }
     .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right:5px;
+        margin-right: 5px;
     }
     .grid-scroll-page-wrapper {
-        overflow-y:unset;
+        overflow-y: unset;
     }
     .grid-scroll-wrapper {
-        overflow-y:unset;
-        margin-bottom:0;
+        overflow-y: unset;
+        margin-bottom: 0;
+        margin-top: 0;
     }
     .input-radio {
-        padding:20px 15px;
+        padding: 20px 15px;
     }
     .column-option-container {
         /*width: 100%;*/
@@ -1432,33 +1573,90 @@ html, body, #root, #root>div, .student-information-Container {
         margin: 0 !important;
     }
     .logout-button {
-        padding:3px 10px !important;
+        padding: 3px 10px !important;
     }
     .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right:10px;
+        margin-right: 10px;
     }
     .inputFieldContainerWrapper {
-        overflow-y:inherit;
+        overflow-y: inherit;
+    }
+    .landing-page-wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .landingPageContainer {
+        flex-direction: column;
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+    .landingPageContainer .student-heading {
+        position: static;
+    }
+    .footer {
+        position: static;
+    }
+    .landingPageContent {
+        max-height: 99%;
+        overflow-y: inherit !important;
+    }
+    .grid-scroll-page-wrapper {
+        overflow-y: inherit;
+        display: block;
+        height: auto;
+        /*margin-top:0px !important;*/
+    }
+    .yjsg-logo {
+        position: absolute !important;
+    }
+    .student-logo-header .student-info-heading {
+        position: relative !important;
+    }
+    .modal {
+        margin-top: 50px;
+    }
+    .table-drawer.table-drawer__bottom {
+        margin: 0px 0px 30px;
+    }
+    .landingPageButtonContainer {
+        background-color: transparent;
+    }
+    .student-logo-header {
+        position:static;
+        display:block;
+    }
+    .registrationFormContainer {
+        padding-top:0px;
+        padding-bottom:0px;
+        height: auto;
+    }
+    .inputFieldContainer {
+        overflow-y :inherit;
+        margin:0px auto;
     }
 }
-@media (max-width: 800px) {
 
+@media (max-width: 800px) {
     .custom-modal {
         width: 75% !important;
     }
 }
+
 @media (max-width: 768px) {
     .custom-modal {
         width: 70% !important;
     }
-    .logoutButtonContainer {
-        position: absolute;
-        top: 15px;
-        right:0px;
-        z-index:1;
-    }
+    /*.logoutButtonContainer {*/
+    /*position: absolute;*/
+    /*top: 15px;*/
+    /*right:0px;*/
+    /*z-index:1;*/
+    /*}*/
     .modal {
-        margin-top:15px;
+        margin-top: 15px;
     }
     .logout-button {
         color: rgb(255, 255, 255);
@@ -1470,25 +1668,25 @@ html, body, #root, #root>div, .student-information-Container {
         text-align: center;
         line-height: 20px;
         padding: 10px;
-        box-shadow:none;
+        box-shadow: none;
         font-size: 14px;
-        margin-right:0px;
+        margin-right: 0px;
         border-radius: 4px;
     }
     .logoutLinkContainer {
         margin: 0px 10px;
     }
     .logoutLinkContainer .logout-button:first-child {
-        margin-right:5px;
+        margin-right: 5px;
     }
     .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right:5px;
+        margin-right: 5px;
     }
     .column-group {
         display: block;
-        padding:0;
+        padding: 0;
         margin-left: 50px;
-        overflow-y:auto;
+        overflow-y: auto;
     }
     .select-button-wrapper {
         padding: 20px 20px 10px;
@@ -1501,12 +1699,12 @@ html, body, #root, #root>div, .student-information-Container {
         max-width: 100%;
     }
     .yjsg-logo {
-        position:fixed;
+        position: fixed;
         top: -5px;
         width: 80px;
     }
     .yjsg-logo-img {
-        max-width:100%;
+        max-width: 100%;
     }
     .student-information-Container .student-info-heading {
         position: fixed;
@@ -1523,24 +1721,20 @@ html, body, #root, #root>div, .student-information-Container {
         left: 0;
     }
     .student-information-Container .student-logo-header {
-        position:relative;
-        z-index:auto;
+        position: relative;
+        z-index: auto;
     }
     .loader {
-        width:110px;
+        width: 110px;
     }
     .loader .loader-img {
-        max-width:100%;
+        max-width: 100%;
     }
-
     .column-option-container {
         min-width: 110px;
     }
-    .table-drawer.table-drawer__bottom {
-        margin:0px 0px 50px;
-    }
-
 }
+
 @media (max-width: 600px) {
     .custom-modal {
         width: 50% !important;
@@ -1556,23 +1750,24 @@ html, body, #root, #root>div, .student-information-Container {
         padding: 0px 0px 8px !important;
     }
 }
+
 @media (max-width: 500px) {
     .custom-modal {
-        width:50% !important;
+        width: 50% !important;
     }
     .button-wrapper {
         display: flex;
         flex-direction: column;
     }
     .button-wrapper .buttonContainer {
-        width:100%;
-        margin-top:15px;
+        width: 100%;
+        margin-top: 15px;
     }
     .button-wrapper .buttonContainer:first-child {
-        order:1;
+        order: 1;
     }
     .landingPageButtonContainer .buttonContainer {
-        width:100%;
+        width: 100%;
     }
     .inputWrapper {
         width: 100%;
@@ -1581,7 +1776,8 @@ html, body, #root, #root>div, .student-information-Container {
         padding: 12px 5px 15px;
         -webkit-overflow-scrolling: touch;
     }
-    .inputText, .textAreaText {
+    .inputText,
+    .textAreaText {
         max-width: 100%;
     }
     .buttonContainer {
@@ -1589,8 +1785,8 @@ html, body, #root, #root>div, .student-information-Container {
         width: 100%;
     }
     .landingPageContainer h2 {
-        padding:10px 0;
-        font-size:24px;
+        padding: 10px 0;
+        font-size: 24px;
     }
     .student-information-Container .student-info-heading {
         padding: 15px 20px 15px 100px;
@@ -1603,18 +1799,20 @@ html, body, #root, #root>div, .student-information-Container {
         width: 100px;
     }
     .yjsg-logo-img {
-        max-width:100%;
+        max-width: 100%;
     }
     .logoutButtonContainer {
         position: absolute;
         /*margin-top:19px;*/
-        top:35px;
-        z-index:1;
+        /*top:35px;*/
+        right: 0px;
+        margin-top: 17px;
+        z-index: 1;
     }
     .input-radio {
-        padding:20px 0px;
-        width:100%;
-        display:block;
+        padding: 20px 0px;
+        width: 100%;
+        display: block;
         text-align: center;
     }
     .column-option {
@@ -1631,32 +1829,33 @@ html, body, #root, #root>div, .student-information-Container {
         margin: 0 !important;
     }
     .logout-button {
-        padding:3px 10px !important;
+        padding: 3px 10px !important;
     }
     .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right:5px;
+        margin-right: 5px;
     }
     .modal {
-         margin-top: 75px;
+        /*margin-top: 75px;*/
+        margin-top: 45px;
         display: block;
         width: 100%;
     }
     .advanceSearchForm {
         display: block;
-        margin:0 10px;
+        margin: 0 10px;
     }
     .data-grid {
         margin-top: -50px;
     }
     .search-input-advance {
-        width:100% !important;
+        width: 100% !important;
     }
     .advance-input-radio {
         display: block;
         margin: 0 3px 0 30px;
     }
     .wrapper-pagination-search div:first-child {
-        display: block ;
+        display: block;
     }
     .wrapper-pagination-search .pagination-wrapper {
         display: block !important;
@@ -1668,30 +1867,30 @@ html, body, #root, #root>div, .student-information-Container {
         max-width: 100%;
     }
     .advance-search-button {
-        margin-right:0px;
+        margin-right: 0px;
     }
     .input-radio-container:first-child label {
-        margin-right:15px;
+        margin-right: 15px;
     }
     .pagination-info {
-        margin-top:0px;
+        margin-top: 0px;
     }
     .table-footer-cell {
         margin-top: 2px;
-         float: none;
+        float: none;
         text-align: center;
-         display: block !important;
+        display: block !important;
         padding: 0px 0px 8px !important;
     }
     .column-option-container::after {
         content: '';
-        opacity:0;
+        opacity: 0;
     }
     .column-option:hover .column-option-container {
         padding-right: 10px !important;
     }
     .column-group {
-        margin-left:30px;
+        margin-left: 30px;
     }
     .export {
         width: 100%;
@@ -1702,13 +1901,13 @@ html, body, #root, #root>div, .student-information-Container {
         border-top: 1px solid #c2c1bf !important;
     }
     .id-card-wrapper {
-        width:50%;
-        margin-top:0px;
+        width: 50%;
+        margin-top: 0px;
     }
     .id-card-wrapper .selected-student-buttons {
-        width:100%;
-        margin:5px 0px 0px 0px;
-        display:block;
+        width: 100%;
+        margin: 5px 0px 0px 0px;
+        display: block;
     }
     .id-card-wrapper .selected-student-buttons .buttonContainer {
         flex: 1 0 50%;
@@ -1716,30 +1915,30 @@ html, body, #root, #root>div, .student-information-Container {
         display: inline-block;
     }
     .id-card-wrapper .linkButton {
-        width:100%;
+        width: 100%;
         padding: 8px;
     }
     .id-card-wrapper .buttonContainer:nth-child(1) {
-        display:none;
+        display: none;
     }
     .id-card-wrapper .buttonContainer:nth-child(2) {
-        display:none;
+        display: none;
     }
     .id-card-wrapper .buttonContainer:nth-child(3) {
-        display:none;
+        display: none;
     }
     .id-card-wrapper .buttonContainer:nth-child(4) {
-        display:block;
-        width:100%;
-        margin-top:12px;
-        padding:0 10px;
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        padding: 0 10px;
     }
     .selected-student-buttons .buttonContainer .disable-link-button-new::after {
-        content:none;
+        content: none;
         display: none;
     }
     .selected-student-buttons .buttonContainer .disable-link-new::after {
-        content:none;
+        content: none;
         display: none;
     }
     .link {
@@ -1764,19 +1963,19 @@ html, body, #root, #root>div, .student-information-Container {
         font-size: 20px;
     }
     .total-record-row {
-        margin-top:0px;
+        margin-top: 0px;
     }
     .registrationFormButtonContainer .button-wrapper .buttonContainer {
         padding: 0px 5px;
     }
     .registrationFormButtonContainer .button-wrapper {
-        padding-top:0px;
+        padding-top: 0px;
     }
     .landingPageContainer .student-heading {
-        padding:15px 10px;
+        padding: 15px 10px;
     }
     .yjsgEventInfo .header-text {
-        font-size:16px;
+        font-size: 16px;
     }
     /*.table-drawer.table-drawer__bottom {
         margin: 0px 0 30px;
@@ -1785,16 +1984,18 @@ html, body, #root, #root>div, .student-information-Container {
         margin-right: 10px;
     }
     .empty-column-message {
-        line-height:22px;
-        display:flex;
+        line-height: 22px;
+        display: flex;
     }
     .table-drawer.table-drawer__bottom {
-        margin: 0px 0 60px;
+        /*margin: 0px 0 60px;*/
+        margin: 0px 0px 20px;
     }
 }
-@media (max-width: 425px){
+
+@media (max-width: 425px) {
     .search-input-bar {
-        margin-top:10px;
+        margin-top: 10px;
     }
     .custom-modal {
         width: 80% !important;
@@ -1803,27 +2004,28 @@ html, body, #root, #root>div, .student-information-Container {
         margin-top: 0px !important;
     }
     .render-table {
-        margin-top:16px !important;
+        margin-top: 16px !important;
     }
     .grid-export {
         margin-top: 5px;
     }
     .table-footer-row {
-        margin-top:5px !important;
+        margin-top: 5px !important;
     }
     .wrapper-pagination-search {
-        padding:14px 0;
+        padding: 14px 0;
     }
     .column-group {
         max-height: 400px;
-        overflow-y:auto;
+        overflow-y: auto;
         padding-left: 10px;
     }
     .select-button-wrapper {
         padding: 10px 12px 10px;
     }
     .advance-input-radio {
-        margin: 5px 3px 0 25px;
+        display: inline-block;
+        margin: 5px 15px 0 0px;
     }
     .modal-save-container {
         text-align: right;
@@ -1836,10 +2038,10 @@ html, body, #root, #root>div, .student-information-Container {
         padding-bottom: 0px;
     }
     .landingPageContent {
-        margin-left:5px;
-        display:block;
-        margin:0 auto;
-        padding:10px 0 0px;
+        margin-left: 5px;
+        display: block;
+        margin: 0 auto;
+        padding: 10px 0 0px;
         /*padding-bottom:10px;*/
         overflow-y: auto;
     }
@@ -1847,33 +2049,35 @@ html, body, #root, #root>div, .student-information-Container {
         margin: 0 auto;
     }
     .landingPageButtonContainer {
-        margin: 0  auto;
+        margin: 0 auto;
     }
     .student-id-cards-footer {
-        display:block;
+        display: block;
     }
     .student-id-cards-footer .card-text:first-child {
-        margin-bottom:5px;
+        margin-bottom: 5px;
     }
     .errorPopupContainer {
-        padding:10px 0px 0px;
+        padding: 10px 0px 0px;
         margin-bottom: 5px;
-        animation-duration:0.2s;
+        animation-duration: 0.2s;
     }
     .search {
-        padding:6px 10px !important;
+        padding: 6px 10px !important;
     }
 }
+
 @media (max-width: 360px) {
     .landingPageLogo {
-        max-width:120px;
+        max-width: 120px;
     }
     .errorPopupContainer {
-        padding:10px 0px 0px;
+        padding: 10px 0px 0px;
         margin-bottom: 5px;
-        animation-duration:0.2s;
+        animation-duration: 0.2s;
     }
 }
+
 @media (max-width: 320px) {
     .custom-modal {
         width: 90% !important;
@@ -1882,27 +2086,26 @@ html, body, #root, #root>div, .student-information-Container {
         margin-left: 0px !important;
     }
     .footer {
-        padding:5px 0;
+        padding: 5px 0;
     }
     .advance-input-radio {
-        display:inline-block;
+        display: inline-block;
         margin: 0 3px 0 25px;
     }
-
     .id-card-wrapper .linkButton {
         padding: 7px;
     }
     .column-group {
-        max-height:300px;
+        max-height: 300px;
     }
     .disable-link-button-new {
-        padding:10px;
+        padding: 10px;
     }
     .input-radio .input-text {
-        min-width:90%;
+        min-width: 90%;
     }
     .selected-student-buttons .buttonContainer .linkButton {
-        padding:10px;
+        padding: 10px;
     }
     .student-logo-header .student-info-heading {
         padding: 10px 0px 10px 100px;
@@ -1916,16 +2119,15 @@ html, body, #root, #root>div, .student-information-Container {
         width: 95px;
     }
     .id-card-wrapper {
-        width:60%;
+        width: 60%;
     }
     .footer {
-        padding:10px 0;
+        padding: 10px 0;
     }
-
 }
+
 @media (max-width: 280px) {
     .custom-modal {
         width: 90% !important;
     }
 }
-

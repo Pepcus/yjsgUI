@@ -106,8 +106,7 @@ class SplashPage extends Component {
     })
   }
   checkAdminCredential() {
-    let isAdminLogin  = sessionStorage.getItem('isAdminLogin');
-    if (!isAdminLogin ) {
+    if(!this.props.adminLoginState){
       const {
         id,
         password,
@@ -120,7 +119,7 @@ class SplashPage extends Component {
             </div>
           );
         } else {
-          sessionStorage.setItem('isAdminLogin', 'yes');
+          //localStorage['isAdminLogin']= true;
           return <Switch><Redirect to={'/student-search'}/></Switch>
         }
       }

@@ -3,12 +3,18 @@
 /**
  *
  * @param {String} url
+ * @param secretKey
  * @returns {Promise} response
  */
-export const GET = ({url}) => {
+export const GET = ({url, secretKey}) => {
   const config = {
     url: url,
     method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'secretKey': secretKey,
+    },
   };
 
   return new Promise((resolve, reject) => {
@@ -47,13 +53,14 @@ export const POST = ( {url, body} ) => {
 };
 
 
-export const PUT = ( {url, body} ) => {
+export const PUT = ( {url, secretKey, body} ) => {
 
   const config = {
     method: 'PUT',
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json',
+      'secretKey': secretKey,
     },
     body: JSON.stringify(body),
     mode: 'cors',

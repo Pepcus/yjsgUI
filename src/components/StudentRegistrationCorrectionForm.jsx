@@ -133,7 +133,8 @@ class StudentRegistrationCorrectionForm extends Component {
       this.state.student);
   }
 
-  submitStudentData() {
+  submitStudentData(e) {
+    e.preventDefault();
     if (String(this.state.student.optIn2018) !== '1') {
       this.setState({
         isSubmitTriggered: true,
@@ -241,7 +242,7 @@ class StudentRegistrationCorrectionForm extends Component {
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
         {/*<h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
-        <div className="inputFieldContainerWrapper">
+        <form id='renderNoValidationFields' className="inputFieldContainerWrapper">
           <div className={'inputFieldContainer'}>
             <SelectListInputField
               name={'optIn2018'}
@@ -370,15 +371,17 @@ class StudentRegistrationCorrectionForm extends Component {
                   buttonText={goBackBtnText}
                   linkPath={this.props.context.previousLocation}
                 />
-                <Button
-                  buttonText={formSubmitBtnText}
-                  onClick={this._submitStudentData}
-                />
+                <button
+                type='submit'
+                value='Submit'
+                form='renderNoValidationFields'
+                onClick={this._submitStudentData}
+                >Submit
+                </button>
+                </div>
               </div>
-            </div>
           </div>
-        </div>
-
+        </form>
       </div>
     )
   }
@@ -393,7 +396,7 @@ class StudentRegistrationCorrectionForm extends Component {
         <div className={'registrationFormContainer'}>
           {this.renderSuccessMessage()}
           <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
-          <div className="inputFieldContainerWrapper">
+          <form id='studentCorrectionForm' className="inputFieldContainerWrapper">
             <div className={'inputFieldContainer'}>
               <SelectListInputField
                 name={'optIn2018'}
@@ -532,14 +535,16 @@ class StudentRegistrationCorrectionForm extends Component {
                   buttonText={goBackBtnText}
                   linkPath={this.props.context.previousLocation}
                 />
-                <Button
-                  buttonText={formSubmitBtnText}
+                <button
+                  type='submit'
+                  value='Submit'
+                  form='studentCorrectionForm'
+                  /*buttonText={formSubmitBtnText}*/
                   onClick={this._submitStudentData}
-                />
+                >Submit</button>
               </div>
             </div>
-          </div>
-
+          </form>
         </div>
       );
     } else if(this.props.isLoading) {

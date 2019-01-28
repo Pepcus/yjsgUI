@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-import { allStudentsData, getVisibleColumnConfig, getSelectValue } from '../reducers/studentRegistrationReducer';
+import { allStudentsData, getVisibleColumnConfig, getSelectValue, getAdminPassword } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
@@ -31,14 +31,11 @@ import {
   goBackBtnText,
   adminPassword,
 } from '../utils/yjsgConstants';
+import {
+  fetchStudentData,
+} from '../actions/studentRegistrationActions';
 
 const gridMetaData = [
-  {
-    'label': '',
-    'key': 'column',
-    'disableFilter': true,
-    'excludeFromExport': true,
-  },
   {
     'label': 'ID',
     'key': 'studentId',
@@ -147,6 +144,8 @@ const gridHeaderData = () => ({
     'exportButton': false,
     'totalRecords': true,
   },
+  enableRowSelection: true,
+  enableAllRowSelection: true,
   recordsPerPage: 25,
   drawerPosition: 'top',
   includeAllInGlobalFilter:false,
@@ -158,13 +157,11 @@ const getStyles = () => ({
     'width': 'auto',
   },
 });
-
 class DataGrid1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedStudents: [],
-      selectedStudentsCheck: [],
       selectValue: this.props.selectValue,
       students:[],
       metaData: gridHeaderData(),
@@ -184,10 +181,9 @@ class DataGrid1 extends Component {
     this.performLogout = this.performLogout.bind(this);
     this.renderColumnConfig = this.renderColumnConfig.bind(this);
     this.formatMetaData = this.formatMetaData.bind(this);
-    this.handleEditCheckBoxClick = this.handleEditCheckBoxClick.bind(this);
     this.EditButton = this.EditButton.bind(this);
-    this.CheckButton = this.CheckButton.bind(this);
     this.formattedStudent = this.formattedStudent.bind(this);
+    this.getSelectedRow = this.getSelectedRow.bind(this);
   }
 
   componentWillMount() {
@@ -199,7 +195,7 @@ class DataGrid1 extends Component {
     });
   }
   componentDidMount() {
-    this.props.getAllStudentsAction();
+    this.props.getAllStudentsAction({ secretKey: this.props.adminPassword });
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
     }
@@ -208,8 +204,13 @@ class DataGrid1 extends Component {
     this.props.resetAdminCredentialsAction();
     this.props.setAdminLoginStateAction(false);
     this.props.setRedirectValueAction(false);
-    sessionStorage.removeItem('isAdminLogin');
     this.props.resetVisibleColumnConfigAction();
+    localStorage.clear();
+  }
+  getSelectedRow(selectedRow) {
+    this.setState({
+      selectedStudents: selectedRow,
+    });
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -224,18 +225,6 @@ class DataGrid1 extends Component {
     this.setState({advanceFilterIsOpen: false});
   }
   setValuesOfVisibleColumnConfig(values, selectValue){
-    let count = 0;
-    for(let key in values) {
-      if(values[key]){
-        count ++;
-      }
-      if(count>1){
-        values = {...values, column : true,};
-      }
-      else{
-        values = {...values, column : false,};
-      }
-    }
     this.setState({
       visibleColumnConfig : values,
       metaData: this.formatMetaData(values),
@@ -243,6 +232,7 @@ class DataGrid1 extends Component {
     });
     this.props.setVisibleColumnConfigAction(values, selectValue);
   }
+
   formatMetaData = (visibleColumnConfig) => {
     const metaData = [];
     for(const columnKey in visibleColumnConfig) {
@@ -251,12 +241,7 @@ class DataGrid1 extends Component {
           metaData.push({
             ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey),
             customComponent: this.EditButton
-          })
-        }else if (columnKey === 'column'){
-          metaData.push({
-            ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey ),
-            customComponent: this.CheckButton
-          })
+          });
         }
         else {
           metaData.push(gridMetaData.find(metaDataObj => metaDataObj.key === columnKey))
@@ -269,30 +254,10 @@ class DataGrid1 extends Component {
     const newRowData = {...rowData, id:rowData.studentId};
     if (!isEmpty(rowData)) {
       this.props.setStudentDataAction(newRowData);
+      //this.props.fetchStudentData(rowData.studentId, adminPassword);
       this.props.updateStudentByAdminAction(rowData.studentId, adminPassword);
       this.setState({
         isStudentDataSet: true,
-      });
-    }
-  }
-  handleEditCheckBoxClick(rowData , e){
-    if (e.target.checked) {
-      this.setState({
-        selectedStudents: [
-          ...this.state.selectedStudents,
-          rowData,
-        ],
-        selectedStudentsCheck: [
-          ...this.state.selectedStudentsCheck,
-          rowData.studentId,
-        ],
-      });
-    } else if(!e.target.checked){
-      const removedStudent = this.state.selectedStudents.filter((item) => item.studentId !== Number(e.target.name));
-      const removedSelectCheckBox = this.state.selectedStudentsCheck.filter((item) => item !== Number(e.target.name));
-      this.setState({
-        selectedStudents: removedStudent,
-        selectedStudentsCheck: removedSelectCheckBox,
       });
     }
   }
@@ -312,18 +277,6 @@ class DataGrid1 extends Component {
       </button>
     </div>
   );
-  CheckButton = ({ rowData }) => {
-    return(
-    <div className = "btn-block">
-      <input
-        name={String(rowData.studentId)}
-        type="checkbox"
-        onChange={(e) =>{this.handleEditCheckBoxClick(rowData, e)}}
-        checked={this.state.selectedStudentsCheck.includes(rowData.studentId) ? "checked": ""}
-      />
-    </div>
-  );
-};
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
@@ -369,8 +322,13 @@ class DataGrid1 extends Component {
         }
     return (
       <div className="student-grid-none">
-      <DataGrid data={this.state.students} metaData={this.state.metaData} styles={getStyles()}/>
-      </div>
+        <DataGrid
+          getSelectedRow={this.getSelectedRow}
+          data={this.state.students}
+          metaData={this.state.metaData}
+          styles={getStyles()}
+        />
+        </div>
     );
   }
 
@@ -387,7 +345,7 @@ class DataGrid1 extends Component {
         </div>
       );
     }
-    if(sessionStorage.getItem('isAdminLogin') !== 'yes' && !(this.props.adminLoginState)) {
+    if(!(this.props.adminLoginState)) {
       return (
         <div>
           <Redirect to={'/'}/>
@@ -406,36 +364,30 @@ class DataGrid1 extends Component {
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">
                   <div className="logoutLinkContainer">
-                    <Link to = {'/'} className="logout-button">Back</Link>
-                    <Link to={'/'} className = "logout-button" onClick={this.performLogout}>Logout</Link>
-                  </div>
-                </div>
-                <div className="logoutButtonContainer display-logout-desktop">
-                  <div className="logoutLinkContainer">
-                    <Link to = {'/'} className="logout-button">
-                      <i className="fa fa-arrow-left"></i>
-                    </Link>
-                    <a className="logout-button" onClick={this.openColumnOption}>
-                      <i className="fa fa-cog"></i>
-                    </a>
-                    {this.renderColumnConfig()}
-                    <Link to={'/'} className = "logout-button" onClick={this.performLogout}>
-                      <i className="fa fa-sign-out"></i>
-                    </Link>
+                    <Link to = {'/'}className="logout-button">Back</Link>
+                    <Link to={'/'}className = "logout-button" onClick={this.performLogout}>Logout</Link>
                   </div>
                 </div>
               </div>
-
+            </div>
+            <div className="logoutButtonContainer display-logout-desktop">
+              <div className="logoutLinkContainer">
+                <Link to = {'/'}className="logout-button">
+                  <i className="fa fa-arrow-left"></i>
+                </Link>
+                <a className="logout-button" onClick={this.openColumnOption}>
+                  <i className="fa fa-cog"></i>
+                </a>
+                {this.renderColumnConfig()}
+                <Link to={'/'}className = "logout-button" onClick={this.performLogout}>
+                  <i className="fa fa-power-off"></i>
+                </Link>
+              </div>
             </div>
             <div className="modal">
               <div>
                 <AdvanceSearch
-                  metaData={this.state.metaData}
-                  getAllStudentsAction={this.props.getAllStudentsAction}
-                  students={this.props.students}
-                  onFilter={this.onFilter}
-                  formattedStudent = {this.formattedStudent}
-                />
+                  metaData={this.state.metaData}getAllStudentsAction={this.props.getAllStudentsAction}students={this.props.students}onFilter={this.onFilter}formattedStudent = {this.formattedStudent}          />
                 <div className="column-option display-mobile-none">
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     <i className="fa fa-filter card-icon"/>
@@ -445,24 +397,21 @@ class DataGrid1 extends Component {
                 </div>
               </div>
               {/*
-           Todo: This feature will be implemented in future scope.
-          <div>
-           <button onClick={this.openAdvanceFilter}>Advance Filter</button>
-           <AdvanceFilter
-           advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
-           closeAdvanceFilter = {this.closeAdvanceFilter}
-           setInputValue = {this.setInputValue}
-           setStudentData = {this.setStudentData}
-           />
-           </div>*/}
+Todo: This feature will be implemented in future scope.    <div>
+     <button onClick={this.openAdvanceFilter}>Advance Filter</button>
+     <AdvanceFilter
+     advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
+     closeAdvanceFilter = {this.closeAdvanceFilter}
+     setInputValue = {this.setInputValue}
+     setStudentData = {this.setStudentData}
+     />
+     </div>*/}
             </div>
           </div>
           <div>
             {this.redirectToStudentCorrection()}
             <SelectedStudentsActionWrapper
-              selectedStudents = {this.state.selectedStudents}
-              metaData={this.state.metaData}
-            />
+              selectedStudents = {this.state.selectedStudents}metaData={this.state.metaData}      />
             {this.renderDataGrid()}
           </div>
         </div>
@@ -496,8 +445,10 @@ const mapStateToProps = state => ({
   selectValue: getSelectValue(state),
   redirect: stateOfRedirect(state),
   adminLoginState: stateOfAdminLogin(state),
+  adminPassword: getAdminPassword(state),
 });
 export default connect(mapStateToProps, {
+  fetchStudentData,
   getAllStudentsAction,
   setStudentDataAction,
   updateStudentByAdminAction,
