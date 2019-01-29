@@ -75,6 +75,28 @@ export const PUT = ( {url, headers, body} ) => {
   });
 };
 
+export const PATCH = ( {url, headers, body} ) => {
+  const attendanceFile = new FormData();
+  attendanceFile.append('file', body);
+  const config = {
+    method: 'PATCH',
+    headers: headers ||{
+    },
+    body: attendanceFile,
+    mode: 'cors',
+    cache: 'default',
+  };
+  return new Promise((resolve, reject) => {
+    fetch(url, config).then(
+      function(response) {
+        resolve(response.json());
+      },
+      function(error) {
+        reject(error);
+      });
+  });
+};
+
 /**
  * This method returns the request parameters of the URL
  * @param {String}name

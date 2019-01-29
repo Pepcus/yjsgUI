@@ -6,6 +6,8 @@ import {
   searchStudent,
   updateStudent,
   getAllStudentsAPI,
+  uploadAttendanceAPI,
+  //updateOptInAPI,
 } from './studentRegisterAPI';
 import {
   createStudentFailedAction,
@@ -19,6 +21,8 @@ import {
   updateStudentSuccessAction,
   getAllStudentsDataResultsSuccessAction,
   getAllStudentsDataResultsFailureAction,
+  uploadAttendanceFileResultsSuccessAction,
+  uploadAttendanceFileResultsFailureAction,
 } from '../actions/studentRegistrationActions';
 
 
@@ -28,6 +32,7 @@ export default function* rootSaga () {
   yield takeLatest(['UPDATE_STUDENT'], updateStudentSaga);
   yield takeLatest(['FETCH_SEARCH_RESULTS'], searchStudentSaga);
   yield takeLatest(['GET_ALL_STUDENTS'], getAllStudentsSaga);
+  yield takeLatest(['UPLOAD_ATTENDANCE_FILE'], uploadAttendanceFileSaga);
 }
 
 export function* createStudentSaga(action) {
@@ -108,3 +113,19 @@ export function* getAllStudentsSaga(action) {
     yield put(getAllStudentsDataResultsFailureAction(errorMessage));
   }
 }
+
+export function* uploadAttendanceFileSaga(action) {
+  const { secretKey, attendanceFile } = action;
+  const errorMessage = 'Error getting upload attendance file.';
+  try{
+    const response = yield uploadAttendanceAPI(secretKey, attendanceFile);
+    if(response){
+      yield put(uploadAttendanceFileResultsSuccessAction(response));
+    } else {
+      yield put(uploadAttendanceFileResultsFailureAction(errorMessage));
+    }
+  }catch (e){
+    yield put(uploadAttendanceFileResultsFailureAction(errorMessage));
+  }
+}
+

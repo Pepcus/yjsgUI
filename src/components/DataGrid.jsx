@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey } from '../reducers/studentRegistrationReducer';
+import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey, } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
@@ -18,6 +18,7 @@ import {
   setRedirectValueAction,
   setVisibleColumnConfigAction,
   resetVisibleColumnConfigAction,
+  resetIsSuccessAction,
 } from  '../actions/studentRegistrationActions';
 import {
   stateOfRedirect,
@@ -25,6 +26,7 @@ import {
   isGetAllStudentsLoading,
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
+import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
@@ -169,7 +171,11 @@ class DataGrid1 extends Component {
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
+      UploadStudentsAttendanceFileOptionIsOption: false,
     };
+    this.optionUploadStudentsAttendanceFileOption = this.optionUploadStudentsAttendanceFileOption.bind(this);
+    this.closeUploadStudentsAttendanceFileOption = this.closeUploadStudentsAttendanceFileOption.bind(this);
+    this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
     this.openAdvanceFilter = this.openAdvanceFilter.bind(this);
@@ -211,6 +217,13 @@ class DataGrid1 extends Component {
     this.setState({
       selectedStudents: selectedRow,
     });
+  }
+  optionUploadStudentsAttendanceFileOption() {
+    this.setState({UploadStudentsAttendanceFileOptionIsOption: true});
+  }
+  closeUploadStudentsAttendanceFileOption() {
+    this.setState({UploadStudentsAttendanceFileOptionIsOption: false});
+    this.props.resetIsSuccessAction();
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -273,7 +286,7 @@ class DataGrid1 extends Component {
   EditButton = ({ rowData }) => (
     <div className = "btn-block">
       <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
-          <i className="fa fa-edit"/>Edit
+        <i className="fa fa-edit"/>Edit
       </button>
     </div>
   );
@@ -281,7 +294,7 @@ class DataGrid1 extends Component {
     if(nextProps.students !== this.props.students) {
       this.setState({
         students: this.formattedStudent(nextProps.students),
-        });
+      });
     }
   }
   onFilter(result){
@@ -289,8 +302,18 @@ class DataGrid1 extends Component {
       students: this.formattedStudent(result),
     });
   }
+  renderUploadStudentsAttendanceOption() {
+    if (this.state.UploadStudentsAttendanceFileOptionIsOption) {
+      return (
+        <UploadStudentsAttendanceFile
+          UploadStudentsAttendanceFileOptionIsOption={this.state.UploadStudentsAttendanceFileOptionIsOption}
+          closeUploadStudentsAttendanceFileOption={this.closeUploadStudentsAttendanceFileOption}
+        />
+      );
+    }
+  }
   renderColumnConfig() {
-    if (this.state.columnOptionIsOpen) {
+     if (this.state.columnOptionIsOpen) {
       return (
         <ColumnConfig
           columnOptionIsOpen={this.state.columnOptionIsOpen}
@@ -302,11 +325,11 @@ class DataGrid1 extends Component {
       );
     }
   }
-    formattedStudent(students) {
-     return students.map(item =>
-        ({...item, studentId: String(item.id)})
-      );
-    }
+  formattedStudent(students) {
+    return students.map(item =>
+      ({...item, studentId: String(item.id)})
+    );
+  }
   renderDataGrid () {
     if(isEmpty(this.state.metaData.headerConfig)){
       return(
@@ -316,10 +339,10 @@ class DataGrid1 extends Component {
               <i className="fa fa-exclamation-triangle"/>
               </span>
             आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
-            </div>
           </div>
+        </div>
       );
-        }
+    }
     return (
       <div className="student-grid-none">
         <DataGrid
@@ -328,7 +351,7 @@ class DataGrid1 extends Component {
           metaData={this.state.metaData}
           styles={getStyles()}
         />
-        </div>
+      </div>
     );
   }
 
@@ -391,18 +414,28 @@ class DataGrid1 extends Component {
             <div className="modal">
               <div>
                 <AdvanceSearch
-                  metaData={this.state.metaData}getAllStudentsAction={this.props.getAllStudentsAction}students={this.props.students}onFilter={this.onFilter}formattedStudent = {this.formattedStudent}          />
+                  metaData={this.state.metaData}
+                  getAllStudentsAction={this.props.getAllStudentsAction}
+                  students={this.props.students}
+                  onFilter={this.onFilter}
+                  formattedStudent = {this.formattedStudent}
+                />
                 <div className="column-option display-mobile-none">
+                  <button className="column-option-container" onClick={this.optionUploadStudentsAttendanceFileOption}>
+                    Upload Attendance
+                  </button>
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     {/*<i className="fa fa-filter card-icon"/>*/}
                     <i className="fa fa-cog card-icon"/>
                     Configure
                   </button>
                   {this.renderColumnConfig()}
+                  {this.renderUploadStudentsAttendanceOption()}
                 </div>
               </div>
               {/*
-Todo: This feature will be implemented in future scope.    <div>
+Todo: This feature will be implemented in future scope.
+     <div>
      <button onClick={this.openAdvanceFilter}>Advance Filter</button>
      <AdvanceFilter
      advanceFilterIsOpen={ this.state.advanceFilterIsOpen}
@@ -462,4 +495,5 @@ export default connect(mapStateToProps, {
   setRedirectValueAction,
   setVisibleColumnConfigAction,
   resetVisibleColumnConfigAction,
+  resetIsSuccessAction,
 })(DataGrid1);

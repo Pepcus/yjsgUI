@@ -1,3 +1,5 @@
+import { uploadAttendanceFileSaga } from '../sagas/rootSaga';
+
 export const checkValidUserInfo = (errorMessageObject) => ({
   type: 'CHECK_FOR_VALID_USER_INFO',
   errorMessageObject,
@@ -142,3 +144,24 @@ export const resetVisibleColumnConfigAction = () => ({
   type: 'RESET_VISIBLE_COLUMN_CONFIG_DATA',
 });
 
+export const uploadStudentsAttendanceFileAction = (secretKey, attendanceFile) => ({
+  type: 'UPLOAD_ATTENDANCE_FILE',
+  secretKey,
+  attendanceFile,
+});
+
+export const uploadAttendanceFileResultsSuccessAction = response => {
+  return ({
+    type: 'UPLOAD_FILE_SUCCESS_ACTION',
+    failRecordIds: response.failRecordIds,
+  });
+};
+
+export const uploadAttendanceFileResultsFailureAction = message => ({
+  type: 'UPLOAD_FILE_FAILED_ACTION',
+  message,
+});
+
+export const resetIsSuccessAction = () => ({
+  type: 'RESET_IS_SUCCESS_ACTION',
+});

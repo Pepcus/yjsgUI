@@ -194,6 +194,7 @@ const allStudentsDataReducerInitialState = {
     marks2017: true,
     edit: true,
   },
+  isSuccess: false,
   isLoading: false,
 };
 
@@ -238,6 +239,22 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         ...state,
         visibleColumnConfig: allStudentsDataReducerInitialState.visibleColumnConfig,
         selectValue: allStudentsDataReducerInitialState.selectValue,
+      };
+    case 'UPLOAD_FILE_SUCCESS_ACTION':
+      return {
+        ...state,
+        isSuccess: true,
+        failRecordIds: action.failRecordIds,
+      };
+    case 'UPLOAD_FILE_FAILED_ACTION':
+      return {
+        ...state,
+        isSuccess: false,
+      };
+    case 'RESET_IS_SUCCESS_ACTION':
+      return {
+        ...state,
+        isSuccess: false,
       };
     default: {
       return {
@@ -285,4 +302,10 @@ export const getSelectValue = state => state.allStudentsDataReducer.selectValue;
 export const isGetAllStudentsLoading = state => state.allStudentsDataReducer.isLoading;
 
 export const getSecretKey = state => state.studentRegistrationReducer.adminPassword;
+
+export const getSuccess = state => state.allStudentsDataReducer.isSuccess;
+
+export const getFailRecordIds = state => state.allStudentsDataReducer.failRecordIds;
+
+
 

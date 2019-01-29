@@ -1,4 +1,4 @@
-import { PUT, POST, GET } from '../utils/http';
+import { PUT, POST, GET, PATCH } from '../utils/http';
 import {
   formatUpdateStudentDataPayload,
   formatCreateStudentDataPayload,
@@ -50,3 +50,15 @@ export const getAllStudentsAPI = (secretKey) =>
     'secretKey': secretKey,
     },
   });
+
+export const uploadAttendanceAPI = (secretKey, attendanceFile) => {
+  return PATCH({
+    url: `v1/students/bulk-attendance`,
+    headers: {
+      'secretKey': secretKey,
+    },
+    body: attendanceFile,
+  });
+};
+
+
