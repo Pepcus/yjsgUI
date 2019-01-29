@@ -24,7 +24,7 @@ const customColumnOptionStyles = {
     transform: 'translate(-50%, -50%)'
   }
 };
-const secretKey = '451725';
+
 class UploadStudentsAttendanceFile extends Component {
 
   constructor(props) {
@@ -50,7 +50,7 @@ class UploadStudentsAttendanceFile extends Component {
   }
 
   fileUpload(attendanceFile) {
-    this.props.uploadStudentsAttendanceFileAction(secretKey, attendanceFile);
+    this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile);
   }
   closePopup(){
     this.props.resetIsSuccessAction();

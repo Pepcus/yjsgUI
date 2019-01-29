@@ -7,7 +7,6 @@ import {
   updateStudent,
   getAllStudentsAPI,
   uploadAttendanceAPI,
-  //updateOptInAPI,
 } from './studentRegisterAPI';
 import {
   createStudentFailedAction,
