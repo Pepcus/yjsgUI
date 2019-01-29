@@ -120,7 +120,7 @@ class UploadStudentsAttendanceFile extends Component {
   render() {
     return (
       <div>
-      <button className="column-option-container" onClick={this.optionUploadStudentsAttendanceFileOption}>
+      <button onClick={this.optionUploadStudentsAttendanceFileOption}>
         Upload Attendance
       </button>
         {this.renderUploadStudentsAttendanceOption()}

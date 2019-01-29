@@ -51,14 +51,23 @@ export const getAllStudentsAPI = (secretKey) =>
     },
   });
 
-export const uploadAttendanceAPI = (secretKey, attendanceFile) => {
-  return PATCH({
+export const uploadAttendanceAPI = (secretKey, attendanceFile) =>
+  PATCH({
     url: `v1/students/bulk-attendance`,
     headers: {
       'secretKey': secretKey,
     },
     body: attendanceFile,
   });
-};
+
+export const uploadOptInAPI = (secretKey, optInFile) =>
+  PATCH({
+    url: `v1/students/bulk-optin`,
+    headers: {
+      'secretKey': secretKey,
+    },
+    body: optInFile,
+  });
+
 
 

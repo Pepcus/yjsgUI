@@ -1,4 +1,3 @@
-import { uploadAttendanceFileSaga } from '../sagas/rootSaga';
 
 export const checkValidUserInfo = (errorMessageObject) => ({
   type: 'CHECK_FOR_VALID_USER_INFO',
@@ -152,16 +151,38 @@ export const uploadStudentsAttendanceFileAction = (secretKey, attendanceFile) =>
 
 export const uploadAttendanceFileResultsSuccessAction = response => {
   return ({
-    type: 'UPLOAD_FILE_SUCCESS_ACTION',
+    type: 'UPLOAD_ATTENDANCE_FILE_SUCCESS_ACTION',
     failRecordIds: response.failRecordIds,
   });
 };
 
 export const uploadAttendanceFileResultsFailureAction = message => ({
-  type: 'UPLOAD_FILE_FAILED_ACTION',
+  type: 'UPLOAD_ATTENDANCE_FILE_FAILED_ACTION',
   message,
 });
 
 export const resetIsSuccessAction = () => ({
   type: 'RESET_IS_SUCCESS_ACTION',
+});
+
+export const uploadOptInFileAction = (secretKey, optInFile) => ({
+  type: 'UPLOAD_OPTIN_FILE_FILE',
+  secretKey,
+  optInFile,
+});
+
+export const uploadOptInFileResultsSuccessAction = response => {
+  return ({
+    type: 'UPLOAD_OPTIN_FILE_SUCCESS_ACTION',
+    failRecordIds: response.failRecordIds,
+  });
+};
+
+export const uploadOptInFileResultsFailureAction = message => ({
+  type: 'UPLOAD_OPTIN_FILE_FAILED_ACTION',
+  message,
+});
+
+export const resetIsOptinSuccessAction = () => ({
+  type: 'RESET_IS_OPTIN_SUCCESS_ACTION',
 });

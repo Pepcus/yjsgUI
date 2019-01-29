@@ -76,13 +76,13 @@ export const PUT = ( {url, headers, body} ) => {
 };
 
 export const PATCH = ( {url, headers, body} ) => {
-  const attendanceFile = new FormData();
-  attendanceFile.append('file', body);
+  const file = new FormData();
+  file.append('file', body);
   const config = {
     method: 'PATCH',
     headers: headers ||{
     },
-    body: attendanceFile,
+    body: file,
     mode: 'cors',
     cache: 'default',
   };

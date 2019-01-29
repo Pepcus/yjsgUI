@@ -27,6 +27,7 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
 import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
+import UploadOptinFile from './UploadOptinFile'
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
@@ -400,6 +401,7 @@ class DataGrid1 extends Component {
                   formattedStudent = {this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
+                  <UploadOptinFile/>
                   <UploadStudentsAttendanceFile/>
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     {/*<i className="fa fa-filter card-icon"/>*/}
@@ -425,7 +427,9 @@ Todo: This feature will be implemented in future scope.
           <div>
             {this.redirectToStudentCorrection()}
             <SelectedStudentsActionWrapper
-              selectedStudents = {this.state.selectedStudents}metaData={this.state.metaData}      />
+              selectedStudents = {this.state.selectedStudents}
+              metaData={this.state.metaData}
+            />
             {this.renderDataGrid()}
           </div>
         </div>
