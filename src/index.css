@@ -83,7 +83,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.yjsgEventInfo {
+.yjsg-event-info {
   margin: 15px 0 0;
   text-align: center;
   line-height: 30px;
@@ -479,7 +479,7 @@ input[type=number]::-webkit-outer-spin-button {
     /*margin-bottom: 15px;*/
     justify-content: flex-start;
   }
-  .yjsgEventInfo {
+  .yjsg-event-info {
     font-size: 12px;
     line-height: 25px;
   }

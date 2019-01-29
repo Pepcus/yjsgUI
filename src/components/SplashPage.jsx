@@ -294,7 +294,7 @@ class SplashPage extends Component {
           <h2 className="student-heading">{yjsgHeader}</h2>
           <div className="landing-page-wrapper">
             <div className={'landingPageContent'}>
-              <div className={'yjsgEventInfo'}>
+              <div className={'yjsg-event-info'}>
                 <h5 className="primary-color">{eventDate}</h5>
                 <h5 className="header-text">{eventVenue}</h5>
               </div>

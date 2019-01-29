@@ -378,7 +378,7 @@ class StudentRegistrationCorrectionForm extends Component {
                     value='Submit'
                     /*buttonText={formSubmitBtnText}*/
                     onClick={this._submitStudentData}
-                    className='linkButton mar-0-width-100'
+                    className='linkButton margin-none full-width'
                   >Submit</button>
                 </div>
                 </div>
@@ -545,7 +545,7 @@ class StudentRegistrationCorrectionForm extends Component {
                     value='Submit'
                     /*buttonText={formSubmitBtnText}*/
                     onClick={this._submitStudentData}
-                    className='linkButton mar-0-width-100'
+                    className='linkButton margin-none full-width'
                   >Submit</button>
                 </div>
               </div>

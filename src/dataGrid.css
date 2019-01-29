@@ -1245,10 +1245,12 @@ body,
     margin: 0px 10px 0px 0px;
 }
 
-.group-of-two-students {
-    display: none;
+/*.group-of-two-students {*/
+    /*display: none;*/
+/*}*/
+.students-id-card-wrapper {
+    display:none;
 }
-
 .export {
     font-size: 14px;
     padding: 10px;
@@ -1456,8 +1458,10 @@ body,
 .display-logout-desktop {
     display: none;
 }
-.mar-0-width-100 {
+.margin-none {
     margin:0;
+}
+.full-width {
     width:100%;
 }
 .card-content-wrapper {
@@ -1466,6 +1470,76 @@ body,
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    -webkit-print-color-adjust: exact;
+}
+
+.card-content-wrapper::before {
+    content:'';
+    position:absolute;
+    height:100%;
+    width:100%;
+    background-color: rgba(255, 255, 255, 0.69) !important;
+    -webkit-print-color-adjust: exact;
+}
+.card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
+    font-weight: bold;
+    font-size: 9px;
+}
+.card-text-student .card-text-bold {
+    font-size:13px;
+    font-family: 'Roboto Condensed';
+}
+.card-text-student .card-student-num {
+    font-size:13px;
+}
+.card-fields-wrapper .card-text {
+    z-index:1;
+    flex:1;
+    font-size:9px;
+    margin:4px 0px 10px;
+}
+.card-fields-wrapper .card-text-spacing {
+    flex:0.5 0 0;
+    margin:4px 0px 10px;
+}
+.student-id-cards-header{
+    text-align: center;
+    font-size: 18px;
+    color: white !important;
+    font-weight: bold;
+    font-family: 'Roboto Condensed';
+    -webkit-print-color-adjust: exact;
+}
+.student-id-card-wrapper {
+    background-color: #f9570a !important;
+    color: white !important;
+    font-weight:550;
+    padding: 0px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-print-color-adjust: exact;
+}
+.student-id-cards-footer {
+    background-color: #fa8d19 !important;
+    color: white;
+    padding: 0px 5px;
+    min-height:25px;
+    max-height:100%;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    -webkit-print-color-adjust: exact;
+}
+.student-id-cards-footer .card-text {
+    font-size:10px;
+}
+.card-heading {
+    background-color: #f4f2f2 !important;
+    color: #565454;
+    padding: 15px;
+    font-size:18px;
+    font-weight:550;
     -webkit-print-color-adjust: exact;
 }
 @media (max-width: 1200px) {
@@ -1987,7 +2061,7 @@ body,
     .landingPageContainer .student-heading {
         padding: 15px 10px;
     }
-    .yjsgEventInfo .header-text {
+    .yjsg-event-info .header-text {
         font-size: 16px;
     }
     /*.table-drawer.table-drawer__bottom {
@@ -2004,7 +2078,7 @@ body,
         /*margin: 0px 0 60px;*/
         margin: 0px 0px 20px;
     }
-    .yjsgEventInfo {
+    .yjsg-event-info {
         margin:5px 0 0;
     }
 }
