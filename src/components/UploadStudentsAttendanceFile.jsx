@@ -30,7 +30,8 @@ class UploadStudentsAttendanceFile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      attendanceFile: null
+      attendanceFile: null,
+      UploadStudentsAttendanceFileOptionIsOption: false,
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -38,6 +39,17 @@ class UploadStudentsAttendanceFile extends Component {
     this.renderMessage = this.renderMessage.bind(this);
     this.closePopup = this.closePopup.bind(this);
     this.renderFailRecordIds = this.renderFailRecordIds.bind(this);
+    this.optionUploadStudentsAttendanceFileOption = this.optionUploadStudentsAttendanceFileOption.bind(this);
+    this.closeUploadStudentsAttendanceFileOption = this.closeUploadStudentsAttendanceFileOption.bind(this);
+    this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
+  }
+
+  optionUploadStudentsAttendanceFileOption() {
+    this.setState({UploadStudentsAttendanceFileOptionIsOption: true});
+  }
+  closeUploadStudentsAttendanceFileOption() {
+    this.setState({UploadStudentsAttendanceFileOptionIsOption: false});
+    this.props.resetIsSuccessAction();
   }
 
   onFormSubmit(e) {
@@ -54,7 +66,7 @@ class UploadStudentsAttendanceFile extends Component {
   }
   closePopup(){
     this.props.resetIsSuccessAction();
-    this.props.closeUploadStudentsAttendanceFileOption();
+    this.closeUploadStudentsAttendanceFileOption();
   }
   renderFailRecordIds(){
     if(this.props.failRecordIds){
@@ -73,35 +85,48 @@ class UploadStudentsAttendanceFile extends Component {
       </div>
     }
   }
+  renderUploadStudentsAttendanceOption() {
+    if (this.state.UploadStudentsAttendanceFileOptionIsOption) {
+      return (
+        <Modal
+          isOpen={this.state.UploadStudentsAttendanceFileOptionIsOption}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeUploadStudentsAttendanceFileOption}
+          style={customColumnOptionStyles}
+          contentLabel="Column Options"
+          overlayLabel="Overlay Options"
+          className="custom-modal"
+        >
+          <div className="column-group-wrapper">
+            <form onSubmit={this.onFormSubmit}>
+              <h1>File Upload</h1>
+              <input type="file" onChange={this.onChange}/>
+              <button type="submit">Upload</button>
+            </form>
+            {this.renderMessage()}
+            <div className="modal-save-container">
+              <div className="save-button-wrapper">
+                <button className="button-modal button-close"
+                        onClick={this.closeUploadStudentsAttendanceFileOption}>Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      );
+    }
+  }
 
   render() {
     return (
-      <Modal
-        isOpen={this.props.UploadStudentsAttendanceFileOptionIsOption}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.props.closeUploadStudentsAttendanceFileOption}
-        style={customColumnOptionStyles}
-        contentLabel="Column Options"
-        overlayLabel="Overlay Options"
-        className="custom-modal"
-      >
-        <div className="column-group-wrapper">
-          <form onSubmit={this.onFormSubmit}>
-            <h1>File Upload</h1>
-            <input type="file" onChange={this.onChange}/>
-            <button type="submit">Upload</button>
-          </form>
-          {this.renderMessage()}
-          <div className="modal-save-container">
-            <div className="save-button-wrapper">
-              <button className="button-modal button-close"
-                      onClick={this.props.closeUploadStudentsAttendanceFileOption}>Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </Modal>
+      <div>
+      <button className="column-option-container" onClick={this.optionUploadStudentsAttendanceFileOption}>
+        Upload Attendance
+      </button>
+        {this.renderUploadStudentsAttendanceOption()}
+      </div>
     );
+
   }
 }
 const mapStateToProps = state => ({

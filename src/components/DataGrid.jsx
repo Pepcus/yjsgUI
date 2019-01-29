@@ -171,11 +171,7 @@ class DataGrid1 extends Component {
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
-      UploadStudentsAttendanceFileOptionIsOption: false,
     };
-    this.optionUploadStudentsAttendanceFileOption = this.optionUploadStudentsAttendanceFileOption.bind(this);
-    this.closeUploadStudentsAttendanceFileOption = this.closeUploadStudentsAttendanceFileOption.bind(this);
-    this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
     this.openColumnOption = this.openColumnOption.bind(this);
     this.closeColumnOption = this.closeColumnOption.bind(this);
     this.openAdvanceFilter = this.openAdvanceFilter.bind(this);
@@ -217,13 +213,6 @@ class DataGrid1 extends Component {
     this.setState({
       selectedStudents: selectedRow,
     });
-  }
-  optionUploadStudentsAttendanceFileOption() {
-    this.setState({UploadStudentsAttendanceFileOptionIsOption: true});
-  }
-  closeUploadStudentsAttendanceFileOption() {
-    this.setState({UploadStudentsAttendanceFileOptionIsOption: false});
-    this.props.resetIsSuccessAction();
   }
   openColumnOption() {
     this.setState({columnOptionIsOpen: true});
@@ -301,16 +290,6 @@ class DataGrid1 extends Component {
     this.setState({
       students: this.formattedStudent(result),
     });
-  }
-  renderUploadStudentsAttendanceOption() {
-    if (this.state.UploadStudentsAttendanceFileOptionIsOption) {
-      return (
-        <UploadStudentsAttendanceFile
-          UploadStudentsAttendanceFileOptionIsOption={this.state.UploadStudentsAttendanceFileOptionIsOption}
-          closeUploadStudentsAttendanceFileOption={this.closeUploadStudentsAttendanceFileOption}
-        />
-      );
-    }
   }
   renderColumnConfig() {
      if (this.state.columnOptionIsOpen) {
@@ -421,16 +400,13 @@ class DataGrid1 extends Component {
                   formattedStudent = {this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
-                  <button className="column-option-container" onClick={this.optionUploadStudentsAttendanceFileOption}>
-                    Upload Attendance
-                  </button>
+                  <UploadStudentsAttendanceFile/>
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     {/*<i className="fa fa-filter card-icon"/>*/}
                     <i className="fa fa-cog card-icon"/>
                     Configure
                   </button>
                   {this.renderColumnConfig()}
-                  {this.renderUploadStudentsAttendanceOption()}
                 </div>
               </div>
               {/*
