@@ -1,38 +1,19 @@
 @media print {
-    @font-face {
-        font-family: "Roboto Condensed";
-        src: url('https://fonts.googleapis.com/css?family=Roboto Condensed');
-        /*font-weight: normal;*/
-        /*font-style: normal;*/
-    }
-
     body,html, #root {
-       /* height:100%;
-        width:100%;*/
         -webkit-print-color-adjust: exact;
-        font-family: "Roboto Condensed", Serif;
     }
-
+    .print-media-none {
+        display:none;
+    }
     .grid-scroll-page-wrapper {
-        overflow-y: inherit;
-        display: block;
         height: auto;
         min-height: 100%;
-        /* margin-top: 0px !important; */
     }
     .grid-scroll-wrapper {
-        overflow-y: inherit;
         margin-bottom: 0;
         display:block;
         margin-top: 0;
     }
-    .student-grid-none {
-        display:none;
-    }
-    .id-card-wrapper {
-        display:none !important;
-    }
-
     .students-id-card-wrapper {
         display:block;
         overflow: hidden;
@@ -47,9 +28,6 @@
     {
         display: none;
     }
-    .logoutLinkContainer {
-        display:none;
-    }
 }
 @page {
     size: A4;
@@ -58,6 +36,5 @@
 @media print and (color) {
     * {
         -webkit-print-color-adjust: exact;
-        /*print-color-adjust: exact;*/
     }
 }

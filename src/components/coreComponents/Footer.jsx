@@ -7,7 +7,7 @@ import {
 
 const Footer = (props) => {
     return (
-      <div className="footer student-grid-none">
+      <div className="footer print-media-none">
         <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span></p>
       </div>)
 };

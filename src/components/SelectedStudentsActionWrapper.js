@@ -59,7 +59,7 @@ class SelectedStudentsActionWrapper extends Component{
   );
   return(
     <div>
-      <div className = "id-card-wrapper">
+      <div className = "id-card-wrapper print-media-none">
         <div className="selected-student-buttons">
           <div className="buttonContainer">
             <CSVLink headers={header} data={this.props.selectedStudents} className={this.renderExportClassName()}>

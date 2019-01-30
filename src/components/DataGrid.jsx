@@ -324,7 +324,7 @@ class DataGrid1 extends Component {
       );
     }
     return (
-      <div className="student-grid-none">
+      <div className="print-media-none">
         <DataGrid
           getSelectedRow={this.getSelectedRow}
           data={this.state.students}
@@ -358,7 +358,7 @@ class DataGrid1 extends Component {
     return (
       <div className="grid-scroll-page-wrapper">
         <div className="grid-scroll-wrapper">
-          <div className="student-grid-none">
+          <div className="print-media-none">
             <div className="student-information-Container">
               <div className = "student-logo-header">
                 <div className= "yjsg-logo">
@@ -366,7 +366,7 @@ class DataGrid1 extends Component {
                 </div>
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">
-                  <div className="logoutLinkContainer">
+                  <div className="logoutLinkContainer print-media-none">
                     <Link to = {'/'} className="logout-button">
                       <i className="fa fa-arrow-left card-icon"></i>Back
                     </Link>
@@ -404,7 +404,6 @@ class DataGrid1 extends Component {
                   <UploadOptInFile/>
                   <UploadStudentsAttendanceFile/>
                   <button className="column-option-container" onClick={this.openColumnOption}>
-                    {/*<i className="fa fa-filter card-icon"/>*/}
                     <i className="fa fa-cog card-icon"/>
                     Configure
                   </button>
