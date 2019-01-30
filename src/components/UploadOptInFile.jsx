@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 
-import { uploadOptInFileAction, resetIsOptinSuccessAction } from '../actions/studentRegistrationActions';
+import { uploadOptInFileAction, resetIsOptInSuccessAction } from '../actions/studentRegistrationActions';
 import { connect } from 'react-redux';
-import { getSecretKey, isOptinSuccess, getFailOptin } from '../reducers/studentRegistrationReducer';
+import { getSecretKey, isOptInSuccess, getFailOptIn } from '../reducers/studentRegistrationReducer';
 const customColumnOptionStyles = {
   overlay: {
     zIndex: '999',
@@ -25,31 +25,31 @@ const customColumnOptionStyles = {
   }
 };
 
-class UploadOptinFile extends Component {
+class UploadOptInFile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       optinFile: null,
-      isUploadOptinFileModalOpen: false,
+      isUploadOptInFileModalOpen: false,
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
     this.closePopup = this.closePopup.bind(this);
-    this.renderFailOptin = this.renderFailOptin.bind(this);
-    this.optionUploadOptinFileModal = this.optionUploadOptinFileModal.bind(this);
-    this.closeUploadOptinFileModal = this.closeUploadOptinFileModal.bind(this);
-    this.renderUploadOptinModal = this.renderUploadOptinModal.bind(this);
+    this.renderFailOptIn = this.renderFailOptIn.bind(this);
+    this.optionUploadOptInFileModal = this.optionUploadOptInFileModal.bind(this);
+    this.closeUploadOptInFileModal = this.closeUploadOptInFileModal.bind(this);
+    this.renderUploadOptInModal = this.renderUploadOptInModal.bind(this);
   }
 
-  optionUploadOptinFileModal() {
-    this.setState({isUploadOptinFileModalOpen: true});
+  optionUploadOptInFileModal() {
+    this.setState({isUploadOptInFileModalOpen: true});
   }
-  closeUploadOptinFileModal() {
-    this.setState({isUploadOptinFileModalOpen: false});
-    this.props.resetIsOptinSuccessAction();
+  closeUploadOptInFileModal() {
+    this.setState({isUploadOptInFileModalOpen: false});
+    this.props.resetIsOptInSuccessAction();
   }
 
   onFormSubmit(e) {
@@ -65,37 +65,37 @@ class UploadOptinFile extends Component {
     this.props.uploadOptInFileAction(this.props.secretKey, optinFile);
   }
   closePopup(){
-    this.props.resetIsOptinSuccessAction();
-    this.closeUploadOptinFileModal();
+    this.props.resetIsOptInSuccessAction();
+    this.closeUploadOptInFileModal();
   }
-  renderFailOptin(){
-    if(this.props.failOptin){
+  renderFailOptIn(){
+    if(this.props.failOptIn){
       return(
         <div>
           <label>Failed Records are:</label>
-          <div>{this.props.failOptin}</div>
+          <div>{this.props.failOptIn}</div>
         </div>
       );
     }
   }
   renderMessage(){
-    if(this.props.isOptinSuccess){
+    if(this.props.isOptInSuccess){
       return(
         <div>
           <label>Upload optin file is success</label>
-          {this.renderFailOptin()}
-          <button onClick = {() => this.closePopup()}>OK</button>
+          {this.renderFailOptIn()}
+          <button onClick = {() => { this.closePopup() }}>OK</button>
         </div>
       );
     }
   }
-  renderUploadOptinModal() {
-    if (this.state.isUploadOptinFileModalOpen) {
+  renderUploadOptInModal() {
+    if (this.state.isUploadOptInFileModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isUploadOptinFileModalOpen}
+          isOpen={this.state.isUploadOptInFileModalOpen}
           onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeUploadOptinFileModal}
+          onRequestClose={this.closeUploadOptInFileModal}
           style={customColumnOptionStyles}
           contentLabel="Column Options"
           overlayLabel="Overlay Options"
@@ -111,7 +111,7 @@ class UploadOptinFile extends Component {
             <div className="modal-save-container">
               <div className="save-button-wrapper">
                 <button className="button-modal button-close"
-                        onClick={this.closeUploadOptinFileModal}>Close
+                        onClick={this.closeUploadOptInFileModal}>Close
                 </button>
               </div>
             </div>
@@ -119,15 +119,16 @@ class UploadOptinFile extends Component {
         </Modal>
       );
     }
+    return null;
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.optionUploadOptinFileModal}>
-          Upload Optin File
+        <button onClick={this.optionUploadOptInFileModal}>
+          Upload Opt In File
         </button>
-        {this.renderUploadOptinModal()}
+        {this.renderUploadOptInModal()}
       </div>
     );
 
@@ -135,12 +136,12 @@ class UploadOptinFile extends Component {
 }
 const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
-  isOptinSuccess: isOptinSuccess(state),
-  failOptin: getFailOptin(state),
+  isOptInSuccess: isOptInSuccess(state),
+  failOptIn: getFailOptIn(state),
 });
 
 export default connect(mapStateToProps, {
   uploadOptInFileAction,
-  resetIsOptinSuccessAction,
-})(UploadOptinFile);
+  resetIsOptInSuccessAction,
+})(UploadOptInFile);
 

@@ -27,7 +27,7 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
 import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
-import UploadOptinFile from './UploadOptinFile'
+import UploadOptInFile from './UploadOptInFile'
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
@@ -401,7 +401,7 @@ class DataGrid1 extends Component {
                   formattedStudent = {this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
-                  <UploadOptinFile/>
+                  <UploadOptInFile/>
                   <UploadStudentsAttendanceFile/>
                   <button className="column-option-container" onClick={this.openColumnOption}>
                     {/*<i className="fa fa-filter card-icon"/>*/}

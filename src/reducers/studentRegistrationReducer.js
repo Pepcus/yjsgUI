@@ -43,7 +43,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isUpdated: false,
       };
 
-    case 'CREATE_STUDENT_SUCCESS_ACTION':
+    case 'CREATE_STUDENT_SUCCESS':
       return {
         ...state,
         newStudent: {...state.newStudent, ...action.newStudent},
@@ -51,7 +51,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isCreated: true,
       };
 
-    case 'UPDATE_STUDENT_SUCCESS_ACTION':
+    case 'UPDATE_STUDENT_SUCCESS':
       return {
         ...state,
         updatedStudent: {...state.student, ...action.student},
@@ -59,7 +59,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isUpdated: true,
       };
 
-    case 'FETCH_STUDENT_SUCCESS_ACTION':
+    case 'FETCH_STUDENT_SUCCESS':
       return {
         ...state,
         student: {...action.student},
@@ -67,21 +67,21 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isFetched: true,
       };
 
-    case 'CREATE_STUDENT_FAILED_ACTION':
+    case 'CREATE_STUDENT_FAILED':
       return {
         ...state,
         isLoading: false,
         isCreated: false,
       };
 
-    case 'UPDATE_STUDENT_FAILED_ACTION':
+    case 'UPDATE_STUDENT_FAILED':
       return {
         ...state,
         isLoading: false,
         isUpdated: false,
       };
 
-    case 'FETCH_STUDENT_FAILED_ACTION':
+    case 'FETCH_STUDENT_FAILED':
       return {
         ...state,
         isLoading: false,
@@ -195,7 +195,7 @@ const allStudentsDataReducerInitialState = {
     edit: true,
   },
   isSuccess: false,
-  isOptinSuccess: false,
+  isOptInSuccess: false,
   isLoading: false,
 };
 
@@ -241,37 +241,37 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         visibleColumnConfig: allStudentsDataReducerInitialState.visibleColumnConfig,
         selectValue: allStudentsDataReducerInitialState.selectValue,
       };
-    case 'UPLOAD_ATTENDANCE_FILE_SUCCESS_ACTION':
+    case 'UPLOAD_ATTENDANCE_FILE_SUCCESS':
       return {
         ...state,
         isSuccess: true,
         failRecordIds: action.failRecordIds,
       };
-    case 'UPLOAD_ATTENDANCE_FILE_FAILED_ACTION':
+    case 'UPLOAD_ATTENDANCE_FILE_FAILED':
       return {
         ...state,
         isSuccess: false,
       };
-    case 'RESET_IS_SUCCESS_ACTION':
+    case 'RESET_IS_SUCCESS':
       return {
         ...state,
         isSuccess: false,
       };
-    case 'UPLOAD_OPTIN_FILE_SUCCESS_ACTION':
+    case 'UPLOAD_OPT_IN_FILE_SUCCESS':
       return {
         ...state,
-        isOptinSuccess: true,
-        failOptin: action.failRecordIds,
+        isOptInSuccess: true,
+        failOptIn: action.failRecordIds,
       };
-    case 'UPLOAD_OPTIN_FILE_FAILED_ACTION':
+    case 'UPLOAD_OPT_IN_FILE_FAILED':
       return {
         ...state,
-        isOptinSuccess: false,
+        isOptInSuccess: false,
       };
-    case 'RESET_IS_OPTIN_SUCCESS_ACTION':
+    case 'RESET_IS_OPT_IN_SUCCESS':
       return {
         ...state,
-        isOptinSuccess: false,
+        isOptInSuccess: false,
       };
     default: {
       return {
@@ -324,8 +324,8 @@ export const getSuccess = state => state.allStudentsDataReducer.isSuccess;
 
 export const getFailRecordIds = state => state.allStudentsDataReducer.failRecordIds;
 
-export const isOptinSuccess = state => state.allStudentsDataReducer.isOptinSuccess;
+export const isOptInSuccess = state => state.allStudentsDataReducer.isOptInSuccess;
 
-export const getFailOptin = state => state.allStudentsDataReducer.failOptin;
+export const getFailOptIn = state => state.allStudentsDataReducer.failOptIn;
 
 
