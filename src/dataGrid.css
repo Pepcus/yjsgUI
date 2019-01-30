@@ -1749,7 +1749,7 @@ body,
         position: relative;
     }
     .footer {
-        position: static;
+        position: relative;
     }
     .landingPageContent {
         max-height: 99%;
@@ -1777,7 +1777,7 @@ body,
         background-color: transparent;
     }
     .student-logo-header {
-        position:static;
+        position:relative;
         display:block;
     }
     .registrationFormContainer {
@@ -1943,7 +1943,7 @@ body,
     }
     .column-option {
         margin: 10px 10px 0 10px;
-        position: static;
+        position: relative;
     }
     .column-option-container {
         font-size: 14px !important;

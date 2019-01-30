@@ -24,7 +24,7 @@
     .students-id-card-wrapper>div.group-of-two-students:nth-child(4n){
         page-break-after: always;
     }
-    #header, #nav, .noprint
+    #header, #nav
     {
         display: none;
     }
