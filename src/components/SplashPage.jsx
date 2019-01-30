@@ -290,8 +290,10 @@ class SplashPage extends Component {
         return <Switch><Redirect to={'/studentCorrection'} /></Switch>
       }
     return (
+      <div className="landing-page-full-height">
         <div className={'landingPageContainer'}>
           <h2 className="student-heading">{yjsgHeader}</h2>
+        </div>
           <div className="landing-page-wrapper">
             <div className={'landingPageContent'}>
               <div className={'yjsg-event-info'}>
@@ -307,6 +309,7 @@ class SplashPage extends Component {
             </div>
           </div>
         </div>
+
       );
   }
 }

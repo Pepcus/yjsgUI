@@ -55,7 +55,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: auto;
     background-color: rgba(244, 233, 227, 0.21);
 }
 .landingPageContainer .student-heading {
@@ -71,6 +71,21 @@ html, body {
     width: 100%;
     text-align: center;
 }
+.landing-page-full-height {
+    /*height:auto;*/
+    height:100%;
+    background-color: rgba(244, 233, 227, 0.21);
+    /*min-height:100%;*/
+}
+.landing-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+}
+
 .landingPageContent {
     display: flex;
     align-items: center;
@@ -80,6 +95,7 @@ html, body {
     flex-direction: column;
     width: 600px;
     max-width: 97%;
+    max-height:100%;
 }
 
 .footer {
@@ -1246,7 +1262,7 @@ body,
 }
 
 /*.group-of-two-students {*/
-    /*display: none;*/
+/*display: none;*/
 /*}*/
 .students-id-card-wrapper {
     display:none;
@@ -1464,22 +1480,17 @@ body,
 .full-width {
     width:100%;
 }
-.card-content-wrapper {
-    position:relative;
-    background-image:url('assets/LOGO.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-print-color-adjust: exact;
+.student-id-cards{
+    border: 1px solid #d94803;
+    width:45%;
+    float: left;
+    margin:15px 15px 30px;
 }
-
-.card-content-wrapper::before {
-    content:'';
-    position:absolute;
-    height:100%;
-    width:100%;
-    background-color: rgba(255, 255, 255, 0.69) !important;
-    -webkit-print-color-adjust: exact;
+.students-id-card-wrapper>div.group-of-two-students {
+    overflow: hidden;
+}
+.card-fields-wrapper{
+    display: flex;
 }
 .card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
     font-weight: bold;
@@ -1518,6 +1529,7 @@ body,
     display:flex;
     align-items: center;
     justify-content: center;
+    font-family: "Roboto Condensed" ,Serif;
     -webkit-print-color-adjust: exact;
 }
 .student-id-cards-footer {
@@ -1534,14 +1546,159 @@ body,
 .student-id-cards-footer .card-text {
     font-size:10px;
 }
-.card-heading {
+.image-id-card {
+    width: 40px;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+.image-id-card img {
+    max-width:100%;
+}
+.card-content {
+    padding:5px;
+}
+.card-text-content {
+    text-transform: capitalize !important;
+}
+
+.card-modal-footer {
+    text-align: right;
+    padding: 10px 30px;
     background-color: #f4f2f2 !important;
-    color: #565454;
-    padding: 15px;
-    font-size:18px;
-    font-weight:550;
     -webkit-print-color-adjust: exact;
 }
+.card-modal-footer .button-close {
+    color:#565454;
+    border-color:#565454;
+    box-shadow:none !important;
+}
+.card-modal-footer .button-close:hover {
+    color:#565454;
+    border-color:#565454 !important;
+    box-shadow:none !important;
+}
+
+.card-text-bus-stop {
+    height:10px;
+}
+.card-flex {
+    display: flex;
+    align-items: center;
+}
+.card-content-wrapper {
+    position:relative;
+    background-image:url('assets/LOGO.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-print-color-adjust: exact;
+}
+
+.card-content-wrapper::before {
+    content:'';
+    position:absolute;
+    height:100%;
+    width:100%;
+    background-color: rgba(255, 255, 255, 0.69) !important;
+    -webkit-print-color-adjust: exact;
+}
+.card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
+    font-weight: bold;
+    font-size: 9px;
+}
+.card-text-student .card-text-bold {
+    font-size:13px;
+    font-family: 'Roboto Condensed';
+}
+.card-text-student .card-student-num {
+    font-size:13px;
+}
+.card-fields-wrapper .card-text {
+    z-index:1;
+    flex:1;
+    font-size:9px;
+    margin:4px 0px 10px;
+}
+.card-fields-wrapper .card-text-spacing {
+    flex:0.5 0 0;
+    margin:4px 0px 10px;
+}
+/*.student-id-cards-header{*/
+/*text-align: center;*/
+/*font-size: 18px;*/
+/*color: white !important;*/
+/*font-weight: bold;*/
+/*font-family: 'Roboto Condensed';*/
+/*-webkit-print-color-adjust: exact;*/
+/*}*/
+/*.student-id-card-wrapper {*/
+/*background-color: #f9570a !important;*/
+/*font-weight:550;*/
+/*padding: 0px;*/
+/*display:flex;*/
+/*align-items: center;*/
+/*justify-content: center;*/
+/*-webkit-print-color-adjust: exact;*/
+/*}*/
+/*.student-id-cards-footer {*/
+/*background-color: #fa8d19 !important;*/
+/*color: white;*/
+/*padding: 0px 5px;*/
+/*min-height:25px;*/
+/*max-height:100%;*/
+/*display: flex;*/
+/*align-items:center;*/
+/*justify-content: space-between;*/
+/*-webkit-print-color-adjust: exact;*/
+/*}*/
+/*.student-id-cards-footer .card-text {*/
+/*font-size:10px;*/
+/*}*/
+/*.card-heading {*/
+/*background-color: #f4f2f2 !important;*/
+/*color: #565454;*/
+/*padding: 15px;*/
+/*font-size:18px;*/
+/*font-weight:550;*/
+/*-webkit-print-color-adjust: exact;*/
+/*}*/
+/*.card-modal-footer {*/
+/*text-align: right;*/
+/*padding: 10px 30px;*/
+/*background-color: #f4f2f2 !important;*/
+/*}*/
+/*.card-modal-footer .button-close {*/
+/*color:#565454;*/
+/*border-color:#565454;*/
+/*box-shadow:none !important;*/
+/*}*/
+/*.card-modal-footer .button-close:hover {*/
+/*color:#565454;*/
+/*border-color:#565454 !important;*/
+/*box-shadow:none !important;*/
+/*}*/
+.image-id-card {
+    width: 40px;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+.image-id-card img {
+    max-width:100%;
+}
+.card-content {
+    padding:5px;
+}
+.card-text-content {
+    text-transform: capitalize !important;
+}
+.card-text-bus-stop {
+    height:10px;
+}
+.card-flex {
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 1200px) {
     .custom-modal {
         width: 50% !important;
@@ -1680,7 +1837,7 @@ body,
         margin-top: 0px !important;
     }
     .landingPageContainer .student-heading {
-        position: static;
+        position: relative;
     }
     .footer {
         position: static;
@@ -1820,6 +1977,11 @@ body,
     .column-option-container {
         min-width: 110px;
     }
+    .landing-page-full-height {
+        height:100%;
+        display:flex;
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 600px) {
@@ -1844,11 +2006,12 @@ body,
     }
     .button-wrapper {
         display: flex;
+        padding-top:10px;
         flex-direction: column;
     }
     .button-wrapper .buttonContainer {
         width: 100%;
-        margin-top: 15px;
+        margin-top: 10px;
     }
     .button-wrapper .buttonContainer:first-child {
         order: 1;
@@ -2078,11 +2241,12 @@ body,
         /*margin: 0px 0 60px;*/
         margin: 0px 0px 20px;
     }
-    .yjsg-event-info {
-        margin:5px 0 0;
+    .landing-page-wrapper {
+        display:block;
+        padding:40px 0;
     }
-}
 
+}
 @media (max-width: 425px) {
     .search-input-bar {
         margin-top: 10px;
@@ -2131,7 +2295,10 @@ body,
         margin-left: 5px;
         display: block;
         margin: 0 auto;
-        padding: 10px 0 0px;
+        min-height:auto;
+        max-height:100%;
+        margin-bottom:10px;
+        /*padding: 0px 0 10px;*/
         /*padding-bottom:10px;*/
         overflow-y: auto;
     }
@@ -2154,6 +2321,10 @@ body,
     }
     .search {
         padding: 6px 10px !important;
+    }
+    .landing-page-full-height {
+        height:auto;
+        min-height:100%;
     }
 }
 
@@ -2213,6 +2384,9 @@ body,
     }
     .footer {
         padding: 10px 0;
+    }
+    .landingPageContent {
+        margin-bottom:20px;
     }
 }
 

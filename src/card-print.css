@@ -1,158 +1,54 @@
 @media print {
-    body,html, #root {
-        height:100%;
-        width:100%;
-        /*-webkit-print-color-adjust: exact;*/
-    }
-    body,html {
-        height:100%;
-        width:100%;
+    @font-face {
+        font-family: "Roboto Condensed";
+        src: url('https://fonts.googleapis.com/css?family=Roboto Condensed');
+        /*font-weight: normal;*/
+        /*font-style: normal;*/
     }
 
+    body,html, #root {
+       /* height:100%;
+        width:100%;*/
+        -webkit-print-color-adjust: exact;
+        font-family: "Roboto Condensed", Serif;
+    }
+
+    .grid-scroll-page-wrapper {
+        overflow-y: inherit;
+        display: block;
+        height: auto;
+        min-height: 100%;
+        /* margin-top: 0px !important; */
+    }
+    .grid-scroll-wrapper {
+        overflow-y: inherit;
+        margin-bottom: 0;
+        display:block;
+        margin-top: 0;
+    }
     .student-grid-none {
         display:none;
-    }
-    .student-id-cards{
-        border: 1px solid #d94803;
-        width:45%;
-        box-sizing:border-box;
-        margin:0px 15px 20px;
-    }
-    .students-id-card-wrapper {
-        display:block
-    }
-    .group-of-two-students {
-        display:flex;
-        flex-wrap:wrap;
-        overflow-y:hidden;
-        max-height: 100%;
-        max-width: 100%;
-        /*clear:both;*/
-    }
-
-     .students-id-card-wrapper .group-of-two-students:nth-child(2){
-        /*display:block;*/
-        page-break-after: always;
-    }
-    .card-fields-wrapper{
-        display: flex;
-    }
-    .card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
-        font-weight: bold;
-        font-size: 9px;
-    }
-    .card-text-student .card-text-bold {
-        font-size:13px;
-        font-family: 'Roboto Condensed';
-    }
-    .card-text-student .card-student-num {
-        font-size:13px;
-    }
-    .card-fields-wrapper .card-text {
-        z-index:1;
-        flex:1;
-        font-size:9px;
-        margin:4px 0px 10px;
-    }
-    .card-fields-wrapper .card-text-spacing {
-        flex:0.5 0 0;
-        margin:4px 0px 10px;
-    }
-    .student-id-cards-header{
-        text-align: center;
-        font-size: 18px;
-        color: white !important;
-        font-weight: bold;
-        font-family: 'Roboto Condensed';
-        -webkit-print-color-adjust: exact;
-    }
-    .student-id-card-wrapper {
-        background-color: #f9570a !important;
-        color: white !important;
-        font-weight:550;
-        padding: 0px;
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        -webkit-print-color-adjust: exact;
-    }
-    .student-id-cards-footer {
-        background-color: #fa8d19 !important;
-        color: white;
-        padding: 0px 5px;
-        min-height:25px;
-        max-height:100%;
-        display: flex;
-        align-items:center;
-        justify-content: space-between;
-        -webkit-print-color-adjust: exact;
-    }
-    .student-id-cards-footer .card-text {
-        font-size:10px;
-    }
-    .card-heading {
-        background-color: #f4f2f2 !important;
-        color: #565454;
-        padding: 15px;
-        font-size:18px;
-        font-weight:550;
-        -webkit-print-color-adjust: exact;
-    }
-    .image-id-card {
-        width: 40px;
-        margin-top: 2px;
-        margin-right: 10px;
-    }
-    .image-id-card img {
-        max-width:100%;
-    }
-
-    .card-content {
-        padding:5px;
-    }
-    .card-text-content {
-        text-transform: capitalize !important;
-    }
-    .card-content-wrapper::before {
-        content:'';
-        position:absolute;
-        height:100%;
-        width:100%;
-        background-color: rgba(255, 255, 255, 0.69) !important;
-        -webkit-print-color-adjust: exact;
-    }
-    .card-modal-footer {
-        text-align: right;
-        padding: 10px 30px;
-        background-color: #f4f2f2 !important;
-        -webkit-print-color-adjust: exact;
-    }
-    .card-modal-footer .button-close {
-        color:#565454;
-        border-color:#565454;
-        box-shadow:none !important;
-    }
-    .card-modal-footer .button-close:hover {
-        color:#565454;
-        border-color:#565454 !important;
-        box-shadow:none !important;
     }
     .id-card-wrapper {
         display:none !important;
     }
-    .logoutLinkContainer {
-        display:none;
+
+    .students-id-card-wrapper {
+        display:block;
+        overflow: hidden;
+    }
+    .students-id-card-wrapper>div.group-of-two-students {
+        overflow: hidden;
+    }
+    .students-id-card-wrapper>div.group-of-two-students:nth-child(4n){
+        page-break-after: always;
     }
     #header, #nav, .noprint
     {
         display: none;
     }
-    .card-text-bus-stop {
-        height:10px;
-    }
-    .card-flex {
-        display: flex;
-        align-items: center;
+    .logoutLinkContainer {
+        display:none;
     }
 }
 @page {
