@@ -246,7 +246,7 @@ class StudentRegistrationCorrectionForm extends Component {
           <div className={'inputFieldContainer'}>
             <SelectListInputField
               name={'optIn2018'}
-              label={'2018 के शिविर की स्वीकृति ?'}
+              label={'2019 के शिविर की स्वीकृति ?'}
               options={optIn2018Options}
               onInputChange={this._handleInputChange}
               value={this.state.student.optIn2018}
@@ -398,7 +398,12 @@ class StudentRegistrationCorrectionForm extends Component {
       return (
         <div className={'registrationFormContainer'}>
           {this.renderSuccessMessage()}
-          <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
+          <div className = "student-logo-header">
+            <div className= "yjsg-logo">
+              <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+            </div>
+            <h2 className="student-info-heading">{yjsgHeader}</h2>
+          </div>
           <form id='studentCorrectionForm' className="inputFieldContainerWrapper">
             <div className={'inputFieldContainer'}>
               <SelectListInputField

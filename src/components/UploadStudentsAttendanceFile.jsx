@@ -86,7 +86,7 @@ class UploadStudentsAttendanceFile extends Component {
             छात्रों की उपस्तिथि फाइल सफलतापूवक अपलोड कर दी गयी है |
           </div>
           {this.renderFailRecordIds()}
-          <button onClick = {() => { this.closePopup() }} className="padding-7 linkButton display-none">
+          <button onClick = {() => { this.closePopup() }} className="tiny-btn linkButton display-none">
             OK
           </button>
         </div>
@@ -113,7 +113,7 @@ class UploadStudentsAttendanceFile extends Component {
               <div>
                 <div className="padding-20-30">
                   <input type="file" onChange={this.onChange} className="choose-file-wrapper"/>
-                  <button type="submit" className="display-inline padding-7 linkButton float-right">
+                  <button type="submit" className="display-inline linkButton btn-upload">
                     <i className="fa fa-file-text card-icon"/>
                     Upload
                   </button>

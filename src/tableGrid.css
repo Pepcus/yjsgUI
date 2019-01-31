@@ -60,6 +60,9 @@
     min-width:100px;
     max-width:100%;
 }
+.cell__mobile > div.table-cell {
+   font-family: sans-serif;
+}
 .cell__email {
     min-width:200px;
     max-width:100%;

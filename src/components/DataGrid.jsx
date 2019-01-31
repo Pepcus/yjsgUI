@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
@@ -339,7 +340,7 @@ class DataGrid1 extends Component {
     return <Redirect to={'/adminPanel'}/>
   }
   render() {
-    if(this.props.isLoading) {
+    if(this.props.isLoading ) {
       return (
         <div className="loader-wrapper">
           <div className='loader'>

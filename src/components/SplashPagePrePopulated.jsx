@@ -198,14 +198,16 @@ class SplashPage extends Component {
           value={this.state.credentials.secretKey}
         />
         {this.checkRegisteredStudentCredential()}
-        <Button
-          buttonText={viewEditInfoBtnText}
-          onClick={this._fetchStudentById}
-        />
-        <Button
-          buttonText={goBackBtnText}
-          onClick={this._disableEditInfo}
-        />
+        <div className="button-wrapper">
+          <Button
+            buttonText={goBackBtnText}
+            onClick={this._disableEditInfo}
+          />
+          <Button
+            buttonText={viewEditInfoBtnText}
+            onClick={this._fetchStudentById}
+          />
+        </div>
       </div>
     )
   }
@@ -230,14 +232,16 @@ class SplashPage extends Component {
           value={this.state.admin.adminPassword}
         />
         {this.checkAdminCredential()}
-        <Button
-          buttonText={goBackBtnText}
-          onClick={this._disableAdminLogin}
-        />
-        <Button
-          buttonText={loginBtnText}
-          onClick={this._setAdminLogin}
-        />
+        <div className="button-wrapper">
+          <Button
+            buttonText={goBackBtnText}
+            onClick={this._disableAdminLogin}
+          />
+          <Button
+            buttonText={loginBtnText}
+            onClick={this._setAdminLogin}
+          />
+        </div>
       </div>
     );
   }
@@ -270,12 +274,15 @@ class SplashPage extends Component {
 
   render() {
     return (
+    <div className="landing-page-block">
       <div className={'landingPageContainer'}>
-        <h2>{yjsgHeader}</h2>
+        <h2 className="student-heading">{yjsgHeader}</h2>
+      </div>
+      <div className="landing-page-wrapper">
         <div className={'landingPageContent'}>
-          <div className={'yjsgEventInfo'}>
+          <div className={'yjsg-event-info'}>
             <h5 className="primary-color">{eventDate}</h5>
-            <h5>{eventVenue}</h5>
+            <h5 className="header-text">{eventVenue}</h5>
           </div>
           <div className={'landingPageLogo'}>
             <img src={yjsgLogo} alt={'yjsg logo'} />
@@ -285,6 +292,7 @@ class SplashPage extends Component {
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }

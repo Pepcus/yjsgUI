@@ -83,7 +83,7 @@ class UploadOptInFile extends Component {
       return(
         <div className="upload-message-wrapper">
           <div className="success-block">
-            Upload optin file is success
+            छात्रों की optin file सफलतापूवक अपलोड कर दी गयी है|
           </div>
           {this.renderFailOptIn()}
           <button onClick = {() => { this.closePopup() }} className="display-none">OK</button>
