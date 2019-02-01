@@ -70,6 +70,7 @@ class SelectedStudentsActionWrapper extends Component{
             />
             <MarkSelectedStudentAttendance
               selectedStudents={this.props.selectedStudents}
+
             />
             <MarkSelectedStudentsOptInOrOptOut
               selectedStudents={this.props.selectedStudents}

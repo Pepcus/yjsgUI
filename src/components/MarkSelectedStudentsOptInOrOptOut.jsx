@@ -67,7 +67,7 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
       return "popup-buttons-disable";
     }
     else {
-      return "display-inline padding-7 linkButton float-right";
+      return "btn-upload linkButton";
     }
   }
   filterIdsOfStudents(){
@@ -89,8 +89,8 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
   renderMessage(){
     if(this.props.isMarkOptInOrOptOutSuccess){
       return(
-        <div>
-          <label>Update selected students Opt In/Out success</label>
+        <div className="success-block">
+          <span>चयनित छात्रो की optin या optout सफलतापूवर्क अद्यतन कर दी गयी है|</span>
         </div>
       );
     }
@@ -120,35 +120,37 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
           <div className="column-group-wrapper">
             <form onSubmit={this.onFormSubmit}>
               <div className="column-modal">
-              <h1  className="column-modal-container">Update Selected Students Opt In or Opt Out</h1>
+              <h1  className="column-modal-container">कृपिया चयनित छात्रो की optin या optout अद्यतन करे </h1>
               </div>
-              <div>
-                <label>Selected Students Id: </label>
-                {
-                  this.state.studentsId.map(student =>
-                    <span className='selected-students-Id'>{student}</span>)
-                }
-              </div>
-              <div className = "advance-input-radio">
-                <div className="input-radio-container">
-                  <input type="radio" name="OptInOrOptOut" value="Y" onClick={this.onClickRadioButton} />
-                  <label htmlFor = "Opt-In">Opt In</label>
+              <div className="column-content-modal">
+                <div className="selected-student-heading">
+                  <span>Selected Students Id: </span>
+                  {
+                    this.state.studentsId.map(student =>
+                      <span className='selected-students-Id'>{student}</span>)
+                  }
                 </div>
-                <div className="input-radio-container">
-                  <input type="radio" name="OptInOrOptOut" value="N" onClick={this.onClickRadioButton} />
-                  <label htmlFor="Opt-Out">Opt Out</label>
+                <div className = "advance-input-radio">
+                  <div className="input-radio-container">
+                    <input type="radio" name="OptInOrOptOut" value="Y" onClick={this.onClickRadioButton} />
+                    <label htmlFor = "Opt-In">Opt In</label>
+                  </div>
+                  <div className="input-radio-container">
+                    <input type="radio" name="OptInOrOptOut" value="N" onClick={this.onClickRadioButton} />
+                    <label htmlFor="Opt-Out">Opt Out</label>
+                  </div>
+                </div>
+                {this.renderMessage()}
+              </div>
+              <div className="modal-save-container">
+                <div className="save-button-wrapper">
+                  <button className="button-modal button-close"
+                          onClick={this.closeMarkSelectedStudentsOptInOrOptOutModal}>Close
+                  </button>
+                  <button className={this.renderSubmitButtonClassName()} type="submit">Submit</button>
                 </div>
               </div>
-              <button className={this.renderSubmitButtonClassName()} type="submit">Submit</button>
-              {this.renderMessage()}
             </form>
-            <div className="modal-save-container">
-              <div className="save-button-wrapper">
-                <button className="button-modal button-close"
-                        onClick={this.closeMarkSelectedStudentsOptInOrOptOutModal}>Close
-                </button>
-              </div>
-            </div>
           </div>
         </Modal>
       );
@@ -158,7 +160,8 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
     return (
       <div className="buttonContainer">
         <button className={this.renderMarkOptInOrOutClassName()} onClick={this.openMarkSelectedStudentsOptInOrOptOutModal}>
-          <i className="fa fa-user card-icon"/>Mark Opt In/Out
+          <i className="fa fa-info-circle card-icon"/>
+          Mark Opt In / Out
         </button>
         {this.renderMarkSelectedStudentsOptInOrOptOutModal()}
       </div>

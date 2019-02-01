@@ -91,14 +91,14 @@ class MarkSelectedStudentAttendance extends Component {
       return "popup-buttons-disable";
     }
     else {
-      return "display-inline padding-7 linkButton float-right";
+      return "btn-upload linkButton";
     }
   }
   renderMessage(){
     if(this.props.isMarkAttendanceSuccess ){
       return(
-        <div>
-          <label>Mark selected students attendance success</label>
+        <div className="success-block">
+          <span>चयनित छात्रो की उपस्तिथि सफलतापूवर्क दर्ज कर दी गयी है |</span>
         </div>
       );
     }
@@ -144,30 +144,35 @@ class MarkSelectedStudentAttendance extends Component {
           <div className="column-group-wrapper">
             <form onSubmit={this.onFormSubmit}>
               <div className="column-modal">
-              <h1  className="column-modal-container">Mark Selected Students Attendance</h1>
+              <h1  className="column-modal-container">कृपिया चयनित छात्रो की उपस्तिथि दर्ज करे </h1>
               </div>
-              <div>
-                <label>Selected Students Id: </label>
-                {
-                  this.state.studentsId.map(student =>
-                    <span className='selected-students-Id'>{student}</span>)
-                }
+              <div className="column-content-modal column-wrapper">
+                <div className="selected-student-heading">
+                  <span>Selected Students Id:</span>
+                  {
+                    this.state.studentsId.map(student =>
+                      <span className='selected-students-Id'>{student}</span>)
+                  }
+                </div>
+                <div className="column-content-student-wrapper">
+                  <span className="column-content-students">Select Day:</span>
+                  <select onChange={this.handleSelectChange} value={this.state.selectedDay["day"]} className="selected-day-list">
+                    <option selected="true" hidden="true" disabled="disabled" value=''/>
+                    {this.addOptions()}
+                  </select>
+                </div>
+                {this.renderMessage()}
               </div>
-              <label>Select Day:</label>
-              <select onChange={this.handleSelectChange} value={this.state.selectedDay["day"]}>
-                <option selected="true" hidden="true" disabled="disabled" value=''/>
-                {this.addOptions()}
-              </select>
-              <button className={this.renderMarkButtonClassName()} type="submit">Submit</button>
-              {this.renderMessage()}
+              <div className="modal-save-container">
+                <div className="save-button-wrapper">
+                  <button className="button-modal button-close"
+                          onClick={this.closeMarkSelectedStudentsAttendanceModal}>Close
+                  </button>
+                  <button className={this.renderMarkButtonClassName()} type="submit">Submit</button>
+                </div>
+              </div>
             </form>
-            <div className="modal-save-container">
-              <div className="save-button-wrapper">
-                <button className="button-modal button-close"
-                        onClick={this.closeMarkSelectedStudentsAttendanceModal}>Close
-                </button>
-              </div>
-            </div>
+
           </div>
         </Modal>
       );
