@@ -109,6 +109,7 @@ class StudentIdCardModal extends Component {
       );
     }
   }
+
   render() {
     return(
       <div>{this.renderStudentIdCards(this.props.selectedStudents)}</div>

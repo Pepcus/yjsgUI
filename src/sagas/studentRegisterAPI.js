@@ -1,4 +1,4 @@
-import { PUT, POST, GET, PATCH } from '../utils/http';
+import { PUT, POST, GET, PATCH, } from '../utils/http';
 import {
   formatUpdateStudentDataPayload,
   formatCreateStudentDataPayload,
@@ -51,23 +51,58 @@ export const getAllStudentsAPI = (secretKey) =>
     },
   });
 
-export const uploadAttendanceAPI = (secretKey, attendanceFile) =>
-  PATCH({
+export const uploadAttendanceAPI = (secretKey, attendanceFile) => {
+  const file = new FormData();
+  file.append('file', attendanceFile);
+  return(
+    PATCH({
     url: `v1/students/bulk-attendance`,
     headers: {
       'secretKey': secretKey,
     },
-    body: attendanceFile,
-  });
+    body: file,
+  }));
+};
 
-export const uploadOptInAPI = (secretKey, optInFile) =>
-  PATCH({
+export const uploadOptInAPI = (secretKey, optInFile) => {
+  const file = new FormData();
+  file.append('file', optInFile);
+  return (
+    PATCH({
     url: `v1/students/bulk-optin`,
     headers: {
       'secretKey': secretKey,
     },
-    body: optInFile,
+    body: file,
+  }));
+};
+
+export const markSelectedStudentsAttendanceAPI = (secretKey, selectedStudentsId, day) =>
+  PUT({
+    url: `v1/students/attendance?id=${selectedStudentsId}`,
+    headers: {
+      'Content-type': 'application/json',
+      'secretKey': secretKey,
+    },
+    body: day,
   });
 
+export const markSelectedStudentsOptInOrOptOutAPI = (secretKey, selectedStudentsId, opt) =>
+  PATCH({
+    url: `v1/students/optin?id=${selectedStudentsId}`,
+    headers: {
+      'Content-type': 'application/json',
+      'secretKey': secretKey,
+    },
+    body: JSON.stringify(opt),
+  });
 
-
+export const updateIdCardStatusSelectedStudentsAPI = (secretKey, selectedStudentsId, IdCardStatus) =>
+  PATCH({
+    url: `v1/students/reprint?id=${selectedStudentsId}`,
+    headers: {
+      'Content-type': 'application/json',
+      'secretKey': secretKey,
+    },
+    body: JSON.stringify(IdCardStatus),
+  });

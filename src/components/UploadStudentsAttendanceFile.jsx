@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { uploadStudentsAttendanceFileAction, resetIsSuccessAction } from '../actions/studentRegistrationActions';
 import { connect } from 'react-redux';
 import { getSecretKey, getSuccess, getFailRecordIds } from '../reducers/studentRegistrationReducer';
-const customColumnOptionStyles = {
+const customUploadStudentsAttendanceFileModalStyles = {
   overlay: {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)'
@@ -31,25 +31,28 @@ class UploadStudentsAttendanceFile extends Component {
     super(props);
     this.state = {
       attendanceFile: null,
-      UploadStudentsAttendanceFileOptionIsOption: false,
+      isUploadStudentsAttendanceFileModal: false,
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
-    this.closePopup = this.closePopup.bind(this);
     this.renderFailRecordIds = this.renderFailRecordIds.bind(this);
-    this.optionUploadStudentsAttendanceFileOption = this.optionUploadStudentsAttendanceFileOption.bind(this);
+    this.openUploadStudentsAttendanceFileOption = this.openUploadStudentsAttendanceFileOption.bind(this);
     this.closeUploadStudentsAttendanceFileOption = this.closeUploadStudentsAttendanceFileOption.bind(this);
     this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
+    this.renderUploadButtonClassName = this.renderUploadButtonClassName.bind(this);
   }
 
-  optionUploadStudentsAttendanceFileOption() {
-    this.setState({UploadStudentsAttendanceFileOptionIsOption: true});
+  openUploadStudentsAttendanceFileOption() {
+    this.setState({isUploadStudentsAttendanceFileModal: true});
   }
   closeUploadStudentsAttendanceFileOption() {
-    this.setState({UploadStudentsAttendanceFileOptionIsOption: false});
+    this.setState({isUploadStudentsAttendanceFileModal: false});
     this.props.resetIsSuccessAction();
+    this.setState({
+      attendanceFile: null,
+    });
   }
 
   onFormSubmit(e) {
@@ -64,12 +67,8 @@ class UploadStudentsAttendanceFile extends Component {
   fileUpload(attendanceFile) {
     this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile);
   }
-  closePopup(){
-    this.props.resetIsSuccessAction();
-    this.closeUploadStudentsAttendanceFileOption();
-  }
   renderFailRecordIds(){
-    if(this.props.failRecordIds){
+    if(this.props.failRecordIds ){
       return(
         <div className="failure-block">
         Failed Records are:
@@ -77,43 +76,48 @@ class UploadStudentsAttendanceFile extends Component {
       </div>);
     }
   }
+  renderUploadButtonClassName(){
+    if(!this.state.attendanceFile) {
+      return "popup-buttons-disable";
+    }
+    else {
+      return "display-inline padding-7 linkButton float-right";
+    }
+  }
   renderMessage(){
-    if(this.props.isSuccess){
+    if(this.props.isSuccess ){
       return(
         <div className="upload-message-wrapper">
           <div className="success-block">
             {/*Upload students attendance file is success*/}
-            छात्रों की उपस्तिथि फाइल सफलतापूवक अपलोड कर दी गयी है |
+            छात्रों की उपस्तिथि फाइल सफलतापूवक अपलोड कर दी गयी है|
           </div>
           {this.renderFailRecordIds()}
-          <button onClick = {() => { this.closePopup() }} className="tiny-btn linkButton display-none">
-            OK
-          </button>
         </div>
       );
     }
   }
   renderUploadStudentsAttendanceOption() {
-    if (this.state.UploadStudentsAttendanceFileOptionIsOption) {
+    if (this.state.isUploadStudentsAttendanceFileModal) {
       return (
         <Modal
-          isOpen={this.state.UploadStudentsAttendanceFileOptionIsOption}
+          isOpen={this.state.isUploadStudentsAttendanceFileModal}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeUploadStudentsAttendanceFileOption}
-          style={customColumnOptionStyles}
+          style={customUploadStudentsAttendanceFileModalStyles}
           contentLabel="Column Options"
           overlayLabel="Overlay Options"
           className="custom-modal"
         >
           <div className="column-group-wrapper">
             <div className="column-modal">
-              <h1 className="column-modal-container">कृपिया फाइल को अपलोड करे </h1>
+              <h1 className="column-modal-container">कृपिया फाइल को अपलोड करे</h1>
             </div>
             <form onSubmit={this.onFormSubmit} className="upload-form-wrapper">
               <div>
                 <div className="padding-20-30">
                   <input type="file" onChange={this.onChange} className="choose-file-wrapper"/>
-                  <button type="submit" className="display-inline linkButton btn-upload">
+                  <button type="submit" className={this.renderUploadButtonClassName()}>
                     <i className="fa fa-file-text card-icon"/>
                     Upload
                   </button>
@@ -137,7 +141,7 @@ class UploadStudentsAttendanceFile extends Component {
   render() {
     return (
       <div className="display-inline mar-right-10">
-      <button className="column-option-container" onClick={this.optionUploadStudentsAttendanceFileOption}>
+      <button className="column-option-container" onClick={this.openUploadStudentsAttendanceFileOption}>
         Upload Attendance
       </button>
         {this.renderUploadStudentsAttendanceOption()}
