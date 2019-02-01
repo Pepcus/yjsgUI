@@ -26,7 +26,7 @@ module.exports = {
     ],
     react: {
       pragma: 'React',
-      version: '16.0',
+      version: '15.0',
     },
     'import/extensions': [
       '.js',
