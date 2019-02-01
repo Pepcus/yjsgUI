@@ -68,7 +68,7 @@ class UploadStudentsAttendanceFile extends Component {
     this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile);
   }
   renderFailRecordIds(){
-    if(this.props.failRecordIds ){
+    if(this.props.failRecordIds){
       return(
         <div className="failure-block">
         Failed Records are:
@@ -85,7 +85,7 @@ class UploadStudentsAttendanceFile extends Component {
     }
   }
   renderMessage(){
-    if(this.props.isSuccess ){
+    if(this.props.isSuccess){
       return(
         <div className="upload-message-wrapper">
           <div className="success-block">

@@ -75,7 +75,7 @@ class UploadOptInFile extends Component {
     this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
   }
   renderFailOptIn(){
-    if(this.props.failOptIn ){
+    if(this.props.failOptIn){
       return(
         <div className="failure-block">
           Failed Records are:
@@ -85,7 +85,7 @@ class UploadOptInFile extends Component {
     }
   }
   renderMessage(){
-    if(this.props.isOptInSuccess ){
+    if(this.props.isOptInSuccess){
       return(
         <div className="upload-message-wrapper">
           <div className="success-block">

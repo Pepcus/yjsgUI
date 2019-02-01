@@ -1,4 +1,4 @@
-import { PUT, POST, GET, PATCH, } from '../utils/http';
+import { PUT, POST, GET, PATCH } from '../utils/http';
 import {
   formatUpdateStudentDataPayload,
   formatCreateStudentDataPayload,

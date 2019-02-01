@@ -65,18 +65,13 @@ class SelectedStudentsActionWrapper extends Component{
                 <i className="fa fa-print card-icon"/>Print Now
               </button>
             </div>
-            <div className="buttonContainer">
-              <button className={this.renderPrintNowClassName()}>
-                <i className="fa fa-print card-icon"/>Print Later
-              </button>
-            </div>
+            <UpdateIdCardStatusSelectedStudents
+              selectedStudents={this.props.selectedStudents}
+            />
             <MarkSelectedStudentAttendance
               selectedStudents={this.props.selectedStudents}
             />
             <MarkSelectedStudentsOptInOrOptOut
-              selectedStudents={this.props.selectedStudents}
-            />
-            <UpdateIdCardStatusSelectedStudents
               selectedStudents={this.props.selectedStudents}
             />
           </div>

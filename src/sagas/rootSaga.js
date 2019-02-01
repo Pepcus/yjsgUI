@@ -1,5 +1,4 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import isEmpty from 'lodash/isEmpty';
 
 import {
   createStudent,
@@ -135,7 +134,7 @@ export function* uploadAttendanceFileSaga(action) {
   const errorMessage = 'Error occurred while uploading attendance file.';
   try{
     const response = yield uploadAttendanceAPI(secretKey, attendanceFile);
-    if(!isEmpty(response["totalRecords"])){
+    if(response["totalRecords"]){
       yield put(uploadAttendanceFileResultsSuccessAction(response));
     } else {
       yield put(uploadAttendanceFileResultsFailureAction(errorMessage));

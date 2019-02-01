@@ -9,7 +9,6 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-//import MarkSelectedStudentAttendance from './MarkSelectedStudentAttendance';
 import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey, } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
@@ -279,14 +278,13 @@ class DataGrid1 extends Component {
     }
     return null;
   }
-  EditButton = ({ rowData }) => {
-      return(
+  EditButton = ({ rowData }) => (
     <div className = "btn-block">
       <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
         <i className="fa fa-edit"/>Edit
       </button>
     </div>
-  );}
+  );
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
@@ -408,7 +406,6 @@ class DataGrid1 extends Component {
                   formattedStudent = {this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
-                  {/*<MarkSelectedStudentAttendance/>*/}
                   <UploadOptInFile/>
                   <UploadStudentsAttendanceFile/>
                   <div className="column-option-configure display-inline">
