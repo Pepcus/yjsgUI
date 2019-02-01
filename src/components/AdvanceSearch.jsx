@@ -15,8 +15,20 @@ class AdvanceSearch extends Component {
     this.setInputValue = this.setInputValue.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
     this.onClickMultipleIdSearchRadioButton = this.onClickMultipleIdSearchRadioButton.bind(this);
+    this.unCheckDeepSearch = this.unCheckDeepSearch.bind(this);
+    this.unCheckMultiIdSearch = this.unCheckMultiIdSearch.bind(this);
   }
 
+  unCheckMultiIdSearch(){
+    if(!this.state.isMultipleIdSearch){
+      return "";
+    }
+  }
+  unCheckDeepSearch(){
+    if(this.state.isMultipleIdSearch || (this.state.thresholdValue !== '0.6') && (this.state.thresholdValue === '0.0')){
+      return "";
+    }
+  }
   setInputValue(e){
     if(isEmpty(e.target.value)){
       this.props.onFilter(this.props.formattedStudent(this.props.students));
@@ -37,17 +49,29 @@ class AdvanceSearch extends Component {
     });
     this.props.onFilter(this.props.formattedStudent(this.props.students));
   }
-
   onClickRadioButton(e) {
-    this.setState({
-      thresholdValue: e.target.value,
-      isMultipleIdSearch: false,
-    });
+    if(e.target.checked) {
+      this.setState({
+        thresholdValue: e.target.value,
+        isMultipleIdSearch: false,
+      });
+    }else{
+      this.setState({
+        thresholdValue: '0.0',
+      });
+    }
   }
-  onClickMultipleIdSearchRadioButton(){
-    this.setState({
-      isMultipleIdSearch: true,
-    });
+  onClickMultipleIdSearchRadioButton(e){
+    if(e.target.checked) {
+      this.setState({
+        isMultipleIdSearch: true,
+        thresholdValue: '0.0',
+      });
+    }else {
+      this.setState({
+        isMultipleIdSearch: false,
+      });
+    }
   }
   advanceSearch(e) {
     e.preventDefault();
@@ -92,20 +116,20 @@ class AdvanceSearch extends Component {
               <i className="fa fa-search"/>
             </button>
           </label>
-          <button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button display-none">
+          {/*<button type="reset" value="Reset" onClick={this.clearFilter} className = "advance-search-button display-none">
             <i className="fa fa-trash card-icon"/>Clear
-          </button>
+          </button>*/}
           <div className = "advance-input-radio">
-            <div className="input-radio-container display-none">
-              <input type="radio" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
+           {/* <div className="input-radio-container display-none">
+              <input type="checkbox" name="thresholdValue" value="0.0" onClick={this.onClickRadioButton}  defaultChecked />
               <label htmlFor = "normal_search">Normal Search</label>
-            </div>
+            </div>*/}
             <div className="input-radio-container">
-              <input type="radio" name="thresholdValue" value="0.6" onClick={this.onClickRadioButton} />
+              <input type="checkbox" name="thresholdValue" value="0.6" onChange={this.onClickRadioButton} checked={this.unCheckDeepSearch()} />
               <label htmlFor="deep_search">Deep Search</label>
             </div>
             <div className="input-radio-container">
-              <input type="radio" name="thresholdValue" value={this.state.isMultipleIdSearch} onClick={this.onClickMultipleIdSearchRadioButton} />
+              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearch} onChange={this.onClickMultipleIdSearchRadioButton} checked={this.unCheckMultiIdSearch()} />
               <label htmlFor="deep_search">Multiple ID Search</label>
             </div>
           </div>
