@@ -9,6 +9,7 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
+//import MarkSelectedStudentAttendance from './MarkSelectedStudentAttendance';
 import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey, } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
@@ -255,7 +256,11 @@ class DataGrid1 extends Component {
     return {...this.state.metaData, headerConfig: metaData};
   };
   handleEditClick(rowData) {
-    const newRowData = {...rowData, id:rowData.studentId};
+    const newRowData = {...rowData, id:rowData.studentId, age: String(rowData.age),
+      mobile: String(rowData.mobile), attendance2016: String(rowData.attendance2016),
+      attendance2017: String(rowData.attendance2017), classRoomNo2016: String(rowData.classRoomNo2016),
+      classRoomNo2017: String(rowData.classRoomNo2017), marks2016: String(rowData.marks2016),
+      marks2017: String(rowData.marks2016)};
     if (!isEmpty(rowData)) {
       this.props.setStudentDataAction(newRowData);
       //this.props.fetchStudentData(rowData.studentId, adminPassword);
@@ -274,13 +279,14 @@ class DataGrid1 extends Component {
     }
     return null;
   }
-  EditButton = ({ rowData }) => (
+  EditButton = ({ rowData }) => {
+      return(
     <div className = "btn-block">
       <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
         <i className="fa fa-edit"/>Edit
       </button>
     </div>
-  );
+  );}
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
       this.setState({
@@ -402,6 +408,7 @@ class DataGrid1 extends Component {
                   formattedStudent = {this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
+                  {/*<MarkSelectedStudentAttendance/>*/}
                   <UploadOptInFile/>
                   <UploadStudentsAttendanceFile/>
                   <div className="column-option-configure display-inline">

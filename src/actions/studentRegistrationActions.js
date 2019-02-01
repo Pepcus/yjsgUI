@@ -171,12 +171,10 @@ export const uploadOptInFileAction = (secretKey, optInFile) => ({
   optInFile,
 });
 
-export const uploadOptInFileResultsSuccessAction = response => {
-  return ({
+export const uploadOptInFileResultsSuccessAction = response => ({
     type: 'UPLOAD_OPT_IN_FILE_SUCCESS',
     failRecordIds: response.failRecordIds,
   });
-};
 
 export const uploadOptInFileResultsFailureAction = message => ({
   type: 'UPLOAD_OPT_IN_FILE_FAILED',
@@ -185,4 +183,64 @@ export const uploadOptInFileResultsFailureAction = message => ({
 
 export const resetIsOptInSuccessAction = () => ({
   type: 'RESET_IS_OPT_IN_SUCCESS',
+});
+
+export const markSelectedStudentsAttendanceAction = (secretKey, selectedStudentsId, day) => ({
+  type: 'MARK_SELECTED_STUDENTS_ATTENDANCE',
+  secretKey,
+  selectedStudentsId,
+  day,
+});
+
+export const markSelectedStudentsAttendanceResultsSuccessAction = response => ({
+  type: 'MARK_SELECTED_STUDENTS_ATTENDANCE_SUCCESS',
+});
+
+export const markSelectedStudentsAttendanceResultsFailureAction = message => ({
+  type: 'MARK_SELECTED_STUDENTS_ATTENDANCE_FAILED',
+  message,
+});
+
+export const resetIsMarkAttendanceSuccessAction = () => ({
+  type: 'RESET_IS_MARK_ATTENDANCE_SUCCESS',
+});
+
+export const markSelectedStudentsOptInOrOptOutAction = (secretKey, selectedStudentsId, opt) => ({
+  type: 'MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT',
+  secretKey,
+  selectedStudentsId,
+  opt,
+});
+
+export const markSelectedStudentsOptInOrOptOutResultsSuccessAction = response => ({
+  type: 'MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT_SUCCESS',
+});
+
+export const markSelectedStudentsOptInOrOptOutResultsFailureAction = message => ({
+  type: 'MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT_FAILED',
+  message,
+});
+
+export const resetIsMarkOptInOrOptOutSuccessAction = () => ({
+  type: 'RESET_IS_MARK_OPT_IN_OR_OPT_OUT_SUCCESS',
+});
+
+export const updateIdCardStatusSelectedStudentsAction = (secretKey, selectedStudentsId, IdCardStatus) => ({
+  type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS',
+  secretKey,
+  selectedStudentsId,
+  IdCardStatus,
+});
+
+export const updateIdCardStatusSelectedStudentsResultsSuccessAction = response => ({
+  type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS_SUCCESS',
+});
+
+export const updateIdCardStatusSelectedStudentsResultsFailureAction = message => ({
+  type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS_FAILED',
+  message,
+});
+
+export const resetIsUpdateIdCardStatusSuccessAction = () => ({
+  type: 'RESET_IS_UPDATE_ID_CARD_STATUS_SUCCESS',
 });

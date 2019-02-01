@@ -1507,6 +1507,25 @@ body,
 .float-right {
     float:right;
 }
+.popup-buttons-disable {
+    background-color: #dfe1e3;
+    color: #cac6c6;
+    outline: none;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+    border: none;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    float: right;
+    display: inline-block;
+    border-radius: 4px;
+}
+.selected-students-Id {
+    padding: 5px;
+}
 .upload-message-wrapper {
     margin:30px 0px 0px;
     /*border: 1px solid #d1d0d0;*/
