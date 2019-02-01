@@ -9,26 +9,16 @@ class AdvanceSearch extends Component {
       thresholdValue: '0.0',
       inputValue:'',
       isMultipleIdSearch: false,
+      isMultipleIdSearchCheck: false,
+      isDeepSearchCheck: false,
     };
     this.advanceSearch = this.advanceSearch.bind(this);
-    this.onClickRadioButton = this.onClickRadioButton.bind(this);
+    this.onChangeDeepSearchCheckBox = this.onChangeDeepSearchCheckBox.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
-    this.onClickMultipleIdSearchRadioButton = this.onClickMultipleIdSearchRadioButton.bind(this);
-    this.unCheckDeepSearch = this.unCheckDeepSearch.bind(this);
-    this.unCheckMultiIdSearch = this.unCheckMultiIdSearch.bind(this);
+    this.onChangeMultipleIdSearchCheckBox = this.onChangeMultipleIdSearchCheckBox.bind(this);
   }
 
-  unCheckMultiIdSearch(){
-    if(!this.state.isMultipleIdSearch){
-      return "";
-    }
-  }
-  unCheckDeepSearch(){
-    if(this.state.isMultipleIdSearch || (this.state.thresholdValue !== '0.6') && (this.state.thresholdValue === '0.0')){
-      return "";
-    }
-  }
   setInputValue(e){
     if(isEmpty(e.target.value)){
       this.props.onFilter(this.props.formattedStudent(this.props.students));
@@ -49,27 +39,33 @@ class AdvanceSearch extends Component {
     });
     this.props.onFilter(this.props.formattedStudent(this.props.students));
   }
-  onClickRadioButton(e) {
+  onChangeDeepSearchCheckBox(e) {
     if(e.target.checked) {
       this.setState({
         thresholdValue: e.target.value,
         isMultipleIdSearch: false,
+        isDeepSearchCheck: true,
+        isMultipleIdSearchCheck: false,
       });
     }else{
       this.setState({
         thresholdValue: '0.0',
+        isDeepSearchCheck: false,
       });
     }
   }
-  onClickMultipleIdSearchRadioButton(e){
+  onChangeMultipleIdSearchCheckBox(e){
     if(e.target.checked) {
       this.setState({
         isMultipleIdSearch: true,
         thresholdValue: '0.0',
+        isDeepSearchCheck: false,
+        isMultipleIdSearchCheck: true,
       });
     }else {
       this.setState({
         isMultipleIdSearch: false,
+        isMultipleIdSearchCheck: false,
       });
     }
   }
@@ -125,11 +121,11 @@ class AdvanceSearch extends Component {
               <label htmlFor = "normal_search">Normal Search</label>
             </div>*/}
             <div className="input-radio-container">
-              <input type="checkbox" name="thresholdValue" value="0.6" onChange={this.onClickRadioButton} checked={this.unCheckDeepSearch()} />
+              <input type="checkbox" name="thresholdValue" value="0.6" onChange={this.onChangeDeepSearchCheckBox} checked={this.state.isDeepSearchCheck} />
               <label htmlFor="deep_search">Deep Search</label>
             </div>
             <div className="input-radio-container">
-              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearch} onChange={this.onClickMultipleIdSearchRadioButton} checked={this.unCheckMultiIdSearch()} />
+              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearch} onChange={this.onChangeMultipleIdSearchCheckBox} checked={this.state.isMultipleIdSearchCheck} />
               <label htmlFor="deep_search">Multiple ID Search</label>
             </div>
           </div>
