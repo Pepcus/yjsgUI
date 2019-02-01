@@ -114,8 +114,8 @@ module.exports = {
     // Enforce event handler naming conventions in JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md
     'react/jsx-handler-names': ['off', {
-     eventHandlerPrefix: 'handle',
-     eventHandlerPropPrefix: 'on',
+      eventHandlerPrefix: 'handle',
+      eventHandlerPropPrefix: 'on',
     }],
 
     // Validate props indentation in JSX
@@ -133,10 +133,10 @@ module.exports = {
     // Prevent usage of .bind() in JSX props
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md
     'react/jsx-no-bind': ['warn', {
-       ignoreRefs: true,
-       allowArrowFunctions: true,
-       allowBind: false,
-      }
+      ignoreRefs: true,
+      allowArrowFunctions: true,
+      allowBind: false,
+    }
     ],
 
     // Prevent duplicate props in JSX
@@ -154,8 +154,8 @@ module.exports = {
     // Enforce PascalCase for user-defined JSX components
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md
     'react/jsx-pascal-case': ['error', {
-       allowAllCaps: true,
-       ignore: [],
+      allowAllCaps: true,
+      ignore: [],
     }],
 
     // Enforce propTypes declarations alphabetical sorting

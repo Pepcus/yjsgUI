@@ -21,4 +21,4 @@ swift:
 
 eslint:
   enabled: true
-  config_file: .hound_eslintrc
+  config_file: .eslintrc
