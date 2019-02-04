@@ -102,4 +102,7 @@
     .btn-block input[type = "checkbox"] {
         width:25px;
     }
+    .cell__edit {
+        max-width: 52px;
+    }
 }

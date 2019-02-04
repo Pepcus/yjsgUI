@@ -1633,6 +1633,15 @@ body,
     .display-logout-desktop {
         display: block;
     }
+    .cell__edit {
+        max-width: 52px;
+    }
+    .btn-block .btn-grid {
+        padding:4px 8px;
+    }
+    .btn-grid .fa-edit {
+        margin-right: 0px;
+    }
     .logoutButtonContainer {
         position: absolute;
         top: 66px;

@@ -279,11 +279,19 @@ class DataGrid1 extends Component {
     return null;
   }
   EditButton = ({ rowData }) => (
-      <div className = "btn-block">
+    <div>
+      <div className = "btn-block display-mobile-none">
         <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
           <i className="fa fa-edit"/>Edit
         </button>
       </div>
+      <div className = "btn-block display-logout-desktop">
+        <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
+          <i className="fa fa-edit"/>
+        </button>
+      </div>
+    </div>
+
   );
   componentWillReceiveProps(nextProps){
     if(nextProps.students !== this.props.students) {
