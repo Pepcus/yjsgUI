@@ -8,7 +8,6 @@ class AdvanceSearch extends Component {
     this.state = {
       thresholdValue: '0.0',
       inputValue:'',
-      isMultipleIdSearch: false,
       isMultipleIdSearchCheck: false,
       isDeepSearchCheck: false,
     };
@@ -35,7 +34,7 @@ class AdvanceSearch extends Component {
     }
     this.setState({
       thresholdValue: '0.0',
-      isMultipleIdSearch: false,
+      isMultipleIdSearchCheck: false,
     });
     this.props.onFilter(this.props.formattedStudent(this.props.students));
   }
@@ -43,7 +42,6 @@ class AdvanceSearch extends Component {
     if(e.target.checked) {
       this.setState({
         thresholdValue: e.target.value,
-        isMultipleIdSearch: false,
         isDeepSearchCheck: true,
         isMultipleIdSearchCheck: false,
       });
@@ -57,21 +55,19 @@ class AdvanceSearch extends Component {
   onChangeMultipleIdSearchCheckBox(e){
     if(e.target.checked) {
       this.setState({
-        isMultipleIdSearch: true,
         thresholdValue: '0.0',
         isDeepSearchCheck: false,
         isMultipleIdSearchCheck: true,
       });
     }else {
       this.setState({
-        isMultipleIdSearch: false,
         isMultipleIdSearchCheck: false,
       });
     }
   }
   advanceSearch(e) {
     e.preventDefault();
-    if (!this.state.isMultipleIdSearch) {
+    if (!this.state.isMultipleIdSearchCheck) {
       const foundKeys = this.props.metaData.headerConfig.map((object) => {
           return object.key;
         }
@@ -125,7 +121,7 @@ class AdvanceSearch extends Component {
               <label htmlFor="deep_search">Deep Search</label>
             </div>
             <div className="input-radio-container">
-              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearch} onChange={this.onChangeMultipleIdSearchCheckBox} checked={this.state.isMultipleIdSearchCheck} />
+              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearchCheck} onChange={this.onChangeMultipleIdSearchCheckBox} checked={this.state.isMultipleIdSearchCheck} />
               <label htmlFor="deep_search">Multiple ID Search</label>
             </div>
           </div>
