@@ -119,7 +119,7 @@ class SplashPage extends Component {
             </div>
           );
         } else {
-          //localStorage['isAdminLogin']= true;
+          this.props.setAdminLoginStateAction(true);
           return <Switch><Redirect to={'/student-search'}/></Switch>
         }
       }
@@ -149,7 +149,6 @@ class SplashPage extends Component {
       adminLoginState: true,
       adminCredentialErrorMessage: true
     });
-    this.props.setAdminLoginStateAction(true);
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 

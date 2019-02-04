@@ -135,7 +135,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
   submitStudentData(e) {
     e.preventDefault();
-    if (String(this.state.student.optIn2018) !== '1') {
+    if (String(this.state.student.optIn2018) !== 1) {
       this.setState({
         isSubmitTriggered: true,
       });
