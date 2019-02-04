@@ -34,16 +34,15 @@ import {
   goBackBtnText,
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
-  viewEditInfoBtnText,
+  //viewEditInfoBtnText,
   loginBtnText,
   adminLoginBtnText,
   invalidAdminMsg,
-  invalidIdMessage,
+  //invalidIdMessage,
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
 import { setRedirect } from './DataGrid';
-
 import Context from "./coreComponents/ConfigProvider";
 
 class SplashPage extends Component {
@@ -66,10 +65,10 @@ class SplashPage extends Component {
     this._enableAdminLogin = this.enableAdminLogin.bind(this);
     this._disableAdminLogin = this.disableAdminLogin.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
-    this._fetchStudentById = this.fetchStudentById.bind(this);
+    //this._fetchStudentById = this.fetchStudentById.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
     this.checkAdminCredential = this.checkAdminCredential.bind(this);
-    this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
+   // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
   }
 
   componentWillMount() {
@@ -135,7 +134,7 @@ class SplashPage extends Component {
       return <Switch><Redirect to={'/student-search'}/></Switch>
       }
       }
-  checkRegisteredStudentCredential() {
+ /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
         return (
@@ -152,7 +151,7 @@ class SplashPage extends Component {
       }
     }
       return null;
-  }
+  }*/
   setAdminLogin() {
     this.setState({
       adminLoginState: true,
@@ -161,7 +160,7 @@ class SplashPage extends Component {
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 
-  fetchStudentById () {
+ /* fetchStudentById () {
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.props.fetchStudentData(this.state.credentials.studentId,
@@ -169,7 +168,7 @@ class SplashPage extends Component {
     this.setState({
       registeredStudentCredentialErrorMessage: true,
     });
-  };
+  };*/
 
   handleInputChange(value, name) {
     let updatedData = extend(cloneDeep(this.state.credentials),
@@ -186,7 +185,7 @@ class SplashPage extends Component {
     });
   }
 
-  renderRegistrationCorrectionFields() {
+  /*renderRegistrationCorrectionFields() {
     return (
       <div>
         <div className = "form-input-wrapper">
@@ -220,8 +219,7 @@ class SplashPage extends Component {
           </div>
       </div>
     )
-  }
-
+  }*/
   renderAdminLoginFields() {
     return (
       <div>
@@ -260,7 +258,7 @@ class SplashPage extends Component {
 
   renderLoginField() {
     if (this.state.isCorrection) {
-      return this.renderRegistrationCorrectionFields();
+      return <Switch><Redirect to={'/student-login'} /></Switch>
     } else if (this.state.isAdmin) {
       return this.renderAdminLoginFields();
     }
@@ -309,7 +307,6 @@ class SplashPage extends Component {
             </div>
           </div>
         </div>
-
       );
   }
 }

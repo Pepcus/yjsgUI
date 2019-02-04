@@ -26,7 +26,6 @@ import {
 } from '../utils/registrationFormUtils';
 import { yjsgHeader } from '../utils/yjsgConstants';
 import SelectListInputField from './formComponents/SelectListInputField';
-import Button from './commonComponents/Button';
 import {
   getNewStudent,
   isCreated,
@@ -132,7 +131,7 @@ class StudentRegistrationForm extends Component {
             <p>शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |</p>
             <LinkButton
               buttonText={goBackBtnText}
-              linkPath="/home"
+              linkPath={this.props.context.previousLocation}
             />
           </div>
         </div>
@@ -279,10 +278,10 @@ class StudentRegistrationForm extends Component {
             />
             <div className="registrationFormButtonContainer">
               <div className = "button-wrapper">
-                  <LinkButton
-                      buttonText={goBackBtnText}
-                      linkPath="/"
-                  />
+                <LinkButton
+                  buttonText={goBackBtnText}
+                  linkPath={this.props.context.previousLocation}
+                />
                   <div className="buttonContainer">
                     <button
                       type='submit'

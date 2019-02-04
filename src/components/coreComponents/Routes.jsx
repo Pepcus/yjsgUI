@@ -8,7 +8,8 @@ import Footer from './Footer';
 import SplashPagePrePopulated from '../SplashPagePrePopulated';
 import AdminPanel from '../AdminPanel';
 import DataGrid from '../DataGrid';
-
+import StudentCredentialPage from '../StudentCredentialPage';
+import StudentPage from '../StudentPage';
 import Context from "./ConfigProvider";
 
 class Routes extends Component{
@@ -68,6 +69,18 @@ class Routes extends Component{
                     return <AdminPanel context={context} />;
                   }}
                 </Consumer>} />
+              <Route exact path={'/student-login'} component={() =>
+                <Consumer>
+                  {(context) => {
+                    return <StudentCredentialPage context={context} />;
+                    }}
+                  </Consumer>} />
+            <Route exact path={'/reg'} component={() =>
+              <Consumer>
+                {(context) => {
+                  return <StudentPage context={context} />;
+                }}
+              </Consumer>} />
               <Footer />
           </Context.Provider>
       </div>
