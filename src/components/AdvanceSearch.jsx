@@ -117,11 +117,13 @@ class AdvanceSearch extends Component {
               <label htmlFor = "normal_search">Normal Search</label>
             </div>*/}
             <div className="input-radio-container">
-              <input type="checkbox" name="thresholdValue" value="0.6" onChange={this.onChangeDeepSearchCheckBox} checked={this.state.isDeepSearchCheck} />
+              <input type="checkbox" name="thresholdValue" className="checkbox-input" value="0.6"
+                     onChange={this.onChangeDeepSearchCheckBox} checked={this.state.isDeepSearchCheck} />
               <label htmlFor="deep_search">Deep Search</label>
             </div>
             <div className="input-radio-container">
-              <input type="checkbox" name="thresholdValue" value={this.state.isMultipleIdSearchCheck} onChange={this.onChangeMultipleIdSearchCheckBox} checked={this.state.isMultipleIdSearchCheck} />
+              <input type="checkbox" name="thresholdValue" className="checkbox-input" value={this.state.isMultipleIdSearchCheck}
+                     onChange={this.onChangeMultipleIdSearchCheckBox} checked={this.state.isMultipleIdSearchCheck} />
               <label htmlFor="deep_search">Multiple ID Search</label>
             </div>
           </div>

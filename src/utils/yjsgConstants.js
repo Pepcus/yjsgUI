@@ -231,9 +231,9 @@ export const adminSearchOptions = [
 
 export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)';
 
-export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र';
+export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
 
-export const yjsgFooterContactInfo = '74470-56789';
+export const yjsgFooterContactInfo = ' 74470-56789';
 
 export const eventDate = 'दिनांक: २८ अप्रैल २०१९, रविवार  से ५  मई २०१९, रविवार तक';
 
