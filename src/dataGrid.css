@@ -421,11 +421,13 @@ html, body {
     padding: 30px 0;
     margin: 15px auto;
     -webkit-overflow-scrolling: touch;
+    overflow-x:hidden;
 }
 .inputFieldContainerWrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height:100%;
 }
 .registrationFormContainer {
     background-color: #fff;
@@ -569,7 +571,6 @@ html, body {
     padding: 8px 16px;
 }
 .button-modal {
-    /*margin-left: 16px;*/
     background: #f9570a;
     border: 1px solid #f9570a;
     cursor: pointer;
@@ -2009,7 +2010,7 @@ body,
     .id-card-wrapper .selected-student-buttons {
         width: 100%;
         margin: 5px 0px 0px 0px;
-        display: block;
+        display: inline-block;
     }
     .id-card-wrapper .selected-student-buttons .buttonContainer {
         flex: 1 0 50%;
@@ -2029,13 +2030,7 @@ body,
     .id-card-wrapper .buttonContainer:nth-child(3) {
         display: none;
     }
-    .id-card-wrapper .buttonContainer:nth-child(4) {
-        display: inline-block;
-        width: 50%;
-        margin-top: 12px;
-        padding: 0 10px;
-    }
-    .id-card-wrapper .buttonContainer:nth-child(5) {
+    .id-card-wrapper .selected-student-buttons .button-container-mobile {
         display: inline-block;
         width: 50%;
         margin-top: 12px;
@@ -2184,6 +2179,15 @@ body,
         height:auto;
         min-height:100%;
     }
+    .column-modal {
+        padding:10px 20px;
+    }
+    .column-modal .column-modal-container {
+        line-height: 24px;
+    }
+    .success-block {
+        line-height: 20px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -2236,9 +2240,6 @@ body,
     .yjsg-logo {
         top: -3px;
         width: 95px;
-    }
-    .id-card-wrapper {
-        width: 60%;
     }
     .footer {
         padding: 10px 0;

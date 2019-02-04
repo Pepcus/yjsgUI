@@ -180,7 +180,7 @@ class MarkSelectedStudentAttendance extends Component {
   }
   render() {
     return (
-      <div className="buttonContainer">
+      <div className="buttonContainer button-container-mobile">
         <button className={this.renderMarkPresentButtonClassName()} onClick={this.openMarkSelectedStudentsAttendanceModal}>
           <i className="fa fa-user card-icon"/>Mark as Present
         </button>
