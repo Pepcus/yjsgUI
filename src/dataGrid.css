@@ -880,6 +880,8 @@ body,
 }
 .popup {
     height: 100%;
+    position:fixed;
+    top:0;
     background: rgba(248, 248, 247, 0.75);
 }
 .popupContainer {
@@ -1458,6 +1460,9 @@ body,
     font-size:9px;
     margin:4px 0px 10px;
 }
+.disable-footer {
+    display:none;
+}
 .card-fields-wrapper .card-text-spacing {
     flex:0.5 0 0;
     margin:4px 0px 10px;
@@ -1764,7 +1769,7 @@ body,
         padding-top:0px;
         padding-bottom:0px;
         height: auto;
-        display:block;
+        display: flex;
         min-height:100%;
         background-color: #f8f8f8;
     }
