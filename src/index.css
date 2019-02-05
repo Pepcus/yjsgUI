@@ -66,7 +66,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-html, body, #root, #root>div, .landingPageContainer {
+html, body, #root, #root>div, .landing-page-container {
     height: 100%;
 }
 input, select, textarea {
@@ -227,13 +227,13 @@ input[type=number]::-webkit-outer-spin-button {
     top: 0;
 }
 
-.landingPageContainer {
+.landing-page-container {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fffcc9;
 }
-.landingPageContainer h2 {
+.landing-page-container h2 {
     position: fixed;
     top: 0;
     background: #ee7c2a;
@@ -245,7 +245,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
 }
 
-.landingPageContent {
+.landing-page-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,26 +255,26 @@ input[type=number]::-webkit-outer-spin-button {
     max-width: 97%;
 }
 
-.landingPageLogo {
+.landing-page-logo {
     width: 50%;
     max-width: 200px;
     padding: 20px;
     background-color: #ffffff;
 }
 
-.landingPageLogo img {
+.landing-page-logo img {
     width: 100%;
 }
 
-.landingPageButtonContainer {
+.landing-page-button-container {
     background-color: #ffffff;
     padding-bottom: 20px;
     text-align: center;
 }
-.landingPageButtonContainer .inputWrapper{
+.landing-page-button-container .inputWrapper{
     width: 210px;
 }
-.landingPageButtonContainer .inputText{
+.landing-page-button-container .inputText{
     padding: 15px 5px;
     height:15px;
 }
@@ -373,11 +373,6 @@ input[type=number]::-webkit-outer-spin-button {
     z-index: 2;
     position:absolute;
     right:28px;
-    /*position: fixed;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*right: 10px;*/
-    /*float: right;*/
 }
 .backButtonContainer{
     z-index: 2;
@@ -432,13 +427,13 @@ input[type=number]::-webkit-outer-spin-button {
         margin: 10px 0 0;
         width: 100%;
     }
-    .landingPageButtonContainer{
+    .landing-page-button-container{
         width: 90%;
     }
-    .landingPageButtonContainer .inputWrapper{
+    .landing-page-button-container .inputWrapper{
         width: 100%;
     }
-    .landingPageButtonContainer .inputWrapperContainer {
+    .landing-page-button-container .inputWrapperContainer {
         padding: 0;
         margin-top: 15px;
     }
@@ -451,7 +446,7 @@ input[type=number]::-webkit-outer-spin-button {
         line-height: 30px;
         padding: 10px 0;
     }
-    .landingPageContainer h2 {
+    .landing-page-container h2 {
         font-size: 13px;
         padding: 10px 0;
     }
@@ -463,7 +458,7 @@ input[type=number]::-webkit-outer-spin-button {
     .registrationFormContainer {
         height: calc(100% - 115px);
     }
-    .landingPageButtonContainer {
+    .landing-page-button-container {
         padding-bottom: 20px;
     }
     .footer {
@@ -473,11 +468,10 @@ input[type=number]::-webkit-outer-spin-button {
     .contact-no-footer{
         display: block;
     }
-    .landingPageContent {
+    .landing-page-content {
         max-height: 85%;
         overflow-y: auto;
         margin-top:30px;
-        /*margin-bottom: 15px;*/
         justify-content: flex-start;
     }
     .yjsg-event-info {
@@ -491,10 +485,10 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 @media (max-width:360px) {
-    .landingPageLogo {
+    .landing-page-logo {
         max-width: 80px;
     }
-    .landingPageButtonContainer .inputText {
+    .landing-page-button-container .inputText {
         padding: 10px 5px;
     }
 }

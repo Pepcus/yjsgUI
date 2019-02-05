@@ -38,7 +38,7 @@ html, body {
     margin: -5px 1px !important;
     color: rgb(76, 76, 76) !important;
 }
-.landingPageButtonContainer .inputText {
+.landing-page-button-container .inputText {
     padding: 7px 5px;
 }
 .inputWrapperContainer label {
@@ -47,14 +47,14 @@ html, body {
 .inputWrapperContainer {
     padding: 12px 20px 5px;
 }
-.landingPageContainer {
+.landing-page-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: auto;
     background-color: rgba(244, 233, 227, 0.21);
 }
-.landingPageContainer .student-heading {
+.landing-page-container .student-heading {
     position: fixed;
     top: 0;
     left:0;
@@ -80,8 +80,7 @@ html, body {
     width: 100%;
 
 }
-
-.landingPageContent {
+.landing-page-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +91,6 @@ html, body {
     max-width: 97%;
     max-height:100%;
 }
-
 .footer {
     background: #ee7c2a;
     text-align: center;
@@ -1735,18 +1733,18 @@ body,
         align-items: center;
         justify-content: center;
     }
-    .landingPageContainer {
+    .landing-page-container {
         flex-direction: column;
         padding-top: 0px ;
         margin-top: 0px ;
     }
-    .landingPageContainer .student-heading {
+    .landing-page-container .student-heading {
         position: relative;
     }
     .footer {
         position: relative;
     }
-    .landingPageContent {
+    .landing-page-content {
         max-height: 99%;
         overflow-y: inherit !important;
     }
@@ -1768,7 +1766,7 @@ body,
     .table-drawer.table-drawer__bottom {
         margin: 0px 0px 30px;
     }
-    .landingPageButtonContainer {
+    .landing-page-button-container {
         background-color: transparent;
     }
     .student-logo-header {
@@ -1902,7 +1900,7 @@ body,
     .button-wrapper .buttonContainer:first-child {
         order: 1;
     }
-    .landingPageButtonContainer .buttonContainer {
+    .landing-page-button-container .buttonContainer {
         width: 100%;
     }
     .inputWrapper {
@@ -1920,7 +1918,7 @@ body,
         margin: 12px 0 0;
         width: 100%;
     }
-    .landingPageContainer h2 {
+    .landing-page-container h2 {
         padding: 10px 0;
         font-size: 24px;
     }
@@ -2101,7 +2099,7 @@ body,
     .registrationFormButtonContainer .button-wrapper {
         padding-top: 0px;
     }
-    .landingPageContainer .student-heading {
+    .landing-page-container .student-heading {
         padding: 15px 10px;
     }
     .yjsg-event-info .header-text {
@@ -2167,13 +2165,13 @@ body,
         text-align: right;
         padding: 10px 30px 15px;
     }
-    /*.landingPageContainer {*/
+    /*.landing-page-container {*/
         /*margin: 20px auto 0;*/
         /*text-align: center;*/
         /*padding-top: 20px;*/
         /*padding-bottom: 0px;*/
     /*}*/
-    .landingPageContent {
+    .landing-page-content {
         margin-left: 5px;
         display: block;
         margin: 0 auto;
@@ -2182,10 +2180,10 @@ body,
         margin-bottom:10px;
         overflow-y: auto;
     }
-    .landingPageLogo {
+    .landing-page-logo {
         margin: 0 auto;
     }
-    .landingPageButtonContainer {
+    .landing-page-button-container {
         margin: 0 auto;
     }
     .student-id-cards-footer {
@@ -2221,7 +2219,7 @@ body,
 }
 
 @media (max-width: 360px) {
-    .landingPageLogo {
+    .landing-page-logo {
         max-width: 120px;
     }
     .errorPopupContainer {
@@ -2274,7 +2272,7 @@ body,
     .footer {
         padding: 10px 0;
     }
-    .landingPageContent {
+    .landing-page-content {
         margin-bottom:20px;
     }
 
