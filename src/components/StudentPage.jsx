@@ -91,19 +91,19 @@ class StudentPage extends Component {
     }
     return (
       <div className="landing-page-block">
-        <div className="landingPageContainer">
+        <div className={'landing-page-container'}>
           <h2 className="student-heading">{yjsgHeader}</h2>
         </div>
         <div className="landing-page-wrapper">
-          <div className="landingPageContent">
-            <div className="yjsg-event-info">
+          <div className={'landing-page-content'}>
+            <div className={'yjsg-event-info'}>
               <h5 className="primary-color">{eventDate}</h5>
               <h5 className="header-text">{eventVenue}</h5>
             </div>
-            <div className="landingPageLogo">
-              <img src={yjsgLogo} alt="yjsg logo" />
+            <div className={'landing-page-logo'}>
+              <img src={yjsgLogo} alt={'yjsg logo'} />
             </div>
-            <div className="landingPageButtonContainer">
+            <div className={'landing-page-button-container'}>
               {this.renderLoginField()}
             </div>
           </div>

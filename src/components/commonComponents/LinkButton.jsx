@@ -8,7 +8,7 @@ const LinkButton = ({linkPath, onClick, buttonText}) => (
   <ButtonContainer>
     <Link
       to={linkPath}
-      className={'linkButton'}
+      className={'linkButton back-button'}
       onClick={onClick}>
       {buttonText}
     </Link>
