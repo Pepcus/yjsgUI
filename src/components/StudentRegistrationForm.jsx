@@ -48,8 +48,8 @@ class StudentRegistrationForm extends Component {
         email: '',
         address: '',
         busStop: '',
-        course2018: '',
-        optIn2018: 1,
+        course2019: '',
+        optIn2019: 'Y',
       },
       isSubmitTriggered: false,
       errorMessage: {
@@ -62,8 +62,8 @@ class StudentRegistrationForm extends Component {
         email: {},
         address: {},
         busStop: {},
-        course2018: {},
-        optIn2018: {},
+        course2019: {},
+        optIn2019: {},
       },
     };
 
@@ -82,7 +82,7 @@ class StudentRegistrationForm extends Component {
 
   componentDidMount() {
     // Since the below fields are optional. we are setting them blank explicitly
-    this.checkError({ email: '', motherMobile: '', optIn2018: 1 });
+    this.checkError({ email: '', motherMobile: '', optIn2019: 'Y' });
   }
 
   isValidData() {
@@ -281,20 +281,20 @@ class StudentRegistrationForm extends Component {
               errorMessage={this.state.errorMessage.busStop.message}
             />
             <SelectListInputField
-              name="course2018"
+              name="course2019"
               label="आप क्या अध्ययन करना चाहते हैं ?"
               options={studiesArray}
               onInputChange={this._handleInputChange}
-              value={this.state.student.course2018}
+              value={this.state.student.course2019}
               isRequired
-              errorMessage={this.state.errorMessage.course2018.message}
+              errorMessage={this.state.errorMessage.course2019.message}
             />
             <InputField
               type="text"
               label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
-              name="classAttended2017"
+              name="classAttended2018"
               onInputChange={this._handleInputChange}
-              value={this.state.student.classAttended2017}
+              value={this.state.student.classAttended2018}
               isRequired={false}
             />
             <div className="registrationFormButtonContainer">

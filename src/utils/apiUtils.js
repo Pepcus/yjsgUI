@@ -12,8 +12,8 @@ export const formatUpdateStudentDataPayload = (updatedStudent) => {
     motherMobile,
     name,
     occupation,
-    optIn2018,
-    course2018,
+    optIn2019,
+    course2019,
     secretKey,
     remark,
   } = updatedStudent;
@@ -31,8 +31,8 @@ export const formatUpdateStudentDataPayload = (updatedStudent) => {
     motherMobile,
     name,
     occupation,
-    optIn2018,
-    course2018,
+    optIn2019,
+    course2019,
     secretKey,
     remark,
   };

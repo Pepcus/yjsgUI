@@ -172,35 +172,35 @@ export const busStops =  [
 export const gender = [
   {
     text: 'पुरुष',
-    value: 'M'
+    value: 'Male'
   },
   {
     text: 'स्त्री',
-    value: 'F'
+    value: 'Female'
   }
 ];
 
 export const yesOrNo = [
   {
     text: 'हाँ',
-    value: 1
+    value: 'Y'
   },
   {
     text: 'नहीं',
-    value: 0
+    value: 'N'
   }
 ];
 
-export const optIn2018Options = [
+export const optIn2019Options = [
   {
     text: 'हाँ',
-    value: 1
+    value: 'Y'
   },
   {
     text: 'नहीं',
-    value: 0
+    value: 'N'
   },
-  {
+  /*{
     text: 'पक्का  नहीं',
     value: 2
   },
@@ -211,7 +211,7 @@ export const optIn2018Options = [
   {
     text: 'फ़ोन  नहीं  उठाया',
     value: 4
-  }
+  }*/
 ];
 
 export const adminSearchOptions = [
