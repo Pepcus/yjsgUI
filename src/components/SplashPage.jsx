@@ -13,6 +13,8 @@ import {
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
+  setHashLinkForStudentCredentialAction,
+  setHashLinkForNewRegistrationAction,
 } from '../actions/studentRegistrationActions';
 import {
   getAdminId,
@@ -34,16 +36,16 @@ import {
   goBackBtnText,
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
-  //viewEditInfoBtnText,
+  // viewEditInfoBtnText,
   loginBtnText,
   adminLoginBtnText,
   invalidAdminMsg,
-  //invalidIdMessage,
+  // invalidIdMessage,
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
 import { setRedirect } from './DataGrid';
-import Context from "./coreComponents/ConfigProvider";
+import Context from './coreComponents/ConfigProvider';
 
 class SplashPage extends Component {
   constructor(props) {
@@ -57,7 +59,8 @@ class SplashPage extends Component {
       isURLParams: false,
       adminLoginState: false,
       adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage:false,
+      registeredStudentCredentialErrorMessage: false,
+      isNewRegistration: false,
     };
 
     this._enableEditInfo = this.enableEditInfo.bind(this);
@@ -65,10 +68,11 @@ class SplashPage extends Component {
     this._enableAdminLogin = this.enableAdminLogin.bind(this);
     this._disableAdminLogin = this.disableAdminLogin.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
-    //this._fetchStudentById = this.fetchStudentById.bind(this);
+    // this._fetchStudentById = this.fetchStudentById.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
     this.checkAdminCredential = this.checkAdminCredential.bind(this);
-   // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
+    // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
+    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
 
   componentWillMount() {
@@ -84,13 +88,13 @@ class SplashPage extends Component {
     this.props.fetchStudentData(id, secretCode);
     this.setState({
       isURLParams: true,
-    })
+    });
   }
 
   enableEditInfo() {
     this.setState({
       isCorrection: true,
-    })
+    });
   }
 
   enableAdminLogin() {
@@ -102,39 +106,39 @@ class SplashPage extends Component {
   disableAdminLogin() {
     this.setState({
       isAdmin: false,
-    })
+    });
   }
 
   disableEditInfo() {
     this.setState({
       isCorrection: false,
-    })
+    });
   }
-  checkAdminCredential(){
+  checkAdminCredential() {
     if (!this.props.adminLoginState) {
       const {
         id,
         password,
       } = this.props;
-      if(this.state.adminCredentialErrorMessage) {
+      if (this.state.adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
           return (
-            <div className={'errorPopupContainer'}>
+            <div className="errorPopupContainer">
               <h5>{invalidAdminMsg}</h5>
             </div>
           );
         }
-        else {
-          this.props.setAdminLoginStateAction(true);
-          return <Switch><Redirect to={'/student-search'}/></Switch>
-          }
+
+        this.props.setAdminLoginStateAction(true);
+        return <Switch><Redirect to="/student-search" /></Switch>;
+
       }
       return null;
-      }else {
-      return <Switch><Redirect to={'/student-search'}/></Switch>
-      }
-      }
- /* checkRegisteredStudentCredential() {
+    }
+    return <Switch><Redirect to="/student-search" /></Switch>;
+
+  }
+  /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
         return (
@@ -155,12 +159,12 @@ class SplashPage extends Component {
   setAdminLogin() {
     this.setState({
       adminLoginState: true,
-      adminCredentialErrorMessage: true
+      adminCredentialErrorMessage: true,
     });
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 
- /* fetchStudentById () {
+  /* fetchStudentById () {
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.props.fetchStudentData(this.state.credentials.studentId,
@@ -171,10 +175,10 @@ class SplashPage extends Component {
   };*/
 
   handleInputChange(value, name) {
-    let updatedData = extend(cloneDeep(this.state.credentials),
+    const updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
 
-    let adminData = extend(cloneDeep(this.state.admin),
+    const adminData = extend(cloneDeep(this.state.admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -185,7 +189,7 @@ class SplashPage extends Component {
     });
   }
 
-  /*renderRegistrationCorrectionFields() {
+  /* renderRegistrationCorrectionFields() {
     return (
       <div>
         <div className = "form-input-wrapper">
@@ -223,91 +227,99 @@ class SplashPage extends Component {
   renderAdminLoginFields() {
     return (
       <div>
-          <div className="form-input-wrapper">
-            <InputField
-              type={'text'}
-              name={'adminId'}
-              label={'Admin ID'}
-              placeholder={'Enter Admin ID'}
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminId}
-            />
-            <InputField
-              type={'password'}
-              name={'adminPassword'}
-              label={'Admin Password'}
-              placeholder={'Enter Admin Password'}
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminPassword}
-            />
-              {this.checkAdminCredential()}
-          </div>
-        <div className = "button-wrapper">
-            <Button
-                buttonText={goBackBtnText}
-                onClick={this._disableAdminLogin}
-            />
-            <Button
-                buttonText={loginBtnText}
-                onClick={this._setAdminLogin}
-            />
+        <div className="form-input-wrapper">
+          <InputField
+            type="text"
+            name="adminId"
+            label="Admin ID"
+            placeholder="Enter Admin ID"
+            onInputChange={this._handleInputChange}
+            value={this.state.admin.adminId}
+          />
+          <InputField
+            type="password"
+            name="adminPassword"
+            label="Admin Password"
+            placeholder="Enter Admin Password"
+            onInputChange={this._handleInputChange}
+            value={this.state.admin.adminPassword}
+          />
+          {this.checkAdminCredential()}
+        </div>
+        <div className="button-wrapper">
+          <Button
+            buttonText={goBackBtnText}
+            onClick={this._disableAdminLogin}
+          />
+          <Button
+            buttonText={loginBtnText}
+            onClick={this._setAdminLogin}
+          />
         </div>
       </div>
     );
   }
-
+  redirectToNewRegistrationPage() {
+    this.setState({
+      isNewRegistration: true,
+    });
+    this.props.setHashLinkForNewRegistrationAction('admin');
+  }
   renderLoginField() {
     if (this.state.isCorrection) {
-      return <Switch><Redirect to={'/student-login'} /></Switch>
+      this.props.setHashLinkForStudentCredentialAction('admin');
+      return <Switch><Redirect to="/student-login" /></Switch>;
     } else if (this.state.isAdmin) {
       return this.renderAdminLoginFields();
+    } else if (this.state.isNewRegistration) {
+      return <Switch><Redirect to="/studentRegister" /></Switch>;
     }
-    else {
-      return (
-        <div>
-          <Button
-            buttonText={alreadyRegisteredBtnText}
-            onClick={this._enableEditInfo}
-          />
-          <LinkButton
-            buttonText={newRegistrationBtnText}
-            linkPath={'/studentRegister'}
-          />
-          <Button
-            buttonText={adminLoginBtnText}
-            onClick={this._enableAdminLogin}
-          />
-        </div>
-      )
-    }
+
+    return (
+      <div>
+        <Button
+          buttonText={alreadyRegisteredBtnText}
+          onClick={this._enableEditInfo}
+        />
+        <Button
+          buttonText={newRegistrationBtnText}
+          onClick={this.redirectToNewRegistrationPage}
+        />
+        <Button
+          buttonText={adminLoginBtnText}
+          onClick={this._enableAdminLogin}
+        />
+      </div>
+    );
+
   }
 
 
   render() {
-      if (this.state.isURLParams) {
-        return <Switch><Redirect to={'/studentCorrection'} /></Switch>
-      }
+    if (this.state.isURLParams) {
+      return <Switch><Redirect to="/studentCorrection" /></Switch>;
+    }
     return (
       <div className="landing-page-block">
-        <div className={'landingPageContainer'}>
+        <div className="landingPageContainer">
           <h2 className="student-heading">{yjsgHeader}</h2>
         </div>
-          <div className="landing-page-wrapper">
-            <div className={'landingPageContent'}>
-              <div className={'yjsg-event-info'}>
-                <h5 className="primary-color">{eventDate}</h5>
-                <h5 className="header-text">{eventVenue}</h5>
-              </div>
-              <div className={'landingPageLogo'}>
-                <img src={yjsgLogo} alt={'yjsg logo'} />
-              </div>
-              <div className={'landingPageButtonContainer'}>
-                {this.renderLoginField()}
-              </div>
+        <div className="landing-page-wrapper">
+          <div className="landingPageContent">
+            <div className="yjsg-event-info">
+              <h5 className="primary-color">{eventDate}</h5>
+              <h5 className="header-text">{eventVenue}</h5>
+            </div>
+            <div className="landingPageLogo">
+              <img src={yjsgLogo} alt="yjsg logo" />
+            </div>
+            <div className="landingPageButtonContainer">
+              {this.renderLoginField()}
             </div>
           </div>
         </div>
-      );
+      </div>
+    );
   }
 }
 
@@ -332,4 +344,6 @@ export default connect(mapStateToProps, {
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
+  setHashLinkForStudentCredentialAction,
+  setHashLinkForNewRegistrationAction,
 })(SplashPage);

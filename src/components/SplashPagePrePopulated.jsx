@@ -1,3 +1,4 @@
+/* This component is deprecated. Please do not use this component*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';

@@ -244,3 +244,13 @@ export const updateIdCardStatusSelectedStudentsResultsFailureAction = message =>
 export const resetIsUpdateIdCardStatusSuccessAction = () => ({
   type: 'RESET_IS_UPDATE_ID_CARD_STATUS_SUCCESS',
 });
+
+export const setHashLinkForStudentCredentialAction = (hashLink) => ({
+  type: 'SET_HASH_LINK_FOR_STUDENT_CREDENTIAL',
+  hashLink,
+});
+
+export const setHashLinkForNewRegistrationAction = (userType) => ({
+  type: 'SET_HASH_LINK_FOR_NEW_REGISTRATION',
+  userType,
+});

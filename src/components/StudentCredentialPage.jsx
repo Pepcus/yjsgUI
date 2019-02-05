@@ -11,8 +11,6 @@ import InputField from './formComponents/InputField';
 import {
   fetchStudentData,
   setStudentCredentials,
-  setAdminCredentialsAction,
-  setAdminLoginStateAction,
 } from '../actions/studentRegistrationActions';
 import {
   getAdminId,
@@ -21,7 +19,8 @@ import {
   getStudent,
   isFetched,
   isLoading,
-  stateOfAdminLogin,
+  getHash,
+  getUserId, getUserSecretKey,
 } from '../reducers/studentRegistrationReducer';
 
 import yjsgLogo from '../assets/yjsgLogo.png';
@@ -35,10 +34,12 @@ import {
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
-import { setRedirect } from './DataGrid';
-
-
-class SplashPage extends Component {
+/*
+* The StudentCredentialPage component for the student which will render -
+* Already Registered student credential field.
+ * @type {class}
+ * */
+class StudentCredentialPage extends Component {
   constructor(props) {
     super(props);
 
@@ -47,15 +48,25 @@ class SplashPage extends Component {
       admin: {},
       isURLParams: false,
       adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage:false,
+      registeredStudentCredentialErrorMessage: false,
     };
 
     this._handleInputChange = this.handleInputChange.bind(this);
     this._fetchStudentById = this.fetchStudentById.bind(this);
     this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
+    this.renderBackButton = this.renderBackButton.bind(this);
   }
 
   componentWillMount() {
+    if (this.props.context.previousLocation === '/') {
+      this.setState({
+        credentials: {studentId: this.props.studentId, secretKey: this.props.secretKey},
+      });
+    } else if (this.props.context.previousLocation === '/reg') {
+      this.setState({
+        credentials: {},
+      });
+    }
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secCode');
     if (id && secretCode) {
@@ -68,27 +79,27 @@ class SplashPage extends Component {
     this.props.fetchStudentData(id, secretCode);
     this.setState({
       isURLParams: true,
-    })
+    });
   }
   checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
       if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
         return (
-          <div className = "errorPopupContainer">
-            <h5 className = "error-message">{invalidIdMessage}</h5>
+          <div className="errorPopupContainer">
+            <h5 className="error-message">{invalidIdMessage}</h5>
           </div>
         );
       } else if (this.props.studentData && this.props.isFetched) {
         return (
           <div>
-            <Redirect to={'/studentCorrection'}/>
+            <Redirect to="/studentCorrection" />
           </div>
-        )
+        );
       }
     }
     return null;
   }
-  fetchStudentById () {
+  fetchStudentById() {
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.props.fetchStudentData(this.state.credentials.studentId,
@@ -96,13 +107,13 @@ class SplashPage extends Component {
     this.setState({
       registeredStudentCredentialErrorMessage: true,
     });
-  };
+  }
 
   handleInputChange(value, name) {
-    let updatedData = extend(cloneDeep(this.state.credentials),
+    const updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
 
-    let adminData = extend(cloneDeep(this.state.admin),
+    const adminData = extend(cloneDeep(this.state.admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -112,61 +123,80 @@ class SplashPage extends Component {
       registeredStudentCredentialErrorMessage: false,
     });
   }
-
+  renderBackButton() {
+    if (this.props.hashLink === 'admin') {
+      return (
+        <LinkButton
+          buttonText={goBackBtnText}
+          linkPath="/"
+        />
+      );
+    } else if (this.props.hashLink === 'student') {
+      return (
+        <LinkButton
+          buttonText={goBackBtnText}
+          linkPath="/reg"
+        />
+      );
+    }
+    return (
+      <LinkButton
+        buttonText={goBackBtnText}
+        linkPath={this.props.context.previousLocation}
+      />
+    );
+  }
   renderRegistrationCorrectionFields() {
     return (
       <div>
-        <div className = "form-input-wrapper">
+        <div className="form-input-wrapper">
           <InputField
-            type={'number'}
-            name={'studentId'}
-            label={'आई.डी. नं.'}
-            placeholder={'अपना आई.डी. नं. दर्ज करें'}
+            type="number"
+            name="studentId"
+            label="आई.डी. नं."
+            placeholder="अपना आई.डी. नं. दर्ज करें"
             onInputChange={this._handleInputChange}
             value={this.state.credentials.studentId}
           />
           <InputField
-            type={'text'}
-            name={'secretKey'}
-            label={'सीक्रेट कोड'}
-            placeholder={'अपना सीक्रेट कोड दर्ज करें'}
+            type="text"
+            name="secretKey"
+            label="सीक्रेट कोड"
+            placeholder="अपना सीक्रेट कोड दर्ज करें"
             onInputChange={this._handleInputChange}
             value={this.state.credentials.secretKey}
           />
           {this.checkRegisteredStudentCredential()}
         </div>
-        <div className = "button-wrapper">
-          <LinkButton
-            buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
-          />
+        <div className="button-wrapper">
+          {this.renderBackButton()}
           <Button
             buttonText={viewEditInfoBtnText}
             onClick={this._fetchStudentById}
           />
         </div>
       </div>
-    )
+    );
   }
   render() {
     if (this.state.isURLParams) {
-      return <Switch><Redirect to={'/studentCorrection'} /></Switch>
+      return <Switch><Redirect to="/studentCorrection" /></Switch>;
     }
     return (
       <div className="landing-page-block">
-        <div className={'landingPageContainer'}>
+        <div className="landingPageContainer">
           <h2 className="student-heading">{yjsgHeader}</h2>
         </div>
         <div className="landing-page-wrapper">
-          <div className={'landingPageContent'}>
-            <div className={'yjsg-event-info'}>
+          <div className="landingPageContent">
+            <div className="yjsg-event-info">
               <h5 className="primary-color">{eventDate}</h5>
               <h5 className="header-text">{eventVenue}</h5>
             </div>
-            <div className={'landingPageLogo'}>
-              <img src={yjsgLogo} alt={'yjsg logo'} />
+            <div className="landingPageLogo">
+              <img src={yjsgLogo} alt="yjsg logo" />
             </div>
-            <div className={'landingPageButtonContainer'}>
+            <div className="landingPageButtonContainer">
               {this.renderRegistrationCorrectionFields()}
             </div>
           </div>
@@ -177,25 +207,36 @@ class SplashPage extends Component {
   }
 }
 
-SplashPage.propTypes = {
+StudentCredentialPage.propTypes = {
   fetchStudentData: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
+  context: PropTypes.object,
+  isFetched: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+
 };
 
-SplashPage.defaultProps = {
+StudentCredentialPage.defaultProps = {
   fetchStudentData: () => {},
+  setStudentCredentials: () => {},
+  studentData: '',
+  context: {},
+  isFetched: false,
+  isLoading: false,
 };
 const mapStateToProps = state => ({
+  studentId: getUserId(state),
   id: getAdminId(state),
+  secretKey: getUserSecretKey(state),
   password: getAdminPassword(state),
   isLoading: isLoading(state),
   searchResults: getSearchResults(state),
-  adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
   isFetched: isFetched(state),
+  hashLink: getHash(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
-  setAdminCredentialsAction,
-  setAdminLoginStateAction,
-})(SplashPage);
+})(StudentCredentialPage);

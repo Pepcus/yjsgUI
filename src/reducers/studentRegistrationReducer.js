@@ -9,7 +9,7 @@ const initialState = {
   adminId: '',
   adminPassword: '',
   updateMessage: '',
-  updatedStudent: {}
+  updatedStudent: {},
 };
 
 export const studentRegistrationReducer = (state = initialState, action) => {
@@ -46,7 +46,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
     case 'CREATE_STUDENT_SUCCESS':
       return {
         ...state,
-        newStudent: {...state.newStudent, ...action.newStudent},
+        newStudent: { ...state.newStudent, ...action.newStudent },
         isLoading: false,
         isCreated: true,
       };
@@ -54,7 +54,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
     case 'UPDATE_STUDENT_SUCCESS':
       return {
         ...state,
-        updatedStudent: {...state.student, ...action.student},
+        updatedStudent: { ...state.student, ...action.student },
         isLoading: false,
         isUpdated: true,
       };
@@ -62,7 +62,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
     case 'FETCH_STUDENT_SUCCESS':
       return {
         ...state,
-        student: {...action.student},
+        student: { ...action.student },
         isLoading: false,
         isFetched: true,
       };
@@ -116,19 +116,19 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: false,
       };
     case 'SET_STUDENT_DATA':
-      return{
+      return {
         ...state,
         student: action.student,
         isFetched: true,
       };
     case 'UPDATE_STUDENT_BY_ADMIN':
-      return{
+      return {
         ...state,
         id: action.id,
         secretKey: action.secretKey,
       };
     case 'RESET_IS_UPDATE':
-      return{
+      return {
         ...state,
         isUpdated: false,
         id: '',
@@ -138,7 +138,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
     default: {
       return {
         ...state,
-      }
+      };
     }
   }
 };
@@ -167,7 +167,7 @@ export const studentSearchReducer = (state = {}, action) => {
     default: {
       return {
         ...state,
-      }
+      };
     }
   }
 };
@@ -322,10 +322,20 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         ...state,
         isUpdateIdCardStatusSuccess: false,
       };
+    case 'SET_HASH_LINK_FOR_STUDENT_CREDENTIAL':
+      return {
+        ...state,
+        hashLink: action.hashLink,
+      };
+    case 'SET_HASH_LINK_FOR_NEW_REGISTRATION':
+      return {
+        ...state,
+        userType: action.userType,
+      };
     default: {
       return {
         ...state,
-      }
+      };
     }
   }
 };
@@ -382,3 +392,7 @@ export const isMarkAttendanceSuccess = state => state.allStudentsDataReducer.isM
 export const isMarkOptInOrOptOutSuccess = state => state.allStudentsDataReducer.isMarkOptInOrOptOutSuccess;
 
 export const isUpdateIdCardStatusSuccess = state => state.allStudentsDataReducer.isUpdateIdCardStatusSuccess;
+
+export const getHash = state => state.allStudentsDataReducer.hashLink;
+
+export const getUserType = state => state.allStudentsDataReducer.userType;

@@ -205,14 +205,14 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   renderClassAttended2017() {
-    if(this.props.studentData.classAttended2017) {
+    if(this.props.studentData.course2018) {
       return (
         <InputField
           type={'text'}
           label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
           name={'classAttended2017'}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2017}
+          value={this.state.student.course2018}
           isRequired={false}
           disabled={true}
         />
@@ -224,7 +224,7 @@ class StudentRegistrationCorrectionForm extends Component {
           label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
           name={'classAttended2017'}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2017}
+          value={this.state.student.course2018}
           isRequired={false}
         />
       )

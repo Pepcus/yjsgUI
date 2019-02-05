@@ -30,6 +30,7 @@ import {
   getNewStudent,
   isCreated,
   isLoading,
+  getUserType,
 } from '../reducers/studentRegistrationReducer';
 
 class StudentRegistrationForm extends Component {
@@ -68,6 +69,7 @@ class StudentRegistrationForm extends Component {
 
     this._submitStudentData = this.submitStudentData.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
+    this.renderBackButton = this.renderBackButton.bind(this);
   }
 
   checkError(studentData) {
@@ -129,17 +131,36 @@ class StudentRegistrationForm extends Component {
             <p>{'आपका सीक्रेट कोड: '}<strong>{student.secretKey}</strong>{' है |'}</p>
             <p>कृपया अपना ID और सीक्रेट कोड ध्यानपूर्वक नोट कर लेवे |</p>
             <p>शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |</p>
-            <LinkButton
-              buttonText={goBackBtnText}
-              linkPath={this.props.context.previousLocation}
-            />
+            {this.renderBackButton()}
           </div>
         </div>
       );
     }
     return null;
   }
-
+  renderBackButton() {
+    if (this.props.userType === 'student') {
+     return (
+       <LinkButton
+         buttonText={goBackBtnText}
+         linkPath={'/reg'}
+       />
+     );
+    } else if (this.props.userType === 'admin') {
+     return (
+       <LinkButton
+         buttonText={goBackBtnText}
+         linkPath={'/'}
+       />
+     );
+    }
+    return (
+      <LinkButton
+        buttonText={goBackBtnText}
+        linkPath={this.props.context.previousLocation}
+      />
+    );
+  }
   render() {
     if (this.props.isLoading) {
       return (
@@ -153,15 +174,15 @@ class StudentRegistrationForm extends Component {
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
-        <div className = "student-logo-header">
-          <div className= "yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+        <div className="student-logo-header">
+          <div className="yjsg-logo">
+            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
           </div>
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
-        {/*<h3 className="registrationFormHeading">{yjsgHeader}</h3>*/}
+        {/* <h3 className="registrationFormHeading">{yjsgHeader}</h3>*/}
         <div className="inputFieldContainerWrapper">
-          <form id='studentRegistrationForm' className="inputFieldContainer">
+          <form id="studentRegistrationForm" className="inputFieldContainer">
             <InputField
               type="text"
               label="नाम"
@@ -277,21 +298,19 @@ class StudentRegistrationForm extends Component {
               isRequired={false}
             />
             <div className="registrationFormButtonContainer">
-              <div className = "button-wrapper">
-                <LinkButton
-                  buttonText={goBackBtnText}
-                  linkPath={this.props.context.previousLocation}
-                />
-                  <div className="buttonContainer">
-                    <button
-                      type='submit'
-                      form='studentRegistrationForm'
-                      value='Submit'
-                      /*buttonText={formSubmitBtnText}*/
-                      onClick={this._submitStudentData}
-                      className='linkButton margin-none full-width'
-                    >Submit</button>
-                  </div>
+              <div className="button-wrapper">
+                {this.renderBackButton()}
+                <div className="buttonContainer">
+                  <button
+                    type="submit"
+                    form="studentRegistrationForm"
+                    value="Submit"
+                      /* buttonText={formSubmitBtnText}*/
+                    onClick={this._submitStudentData}
+                    className="linkButton margin-none full-width"
+                  >Submit
+                  </button>
+                </div>
               </div>
             </div>
           </form>
@@ -321,6 +340,7 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
   isCreated: isCreated(state),
   newStudent: getNewStudent(state),
+  userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
