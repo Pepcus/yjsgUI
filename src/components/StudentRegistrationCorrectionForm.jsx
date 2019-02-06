@@ -397,6 +397,7 @@ class StudentRegistrationCorrectionForm extends Component {
     }
     // when student is going to attend the session
     else if (this.props.studentData && this.props.isFetched) {
+
       return (
         <div className="registrationFormContainer">
           {this.renderSuccessMessage()}
@@ -497,11 +498,9 @@ class StudentRegistrationCorrectionForm extends Component {
                 isRequired={false}
               />
               <InputField
-                type="email"
-                label="ई-मेल"
-                // isRequired={true}
-                // errorMessage={this.state.errorMessage.address['message']}
-                name="email"
+                type={'email'}
+                label={'ई-मेल'}
+                name={'email'}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
                 isRequired={false}
@@ -512,6 +511,8 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
+                isRequired
+                errorMessage={this.state.errorMessage.address['message']}
               />
               <SelectListInputField
                 type="text"
