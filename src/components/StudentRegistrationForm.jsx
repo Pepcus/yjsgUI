@@ -143,14 +143,14 @@ class StudentRegistrationForm extends Component {
      return (
        <LinkButton
          buttonText={goBackBtnText}
-         linkPath={'/reg'}
+         linkPath={'/'}
        />
      );
     } else if (this.props.userType === 'admin') {
      return (
        <LinkButton
          buttonText={goBackBtnText}
-         linkPath={'/'}
+         linkPath={'/admin'}
        />
      );
     }

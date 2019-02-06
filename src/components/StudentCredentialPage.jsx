@@ -58,11 +58,11 @@ class StudentCredentialPage extends Component {
   }
 
   componentWillMount() {
-    if (this.props.context.previousLocation === '/') {
+    if (this.props.context.previousLocation === '/admin') {
       this.setState({
         credentials: {studentId: this.props.studentId, secretKey: this.props.secretKey},
       });
-    } else if (this.props.context.previousLocation === '/reg') {
+    } else if (this.props.context.previousLocation === '/') {
       this.setState({
         credentials: {},
       });
@@ -128,14 +128,14 @@ class StudentCredentialPage extends Component {
       return (
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath="/"
+          linkPath="/admin"
         />
       );
     } else if (this.props.hashLink === 'student') {
       return (
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath="/reg"
+          linkPath="/"
         />
       );
     }

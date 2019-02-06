@@ -114,7 +114,7 @@ class AdminPanel extends Component {
     if (id !== adminId || password !== adminPassword) {
       return (
         <div>
-          <Redirect to="/"/>
+          <Redirect to="/admin" />
         </div>
       );
     }
@@ -136,7 +136,7 @@ class AdminPanel extends Component {
           <div className={'backButtonContainer'}>
             <div className={'logoutLinkContainer'}>
               <Link
-                to={'/'}
+                to={'/admin'}
                 style={{
                   color: '#fff',
                   textDecoration: 'none',
@@ -158,7 +158,7 @@ class AdminPanel extends Component {
           <div className={'logoutButtonContainer'}>
             <div className={'logoutLinkContainer'}>
               <Link
-                to={'/'}
+                to={'/admin'}
                 style={{
                   color: '#fff',
                   textDecoration: 'none',

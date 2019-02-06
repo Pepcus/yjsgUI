@@ -364,7 +364,7 @@ class DataGrid1 extends Component {
     if(!(this.props.adminLoginState)) {
       return (
         <div>
-          <Redirect to={'/'}/>
+          <Redirect to={'/admin'}/>
         </div>
       );
     }
@@ -380,10 +380,10 @@ class DataGrid1 extends Component {
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">
                   <div className="logoutLinkContainer print-media-none">
-                    <Link to = {'/'} className="logout-button">
+                    <Link to = {'/admin'} className="logout-button">
                       <i className="fa fa-arrow-left card-icon"></i>Back
                     </Link>
-                    <Link to={'/'} className = "logout-button" onClick={this.performLogout}>
+                    <Link to={'/admin'} className = "logout-button" onClick={this.performLogout}>
                       <i className="fa fa-power-off card-icon"></i>Logout
                     </Link>
                   </div>
@@ -392,14 +392,14 @@ class DataGrid1 extends Component {
             </div>
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
-                <Link to = {'/'} className="logout-button">
+                <Link to = {'/admin'} className="logout-button">
                   <i className="fa fa-arrow-left"/>
                 </Link>
                 <a className="logout-button" onClick={this.openColumnOption}>
                   <i className="fa fa-cog"/>
                 </a>
                 {this.renderColumnConfig()}
-                <Link to={'/'} className = "logout-button" onClick={this.performLogout}>
+                <Link to={'/admin'} className = "logout-button" onClick={this.performLogout}>
                   <i className="fa fa-power-off"/>
                 </Link>
               </div>

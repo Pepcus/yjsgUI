@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import SplashPage from '../SplashPage';
 import StudentRegistrationForm from '../StudentRegistrationForm';
@@ -36,66 +37,74 @@ class Routes extends Component {
           <Route
             exact
             path="/"
-            component={() =>
-                (<Consumer>
-                  {context => <SplashPage context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <StudentPage context={context} />}
+              </Consumer>
+            )}
+          />
+          <Route
+            exact
+            path="/admin"
+            component={() => (
+              <Consumer>
+                {context => <SplashPage context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/student-search"
-            component={() =>
-                (<Consumer>
-                  {context => <DataGrid context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <DataGrid context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/home"
-            component={() =>
-                (<Consumer>
-                  {context => <SplashPagePrePopulated context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <SplashPagePrePopulated context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/studentRegister"
-            component={() =>
-                (<Consumer>
-                  {context => <StudentRegistrationForm context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <StudentRegistrationForm context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/studentCorrection"
-            component={() =>
-                (<Consumer>
-                  {context => <StudentRegistrationCorrectionForm context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <StudentRegistrationCorrectionForm context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/adminPanel"
-            component={() =>
-                (<Consumer>
-                  {context => <AdminPanel context={context} />}
-                 </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <AdminPanel context={context} />}
+              </Consumer>
+            )}
           />
           <Route
             exact
             path="/student-login"
-            component={() =>
-                (<Consumer>
-                  {context => <StudentCredentialPage context={context} />}
-                 </Consumer>)}
-          />
-          <Route
-            exact
-            path="/reg"
-            component={() =>
-              (<Consumer>
-                {context => <StudentPage context={context} />}
-               </Consumer>)}
+            component={() => (
+              <Consumer>
+                {context => <StudentCredentialPage context={context} />}
+              </Consumer>
+            )}
           />
           <Footer />
         </Context.Provider>
@@ -103,4 +112,5 @@ class Routes extends Component {
     );
   }
 }
+
 export default Routes;
