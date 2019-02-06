@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
-import extend  from 'lodash/extend';
+import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 
 import {
@@ -22,17 +22,17 @@ import LinkButton from './commonComponents/LinkButton';
 import { yjsgHeader } from '../utils/yjsgConstants';
 import { updateStudentData, isUpdatedResetAction } from '../actions/studentRegistrationActions';
 import {
-checkLevelValue,
-isDataCorrect,
-isValidUserInfo,
-setRegistrationData,
-validateInput,
+  checkLevelValue,
+  isDataCorrect,
+  isValidUserInfo,
+  setRegistrationData,
+  validateInput,
 } from '../utils/registrationFormUtils';
 import {
-getStudent,
-isFetched,
-isLoading,
-isUpdated,
+  getStudent,
+  isFetched,
+  isLoading,
+  isUpdated,
 } from '../reducers/studentRegistrationReducer';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
@@ -82,7 +82,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
 
   checkError(studentData) {
-    let errorMessageObject = extend(cloneDeep(this.state.errorMessage),
+    const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
       isDataCorrect(studentData));
     this.setState({
       errorMessage: errorMessageObject,
@@ -93,7 +93,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const lastCourse = nextProps.studentData.classAttended2017;
     const level = checkLevelValue(lastCourse);
     if (level > 0) {
-      const updatedData = extend(cloneDeep(this.state.student), {course2019: level + 1});
+      const updatedData = extend(cloneDeep(this.state.student), { course2019: level + 1 });
       this.setState({
         student: updatedData,
       });
@@ -104,11 +104,11 @@ class StudentRegistrationCorrectionForm extends Component {
     if (this.props.studentData) {
       this.prePopulateCourse2019(this.props);
       this.setState({
-        student: {...this.state.student, ...this.props.studentData},
+        student: { ...this.state.student, ...this.props.studentData },
         isValidId: true,
         isSubmitTriggered: false,
       });
-      this.checkError({email: '', motherMobile: ''});
+      this.checkError({ email: '', motherMobile: '' });
     }
   }
 
@@ -116,11 +116,11 @@ class StudentRegistrationCorrectionForm extends Component {
     if (nextProps.studentData) {
       this.prePopulateCourse2019(nextProps);
       this.setState({
-        student: {...this.state.student, ...nextProps.studentData},
+        student: { ...this.state.student, ...nextProps.studentData },
         isValidId: true,
         isSubmitTriggered: false,
       });
-      this.checkError({email: '', motherMobile: ''});
+      this.checkError({ email: '', motherMobile: '' });
     }
   }
 
@@ -144,7 +144,7 @@ class StudentRegistrationCorrectionForm extends Component {
       this.updateStudentData();
     } else {
       this.checkError(this.state.student);
-      if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
+      if (!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -159,13 +159,13 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   handleInputChange(value, name) {
-    let updatedData = extend(cloneDeep(this.state.student),
+    const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
-    let errorMessageObject = {} ;
+    const errorMessageObject = {};
 
-    errorMessageObject[name]= validateInput(value, name);
+    errorMessageObject[name] = validateInput(value, name);
 
-    let updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
+    const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
 
     this.setState({
       student: updatedData,
@@ -177,24 +177,23 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   renderSuccessMessage() {
-    if(this.props.isUpdated){
+    if (this.props.isUpdated) {
       return (
-        <div className={"popup"}>
-          <div className={"popupContainer"}>
+        <div className="popup">
+          <div className="popupContainer">
             <h5>{infoUpdateSuccessMessage}</h5>
             <LinkButton
               buttonText={goBackBtnText}
-              onClick={() => { this.props.isUpdatedResetAction()}}
+              onClick={() => { this.props.isUpdatedResetAction(); }}
               linkPath={this.props.context.previousLocation}
             />
           </div>
         </div>
       );
-    }
-    else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.isValidData()) {
+    } else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.isValidData()) {
       return (
-        <div className={"popup"}>
-          <div className={"popupContainer"}>
+        <div className="popup">
+          <div className="popupContainer">
             <h5>{noInfoChangeMessage}</h5>
             <LinkButton
               buttonText={goBackBtnText}
@@ -203,171 +202,171 @@ class StudentRegistrationCorrectionForm extends Component {
           </div>
         </div>
       );
-    } else return null;
+    } return null;
   }
 
   renderClassAttended2018() {
-    if(this.props.studentData.course2018) {
+    if (this.props.studentData.course2019) {
       return (
         <InputField
-          type={'text'}
-          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
-          name={'course2018'}
+          type="text"
+          label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
+          name="course2018"
           onInputChange={this._handleInputChange}
-          value={this.state.student.course2018}
+          value={this.state.student.course2019}
           isRequired={false}
-          disabled={true}
+          disabled
         />
-      )
-    } else {
-      return (
-        <InputField
-          type={'text'}
-          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
-          name={'course2018'}
-          onInputChange={this._handleInputChange}
-          value={this.state.student.course2018}
-          isRequired={false}
-        />
-      )
+      );
     }
+    return (
+      <InputField
+        type="text"
+        label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
+        name="course2018"
+        onInputChange={this._handleInputChange}
+        value={this.state.student.course2019}
+        isRequired={false}
+      />
+    );
+
   }
 
   renderNoValidationFields() {
     return (
-      <div className={'registrationFormContainer'}>
+      <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
-        <div className = "student-logo-header">
-          <div className= "yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+        <div className="student-logo-header">
+          <div className="yjsg-logo">
+            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
           </div>
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
-        {/*<h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
-        <form id='studentRegistrationForm' className="inputFieldContainerWrapper">
-          <div className={'inputFieldContainer'}>
+        {/* <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
+        <form id="studentRegistrationForm" className="inputFieldContainerWrapper">
+          <div className="inputFieldContainer">
             <SelectListInputField
-              name={'optIn2019'}
-              label={'2019 के शिविर की स्वीकृति ?'}
+              name="optIn2019"
+              label="2019 के शिविर की स्वीकृति ?"
               options={optIn2019Options}
               onInputChange={this._handleInputChange}
               value={this.state.student.optIn2019}
-              isRequired={true}
+              isRequired
             />
             <InputField
-              type={'number'}
-              label={'आई.डी.'}
-              name={'id'}
+              type="number"
+              label="आई.डी."
+              name="id"
               onInputChange={this._handleInputChange}
               value={this.state.student.id}
-              isRequired={true}
-              disabled={true}
+              isRequired
+              disabled
             />
             <InputField
-              type={'text'}
-              label={'नाम'}
-              name={'name'}
+              type="text"
+              label="नाम"
+              name="name"
               onInputChange={this._handleInputChange}
               value={this.state.student.name}
-              isRequired={true}
+              isRequired
             />
             <InputField
-              type={'text'}
-              label={'पिता / पति का नाम'}
-              name={'fatherName'}
+              type="text"
+              label="पिता / पति का नाम"
+              name="fatherName"
               onInputChange={this._handleInputChange}
               value={this.state.student.fatherName}
-              isRequired={true}
+              isRequired
             />
             <SelectListInputField
-              name={'gender'}
-              label={'लिंग'}
+              name="gender"
+              label="लिंग"
               options={gender}
               onInputChange={this._handleInputChange}
               value={this.state.student.gender}
-              isRequired={true}
+              isRequired
             />
             <InputField
-              type={'number'}
-              label={'उम्र'}
-              name={'age'}
+              type="number"
+              label="उम्र"
+              name="age"
               onInputChange={this._handleInputChange}
               value={this.state.student.age}
-              isRequired={true}
+              isRequired
             />
             <InputField
-              type={'number'}
-              label={'मोबाइल नं.'}
-              name={'mobile'}
+              type="number"
+              label="मोबाइल नं."
+              name="mobile"
               onInputChange={this._handleInputChange}
               value={this.state.student.mobile}
-              isRequired={true}
+              isRequired
             />
             <InputField
-              type={'number'}
-              label={'मोबाइल नं. ( माता का )'}
-              name={'motherMobile'}
+              type="number"
+              label="मोबाइल नं. ( माता का )"
+              name="motherMobile"
               onInputChange={this._handleInputChange}
               value={this.state.student.motherMobile}
               isRequired={false}
             />
             <InputField
-              type={'text'}
-              label={'व्यवसाय (युवा वर्ग हेतु)'}
-              name={'occupation'}
+              type="text"
+              label="व्यवसाय (युवा वर्ग हेतु)"
+              name="occupation"
               onInputChange={this._handleInputChange}
               value={this.state.student.occupation}
               isRequired={false}
             />
             <InputField
-              type={'text'}
-              label={'स्कूल शिक्षा'}
-              name={'education'}
+              type="text"
+              label="स्कूल शिक्षा"
+              name="education"
               onInputChange={this._handleInputChange}
               value={this.state.student.education}
               isRequired={false}
             />
             <InputField
-              type={'email'}
-              label={'ई-मेल'}
-              name={'email'}
+              type="email"
+              label="ई-मेल"
+              name="email"
               onInputChange={this._handleInputChange}
               value={this.state.student.email}
               isRequired={false}
             />
             <TextAreaField
-              label={'पूरा पता'}
-              name={'address'}
+              label="पूरा पता"
+              name="address"
               onInputChange={this._handleInputChange}
               value={this.state.student.address}
-              isRequired={true}
+              isRequired
             />
             <SelectListInputField
-              type={'text'}
-              label={'बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)'}
-              name={'busStop'}
+              type="text"
+              label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
+              name="busStop"
               options={busStops}
               onInputChange={this._handleInputChange}
               value={this.state.student.busStop}
-              isRequired={true}
+              isRequired
             />
             {this.renderClassAttended2018()}
             <SelectListInputField
-              name={'course2019'}
-              label={'आप क्या अध्ययन करना चाहते हैं ?'}
+              name="course2019"
+              label="आप क्या अध्ययन करना चाहते हैं ?"
               options={studiesArray}
               onInputChange={this._handleInputChange}
               value={this.state.student.course2019}
-              isRequired={true}
+              isRequired
             />
             <TextAreaField
-              label={'Remark'}
-              name={'remark'}
+              label="Remark"
+              name="remark"
               onInputChange={this._handleInputChange}
               value={this.state.student.remark}
               isRequired={false}
             />
-            <div className={'registrationFormButtonContainer'}>
+            <div className="registrationFormButtonContainer">
               <div className="button-wrapper">
                 <LinkButton
                   buttonText={goBackBtnText}
@@ -375,186 +374,188 @@ class StudentRegistrationCorrectionForm extends Component {
                 />
                 <div className="buttonContainer">
                   <button
-                    type='submit'
-                    form='studentRegistrationForm'
-                    value='Submit'
-                    /*buttonText={formSubmitBtnText}*/
+                    type="submit"
+                    form="studentRegistrationForm"
+                    value="Submit"
+                    /* buttonText={formSubmitBtnText}*/
                     onClick={this._submitStudentData}
-                    className='linkButton margin-none full-width'
-                  >Submit</button>
-                </div>
+                    className="linkButton margin-none full-width"
+                  >Submit
+                  </button>
                 </div>
               </div>
+            </div>
           </div>
         </form>
       </div>
-    )
+    );
   }
   render() {
-    //when student is not attending the session
+    // when student is not attending the session
     if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
     }
     // when student is going to attend the session
     else if (this.props.studentData && this.props.isFetched) {
       return (
-        <div className={'registrationFormContainer'}>
+        <div className="registrationFormContainer">
           {this.renderSuccessMessage()}
-          <div className = "student-logo-header">
-            <div className= "yjsg-logo">
-              <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+          <div className="student-logo-header">
+            <div className="yjsg-logo">
+              <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
             </div>
             <h2 className="student-info-heading">{yjsgHeader}</h2>
           </div>
-          <form id='studentCorrectionForm' className="inputFieldContainerWrapper">
-            <div className={'inputFieldContainer'}>
+          <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
+            <div className="inputFieldContainer">
               <SelectListInputField
-                name={'optIn2019'}
-                label={'2019 के शिविर की स्वीकृति ?'}
+                name="optIn2019"
+                label="2019 के शिविर की स्वीकृति ?"
                 options={optIn2019Options}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.optIn2019}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.optIn2019['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.optIn2019.message}
               />
               <InputField
-                type={'number'}
-                label={'आई.डी.'}
-                name={'id'}
+                type="number"
+                label="आई.डी."
+                name="id"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.id}
-                isRequired={true}
-                disabled={true}
+                isRequired
+                disabled
               />
               <InputField
-                type={'text'}
-                label={'नाम'}
-                name={'name'}
+                type="text"
+                label="नाम"
+                name="name"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.name}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.name['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.name.message}
               />
               <InputField
-                type={'text'}
-                label={'पिता / पति का नाम'}
-                name={'fatherName'}
+                type="text"
+                label="पिता / पति का नाम"
+                name="fatherName"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.fatherName}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.fatherName['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.fatherName.message}
               />
               <SelectListInputField
-                name={'gender'}
-                label={'लिंग'}
+                name="gender"
+                label="लिंग"
                 options={gender}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.gender}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.gender['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.gender.message}
               />
               <InputField
-                type={'number'}
-                label={'उम्र'}
-                name={'age'}
+                type="number"
+                label="उम्र"
+                name="age"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.age}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.age['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.age.message}
               />
               <InputField
-                type={'number'}
-                label={'मोबाइल नं.'}
-                name={'mobile'}
+                type="number"
+                label="मोबाइल नं."
+                name="mobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.mobile}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.mobile['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.mobile.message}
               />
               <InputField
-                type={'number'}
-                label={'मोबाइल नं. ( माता का )'}
-                name={'motherMobile'}
+                type="number"
+                label="मोबाइल नं. ( माता का )"
+                name="motherMobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.motherMobile}
                 isRequired={false}
-                errorMessage={this.state.errorMessage.motherMobile['message']}
+                errorMessage={this.state.errorMessage.motherMobile.message}
               />
               <InputField
-                type={'text'}
-                label={'व्यवसाय (युवा वर्ग हेतु)'}
-                name={'occupation'}
+                type="text"
+                label="व्यवसाय (युवा वर्ग हेतु)"
+                name="occupation"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.occupation}
                 isRequired={false}
               />
               <InputField
-                type={'text'}
-                label={'स्कूल शिक्षा'}
-                name={'education'}
+                type="text"
+                label="स्कूल शिक्षा"
+                name="education"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.education}
                 isRequired={false}
               />
               <InputField
-                type={'email'}
-                label={'ई-मेल'}
-                //isRequired={true}
-                //errorMessage={this.state.errorMessage.address['message']}
-                name={'email'}
+                type="email"
+                label="ई-मेल"
+                // isRequired={true}
+                // errorMessage={this.state.errorMessage.address['message']}
+                name="email"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
                 isRequired={false}
-                errorMessage={this.state.errorMessage.email['message']}
+                errorMessage={this.state.errorMessage.email.message}
               />
               <TextAreaField
-                label={'पूरा पता'}
-                name={'address'}
+                label="पूरा पता"
+                name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
               />
               <SelectListInputField
-                type={'text'}
-                label={'बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)'}
-                name={'busStop'}
+                type="text"
+                label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
+                name="busStop"
                 options={busStops}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.busStop}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.busStop['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.busStop.message}
               />
               {this.renderClassAttended2018()}
               <SelectListInputField
-                name={'course2019'}
-                label={'आप क्या अध्ययन करना चाहते हैं ?'}
+                name="course2019"
+                label="आप क्या अध्ययन करना चाहते हैं ?"
                 options={studiesArray}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.course2019}
-                isRequired={true}
-                errorMessage={this.state.errorMessage.course2019['message']}
+                isRequired
+                errorMessage={this.state.errorMessage.course2019.message}
               />
               <TextAreaField
-                label={'Remark'}
-                name={'remark'}
+                label="Remark"
+                name="remark"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.remark}
                 isRequired={false}
               />
-              <div className={'registrationFormButtonContainer'}>
+              <div className="registrationFormButtonContainer">
                 <div className="button-wrapper">
-                    <LinkButton
-                      buttonText={goBackBtnText}
-                      linkPath={this.props.context.previousLocation}
-                    />
+                  <LinkButton
+                    buttonText={goBackBtnText}
+                    linkPath={this.props.context.previousLocation}
+                  />
                   <div className="buttonContainer">
                     <button
-                      type='submit'
-                      form='studentRegistrationForm'
-                      value='Submit'
-                      /*buttonText={formSubmitBtnText}*/
+                      type="submit"
+                      form="studentRegistrationForm"
+                      value="Submit"
+                      /* buttonText={formSubmitBtnText}*/
                       onClick={this._submitStudentData}
-                      className='linkButton margin-none full-width'
-                    >Submit</button>
+                      className="linkButton margin-none full-width"
+                    >Submit
+                    </button>
                   </div>
                 </div>
               </div>
@@ -562,30 +563,30 @@ class StudentRegistrationCorrectionForm extends Component {
           </form>
         </div>
       );
-    } else if(this.props.isLoading) {
+    } else if (this.props.isLoading) {
       return (
-        <div className={"popup"}>
-          <div className={"popupContainer"}>
-            <h5>{'Loading...'}</h5>
+        <div className="popup">
+          <div className="popupContainer">
+            <h5>Loading...</h5>
           </div>
         </div>
       );
     }
-    else {
-      return (
-        <div className={'errorPopupContainer'}>
-          <div className={"popup"}>
-            <div className={"popupContainer"}>
-              <h5>{invalidIdMessage}</h5>
-              <LinkButton
-                buttonText={goBackBtnText}
-                linkPath={this.props.context.previousLocation}
-              />
-            </div>
+
+    return (
+      <div className="errorPopupContainer">
+        <div className="popup">
+          <div className="popupContainer">
+            <h5>{invalidIdMessage}</h5>
+            <LinkButton
+              buttonText={goBackBtnText}
+              linkPath={this.props.context.previousLocation}
+            />
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+
   }
 
 }
