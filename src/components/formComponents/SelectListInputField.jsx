@@ -34,6 +34,7 @@ class SelectListInputField extends Component {
       label,
       isRequired,
       errorMessage,
+      style,
       disabled,
     } = this.props;
 
@@ -62,7 +63,7 @@ class SelectListInputField extends Component {
       );
     }
     return (
-      <div className={'inputWrapper'}>
+      <div style={style} className={'inputWrapper'}>
         <div className={'inputWrapperContainer'}>
           <div className={'inputLabel'}><label>{newLabel}</label></div>
           <div>

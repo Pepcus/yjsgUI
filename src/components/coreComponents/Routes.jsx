@@ -11,6 +11,7 @@ import AdminPanel from '../AdminPanel';
 import DataGrid from '../DataGrid';
 import StudentCredentialPage from '../StudentCredentialPage';
 import StudentPage from '../StudentPage';
+import StudentRegistrationCorrectionFormURL from '../StudentRegistartionCorrectionFormURL';
 import Context from './ConfigProvider';
 
 class Routes extends Component {
@@ -103,6 +104,15 @@ class Routes extends Component {
             component={() => (
               <Consumer>
                 {context => <StudentCredentialPage context={context} />}
+              </Consumer>
+            )}
+          />
+          <Route
+            exact
+            path="/student-correction-by-url"
+            component={() => (
+              <Consumer>
+                {context => <StudentRegistrationCorrectionFormURL context={context} />}
               </Consumer>
             )}
           />

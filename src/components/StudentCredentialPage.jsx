@@ -68,7 +68,7 @@ class StudentCredentialPage extends Component {
       });
     }
     const id = getParameterByName('id');
-    const secretCode = getParameterByName('secCode');
+    const secretCode = getParameterByName('secretCode');
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
@@ -180,7 +180,7 @@ class StudentCredentialPage extends Component {
   }
   render() {
     if (this.state.isURLParams) {
-      return <Switch><Redirect to="/studentCorrection" /></Switch>;
+      return <Switch><Redirect to="/student-correction-by-url" /></Switch>;
     }
     return (
       <div className="landing-page-block">

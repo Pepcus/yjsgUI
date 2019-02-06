@@ -83,7 +83,7 @@ class StudentPage extends Component {
   }
   render() {
     if (this.state.isURLParams) {
-      return <Switch><Redirect to="/studentCorrection" /></Switch>;
+      return <Switch><Redirect to="/student-correction-by-url" /></Switch>;
     } else if (this.state.isStudentLogin) {
       return <Switch><Redirect to="/student-login" /></Switch>;
     } else if (this.state.isNewRegistration) {

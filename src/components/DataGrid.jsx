@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
@@ -9,7 +9,7 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import LinkButton from './commonComponents/LinkButton';
-import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey, } from '../reducers/studentRegistrationReducer';
+import { allStudentsData, getVisibleColumnConfig, getSelectValue, getSecretKey } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
@@ -20,7 +20,7 @@ import {
   setVisibleColumnConfigAction,
   resetVisibleColumnConfigAction,
   resetIsSuccessAction,
-} from  '../actions/studentRegistrationActions';
+} from '../actions/studentRegistrationActions';
 import {
   stateOfRedirect,
   stateOfAdminLogin,
@@ -28,7 +28,7 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import AdvanceSearch from './AdvanceSearch';
 import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
-import UploadOptInFile from './UploadOptInFile'
+import UploadOptInFile from './UploadOptInFile';
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
   yjsgHeader,
@@ -152,7 +152,7 @@ const gridHeaderData = () => ({
   enableAllRowSelection: true,
   recordsPerPage: 25,
   drawerPosition: 'top',
-  includeAllInGlobalFilter:false,
+  includeAllInGlobalFilter: false,
   includeGlobalFilter: true,
 });
 
@@ -167,9 +167,9 @@ class DataGrid1 extends Component {
     this.state = {
       selectedStudents: [],
       selectValue: this.props.selectValue,
-      students:[],
+      students: [],
       metaData: gridHeaderData(),
-      columnOptionIsOpen:false,
+      columnOptionIsOpen: false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
@@ -217,52 +217,56 @@ class DataGrid1 extends Component {
     });
   }
   openColumnOption() {
-    this.setState({columnOptionIsOpen: true});
+    this.setState({ columnOptionIsOpen: true });
   }
   closeColumnOption() {
-    this.setState({columnOptionIsOpen: false});
+    this.setState({ columnOptionIsOpen: false });
   }
   openAdvanceFilter() {
-    this.setState({advanceFilterIsOpen: true});
+    this.setState({ advanceFilterIsOpen: true });
   }
   closeAdvanceFilter() {
-    this.setState({advanceFilterIsOpen: false});
+    this.setState({ advanceFilterIsOpen: false });
   }
-  setValuesOfVisibleColumnConfig(values, selectValue){
+  setValuesOfVisibleColumnConfig(values, selectValue) {
     this.setState({
-      visibleColumnConfig : values,
+      visibleColumnConfig: values,
       metaData: this.formatMetaData(values),
-      selectValue: selectValue,
+      selectValue,
     });
     this.props.setVisibleColumnConfigAction(values, selectValue);
   }
 
   formatMetaData = (visibleColumnConfig) => {
     const metaData = [];
-    for(const columnKey in visibleColumnConfig) {
+    for (const columnKey in visibleColumnConfig) {
       if (visibleColumnConfig[columnKey]) {
         if (columnKey === 'edit') {
           metaData.push({
             ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey),
-            customComponent: this.EditButton
+            customComponent: this.EditButton,
           });
-        }
-        else {
-          metaData.push(gridMetaData.find(metaDataObj => metaDataObj.key === columnKey))
+        } else {
+          metaData.push(gridMetaData.find(metaDataObj => metaDataObj.key === columnKey));
         }
       }
     }
-    return {...this.state.metaData, headerConfig: metaData};
+    return { ...this.state.metaData, headerConfig: metaData };
   };
   handleEditClick(rowData) {
-    const newRowData = {...rowData, id:rowData.studentId, age: String(rowData.age),
-      mobile: String(rowData.mobile), attendance2016: String(rowData.attendance2016),
-      attendance2017: String(rowData.attendance2017), classRoomNo2016: String(rowData.classRoomNo2016),
-      classRoomNo2017: String(rowData.classRoomNo2017), marks2016: String(rowData.marks2016),
-      marks2017: String(rowData.marks2016)};
+    const newRowData = { ...rowData,
+      id: rowData.studentId,
+      age: String(rowData.age),
+      mobile: String(rowData.mobile),
+      attendance2016: String(rowData.attendance2016),
+      attendance2017: String(rowData.attendance2017),
+      classRoomNo2016: String(rowData.classRoomNo2016),
+      classRoomNo2017: String(rowData.classRoomNo2017),
+      marks2016: String(rowData.marks2016),
+      marks2017: String(rowData.marks2016) };
     if (!isEmpty(rowData)) {
       this.props.setStudentDataAction(newRowData);
-      //this.props.fetchStudentData(rowData.studentId, adminPassword);
+      // this.props.fetchStudentData(rowData.studentId, adminPassword);
       this.props.updateStudentByAdminAction(rowData.studentId, adminPassword);
       this.setState({
         isStudentDataSet: true,
@@ -270,43 +274,43 @@ class DataGrid1 extends Component {
     }
   }
   redirectToStudentCorrection() {
-    if (this.state.isStudentDataSet){
+    if (this.state.isStudentDataSet) {
       return (
         <div>
-          <Redirect to={'/studentCorrection'}/>
-        </div> );
+          <Redirect to="/studentCorrection" />
+        </div>);
     }
     return null;
   }
   EditButton = ({ rowData }) => (
     <div>
-      <div className = "btn-block display-mobile-none">
-        <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
-          <i className="fa fa-edit"/>Edit
+      <div className="btn-block display-mobile-none">
+        <button onClick={() => { this.handleEditClick(rowData); }} className="btn-grid">
+          <i className="fa fa-edit" />Edit
         </button>
       </div>
-      <div className = "btn-block display-logout-desktop">
-        <button onClick={() => { this.handleEditClick(rowData) }} className="btn-grid">
-          <i className="fa fa-edit"/>
+      <div className="btn-block display-logout-desktop">
+        <button onClick={() => { this.handleEditClick(rowData); }} className="btn-grid">
+          <i className="fa fa-edit" />
         </button>
       </div>
     </div>
 
   );
-  componentWillReceiveProps(nextProps){
-    if(nextProps.students !== this.props.students) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.students !== this.props.students) {
       this.setState({
         students: this.formattedStudent(nextProps.students),
       });
     }
   }
-  onFilter(result){
+  onFilter(result) {
     this.setState({
       students: this.formattedStudent(result),
     });
   }
   renderColumnConfig() {
-     if (this.state.columnOptionIsOpen) {
+    if (this.state.columnOptionIsOpen) {
       return (
         <ColumnConfig
           columnOptionIsOpen={this.state.columnOptionIsOpen}
@@ -320,17 +324,17 @@ class DataGrid1 extends Component {
   }
   formattedStudent(students) {
     return students.map(item =>
-      ({...item, studentId: String(item.id)})
+      ({ ...item, studentId: String(item.id) }),
     );
   }
-  renderDataGrid () {
-    if(isEmpty(this.state.metaData.headerConfig)){
-      return(
+  renderDataGrid() {
+    if (isEmpty(this.state.metaData.headerConfig)) {
+      return (
         <div>
-          <div className = "empty-column-message">
-            <span className = "circle-icon">
-              <i className="fa fa-exclamation-triangle"/>
-              </span>
+          <div className="empty-column-message">
+            <span className="circle-icon">
+              <i className="fa fa-exclamation-triangle" />
+            </span>
             आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।
           </div>
         </div>
@@ -349,22 +353,22 @@ class DataGrid1 extends Component {
   }
 
   redirectToAdminLogin() {
-    return <Redirect to={'/adminPanel'}/>
+    return <Redirect to="/adminPanel" />;
   }
   render() {
-    if(this.props.isLoading ) {
+    if (this.props.isLoading) {
       return (
         <div className="loader-wrapper">
-          <div className='loader'>
-            <img src="../../spinner.gif" alt="logo" className="loader-img"/>
+          <div className="loader">
+            <img src="../../spinner.gif" alt="logo" className="loader-img" />
           </div>
         </div>
       );
     }
-    if(!(this.props.adminLoginState)) {
+    if (!(this.props.adminLoginState)) {
       return (
         <div>
-          <Redirect to={'/admin'}/>
+          <Redirect to="/admin" />
         </div>
       );
     }
@@ -373,18 +377,18 @@ class DataGrid1 extends Component {
         <div className="grid-scroll-wrapper">
           <div className="print-media-none">
             <div className="student-information-Container">
-              <div className = "student-logo-header">
-                <div className= "yjsg-logo">
-                  <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img"/>
+              <div className="student-logo-header">
+                <div className="yjsg-logo">
+                  <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
                 </div>
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">
                   <div className="logoutLinkContainer print-media-none">
-                    <Link to = {'/admin'} className="logout-button">
-                      <i className="fa fa-arrow-left card-icon"></i>Back
+                    <Link to="/admin" className="logout-button">
+                      <i className="fa fa-arrow-left card-icon" />Back
                     </Link>
-                    <Link to={'/admin'} className = "logout-button" onClick={this.performLogout}>
-                      <i className="fa fa-power-off card-icon"></i>Logout
+                    <Link to="/admin" className="logout-button" onClick={this.performLogout}>
+                      <i className="fa fa-power-off card-icon" />Logout
                     </Link>
                   </div>
                 </div>
@@ -392,15 +396,15 @@ class DataGrid1 extends Component {
             </div>
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
-                <Link to = {'/admin'} className="logout-button">
-                  <i className="fa fa-arrow-left"/>
+                <Link to="/admin" className="logout-button">
+                  <i className="fa fa-arrow-left" />
                 </Link>
                 <a className="logout-button" onClick={this.openColumnOption}>
-                  <i className="fa fa-cog"/>
+                  <i className="fa fa-cog" />
                 </a>
                 {this.renderColumnConfig()}
-                <Link to={'/admin'} className = "logout-button" onClick={this.performLogout}>
-                  <i className="fa fa-power-off"/>
+                <Link to="/admin" className="logout-button" onClick={this.performLogout}>
+                  <i className="fa fa-power-off" />
                 </Link>
               </div>
             </div>
@@ -411,14 +415,14 @@ class DataGrid1 extends Component {
                   getAllStudentsAction={this.props.getAllStudentsAction}
                   students={this.props.students}
                   onFilter={this.onFilter}
-                  formattedStudent = {this.formattedStudent}
+                  formattedStudent={this.formattedStudent}
                 />
                 <div className="column-option display-mobile-none">
-                  <UploadOptInFile/>
-                  <UploadStudentsAttendanceFile/>
+                  <UploadOptInFile />
+                  <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" onClick={this.openColumnOption}>
-                      <i className="fa fa-cog card-icon"/>
+                      <i className="fa fa-cog card-icon" />
                       Configure
                     </button>
                     {this.renderColumnConfig()}
@@ -441,7 +445,7 @@ Todo: This feature will be implemented in future scope.
           <div>
             {this.redirectToStudentCorrection()}
             <SelectedStudentsActionWrapper
-              selectedStudents = {this.state.selectedStudents}
+              selectedStudents={this.state.selectedStudents}
               metaData={this.state.metaData}
             />
             {this.renderDataGrid()}
