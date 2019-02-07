@@ -39,7 +39,7 @@ class ColumnConfig extends Component {
     this.props.closeColumnOption();
   }
   setCheckValue() {
-    const temporarySelectValue = this.state.selectValue = this.state.selectValue !== true;
+    const temporarySelectValue = this.state.selectValue !== true;
     const temporaryVisibleColumnConfig = cloneDeep(this.props.visibleColumnConfig);
     if (temporarySelectValue) {
       for (const key in temporaryVisibleColumnConfig) {
