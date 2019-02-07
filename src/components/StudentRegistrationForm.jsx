@@ -48,7 +48,7 @@ class StudentRegistrationForm extends Component {
         email: '',
         address: '',
         busStop: '',
-        course2019: '',
+        classAttended2019: '',
         optIn2019: 'Y',
       },
       isSubmitTriggered: false,
@@ -62,7 +62,7 @@ class StudentRegistrationForm extends Component {
         email: {},
         address: {},
         busStop: {},
-        course2019: {},
+        classAttended2019: {},
         optIn2019: {},
       },
     };
@@ -281,13 +281,13 @@ class StudentRegistrationForm extends Component {
               errorMessage={this.state.errorMessage.busStop.message}
             />
             <SelectListInputField
-              name="course2019"
+              name="classAttended2019"
               label="आप क्या अध्ययन करना चाहते हैं ?"
               options={studiesArray}
               onInputChange={this._handleInputChange}
-              value={this.state.student.course2019}
+              value={this.state.student.classAttended2019}
               isRequired
-              errorMessage={this.state.errorMessage.course2019.message}
+              errorMessage={this.state.errorMessage.classAttended2019.message}
             />
             <InputField
               type="text"

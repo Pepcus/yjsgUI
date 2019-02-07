@@ -33,7 +33,7 @@ export const validateInput = (value, name) => {
     return optionalMobileValidate(value, name);
   }
   if (name === 'gender' || name === 'busStop'
-    || name === 'course2019' || name === 'optIn2019' ) {
+    || name === 'classAttended2019' || name === 'optIn2019' ) {
     return requireFieldsValidate(value, name);
   }
   return null;
@@ -224,7 +224,7 @@ export const isValidUserInfo = (errorMessageObject) => {
     errorMessageObject.address['isValid_address'] &&
     errorMessageObject.busStop['isValid_busStop'] &&
     errorMessageObject.optIn2019['isValid_optIn2019'] &&
-    errorMessageObject.course2019['isValid_course2019']
+    errorMessageObject.classAttended2019['isValid_classAttended2019']
   ) {
     isValid = true;
   }

@@ -263,7 +263,7 @@ class DataGrid1 extends Component {
       classRoomNo2016: String(rowData.classRoomNo2016),
       classRoomNo2017: String(rowData.classRoomNo2017),
       marks2016: String(rowData.marks2016),
-      marks2017: String(rowData.marks2016) };
+      marks2017: String(rowData.marks2017) };
     if (!isEmpty(rowData)) {
       this.props.setStudentDataAction(newRowData);
       // this.props.fetchStudentData(rowData.studentId, adminPassword);

@@ -53,9 +53,10 @@ class StudentRegistrationCorrectionForm extends Component {
         email: '',
         address: '',
         busStop: '',
-        course2019: '',
+        classAttended2019: '',
         optIn2019: '',
         remark: '',
+        occupation: '',
       },
       isSubmitTriggered: false,
       isValidId: false,
@@ -70,7 +71,7 @@ class StudentRegistrationCorrectionForm extends Component {
         email: {},
         address: {},
         busStop: {},
-        course2019: {},
+        classAttended2019: {},
         optIn2019: {},
       },
     };
@@ -93,7 +94,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const lastCourse = nextProps.studentData.classAttended2017;
     const level = checkLevelValue(lastCourse);
     if (level > 0) {
-      const updatedData = extend(cloneDeep(this.state.student), { course2019: level + 1 });
+      const updatedData = extend(cloneDeep(this.state.student), { classAttended2019: level + 1 });
       this.setState({
         student: updatedData,
       });
@@ -206,14 +207,14 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   renderClassAttended2018() {
-    if (this.props.studentData.course2019) {
+    if (this.props.studentData.classAttended2018) {
       return (
         <InputField
           type="text"
           label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
-          name="course2018"
+          name="classAttended2018"
           onInputChange={this._handleInputChange}
-          value={this.state.student.course2019}
+          value={this.state.student.classAttended2018}
           isRequired={false}
           disabled
         />
@@ -223,9 +224,9 @@ class StudentRegistrationCorrectionForm extends Component {
       <InputField
         type="text"
         label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
-        name="course2018"
+        name="classAttended2018"
         onInputChange={this._handleInputChange}
-        value={this.state.student.course2019}
+        value={this.state.student.classAttended2018}
         isRequired={false}
       />
     );
@@ -352,11 +353,11 @@ class StudentRegistrationCorrectionForm extends Component {
             />
             {this.renderClassAttended2018()}
             <SelectListInputField
-              name="course2019"
+              name="classAttended2019"
               label="आप क्या अध्ययन करना चाहते हैं ?"
               options={studiesArray}
               onInputChange={this._handleInputChange}
-              value={this.state.student.course2019}
+              value={this.state.student.classAttended2019}
               isRequired
             />
             <TextAreaField
@@ -526,13 +527,13 @@ class StudentRegistrationCorrectionForm extends Component {
               />
               {this.renderClassAttended2018()}
               <SelectListInputField
-                name="course2019"
+                name="classAttended2019"
                 label="आप क्या अध्ययन करना चाहते हैं ?"
                 options={studiesArray}
                 onInputChange={this._handleInputChange}
-                value={this.state.student.course2019}
+                value={this.state.student.classAttended2019}
                 isRequired
-                errorMessage={this.state.errorMessage.course2019.message}
+                errorMessage={this.state.errorMessage.classAttended2019.message}
               />
               <TextAreaField
                 label="Remark"
