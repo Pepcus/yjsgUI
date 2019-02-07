@@ -446,7 +446,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
                 </div>
                 <Button
                   style={{padding: '8px 0px'}}
-                  buttonCorrectionStyle={{padding: '0px 0px'}}
+                  buttonContainerStyle={{padding: '0px 0px'}}
                   buttonText={viewEditInfoBtnText}
                   onClick={this.ChangeIsOnlyOptIn2019}
                 />

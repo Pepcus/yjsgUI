@@ -537,7 +537,7 @@ html, body {
     color: rgb(76, 76, 76) !important;
     font-weight: 500 !important;
 }
-.column-group .column-group-container:first-child {
+.column-group .column-group-container {
     margin-right: 2em;
 }
 .column-group {
@@ -923,7 +923,7 @@ body,
     display: inline-block;
 }
 .select-button-wrapper {
-    padding: 20px 30px 10px;
+    padding: 20px 20px 10px;
 }
 .select-button-wrapper label .select-none-wrapper {
     font-size: 18px;
@@ -2103,6 +2103,7 @@ body,
     }
     .registrationFormButtonContainer .button-wrapper .button-container-correction {
         padding:0px 0px;
+        margin-top: 15px;
     }
     .registrationFormButtonContainer .button-wrapper {
         padding-top: 0px;

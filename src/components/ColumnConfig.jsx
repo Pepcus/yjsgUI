@@ -17,7 +17,7 @@ const customColumnOptionStyles = {
     boxShadow: 'rgb(99, 99, 99) 0px 2.3px 3px 0px',
     padding: '0px !important',
     marginRight: '-50%',
-    width: '45%',
+    width: '80%',
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },

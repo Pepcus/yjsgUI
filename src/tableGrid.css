@@ -56,10 +56,6 @@
     min-width: 200px;
     max-width:100%;
 }
-.cell__mobile {
-    min-width:100px;
-    max-width:100%;
-}
 .cell__mobile> div.table-cell {
    font-family: sans-serif;
 }
@@ -74,7 +70,8 @@
     max-width: 50px;
 }
 .cell__address {
-    min-width: 320px;
+    min-width: 280px;
+    max-width: 100%;
 }
 .cell__education {
     max-width: 120px;
@@ -91,13 +88,40 @@
 .cell__grid__select-column {
     max-width: 50px;
 }
+.cell__marks2016, .cell__marks2017,.cell__marks2018, .cell__marks2019, .cell__optIn2018, .cell__optIn2019 {
+    max-width: 85px;
+}
+.cell__day1, .cell__day2, .cell__day3, .cell__day4, .cell__day5, .cell__day6, .cell__day7,  .cell__day8 {
+    max-width: 60px;
+}
+.cell__createdDate {
+    max-width: 96px;
+}
+.cell__lastModifiedDate, .cell__attendance2016, .cell__attendance2017, .cell__attendance2018,
+.cell__attendance2019, .cell__motherMobile, .cell__mobile, {
+    max-width: 100px;
+}
+.cell__classRoomNo2016, .cell__classRoomNo2017, .cell__classRoomNo2018, .cell__classRoomNo2019 {
+    max-width:140px;
+}
 .cell__grid__select-column input[type = "checkbox"] {
     height: 20px;
     width: 20px;
     cursor:pointer;
     box-shadow: none;
 }
-
+.cell__secretKey, .cell__remark, .cell__printStatus {
+    max-width: 88px;
+}
+.cell__busNumber {
+    max-width: 65px;
+}
+.cell__busStop {
+    min-width: 250px;
+}
+.cell__occupation {
+    max-width: 108px;
+}
 @media (max-width:990px) {
     .btn-block input[type = "checkbox"] {
         width:25px;

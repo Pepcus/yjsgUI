@@ -201,12 +201,12 @@ const gridMetaData = [
     'type': 'Number',
   },
   {
-    'label': 'Opt In 2018',
+    'label': '2018 Opt In',
     'key': 'optIn2018',
     'type': 'string',
   },
   {
-    'label': 'Opt In 2019',
+    'label': '2019 Opt In',
     'key': 'optIn2019',
     'type': 'string',
   },
