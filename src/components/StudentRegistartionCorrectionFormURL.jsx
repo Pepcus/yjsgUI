@@ -390,6 +390,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
                 />
                 <div className="buttonContainer">
                   <button
+                    style={{padding: '8px 0px' }}
                     type="submit"
                     form="studentRegistrationForm"
                     value="Submit"
@@ -417,9 +418,11 @@ class StudentRegistrationCorrectionFormURL extends Component {
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
         <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
-          <div className="inputFieldContainer">
+          <div className="inputFieldContainer input-field-container-wrapper">
             <SelectListInputField
-              style={{ width: '100%' }}
+              wrapperStyle={{ width: '100%' }}
+              wrapperContainerStyle={{ padding: '0px 0px 15px' }}
+              selectInputStyle={{maxWidth: ' 100%' }}
               name="optIn2019"
               label="2019 के शिविर की स्वीकृति ?"
               options={optIn2019Options}
@@ -430,7 +433,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
             />
             <div className="registrationFormButtonContainer">
               <div className="button-wrapper">
-                <div className="buttonContainer">
+                <div className="buttonContainer button-container-correction">
                   <button
                     type="submit"
                     form="studentRegistrationForm"
@@ -442,6 +445,8 @@ class StudentRegistrationCorrectionFormURL extends Component {
                   </button>
                 </div>
                 <Button
+                  style={{padding: '8px 0px'}}
+                  buttonCorrectionStyle={{padding: '0px 0px'}}
                   buttonText={viewEditInfoBtnText}
                   onClick={this.ChangeIsOnlyOptIn2019}
                 />

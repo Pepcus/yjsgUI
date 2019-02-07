@@ -34,7 +34,9 @@ class SelectListInputField extends Component {
       label,
       isRequired,
       errorMessage,
-      style,
+      wrapperStyle,
+      wrapperContainerStyle,
+      selectInputStyle,
       disabled,
     } = this.props;
 
@@ -42,11 +44,12 @@ class SelectListInputField extends Component {
 
     if ( errorMessage ) {
       return (
-        <div className={'inputWrapper'}>
-          <div className={'inputWrapperContainer errorInputField'}>
+        <div style={wrapperStyle} className={'inputWrapper'}>
+          <div style={wrapperContainerStyle} className={'inputWrapperContainer errorInputField'}>
             <div className={'inputLabel'}><label>{newLabel}</label></div>
             <div>
               <select
+                style={selectInputStyle}
                 className={'selectInputText'}
                 name={name}
                 onChange={this._handleOnChange}
@@ -63,11 +66,12 @@ class SelectListInputField extends Component {
       );
     }
     return (
-      <div style={style} className={'inputWrapper'}>
-        <div className={'inputWrapperContainer'}>
+      <div style={wrapperStyle} className={'inputWrapper'}>
+        <div style={wrapperContainerStyle} className={'inputWrapperContainer'}>
           <div className={'inputLabel'}><label>{newLabel}</label></div>
           <div>
             <select
+              style={selectInputStyle}
               className={'selectInputText'}
               name={name}
               onChange={this._handleOnChange}

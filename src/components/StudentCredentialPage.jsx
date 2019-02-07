@@ -171,6 +171,7 @@ class StudentCredentialPage extends Component {
         <div className="button-wrapper">
           {this.renderBackButton()}
           <Button
+            style={{padding: '8px 0px' }}
             buttonText={viewEditInfoBtnText}
             onClick={this._fetchStudentById}
           />

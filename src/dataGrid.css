@@ -1593,6 +1593,9 @@ body,
     height:15px;
     width:15px;
 }
+.input-field-container-wrapper {
+    padding:70px 50px;
+}
 @media (max-width: 1024px) {
     .registrationFormContainer {
         display:block;
@@ -2098,6 +2101,9 @@ body,
     .registrationFormButtonContainer .button-wrapper .buttonContainer {
         padding: 0px 5px;
     }
+    .registrationFormButtonContainer .button-wrapper .button-container-correction {
+        padding:0px 0px;
+    }
     .registrationFormButtonContainer .button-wrapper {
         padding-top: 0px;
     }
@@ -2126,6 +2132,9 @@ body,
     }
     .grid-export .link {
         display:none;
+    }
+    .input-field-container-wrapper {
+        margin:64px 0px;
     }
 
 }

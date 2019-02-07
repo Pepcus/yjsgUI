@@ -107,7 +107,7 @@ class SplashPage extends Component {
     })
   }
   checkAdminCredential() {
-    if(!this.props.adminLoginState){
+    if (!this.props.adminLoginState){
       const {
         id,
         password,
@@ -125,7 +125,7 @@ class SplashPage extends Component {
         }
       }
       return null;
-    }else {
+    } else {
       return <Switch><Redirect to={'/student-search'}/></Switch>
     }
   }
