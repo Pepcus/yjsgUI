@@ -129,7 +129,7 @@ html, body {
     background-color: #d24c0c;
 }
 .footer-index {
-    z-index: 1000;
+    z-index:1000;
 }
 .buttonOrange {
     color: rgb(255, 255, 255);
@@ -898,7 +898,7 @@ body,
 }
 .search {
     position: absolute !important;
-    top: 0 !important;
+    top: 5px !important;
     cursor: pointer;
     right: 0 !important;
     padding: 6px 10px !important;
@@ -1603,7 +1603,7 @@ body,
 .input-text {
     height: auto;
     padding: 5px;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     border-radius: 4px;
 }
 .parent-register-heading {
@@ -1628,7 +1628,14 @@ body,
 .error-popup-padding {
     padding:0px 0px;
 }
-
+.footer-none-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.parent-register-message-wrapper {
+    padding: 50px 50px;
+}
 @media (max-width: 1024px) {
     .registrationFormContainer {
         display:block;
@@ -1655,6 +1662,17 @@ body,
     }
     .table-drawer.table-drawer__bottom {
         margin: 0px 0 30px;
+    }
+    .footer-none-wrapper .footer-none {
+        display:none !important;
+    }
+    .footer-none-wrapper {
+        min-height: 100%;
+        height:100%;
+        background-color: #f8f8f8;
+    }
+    .parent-register-container {
+        display: block;
     }
 }
 @media (max-width: 990px) {
@@ -1937,6 +1955,12 @@ body,
     .custom-modal {
         width: 50% !important;
     }
+    .footer-none-wrapper + .footer-none {
+        display:none;
+    }
+    .parent-register-heading-text {
+        line-height: 24px;
+    }
     .button-wrapper {
         display: flex;
         padding-top:10px;
@@ -2189,6 +2213,14 @@ body,
     }
     .form-content-flex-content {
         flex:1;
+        line-height:20px;
+    }
+    .parent-register-message-wrapper {
+        padding:90px 30px;
+    }
+    .parent-register-success {
+        margin-bottom: 20px;
+        line-height: 20px;
     }
 
 

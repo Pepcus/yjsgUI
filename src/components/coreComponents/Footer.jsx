@@ -19,7 +19,7 @@ class Footer extends Component {
     if (this.props.isLoading) {
       return ('disable-footer');
     }
-    return ('footer print-media-none');
+    return ('footer print-media-none footer-none');
 
   };
   render() {
