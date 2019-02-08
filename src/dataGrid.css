@@ -128,6 +128,9 @@ html, body {
     box-shadow: 0 1.6px 4px 0px #777978;
     background-color: #d24c0c;
 }
+.footer-index {
+    z-index: 1000;
+}
 .buttonOrange {
     color: rgb(255, 255, 255);
     outline: none;

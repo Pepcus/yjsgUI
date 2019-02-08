@@ -24,7 +24,7 @@ class Footer extends Component {
   };
   render() {
     return (
-      <div className={this.renderClassName()}>
+      <div className={this.renderClassName()} >
         <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span>
         </p>
       </div>);
