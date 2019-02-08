@@ -91,7 +91,7 @@ class ParentsRegistration extends Component {
   renderPopUp() {
     if (this.state.isSubmitTriggered) {
       return (
-        <div div className="inputFieldContainer">
+        <div className="inputFieldContainer">
           <div>
             <span>आपका रजिस्ट्रेशन संपन्न हुआ!</span>
           </div>
