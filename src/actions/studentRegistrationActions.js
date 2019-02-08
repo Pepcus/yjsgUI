@@ -6,7 +6,7 @@ export const checkValidUserInfo = (errorMessageObject) => ({
 
 export const createStudentData = student => ({
   type: 'CREATE_STUDENT',
-  student
+  student,
 });
 
 export const setStudentCredentials = (id, secretKey) => ({
@@ -253,4 +253,21 @@ export const setHashLinkForStudentCredentialAction = (hashLink) => ({
 export const setHashLinkForNewRegistrationAction = (userType) => ({
   type: 'SET_HASH_LINK_FOR_NEW_REGISTRATION',
   userType,
+});
+
+export const parentsRegistrationAction = (name, members, phoneNumber) => ({
+  type: 'PARENTS_REGISTRATION',
+  name,
+  members,
+  phoneNumber,
+});
+
+export const parentsRegistrationResultsSuccessAction = response => ({
+  type: 'PARENTS_REGISTRATION_RESULT_SUCCESS',
+  response,
+});
+
+export const parentsRegistrationResultsFailureAction = message => ({
+  type: 'PARENTS_REGISTRATION_RESULT_FAILED',
+  message,
 });

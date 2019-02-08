@@ -13,6 +13,7 @@ import StudentCredentialPage from '../StudentCredentialPage';
 import StudentPage from '../StudentPage';
 import StudentRegistrationCorrectionFormURL from '../StudentRegistartionCorrectionFormURL';
 import Context from './ConfigProvider';
+import ParentsRegistration from '../ParentsRegistrationForm';
 
 class Routes extends Component {
   constructor(props) {
@@ -113,6 +114,15 @@ class Routes extends Component {
             component={() => (
               <Consumer>
                 {context => <StudentRegistrationCorrectionFormURL context={context} />}
+              </Consumer>
+            )}
+          />
+          <Route
+            exact
+            path="/event"
+            component={() => (
+              <Consumer>
+                {context => <ParentsRegistration context={context} />}
               </Consumer>
             )}
           />

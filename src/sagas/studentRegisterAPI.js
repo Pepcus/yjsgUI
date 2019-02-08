@@ -54,7 +54,7 @@ export const getAllStudentsAPI = (secretKey) =>
 export const uploadAttendanceAPI = (secretKey, attendanceFile) => {
   const file = new FormData();
   file.append('file', attendanceFile);
-  return(
+  return (
     PATCH({
     url: `v1/students/bulk-attendance`,
     headers: {
@@ -105,4 +105,14 @@ export const updateIdCardStatusSelectedStudentsAPI = (secretKey, selectedStudent
       'secretKey': secretKey,
     },
     body: JSON.stringify(IdCardStatus),
+  });
+
+export const parentsRegistrationAPI = (name, members, phoneNumber) =>
+  POST({
+    url: `/v1/events`,
+    body: {
+      "name": name,
+      "members": members,
+      "phoneNumber": phoneNumber
+    },
   });

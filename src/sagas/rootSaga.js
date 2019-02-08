@@ -11,6 +11,7 @@ import {
   markSelectedStudentsAttendanceAPI,
   markSelectedStudentsOptInOrOptOutAPI,
   updateIdCardStatusSelectedStudentsAPI,
+  parentsRegistrationAPI,
 } from './studentRegisterAPI';
 import {
   createStudentFailedAction,
@@ -34,10 +35,12 @@ import {
   markSelectedStudentsOptInOrOptOutResultsFailureAction,
   updateIdCardStatusSelectedStudentsResultsSuccessAction,
   updateIdCardStatusSelectedStudentsResultsFailureAction,
+  parentsRegistrationResultsSuccessAction,
+  parentsRegistrationResultsFailureAction,
 } from '../actions/studentRegistrationActions';
 
 
-export default function* rootSaga () {
+export default function* rootSaga() {
   yield takeLatest(['CREATE_STUDENT'], createStudentSaga);
   yield takeLatest(['FETCH_STUDENT'], fetchStudentSaga);
   yield takeLatest(['UPDATE_STUDENT'], updateStudentSaga);
@@ -48,6 +51,7 @@ export default function* rootSaga () {
   yield takeLatest(['MARK_SELECTED_STUDENTS_ATTENDANCE'], markSelectedStudentsAttendanceSaga);
   yield takeLatest(['MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT'], markSelectedStudentsOptInOrOptOutSaga);
   yield takeLatest(['UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS'], updateIdCardStatusSelectedStudentsSaga);
+  yield takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga);
 }
 
 export function* createStudentSaga(action) {
@@ -117,14 +121,14 @@ export function* searchStudentSaga(action) {
 export function* getAllStudentsSaga(action) {
   const { secretKey } = action;
   const errorMessage = 'Error getting student details.';
-  try{
+  try {
     const response = yield getAllStudentsAPI(secretKey);
-    if(response.students){
+    if (response.students) {
       yield put(getAllStudentsDataResultsSuccessAction(response.students));
     } else {
       throw response;
     }
-  }catch (e){
+  } catch (e) {
     yield put(getAllStudentsDataResultsFailureAction(errorMessage));
   }
 }
@@ -132,14 +136,14 @@ export function* getAllStudentsSaga(action) {
 export function* uploadAttendanceFileSaga(action) {
   const { secretKey, attendanceFile } = action;
   const errorMessage = 'Error occurred while uploading attendance file.';
-  try{
+  try {
     const response = yield uploadAttendanceAPI(secretKey, attendanceFile);
-    if(response["totalRecords"]){
+    if (response.totalRecords) {
       yield put(uploadAttendanceFileResultsSuccessAction(response));
     } else {
       yield put(uploadAttendanceFileResultsFailureAction(errorMessage));
     }
-  }catch (e){
+  } catch (e) {
     yield put(uploadAttendanceFileResultsFailureAction(errorMessage));
   }
 }
@@ -147,14 +151,14 @@ export function* uploadAttendanceFileSaga(action) {
 export function* uploadOptInFileSaga(action) {
   const { secretKey, optInFile } = action;
   const errorMessage = 'Error occurred while uploading opt-in file.';
-  try{
+  try {
     const response = yield uploadOptInAPI(secretKey, optInFile);
-    if(response["totalRecords"]){
+    if (response.totalRecords) {
       yield put(uploadOptInFileResultsSuccessAction(response));
     } else {
       yield put(uploadOptInFileResultsFailureAction(errorMessage));
     }
-  }catch (e){
+  } catch (e) {
     yield put(uploadOptInFileResultsFailureAction(errorMessage));
   }
 }
@@ -162,14 +166,14 @@ export function* uploadOptInFileSaga(action) {
 export function* markSelectedStudentsAttendanceSaga(action) {
   const { secretKey, selectedStudentsId, day } = action;
   const errorMessage = 'Error getting mark selected students attendance.';
-  try{
+  try {
     const response = yield markSelectedStudentsAttendanceAPI(secretKey, selectedStudentsId, day);
-    if(response["message"] === "Updated Successfully"){
+    if (response.message === 'Updated Successfully') {
       yield put(markSelectedStudentsAttendanceResultsSuccessAction(response));
     } else {
       yield put(markSelectedStudentsAttendanceResultsFailureAction(errorMessage));
     }
-  }catch (e){
+  } catch (e) {
     yield put(markSelectedStudentsAttendanceResultsFailureAction(errorMessage));
   }
 }
@@ -178,14 +182,14 @@ export function* markSelectedStudentsAttendanceSaga(action) {
 export function* markSelectedStudentsOptInOrOptOutSaga(action) {
   const { secretKey, selectedStudentsId, opt } = action;
   const errorMessage = 'Error getting mark selected students opt in or opt out.';
-  try{
+  try {
     const response = yield markSelectedStudentsOptInOrOptOutAPI(secretKey, selectedStudentsId, opt);
-    if(response["message"] === "Updated Successfully"){
+    if (response.message === 'Updated Successfully') {
       yield put(markSelectedStudentsOptInOrOptOutResultsSuccessAction(response));
     } else {
       yield put(markSelectedStudentsOptInOrOptOutResultsFailureAction(errorMessage));
     }
-  }catch (e){
+  } catch (e) {
     yield put(markSelectedStudentsOptInOrOptOutResultsFailureAction(errorMessage));
   }
 }
@@ -194,14 +198,29 @@ export function* markSelectedStudentsOptInOrOptOutSaga(action) {
 export function* updateIdCardStatusSelectedStudentsSaga(action) {
   const { secretKey, selectedStudentsId, IdCardStatus } = action;
   const errorMessage = 'Error getting update Id card status of selected students.';
-  try{
+  try {
     const response = yield updateIdCardStatusSelectedStudentsAPI(secretKey, selectedStudentsId, IdCardStatus);
-    if(response["message"] === "Updated Successfully"){
+    if (response.message === 'Updated Successfully') {
       yield put(updateIdCardStatusSelectedStudentsResultsSuccessAction(response));
     } else {
       yield put(updateIdCardStatusSelectedStudentsResultsFailureAction(errorMessage));
     }
-  }catch (e){
+  } catch (e) {
     yield put(updateIdCardStatusSelectedStudentsResultsFailureAction(errorMessage));
+  }
+}
+
+export function* parentsRegistrationSaga(action) {
+  const { name, members, phoneNumber } = action;
+  const errorMessage = 'Error getting registration.';
+  try {
+    const response = yield parentsRegistrationAPI(name, members, phoneNumber);
+    if (response.message === 'Registration successful') {
+      yield put(parentsRegistrationResultsSuccessAction(response));
+    } else {
+      yield put(parentsRegistrationResultsFailureAction(errorMessage));
+    }
+  } catch (e) {
+    yield put(parentsRegistrationResultsFailureAction(errorMessage));
   }
 }

@@ -359,6 +359,14 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         ...state,
         userType: action.userType,
       };
+    case 'PARENTS_REGISTRATION_RESULT_SUCCESS':
+      return {
+        ...state,
+      }
+    case 'PARENTS_REGISTRATION_RESULT_FAILED':
+      return {
+        ...state,
+      };
     default: {
       return {
         ...state,
