@@ -82,8 +82,8 @@ class ParentsRegistration extends Component {
   renderErrorMessage() {
     if (this.state.isError) {
       return (
-        <div>
-          {'All fields are compulsory'}
+        <div className="errorPopupContainer error-popup-padding">
+          <span className="error-message">{'All fields are compulsory'}</span>
         </div>);
     }
     return null;
@@ -160,16 +160,55 @@ class ParentsRegistration extends Component {
             </form>
             <div>
               <div>
-                <span>दिनांक : रविवार १७ फरवरी</span>
+                <span className="column-content-students">नाम : </span>
+                <input
+                  type="text"
+                  name="name"
+                  className="input-text"
+                  value={this.state.name}
+                  onChange={this._handleInputChangeName}
+                />
               </div>
-              <div>
-                <span>समय : प्रातः ९ से १ बजे</span>
+              <div className="parent-register-input-text">
+                <span className="column-content-students">फ़ोन : </span>
+                <input
+                  type="number"
+                  name="mobile"
+                  className="input-text"
+                  value={this.state.mobile}
+                  onChange={this._handleInputChangeMobile}
+                />
               </div>
               <div>
                 <span>स्थान : श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर</span>
               </div>
+              <div className="buttonContainer button-register-submit">
+                <button
+                  type="submit"
+                  form="parentsRegistrationForm"
+                  value="Submit"
+                  className="linkButton margin-none full-width"
+                  onClick={this._submitStudentData}
+                >
+                  {'Submit'}
+                </button>
+              </div>
+              <div className="register-form-content-wrapper">
+                <div className="form-content-title">
+                  <span>{'दिनांक : रविवार १७ फरवरी'}</span>
+                </div>
+                <div className="form-content-title">
+                  <span>{'समय : प्रातः ९ से १ बजे'}</span>
+                </div>
+                <div className="form-content-title form-content-flex">
+                  <span>{'स्थान : '}</span>
+                  <span className="form-content-flex-content">{'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर'}</span>
+                </div>
+              </div>
             </div>
-          </div>
+
+          </form>
+
           <div className="footer print-media-none footer-index">
             <p className="footer-text footer-index">
               <span className="contact-no-footer footer-index">{"किसी अन्य जानकारी के लिए संपर्क सूत्र: प्रकाश छाबड़ा (99260 40137)"}</span>
