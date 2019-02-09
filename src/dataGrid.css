@@ -130,6 +130,7 @@ html, body {
 }
 .footer-index {
     z-index:1000;
+    padding:5px;
 }
 .buttonOrange {
     color: rgb(255, 255, 255);
@@ -1578,6 +1579,7 @@ body,
 }
 .selected-day-list {
     min-height: 26px;
+    margin-top:5px;
     min-width: 85px;
     cursor:pointer;
 }
@@ -1606,17 +1608,35 @@ body,
     /*border: 1px solid #ccc;*/
     border-radius: 4px;
 }
+.parent-input-text {
+    height: auto;
+    /*flex:0 85%;*/
+    flex: 0.5 0 36%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.parent-register-label {
+    /*flex:1;*/
+    flex: 0 0 13%;
+}
 .parent-register-heading {
     margin-bottom:25px;
 }
 .input-field-register-wrapper {
     padding: 30px 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 1px 0px #eeecec;
 }
 .register-form-content-wrapper {
     margin-top:30px;
 }
 .register-form-content-wrapper .form-content-title {
     margin-bottom:10px;
+    display:flex;
+}
+.form-title-small {
+    flex: 0 15%;
 }
 .button-register-submit {
     margin-left:0;
@@ -1624,6 +1644,9 @@ body,
 }
 .parent-register-input-text {
     margin:20px 0px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
 }
 .error-popup-padding {
     padding:0px 0px;
@@ -1633,8 +1656,14 @@ body,
     flex-direction: column;
     height: 100%;
 }
+.form-title-text {
+    padding-left: 5px;
+}
 .parent-register-message-wrapper {
     padding: 50px 50px;
+}
+.parent-register-container {
+    background-color: #f8f8f8;
 }
 @media (max-width: 1024px) {
     .registrationFormContainer {
@@ -1839,6 +1868,7 @@ body,
         margin:0px auto;
         box-shadow:none;
     }
+
 }
 @media (max-width: 768px) {
     .custom-modal {
@@ -1938,7 +1968,21 @@ body,
         padding: 20px 30px;
     }
     .input-field-register-container {
-        display:block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:100%;
+    }
+    .button-register-submit {
+        width:100%;
+        margin-top:30px;
+    }
+    .parent-input-text {
+        width:100%;
+    }
+    .parent-register-container {
+        display:flex;
+        height:100%;
     }
 
 }
@@ -1955,11 +1999,31 @@ body,
     .custom-modal {
         width: 50% !important;
     }
+    .input-field-register-container {
+        display:block;
+    }
+    .input-field-register-wrapper {
+        margin:50px 10px;
+    }
+    .parent-register-container {
+        display:block;
+        height:auto;
+    }
+    .footer-none-wrapper {
+        display:block;
+    }
+    .selected-day-list {
+        display:block;
+    }
     .footer-none-wrapper + .footer-none {
         display:none;
     }
     .parent-register-heading-text {
         line-height: 24px;
+        text-align: center;
+    }
+    .parent-input-text {
+        flex: 0 1 100%;
     }
     .button-wrapper {
         display: flex;
@@ -2206,7 +2270,7 @@ body,
         margin:64px 0px;
     }
     .parent-info-heading {
-        padding:15px !important;
+        padding: 10px 20px 10px 100px !important;
     }
     .form-content-flex {
         display:flex;
@@ -2221,6 +2285,12 @@ body,
     .parent-register-success {
         margin-bottom: 20px;
         line-height: 20px;
+    }
+    .form-title-small {
+        flex: 0 1 20%;
+    }
+    .parent-register-label {
+        flex: 0 0 20%;
     }
 
 
@@ -2372,6 +2442,9 @@ body,
     }
     .landing-page-content {
         margin-bottom:20px;
+    }
+    .form-title-small {
+        flex: 0 1 24%;
     }
 
 }

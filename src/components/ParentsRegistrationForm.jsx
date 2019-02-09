@@ -103,7 +103,7 @@ class ParentsRegistration extends Component {
     if (this.state.isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
-          <span className="error-message">All fields are compulsory</span>
+          <span className="error-message">{'सभी क्षेत्रों अनिवार्य है| '}</span>
         </div>);
     }
     return null;
@@ -139,25 +139,25 @@ class ParentsRegistration extends Component {
             <form id="parentsRegistrationForm" className="inputFieldContainerWrapper input-field-register-container">
               <div className="inputFieldContainer input-field-register-wrapper">
                 <div className="parent-register-heading">
-                  <h1 className="parent-register-heading-text">सम्मिलित होने के लिए कृपया निचे दी गई जानकारी देवें!</h1>
+                  <h1 className="parent-register-heading-text primary-color">सम्मिलित होने के लिए कृपया निचे दी गई जानकारी देवें!</h1>
                 </div>
                 <div className="parent-register-input-text">
-                  <span className="column-content-students">नाम : </span>
+                  <span className="column-content-students parent-register-label">नाम : </span>
                   <input
                     type="text"
                     name="name"
-                    className="input-text"
+                    className="parent-input-text"
                     value={this.state.name}
                     onChange={this._handleInputChangeName}
                     required
                   />
                 </div>
                 <div className="parent-register-input-text">
-                  <span className="column-content-students">फ़ोन : </span>
+                  <span className="column-content-students parent-register-label">फ़ोन : </span>
                   <input
                     type="number"
                     name="mobile"
-                    className="input-text"
+                    className="parent-input-text"
                     value={this.state.mobile}
                     onChange={this._handleInputChangeMobile}
                     required
@@ -187,14 +187,16 @@ class ParentsRegistration extends Component {
                 </div>
                 <div className="register-form-content-wrapper">
                   <div className="form-content-title">
-                    <span>दिनांक : रविवार १७ फरवरी</span>
+                    <span className="form-title-small">{'दिनांक :'}</span>
+                    <span className="form-title-text"> {'रविवार १७ फरवरी'}</span>
                   </div>
                   <div className="form-content-title">
-                    <span>समय : प्रातः ९ से १ बजे</span>
+                    <span className="form-title-small">{'समय :'}</span>
+                    <span className="form-title-text">{'प्रातः ९ से १ बजे'}</span>
                   </div>
                   <div className="form-content-title form-content-flex">
-                    <span>स्थान : </span>
-                    <span className="form-content-flex-content">श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर</span>
+                    <span className="form-title-small">{'स्थान : '}</span>
+                    <span className="form-content-flex-content form-title-text">{'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर'}</span>
                   </div>
                 </div>
               </div>

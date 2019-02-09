@@ -253,7 +253,7 @@ export const invalidIdMessage = 'आपके द्वारा दर्ज �
 
 export const noInfoChangeMessage = 'जानकारी में कोई बदलाव नहीं ';
 
-export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलता पूर्वक अपडेट कर दी गई है |';
+export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलतापूवर्क अपडेट कर दी गई है |';
 
 export const adminLoginBtnText = 'Admin Login';
 
