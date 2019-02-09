@@ -103,7 +103,7 @@ class ParentsRegistration extends Component {
     if (this.state.isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
-          <span className="error-message">{'सभी क्षेत्रों अनिवार्य है| '}</span>
+          <span className="error-message">{'All fields are compulsory'}</span>
         </div>);
     }
     return null;
