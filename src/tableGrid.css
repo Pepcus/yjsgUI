@@ -1,3 +1,6 @@
+.table-head {
+    background-color: #f2f2f4;
+}
 .render-table {
 
     padding: 0px !important;
@@ -49,11 +52,11 @@
     /* height: auto; */
 }
 .cell__name {
-    min-width:200px;
+    min-width:100px;
     max-width: 100%;
 }
 .cell__fatherName {
-    min-width: 200px;
+    min-width: 145px;
     max-width:100%;
 }
 .cell__mobile> div.table-cell {
@@ -70,7 +73,7 @@
     max-width: 50px;
 }
 .cell__address {
-    min-width: 280px;
+    min-width: 270px;
     max-width: 100%;
 }
 .cell__education {

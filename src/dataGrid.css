@@ -1387,7 +1387,7 @@ body,
 .card-content-wrapper {
     position:relative;
     background-size: contain;
-    background: url('assets/LOGO.png') no-repeat center;
+    background: url('assets/LOGO.png') no-repeat center top;
     -webkit-print-color-adjust: exact;
 }
 
