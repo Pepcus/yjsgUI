@@ -4,6 +4,12 @@
  */
 export const gridMetaData = [
   {
+    'label': 'Edit',
+    'key': 'edit',
+    'disableFilter': true,
+    'excludeFromExport': true,
+  },
+  {
     'label': 'ID',
     'key': 'studentId',
     'type': 'Number',
@@ -222,12 +228,6 @@ export const gridMetaData = [
     'label': 'Last Modified Date',
     'key': 'lastModifiedDate',
     'type': 'string',
-  },
-  {
-    'label': 'Edit',
-    'key': 'edit',
-    'disableFilter': true,
-    'excludeFromExport': true,
   },
 ];
 

@@ -157,7 +157,10 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   render() {
     return (
       <div className="buttonContainer">
-        <button className={this.renderIdCardStatusButtonClassName()} onClick={this.openUpdateIdCardStatusSelectedStudentsModal}>
+        <button
+          className={this.renderIdCardStatusButtonClassName()}
+          onClick={this.openUpdateIdCardStatusSelectedStudentsModal}
+        >
           <i className="fa fa-print card-icon" />Print Later
         </button>
         {this.renderUpdateIdCardStatusSelectedStudentsModal()}

@@ -178,14 +178,14 @@ class StudentInfoGrid extends Component {
    * @return {Object} metaData
    */
   formatMetaData = (visibleColumnConfig) => {
-    const metaData = [];
+    let metaData = [];
     for (const columnKey in visibleColumnConfig) {
       if (visibleColumnConfig[columnKey]) {
         if (columnKey === 'edit') {
-          metaData.push({
+          metaData = [{
             ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey),
             customComponent: this.EditButton,
-          });
+          }, ...metaData];
         } else {
           metaData.push(gridMetaData.find(metaDataObj => metaDataObj.key === columnKey));
         }
@@ -246,7 +246,7 @@ class StudentInfoGrid extends Component {
     <div>
       <div className="btn-block display-mobile-none">
         <button onClick={() => { this.handleEditClick(rowData); }} className="btn-grid">
-          <i className="fa fa-edit" />Edit
+          <i className="fa fa-edit" />
         </button>
       </div>
       <div className="btn-block display-logout-desktop">
