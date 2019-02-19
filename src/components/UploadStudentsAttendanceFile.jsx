@@ -147,7 +147,7 @@ class UploadStudentsAttendanceFile extends Component {
   render() {
     return (
       <div className="display-inline mar-right-10">
-        <button className="column-option-container" onClick={this.openUploadStudentsAttendanceFileOption}>
+        <button className="column-option-container" title="Upload Attendance" onClick={this.openUploadStudentsAttendanceFileOption}>
           <i className="fa fa-upload card-icon" />
         Upload Attendance
         </button>

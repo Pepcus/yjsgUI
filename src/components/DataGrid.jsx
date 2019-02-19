@@ -8,13 +8,14 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from './GridData';
-import { allStudentsData,
+import {
+  allStudentsData,
   getVisibleColumnConfig,
   getSelectValue,
   getSecretKey,
   stateOfRedirect,
   stateOfAdminLogin,
-  isGetAllStudentsLoading,
+  isGetAllStudentsLoading, getStudent,
 } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
@@ -53,6 +54,7 @@ class StudentInfoGrid extends Component {
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
+      refresh: false,
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -72,6 +74,7 @@ class StudentInfoGrid extends Component {
     this.EditButton = this.EditButton.bind(this);
     this.formattedStudent = this.formattedStudent.bind(this);
     this.getSelectedRow = this.getSelectedRow.bind(this);
+    this.refreshStudentsGrid = this.refreshStudentsGrid.bind(this);
   }
 
   componentWillMount() {
@@ -83,17 +86,44 @@ class StudentInfoGrid extends Component {
     });
   }
   componentDidMount() {
-    this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
+    if (isEmpty(this.props.students)) {
+      this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
+    } else {
+      this.setState({
+        students: this.formattedStudent(this.props.students),
+      });
+    }
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.students !== this.props.students) {
+    if (isEmpty(this.props.students)) {
+      if (nextProps.students !== this.props.students) {
+        this.setState({
+          students: this.formattedStudent(nextProps.students),
+        });
+      }
+    } else {
       this.setState({
-        students: this.formattedStudent(nextProps.students),
+        students: this.formattedStudent(this.props.students),
       });
     }
+    if (this.state.refresh) {
+      if (nextProps.students !== this.props.students) {
+        this.setState({
+          students: this.formattedStudent(nextProps.students),
+          refresh: false,
+        });
+      }
+    }
+  }
+
+  refreshStudentsGrid() {
+    this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
+    this.setState({
+      refresh: true,
+    });
   }
   /**
    * performLogout method will call when click on logout button
@@ -202,19 +232,10 @@ class StudentInfoGrid extends Component {
    * @param {Object} rowData
    */
   handleEditClick(rowData) {
-    const newRowData = { ...rowData,
-      id: rowData.studentId,
-      age: String(rowData.age),
-      mobile: String(rowData.mobile),
-      attendance2016: String(rowData.attendance2016),
-      attendance2017: String(rowData.attendance2017),
-      classRoomNo2016: String(rowData.classRoomNo2016),
-      classRoomNo2017: String(rowData.classRoomNo2017),
-      marks2016: String(rowData.marks2016),
-      marks2017: String(rowData.marks2017) };
     if (!isEmpty(rowData)) {
-      this.props.setStudentDataAction(newRowData);
-      this.props.updateStudentByAdminAction(rowData.studentId, adminPassword);
+      this.props.fetchStudentData(String(rowData.studentId), adminPassword);
+      this.props.setStudentDataAction(this.props.studentData);
+      this.props.updateStudentByAdminAction(String(rowData.studentId), adminPassword);
       this.setState({
         isStudentDataSet: true,
       });
@@ -245,12 +266,12 @@ class StudentInfoGrid extends Component {
   EditButton = ({ rowData }) => (
     <div>
       <div className="btn-block display-mobile-none">
-        <button onClick={() => { this.handleEditClick(rowData); }} className="btn-grid">
+        <button onClick={() => { this.handleEditClick(rowData); }} title="Edit" className="btn-grid">
           <i className="fa fa-edit" />
         </button>
       </div>
       <div className="btn-block display-logout-desktop">
-        <button onClick={() => { this.handleEditClick(rowData); }} className="btn-grid">
+        <button onClick={() => { this.handleEditClick(rowData); }} title="Edit" className="btn-grid">
           <i className="fa fa-edit" />
         </button>
       </div>
@@ -414,11 +435,15 @@ class StudentInfoGrid extends Component {
                   <UploadOptInFile />
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
-                    <button className="column-option-container" onClick={this.openColumnOption}>
+                    <button className="column-option-container" title="Configure" onClick={this.openColumnOption}>
                       <i className="fa fa-cog card-icon" />
-                      Configure
                     </button>
                     {this.renderColumnConfig()}
+                  </div>
+                  <div className=" display-inline">
+                    <button className="column-option-container" title="Refresh Students Information" onClick={this.refreshStudentsGrid}>
+                      <i className="fa fa-refresh" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -466,6 +491,7 @@ StudentInfoGrid.propTypes = {
   setVisibleColumnConfigAction: PropTypes.func,
   setStudentDataAction: PropTypes.func,
   updateStudentByAdminAction: PropTypes.func,
+  fetchStudentData: PropTypes.func,
 };
 
 StudentInfoGrid.defaultProps = {
@@ -484,6 +510,7 @@ StudentInfoGrid.defaultProps = {
   setVisibleColumnConfigAction: () => {},
   setStudentDataAction: () => {},
   updateStudentByAdminAction: () => {},
+  fetchStudentData: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -494,6 +521,7 @@ const mapStateToProps = state => ({
   redirect: stateOfRedirect(state),
   adminLoginState: stateOfAdminLogin(state),
   secretKey: getSecretKey(state),
+  studentData: getStudent(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,

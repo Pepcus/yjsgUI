@@ -75,6 +75,7 @@ class UploadOptInFile extends Component {
   fileUpload(optInFile) {
     this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
   }
+
   renderFailOptIn() {
     if (this.props.failOptIn) {
       return (
@@ -85,6 +86,7 @@ class UploadOptInFile extends Component {
       );
     }
   }
+
   renderMessage() {
     if (this.props.isOptInSuccess) {
       return (
@@ -146,7 +148,7 @@ class UploadOptInFile extends Component {
   render() {
     return (
       <div className="display-inline mar-right-10">
-        <button className="column-option-container" onClick={this.optionUploadOptInFileModal}>
+        <button className="column-option-container" title="Upload Opt In" onClick={this.optionUploadOptInFileModal}>
           <i className="fa fa-upload card-icon" />
           Upload Opt In
         </button>
