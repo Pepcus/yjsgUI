@@ -398,10 +398,10 @@ class StudentInfoGrid extends Component {
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">
                   <div className="logoutLinkContainer print-media-none">
-                    <Link to="/admin" className="logout-button">
+                    <Link to="/admin" className="grid-small-button">
                       <i className="fa fa-arrow-left card-icon" />Back
                     </Link>
-                    <Link to="/admin" className="logout-button" onClick={this.performLogout}>
+                    <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
                       <i className="fa fa-power-off card-icon" />Logout
                     </Link>
                   </div>
@@ -410,16 +410,21 @@ class StudentInfoGrid extends Component {
             </div>
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
-                <Link to="/admin" className="logout-button">
+                <Link to="/admin" className="grid-small-button">
                   <i className="fa fa-arrow-left" />
                 </Link>
-                <a className="logout-button" onClick={this.openColumnOption}>
+                <a className="grid-small-button" onClick={this.openColumnOption}>
                   <i className="fa fa-cog" />
                 </a>
                 {this.renderColumnConfig()}
-                <Link to="/admin" className="logout-button" onClick={this.performLogout}>
+                <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
                   <i className="fa fa-power-off" />
                 </Link>
+                <div className=" display-inline">
+                  <button className="grid-small-button" title="Refresh Students Information" onClick={this.refreshStudentsGrid}>
+                    <i className="fa fa-refresh" />
+                  </button>
+                </div>
               </div>
             </div>
             <div className="modal">
@@ -436,7 +441,7 @@ class StudentInfoGrid extends Component {
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" title="Configure" onClick={this.openColumnOption}>
-                      <i className="fa fa-cog card-icon" />
+                      <i className="fa fa-cog" />
                     </button>
                     {this.renderColumnConfig()}
                   </div>

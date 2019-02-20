@@ -458,10 +458,9 @@ html, body {
     background-color: #f9570a !important;
     border: 1px solid #f9570a !important;
     color: #ffffff !important;
-    min-width: 130px;
     outline: none;
     cursor: pointer;
-    padding: 15px 10px !important;
+    padding: 7px 10px !important;
     height: auto !important;
     font-size: 14px !important;
     margin: 2px 0 5px !important;
@@ -469,25 +468,29 @@ html, body {
     position: relative;
     transition: 0.5s all;
 }
-.column-option-container::after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    font-size: 28px;
-    top: 3px;
-    right: 40px;
-    transition: 0.5s linear;
+.column-option-configure {
+    margin-right: 10px;
 }
-.column-option-configure:hover .column-option-container {
-    cursor: pointer;
-    transition: 0.3s all;
-    padding-right: 26px !important;
-}
-.column-option-configure:hover .column-option-container::after {
-    opacity: 1;
-    right: 7px;
-    transition: 0.5s all;
-}
+/*this is the code for column-option configure arrow styling*/
+/*.column-option-container::after {*/
+    /*content: '\00bb';*/
+    /*position: absolute;*/
+    /*opacity: 0;*/
+    /*font-size: 28px;*/
+    /*top: 3px;*/
+    /*right: 40px;*/
+    /*transition: 0.5s linear;*/
+/*}*/
+/*.column-option-configure:hover .column-option-container {*/
+    /*cursor: pointer;*/
+    /*transition: 0.3s all;*/
+    /*padding-right: 26px !important;*/
+/*}*/
+/*.column-option-configure:hover .column-option-container::after {*/
+    /*opacity: 1;*/
+    /*right: 7px;*/
+    /*transition: 0.5s all;*/
+/*}*/
 .column-option-container:hover {
     transition: 0.3s all;
     box-shadow: 1px 2px 3px #b0b0b0;
@@ -1047,7 +1050,7 @@ body,
     margin-top: -30px;
 }
 
-.logout-button {
+.grid-small-button {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -1058,15 +1061,11 @@ body,
     border-radius: 3px;
 }
 
-.logout-button:hover {
+.grid-small-button:hover {
     color: #ffffff;
     background-color: rgb(231, 104, 14);
     transition: 0.3s all;
 }
-.logoutLinkContainer .logout-button:nth-child(2) {
-    margin-right: 0;
-}
-
 .input-radio .input-text {
     min-width: 100%;
     max-width: 100%;
@@ -1719,7 +1718,7 @@ body,
         right: 0;
         z-index: 1;
     }
-    .logout-button {
+    .grid-small-button {
         color: rgb(255, 255, 255);
         background-color: #f9570a;
         outline: none;
@@ -1733,9 +1732,6 @@ body,
     }
     .logoutLinkContainer {
         margin: 0 10px;
-    }
-    .logoutLinkContainer .logout-button:first-child {
-        margin-right: 10px;
     }
     .yjsg-logo {
         position: fixed;
@@ -1763,11 +1759,11 @@ body,
         position: relative;
         z-index: auto;
     }
-    .logoutLinkContainer .logout-button:first-child {
+    .logoutLinkContainer .grid-small-button {
         margin-right: 5px;
     }
-    .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right: 5px;
+    .logoutLinkContainer .grid-small-button:last-child {
+        margin-right: 0px;
     }
     .grid-scroll-page-wrapper {
         overflow-y: unset;
@@ -1786,11 +1782,8 @@ body,
         padding: 5px 10px !important;
         margin: 0 !important;
     }
-    .logout-button {
+    .grid-small-button {
         padding: 3px 10px !important;
-    }
-    .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right: 10px;
     }
     .inputFieldContainerWrapper {
         overflow-y: inherit;
@@ -1871,7 +1864,7 @@ body,
     .modal {
         margin-top: 15px;
     }
-    .logout-button {
+    .grid-small-button {
         color: rgb(255, 255, 255);
         background-color: #f9570a;
         outline: none;
@@ -1886,11 +1879,11 @@ body,
     .logoutLinkContainer {
         margin: 0 10px;
     }
-    .logoutLinkContainer .logout-button:first-child {
+    .logoutLinkContainer .grid-small-button {
         margin-right: 5px;
     }
-    .logoutLinkContainer .logout-button:nth-child(2) {
-        margin-right: 5px;
+    .logoutLinkContainer .grid-small-button:last-child {
+        margin-right: 0px;
     }
     .column-group {
         display: block;
@@ -2099,10 +2092,10 @@ body,
         padding: 5px 10px !important;
         margin: 0 !important;
     }
-    .logout-button {
+    .grid-small-button {
         padding: 3px 10px !important;
     }
-    .logoutLinkContainer .logout-button:nth-child(2) {
+    .logoutLinkContainer .grid-small-button:nth-child(2) {
         margin-right: 5px;
     }
     .modal {
