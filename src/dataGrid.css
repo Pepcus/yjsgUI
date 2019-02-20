@@ -25,8 +25,8 @@ html, body {
 
 .logoutLinkContainer a:hover {
     border-radius: 4px;
-    border: 1px solid rgb(218, 76, 8) !important;
-    background-color: rgb(218, 76, 8);
+    border: 1px solid #da4c08 !important;
+    background-color: #da4c08;
     transition: 0.3s all;
 }
 .primary-color {
@@ -36,7 +36,7 @@ html, body {
 }
 .arrowIcon {
     margin: -5px 1px !important;
-    color: rgb(76, 76, 76) !important;
+    color: #4c4c4c !important;
 }
 .landing-page-button-container .inputText {
     padding: 7px 5px;
@@ -58,7 +58,7 @@ html, body {
     position: fixed;
     top: 0;
     left:0;
-    background: rgb(249, 87, 10);
+    background: #f9570a;
     padding: 15px 0;
     margin: 0;
     color: #fff;
@@ -98,16 +98,16 @@ html, body {
     width: 100%;
     color: #858585;
     padding: 10px 0;
-    background: rgb(242, 242, 242);
+    background: #f2f2f2;
     border-top: 1px solid #e8e6e6;
 }
 .footer .footer-text {
     font-size: 14px;
-    background: rgb(242, 242, 242);
+    background: #f2f2f2;
 }
 
 .linkButton {
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     background-color: #f9570a;
     outline: none;
     box-shadow: 0 1px 3px 0 #777978;
@@ -130,7 +130,7 @@ html, body {
     padding:5px;
 }
 .buttonOrange {
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     outline: none;
     background-color: #f9570a;
     box-shadow: 0 1px 3px 0 #777978;
@@ -194,7 +194,7 @@ html, body {
 
 .table-cell {
     font-size: 14px;
-    color: rgb(76, 76, 76) !important;
+    color: #4c4c4c !important;
     padding: 5px 10px !important;
     height: auto !important;
     border-right: 0;
@@ -335,11 +335,11 @@ html, body {
     color: #fff !important;
 }
 .page-number-arrow .arrowIcon {
-    color: rgb(106, 104, 104) !important;
+    color: #6a6868 !important;
 }
 .page-number-arrow:hover .arrowIcon {
     transition: 0.3s all;
-    color: rgb(77, 73, 73) !important;
+    color: #4d4949 !important;
 }
 .table-footer-cell {
     height: auto !important;
@@ -351,7 +351,7 @@ html, body {
     padding: 8px 0 8px !important;
     font-size: 16px !important;
     font-weight: 500;
-    color: rgb(103, 103, 103) !important;
+    color: #676767 !important;
     border: none !important;
     background-color: transparent !important;
 }
@@ -375,7 +375,7 @@ html, body {
 .header-column {
     width: 100% !important;
     overflow: hidden !important;
-    background-color: rgb(242, 242, 244) !important;
+    background-color: #f2f2f4 !important;
 }
 .table-body-row:nth-child(2n+1) {
     font-size: 15px;
@@ -383,7 +383,7 @@ html, body {
 }
 .table-body-row {
     font-size: 15px;
-    background-color: rgb(248, 247, 247) !important;
+    background-color: #f8f7f7 !important;
 }
 .btn-block .btn-grid {
     background: #f9570a;
@@ -435,7 +435,7 @@ html, body {
     width: 100%;
     max-width: 330px;
     padding: 5px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid #cccccc;
     border-radius: 4px;
     height: auto !important;
 }
@@ -529,7 +529,7 @@ html, body {
 }
 .page-number {
     margin-left: 0 !important;
-    color: rgb(76, 76, 76) !important;
+    color: #4c4c4c !important;
     font-weight: 500 !important;
 }
 .column-group .column-group-container {
@@ -664,7 +664,7 @@ html, body {
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    border: 1px solid rgb(205, 68, 3) !important;
+    border: 1px solid #cd4403 !important;
     padding: 0 !important;
 }
 .column-group .label {
@@ -673,7 +673,7 @@ html, body {
     margin-top: 4px;
 }
 .column-group-wrapper {
-    background-color: rgb(241, 241, 241);
+    background-color: #f1f1f1;
 }
 .column-group {
     display: flex;
@@ -734,7 +734,7 @@ html, body {
     border-radius: 4px;
     padding: 5px 10px 5px 13px;
     box-shadow: 1px 1px 9px -4px #f0f0f0 !important;
-    background: rgb(248, 247, 247) !important;
+    background: #f8f7f7 !important;
 }
 .advance-search-button {
     border-radius: 3px;
@@ -855,7 +855,7 @@ body,
     background: rgba(248, 248, 247, 0.75);
 }
 .popupContainer {
-    background: rgb(249, 87, 10);
+    background: #F9570A;
     box-shadow: 0 1px 3px 0 #a2a2a2;
 }
 .errorPopupContainer .popup .linkButton {
@@ -993,7 +993,7 @@ body,
     animation-name: column-message;
     animation-duration: 0.7s;
     transition: 0.3s all;
-    background: rgb(242, 242, 244);
+    background: #f2f2f4;
 }
 
 @keyframes column-message {
@@ -1039,7 +1039,7 @@ body,
 }
 
 .page-number-arrow-disabled .arrowIcon {
-    color: rgb(193, 193, 193) !important;
+    color: #c1c1c1 !important;
 }
 
 .card-icon {
@@ -1063,7 +1063,7 @@ body,
 
 .grid-small-button:hover {
     color: #ffffff;
-    background-color: rgb(231, 104, 14);
+    background-color: #e7680e;
     transition: 0.3s all;
 }
 .input-radio .input-text {
@@ -1719,7 +1719,7 @@ body,
         z-index: 1;
     }
     .grid-small-button {
-        color: rgb(255, 255, 255);
+        color: #ffffff;
         background-color: #f9570a;
         outline: none;
         text-align: center;
@@ -1763,7 +1763,7 @@ body,
         margin-right: 5px;
     }
     .logoutLinkContainer .grid-small-button:last-child {
-        margin-right: 0px;
+        margin-right: 0;
     }
     .grid-scroll-page-wrapper {
         overflow-y: unset;
@@ -1865,7 +1865,7 @@ body,
         margin-top: 15px;
     }
     .grid-small-button {
-        color: rgb(255, 255, 255);
+        color: #ffffff;
         background-color: #f9570a;
         outline: none;
         text-align: center;
@@ -1883,7 +1883,7 @@ body,
         margin-right: 5px;
     }
     .logoutLinkContainer .grid-small-button:last-child {
-        margin-right: 0px;
+        margin-right:0;
     }
     .column-group {
         display: block;
