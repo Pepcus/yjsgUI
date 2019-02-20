@@ -36,7 +36,7 @@ html, body {
 }
 .arrowIcon {
     margin: -5px 1px !important;
-    color: #4c4c4c !important;
+    color: #4c4c4c;
 }
 .landing-page-button-container .inputText {
     padding: 7px 5px;
@@ -335,11 +335,11 @@ html, body {
     color: #fff !important;
 }
 .page-number-arrow .arrowIcon {
-    color: #6a6868 !important;
+    color: #6a6868;
 }
 .page-number-arrow:hover .arrowIcon {
     transition: 0.3s all;
-    color: #4d4949 !important;
+    color: #4d4949;
 }
 .table-footer-cell {
     height: auto !important;
@@ -454,16 +454,16 @@ html, body {
     margin-right:10px;
 }
 .column-option-container {
-    border-radius: 4px !important;
-    background-color: #f9570a !important;
-    border: 1px solid #f9570a !important;
-    color: #ffffff !important;
+    border-radius: 4px ;
+    background-color: #f9570a ;
+    border: 1px solid #f9570a;
+    color: #ffffff;
     outline: none;
     cursor: pointer;
-    padding: 7px 10px !important;
-    height: auto !important;
-    font-size: 14px !important;
-    margin: 2px 0 5px !important;
+    padding: 7px 10px ;
+    height: auto ;
+    font-size: 14px ;
+    margin: 2px 0 5px;
     box-shadow: 1px 1px 3px 0 #b0b0b0;
     position: relative;
     transition: 0.5s all;
@@ -494,8 +494,8 @@ html, body {
 .column-option-container:hover {
     transition: 0.3s all;
     box-shadow: 1px 2px 3px #b0b0b0;
-    border: 1px solid #d24c0c !important;
-    background: #d24c0c !important;
+    border: 1px solid #d24c0c;
+    background: #d24c0c ;
 }
 .column-modal {
     background: #f9570a;
@@ -1039,7 +1039,7 @@ body,
 }
 
 .page-number-arrow-disabled .arrowIcon {
-    color: #c1c1c1 !important;
+    color: #c1c1c1;
 }
 
 .card-icon {
@@ -1320,8 +1320,8 @@ body,
     -webkit-print-color-adjust: exact;
 }
 .student-id-card-wrapper {
-    background-color: #f9570a !important;
-    color: #ffffff !important;
+    background-color: #f9570a;
+    color: #ffffff;
     font-weight:600;
     padding: 0;
     display:flex;
@@ -1356,7 +1356,7 @@ body,
     padding:5px;
 }
 .card-text-content {
-    text-transform: capitalize !important;
+    text-transform: capitalize;
 }
 
 .card-modal-footer {
@@ -1434,7 +1434,7 @@ body,
     padding:5px;
 }
 .card-text-content {
-    text-transform: capitalize !important;
+    text-transform: capitalize;
 }
 .card-text-bus-stop {
     height:10px;
@@ -1777,13 +1777,13 @@ body,
         padding: 20px 15px;
     }
     .column-option-container {
-        font-size: 14px !important;
+        font-size: 14px ;
         min-width: auto;
-        padding: 5px 10px !important;
-        margin: 0 !important;
+        padding: 5px 10px ;
+        margin: 0 ;
     }
     .grid-small-button {
-        padding: 3px 10px !important;
+        padding: 3px 10px;
     }
     .inputFieldContainerWrapper {
         overflow-y: inherit;
@@ -2087,13 +2087,13 @@ body,
         position: relative;
     }
     .column-option-container {
-        font-size: 14px !important;
+        font-size: 14px ;
         min-width: auto;
-        padding: 5px 10px !important;
-        margin: 0 !important;
+        padding: 5px 10px ;
+        margin: 0 ;
     }
     .grid-small-button {
-        padding: 3px 10px !important;
+        padding: 3px 10px;
     }
     .logoutLinkContainer .grid-small-button:nth-child(2) {
         margin-right: 5px;
@@ -2150,7 +2150,7 @@ body,
         opacity: 0;
     }
     .column-option-configure:hover .column-option-container {
-        padding-right: 10px !important;
+        padding-right: 10px;
     }
     .column-group {
         margin-left: 30px;

@@ -445,7 +445,7 @@ class StudentInfoGrid extends Component {
                     </button>
                     {this.renderColumnConfig()}
                   </div>
-                  <div className=" display-inline">
+                  <div className="display-inline">
                     <button className="column-option-container" title="Refresh Students Information" onClick={this.refreshStudentsGrid}>
                       <i className="fa fa-refresh" />
                     </button>
