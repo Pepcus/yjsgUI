@@ -170,12 +170,14 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
               <div className="column-content-modal">
                 <div className="selected-student-heading">
                   <span>Selected Students Id: </span>
-                  {
-                    this.state.studentsId.map(student =>
-                      <span className="selected-students-Id">{student}</span>)
-                  }
+                  <div className="selected-student-wrapper-id">
+                    {
+                      this.state.studentsId.map(student =>
+                        <span className="selected-students-Id">{student}</span>)
+                    }
+                  </div>
                 </div>
-                <div className="advance-input-radio">
+                <div className="advance-input-radio advance-input-print-later">
                   <div className="input-radio-container">
                     <input type="radio" name="OptInOrOptOut" value="Y" onClick={this.onClickRadioButton} />
                     <label htmlFor="Opt-In">Opt In</label>

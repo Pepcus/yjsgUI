@@ -200,10 +200,12 @@ class MarkSelectedStudentAttendance extends Component {
               <div className="column-content-modal column-wrapper">
                 <div className="selected-student-heading">
                   <span>Selected Students Id:</span>
-                  {
-                    this.state.studentsId.map(student =>
-                      <span className="selected-students-Id">{student}</span>)
-                  }
+                  <div className="selected-student-wrapper-id">
+                    {
+                      this.state.studentsId.map(student =>
+                        <span className="selected-students-Id">{student}</span>)
+                    }
+                  </div>
                 </div>
                 <div className="column-content-student-wrapper">
                   <span className="column-content-students">Select Day:</span>

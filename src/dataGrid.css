@@ -114,7 +114,7 @@ html, body {
     display: block;
     text-align: center;
     line-height: 20px;
-    padding: 10px;
+    padding: 7px;
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
@@ -393,7 +393,7 @@ html, body {
     outline: none;
     box-shadow: 0 1px 4px 0 #777978;
     border-radius: 3px;
-    padding: 7px 8px;
+    padding: 5px 8px;
 }
 .btn-block .btn-grid:hover {
     transition: 0.3s all;
@@ -1100,7 +1100,7 @@ body,
 }
 .export:hover {
     transition: 0.3s all;
-    box-shadow: 0 2px 3px 0 #aeaeae;
+    box-shadow: 0 1px 3px 0 #d4d0d0;
     background-color: #e1e1e4;
 }
 
@@ -1121,7 +1121,7 @@ body,
 .disable-link {
     pointer-events: none;
     font-size: 14px;
-    padding: 12px 14px 12px;
+    padding: 10px 14px 10px;
     text-decoration: none;
     outline: medium none;
     border-radius: 4px;
@@ -1148,7 +1148,6 @@ body,
     color: #d8d8d8;
     outline: none;
     pointer-events: none;
-    box-shadow: 0 1px 2px 0 #d7d3d3;
     border: none;
     display: block;
     text-align: center;
@@ -1174,7 +1173,7 @@ body,
 }
 .selected-student-buttons .buttonContainer .linkButton:hover {
     transition: 0.3s all;
-    box-shadow: 0 2px 3px 0 #aeaeae;
+    box-shadow: 0 1px 3px 0 #d4d0d0;
     background-color: #e1e1e4;
 }
 .selected-student-buttons .buttonContainer .disable-link-button-new {
@@ -1196,13 +1195,13 @@ body,
     opacity: 0;
 }
 .selected-student-buttons .buttonContainer:hover .disable-link-button-new::after {
-    transition: 0.2s all;
+    transition: 0.6s all;
     opacity: 1;
 }
-.selected-student-buttons .buttonContainer.disable-link-new {
+.selected-student-buttons .buttonContainer.disable-link {
     position: relative;
 }
-.selected-student-buttons .buttonContainer .disable-link-new::after {
+.selected-student-buttons .buttonContainer .disable-link::after {
     position: absolute;
     content: 'Please select students...';
     left: 0 ;
@@ -1217,8 +1216,8 @@ body,
     font-size: 12px;
     opacity: 0;
 }
-.selected-student-buttons .buttonContainer:hover .disable-link-new::after {
-    transition: 0.2s all;
+.selected-student-buttons .buttonContainer:hover .disable-link::after {
+    transition: 0.6s all;
     opacity: 1;
 }
 
@@ -1459,6 +1458,7 @@ body,
 .success-block {
     color:#008000;
     margin:10px 0;
+    line-height: 20px;
 }
 .failure-block {
     color:red;
@@ -1487,6 +1487,8 @@ body,
 }
 .selected-students-Id {
     padding: 5px;
+    display: inline-block;
+    word-break: break-word;
 }
 .upload-message-wrapper {
     margin:30px 0 0;
@@ -1515,7 +1517,7 @@ body,
     margin-right:10px;
 }
 .column-content-student-wrapper {
-    margin-top:10px;
+    margin: 15px 0 0 10px;
 }
 .column-wrapper {
     min-height: 120px;
@@ -1559,14 +1561,12 @@ body,
 }
 .parent-input-text {
     height: auto;
-    /*flex:0 85%;*/
     flex: 0.5 0 36%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 .parent-register-label {
-    /*flex:1;*/
     flex: 0 0 13%;
 }
 .parent-register-heading {
@@ -1653,6 +1653,13 @@ body,
 }
 .student-already-register-form .button-wrapper .buttonContainer:nth-child(2) .buttonOrange {
     padding: 8px 0;
+}
+.selected-student-wrapper-id {
+    max-height:200px;
+    overflow:auto;
+}
+.advance-input-print-later {
+    margin-top: 15px;
 }
 @media (max-width: 1024px) {
     .registrationFormContainer {
@@ -2290,7 +2297,9 @@ body,
     .parent-register-label {
         flex: 0 0 20%;
     }
-
+    .column-content-student-wrapper {
+        margin: 15px 0 0 0;
+    }
 
 }
 @media (max-width: 480px) {
@@ -2399,7 +2408,7 @@ body,
     }
     .advance-input-radio {
         display: inline-block;
-        margin: 0 3px 0 25px;
+        margin: 0 3px 0 0;
     }
     .id-card-wrapper .linkButton {
         padding: 7px;

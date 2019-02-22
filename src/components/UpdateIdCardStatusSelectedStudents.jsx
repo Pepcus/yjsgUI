@@ -88,8 +88,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   renderMessage() {
     if (this.props.isUpdateIdCardStatusSuccess) {
       return (
-        <div>
-          <label>Update selected students Id card print status success</label>
+        <div className="success-block">
+          <span>चयनित छात्रों के पहचान पत्र का print status सफलतापूवर्क अद्यतन कर दी गयी है|</span>
         </div>
       );
     }
@@ -118,37 +118,41 @@ class UpdateIdCardStatusSelectedStudents extends Component {
           <div className="column-group-wrapper">
             <form onSubmit={this.onFormSubmit}>
               <div className="column-modal">
-                <h1 className="column-modal-container">Update selected students Id card print status</h1>
+                <h1 className="column-modal-container">कृपिया चयनित छात्रों के पहचान पत्र का print status अद्यतन करे</h1>
               </div>
-              <div>
-                <label>Selected Students Id: </label>
-                {
-                  this.state.studentsId.map(student =>
-                    <span className="selected-students-Id">{student}</span>)
-                }
-              </div>
-              <div className="advance-input-radio">
-                <div className="input-radio-container">
-                  <input type="radio" name="IdCardStatus" value="Y" onClick={this.onClickRadioButton} />
-                  <label htmlFor="Reprint">Reprint</label>
+              <div className="column-content-modal column-wrapper">
+                <div className="selected-student-heading">
+                  <span>Selected Students Id: </span>
+                  <div className="selected-student-wrapper-id">
+                    {
+                      this.state.studentsId.map(student =>
+                        <span className="selected-students-Id">{student}</span>)
+                    }
+                  </div>
                 </div>
-                <div className="input-radio-container">
-                  <input type="radio" name="IdCardStatus" value="N" onClick={this.onClickRadioButton} />
-                  <label htmlFor="NotPrint">Not Print</label>
+                <div className="advance-input-radio advance-input-print-later">
+                  <div className="input-radio-container">
+                    <input type="radio" name="IdCardStatus" value="Y" onClick={this.onClickRadioButton} />
+                    <label htmlFor="Reprint">Reprint</label>
+                  </div>
+                  <div className="input-radio-container">
+                    <input type="radio" name="IdCardStatus" value="N" onClick={this.onClickRadioButton} />
+                    <label htmlFor="NotPrint">Not Print</label>
+                  </div>
+                </div>
+                {this.renderMessage()}
+              </div>
+              <div className="modal-save-container">
+                <div className="save-button-wrapper">
+                  <button
+                    className="button-modal button-close"
+                    onClick={this.closeUpdateIdCardStatusSelectedStudentsModal}
+                  >Close
+                  </button>
+                  <button className={this.renderSubmitButtonClassName()} type="submit">Submit</button>
                 </div>
               </div>
-              <button className={this.renderSubmitButtonClassName()} type="submit">Submit</button>
-              {this.renderMessage()}
             </form>
-            <div className="modal-save-container">
-              <div className="save-button-wrapper">
-                <button
-                  className="button-modal button-close"
-                  onClick={this.closeUpdateIdCardStatusSelectedStudentsModal}
-                >Close
-                </button>
-              </div>
-            </div>
           </div>
         </Modal>
       );
