@@ -76,7 +76,7 @@ class StudentInfoGrid extends Component {
     this.formatStudents = this.formatStudents.bind(this);
     this.getSelectedRow = this.getSelectedRow.bind(this);
     this.refreshStudentsGrid = this.refreshStudentsGrid.bind(this);
-    this.setStudentsISUncheckedInitially = this.setStudentsISUncheckedInitially.bind(this);
+    this.setAllStudentsAsUnchecked = this.setAllStudentsAsUnchecked.bind(this);
     this.getSelectedStudents = this.getSelectedStudents.bind(this);
   }
 
@@ -94,10 +94,10 @@ class StudentInfoGrid extends Component {
     } else {
       this.setState({
         students: this.formatStudents(this.props.students),
-        checkedIds: this.setStudentsISUncheckedInitially(this.props.students),
+        checkedIds: this.setAllStudentsAsUnchecked(this.props.students),
       });
-      let idIsCheckedStatusList = this.setStudentsISUncheckedInitially(this.props.students);
-      this.getSelectedStudents(idIsCheckedStatusList);
+      let idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
+      this.getSelectedStudents(idCheckStatusList);
     }
     if (!this.props.redirect) {
       this.redirectToAdminLogin();
@@ -108,32 +108,32 @@ class StudentInfoGrid extends Component {
       if (nextProps.students !== this.props.students) {
         this.setState({
           students: this.formatStudents(nextProps.students),
-          checkedIds: this.setStudentsISUncheckedInitially(nextProps.students),
+          checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
-        let idIsCheckedStatusList = this.setStudentsISUncheckedInitially(nextProps.students);
-        this.getSelectedStudents(idIsCheckedStatusList);
+        let idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+        this.getSelectedStudents(idCheckStatusList);
       }
     } else {
       this.setState({
         students: this.formatStudents(this.props.students),
-        checkedIds: this.setStudentsISUncheckedInitially(this.props.students),
+        checkedIds: this.setAllStudentsAsUnchecked(this.props.students),
       });
-      let idIsCheckedStatusList = this.setStudentsISUncheckedInitially(this.props.students);
-      this.getSelectedStudents(idIsCheckedStatusList);
+      let idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
+      this.getSelectedStudents(idCheckStatusList);
     }
     if (this.state.refresh) {
       if (nextProps.students !== this.props.students) {
         this.setState({
           students: this.formatStudents(nextProps.students),
           refresh: false,
-          checkedIds: this.setStudentsISUncheckedInitially(nextProps.students),
+          checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
-        let idIsCheckedStatusList = this.setStudentsISUncheckedInitially(nextProps.students);
-        this.getSelectedStudents(idIsCheckedStatusList);
+        let idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+        this.getSelectedStudents(idCheckStatusList);
       }
     }
   }
-  setStudentsISUncheckedInitially(students) {
+  setAllStudentsAsUnchecked(students) {
     return students.map(student => ({ id: student.id, isChecked: false }));
   }
   refreshStudentsGrid() {
@@ -142,12 +142,12 @@ class StudentInfoGrid extends Component {
       refresh: true,
     });
   }
-  getSelectedStudents(idIsCheckedStatusList) {
+  getSelectedStudents(idCheckStatusList) {
     let checkedStudents = [];
-    idIsCheckedStatusList.forEach((idIsCheckedStatusListObject) => {
+    idCheckStatusList.forEach((idCheckStatusObject) => {
       this.props.students.forEach((student) => {
-        if (idIsCheckedStatusListObject.isChecked) {
-          if (Number(student.id) === idIsCheckedStatusListObject.id) {
+        if (idCheckStatusObject.isChecked) {
+          if (Number(student.id) === idCheckStatusObject.id) {
             checkedStudents.push({ ...student, studentId: String(student.id) });
           }
         }
@@ -197,19 +197,19 @@ class StudentInfoGrid extends Component {
       });
       return studentObject;
     });
-    const idIsCheckedStatusList = this.state.checkedIds.map((idIsCheckedStatusListObject) => {
-      let finalIdIsCheckedStatusListObject = idIsCheckedStatusListObject;
+    const idCheckStatusList = this.state.checkedIds.map((idCheckStatusObject) => {
+      let finalIdCheckStatusObject = idCheckStatusObject;
       listOfIsCheckedStatusStudentIds.forEach((checkedUncheckedStudentIdObject) => {
-        if (Number(idIsCheckedStatusListObject.id) === Number(checkedUncheckedStudentIdObject.id)) {
-          finalIdIsCheckedStatusListObject = checkedUncheckedStudentIdObject;
+        if (Number(idCheckStatusObject.id) === Number(checkedUncheckedStudentIdObject.id)) {
+          finalIdCheckStatusObject = checkedUncheckedStudentIdObject;
         }
       });
-      return finalIdIsCheckedStatusListObject;
+      return finalIdCheckStatusObject;
     });
-    this.getSelectedStudents(idIsCheckedStatusList);
+    this.getSelectedStudents(idCheckStatusList);
     this.setState({
       students: studentsData,
-      checkedIds: idIsCheckedStatusList,
+      checkedIds: idCheckStatusList,
     });
     listOfIsCheckedStatusStudentIds = [];
   }
