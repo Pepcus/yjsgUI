@@ -52,7 +52,7 @@ class AdvanceSearch extends Component {
         });
         return finalStudentObject;
       });
-      this.props.onFilter(this.props.formattedStudent(studentsData));
+      this.props.onFilter(this.props.formatStudents(studentsData));
     }
     this.setState({
       inputValue: event.target.value,
@@ -89,8 +89,8 @@ class AdvanceSearch extends Component {
       });
       return finalStudentObject;
     });
-    this.props.onFilter(this.props.formattedStudent(studentsData));
-    // this.props.onFilter(this.props.formattedStudent(this.props.students));
+    this.props.onFilter(this.props.formatStudents(studentsData));
+    // this.props.onFilter(this.props.formatStudents(this.props.students));
   }
   /**
    * onChangeDeepSearchCheckBox method on OnChange of search option check box
@@ -168,7 +168,7 @@ class AdvanceSearch extends Component {
           });
           return finalStudentObject;
         });
-        this.props.onFilter(this.props.formattedStudent(studentsData));
+        this.props.onFilter(this.props.formatStudents(studentsData));
       }
     } else {
       // isMultipleIdSearchCheck is check it do the search result according to search Ids.
@@ -187,7 +187,7 @@ class AdvanceSearch extends Component {
         });
         return finalStudentObject;
       });
-      this.props.onFilter(this.props.formattedStudent(studentsData));
+      this.props.onFilter(this.props.formatStudents(studentsData));
     }
   }
   render() {
@@ -252,14 +252,14 @@ class AdvanceSearch extends Component {
 
 AdvanceSearch.propTypes = {
   onFilter: PropTypes.func,
-  formattedStudent: PropTypes.func,
+  formatStudents: PropTypes.func,
   students: PropTypes.array,
   metaData: PropTypes.object,
 };
 
 AdvanceSearch.defaultProps = {
   onFilter: () => {},
-  formattedStudent: () => {},
+  formatStudents: () => {},
   students: [],
   metaData: {},
 };
