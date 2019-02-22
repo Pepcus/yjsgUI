@@ -722,6 +722,7 @@ html, body {
     box-shadow: 0 1px 1px 0 #e0dbdb;
     -webkit-box-shadow: 0 1px 1px 0 #e0dbdb;
     background-color: #fff;
+    position:relative;
 }
 .search-input-advance:focus {
     background-color: #fdfdfd !important;
@@ -1069,8 +1070,17 @@ body,
 .input-radio .input-text {
     min-width: 100%;
     max-width: 100%;
-}
+    display:flex;
+    align-items:center;
 
+}
+.clear-search {
+    position: absolute;
+    right: 12%;
+    cursor: pointer;
+    font-size: 21px;
+    color: #d2cfcf;
+}
 .link:active {
     transform: translateY(0) translateX(0);
     display: inline !important;

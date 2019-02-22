@@ -661,6 +661,8 @@ class StudentRegistrationCorrectionFormURL extends Component {
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
+                isRequired
+                errorMessage={this.state.errorMessage.address.message}
               />
               <SelectListInputField
                 type="text"
@@ -738,7 +740,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
 }
 
 StudentRegistrationCorrectionFormURL.propTypes = {
-  studentData: PropTypes.object,
+  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isUpdated: PropTypes.bool,
   isLoading: PropTypes.bool,
   isFetched: PropTypes.bool,
