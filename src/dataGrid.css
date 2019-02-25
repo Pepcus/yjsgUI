@@ -114,7 +114,7 @@ html, body {
     display: block;
     text-align: center;
     line-height: 20px;
-    padding: 7px;
+    padding: 10px;
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
@@ -1096,7 +1096,9 @@ body,
     margin: 0 10px 0 0;
 }
 .students-id-card-wrapper {
-    display:none;
+    display:block;
+    height: 0;
+    visibility: hidden;
 }
 .export {
     font-size: 14px;
@@ -1394,18 +1396,22 @@ body,
 }
 .card-content-wrapper {
     position:relative;
+    display:block;
+    width:100%;
+    height:100%;
+    background-image: url('assets/LOGO.png');
+    background-repeat: no-repeat;
+    background-position: center top;
     background-size: contain;
-    background: url('assets/LOGO.png') no-repeat center top;
-    -webkit-print-color-adjust: exact;
-}
 
+
+}
 .card-content-wrapper::before {
-    content:'';
+    content: '';
     position:absolute;
     height:100%;
     width:100%;
     background-color: rgba(255, 255, 255, 0.69) !important;
-    -webkit-print-color-adjust: exact;
 }
 .card-fields-wrapper .card-text-bold, .student-id-cards-footer .card-text-bold {
     font-weight: bold;
@@ -1566,7 +1572,6 @@ body,
 .input-text {
     height: auto;
     padding: 5px;
-    /*border: 1px solid #ccc;*/
     border-radius: 4px;
 }
 .parent-input-text {
@@ -2246,7 +2251,7 @@ body,
         margin-top: 0;
     }
     .registrationFormButtonContainer .button-wrapper .buttonContainer {
-        padding: 0 5px;
+        padding: 0;
     }
     .registrationFormButtonContainer .button-wrapper .button-container-correction {
         padding:0;

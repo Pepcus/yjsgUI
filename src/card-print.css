@@ -1,6 +1,7 @@
 @media print {
-    body,html, #root {
-        -webkit-print-color-adjust: exact;
+    html,body, #root {
+        height:100%;
+        width:100%;
     }
     .print-media-none {
         display:none;
@@ -15,8 +16,8 @@
         margin-top: 0;
     }
     .students-id-card-wrapper {
-        display:block;
-        overflow: hidden;
+        height: auto;
+        visibility: visible;
     }
     .students-id-card-wrapper>div.group-of-two-students {
         overflow: hidden;
@@ -24,15 +25,12 @@
     .students-id-card-wrapper>div.group-of-two-students:nth-child(4n){
         page-break-after: always;
     }
-    .card-content-wrapper {
-        position:relative;
-        background-size: contain;
-        background: url('assets/LOGO.png') no-repeat center;
-        -webkit-print-color-adjust: exact;
-    }
     #header, #nav
     {
         display: none;
+    }
+    * {
+        -webkit-print-color-adjust: exact !important;
     }
 }
 @page {
@@ -42,5 +40,6 @@
 @media print and (color) {
     * {
         -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }
