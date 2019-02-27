@@ -51,6 +51,7 @@ import Button from './commonComponents/Button';
 class StudentRegistrationCorrectionFormURL extends Component {
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       student: {
         name: '',
@@ -206,6 +207,14 @@ class StudentRegistrationCorrectionFormURL extends Component {
    * submitStudentData method call onClick of submit button in student correction form.
    * @param {Object} e
    */
+  scrollToError = () => {
+    for (const node of this.formRef.current.childNodes) {
+      if (node.childNodes[0].className.includes('has-error')) {
+        window.scrollTo(0, node.offsetTop);
+        break;
+      }
+    }
+  };
   submitStudentData(e) {
     // on submit of student correction form prevent form action is default.
     e.preventDefault();
@@ -234,7 +243,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
         this.setState({
           isFormChanged: false,
           isSubmitTriggered: true,
-        });
+        }, () => { this.scrollToError(); });
       }
     }
   }
@@ -558,7 +567,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
             <h2 className="student-info-heading">{yjsgHeader}</h2>
           </div>
           <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
-            <div className="inputFieldContainer">
+            <div className="inputFieldContainer" ref={this.formRef}>
               <SelectListInputField
                 name="optIn2019"
                 label="2019 के शिविर की स्वीकृति ?"

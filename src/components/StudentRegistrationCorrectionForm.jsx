@@ -46,6 +46,7 @@ class StudentRegistrationCorrectionForm extends Component {
   constructor(props) {
     super(props);
 
+    this.formRef = React.createRef();
     this.state = {
       student: {
         name: '',
@@ -142,6 +143,15 @@ class StudentRegistrationCorrectionForm extends Component {
       this.state.student);
   }
 
+  scrollToError = () => {
+    for (const node of this.formRef.current.childNodes) {
+      if (node.childNodes[0].className.includes('has-error')) {
+        window.scrollTo(0, node.offsetTop);
+        break;
+      }
+    }
+  };
+
   // FIXME: Rename it to onSubmitStudentData
   submitStudentData(e) {
     e.preventDefault();
@@ -161,7 +171,7 @@ class StudentRegistrationCorrectionForm extends Component {
         this.setState({
           isFormChanged: false,
           isSubmitTriggered: true,
-        });
+        }, () => { this.scrollToError(); });
       }
     }
   }
@@ -417,7 +427,7 @@ class StudentRegistrationCorrectionForm extends Component {
           </div>
           {/* FIXME: Create a separate reusable component to render form*/}
           <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
-            <div className="inputFieldContainer">
+            <div className="inputFieldContainer" ref={this.formRef}>
               <SelectListInputField
                 name="optIn2019"
                 label="2019 के शिविर की स्वीकृति ?"

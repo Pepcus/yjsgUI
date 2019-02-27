@@ -37,7 +37,7 @@ class InputField extends Component {
     if(errorMessage) {
       return (
         <div className={'inputWrapper'}>
-          <div className={'inputWrapperContainer errorInputField'}>
+          <div className={'has-error inputWrapperContainer errorInputField'}>
             <div className={'inputLabel'}><label>{newLabel}</label></div>
             <div>
               <input
