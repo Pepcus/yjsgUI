@@ -45,7 +45,6 @@ import LinkButton from './commonComponents/LinkButton';
  * @type {Class}
  */
 class AdminPanel extends Component {
-
   constructor(props) {
     super(props);
 
@@ -53,13 +52,7 @@ class AdminPanel extends Component {
       search: {},
       redirect: false,
     };
-    // FIXME: Use arrow functions to avoid binding.
     this.props.clearSearchResultsAction();
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.populateResults = this.populateResults.bind(this);
-    this.performLogout = this.performLogout.bind(this);
-    this._checkValidKey = this.checkValidKey.bind(this);
-    this._setRedirectValue = this.setRedirectValue.bind(this);
   }
   componentWillMount() {
     if (this.props.adminLoginState) {
@@ -67,28 +60,28 @@ class AdminPanel extends Component {
     }
   }
 
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const updatedData = extend(cloneDeep(this.state.search),
       setRegistrationData(value, name));
 
     this.setState({
       search: updatedData,
     });
-  }
+  };
 
-  performLogout() {
+  performLogout = () => {
     this.props.resetAdminCredentialsAction();
     this.props.setAdminLoginStateAction(false);
     this.props.setRedirectValueAction(false);
-  }
+  };
 
-  populateResults() {
+  populateResults = () => {
     this.props.clearSearchResultsAction();
     const { selectSearchOption, searchText } = this.state.search;
     if (!isEmpty(selectSearchOption) && !isEmpty(searchText)) {
       this.props.fetchSearchResultsAction(adminPassword, selectSearchOption, searchText);
     }
-  }
+  };
 
   renderResultsTable() {
     const { searchResults } = this.props;
@@ -100,7 +93,7 @@ class AdminPanel extends Component {
     return <h5>Your Search Results will appear here.</h5>;
   }
 
-  setRedirectValue() {
+  setRedirectValue = () => {
     if (this.props.adminLoginState) {
       this.setState({
         redirect: true,
@@ -109,12 +102,14 @@ class AdminPanel extends Component {
     } else {
       alert('Invalid Admin');
     }
-  }
-  checkValidKey() {
+  };
+
+  checkValidKey = () => {
     if (this.state.redirect) {
       return <Redirect to="/adminPanel" />;
     }
-  }
+  };
+
   render() {
     const {
       id,
@@ -201,11 +196,11 @@ class AdminPanel extends Component {
                   fugiat nulla pariatur.
                 </p>
 
-                {this._checkValidKey()}
+                {this.checkValidKey()}
 
                 <LinkButton
                   buttonText="Student Information"
-                  onClick={this._setRedirectValue}
+                  onClick={this.setRedirectValue}
                   linkPath="/student-search"
                 />
               </div>

@@ -60,19 +60,6 @@ class SplashPage extends Component {
       registeredStudentCredentialErrorMessage: false,
       isNewRegistration: false,
     };
-
-    // FIXME: Use arrow functions to avoid binding.
-    this._enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
-    this._enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this._disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
-    this._handleInputChange = this.handleInputChange.bind(this);
-    this._setAdminLogin = this.setAdminLogin.bind(this);
-    this._adminScreenRedirection = this.adminScreenRedirection.bind(this);
-    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
-    // this may be use in future.
-    // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
-    // this._fetchStudentById = this.fetchStudentById.bind(this);
-    // this._disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
   }
 
   /**
@@ -94,7 +81,7 @@ class SplashPage extends Component {
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams(id, secretCode) {
+  fetchStudentByURLParams = (id, secretCode) => {
     this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
     this.setState({
@@ -107,32 +94,33 @@ class SplashPage extends Component {
    * corrections button by onClick of already register button.
    * It set the value of isCorrection to true.
    */
-  enableStudentInfoCorrectionButtons() {
+  enableStudentInfoCorrectionButtons = () => {
     this.setState({
       isCorrection: true,
     });
-  }
+  };
 
   /**
    * enableAdminLoginButtons method enable the admin login
    * button by onClick of admin login button.
    * It set the value of isAdmin to true.
    */
-  enableAdminLoginButtons() {
+  enableAdminLoginButtons = () => {
     this.setState({
       isAdmin: true,
     });
-  }
+  };
+
   /**
    * disableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
-  disableAdminLoginButtons() {
+  disableAdminLoginButtons = () => {
     this.setState({
       isAdmin: false,
     });
-  }
+  };
 
   /**
    * disableStudentInfoCorrectionButtons method disable the the student information
@@ -149,7 +137,7 @@ class SplashPage extends Component {
    * adminScreenRedirection method redirect to admin page on some condition.
    * @return {ReactComponent}
    */
-  adminScreenRedirection() {
+  adminScreenRedirection = () => {
     // IF admin initial login.
     if (!this.props.adminLoginState) {
       const {
@@ -179,7 +167,7 @@ class SplashPage extends Component {
     // without any credential.
     return <Switch><Redirect to="/student-search" /></Switch>;
 
-  }
+  };
 
   /**
    * checkRegisteredStudentCredential method verify the student credential
@@ -210,14 +198,14 @@ class SplashPage extends Component {
    * setAdminLogin method set the admin login credential
    * @param {Object} event
    */
-  setAdminLogin(event) {
+  setAdminLogin = (event) => {
     event.preventDefault();
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
-  }
+  };
 
   /**
    * fetchStudentById method fetch the student data while student login through URL.
@@ -239,7 +227,7 @@ class SplashPage extends Component {
    * @param {String} value
    * @param {String} name
    */
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
 
@@ -252,7 +240,7 @@ class SplashPage extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
     });
-  }
+  };
 
   /**
    * renderRegistrationCorrectionFields method return student credential fields
@@ -268,7 +256,7 @@ class SplashPage extends Component {
                 name={'studentId'}
                 label={'आई.डी. नं.'}
                 placeholder={'अपना आई.डी. नं. दर्ज करें'}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.credentials.studentId}
             />
             <InputField
@@ -276,7 +264,7 @@ class SplashPage extends Component {
                 name={'secretKey'}
                 label={'सीक्रेट कोड'}
                 placeholder={'अपना सीक्रेट कोड दर्ज करें'}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.credentials.secretKey}
             />
             {this.checkRegisteredStudentCredential()}
@@ -298,59 +286,58 @@ class SplashPage extends Component {
   }*/
 
   // FIXME: Create a separate component to render admin login fields
-  renderAdminLoginFields() {
-    return (
-      <div>
-        <form id="adminCredential">
-          <div className="form-input-wrapper">
-            <InputField
-              type="text"
-              name="adminId"
-              label="Admin ID"
-              placeholder="Enter Admin ID"
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminId}
-            />
-            <InputField
-              type="password"
-              name="adminPassword"
-              label="Admin Password"
-              placeholder="Enter Admin Password"
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminPassword}
-            />
-            {this._adminScreenRedirection()}
-          </div>
-          <div className="button-wrapper">
-            <Button
-              type="button"
-              buttonText={goBackBtnText}
-              onClick={this._disableAdminLoginButtons}
-            />
-            <Button
-              type="submit"
-              form="adminCredential"
-              buttonText={formSubmitBtnText}
-              onClick={this._setAdminLogin}
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
+  renderAdminLoginFields = () => (
+    <div>
+      <form id="adminCredential">
+        <div className="form-input-wrapper">
+          <InputField
+            type="text"
+            name="adminId"
+            label="Admin ID"
+            placeholder="Enter Admin ID"
+            onInputChange={this.handleInputChange}
+            value={this.state.admin.adminId}
+          />
+          <InputField
+            type="password"
+            name="adminPassword"
+            label="Admin Password"
+            placeholder="Enter Admin Password"
+            onInputChange={this.handleInputChange}
+            value={this.state.admin.adminPassword}
+          />
+          {this.adminScreenRedirection()}
+        </div>
+        <div className="button-wrapper">
+          <Button
+            type="button"
+            buttonText={goBackBtnText}
+            onClick={this.disableAdminLoginButtons}
+          />
+          <Button
+            type="submit"
+            form="adminCredential"
+            buttonText={formSubmitBtnText}
+            onClick={this.setAdminLogin}
+          />
+        </div>
+      </form>
+    </div>
+  );
 
   /**
    * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
    * of new registration button.
    */
-  redirectToNewRegistrationPage() {
+  redirectToNewRegistrationPage = () => {
     this.setState({
       isNewRegistration: true,
     });
     this.props.setHashLinkForNewRegistrationAction('admin');
-  }
+  };
+
   // FixMe: Use separate methods for redirection and rendering Button fields
-  renderLoginField() {
+  renderLoginField = () => {
     if (this.state.isCorrection) {
       this.props.setHashLinkForStudentCredentialAction('admin');
       return <Switch><Redirect to="/student-login" /></Switch>;
@@ -364,7 +351,7 @@ class SplashPage extends Component {
         <Button
           type="button"
           buttonText={alreadyRegisteredBtnText}
-          onClick={this._enableStudentInfoCorrectionButtons}
+          onClick={this.enableStudentInfoCorrectionButtons}
         />
         <Button
           type="button"
@@ -374,7 +361,7 @@ class SplashPage extends Component {
         <Button
           type="button"
           buttonText={adminLoginBtnText}
-          onClick={this._enableAdminLoginButtons}
+          onClick={this.enableAdminLoginButtons}
         />
       </div>
     );

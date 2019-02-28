@@ -58,26 +58,6 @@ class StudentInfoGrid extends Component {
       refresh: false,
     };
 
-    // FIXME: Use arrow functions to avoid binding.
-    this.openColumnOption = this.openColumnOption.bind(this);
-    this.closeColumnOption = this.closeColumnOption.bind(this);
-    /*
-  Todo: This feature will be implemented in future scope.
-    this.openAdvanceFilter = this.openAdvanceFilter.bind(this);
-    this.closeAdvanceFilter = this.closeAdvanceFilter.bind(this);*/
-    this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
-    this.renderDataGrid = this.renderDataGrid.bind(this);
-    this.onFilter = this.onFilter.bind(this);
-    this.redirectToAdminLogin = this.redirectToAdminLogin.bind(this);
-    this.performLogout = this.performLogout.bind(this);
-    this.renderColumnConfig = this.renderColumnConfig.bind(this);
-    this.formatMetaData = this.formatMetaData.bind(this);
-    this.EditButton = this.EditButton.bind(this);
-    this.formatStudents = this.formatStudents.bind(this);
-    this.getSelectedRow = this.getSelectedRow.bind(this);
-    this.refreshStudentsGrid = this.refreshStudentsGrid.bind(this);
-    this.setAllStudentsAsUnchecked = this.setAllStudentsAsUnchecked.bind(this);
-    this.getSelectedStudents = this.getSelectedStudents.bind(this);
   }
 
   componentWillMount() {
@@ -96,7 +76,7 @@ class StudentInfoGrid extends Component {
         students: this.formatStudents(this.props.students),
         checkedIds: this.setAllStudentsAsUnchecked(this.props.students),
       });
-      let idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
+      const idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
       this.getSelectedStudents(idCheckStatusList);
     }
     if (!this.props.redirect) {
@@ -110,7 +90,7 @@ class StudentInfoGrid extends Component {
           students: this.formatStudents(nextProps.students),
           checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
-        let idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+        const idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
         this.getSelectedStudents(idCheckStatusList);
       }
     } else {
@@ -118,7 +98,7 @@ class StudentInfoGrid extends Component {
         students: this.formatStudents(this.props.students),
         checkedIds: this.setAllStudentsAsUnchecked(this.props.students),
       });
-      let idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
+      const idCheckStatusList = this.setAllStudentsAsUnchecked(this.props.students);
       this.getSelectedStudents(idCheckStatusList);
     }
     if (this.state.refresh) {
@@ -128,21 +108,23 @@ class StudentInfoGrid extends Component {
           refresh: false,
           checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
-        let idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+        const idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
         this.getSelectedStudents(idCheckStatusList);
       }
     }
   }
-  setAllStudentsAsUnchecked(students) {
-    return students.map(student => ({ id: student.id, isChecked: false }));
-  }
-  refreshStudentsGrid() {
+
+  setAllStudentsAsUnchecked = students =>
+    students.map(student => ({ id: student.id, isChecked: false }));
+
+  refreshStudentsGrid = () => {
     this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
     this.setState({
       refresh: true,
     });
-  }
-  getSelectedStudents(idCheckStatusList) {
+  };
+
+  getSelectedStudents = (idCheckStatusList) => {
     let checkedStudents = [];
     idCheckStatusList.forEach((idCheckStatusObject) => {
       this.props.students.forEach((student) => {
@@ -157,7 +139,8 @@ class StudentInfoGrid extends Component {
       selectedStudents: checkedStudents,
     });
     checkedStudents = [];
-  }
+  };
+
   /**
    * performLogout method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -166,19 +149,20 @@ class StudentInfoGrid extends Component {
    * state by calling action resetVisibleColumnConfigAction()
    * And clear local store.
    */
-  performLogout() {
+  performLogout = () => {
     this.props.resetAdminCredentialsAction();
     this.props.setAdminLoginStateAction(false);
     this.props.setRedirectValueAction(false);
     this.props.resetVisibleColumnConfigAction();
     localStorage.clear();
-  }
+  };
+
   /**
    * getSelectedRow method is call back function which is pass to DataGrid
    * It give selected row data of student on check of check box.
    * @param {Object} selectedRow
    */
-  getSelectedRow(selectedRow) {
+  getSelectedRow = (selectedRow) => {
     let listOfIsCheckedStatusStudentIds = [];
     const studentsData = this.state.students.map((student) => {
       let studentObject = { ...student, id: Number(student.studentId) };
@@ -212,21 +196,24 @@ class StudentInfoGrid extends Component {
       checkedIds: idCheckStatusList,
     });
     listOfIsCheckedStatusStudentIds = [];
-  }
+  };
+
   /**
    * openColumnOption method call when onClick of columnConfig button
    * It set the true value of columnOptionIsOpen.
    */
-  openColumnOption() {
+  openColumnOption = () => {
     this.setState({ columnOptionIsOpen: true });
-  }
+  };
+
   /**
    * closeColumnOption method call when onClick of close button of columnConfig modal
    * It set the false value of columnOptionIsOpen.
    */
-  closeColumnOption() {
+  closeColumnOption = () => {
     this.setState({ columnOptionIsOpen: false });
-  }
+  };
+
   /**
    * Todo: This feature will be implemented in future scope.
    */
@@ -242,7 +229,7 @@ class StudentInfoGrid extends Component {
    * @param {Object} values,
    * @param {variable} selectValue,
    */
-  setValuesOfVisibleColumnConfig(values, selectValue) {
+  setValuesOfVisibleColumnConfig = (values, selectValue) => {
     /**
      * set the value of edit column on the basis of any column selected on not.
      */
@@ -263,7 +250,8 @@ class StudentInfoGrid extends Component {
       selectValue,
     });
     this.props.setVisibleColumnConfigAction(values, selectValue);
-  }
+  };
+
   /**
    * formatMetaData method format headerConfig of metaData according to visibleColumnConfig object
    * (set the column which should be render in DataGrid)
@@ -294,7 +282,7 @@ class StudentInfoGrid extends Component {
    * set value of isStudentDataSet
    * @param {Object} rowData
    */
-  handleEditClick(rowData) {
+  handleEditClick = (rowData) => {
     if (!isEmpty(rowData)) {
       this.props.fetchStudentData(String(rowData.studentId), adminPassword);
       this.props.setStudentDataAction(this.props.studentData);
@@ -303,13 +291,13 @@ class StudentInfoGrid extends Component {
         isStudentDataSet: true,
       });
     }
-  }
+  };
   /**
    * redirectToStudentCorrection method redirect to "/studentCorrection"
    * when isStudentDataSet value is true(fetch student success)
    * @return {ReactComponent}
    */
-  redirectToStudentCorrection() {
+  redirectToStudentCorrection = () => {
     if (this.state.isStudentDataSet) {
       return (
         <div>
@@ -317,7 +305,7 @@ class StudentInfoGrid extends Component {
         </div>);
     }
     return null;
-  }
+  };
   /**
    * EditButton is custom component which is pass to DataGrid
    * (Edit button render in each row of DataGrid)
@@ -341,22 +329,24 @@ class StudentInfoGrid extends Component {
     </div>
 
   );
+
   /**
    * onFilter method pass as call back function to AdvanceSearch react component.
    * onFilter method call the formatStudents call back function and
    * set the resultant formatted students data in students.
    * @param {Array} result
    */
-  onFilter(result) {
+  onFilter = (result) => {
     this.setState({
       students: this.formatStudents(result),
     });
-  }
+  };
+
   /**
    * renderColumnConfig method the ColumnConfig react component in render method
    * @return {ReactComponent} ColumnConfig
    */
-  renderColumnConfig() {
+  renderColumnConfig = () => {
     if (this.state.columnOptionIsOpen) {
       return (
         <ColumnConfig
@@ -369,22 +359,22 @@ class StudentInfoGrid extends Component {
       );
     }
     return null;
-  }
+  };
+
   /**
    * formatStudents method format students array in which
    * assign id as studentId to object.
    * @param {Array} students
    * @return {Array} students
    */
-  formatStudents(students) {
-    return students.map((item) => {
-      if (!('studentId' in item)) {
-        return ({ ...item, studentId: String(item.id), isChecked: false });
-      }
-      return item;
-    },
-    );
-  }
+  formatStudents = students => students.map((item) => {
+    if (!('studentId' in item)) {
+      return ({ ...item, studentId: String(item.id), isChecked: false });
+    }
+    return item;
+  },
+  );
+
   /**
    * renderDataGrid method render DataGrid react component in render method.
    * In case if data is not present than it will render
@@ -393,7 +383,7 @@ class StudentInfoGrid extends Component {
    * than it will render "आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।" message.
    * @return {ReactComponent}
    */
-  renderDataGrid() {
+  renderDataGrid = () => {
     if (isEmpty(this.state.metaData.headerConfig)) {
       return (
         <div>
@@ -427,14 +417,13 @@ class StudentInfoGrid extends Component {
         />
       </div>
     );
-  }
+  };
+
   /**
   * redirectToAdminLogin method will redirect to "/adminPanel".
   * @return {String}
   */
-  redirectToAdminLogin() {
-    return <Redirect to="/adminPanel" />;
-  }
+  redirectToAdminLogin = () => <Redirect to="/adminPanel" />;
 
   render() {
     if (this.props.isLoading) {

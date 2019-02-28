@@ -80,33 +80,29 @@ class StudentRegistrationCorrectionForm extends Component {
         optIn2019: {},
       },
     };
-    // FIXME: Use arrow functions to avoid binding.
-    this._submitStudentData = this.submitStudentData.bind(this);
-    this._handleInputChange = this.handleInputChange.bind(this);
-    this.prePopulateCourse2019 = this.prePopulateCourse2019.bind(this);
-    this.renderClassAttended2018 = this.renderClassAttended2018.bind(this);
   }
 
   // FIXME: Rename it to verifyStudentFormData
-  checkError(studentData) {
+  checkError = (studentData) => {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
       isDataCorrect(studentData));
     this.setState({
       errorMessage: errorMessageObject,
     });
-  }
+  };
+
   /**
    * prePopulateCourse2019 method will use for pre populate the information of fetch student.
    * @param {Object} nextProps
    */
-  prePopulateCourse2019(nextProps) {
+  prePopulateCourse2019 = (nextProps) => {
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
     const updatedData = updateClassAttended2019InStudentData(nextProps.studentData);
     this.setState({
       student: updatedData,
     });
-  }
+  };
 
   componentDidMount() {
     if (this.props.studentData) {
@@ -132,16 +128,14 @@ class StudentRegistrationCorrectionForm extends Component {
     }
   }
 
-  isValidData() {
-    return isValidUserInfo(this.state.errorMessage);
-  }
+  isValidData = () => isValidUserInfo(this.state.errorMessage);
 
-  updateStudentData() {
+  updateStudentData = () => {
     // Calls api to update student data
     this.props.updateStudentData(this.props.id,
       this.props.secretKey,
       this.state.student);
-  }
+  };
 
   scrollToError = () => {
     for (const node of this.formRef.current.childNodes) {
@@ -153,7 +147,7 @@ class StudentRegistrationCorrectionForm extends Component {
   };
 
   // FIXME: Rename it to onSubmitStudentData
-  submitStudentData(e) {
+  submitStudentData = (e) => {
     e.preventDefault();
     if (this.state.student.optIn2019 === 'N') {
       this.setState({
@@ -174,9 +168,9 @@ class StudentRegistrationCorrectionForm extends Component {
         }, () => { this.scrollToError(); });
       }
     }
-  }
+  };
 
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
@@ -192,10 +186,10 @@ class StudentRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
     });
     this.checkError(updatedData);
-  }
+  };
 
   // FIXME: Create a separate reusable component to render success message popup
-  renderSuccessMessage() {
+  renderSuccessMessage = () => {
     if (this.props.isUpdated) {
       return (
         <div className="popup">
@@ -224,14 +218,14 @@ class StudentRegistrationCorrectionForm extends Component {
     } return null;
   }
 
-  renderClassAttended2018() {
+  renderClassAttended2018 = () => {
     if (this.props.studentData.classAttended2018) {
       return (
         <InputField
           type="text"
           label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
           name="classAttended2018"
-          onInputChange={this._handleInputChange}
+          onInputChange={this.handleInputChange}
           value={this.state.student.classAttended2018}
           isRequired={false}
           disabled
@@ -243,171 +237,170 @@ class StudentRegistrationCorrectionForm extends Component {
         type="text"
         label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
         name="classAttended2018"
-        onInputChange={this._handleInputChange}
+        onInputChange={this.handleInputChange}
         value={this.state.student.classAttended2018}
         isRequired={false}
       />
     );
 
-  }
+  };
 
   // FIXME: Create a separate component to render no-validation input fields
-  renderNoValidationFields() {
-    return (
-      <div className="registrationFormContainer">
-        {this.renderSuccessMessage()}
-        <div className="student-logo-header">
-          <div className="yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
-          </div>
-          <h2 className="student-info-heading">{yjsgHeader}</h2>
+  renderNoValidationFields = () => (
+    <div className="registrationFormContainer">
+      {this.renderSuccessMessage()}
+      <div className="student-logo-header">
+        <div className="yjsg-logo">
+          <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
         </div>
-        {/* <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
-        <form id="studentRegistrationForm" className="inputFieldContainerWrapper">
-          <div className="inputFieldContainer">
-            <SelectListInputField
-              name="optIn2019"
-              label="2019 के शिविर की स्वीकृति ?"
-              options={optIn2019Options}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.optIn2019}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label="आई.डी."
-              name="id"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.id}
-              isRequired
-              disabled
-            />
-            <InputField
-              type="text"
-              label="नाम"
-              name="name"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.name}
-              isRequired
-            />
-            <InputField
-              type="text"
-              label="पिता / पति का नाम"
-              name="fatherName"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.fatherName}
-              isRequired
-            />
-            <SelectListInputField
-              name="gender"
-              label="लिंग"
-              options={gender}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.gender}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label="उम्र"
-              name="age"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.age}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label="मोबाइल नं."
-              name="mobile"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.mobile}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label="मोबाइल नं. ( माता का )"
-              name="motherMobile"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.motherMobile}
-              isRequired={false}
-            />
-            <InputField
-              type="text"
-              label="व्यवसाय (युवा वर्ग हेतु)"
-              name="occupation"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.occupation}
-              isRequired={false}
-            />
-            <InputField
-              type="text"
-              label="स्कूल शिक्षा"
-              name="education"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.education}
-              isRequired={false}
-            />
-            <InputField
-              type="email"
-              label="ई-मेल"
-              name="email"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.email}
-              isRequired={false}
-            />
-            <TextAreaField
-              label="पूरा पता"
-              name="address"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.address}
-              isRequired
-            />
-            <SelectListInputField
-              type="text"
-              label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
-              name="busStop"
-              options={busStops}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.busStop}
-              isRequired
-            />
-            {this.renderClassAttended2018()}
-            <SelectListInputField
-              name="classAttended2019"
-              label="आप क्या अध्ययन करना चाहते हैं ?"
-              options={studiesArray}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.classAttended2019}
-              isRequired
-            />
-            <TextAreaField
-              label="Remark"
-              name="remark"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.remark}
-              isRequired={false}
-            />
-            <div className="registrationFormButtonContainer">
-              <div className="button-wrapper">
-                <LinkButton
-                  buttonText={goBackBtnText}
-                  linkPath={this.props.context.previousLocation}
+        <h2 className="student-info-heading">{yjsgHeader}</h2>
+      </div>
+      {/* <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
+      <form id="studentRegistrationForm" className="inputFieldContainerWrapper">
+        <div className="inputFieldContainer">
+          <SelectListInputField
+            name="optIn2019"
+            label="2019 के शिविर की स्वीकृति ?"
+            options={optIn2019Options}
+            onInputChange={this.handleInputChange}
+            value={this.state.student.optIn2019}
+            isRequired
+          />
+          <InputField
+            type="number"
+            label="आई.डी."
+            name="id"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.id}
+            isRequired
+            disabled
+          />
+          <InputField
+            type="text"
+            label="नाम"
+            name="name"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.name}
+            isRequired
+          />
+          <InputField
+            type="text"
+            label="पिता / पति का नाम"
+            name="fatherName"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.fatherName}
+            isRequired
+          />
+          <SelectListInputField
+            name="gender"
+            label="लिंग"
+            options={gender}
+            onInputChange={this.handleInputChange}
+            value={this.state.student.gender}
+            isRequired
+          />
+          <InputField
+            type="number"
+            label="उम्र"
+            name="age"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.age}
+            isRequired
+          />
+          <InputField
+            type="number"
+            label="मोबाइल नं."
+            name="mobile"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.mobile}
+            isRequired
+          />
+          <InputField
+            type="number"
+            label="मोबाइल नं. ( माता का )"
+            name="motherMobile"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.motherMobile}
+            isRequired={false}
+          />
+          <InputField
+            type="text"
+            label="व्यवसाय (युवा वर्ग हेतु)"
+            name="occupation"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.occupation}
+            isRequired={false}
+          />
+          <InputField
+            type="text"
+            label="स्कूल शिक्षा"
+            name="education"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.education}
+            isRequired={false}
+          />
+          <InputField
+            type="email"
+            label="ई-मेल"
+            name="email"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.email}
+            isRequired={false}
+          />
+          <TextAreaField
+            label="पूरा पता"
+            name="address"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.address}
+            isRequired
+          />
+          <SelectListInputField
+            type="text"
+            label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
+            name="busStop"
+            options={busStops}
+            onInputChange={this.handleInputChange}
+            value={this.state.student.busStop}
+            isRequired
+          />
+          {this.renderClassAttended2018()}
+          <SelectListInputField
+            name="classAttended2019"
+            label="आप क्या अध्ययन करना चाहते हैं ?"
+            options={studiesArray}
+            onInputChange={this.handleInputChange}
+            value={this.state.student.classAttended2019}
+            isRequired
+          />
+          <TextAreaField
+            label="Remark"
+            name="remark"
+            onInputChange={this.handleInputChange}
+            value={this.state.student.remark}
+            isRequired={false}
+          />
+          <div className="registrationFormButtonContainer">
+            <div className="button-wrapper">
+              <LinkButton
+                buttonText={goBackBtnText}
+                linkPath={this.props.context.previousLocation}
+              />
+              <div className="buttonContainer">
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  form="studentRegistrationForm"
+                  value="Submit"
+                  onClick={this.submitStudentData}
                 />
-                <div className="buttonContainer">
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    form="studentRegistrationForm"
-                    value="Submit"
-                    onClick={this._submitStudentData}
-                  />
-                </div>
               </div>
             </div>
           </div>
-        </form>
-      </div>
-    );
-  }
+        </div>
+      </form>
+    </div>
+  );
+
   render() {
     // when student is not attending the session
     if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
@@ -432,7 +425,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="optIn2019"
                 label="2019 के शिविर की स्वीकृति ?"
                 options={optIn2019Options}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.optIn2019}
                 isRequired
                 errorMessage={this.state.errorMessage.optIn2019.message}
@@ -441,7 +434,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="number"
                 label="आई.डी."
                 name="id"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.id}
                 isRequired
                 disabled
@@ -450,7 +443,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="text"
                 label="नाम"
                 name="name"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.name}
                 isRequired
                 errorMessage={this.state.errorMessage.name.message}
@@ -459,7 +452,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="text"
                 label="पिता / पति का नाम"
                 name="fatherName"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.fatherName}
                 isRequired
                 errorMessage={this.state.errorMessage.fatherName.message}
@@ -468,7 +461,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="gender"
                 label="लिंग"
                 options={gender}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.gender}
                 isRequired
                 errorMessage={this.state.errorMessage.gender.message}
@@ -477,7 +470,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="number"
                 label="उम्र"
                 name="age"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.age}
                 isRequired
                 errorMessage={this.state.errorMessage.age.message}
@@ -486,7 +479,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="number"
                 label="मोबाइल नं."
                 name="mobile"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.mobile}
                 isRequired
                 errorMessage={this.state.errorMessage.mobile.message}
@@ -495,7 +488,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="number"
                 label="मोबाइल नं. ( माता का )"
                 name="motherMobile"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.motherMobile}
                 isRequired={false}
                 errorMessage={this.state.errorMessage.motherMobile.message}
@@ -504,7 +497,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="text"
                 label="व्यवसाय (युवा वर्ग हेतु)"
                 name="occupation"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.occupation}
                 isRequired={false}
               />
@@ -512,7 +505,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="text"
                 label="स्कूल शिक्षा"
                 name="education"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.education}
                 isRequired={false}
               />
@@ -520,7 +513,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 type="email"
                 label="ई-मेल"
                 name="email"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.email}
                 isRequired={false}
                 errorMessage={this.state.errorMessage.email.message}
@@ -528,7 +521,7 @@ class StudentRegistrationCorrectionForm extends Component {
               <TextAreaField
                 label="पूरा पता"
                 name="address"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.address}
                 isRequired
                 errorMessage={this.state.errorMessage.address.message}
@@ -538,7 +531,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
                 name="busStop"
                 options={busStops}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.busStop}
                 isRequired
                 errorMessage={this.state.errorMessage.busStop.message}
@@ -548,7 +541,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="classAttended2019"
                 label="आप क्या अध्ययन करना चाहते हैं ?"
                 options={studiesArray}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.classAttended2019}
                 isRequired
                 errorMessage={this.state.errorMessage.classAttended2019.message}
@@ -556,7 +549,7 @@ class StudentRegistrationCorrectionForm extends Component {
               <TextAreaField
                 label="Remark"
                 name="remark"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.remark}
                 isRequired={false}
               />
@@ -571,7 +564,7 @@ class StudentRegistrationCorrectionForm extends Component {
                     type="submit"
                     form="studentRegistrationForm"
                     value="Submit"
-                    onClick={this._submitStudentData}
+                    onClick={this.submitStudentData}
                   />
                 </div>
               </div>
@@ -606,7 +599,6 @@ class StudentRegistrationCorrectionForm extends Component {
     );
 
   }
-
 }
 
 StudentRegistrationCorrectionForm.propTypes = {

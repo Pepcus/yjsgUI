@@ -3,26 +3,16 @@ import PropTypes from 'prop-types';
 // Provider and Consumer are connected through their "parent" context
 const Context = createContext();
 
-/**
- * Provider will be exported wrapped in ConfigProvider component.
- * @type {Class}
- */
-class Provider extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { Consumer } = Context;
-    return (
-      <Context.Provider
-        value={{
-          previousLocation: this.props.previousLocation,
-        }}
-      >
-        {this.props.children}
-      </Context.Provider>
-    );
-  }
+function Provider(props) {
+  return (
+    <Context.Provider
+      value={{
+        previousLocation: props.previousLocation,
+      }}
+    >
+      {props.children}
+    </Context.Provider>
+  );
 }
 
 Provider.propTypes = {

@@ -71,39 +71,35 @@ class StudentRegistrationForm extends Component {
         optIn2019: {},
       },
     };
-
-    // FIXME: Use arrow functions to avoid binding.
-    this._onSubmitStudentData = this.onSubmitStudentData.bind(this);
-    this._handleInputChange = this.handleInputChange.bind(this);
-    this._verifyStudentFormData = this.verifyStudentFormData.bind(this);
-    this.renderBackButton = this.renderBackButton.bind(this);
   }
 
   componentDidMount() {
     // Since the below fields are optional. we are setting them blank explicitly
-    this._verifyStudentFormData({ email: '', motherMobile: '', optIn2019: 'Y' });
+    this.verifyStudentFormData({ email: '', motherMobile: '', optIn2019: 'Y' });
   }
+
   /**
    * verifyStudentFormData method verify the student data.
    * according to student data it set the error message object.
    * @param {Object} studentData
    */
-  verifyStudentFormData(studentData) {
+  verifyStudentFormData = (studentData) => {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
       isDataCorrect(studentData));
     this.setState({
       errorMessage: errorMessageObject,
     });
-  }
+  };
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
    * object return it boolean value
    * @return {boolean}
    */
-  isValidData() {
+  isValidData = () => {
     return isValidUserInfo(this.state.errorMessage);
-  }
+  };
   /**
    * onSubmitStudentData method will be call on onClick
    * of submit button in student registration form.
@@ -117,10 +113,11 @@ class StudentRegistrationForm extends Component {
       }
     }
   };
-  onSubmitStudentData(event) {
+
+  onSubmitStudentData = (event) => {
     event.preventDefault();
-    // call _verifyStudentFormData method to check data student
-    this._verifyStudentFormData(this.state.student);
+    // call verifyStudentFormData method to check data student
+    this.verifyStudentFormData(this.state.student);
     // call isValidData method to check error message
     // according to error message it will get boolean value
     if (this.isValidData()) {
@@ -128,19 +125,20 @@ class StudentRegistrationForm extends Component {
       this.props.createStudentData(this.state.student);
       this.setState({
         isSubmitTriggered: true,
-      })
+      });
     } else {
       this.setState({
       }, () => { this.scrollToError(); });
     }
-  }
+  };
+
   /**
    * handleInputChange method set the value and name of input field
    * of student registration form.
    * @param {String} value
    * @param {String} name
    */
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const errorMessageObject = {};
     // validateInput set the error message in error message object according to input value and name
     errorMessageObject[name] = validateInput(value, name);
@@ -155,10 +153,10 @@ class StudentRegistrationForm extends Component {
       isSubmitTriggered: false,
       errorMessage: updatedErrorState,
     });
-  }
+  };
 
   // FIXME: Create a separate reusable component to render success message popup
-  renderSuccessMessage() {
+  renderSuccessMessage = () => {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const student = this.props.newStudent;
 
@@ -180,11 +178,12 @@ class StudentRegistrationForm extends Component {
     }
     return null;
   }
+
   /**
    * renderBackButton method return link button according to user type
    * @return {ReactComponent}
    */
-  renderBackButton() {
+  renderBackButton = () => {
     // FIXME: Create constant MAP for UserTypes
     if (this.props.userType === 'student') {
       return (
@@ -207,7 +206,8 @@ class StudentRegistrationForm extends Component {
         linkPath={this.props.context.previousLocation}
       />
     );
-  }
+  };
+
   render() {
     if (this.props.isLoading) {
       return (
@@ -240,7 +240,7 @@ class StudentRegistrationForm extends Component {
                 type="text"
                 label="नाम"
                 name="name"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.name}
                 isRequired
                 errorMessage={this.state.errorMessage.name.message}
@@ -249,7 +249,7 @@ class StudentRegistrationForm extends Component {
                 type="text"
                 label="पिता / पति का नाम"
                 name="fatherName"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.fatherName}
                 isRequired
                 errorMessage={this.state.errorMessage.fatherName.message}
@@ -258,7 +258,7 @@ class StudentRegistrationForm extends Component {
                 name="gender"
                 label="लिंग"
                 options={gender}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.gender}
                 isRequired
                 errorMessage={this.state.errorMessage.gender.message}
@@ -267,7 +267,7 @@ class StudentRegistrationForm extends Component {
                 type="number"
                 label="उम्र"
                 name="age"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.age}
                 isRequired
                 errorMessage={this.state.errorMessage.age.message}
@@ -276,7 +276,7 @@ class StudentRegistrationForm extends Component {
                 type="number"
                 label="मोबाइल नं."
                 name="mobile"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.mobile}
                 isRequired
                 errorMessage={this.state.errorMessage.mobile.message}
@@ -285,7 +285,7 @@ class StudentRegistrationForm extends Component {
                 type="number"
                 label="मोबाइल नं. ( माता का )"
                 name="motherMobile"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.motherMobile}
                 isRequired={false}
                 errorMessage={this.state.errorMessage.motherMobile.message}
@@ -294,7 +294,7 @@ class StudentRegistrationForm extends Component {
                 type="text"
                 label="व्यवसाय (युवा वर्ग हेतु)"
                 name="occupation"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.occupation}
                 isRequired={false}
               />
@@ -302,7 +302,7 @@ class StudentRegistrationForm extends Component {
                 type="text"
                 label="स्कूल शिक्षा"
                 name="education"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.education}
                 isRequired={false}
               />
@@ -310,7 +310,7 @@ class StudentRegistrationForm extends Component {
                 type="email"
                 label="ई-मेल"
                 name="email"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.email}
                 isRequired={false}
                 errorMessage={this.state.errorMessage.email.message}
@@ -318,7 +318,7 @@ class StudentRegistrationForm extends Component {
               <TextAreaField
                 label="पूरा पता"
                 name="address"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.address}
                 isRequired
                 errorMessage={this.state.errorMessage.address.message}
@@ -328,7 +328,7 @@ class StudentRegistrationForm extends Component {
                 label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
                 name="busStop"
                 options={busStops}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.busStop}
                 isRequired
                 errorMessage={this.state.errorMessage.busStop.message}
@@ -337,7 +337,7 @@ class StudentRegistrationForm extends Component {
                 name="classAttended2019"
                 label="आप क्या अध्ययन करना चाहते हैं ?"
                 options={studiesArray}
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.classAttended2019}
                 isRequired
                 errorMessage={this.state.errorMessage.classAttended2019.message}
@@ -346,26 +346,24 @@ class StudentRegistrationForm extends Component {
                 type="text"
                 label="पूर्व में किये गए धार्मिक अध्ययन का विवरण"
                 name="classAttended2018"
-                onInputChange={this._handleInputChange}
+                onInputChange={this.handleInputChange}
                 value={this.state.student.classAttended2018}
                 isRequired={false}
               />
-
-
-            <div className="registrationFormButtonContainer">
-              <div className="button-wrapper">
-                {this.renderBackButton()}
-                <div className="buttonContainer">
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    form="studentRegistrationForm"
-                    value="Submit"
-                    onClick={this._onSubmitStudentData}
-                  />
+              <div className="registrationFormButtonContainer">
+                <div className="button-wrapper">
+                  {this.renderBackButton()}
+                  <div className="buttonContainer">
+                    <Button
+                      buttonText={formSubmitBtnText}
+                      type="submit"
+                      form="studentRegistrationForm"
+                      value="Submit"
+                      onClick={this.onSubmitStudentData}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </form>
         </div>

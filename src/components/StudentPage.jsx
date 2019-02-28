@@ -38,10 +38,6 @@ class StudentPage extends Component {
       isStudentLogin: false,
       isNewRegistration: false,
     };
-    // FIXME: Use arrow functions to avoid binding.
-    this.renderLoginField = this.renderLoginField.bind(this);
-    this.redirectToStudentLogin = this.redirectToStudentLogin.bind(this);
-    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
 
   componentWillMount() {
@@ -56,44 +52,45 @@ class StudentPage extends Component {
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams(id, secretCode) {
+  fetchStudentByURLParams = (id, secretCode) => {
     this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
     this.setState({
       isURLParams: true,
     });
-  }
+  };
 
   /**
    * redirectToStudentLogin method call by onclick of button already register
    * it set the value of isStudentLogin is true.
    * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
    */
-  redirectToStudentLogin() {
+  redirectToStudentLogin = () => {
     this.setState({
       isStudentLogin: true,
     });
     this.props.setHashLinkForStudentCredentialAction('student');
-  }
+  };
 
   /**
    * redirectToNewRegistrationPage method call by onclick of button new registration
    * it set the value of isNewRegistration is true.
    * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
    */
-  redirectToNewRegistrationPage() {
+  redirectToNewRegistrationPage = () => {
     this.setState({
       isNewRegistration: true,
     });
     this.props.setHashLinkForNewRegistrationAction('student');
-  }
-// FixMe: Rename the method to renderStudentLoginButtons
+  };
+
+  // FixMe: Rename the method to renderStudentLoginButtons
   /**
    * renderLoginField method return the react component in that
    * there are two buttons one is already register and anther is new registration.
    * @return {ReactComponent}
    */
-  renderLoginField() {
+  renderLoginField = () => {
     return (
       <div>
         <Button
@@ -106,7 +103,8 @@ class StudentPage extends Component {
         />
       </div>
     );
-  }
+  };
+
   render() {
     if (this.state.isURLParams) {
       return <Switch><Redirect to="/student-correction-by-url" /></Switch>;

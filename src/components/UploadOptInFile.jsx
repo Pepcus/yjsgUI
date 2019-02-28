@@ -27,56 +27,44 @@ const customUploadOptInFileModalStyles = {
 };
 
 class UploadOptInFile extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       optInFile: null,
       isUploadOptInFileModalOpen: false,
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.fileUpload = this.fileUpload.bind(this);
-    this.renderMessage = this.renderMessage.bind(this);
-    this.renderFailOptIn = this.renderFailOptIn.bind(this);
-    this.optionUploadOptInFileModal = this.optionUploadOptInFileModal.bind(this);
-    this.closeUploadOptInFileModal = this.closeUploadOptInFileModal.bind(this);
-    this.renderUploadOptInModal = this.renderUploadOptInModal.bind(this);
-    this.renderUploadButtonClassName = this.renderUploadButtonClassName.bind(this);
   }
 
-  optionUploadOptInFileModal() {
+  optionUploadOptInFileModal = () => {
     this.setState({ isUploadOptInFileModalOpen: true });
-  }
-  closeUploadOptInFileModal() {
+  };
+
+  closeUploadOptInFileModal = () => {
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
     this.setState({
       optInFile: null,
     });
-  }
-  renderUploadButtonClassName() {
+  };
+
+  renderUploadButtonClassName = () => {
     if (!this.state.optInFile) {
       return 'popup-buttons-disable';
     }
-
     return 'btn-upload linkButton';
-
-  }
-  onFormSubmit(e) {
+  };
+  onFormSubmit = (e) => {
     e.preventDefault();
     this.fileUpload(this.state.optInFile);
-  }
-
-  onChange(e) {
+  };
+  onChange = (e) => {
     this.setState({ optInFile: e.target.files[0] });
-  }
-
-  fileUpload(optInFile) {
+  };
+  fileUpload = (optInFile) => {
     this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
-  }
+  };
 
-  renderFailOptIn() {
+  renderFailOptIn = () => {
     if (this.props.failOptIn) {
       return (
         <div className="failure-block">
@@ -85,9 +73,9 @@ class UploadOptInFile extends Component {
         </div>
       );
     }
-  }
+  };
 
-  renderMessage() {
+  renderMessage = () => {
     if (this.props.isOptInSuccess) {
       return (
         <div className="upload-message-wrapper">
@@ -100,8 +88,9 @@ class UploadOptInFile extends Component {
         </div>
       );
     }
-  }
-  renderUploadOptInModal() {
+  };
+
+  renderUploadOptInModal = () => {
     if (this.state.isUploadOptInFileModalOpen) {
       return (
         <Modal
@@ -143,7 +132,7 @@ class UploadOptInFile extends Component {
       );
     }
     return null;
-  }
+  };
 
   render() {
     return (

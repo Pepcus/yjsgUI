@@ -4,23 +4,16 @@ import ErrorMessage from '../commonComponents/ErrorMessage';
 
 class InputField extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this._handleOnChange = this.handleOnChange.bind(this);
-    this._populateValue = this.populateValue.bind(this);
-  }
-
-  handleOnChange(e) {
+  handleOnChange = (e) => {
     this.props.onInputChange(e.target.value, this.props.name);
   };
 
-  populateValue() {
+  populateValue = () => {
     if (this.props.value) {
       return this.props.value;
     }
     return '';
-  }
+  };
 
   render() {
     const {
@@ -44,8 +37,8 @@ class InputField extends Component {
                 className={'inputText'}
                 type={type}
                 placeholder={placeholder}
-                onChange={this._handleOnChange}
-                value={this._populateValue()}
+                onChange={this.handleOnChange}
+                value={this.populateValue()}
                 disabled={disabled}
               />
             </div>
@@ -63,8 +56,8 @@ class InputField extends Component {
               className={'inputText'}
               type={type}
               placeholder={placeholder}
-              onChange={this._handleOnChange}
-              value={this._populateValue()}
+              onChange={this.handleOnChange}
+              value={this.populateValue()}
               disabled={disabled}
             />
           </div>

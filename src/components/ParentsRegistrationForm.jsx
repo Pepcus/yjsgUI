@@ -23,17 +23,6 @@ class ParentsRegistration extends Component {
       isError: false,
       isCloseBrowserPopMessage: false,
     };
-
-    // FIXME: Use arrow functions to avoid binding.
-    this._handleInputChangeName = this.handleInputChangeName.bind(this);
-    this._addOptions = this.addOptions.bind(this);
-    this._handleSelectChange = this.handleSelectChange.bind(this);
-    this._onSubmitParentsData = this.onSubmitParentsData.bind(this);
-    this._renderPopUp = this.renderPopUp.bind(this);
-    this._closePopUp = this.closePopUp.bind(this);
-    this._renderErrorMessage = this.renderErrorMessage.bind(this);
-    this._handleInputChangeMobile = this.handleInputChangeMobile.bind(this);
-    this.renderCloseBrowserMessage = this.renderCloseBrowserMessage.bind(this);
   }
   componentDidMount() {
     this.setState({
@@ -41,42 +30,49 @@ class ParentsRegistration extends Component {
       isCloseBrowserPopMessage: false,
     });
   }
-  handleInputChangeName(event) {
+
+  handleInputChangeName = (event) => {
     this.setState({
       name: event.target.value,
       isError: false,
     });
-  }
+  };
+
   /**
    * handleInputChangeMobile method set mobile number.
    * @param {Object} event
    */
-  handleInputChangeMobile(event) {
+  handleInputChangeMobile = (event) => {
     // validation only for number with max length 10 only
     const validationForMobile = /^[0-9\b]+$/;
-    if (((event.target.value === '') || validationForMobile.test(event.target.value)) && event.target.value !== 'e' && event.target.value.length <= 10) {
+    if (((event.target.value === '')
+      || validationForMobile.test(event.target.value))
+      && event.target.value !== 'e'
+      && event.target.value.length <= 10) {
       this.setState({
         mobile: event.target.value,
         isError: false,
       });
     }
-  }
+  };
+
   /**
    * handleSelectChange method set the number of member
    * that are selected from drop down list of member
    * @param {Object} event
    */
-  handleSelectChange(event) {
+  handleSelectChange = (event) => {
     this.setState({
       selectedCountOfMembers: event.target.value,
       isError: false,
     });
-  }
+  };
+
   /**
    * onSubmitParentsData method will on onClick of submit button
    * @param {Object} event
    */
-  onSubmitParentsData(event) {
+  onSubmitParentsData = (event) => {
     // to prevent form action default
     event.preventDefault();
     // name and mobile number are compulsory for from submission
@@ -93,23 +89,23 @@ class ParentsRegistration extends Component {
         isError: false,
       });
     }
-  }
+  };
+
   /**
    * addOptions method return number of member option in member drop down list.
    * @return {ReactComponent}
    */
-  addOptions() {
-    return (this.state.members.map(
-      optionCount => (
-        <option
-          key={optionCount}
-        >{optionCount}
-        </option>
-      ))
-    );
-  }
+  addOptions = () => (this.state.members.map(
+    optionCount => (
+      <option
+        key={optionCount}
+      >{optionCount}
+      </option>
+    ))
+  );
+
   // FIXME: Please reuse the component to display message.
-  renderCloseBrowserMessage() {
+  renderCloseBrowserMessage = () => {
     if (this.state.isCloseBrowserPopMessage) {
       return (
         <div className="popup">
@@ -119,12 +115,13 @@ class ParentsRegistration extends Component {
         </div>
       );
     }
-  }
+  };
+
   /**
    * closePopUp method call on onClick on close button in popup
    * And set all values of state initial.
    */
-  closePopUp() {
+  closePopUp = () => {
     this.setState({
       isSubmitTriggered: true,
       name: '',
@@ -133,10 +130,10 @@ class ParentsRegistration extends Component {
       isError: false,
       isCloseBrowserPopMessage: true,
     });
-  }
+  };
 
   // FIXME: Reuse the component to render error message popup
-  renderErrorMessage() {
+  renderErrorMessage = () => {
     if (this.state.isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
@@ -146,9 +143,10 @@ class ParentsRegistration extends Component {
         </div>);
     }
     return null;
-  }
+  };
+
   // FIXME: Reuse the component to render message popup
-  renderPopUp() {
+  renderPopUp = () => {
     if (this.state.isSubmitTriggered) {
       return (
         <div className="inputFieldContainer parent-register-message-wrapper">
@@ -159,13 +157,14 @@ class ParentsRegistration extends Component {
             <span>धन्यवाद्</span>
           </div>
           <div className="buttonContainer">
-            <button onClick={this._closePopUp} className="linkButton margin-none full-width">Close</button>
+            <button onClick={this.closePopUp} className="linkButton margin-none full-width">Close</button>
           </div>
         </div>
       );
     }
     return null;
-  }
+  };
+
   render() {
     if (!this.state.isSubmitTriggered && !this.state.isCloseBrowserPopMessage) {
       return (
@@ -192,7 +191,7 @@ class ParentsRegistration extends Component {
                     name="name"
                     className="parent-input-text"
                     value={this.state.name}
-                    onChange={this._handleInputChangeName}
+                    onChange={this.handleInputChangeName}
                     required
                   />
                 </div>
@@ -203,20 +202,20 @@ class ParentsRegistration extends Component {
                     name="mobile"
                     className="parent-input-text"
                     value={this.state.mobile}
-                    onChange={this._handleInputChangeMobile}
+                    onChange={this.handleInputChangeMobile}
                     required
                   />
                 </div>
                 <span className="column-content-students">आपके अलावा साथ आने वालो की संख्या : </span>
                 <select
-                  onChange={this._handleSelectChange}
+                  onChange={this.handleSelectChange}
                   value={this.state.members[this.state.selectedCountOfMembers]}
                   className="selected-day-list"
                 >
-                  {this._addOptions()}
+                  {this.addOptions()}
                 </select>
                 <div>
-                  {this._renderErrorMessage()}
+                  {this.renderErrorMessage()}
                 </div>
                 <div className="buttonContainer button-register-submit">
                   <Button
@@ -224,21 +223,21 @@ class ParentsRegistration extends Component {
                     type="submit"
                     form="parentsRegistrationForm"
                     value="Submit"
-                    onClick={this._onSubmitParentsData}
+                    onClick={this.onSubmitParentsData}
                   />
                 </div>
                 <div className="register-form-content-wrapper">
                   <div className="form-content-title">
-                    <span className="form-title-small">{'दिनांक :'}</span>
+                    <span className="form-title-small">दिनांक :</span>
                     <span className="form-title-text"> {'रविवार १७ फरवरी'}</span>
                   </div>
                   <div className="form-content-title">
-                    <span className="form-title-small">{'समय :'}</span>
-                    <span className="form-title-text">{'प्रातः ९ से १ बजे'}</span>
+                    <span className="form-title-small">समय :</span>
+                    <span className="form-title-text">प्रातः ९ से १ बजे</span>
                   </div>
                   <div className="form-content-title form-content-flex">
-                    <span className="form-title-small">{'स्थान : '}</span>
-                    <span className="form-content-flex-content form-title-text">{'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर'}</span>
+                    <span className="form-title-small">स्थान : </span>
+                    <span className="form-content-flex-content form-title-text">श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर</span>
                   </div>
                 </div>
               </div>
@@ -261,7 +260,7 @@ class ParentsRegistration extends Component {
             </div>
             <h2 className="student-info-heading">{'अभिभावक सम्मलेन (Parents\' Convention)'}</h2>
           </div>
-          {this._renderPopUp()}
+          {this.renderPopUp()}
         </div>
         <div className="footer print-media-none footer-index">
           <p className="footer-text footer-index">

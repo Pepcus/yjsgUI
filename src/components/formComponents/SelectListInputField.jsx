@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import ErrorMessage from '../commonComponents/ErrorMessage';
 
 class SelectListInputField extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this._handleOnChange = this.handleOnChange.bind(this);
-    this._populateValue = this.populateValue.bind(this);
-  }
-
-  renderOptionStatements() {
+  renderOptionStatements = () => {
     return this.props.options.map((iterator, index) => {
-      return <option value={iterator.value} key={index}>{iterator.text}</option>
+      return <option value={iterator.value} key={index}>{iterator.text}</option>;
     });
   };
 
-  populateValue(value) {
+  populateValue = (value) => {
     if(value === '' || value === null || value === undefined) {
       return 'select';
     } else return value;
-  }
+  };
 
-  handleOnChange(e) {
+  handleOnChange = (e) =>  {
     this.props.onInputChange(e.target.value, this.props.name);
   };
 
@@ -50,8 +43,8 @@ class SelectListInputField extends Component {
               <select
                 className={'selectInputText'}
                 name={name}
-                onChange={this._handleOnChange}
-                value={this._populateValue(value)}
+                onChange={this.handleOnChange}
+                value={this.populateValue(value)}
                 disabled={disabled}
               >
                 <option value="select" disabled>{'कृपया एक चुनिए . . .'}</option>
@@ -73,8 +66,8 @@ class SelectListInputField extends Component {
             <select
               className={'selectInputText'}
               name={name}
-              onChange={this._handleOnChange}
-              value={this._populateValue(value)}
+              onChange={this.handleOnChange}
+              value={this.populateValue(value)}
               disabled={disabled}
             >
               <option value="select" disabled>{'कृपया एक चुनिए . . .'}</option>

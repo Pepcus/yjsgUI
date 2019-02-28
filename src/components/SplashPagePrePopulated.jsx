@@ -62,18 +62,6 @@ class SplashPagePrePopulated extends Component {
       adminLoginState: false,
       registeredStudentCredentialErrorMessage: false,
     };
-
-    // FIXME: Use arrow functions to avoid binding.
-    this.enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
-    this.disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
-    this.enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this.disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
-    this._handleInputChange = this.handleInputChange.bind(this);
-    this._setAdminLogin = this.setAdminLogin.bind(this);
-    this.adminScreenRedirection = this.adminScreenRedirection.bind(this);
-    // This may be use in future.
-    // this._fetchStudentById = this.fetchStudentById.bind(this);
-    // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
   }
 
   componentDidMount() {
@@ -99,50 +87,50 @@ class SplashPagePrePopulated extends Component {
    * corrections button by onClick of already register button.
    * It set the value of isCorrection to true.
    */
-  enableStudentInfoCorrectionButtons() {
+  enableStudentInfoCorrectionButtons = () => {
     this.setState({
       isCorrection: true,
     });
-  }
+  };
 
   /**
    * enableAdminLoginButtons method enable the admin login
    * button by onClick of admin login button.
    * It set the value of isAdmin to true.
    */
-  enableAdminLoginButtons() {
+  enableAdminLoginButtons = () => {
     this.setState({
       isAdmin: true,
     });
-  }
+  };
 
   /**
    * disableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
-  disableAdminLoginButtons() {
+  disableAdminLoginButtons = () => {
     this.setState({
       isAdmin: false,
     });
-  }
+  };
 
   /**
    * disableStudentInfoCorrectionButtons method disable the the student information
    * corrections button by onClick of go back button.
    * It set the value of isCorrection to false.
    */
-  disableStudentInfoCorrectionButtons() {
+  disableStudentInfoCorrectionButtons = () => {
     this.setState({
       isCorrection: false,
     });
-  }
+  };
 
   /**
    * adminScreenRedirection method redirect to admin page on some condition.
    * @return {ReactComponent}
    */
-  adminScreenRedirection() {
+  adminScreenRedirection = () => {
     if (!this.props.adminLoginState) {
       const {
         id,
@@ -164,7 +152,7 @@ class SplashPagePrePopulated extends Component {
     }
     return <Switch><Redirect to="/student-search" /></Switch>;
 
-  }
+  };
 
   /**
    * checkRegisteredStudentCredential method verify the student credential
@@ -194,14 +182,14 @@ class SplashPagePrePopulated extends Component {
    * setAdminLogin method set the admin login credential
    * @param {Object} event
    */
-  setAdminLogin(event) {
+  setAdminLogin = event => {
     event.preventDefault();
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
     this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
-  }
+  };
 
   /**
    * fetchStudentById method fetch the student data while student login through URL.
@@ -224,7 +212,7 @@ class SplashPagePrePopulated extends Component {
    * @param {String} value
    * @param {String} name
    */
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
 
@@ -237,7 +225,7 @@ class SplashPagePrePopulated extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
     });
-  }
+  };
 
   /**
    * renderRegistrationCorrectionFields method return student credential fields
@@ -252,7 +240,7 @@ class SplashPagePrePopulated extends Component {
           name={'studentId'}
           label={'आई.डी. नं.'}
           placeholder={'अपना आई.डी. नं. दर्ज करें'}
-          onInputChange={this._handleInputChange}
+          onInputChange={this.handleInputChange}
           value={this.state.credentials.studentId}
         />
         <InputField
@@ -260,7 +248,7 @@ class SplashPagePrePopulated extends Component {
           name={'secretKey'}
           label={'सीक्रेट कोड'}
           placeholder={'अपना सीक्रेट कोड दर्ज करें'}
-          onInputChange={this._handleInputChange}
+          onInputChange={this.handleInputChange}
           value={this.state.credentials.secretKey}
         />
         {this.checkRegisteredStudentCredential()}
@@ -287,7 +275,7 @@ class SplashPagePrePopulated extends Component {
             name="adminId"
             label="Admin ID"
             placeholder="Enter Admin ID"
-            onInputChange={this._handleInputChange}
+            onInputChange={this.handleInputChange}
             value={this.state.admin.adminId}
           />
           <InputField
@@ -295,7 +283,7 @@ class SplashPagePrePopulated extends Component {
             name="adminPassword"
             label="Admin Password"
             placeholder="Enter Admin Password"
-            onInputChange={this._handleInputChange}
+            onInputChange={this.handleInputChange}
             value={this.state.admin.adminPassword}
           />
           {this.adminScreenRedirection()}
@@ -309,7 +297,7 @@ class SplashPagePrePopulated extends Component {
               type="submit"
               form="adminCredential"
               buttonText={formSubmitBtnText}
-              onClick={this._setAdminLogin}
+              onClick={this.setAdminLogin}
             />
           </div>
         </form>

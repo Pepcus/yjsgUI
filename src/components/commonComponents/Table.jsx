@@ -2,12 +2,12 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 export const TableRow = ({ row }) => (
-    <tr key={row.id}>
-      <td>{row.id}</td>
-      <td>{row.name}</td>
-      <td>{row.fatherName}</td>
-      <td>{row.mobile}</td>
-    </tr>);
+  <tr key={row.id}>
+    <td>{row.id}</td>
+    <td>{row.name}</td>
+    <td>{row.fatherName}</td>
+    <td>{row.mobile}</td>
+  </tr>);
 
 const Table = ({ data, headings }) => (
   <table>
@@ -22,10 +22,10 @@ const Table = ({ data, headings }) => (
     </thead>
     <tbody>
       {data.map(row =>
-        <TableRow
+        (<TableRow
           key={row.id}
           row={row}
-        />
+        />),
       )}
     </tbody>
   </table>

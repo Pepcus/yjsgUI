@@ -35,9 +35,6 @@ class ColumnConfig extends Component {
       visibleColumnConfig: {},
       selectValue: '',
     };
-    this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
-    this.setCheckValue = this.setCheckValue.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -46,20 +43,21 @@ class ColumnConfig extends Component {
       selectValue: this.props.selectValue,
     });
   }
+
   /**
    * setValuesOfVisibleColumnConfig method call callBack setValuesOfVisibleColumnConfig()
    * and call closeColumnOption() method.
    */
-  setValuesOfVisibleColumnConfig() {
+  setValuesOfVisibleColumnConfig = () => {
     this.props.setValuesOfVisibleColumnConfig(this.state.visibleColumnConfig, this.state.selectValue);
     this.props.closeColumnOption();
-  }
+  };
 
   /**
    * setCheckValue method set value of selectValue(select all)(true or false) and on the basis
    * of selectValue value set the value of visibleColumnConfig(all column value)
    */
-  setCheckValue() {
+  setCheckValue = () => {
     const temporarySelectValue = this.state.selectValue !== true;
     const temporaryVisibleColumnConfig = cloneDeep(this.props.visibleColumnConfig);
     if (temporarySelectValue) {
@@ -79,7 +77,8 @@ class ColumnConfig extends Component {
         visibleColumnConfig: temporaryVisibleColumnConfig,
       });
     }
-  }
+  };
+
   /**
    * handleChange method set value of visibleColumnConfig(all columns value)
    * @param {Object} event

@@ -19,47 +19,46 @@ class SelectedStudentsActionWrapper extends Component {
     this.state = {
       printOptionIsOpen: false,
     };
-    this.openPrintOption = this.openPrintOption.bind(this);
-    this.printCards = this.printCards.bind(this);
   }
 
   /**
    * printCards method call window.print() method to print students
    * Id cards.
    */
-  printCards() {
+  printCards = () => {
     window.print();
-  }
+  };
 
   /**
    * openPrintOption method open or close the print window.
    */
-  openPrintOption() {
+  openPrintOption = () => {
     this.setState({ printOptionIsOpen: !this.state.printOptionIsOpen });
-  }
+  };
 
   /**
    * renderExportClassName method return the className
    * Export button as per students selected or not.
    * @return {string} className
    */
-  renderExportClassName() {
+  renderExportClassName = () => {
     if (isEmpty(this.props.selectedStudents)) {
       return 'disable-link';
     }
     return 'export';
-  }
+  };
   /**
    * renderPrintNowClassName method return the className
    * Print Now button as per students selected or not.
    * @return {string} className
    */
-  renderPrintNowClassName() {
+  renderPrintNowClassName = () => {
     if (isEmpty(this.props.selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
-  }
+  };
+
   render() {
     const filterHeader = this.props.metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);

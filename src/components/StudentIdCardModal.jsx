@@ -3,11 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import upperFirst from 'lodash/upperFirst';
 
 class StudentIdCardModal extends Component {
-  constructor(props) {
-    super(props);
-    this.renderStudentIdCards = this.renderStudentIdCards.bind(this);
-  }
-  renderStudentIdCards(student) {
+  renderStudentIdCards = (student) => {
     const studentsIdCards = student.map((object) => {
       const name = object.name.split(' ');
       name.forEach((element, index) => {
@@ -108,7 +104,7 @@ class StudentIdCardModal extends Component {
         </div>
       );
     }
-  }
+  };
 
   render() {
     return (

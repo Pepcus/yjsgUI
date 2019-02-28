@@ -56,11 +56,6 @@ class StudentCredentialPage extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
     };
-
-    this._handleInputChange = this.handleInputChange.bind(this);
-    this._fetchStudentById = this.fetchStudentById.bind(this);
-    this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
-    this.renderBackButton = this.renderBackButton.bind(this);
   }
 
   componentWillMount() {
@@ -91,20 +86,20 @@ class StudentCredentialPage extends Component {
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams(id, secretCode) {
+  fetchStudentByURLParams = (id, secretCode) => {
     this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
     this.setState({
       isURLParams: true,
     });
-  }
+  };
 
   /**
    * checkRegisteredStudentCredential method check the credential
    * of which is already registered.
    * @return {ReactComponent}
    */
-  checkRegisteredStudentCredential() {
+  checkRegisteredStudentCredential = () => {
     if (this.state.registeredStudentCredentialErrorMessage) {
       if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
         return (
@@ -121,14 +116,14 @@ class StudentCredentialPage extends Component {
       }
     }
     return null;
-  }
+  };
 
   /**
    * fetchStudentById method fetch the student
    * data on submit of student credential
    * @param {Object} event
    */
-  fetchStudentById(event) {
+  fetchStudentById = (event) => {
     event.preventDefault();
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
@@ -137,7 +132,7 @@ class StudentCredentialPage extends Component {
     this.setState({
       registeredStudentCredentialErrorMessage: true,
     });
-  }
+  };
 
   /**
    * handleInputChange method set the student credential in state
@@ -146,7 +141,7 @@ class StudentCredentialPage extends Component {
    * @param {String} value
    * @param {String} name
    */
-  handleInputChange(value, name) {
+  handleInputChange = (value, name) => {
     const updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
 
@@ -159,13 +154,13 @@ class StudentCredentialPage extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
     });
-  }
+  };
 
   /**
    * renderBackButton method return back button according to user type.
    * @return {ReactComponent}
    */
-  renderBackButton() {
+  renderBackButton = () => {
     if (this.props.hashLink === 'admin') {
       return (
         <LinkButton
@@ -187,51 +182,50 @@ class StudentCredentialPage extends Component {
         linkPath={this.props.context.previousLocation}
       />
     );
-  }
+  };
 
   /**
    * renderRegistrationCorrectionFields method return student login fields
    * @return {ReactComponent}
    */
-  renderRegistrationCorrectionFields() {
-    return (
-      <div className="student-already-register-form">
-        <form id="studentCredential">
-          <div className="form-input-wrapper ">
-            <InputField
-              type="number"
-              name="studentId"
-              label="आई.डी. नं."
-              placeholder="अपना आई.डी. नं. दर्ज करें"
-              onInputChange={this._handleInputChange}
-              value={this.state.credentials.studentId}
+  renderRegistrationCorrectionFields = () => (
+    <div className="student-already-register-form">
+      <form id="studentCredential">
+        <div className="form-input-wrapper ">
+          <InputField
+            type="number"
+            name="studentId"
+            label="आई.डी. नं."
+            placeholder="अपना आई.डी. नं. दर्ज करें"
+            onInputChange={this.handleInputChange}
+            value={this.state.credentials.studentId}
+          />
+          <InputField
+            type="text"
+            name="secretKey"
+            label="सीक्रेट कोड"
+            placeholder="अपना सीक्रेट कोड दर्ज करें"
+            onInputChange={this.handleInputChange}
+            value={this.state.credentials.secretKey}
+          />
+          {this.checkRegisteredStudentCredential()}
+        </div>
+        <div className="button-wrapper">
+          {this.renderBackButton()}
+          <div className="buttonContainer">
+            <Button
+              buttonText={viewEditInfoBtnText}
+              type="submit"
+              value="Submit"
+              form="studentCredential"
+              onClick={this.fetchStudentById}
             />
-            <InputField
-              type="text"
-              name="secretKey"
-              label="सीक्रेट कोड"
-              placeholder="अपना सीक्रेट कोड दर्ज करें"
-              onInputChange={this._handleInputChange}
-              value={this.state.credentials.secretKey}
-            />
-            {this.checkRegisteredStudentCredential()}
           </div>
-          <div className="button-wrapper">
-            {this.renderBackButton()}
-            <div className="buttonContainer">
-              <Button
-                buttonText={viewEditInfoBtnText}
-                type="submit"
-                value="Submit"
-                form="studentCredential"
-                onClick={this._fetchStudentById}
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-    );
-  }
+        </div>
+      </form>
+    </div>
+  );
+
   render() {
     if (this.state.isURLParams) {
       return <Switch><Redirect to="/student-correction-by-url" /></Switch>;

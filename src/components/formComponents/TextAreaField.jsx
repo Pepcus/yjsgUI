@@ -3,24 +3,16 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../commonComponents/ErrorMessage';
 
 class TextAreaField extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this._handleOnChange = this.handleOnChange.bind(this);
-    this._populateValue = this.populateValue.bind(this);
-  }
-
-  handleOnChange(e) {
+  handleOnChange = (e) => {
     this.props.onInputChange(e.target.value, this.props.name);
   };
 
-  populateValue() {
+  populateValue = () => {
     if (this.props.value) {
       return this.props.value;
     }
     return '';
-  }
+  };
 
   render() {
     const {
@@ -35,48 +27,48 @@ class TextAreaField extends Component {
 
     const newLabel = isRequired ? `${label} * ` : label;
 
-    if ( errorMessage ) {
+    if (errorMessage) {
       return (
-        <div className={'inputWrapper'}>
-          <div className={'has-error inputWrapperContainer errorInputField'}>
-            <div className={'inputLabel'}><label>{newLabel}</label></div>
+        <div className="inputWrapper">
+          <div className="has-error inputWrapperContainer errorInputField">
+            <div className="inputLabel"><label>{newLabel}</label></div>
             <div>
-            <textarea
-              className={'textAreaText'}
-              type={'textArea'}
-              placeholder={placeholder}
-              onChange={this._handleOnChange}
-              value={this._populateValue()}
-              min={min}
-              max={max}
-              disabled={disabled}
-            />
+              <textarea
+                className="textAreaText"
+                type="textArea"
+                placeholder={placeholder}
+                onChange={this.handleOnChange}
+                value={this.populateValue()}
+                min={min}
+                max={max}
+                disabled={disabled}
+              />
             </div>
-            <ErrorMessage errorMessage={errorMessage}/>
+            <ErrorMessage errorMessage={errorMessage} />
           </div>
         </div>
-      )
+      );
     }
     return (
-      <div className={'inputWrapper'}>
-        <div className={'inputWrapperContainer'}>
-          <div className={'inputLabel'}><label>{newLabel}</label></div>
+      <div className="inputWrapper">
+        <div className="inputWrapperContainer">
+          <div className="inputLabel"><label>{newLabel}</label></div>
           <div>
             <textarea
-              className={'textAreaText'}
-              type={'textArea'}
+              className="textAreaText"
+              type="textArea"
               placeholder={placeholder}
-              onChange={this._handleOnChange}
-              value={this._populateValue()}
+              onChange={this.handleOnChange}
+              value={this.populateValue()}
               min={min}
               max={max}
               disabled={disabled}
             />
           </div>
-          <ErrorMessage errorMessage={errorMessage}/>
+          <ErrorMessage errorMessage={errorMessage} />
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -85,7 +77,7 @@ TextAreaField.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   style: PropTypes.object,
-  value:PropTypes.oneOfType([
+  value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),

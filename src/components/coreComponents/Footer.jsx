@@ -15,10 +15,6 @@ import { isLoading } from '../../reducers/studentRegistrationReducer';
  * @return {ReactComponent}
  */
 class Footer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * renderClassName method render className according where footer show and hide
    * @return {string}

@@ -27,49 +27,40 @@ const customUploadStudentsAttendanceFileModalStyles = {
 };
 
 class UploadStudentsAttendanceFile extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       attendanceFile: null,
       isUploadStudentsAttendanceFileModal: false,
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.fileUpload = this.fileUpload.bind(this);
-    this.renderMessage = this.renderMessage.bind(this);
-    this.renderFailRecordIds = this.renderFailRecordIds.bind(this);
-    this.openUploadStudentsAttendanceFileOption = this.openUploadStudentsAttendanceFileOption.bind(this);
-    this.closeUploadStudentsAttendanceFileOption = this.closeUploadStudentsAttendanceFileOption.bind(this);
-    this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
-    this.renderUploadButtonClassName = this.renderUploadButtonClassName.bind(this);
   }
 
-  openUploadStudentsAttendanceFileOption() {
+  openUploadStudentsAttendanceFileOption = () => {
     this.setState({ isUploadStudentsAttendanceFileModal: true });
-  }
-  closeUploadStudentsAttendanceFileOption() {
+  };
+
+  closeUploadStudentsAttendanceFileOption = () => {
     this.setState({ isUploadStudentsAttendanceFileModal: false });
     this.props.resetIsSuccessAction();
     this.setState({
       attendanceFile: null,
     });
-  }
+  };
 
-  onFormSubmit(e) {
+  onFormSubmit = (e) => {
     e.preventDefault();
     this.fileUpload(this.state.attendanceFile);
-  }
+  };
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ attendanceFile: e.target.files[0] });
-  }
+  };
 
-  fileUpload(attendanceFile) {
+  fileUpload = (attendanceFile) => {
     this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile);
-  }
+  };
 
-  renderFailRecordIds() {
+  renderFailRecordIds = () => {
     if (this.props.failRecordIds) {
       return (
         <div className="failure-block">
@@ -78,14 +69,16 @@ class UploadStudentsAttendanceFile extends Component {
         </div>);
     }
     return null;
-  }
-  renderUploadButtonClassName() {
+  };
+
+  renderUploadButtonClassName = () => {
     if (!this.state.attendanceFile) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
-  }
-  renderMessage() {
+  };
+
+  renderMessage = () => {
     if (this.props.isSuccess) {
       return (
         <div className="upload-message-wrapper">
@@ -98,8 +91,9 @@ class UploadStudentsAttendanceFile extends Component {
       );
     }
     return null;
-  }
-  renderUploadStudentsAttendanceOption() {
+  };
+
+  renderUploadStudentsAttendanceOption = () => {
     if (this.state.isUploadStudentsAttendanceFileModal) {
       return (
         <Modal
@@ -142,7 +136,7 @@ class UploadStudentsAttendanceFile extends Component {
       );
     }
     return null;
-  }
+  };
 
   render() {
     return (

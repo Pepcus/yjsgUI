@@ -41,51 +41,48 @@ class UpdateIdCardStatusSelectedStudents extends Component {
       selectedCardOption: '',
       isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
     };
-    this.openUpdateIdCardStatusSelectedStudentsModal = this.openUpdateIdCardStatusSelectedStudentsModal.bind(this);
-    this.closeUpdateIdCardStatusSelectedStudentsModal = this.closeUpdateIdCardStatusSelectedStudentsModal.bind(this);
-    this.onClickRadioButton = this.onClickRadioButton.bind(this);
-    this.renderUpdateIdCardStatusSelectedStudentsModal = this.renderUpdateIdCardStatusSelectedStudentsModal.bind(this);
-    this.renderMessage = this.renderMessage.bind(this);
-    this.filterIdsOfStudents = this.filterIdsOfStudents.bind(this);
-    this.renderIdCardStatusButtonClassName = this.renderIdCardStatusButtonClassName.bind(this);
-    this.renderSubmitButtonClassName = this.renderSubmitButtonClassName.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
-  openUpdateIdCardStatusSelectedStudentsModal() {
+
+  openUpdateIdCardStatusSelectedStudentsModal = () => {
     this.setState({
       isUpdateSelectedStudentsOptInOrOptOutModalOpen: true,
     });
     this.filterIdsOfStudents();
-  }
-  closeUpdateIdCardStatusSelectedStudentsModal() {
+  };
+
+  closeUpdateIdCardStatusSelectedStudentsModal = () => {
     this.setState({
       isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
     });
     this.props.resetIsUpdateIdCardStatusSuccessAction();
-  }
-  renderSubmitButtonClassName() {
+  };
+
+  renderSubmitButtonClassName = () => {
     if (isEmpty(this.state.selectedCardOption)) {
       return 'popup-buttons-disable';
     }
 
     return 'display-inline padding-7 linkButton float-right';
 
-  }
-  filterIdsOfStudents() {
+  };
+
+  filterIdsOfStudents = () => {
     const Ids = this.props.selectedStudents.map(student => String(student.studentId));
     this.setState({
       studentsId: Ids,
     });
-  }
-  renderIdCardStatusButtonClassName() {
+  };
+
+  renderIdCardStatusButtonClassName = () => {
     if (isEmpty(this.props.selectedStudents)) {
       return 'disable-link-button-new';
     }
 
     return 'linkButton';
 
-  }
-  renderMessage() {
+  };
+
+  renderMessage = () => {
     if (this.props.isUpdateIdCardStatusSuccess) {
       return (
         <div className="success-block">
@@ -93,17 +90,20 @@ class UpdateIdCardStatusSelectedStudents extends Component {
         </div>
       );
     }
-  }
-  onClickRadioButton(event) {
+  };
+
+  onClickRadioButton = (event) => {
     this.setState({
       selectedCardOption: { 'printStatus': event.target.value },
     });
-  }
-  onFormSubmit(e) {
+  };
+
+  onFormSubmit = (e) => {
     e.preventDefault();
     this.props.updateIdCardStatusSelectedStudentsAction(this.props.secretKey, this.state.studentsId, this.state.selectedCardOption);
-  }
-  renderUpdateIdCardStatusSelectedStudentsModal() {
+  };
+
+  renderUpdateIdCardStatusSelectedStudentsModal = () => {
     if (this.state.isUpdateSelectedStudentsOptInOrOptOutModalOpen) {
       return (
         <Modal
@@ -157,7 +157,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
         </Modal>
       );
     }
-  }
+  };
+
   render() {
     return (
       <div className="buttonContainer">

@@ -53,16 +53,6 @@ class MarkSelectedStudentAttendance extends Component {
         { 'day': '8' },
       ],
     };
-    this.openMarkSelectedStudentsAttendanceModal = this.openMarkSelectedStudentsAttendanceModal.bind(this);
-    this.closeMarkSelectedStudentsAttendanceModal = this.closeMarkSelectedStudentsAttendanceModal.bind(this);
-    this.renderMarkSelectedStudentsModal = this.renderMarkSelectedStudentsModal.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.renderMarkPresentButtonClassName = this.renderMarkPresentButtonClassName.bind(this);
-    this.addOptions = this.addOptions.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.filterIdsOfStudents = this.filterIdsOfStudents.bind(this);
-    this.renderMessage = this.renderMessage.bind(this);
-    this.renderMarkButtonClassName = this.renderMarkButtonClassName.bind(this);
   }
 
   /**
@@ -71,62 +61,67 @@ class MarkSelectedStudentAttendance extends Component {
    * isMarkSelectedStudentsAttendanceModalOpen to true.
    * And on the basis of this render the mark selected student modal
    */
-  openMarkSelectedStudentsAttendanceModal() {
+  openMarkSelectedStudentsAttendanceModal = () => {
     this.setState({ isMarkSelectedStudentsAttendanceModalOpen: true });
     this.filterIdsOfStudents();
-  }
+  };
+
   /**
    * closeMarkSelectedStudentsAttendanceModal method
    * on Onclick close button set the value of
    * isMarkSelectedStudentsAttendanceModalOpen to false.
    * And on the basis of this close the mark selected student modal
    */
-  closeMarkSelectedStudentsAttendanceModal() {
+  closeMarkSelectedStudentsAttendanceModal = () => {
     this.setState({ isMarkSelectedStudentsAttendanceModalOpen: false });
     this.props.resetIsMarkAttendanceSuccessAction();
     this.setState({
       selectedDay: '',
       studentsId: [],
     });
-  }
+  };
+
   /**
    * filterIdsOfStudents method filter Ids of selected students
    * for marking the attendance.
    */
-  filterIdsOfStudents() {
+  filterIdsOfStudents = () => {
     const Ids = this.props.selectedStudents.map(student => String(student.studentId));
     this.setState({
       studentsId: Ids,
     });
-  }
+  };
+
   /**
    * renderMarkPresentButtonClassName method return className
    * of mark as present button as per students are selected or not.
    * @return {string} className
    */
-  renderMarkPresentButtonClassName() {
+  renderMarkPresentButtonClassName = () => {
     if (isEmpty(this.props.selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
-  }
+  };
+
   /**
    * renderMarkButtonClassName method return className
    * of submit button as per students attendance mark or not.
    * @return {string} className
    */
-  renderMarkButtonClassName() {
+  renderMarkButtonClassName = () => {
     if (isEmpty(this.state.selectedDay)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
-  }
+  };
+
   /**
    * renderMessage method render success message
    * as per selected students attendance marked.
    * @return {ReactComponent}
    */
-  renderMessage() {
+  renderMessage = () => {
     if (this.props.isMarkAttendanceSuccess) {
       return (
         <div className="success-block">
@@ -135,14 +130,14 @@ class MarkSelectedStudentAttendance extends Component {
       );
     }
     return null;
-  }
+  };
 
   /**
    * addOptions method return options of drop down list
    * of days
    * @return {ReactComponent}
    */
-  addOptions() {
+  addOptions = () => {
     const Options = ({ day }) => (
       <option value={day.day}>
       Day {day.day}
@@ -155,32 +150,34 @@ class MarkSelectedStudentAttendance extends Component {
           key={optionDay.day}
         />
       ));
-  }
+  };
 
   /**
    * handleSelectChange method set the value of selected day in selectedDay.
    * @param {Object} event
    */
-  handleSelectChange(event) {
+  handleSelectChange = (event) => {
     this.setState({
       selectedDay: { 'day': event.target.value },
     });
-  }
+  };
 
   /**
    * onFormSubmit method call on submission of selected student attendance
    * @param {Object} event
    */
-  onFormSubmit(event) {
+  onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.markSelectedStudentsAttendanceAction(this.props.secretKey, this.state.studentsId, this.state.selectedDay);
-  }
+    this.props.markSelectedStudentsAttendanceAction(
+      this.props.secretKey, this.state.studentsId, this.state.selectedDay,
+    );
+  };
 
   /**
    * renderMarkSelectedStudentsModal method render mark selected students attendance modal
    * @return {ReactComponent}
    */
-  renderMarkSelectedStudentsModal() {
+  renderMarkSelectedStudentsModal = () => {
     if (this.state.isMarkSelectedStudentsAttendanceModalOpen) {
       return (
         <Modal
@@ -233,7 +230,8 @@ class MarkSelectedStudentAttendance extends Component {
       );
     }
     return null;
-  }
+  };
+
   render() {
     return (
       <div className="buttonContainer button-container-mobile">
