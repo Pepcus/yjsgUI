@@ -165,7 +165,7 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
           <div className="column-group-wrapper">
             <form onSubmit={this.onFormSubmit}>
               <div className="column-modal">
-                <h1 className="column-modal-container">कृपिया चयनित छात्रो की optin या optout अद्यतन करे </h1>
+                <h1 className="column-modal-container">कृपया चयनित छात्रों की शिविर के लिए हाँ या ना दर्ज़ करें</h1>
               </div>
               <div className="column-content-modal">
                 <div className="selected-student-heading">
@@ -180,11 +180,11 @@ class MarkSelectedStudentsOptInOrOptOut extends Component {
                 <div className="advance-input-radio advance-input-print-later">
                   <div className="input-radio-container">
                     <input type="radio" name="OptInOrOptOut" value="Y" onClick={this.onClickRadioButton} />
-                    <label htmlFor="Opt-In">Opt In</label>
+                    <label htmlFor="Opt-In">हाँ</label>
                   </div>
                   <div className="input-radio-container">
                     <input type="radio" name="OptInOrOptOut" value="N" onClick={this.onClickRadioButton} />
-                    <label htmlFor="Opt-Out">Opt Out</label>
+                    <label htmlFor="Opt-Out">ना</label>
                   </div>
                 </div>
                 {this.renderMessage()}
