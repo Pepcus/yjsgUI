@@ -1098,6 +1098,7 @@ body,
 .students-id-card-wrapper {
     display:block;
     height: 0;
+    overflow: hidden;
     visibility: hidden;
 }
 .export {
