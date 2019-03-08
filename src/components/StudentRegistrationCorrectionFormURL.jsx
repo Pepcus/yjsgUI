@@ -114,13 +114,6 @@ class StudentRegistrationCorrectionFormURL extends Component {
     this._changeIsOnlyOptIn2019 = this.changeIsOnlyOptIn2019.bind(this);
     this.submitStudentDataForOnlyOptInCase = this.submitStudentDataForOnlyOptInCase.bind(this);
   }
-  getMarks = (marks) => {
-    if (marks === null || marks === '' || marks === undefined) {
-      return 'N/A';
-    } else {
-      return marks;
-    }
-  };
   componentDidMount() {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -155,6 +148,13 @@ class StudentRegistrationCorrectionFormURL extends Component {
       this.checkError({ email: '', motherMobile: '' });
     }
   }
+  getMarks = (marks) => {
+    if (!marks) {
+      return 'N/A';
+    } else {
+      return marks;
+    }
+  };
 
   /**
    * changeIsOnlyOptIn2019 method set the boolean value of isOnlyOptIn2019 according to condition.
@@ -172,6 +172,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
    * And set error object according to errors in student data.
    * @param {Object} studentData
    */
+
   checkError(studentData) {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
       isDataCorrect(studentData));
@@ -239,7 +240,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
     const errorNode = this.formRef.current.querySelector('.has-error');
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
-    }
+      }
   };
   submitStudentData(e) {
     // on submit of student correction form prevent form action is default.
@@ -381,148 +382,19 @@ class StudentRegistrationCorrectionFormURL extends Component {
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
         <form id="studentRegistrationForm" className="inputFieldContainerWrapper">
-          <div className="inputFieldContainer">
-            <SelectListInputField
-              name="optIn2019"
-              label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
-              options={optIn2019Options}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.optIn2019}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label={ID_LABEL}
-              name="id"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.id}
-              isRequired
-              disabled
-            />
-            <InputField
-              type="text"
-              label={NAME_LABEL}
-              name="name"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.name}
-              isRequired
-            />
-            <InputField
-              type="text"
-              label={FATHER_OR_HUSBAND_NAME_LABEL}
-              name="fatherName"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.fatherName}
-              isRequired
-            />
-            <SelectListInputField
-              name="gender"
-              label={GENDER_LABEL}
-              options={gender}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.gender}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label={AGE_LABEL}
-              name="age"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.age}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label={MOBILE_NUMBER_LABEL}
-              name="mobile"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.mobile}
-              isRequired
-            />
-            <InputField
-              type="number"
-              label={MOTHER_MOBILE_NUMBER_LABEL}
-              name="motherMobile"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.motherMobile}
-              isRequired={false}
-            />
-            <InputField
-              type="text"
-              label={OCCUPATION_LABEL}
-              name="occupation"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.occupation}
-              isRequired={false}
-            />
-            <InputField
-              type="text"
-              label={EDUCATION_LABEL}
-              name="education"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.education}
-              isRequired={false}
-            />
-            <InputField
-              type="email"
-              label={EMAIL_LABEL}
-              name="email"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.email}
-              isRequired={false}
-            />
-            <TextAreaField
-              label={ADDRESS_LABEL}
-              name="address"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.address}
-              isRequired
-            />
-            <SelectListInputField
-              type="text"
-              label={BUS_STOP_LABEL}
-              name="busStop"
-              options={busStops}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.busStop}
-              isRequired
-            />
-            {this.renderClassAttended2018()}
-            <SelectListInputField
-              name="classAttended2019"
-              label={WHAT_YOU_WANT_TO_STUDY_LABEL}
-              options={studiesArray}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.classAttended2019}
-              isRequired
-            />
-            <TextAreaField
-              label="Remark"
-              name="remark"
-              onInputChange={this._handleInputChange}
-              value={this.state.student.remark}
-              isRequired={false}
-            />
-            <div className="registrationFormButtonContainer">
-              <div className="button-wrapper">
-                <Button
-                  type="button"
-                  buttonText={goBackBtnText}
-                  onClick={() => { this._changeIsOnlyOptIn2019(true); }}
-                />
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  form="studentRegistrationForm"
-                  value="Submit"
-                  onClick={this._submitStudentData}
-                />
-              </div>
-            </div>
-            <div>
+          <div className="inputFieldContainer student-form-input-field">
+            <div className="student-form-input-wrapper">
+              <SelectListInputField
+                name="optIn2019"
+                label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+                options={optIn2019Options}
+                onInputChange={this._handleInputChange}
+                value={this.state.student.optIn2019}
+                isRequired
+              />
               <InputField
                 type="number"
-                label="आई.डी."
+                label={ID_LABEL}
                 name="id"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.id}
@@ -531,7 +403,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="text"
-                label="नाम"
+                label={NAME_LABEL}
                 name="name"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.name}
@@ -539,7 +411,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="text"
-                label="पिता / पति का नाम"
+                label={FATHER_OR_HUSBAND_NAME_LABEL}
                 name="fatherName"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.fatherName}
@@ -547,7 +419,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <SelectListInputField
                 name="gender"
-                label="लिंग"
+                label={GENDER_LABEL}
                 options={gender}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.gender}
@@ -555,7 +427,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="number"
-                label="उम्र"
+                label={AGE_LABEL}
                 name="age"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.age}
@@ -563,7 +435,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="number"
-                label="मोबाइल नं."
+                label={MOBILE_NUMBER_LABEL}
                 name="mobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.mobile}
@@ -571,7 +443,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="number"
-                label="मोबाइल नं. ( माता का )"
+                label={MOTHER_MOBILE_NUMBER_LABEL}
                 name="motherMobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.motherMobile}
@@ -579,7 +451,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="text"
-                label="व्यवसाय (युवा वर्ग हेतु)"
+                label={OCCUPATION_LABEL}
                 name="occupation"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.occupation}
@@ -587,7 +459,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="text"
-                label="स्कूल शिक्षा"
+                label={EDUCATION_LABEL}
                 name="education"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.education}
@@ -595,14 +467,14 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <InputField
                 type="email"
-                label="ई-मेल"
+                label={EMAIL_LABEL}
                 name="email"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
                 isRequired={false}
               />
               <TextAreaField
-                label="पूरा पता"
+                label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
@@ -610,7 +482,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               />
               <SelectListInputField
                 type="text"
-                label="बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)"
+                label={BUS_STOP_LABEL}
                 name="busStop"
                 options={busStops}
                 onInputChange={this._handleInputChange}
@@ -620,7 +492,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
               {this.renderClassAttended2018()}
               <SelectListInputField
                 name="classAttended2019"
-                label="आप क्या अध्ययन करना चाहते हैं ?"
+                label={WHAT_YOU_WANT_TO_STUDY_LABEL}
                 options={studiesArray}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.classAttended2019}
@@ -908,7 +780,7 @@ class StudentRegistrationCorrectionFormURL extends Component {
                     </div>
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2016:</label>
-                      <label className="marks-label-text" >{this.getMarks(this.state.student.marks2016)}</label>
+                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
                     </div>
                   </div>
                 </div>
