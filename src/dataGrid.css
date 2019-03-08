@@ -1237,7 +1237,6 @@ body,
     transition: 0.6s all;
     opacity: 1;
 }
-
 .loader {
     position: absolute;
     top: 50%;
@@ -1246,24 +1245,20 @@ body,
     display: inline;
     transform: translate(-50%, -50%);
 }
-
 .loader-wrapper {
     position: relative;
     height: 100%;
     background: #ffffff;
     z-index: 9999;
 }
-
 .student-logo-header .student-info-heading {
     padding: 15px 0;
     font-size: 22px;
 }
-
 .selectInputText:focus {
     background: #fdfbfb;
     outline-color: #f9570a;
 }
-
 .grid-scroll-page-wrapper {
     display: flex;
     flex-direction: column;
@@ -1273,7 +1268,6 @@ body,
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-
 .grid-scroll-wrapper {
     height: 100%;
     overflow-y: auto;
@@ -1681,6 +1675,36 @@ body,
 .advance-input-print-later {
     margin-top: 15px;
 }
+.student-form-marks-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:25px 0 0;
+    padding:30px 0;
+    background: rgb(239, 239, 239);
+    border-top: 2px solid #e8e8e8;
+}
+.student-form-marks-content {
+    flex-basis: 37%;
+    /*background: #ffffff;*/
+    /*padding: 20px;*/
+    /*box-shadow: 0 1px 3px 0 #eae6e6;*/
+}
+.student-form-marks-content .marks-input-label {
+    color: #484545;
+    font-weight: bold;
+}
+.student-form-marks-content .marks-label-text {
+    padding-left: 5px;
+    color: #484545;
+    font-weight: normal;
+}
+.student-form-marks-wrapper .inputWrapper {
+    /*flex-basis: 14%;*/
+}
+.inputFieldContainerWrapper .student-form-input-field {
+    padding: 30px 0 0;
+}
 @media (max-width: 1024px) {
     .registrationFormContainer {
         display:block;
@@ -1885,6 +1909,13 @@ body,
     }
     .column-group {
         max-height: 500px;
+    }
+    .student-form-marks-wrapper .inputWrapper {
+        width: 45%;
+        margin: 6px;
+    }
+    .student-form-marks-content {
+        flex-basis: 100%;
     }
 
 }
@@ -2269,6 +2300,7 @@ body,
     }
     .registrationFormButtonContainer .button-wrapper {
         padding-top: 0;
+        width: 100%;
     }
     .landing-page-container .student-heading {
         padding: 15px 10px;
@@ -2325,7 +2357,19 @@ body,
     .column-content-student-wrapper {
         margin: 15px 0 0 0;
     }
-
+    .inputFieldContainerWrapper .student-form-input-field {
+        padding: 30px 0 0;
+    }
+    .student-form-input-wrapper {
+        padding: 0 20px;
+    }
+    .selectInputText {
+        width:100%;
+        max-width: 100%;
+    }
+    .student-form-marks-wrapper {
+        padding: 30px 20px;
+    }
 }
 @media (max-width: 480px) {
     .search-input-bar {
