@@ -110,11 +110,9 @@ class StudentRegistrationForm extends Component {
    * @param {Object} event
    */
   scrollToError = () => {
-    for (const node of this.formRef.current.childNodes) {
-      if (node.childNodes[0].className.includes('has-error')) {
-        window.scrollTo(0, node.offsetTop);
-        break;
-      }
+    const errorNode = this.formRef.current.querySelector('.has-error');
+    if (errorNode) {
+      window.scrollTo(0, errorNode.offsetTop);
     }
   };
   onSubmitStudentData(event) {
