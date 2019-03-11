@@ -1,3 +1,7 @@
+import {
+  gridMetaData,
+} from '../components/GridData';
+
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
  * It finds a table class and take dynamic width of it and assigned to footer class after that whole table width managed accordingly.
@@ -40,4 +44,16 @@ export const manageStudentTableWidth = (widthRef) => {
       }
     }
   }
-}
+};
+/**
+ * getInitialVisibleColumnConfig method set initially all column
+ * visible that is set true value of all column
+ * @return {Object} temporaryVisibleColumnConfig
+ */
+export const getInitialVisibleColumnConfig = () => {
+  const temporaryVisibleColumnConfig = {};
+  gridMetaData.forEach((columnOption) => {
+    temporaryVisibleColumnConfig[columnOption.key] = true;
+  });
+  return temporaryVisibleColumnConfig;
+};

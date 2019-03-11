@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 
 import {
   PLEASE_SELECT_COLUMNS_TEXT,
 } from '../utils/textConstants';
+import {
+  columnsList,
+} from './AppColumnConfigData';
 
 const customColumnOptionStyles = {
   overlay: {
@@ -50,6 +54,31 @@ class ColumnConfig extends Component {
       selectValue: this.props.selectValue,
     });
   }
+
+  /**
+   * renderColumns method render the column options in column config.
+   * @return {ReactComponent}
+   */
+  renderColumns = () => {
+    let totalColumnCollection = [];
+    let tenColumnOptions = [];
+    columnsList.forEach((column) => {
+      tenColumnOptions.push(
+        <label className="label">
+          <input type="checkbox" name={column.key} onChange={this.handleChange} checked={this.state.visibleColumnConfig[column.key] ? 'checked' : ''} />
+          <span>{column.label}</span>
+        </label>);
+      if (tenColumnOptions.length === 10) {
+        totalColumnCollection.push(<div className="column-group-container"> {tenColumnOptions} </div>);
+        tenColumnOptions = [];
+      }
+    });
+    if (!isEmpty(tenColumnOptions)) {
+      totalColumnCollection.push(<div className="column-group-container"> {tenColumnOptions} </div>);
+      tenColumnOptions = [];
+    }
+    return <div className="column-group">{totalColumnCollection}</div>;
+  };
   /**
    * setValuesOfVisibleColumnConfig method call callBack setValuesOfVisibleColumnConfig()
    * and call closeColumnOption() method.
@@ -107,6 +136,7 @@ class ColumnConfig extends Component {
   };
 
   render() {
+    this.renderColumns();
     return (
       <Modal
         isOpen={this.props.columnOptionIsOpen}
@@ -129,192 +159,7 @@ class ColumnConfig extends Component {
                   <span className="select-none-wrapper">Select All</span>
                 </label>
               </div>
-              <div className="column-group">
-                <div className="column-group-container">
-                  <label className="label">
-                    <input type="checkbox" name="studentId" onChange={this.handleChange} checked={this.state.visibleColumnConfig.studentId ? 'checked' : ''} />
-                    <span>ID</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="name" onChange={this.handleChange} checked={this.state.visibleColumnConfig.name ? 'checked' : ''} />
-                    <span>Name</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="fatherName" onChange={this.handleChange} checked={this.state.visibleColumnConfig.fatherName ? 'checked' : ''} />
-                    <span>Father Name</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="gender" onChange={this.handleChange} checked={this.state.visibleColumnConfig.gender ? 'checked' : ''} />
-                    <span>Gender</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="age" onChange={this.handleChange} checked={this.state.visibleColumnConfig.age ? 'checked' : ''} />
-                    <span>Age</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="education" onChange={this.handleChange} checked={this.state.visibleColumnConfig.education ? 'checked' : ''} />
-                    <span>Education</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="occupation" onChange={this.handleChange} checked={this.state.visibleColumnConfig.occupation ? 'checked' : ''} />
-                    <span>Occupation</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="motherMobile" onChange={this.handleChange} checked={this.state.visibleColumnConfig.motherMobile ? 'checked' : ''} />
-                    <span>Mother Mobile No.</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="mobile" onChange={this.handleChange} checked={this.state.visibleColumnConfig.mobile ? 'checked' : ''} />
-                    <span>Mobile No.</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="email" onChange={this.handleChange} checked={this.state.visibleColumnConfig.email ? 'checked' : ''} />
-                    <span>Email ID</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="address" onChange={this.handleChange} checked={this.state.visibleColumnConfig.address ? 'checked' : ''} />
-                    <span>Address</span>
-                  </label>
-                </div>
-                <div className="column-group-container">
-                  <label className="label">
-                    <input type="checkbox" name="busNumber" onChange={this.handleChange} checked={this.state.visibleColumnConfig.busNumber ? 'checked' : ''} />
-                    <span>Bus Number</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="busStop" onChange={this.handleChange} checked={this.state.visibleColumnConfig.busStop ? 'checked' : ''} />
-                    <span>Bus Stop</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="printStatus" onChange={this.handleChange} checked={this.state.visibleColumnConfig.printStatus ? 'checked' : ''} />
-                    <span>Print Status</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="remark" onChange={this.handleChange} checked={this.state.visibleColumnConfig.remark ? 'checked' : ''} />
-                    <span>Remark</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="secretKey" onChange={this.handleChange} checked={this.state.visibleColumnConfig.secretKey ? 'checked' : ''} />
-                    <span>Secret Key</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classAttended2016" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classAttended2016 ? 'checked' : ''} />
-                    <span>Class Attended 2016</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classAttended2017" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classAttended2017 ? 'checked' : ''} />
-                    <span>Class Attended 2017</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classAttended2018" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classAttended2018 ? 'checked' : ''} />
-                    <span>Class Attended 2018</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classAttended2019" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classAttended2019 ? 'checked' : ''} />
-                    <span>Class Attended 2019</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classRoomNo2016" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classRoomNo2016 ? 'checked' : ''} />
-                    <span>Class Room No. 2016</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classRoomNo2017" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classRoomNo2017 ? 'checked' : ''} />
-                    <span>Class Room No. 2017</span>
-                  </label>
-                </div>
-                <div className="column-group-container">
-                  <label className="label">
-                    <input type="checkbox" name="classRoomNo2018" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classRoomNo2018 ? 'checked' : ''} />
-                    <span>Class Room No. 2018</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="classRoomNo2019" onChange={this.handleChange} checked={this.state.visibleColumnConfig.classRoomNo2019 ? 'checked' : ''} />
-                    <span>Class Room No. 2019</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="attendance2016" onChange={this.handleChange} checked={this.state.visibleColumnConfig.attendance2016 ? 'checked' : ''} />
-                    <span>Attendance 2016</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="attendance2017" onChange={this.handleChange} checked={this.state.visibleColumnConfig.attendance2017 ? 'checked' : ''} />
-                    <span>Attendance 2017</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="attendance2018" onChange={this.handleChange} checked={this.state.visibleColumnConfig.attendance2018 ? 'checked' : ''} />
-                    <span>Attendance 2018</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="attendance2019" onChange={this.handleChange} checked={this.state.visibleColumnConfig.attendance2019 ? 'checked' : ''} />
-                    <span>Attendance 2019</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="marks2016" onChange={this.handleChange} checked={this.state.visibleColumnConfig.marks2016 ? 'checked' : ''} />
-                    <span>Marks 2016</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="marks2017" onChange={this.handleChange} checked={this.state.visibleColumnConfig.marks2017 ? 'checked' : ''} />
-                    <span>Marks 2017</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="marks2018" onChange={this.handleChange} checked={this.state.visibleColumnConfig.marks2018 ? 'checked' : ''} />
-                    <span>Marks 2018</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="marks2019" onChange={this.handleChange} checked={this.state.visibleColumnConfig.marks2019 ? 'checked' : ''} />
-                    <span>Marks 2019</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="optIn2018" onChange={this.handleChange} checked={this.state.visibleColumnConfig.optIn2018 ? 'checked' : ''} />
-                    <span>Opt In 2018</span>
-                  </label>
-                </div>
-                <div className="column-group-container">
-                  <label className="label">
-                    <input type="checkbox" name="optIn2019" onChange={this.handleChange} checked={this.state.visibleColumnConfig.optIn2019 ? 'checked' : ''} />
-                    <span>Opt In 2019</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day1" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day1 ? 'checked' : ''} />
-                    <span>Day 1</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day2" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day2 ? 'checked' : ''} />
-                    <span>Day 2</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day3" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day3 ? 'checked' : ''} />
-                    <span>Day 3</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day4" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day4 ? 'checked' : ''} />
-                    <span>Day 4</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day5" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day5 ? 'checked' : ''} />
-                    <span>Day 5</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day6" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day6 ? 'checked' : ''} />
-                    <span>Day 6</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day7" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day7 ? 'checked' : ''} />
-                    <span>Day 7</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="day8" onChange={this.handleChange} checked={this.state.visibleColumnConfig.day8 ? 'checked' : ''} />
-                    <span>Day 8</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="createdDate" onChange={this.handleChange} checked={this.state.visibleColumnConfig.createdDate ? 'checked' : ''} />
-                    <span>Created Date</span>
-                  </label>
-                  <label className="label">
-                    <input type="checkbox" name="lastModifiedDate" onChange={this.handleChange} checked={this.state.visibleColumnConfig.lastModifiedDate ? 'checked' : ''} />
-                    <span>Last Modified Date</span>
-                  </label>
-                </div>
-              </div>
+              {this.renderColumns()}
               <div className="modal-save-container">
                 <div className="save-button-wrapper">
                   <button className="button-modal button-close" onClick={this.props.closeColumnOption}>Close</button>
