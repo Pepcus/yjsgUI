@@ -11,6 +11,9 @@ import {
   MARK_ATTENDANCE_FAILED_MESSAGE,
 } from '../utils/messagesConstants';
 import {
+  days,
+} from '../utils/yjsgConstants';
+import {
   resetIsMarkAttendanceSuccessAction,
   markSelectedStudentsAttendanceAction,
 } from '../actions/studentRegistrationActions';
@@ -48,23 +51,13 @@ class MarkSelectedStudentAttendance extends Component {
       studentsId: [],
       selectedDay: '',
       isMarkSelectedStudentsAttendanceModalOpen: false,
-      days: [
-        { 'day': '1' },
-        { 'day': '2' },
-        { 'day': '3' },
-        { 'day': '4' },
-        { 'day': '5' },
-        { 'day': '6' },
-        { 'day': '7' },
-        { 'day': '8' },
-      ],
     };
     this.openMarkSelectedStudentsAttendanceModal = this.openMarkSelectedStudentsAttendanceModal.bind(this);
     this.closeMarkSelectedStudentsAttendanceModal = this.closeMarkSelectedStudentsAttendanceModal.bind(this);
     this.renderMarkSelectedStudentsModal = this.renderMarkSelectedStudentsModal.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.renderMarkPresentButtonClassName = this.renderMarkPresentButtonClassName.bind(this);
-    this.addOptions = this.addOptions.bind(this);
+    this.renderOptions = this.renderOptions.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.filterIdsOfStudents = this.filterIdsOfStudents.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
@@ -158,18 +151,12 @@ class MarkSelectedStudentAttendance extends Component {
    * of days
    * @return {ReactComponent}
    */
-  addOptions() {
-    const Options = ({ day }) => (
-      <option value={day.day}>
-      Day {day.day}
-      </option>
-    );
-    return this.state.days.map(
+  renderOptions() {
+    return days.map(
       optionDay => (
-        <Options
-          day={optionDay}
-          key={optionDay.day}
-        />
+        <option value={optionDay.day}>
+          Day {optionDay.day}
+        </option>
       ));
   }
 
@@ -227,7 +214,7 @@ class MarkSelectedStudentAttendance extends Component {
                   <span className="column-content-students">Select Day:</span>
                   <select onChange={this.handleSelectChange} value={this.state.selectedDay.day} className="selected-day-list">
                     <option selected hidden disabled="disabled" value="" />
-                    {this.addOptions()}
+                    {this.renderOptions()}
                   </select>
                 </div>
                 {this.renderMessage()}

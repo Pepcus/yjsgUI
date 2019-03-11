@@ -19,6 +19,9 @@ import {
 import {
   UPLOAD_FILE_TEXT,
 } from '../utils/textConstants';
+import {
+  days,
+} from '../utils/yjsgConstants';
 
 
 const customUploadStudentsAttendanceFileModalStyles = {
@@ -50,16 +53,6 @@ class UploadStudentsAttendanceFile extends Component {
       attendanceFile: null,
       isUploadStudentsAttendanceFileModal: false,
       selectedDay: '',
-      days: [
-        { 'day': '1' },
-        { 'day': '2' },
-        { 'day': '3' },
-        { 'day': '4' },
-        { 'day': '5' },
-        { 'day': '6' },
-        { 'day': '7' },
-        { 'day': '8' },
-      ],
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -72,7 +65,7 @@ class UploadStudentsAttendanceFile extends Component {
     this.renderUploadButtonClassName = this.renderUploadButtonClassName.bind(this);
     this.renderIdNotExistMessage = this.renderIdNotExistMessage.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.addOptions = this.addOptions.bind(this);
+    this.renderOptions = this.renderOptions.bind(this);
   }
 
   openUploadStudentsAttendanceFileOption() {
@@ -153,18 +146,12 @@ class UploadStudentsAttendanceFile extends Component {
    * of days
    * @return {ReactComponent}
    */
-  addOptions() {
-    const Options = ({ day }) => (
-      <option value={day.day}>
-        Day {day.day}
-      </option>
-    );
-    return this.state.days.map(
+  renderOptions() {
+    return days.map(
       optionDay => (
-        <Options
-          day={optionDay}
-          key={optionDay.day}
-        />
+        <option value={optionDay.day}>
+          Day {optionDay.day}
+        </option>
       ));
   }
   /**
@@ -200,7 +187,7 @@ class UploadStudentsAttendanceFile extends Component {
                     <span className="column-content-students">Select Day:</span>
                     <select onChange={this.handleSelectChange} value={this.state.selectedDay} className="selected-day-list">
                       <option hidden disabled="disabled" value="" />
-                      {this.addOptions()}
+                      {this.renderOptions()}
                     </select>
                   </div>
                   {this.renderMessage()}
