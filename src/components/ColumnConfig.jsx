@@ -9,7 +9,7 @@ import {
 } from '../utils/textConstants';
 import {
   columnsList,
-} from './AppColumnConfigData';
+} from '../AppConfig/GridColumnConfigData.json';
 
 const customColumnOptionStyles = {
   overlay: {
