@@ -62,21 +62,21 @@ class ColumnConfig extends Component {
    */
   renderColumnOptions = () => {
     let totalColumnCollection = [];
-    let tenColumnOptions = [];
+    let columnListChunks = [];
     columnsList.forEach((column) => {
-      tenColumnOptions.push(
+      columnListChunks.push(
         <label className="label">
           <input type="checkbox" name={column.key} onChange={this.handleChange} checked={this.state.visibleColumnConfig[column.key] ? 'checked' : ''} />
           <span>{column.label}</span>
         </label>);
-      if (tenColumnOptions.length === 10) {
-        totalColumnCollection.push(<div className="column-group-container"> {tenColumnOptions} </div>);
-        tenColumnOptions = [];
+      if (columnListChunks.length === 10) {
+        totalColumnCollection.push(<div className="column-group-container"> {columnListChunks} </div>);
+        columnListChunks = [];
       }
     });
-    if (!isEmpty(tenColumnOptions)) {
-      totalColumnCollection.push(<div className="column-group-container"> {tenColumnOptions} </div>);
-      tenColumnOptions = [];
+    if (!isEmpty(columnListChunks)) {
+      totalColumnCollection.push(<div className="column-group-container"> {columnListChunks} </div>);
+      columnListChunks = [];
     }
     return <div className="column-group">{totalColumnCollection}</div>;
   };

@@ -51,9 +51,10 @@ export const getAllStudentsAPI = (secretKey) =>
     },
   });
 
-export const uploadAttendanceAPI = (secretKey, attendanceFile) => {
+export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
   const file = new FormData();
   file.append('file', attendanceFile);
+  file.append('day', day);
   return (
     PATCH({
     url: `v1/students/bulk-attendance`,

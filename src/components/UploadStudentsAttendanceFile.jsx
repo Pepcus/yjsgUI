@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import { uploadStudentsAttendanceFileAction, resetIsSuccessAction } from '../actions/studentRegistrationActions';
 import {
@@ -18,6 +19,7 @@ import {
 import {
   UPLOAD_FILE_TEXT,
 } from '../utils/textConstants';
+
 
 const customUploadStudentsAttendanceFileModalStyles = {
   overlay: {
@@ -47,6 +49,17 @@ class UploadStudentsAttendanceFile extends Component {
     this.state = {
       attendanceFile: null,
       isUploadStudentsAttendanceFileModal: false,
+      selectedDay: '',
+      days: [
+        { 'day': '1' },
+        { 'day': '2' },
+        { 'day': '3' },
+        { 'day': '4' },
+        { 'day': '5' },
+        { 'day': '6' },
+        { 'day': '7' },
+        { 'day': '8' },
+      ],
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -58,6 +71,8 @@ class UploadStudentsAttendanceFile extends Component {
     this.renderUploadStudentsAttendanceOption = this.renderUploadStudentsAttendanceOption.bind(this);
     this.renderUploadButtonClassName = this.renderUploadButtonClassName.bind(this);
     this.renderIdNotExistMessage = this.renderIdNotExistMessage.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.addOptions = this.addOptions.bind(this);
   }
 
   openUploadStudentsAttendanceFileOption() {
@@ -68,6 +83,7 @@ class UploadStudentsAttendanceFile extends Component {
     this.props.resetIsSuccessAction();
     this.setState({
       attendanceFile: null,
+      selectedDay: '',
     });
   }
 
@@ -81,7 +97,7 @@ class UploadStudentsAttendanceFile extends Component {
   }
 
   fileUpload(attendanceFile) {
-    this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile);
+    this.props.uploadStudentsAttendanceFileAction(this.props.secretKey, attendanceFile, this.state.selectedDay);
   }
 
   renderFailRecordIds() {
@@ -105,7 +121,7 @@ class UploadStudentsAttendanceFile extends Component {
     return null;
   }
   renderUploadButtonClassName() {
-    if (!this.state.attendanceFile) {
+    if (!this.state.attendanceFile || isEmpty(this.state.selectedDay)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
@@ -132,6 +148,34 @@ class UploadStudentsAttendanceFile extends Component {
     }
     return null;
   }
+  /**
+   * addOptions method return options of drop down list
+   * of days
+   * @return {ReactComponent}
+   */
+  addOptions() {
+    const Options = ({ day }) => (
+      <option value={day.day}>
+        Day {day.day}
+      </option>
+    );
+    return this.state.days.map(
+      optionDay => (
+        <Options
+          day={optionDay}
+          key={optionDay.day}
+        />
+      ));
+  }
+  /**
+   * handleSelectChange method set the value of selected day in selectedDay.
+   * @param {Object} event
+   */
+  handleSelectChange(event) {
+    this.setState({
+      selectedDay: event.target.value,
+    });
+  }
   renderUploadStudentsAttendanceOption() {
     if (this.state.isUploadStudentsAttendanceFileModal) {
       return (
@@ -152,6 +196,13 @@ class UploadStudentsAttendanceFile extends Component {
               <div>
                 <div className="column-content-modal">
                   <input type="file" onChange={this.onChange} className="choose-file-wrapper" />
+                  <div className="column-content-student-wrapper">
+                    <span className="column-content-students">Select Day:</span>
+                    <select onChange={this.handleSelectChange} value={this.state.selectedDay} className="selected-day-list">
+                      <option hidden disabled="disabled" value="" />
+                      {this.addOptions()}
+                    </select>
+                  </div>
                   {this.renderMessage()}
                 </div>
               </div>

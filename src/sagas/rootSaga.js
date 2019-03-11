@@ -158,10 +158,10 @@ export function* getAllStudentsSaga(action) {
  * @param {Object} action
  */
 export function* uploadAttendanceFileSaga(action) {
-  const { secretKey, attendanceFile } = action;
+  const { secretKey, attendanceFile, day } = action;
   const errorMessage = 'Error occurred while uploading attendance file.';
   try {
-    const response = yield uploadAttendanceAPI(secretKey, attendanceFile);
+    const response = yield uploadAttendanceAPI(secretKey, attendanceFile, day);
     if (response.totalRecords) {
       yield put(uploadAttendanceFileResultsSuccessAction(response));
     } else {

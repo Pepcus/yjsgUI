@@ -288,10 +288,11 @@ export const resetVisibleColumnConfigAction = () => ({
  * @param {Object} attendanceFile
  * @return {{secretKey: {String}, type: string, attendanceFile: {Object}}}
  */
-export const uploadStudentsAttendanceFileAction = (secretKey, attendanceFile) => ({
+export const uploadStudentsAttendanceFileAction = (secretKey, attendanceFile, day) => ({
   type: 'UPLOAD_ATTENDANCE_FILE',
   secretKey,
   attendanceFile,
+  day,
 });
 /**
  * uploadAttendanceFileResultsSuccessAction action will call

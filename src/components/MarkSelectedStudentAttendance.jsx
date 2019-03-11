@@ -226,7 +226,7 @@ class MarkSelectedStudentAttendance extends Component {
                 <div className="column-content-student-wrapper">
                   <span className="column-content-students">Select Day:</span>
                   <select onChange={this.handleSelectChange} value={this.state.selectedDay.day} className="selected-day-list">
-                    <option selected="true" hidden="true" disabled="disabled" value="" />
+                    <option selected hidden disabled="disabled" value="" />
                     {this.addOptions()}
                   </select>
                 </div>
@@ -243,7 +243,6 @@ class MarkSelectedStudentAttendance extends Component {
                 </div>
               </div>
             </form>
-
           </div>
         </Modal>
       );
