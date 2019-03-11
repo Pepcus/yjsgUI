@@ -9,7 +9,7 @@ import {
 } from '../utils/textConstants';
 import {
   columnsList,
-} from '../AppConfig/GridColumnConfigData.json';
+} from '../config/appConfig.json';
 
 const customColumnOptionStyles = {
   overlay: {
@@ -46,6 +46,7 @@ class ColumnConfig extends Component {
     this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
     this.setCheckValue = this.setCheckValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderColumnOptions = this.renderColumnOptions.bind(this);
   }
 
   componentWillMount() {
@@ -59,7 +60,7 @@ class ColumnConfig extends Component {
    * renderColumns method render the column options in column config.
    * @return {ReactComponent}
    */
-  renderColumns = () => {
+  renderColumnOptions = () => {
     let totalColumnCollection = [];
     let tenColumnOptions = [];
     columnsList.forEach((column) => {
@@ -136,7 +137,6 @@ class ColumnConfig extends Component {
   };
 
   render() {
-    this.renderColumns();
     return (
       <Modal
         isOpen={this.props.columnOptionIsOpen}
@@ -159,7 +159,7 @@ class ColumnConfig extends Component {
                   <span className="select-none-wrapper">Select All</span>
                 </label>
               </div>
-              {this.renderColumns()}
+              {this.renderColumnOptions()}
               <div className="modal-save-container">
                 <div className="save-button-wrapper">
                   <button className="button-modal button-close" onClick={this.props.closeColumnOption}>Close</button>
