@@ -541,8 +541,21 @@ export const parentsRegistrationResultsFailureAction = message => ({
   type: 'PARENTS_REGISTRATION_RESULT_FAILED',
   message,
 });
-
+/**
+ * setUserTypeAction action set the user type
+ * @param {String} pageUser
+ * @return {{pageUser: string, type: string}}
+ */
 export const setUserTypeAction = pageUser => ({
   type: 'SET_USER_TYPE',
   pageUser,
 });
+/**
+ * setLoadingStateAction action set the loading state
+ * @param {Boolean} isLoading
+ * @return {{isLoading: boolean, type: string}}
+ */
+export const setLoadingStateAction = isLoading => ({
+    type: 'SET_LOADING_STATE',
+    isLoading,
+  });

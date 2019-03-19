@@ -9,6 +9,7 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from './GridData';
+import Loader from './Loader';
 import {
   allStudentsData,
   getVisibleColumnConfig,
@@ -16,7 +17,8 @@ import {
   getSecretKey,
   stateOfRedirect,
   stateOfAdminLogin,
-  isGetAllStudentsLoading, getStudent,
+  /*getLoaderState,*/
+  getStudent,
 } from '../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
@@ -64,8 +66,6 @@ class StudentInformationGrid extends Component {
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
       refresh: false,
-      gridTableWidth: 0,
-      gridTableUpdate: 0,
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -170,7 +170,7 @@ class StudentInformationGrid extends Component {
     this.setState({
       selectedStudents: checkedStudents,
     });
-    checkedStudents = [];
+    // checkedStudents = [];
   }
   /**
    * performLogout method will call when click on logout button
@@ -462,15 +462,6 @@ class StudentInformationGrid extends Component {
   };
 
   render() {
-    if (this.props.isLoading) {
-      return (
-        <div className="loader-wrapper">
-          <div className="loader">
-            <img src="../../spinner.gif" alt="logo" className="loader-img" />
-          </div>
-        </div>
-      );
-    }
     if (!(this.props.adminLoginState)) {
       return (
         <div>
@@ -613,7 +604,7 @@ StudentInformationGrid.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isLoading: isGetAllStudentsLoading(state),
+  //isLoading: getLoaderState(state),
   students: allStudentsData(state),
   visibleColumnConfig: getVisibleColumnConfig(state),
   selectValue: getSelectValue(state),

@@ -244,6 +244,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
     case 'UPLOAD_ATTENDANCE_FILE_SUCCESS':
       return {
         ...state,
+        isLoading: false,
         isUploadAttendanceSuccess: true,
         isUploadAttendanceFailed: false,
         failRecordIds: action.failRecordIds,
@@ -252,6 +253,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
     case 'UPLOAD_ATTENDANCE_FILE_FAILED':
       return {
         ...state,
+        isLoading: false,
         isUploadAttendanceSuccess: false,
         isUploadAttendanceFailed: true,
         failRecordIds: '',
@@ -373,6 +375,25 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
     }
   }
 };
+
+const initialStateOfLoader = {
+  isLoading: false,
+};
+export const loaderReducer = (state = initialStateOfLoader, action) => {
+  switch (action.type) {
+    case 'SET_LOADING_STATE':
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+    default: {
+      return {
+        ...state,
+      };
+    }
+  }
+};
+
 export const getStudent = state => state.studentRegistrationReducer.student;
 
 export const getNewStudent = state => state.studentRegistrationReducer.newStudent;
@@ -454,5 +475,11 @@ export const idNotExistErrorMessage = state => state.allStudentsDataReducer.idNo
  * @return {String} unavailableIdErrorMessage
  */
 export const unavailableIdErrorMessage = state => state.allStudentsDataReducer.unavailableIdErrorMessage;
-
+/**
+ * getPageUserType return the user type
+ * @param {Object} state
+ * @return {string|String}
+ */
 export const getPageUserType = state => state.allStudentsDataReducer.pageUser;
+
+export const getLoaderState = state => state.loaderReducer.isLoading;

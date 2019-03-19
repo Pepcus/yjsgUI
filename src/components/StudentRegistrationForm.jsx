@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
 
+import Loader from './Loader';
 import {
   studiesArray,
   busStops,
@@ -233,16 +234,6 @@ class StudentRegistrationForm extends Component {
     );
   }
   render() {
-    if (this.props.isLoading) {
-      return (
-        // FIXME: Create a component to render loading popup
-        <div className="popup">
-          <div className="popupContainer">
-            <h5>Loading...</h5>
-          </div>
-        </div>
-      );
-    }
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}

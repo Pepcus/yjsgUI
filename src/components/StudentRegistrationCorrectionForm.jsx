@@ -6,6 +6,7 @@ import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 
+import Loader from './Loader';
 import {
   studiesArray,
   busStops,
@@ -223,50 +224,48 @@ class StudentRegistrationCorrectionForm extends Component {
    * submit button and edit all information form link.
    * @return {*}
    */
-  renderOnlyOptIn2019 = () => {
-    return (
-      <div className="registrationFormContainer correction-form-container">
-        {this.renderSuccessMessage()}
-        <div className="student-logo-header">
-          <div className="yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
-          </div>
-          <h2 className="student-info-heading">{yjsgHeader}</h2>
+  renderOnlyOptIn2019 = () => (
+    <div className="registrationFormContainer correction-form-container">
+      {this.renderSuccessMessage()}
+      <div className="student-logo-header">
+        <div className="yjsg-logo">
+          <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
         </div>
-        <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
-          <div className="inputFieldContainer input-field-container">
-            <span className="student-correction-name-text">{this.state.student.name}</span>
-            <SelectListInputField
-              name="optIn2019"
-              label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
-              options={optIn2019Options}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.optIn2019}
-              isRequired
-              errorMessage={this.state.errorMessage.optIn2019.message}
-            />
-            <div className="registrationFormButtonContainer student-correction-button-container">
-              <div className="button-wrapper student-correction-button-wrapper">
-                <div className="buttonContainer button-container-correction">
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    form="studentRegistrationForm"
-                    value="Submit"
-                    onClick={this.submitStudentDataForOnlyOptInCase}
-                  />
-                </div>
+        <h2 className="student-info-heading">{yjsgHeader}</h2>
+      </div>
+      <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
+        <div className="inputFieldContainer input-field-container">
+          <span className="student-correction-name-text">{this.state.student.name}</span>
+          <SelectListInputField
+            name="optIn2019"
+            label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+            options={optIn2019Options}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.optIn2019}
+            isRequired
+            errorMessage={this.state.errorMessage.optIn2019.message}
+          />
+          <div className="registrationFormButtonContainer student-correction-button-container">
+            <div className="button-wrapper student-correction-button-wrapper">
+              <div className="buttonContainer button-container-correction">
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  form="studentRegistrationForm"
+                  value="Submit"
+                  onClick={this.submitStudentDataForOnlyOptInCase}
+                />
               </div>
             </div>
-            <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
-              <a className="student-portal-link" onClick={() => { this.changeIsOnlyOptIn2019(false); }}>{CLICK_HERE_TEXT}
-              </a>
-            </span>
           </div>
-        </form>
-      </div>
-    );
-  };
+          <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
+            <a className="student-portal-link" onClick={() => { this.changeIsOnlyOptIn2019(false); }}>{CLICK_HERE_TEXT}
+            </a>
+          </span>
+        </div>
+      </form>
+    </div>
+  );
   // FIXME: Rename it to verifyStudentFormData
   checkError(studentData) {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
@@ -293,18 +292,18 @@ class StudentRegistrationCorrectionForm extends Component {
             isRequired
           />
         );
-      } else {
-        return (
-          <SelectListInputField
-            name="classAttended2019"
-            label={WHAT_YOU_WANT_TO_STUDY_LABEL}
-            options={studiesArray}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.classAttended2019}
-            isRequired
-          />
-        );
       }
+      return (
+        <SelectListInputField
+          name="classAttended2019"
+          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2019}
+          isRequired
+        />
+      );
+
     } else if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
         <SelectListInputField
@@ -350,14 +349,14 @@ class StudentRegistrationCorrectionForm extends Component {
           onClick={() => { this.changeIsOnlyOptIn2019(true); }}
         />
       );
-    } else {
-      return (
-        <LinkButton
-          buttonText={goBackBtnText}
-          linkPath={this.props.context.previousLocation}
-        />
-      );
     }
+    return (
+      <LinkButton
+        buttonText={goBackBtnText}
+        linkPath={this.props.context.previousLocation}
+      />
+    );
+
   };
   /**
    * prePopulateCourse2019 method will use for pre populate the information of fetch student.
@@ -372,16 +371,16 @@ class StudentRegistrationCorrectionForm extends Component {
     });
   }
 
- /**
+  /**
   * This method is called to return the value of marks if marks doesn't exist then it will return N.A. otherwise reture the value
   * @param {String} Marks
   */
   getMarks = (marks) => {
     if (!marks) {
       return 'N.A.';
-    } else {
-      return marks;
     }
+    return marks;
+
   };
   isValidData() {
     return isValidUserInfo(this.state.errorMessage);
@@ -663,7 +662,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
   render() {
     if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
-       return this.renderOnlyOptIn2019();
+      return this.renderOnlyOptIn2019();
     } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
     } else if (this.props.studentData && this.props.isFetched) {
@@ -835,16 +834,6 @@ class StudentRegistrationCorrectionForm extends Component {
             </div>
           </form>
         </div>
-      );
-    } else if (this.props.isLoading) {
-      // when student is not attending the session 
-       return (
-        // FIXME: Create a component to render loading popup
-         <div className="popup">
-           <div className="popupContainer">
-             <h5>Loading...</h5>
-           </div>
-         </div>
       );
     }
     return (

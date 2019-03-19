@@ -6,6 +6,7 @@ import SplashPage from '../SplashPage';
 import StudentRegistrationForm from '../StudentRegistrationForm';
 import StudentRegistrationCorrectionForm from '../StudentRegistrationCorrectionForm';
 import Footer from './Footer';
+import Loader from '../Loader';
 import SplashPagePrePopulated from '../SplashPagePrePopulated';
 import AdminPanel from '../AdminPanel';
 import StudentInformationGrid from '../StudentInformationGrid';
@@ -121,6 +122,7 @@ class Routes extends Component {
               </Consumer>
             )}
           />
+          <Loader />
           <Footer />
         </Context.Provider>
       </div>
