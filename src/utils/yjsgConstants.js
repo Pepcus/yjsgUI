@@ -573,3 +573,8 @@ export const FILE_PRESENTATION_TYPE = {
   COMPLEX_GRID: 'complexGrid',
 };
 
+export const SUPPORTED_FILE_TYPES = {
+  CSV: 'csv',
+  XLSX: 'xlsx',
+  XLS: 'xls',
+};

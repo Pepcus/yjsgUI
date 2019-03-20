@@ -12,37 +12,37 @@
       "fileLabel": "fileLabel002",
       "fileType": "csv",
       "presentationType": "complexGrid",
-      "isViewable": true
+      "isViewable": false
     },
     {
       "fileName": "sample1",
       "fileLabel": "fileLabelxlsx",
-      "fileType": "xlsx"
+      "fileType": "pdf"
     },
     {
-      "fileName": "sample1",
+      "fileName": "studentFile2",
       "fileLabel": "fileLabelxls",
-      "fileType": "xls"
+      "fileType": "csv"
     },
     {
       "fileName": "SampleXLSFile_3mb",
       "fileLabel": "SampleXLSFile_3mb",
-      "fileType": "xls"
+      "fileType": "pdf"
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (10)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (10)",
-      "fileType": "xlsx"
+      "fileType": "txt"
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (2)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (2)",
-      "fileType": "xlsx"
+      "fileType": "doc"
     },
     {
       "fileName": "SampleDocsupdakb",
       "fileLabel": "SampleDocsupdakb",
-      "fileType": "xlsx"
+      "fileType": "docx"
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (13)",

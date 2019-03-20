@@ -1789,12 +1789,22 @@ body,
     /*margin-top: 100px;*/
 }
 .download-link {
-    color: #646564;
+    /*color: rgba(100, 101, 100, 0.48);*/
+    color: #696969;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.download-link:hover {
+    color: #ef5106;
+    transition:0.3s all;
+}
+.active-download-link {
+    color: #f9570a;
     cursor: pointer;
     margin-left: 10px;
 }
-.download-link:hover {
-    color: #3a3a3a;
+.active-download-link {
+    color: #ef5106;
     transition:0.3s all;
 }
 .render-file-list {
@@ -1821,9 +1831,9 @@ body,
     padding: 70px;
 }
 .file-heading {
-    font-size:25px;
+    font-size: 21px;
     color: #505050;
-    padding: 10px 20px 0;
+    padding: 10px 20px 8px;
 }
 .render-file-list .buttonContainer {
     width: auto !important;
@@ -1841,9 +1851,9 @@ body,
 }
 .file-component {
     width: 100%;
-    max-width: 83%;
+    max-width: 78%;
     padding-top: 30px;
-    margin: 0 0 0 225px;
+    margin: 0 0 0 300px;
     overflow-x: hidden;
 }
 .no-files-available {
@@ -1853,22 +1863,38 @@ body,
 }
 .file-list-wrapper {
     max-height: 521px;
+    height: 100%;
     overflow-y: scroll;
-    width: 210px;
+    width: 300px;
     position: fixed;
     left: 0;
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
 }
 .file-flex-wrapper {
     display:flex;
     margin: 19px 20px;
+    position: relative;
+    cursor: not-allowed;
 }
 .file-label-heading {
     flex: 1;
     font-size: 14px;
     overflow: hidden;
+    color: #696969;
     text-overflow: ellipsis;
     cursor:pointer;
+}
+.file-label-heading:hover {
+    color: #ef6144;
+    transition:0.3s all;
+}
+.file-label-heading-disabled {
+    flex: 1;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    color: #b2afaf;
 }
 .new-loader-wrapper {
     position: absolute;
@@ -1881,9 +1907,15 @@ body,
     transform: translate(-50%,-50%);
 }
 .file-card-icon {
-    color: #646564;
+    /*color: rgba(100, 101, 100, 0.48);*/
+    margin-right:10px;
+    cursor: text;
+    font-size:14px;
+}
+.active-class-icon {
     margin-right:10px;
     font-size:14px;
+    color: #f9570a;
 }
 .file-component .table-drawer__top {
     display: none;
@@ -1893,11 +1925,30 @@ body,
     align-items: center;
     justify-content: center;
     max-height:100%;
-    min-height:450px;
+    min-height:430px;
 }
 .file-text-message {
     font-size: 25px;
     color: rgba(128, 128, 128, 0.45);
+}
+.flex-text-wrapper {
+    display:flex;
+}
+.file-text-ellipsis {
+    text-overflow: ellipsis;
+    overflow:hidden;
+    max-width: 100%;
+    white-space: nowrap;
+    /*color: rgba(100, 101, 100, 0.48);*/
+    display: inline-block;
+}
+.active-link {
+    text-overflow: ellipsis;
+    overflow:hidden;
+    max-width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    color:#f9570a;
 }
 @media (max-width: 1024px) {
     .registration-file-container {
@@ -2117,6 +2168,21 @@ body,
     }
     .student-form-marks-content {
         flex-basis: 100%;
+    }
+    .file-list-wrapper {
+        max-height: initial;
+        height: 100%;
+        width: 260px;
+    }
+    .file-wrapper {
+        padding-top: 30px;
+    }
+    .file-component {
+        max-width: 64%;
+        margin: 0 0 0 270px;
+    }
+    .file-component .table-footer-cell {
+        padding: 14px 0 !important;
     }
 
 }

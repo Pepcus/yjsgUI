@@ -20,7 +20,7 @@ import {
   fetchFileAction,
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
-import { goBackBtnText, yjsgHeader } from '../utils/yjsgConstants';
+import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
 import { getDataGridHeadersForFileView } from '../utils/fileUtils';
@@ -39,6 +39,7 @@ class Files extends Component {
     this.state = {
       showFileDetails: false,
       currentFileDetails: {},
+      activeFileId: null,
     };
   }
 
@@ -49,6 +50,20 @@ class Files extends Component {
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
+	returnDisableEnable = (fileView, fileType) => {
+    // if (fileView === false) {
+    //   console.log('file viewable::', fileView);
+    //   return 'file-label-heading-disabled';
+    // } else
+    if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
+      || SUPPORTED_FILE_TYPES.XLSX === fileType) {
+      return 'file-label-heading';
+    }
+    // if (fileView === false) {
+    //   return 'file-label-heading-disabled';
+    // }
+    return 'file-label-heading-disabled';
+  };
   performLogout = () => {
     this.props.resetAdminCredentialsAction();
     this.props.setAdminLoginStateAction(false);
@@ -56,12 +71,23 @@ class Files extends Component {
     this.props.resetVisibleColumnConfigAction();
     localStorage.clear();
   };
-  onClickViewFile = (file) => {
+  onClickViewFile = (file, index) => {
     this.setState({
       showFileDetails: true,
       currentFileDetails: file,
+      activeFileId: index,
     });
+    console.log('active field id::', this.state.activeFileId);
     this.props.fetchFileAction(file);
+  };
+  returnActive = (id) => {
+    console.log('span id::', id);
+    if (this.state.showFileDetails) {
+      console.log('state value of active class::', this.state.showFileDetails);
+      return 'active-link';
+    }
+    return 'file-text-ellipsis';
+
   };
 
   renderLoginPopup = () => (
@@ -83,27 +109,31 @@ class Files extends Component {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
           <div className="file-list-wrapper">
-            <h1 className="file-heading">Files...</h1>
-            {this.props.filesConfig.files.map((file) => {
-            const href = `files/${file.fileName}.${file.fileType}`;
+            <h1 className="file-heading">Available Files</h1>
+            {this.props.filesConfig.files.map((file, index) => {
+              console.log('index of active class::', index);
+            const href = `files/${file.fileName}.${file.fileType ? file.fileType : 'txt'}`;
             return (
               <div key={shortId.generate()} className="file-flex-wrapper">
+                {console.log('file condition::', file.isViewable === false)}
                 <div
-                  onClick={() => this.onClickViewFile(file)}
-                  className="file-label-heading"
-                  title={file.fileLabel}
+                  onClick={() => this.onClickViewFile(file, index)}
+                  /* className="file-label-heading"*/
+                  className={this.returnDisableEnable(file.isViewable,file.fileType)}
                 >
-                  <i
-                    className="fa fa-file file-card-icon"
-                    aria-disabled="true"
-                  />
-                  {file.fileLabel}
+                  <div className="flex-text-wrapper">
+                    <i
+                      className={`fa fa-file ${this.state.activeFileId === index ? 'active-class-icon' : 'file-card-icon'}`}
+                      aria-disabled="true"
+                    />
+                    <span className={this.state.activeFileId === index ? 'active-link' : 'file-text-ellipsis'} title={file.fileLabel}>{file.fileLabel}</span>
+                  </div>
                 </div>
                 <div>
                   <a
                     download={`${file.fileLabel}.${file.fileType}`}
                     href={href}
-                    className="download-link"
+                    className={this.state.activeFileId === index ? 'active-download-link' : 'download-link'}
                   >
                     <i className="fa fa-download file-icon" />
                   </a>
