@@ -6,7 +6,7 @@ import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 
-import Loader from './Loader';
+import ErrorMessage from './commonComponents/ErrorMessage';
 import {
   studiesArray,
   busStops,
@@ -64,7 +64,7 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
-import { CLICK_HERE_TEXT, UPDATE_FURTHER_INFORMATION_TEXT } from '../utils/textConstants';
+import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../utils/textConstants';
 
 
 // FixMe: Add missing propTypes and defaultProps.
@@ -235,16 +235,38 @@ class StudentRegistrationCorrectionForm extends Component {
       </div>
       <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
         <div className="inputFieldContainer input-field-container">
+          <label className="name-label">{NAME_LABEL}: </label>
           <span className="student-correction-name-text">{this.state.student.name}</span>
-          <SelectListInputField
-            name="optIn2019"
-            label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
-            options={optIn2019Options}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.optIn2019}
-            isRequired
-            errorMessage={this.state.errorMessage.optIn2019.message}
-          />
+          <div className="inputWrapper input-wrapper-correction-url">
+            <div className="has-error inputWrapperContainer errorInputField">
+              <div className="inputLabel">
+                <label>{IS_OPT_IN_OR_OPT_OUT_2019_LABEL} * </label>
+                <div className="advance-input-radio advance-input-print-later">
+                  <div className="input-radio-container">
+                    <input
+                      type="radio"
+                      name="OptInOrOptOut"
+                      value="Y"
+                      onChange={this.onClickRadioButton}
+                      checked={this.state.student.optIn2019 === 'Y'}
+                    />
+                    <label htmlFor="Opt-In">{YES_TEXT}</label>
+                  </div>
+                  <div className="input-radio-container">
+                    <input
+                      type="radio"
+                      name="OptInOrOptOut"
+                      value="N"
+                      onChange={this.onClickRadioButton}
+                      checked={this.state.student.optIn2019 === 'N'}
+                    />
+                    <label htmlFor="Opt-Out">{NO_TEXT}</label>
+                  </div>
+                </div>
+                <ErrorMessage errorMessage={this.state.errorMessage.optIn2019.message} />
+              </div>
+            </div>
+          </div>
           <div className="registrationFormButtonContainer student-correction-button-container">
             <div className="button-wrapper student-correction-button-wrapper">
               <div className="buttonContainer button-container-correction">
@@ -423,7 +445,14 @@ class StudentRegistrationCorrectionForm extends Component {
       }
     }
   }
-
+  /**
+   * onClickRadioButton method call onchange of optIn or optOut radio button
+   * @param {Object} event
+   */
+  onClickRadioButton = (event) => {
+    let value = event.target.value;
+    this.handleInputChange(value, 'optIn2019');
+  };
   handleInputChange(value, name) {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));

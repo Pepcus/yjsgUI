@@ -9,7 +9,6 @@ import '../card-print.css';
 
 import ColumnConfig from './ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from './GridData';
-import Loader from './Loader';
 import {
   allStudentsData,
   getVisibleColumnConfig,
@@ -17,7 +16,6 @@ import {
   getSecretKey,
   stateOfRedirect,
   stateOfAdminLogin,
-  /*getLoaderState,*/
   getStudent,
 } from '../reducers/studentRegistrationReducer';
 import {
@@ -604,7 +602,6 @@ StudentInformationGrid.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  //isLoading: getLoaderState(state),
   students: allStudentsData(state),
   visibleColumnConfig: getVisibleColumnConfig(state),
   selectValue: getSelectValue(state),

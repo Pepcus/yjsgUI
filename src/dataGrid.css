@@ -22,6 +22,15 @@ html, body {
     flex-direction: column;
     justify-content: center;
 }
+.input-wrapper-correction-url .advance-input-radio {
+    margin: 15px 3px 0 0;
+}
+.input-wrapper-correction-url .input-radio-container {
+    align-items: end;
+}
+.input-wrapper-correction-url .input-radio-container:first-child {
+    margin-right: 10px;
+}
 .new-loader-wrapper {
     position: absolute;
     height: 100%;
@@ -42,6 +51,13 @@ html, body {
     color: #f9570a;
     font-weight: 600;
     font-size: 18px;
+}
+.name-label {
+    color: #3c3d3d;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: bold;
 }
 .arrowIcon {
     margin: -5px 1px !important;
@@ -1681,7 +1697,7 @@ body,
 }
 .student-correction-name-text {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 }
 .student-correction-button-container {
     justify-content: flex-start;
