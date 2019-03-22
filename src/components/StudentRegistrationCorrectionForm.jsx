@@ -651,6 +651,24 @@ class StudentRegistrationCorrectionForm extends Component {
               {this.renderClassAttended2018()}
               {this.renderLevelField()}
               {this.renderAdminEditableFields()}
+              <div className="student-form-marks-container student-form-marks-desktop-none">
+                <div className="student-form-marks-wrapper student-form-marks-mobile-wrapper">
+                  <div className="student-form-marks-content">
+                    <div className="inputWrapper">
+                      <label className="marks-input-label">Marks 2018:</label>
+                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                    </div>
+                    <div className="inputWrapper">
+                      <label className="marks-input-label">Marks 2017:</label>
+                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                    </div>
+                    <div className="inputWrapper">
+                      <label className="marks-input-label">Marks 2016:</label>
+                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="registrationFormButtonContainer">
                 <div className="button-wrapper">
                   {this.renderBackButton()}
@@ -666,7 +684,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 </div>
               </div>
             </div>
-            <div className="student-form-marks-container">
+            <div className="student-form-marks-container student-form-marks-mobile-none">
               <div className="student-form-marks-wrapper">
                 <div className="student-form-marks-content">
                   <div className="inputWrapper">
@@ -829,6 +847,24 @@ class StudentRegistrationCorrectionForm extends Component {
                 {this.renderClassAttended2018()}
                 {this.renderLevelField()}
                 {this.renderAdminEditableFields()}
+                <div className="student-form-marks-container student-form-marks-desktop-none">
+                  <div className="student-form-marks-wrapper student-form-marks-mobile-wrapper">
+                    <div className="student-form-marks-content">
+                      <div className="inputWrapper">
+                        <label className="marks-input-label">Marks 2018:</label>
+                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                      </div>
+                      <div className="inputWrapper">
+                        <label className="marks-input-label">Marks 2017:</label>
+                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                      </div>
+                      <div className="inputWrapper">
+                        <label className="marks-input-label">Marks 2016:</label>
+                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="registrationFormButtonContainer">
                   <div className="button-wrapper">
                     {this.renderBackButton()}
@@ -842,7 +878,7 @@ class StudentRegistrationCorrectionForm extends Component {
                   </div>
                 </div>
               </div>
-              <div className="student-form-marks-container">
+              <div className="student-form-marks-container student-form-marks-mobile-none">
                 <div className="student-form-marks-wrapper">
                   <div className="student-form-marks-content">
                     <div className="inputWrapper">

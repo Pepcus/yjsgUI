@@ -1948,6 +1948,9 @@ body,
     display: inline-block;
     color:#f9570a;
 }
+.student-form-marks-desktop-none {
+    display: none;
+}
 @media (max-width: 1024px) {
     .registration-file-container {
          padding-top: 0;
@@ -2211,6 +2214,12 @@ body,
     .file-button-mobile {
         margin: 10px 10px;
     }
+    .student-form-marks-mobile-none {
+        display: none;
+    }
+    .student-form-marks-desktop-none {
+        display: block;
+    }
 
 }
 @media (max-width: 768px) {
@@ -2349,10 +2358,21 @@ body,
         width:100%;
         display: block;
     }
+
 }
 @media (max-width: 640px) {
     .custom-modal {
         width: 50% !important;
+    }
+    .inputFieldContainerWrapper {
+        padding-bottom: 20px;
+    }
+    .student-form-marks-mobile-wrapper {
+        margin-bottom: 20px;
+        box-shadow: 0 1px 2px 0 #e6e4e4;
+        padding: 20px 20px !important;
+        background: #ffffff;
+        border-top: 2px solid #ffffff;
     }
     .file-component {
         display: none;
@@ -2802,6 +2822,12 @@ body,
     .file-wrapper {
         margin: 10px;
     }
+    .student-form-marks-mobile-wrapper {
+        padding: 20px 5px !important;
+    }
+    .student-form-marks-mobile-wrapper .inputWrapper:last-child {
+        width: 100% !important;
+    }
 }
 
 @media (max-width: 320px) {
@@ -2853,5 +2879,4 @@ body,
     .form-title-small {
         flex: 0 1 24%;
     }
-
 }
