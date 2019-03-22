@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Fuse from 'fuse.js';
 import isEmpty from 'lodash/isEmpty';
+import uniqWith from 'lodash/uniqWith';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 
 /**
@@ -170,7 +172,7 @@ class AdvanceSearch extends Component {
         });
         this.props.onFilter(this.props.formatStudents(studentsData));
       }
-    } else {
+    } else if (!isEmpty(this.state.inputValue)) {
       // isMultipleIdSearchCheck is check it do the search result according to search Ids.
       const searchStudentsIds = this.state.inputValue.split(',');
       const searchResult = [];
@@ -178,7 +180,8 @@ class AdvanceSearch extends Component {
         const result = this.props.students.filter(student => student.id === Number(searchStudentsIds[index]));
         searchResult.push(...result);
       }
-      const studentsData = searchResult.map((student) => {
+      let uniqSearchResult = uniqWith(searchResult, isEqual);
+      const studentsData = uniqSearchResult.map((student) => {
         let finalStudentObject = student;
         this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
