@@ -40,6 +40,8 @@ class Files extends Component {
       showFileDetails: false,
       currentFileDetails: {},
       activeFileId: null,
+      backPageButton: true,
+      width: window.innerWidth,
     };
   }
 
@@ -50,19 +52,19 @@ class Files extends Component {
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
-	returnDisableEnable = (fileView, fileType) => {
-    // if (fileView === false) {
-    //   console.log('file viewable::', fileView);
-    //   return 'file-label-heading-disabled';
-    // } else
+  returnDisableEnable = (fileView, fileType) => {
     if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
-      || SUPPORTED_FILE_TYPES.XLSX === fileType) {
+|| SUPPORTED_FILE_TYPES.XLSX === fileType) {
       return 'file-label-heading';
     }
-    // if (fileView === false) {
-    //   return 'file-label-heading-disabled';
-    // }
     return 'file-label-heading-disabled';
+  };
+  returnFlexClassName = (fileView, fileType) => {
+    if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
+      || SUPPORTED_FILE_TYPES.XLSX === fileType) {
+      return 'file-flex-wrapper';
+    }
+    return 'file-flex-wrapper file-flex-position';
   };
   performLogout = () => {
     this.props.resetAdminCredentialsAction();
@@ -76,20 +78,44 @@ class Files extends Component {
       showFileDetails: true,
       currentFileDetails: file,
       activeFileId: index,
+      backPageButton: false,
     });
-    console.log('active field id::', this.state.activeFileId);
     this.props.fetchFileAction(file);
   };
-  returnActive = (id) => {
-    console.log('span id::', id);
-    if (this.state.showFileDetails) {
-      console.log('state value of active class::', this.state.showFileDetails);
-      return 'active-link';
-    }
-    return 'file-text-ellipsis';
-
+  onClickBackButton = () => {
+    this.setState({
+      backPageButton: true,
+    });
   };
+  returnFileListDisplayBlock = () => {
+    const { width } = this.state;
+    const isMobile = width <= 600;
+    if (this.state.showFileDetails) {
+      if (isMobile) {
+        if (this.state.backPageButton) {
+          return 'file-list-wrapper';
+        }
+        return 'file-list-none';
+      }
+      return 'file-list-wrapper';
+    }
+    return 'file-list-wrapper';
+  };
+  returnTableWidthComponentClass = () => {
+    const { width } = this.state;
+    const isMobile = width <= 600;
+    if (this.state.showFileDetails) {
+      if (isMobile) {
+        if (this.state.backPageButton) {
+          return 'file-component-none';
+        }
+        return 'file-component-mobile-wrapper';
 
+      }
+      return 'file-component';
+    }
+    return 'file-component';
+  };
   renderLoginPopup = () => (
     <div className="popup popupFile">
       <div className="popupContainer">
@@ -101,25 +127,24 @@ class Files extends Component {
         />
       </div>
     </div>);
-
   renderFileList = () => {
     if (!(this.props.adminLoginState)) {
       return this.renderLoginPopup();
     } else if (!isEmpty(this.props.filesConfig)) {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
-          <div className="file-list-wrapper">
+          <div className={this.returnFileListDisplayBlock()}>
             <h1 className="file-heading">Available Files</h1>
             {this.props.filesConfig.files.map((file, index) => {
-              console.log('index of active class::', index);
             const href = `files/${file.fileName}.${file.fileType ? file.fileType : 'txt'}`;
             return (
-              <div key={shortId.generate()} className="file-flex-wrapper">
-                {console.log('file condition::', file.isViewable === false)}
+              <div
+                key={shortId.generate()}
+                className={this.returnFlexClassName(file.isViewable, file.fileType)}
+              >
                 <div
                   onClick={() => this.onClickViewFile(file, index)}
-                  /* className="file-label-heading"*/
-                  className={this.returnDisableEnable(file.isViewable,file.fileType)}
+                  className={this.returnDisableEnable(file.isViewable, file.fileType)}
                 >
                   <div className="flex-text-wrapper">
                     <i
@@ -149,20 +174,63 @@ class Files extends Component {
     }
     return null;
   };
-
   renderFileDetails = () => {
+    const { width } = this.state;
+    const isMobile = width <= 500;
     if (this.state.showFileDetails) {
       if (!isEmpty(this.props.fileData)) {
+        if (isMobile) {
+          return (
+            <div
+              className={this.returnTableWidthComponentClass()}
+              ref={this.widthRef}
+            >
+              <div onClick={this.onClickBackButton}>
+                <a className="grid-small-button file-button-mobile">
+                  <i className="fa fa-arrow-left" />
+                </a>
+              </div>
+              <DataGrid
+                data={this.props.fileData}
+                metaData={getDataGridHeadersForFileView(this.props.fileData, this.state.currentFileDetails)}
+              />
+            </div>
+          );
+        }
         return (
-          <div className="file-component" ref={this.widthRef}>
+          <div
+            className={this.returnTableWidthComponentClass()}
+            ref={this.widthRef}
+          >
             <DataGrid
               data={this.props.fileData}
               metaData={getDataGridHeadersForFileView(this.props.fileData, this.state.currentFileDetails)}
             />
           </div>);
+      } else if (isMobile) {
+        return (
+          <div
+            className={this.returnTableWidthComponentClass()}
+            ref={this.widthRef}
+          >
+            <div onClick={this.onClickBackButton}>
+              <a className="grid-small-button file-button-mobile">
+                <i className="fa fa-arrow-left" />
+              </a>
+            </div>
+            <div className="file-text-panel">
+              <span className="file-text-message">
+                  No Data Found.
+              </span>
+            </div>
+          </div>
+        );
       }
       return (
-        <div className="file-component" ref={this.widthRef}>
+        <div
+          className={this.returnTableWidthComponentClass()}
+          ref={this.widthRef}
+        >
           <div className="file-text-panel">
             <span className="file-text-message">
             Nothing to show.
