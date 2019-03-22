@@ -180,7 +180,7 @@ class AdvanceSearch extends Component {
         const result = this.props.students.filter(student => student.id === Number(searchStudentsIds[index]));
         searchResult.push(...result);
       }
-      let uniqSearchResult = uniqWith(searchResult, isEqual);
+      const uniqSearchResult = uniqWith(searchResult, isEqual);
       const studentsData = uniqSearchResult.map((student) => {
         let finalStudentObject = student;
         this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
