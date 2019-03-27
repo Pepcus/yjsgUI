@@ -44,7 +44,7 @@ import {
   NO_COLUMNS_SELECTED_MESSAGE,
   INFORMATION_NOT_AVAILABLE_MESSAGE,
 } from '../utils/messagesConstants';
-
+import reactLogo1 from '../assets/images/react-logo-1.png';
 /**
  * StudentInformationGrid render student information grid.
  * @type {Class}
@@ -495,7 +495,7 @@ class StudentInformationGrid extends Component {
             <div className="student-information-Container">
               <div className="student-logo-header">
                 <div className="yjsg-logo">
-                  <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+                  <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
                 </div>
                 <h2 className="student-info-heading">{yjsgHeader}</h2>
                 <div className="logoutButtonContainer display-mobile-none">

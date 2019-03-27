@@ -65,7 +65,7 @@ import {
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../utils/textConstants';
-
+import reactLogo1 from '../assets/images/react-logo-1.png';
 
 // FixMe: Add missing propTypes and defaultProps.
 //  Fix EsLint issues.
@@ -229,7 +229,7 @@ class StudentRegistrationCorrectionForm extends Component {
       {this.renderSuccessMessage()}
       <div className="student-logo-header">
         <div className="yjsg-logo">
-          <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+          <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
         </div>
         <h2 className="student-info-heading">{yjsgHeader}</h2>
       </div>
@@ -535,7 +535,7 @@ class StudentRegistrationCorrectionForm extends Component {
         {this.renderSuccessMessage()}
         <div className="student-logo-header">
           <div className="yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
           </div>
           <h2 className="student-info-heading">{yjsgHeader}</h2>
         </div>
@@ -720,7 +720,7 @@ class StudentRegistrationCorrectionForm extends Component {
           {/* FIXME: Create a separate reusable component to render logo*/}
           <div className="student-logo-header">
             <div className="yjsg-logo">
-              <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+              <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
             </div>
             {/* FIXME: Create a separate reusable component to render header*/}
             <h2 className="student-info-heading">{yjsgHeader}</h2>
