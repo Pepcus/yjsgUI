@@ -25,7 +25,7 @@ import {
   stateOfAdminLogin,
 } from '../reducers/studentRegistrationReducer';
 
-import yjsgLogo from '../assets/yjsgLogo.png';
+import yjsgLogo from '../assets/images/yjsgLogo.png';
 import {
   adminId,
   adminPassword,

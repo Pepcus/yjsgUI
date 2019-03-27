@@ -10,7 +10,7 @@ import {
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
 } from '../actions/studentRegistrationActions';
-import yjsgLogo from '../assets/yjsgLogo.png';
+import yjsgLogo from '../assets/images/yjsgLogo.png';
 import {
   yjsgHeader,
   eventDate,

@@ -30,7 +30,8 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../actions/studentRegistrationActions';
-
+import reactLogo1 from '../assets/images/react-logo-1.png';
+import spinner from '../assets/images/spinner.gif';
 
 class Files extends Component {
   constructor(props) {
@@ -268,7 +269,7 @@ class Files extends Component {
       return (
         <div className="new-loader-wrapper">
           <div className="loader">
-            <img src="../../spinner.gif" alt="logo" className="loader-img" />
+            <img src={spinner} alt="logo" className="loader-img" />
           </div>
         </div>
       );
@@ -282,7 +283,7 @@ class Files extends Component {
         {this.renderLoader()}
         <div className="student-logo-header">
           <div className="yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
           </div>
           {/* FIXME: Create a separate reusable component to render header*/}
           <h2 className="student-info-heading">{yjsgHeader}</h2>

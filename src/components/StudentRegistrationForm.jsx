@@ -59,6 +59,7 @@ import {
   getUserType,
 } from '../reducers/studentRegistrationReducer';
 import Button from './commonComponents/Button';
+import reactLogo1 from '../assets/images/react-logo-1.png';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -239,7 +240,7 @@ class StudentRegistrationForm extends Component {
         {/* FIXME: Create a separate reusable component to render logo*/}
         <div className="student-logo-header">
           <div className="yjsg-logo">
-            <img src="../../react-logo-1.png" alt="logo" className="yjsg-logo-img" />
+            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
           </div>
           {/* FIXME: Create a separate reusable component to render header*/}
           <h2 className="student-info-heading">{yjsgHeader}</h2>
