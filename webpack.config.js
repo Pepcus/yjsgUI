@@ -10,7 +10,12 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    port: 9000
+    port: 9000,
+    proxy: {
+      '/v1': {
+        target: 'http://localhost:8080',
+      },
+    },
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
