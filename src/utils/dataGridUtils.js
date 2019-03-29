@@ -3,7 +3,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import {
   gridMetaData,
 } from '../components/GridData';
-import { develop } from '../config/developmentColorCode';
 
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
