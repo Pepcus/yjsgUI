@@ -1,4 +1,54 @@
 /*CSS FOR DATAGRID*/
+:root {
+    --landing-page-container-student-heading-background: #f9570a;
+    --adminPanelHeading-background-color: #f9570a;
+    --logoutLinkContainer-a-hover-border-radius-background-color: #da4c08;
+    --logoutLinkContainer-a-hover-border: #da4c08;
+    --primary-color-color: #f9570a;
+    --linkButton-background-color: #f9570a;
+    --linkButton-hover-background-color: #d24c0c;
+    --buttonOrange-background-color: #f9570a;
+    --buttonOrange-border: 2px solid #f9570a;
+    --buttonOrange-hover-background-color: #d24c0c;
+    --buttonOrange-hover-border: 2px solid #d24c0c;
+    --clearFilterButton-background-color: #f1771f;
+    --clearFilterButton-border: 1px solid #f1771f;
+    --clearFilterButton-hover-border: 1px solid #d24c0c;
+    --clearFilterButton-hover-background: #d24c0c;
+    --btn-block-btn-grid-background: #f9570a;
+    --btn-block-btn-grid-hover-background: #d24c0c;
+    --textAreaText-focus-outline-color: #e34c04;
+    --column-option-container-background-color: #f9570a ;
+    --column-option-container-border: 1px solid #f9570a;
+    --column-option-container-hover-border: 1px solid #d24c0c;
+    --column-option-container-hover-background: #d24c0c ;
+    --column-modal-background: #f9570a;
+    --registrationFormHeading-background-color: #f9570a;
+    --button-modal-background: #f9570a;
+    --button-modal-border: 1px solid #f9570a;
+    --button-modal-hover-border: 1px solid #d24502;
+    --button-modal-hover-background: #d24502;
+    --student-information-header-background-color: #f9570a;
+    --custom-modal-border: 1px solid #cd4403;
+    --advance-search-button-background-color: #f9570a;
+    --advance-search-button-border: 1px solid #f9570a;
+    --advance-search-button-hover-border: 1px solid #d24c0c;
+    --advance-search-button-hover-background: #d24c0c;
+    --student-logo-header-background: #f9570a;
+    --popupContainer-background: #F9570A;
+    --search-hover-background: #f9570a;
+    --button-close-color: #f9570a;
+    --button-close-hover-color: #da4802;
+    --grid-small-button-hover-background-color: #e7680e;
+    --selectInputText-focus-outline-color: #f9570a;
+    --student-id-cards-border: 1px solid #d94803;
+    --student-id-card-wrapper-background-color: #f9570a;
+    --student-id-cards-footer-background-color: #fa8d19;
+    --grid-small-button-background-color: #f9570a;
+    --student-information-Container-student-info-heading-background: #f9570a;
+    --download-message-popup-container-background: #f9570a;
+}
+
 html, body {
     font-family: 'Poppins', sans-serif !important;
 }
@@ -13,7 +63,7 @@ html, body {
 }
 .adminPanelHeading {
     z-index: 1;
-    background-color: #f9570a;
+    background-color: var(--adminPanelHeading-background-color);
 }
 .adminPanelContainer {
     height: 100%;
@@ -43,12 +93,12 @@ html, body {
 }
 .logoutLinkContainer a:hover {
     border-radius: 4px;
-    border: 1px solid #da4c08 !important;
-    background-color: #da4c08;
+    border: 1px solid var(--logoutLinkContainer-a-hover-border) !important;
+    background-color: var(--logoutLinkContainer-a-hover-border-radius-background-color);
     transition: 0.3s all;
 }
 .primary-color {
-    color: #f9570a;
+    color: var(--primary-color-color);
     font-weight: 600;
     font-size: 18px;
 }
@@ -83,7 +133,7 @@ html, body {
     position: fixed;
     top: 0;
     left:0;
-    background: #f9570a;
+    background: var(--landing-page-container-student-heading-background);
     padding: 15px 0;
     margin: 0;
     color: #fff;
@@ -133,7 +183,7 @@ html, body {
 
 .linkButton {
     color: #ffffff;
-    background-color: #f9570a;
+    background-color: var(--linkButton-background-color);
     outline: none;
     box-shadow: 0 1px 3px 0 #777978;
     display: block;
@@ -148,7 +198,7 @@ html, body {
 .linkButton:hover {
     transition: 0.3s all;
     box-shadow: 0 2px 4px 0 #777978;
-    background-color: #d24c0c;
+    background-color: var(--linkButton-hover-background-color);
 }
 .footer-index {
     z-index:1000;
@@ -157,7 +207,7 @@ html, body {
 .buttonOrange {
     color: #ffffff;
     outline: none;
-    background-color: #f9570a;
+    background-color: var(--buttonOrange-background-color);
     box-shadow: 0 1px 3px 0 #777978;
     text-align: center;
     font-size: 14px;
@@ -165,14 +215,14 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    border: 2px solid #f9570a;
+    border: var(--buttonOrange-border);
 }
 
 .buttonOrange:hover {
     transition: 0.3s all;
     box-shadow: 0 2px 4px 0 #777978;
-    background-color: #d24c0c;
-    border: 2px solid #d24c0c;
+    background-color: var(--buttonOrange-hover-background-color);
+    border: var(--buttonOrange-hover-border);
 }
 
 .render-table {
@@ -299,8 +349,8 @@ html, body {
 }
 .clearFilterButton {
     border-radius: 4px !important;
-    background-color: #f1771f !important;
-    border: 1px solid #f1771f !important;
+    background-color: var(--clearFilterButton-background-color) !important;
+    border: var(--clearFilterButton-border) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     margin-right: 8px;
@@ -316,8 +366,8 @@ html, body {
 .clearFilterButton:hover {
     transition: 0.2s all;
     box-shadow: 1px 2px 2px #b0b0b0;
-    border: 1px solid #d24c0c !important;
-    background: #d24c0c !important;
+    border: var(--clearFilterButton-hover-border) !important;
+    background: var(--clearFilterButton-hover-background) !important;
 }
 .link {
     height: auto !important;
@@ -420,7 +470,7 @@ html, body {
     background-color: #f8f7f7 !important;
 }
 .btn-block .btn-grid {
-    background: #f9570a;
+    background: var(--btn-block-btn-grid-background);
     border: none;
     cursor: pointer;
     color: #fff;
@@ -431,7 +481,7 @@ html, body {
 }
 .btn-block .btn-grid:hover {
     transition: 0.3s all;
-    background: #d24c0c;
+    background: var(--btn-block-btn-grid-hover-background);
 }
 .btn-grid .fa-edit {
     margin-right: 2px;
@@ -477,7 +527,7 @@ html, body {
 .inputText:focus,
 .textAreaText:focus {
     background: #f9f9f9;
-    outline-color: #e34c04;
+    outline-color: var(--textAreaText-focus-outline-color);
 }
 .table-footer-row {
     margin-right: 5px !important;
@@ -490,8 +540,8 @@ html, body {
 }
 .column-option-container {
     border-radius: 4px ;
-    background-color: #f9570a ;
-    border: 1px solid #f9570a;
+    background-color: var(--column-option-container-background-color) ;
+    border: var(--column-option-container-border);
     color: #ffffff;
     outline: none;
     cursor: pointer;
@@ -529,16 +579,16 @@ html, body {
 .column-option-container:hover {
     transition: 0.3s all;
     box-shadow: 1px 2px 3px #b0b0b0;
-    border: 1px solid #d24c0c;
-    background: #d24c0c ;
+    border: var(--column-option-container-hover-border);
+    background: var(--column-option-container-hover-background) ;
 }
 .column-modal {
-    background: #f9570a;
+    background: var(--column-modal-background);
     color: #ffffff;
     padding: 20px;
 }
 .registrationFormHeading {
-    background-color: #f9570a !important;
+    background-color: var(--registrationFormHeading-background-color) !important;
 }
 .sort-order-up,
 .sort-order-down {
@@ -599,8 +649,8 @@ html, body {
     padding: 8px 16px;
 }
 .button-modal {
-    background: #f9570a;
-    border: 1px solid #f9570a;
+    background: var(--button-modal-background);
+    border: var(--button-modal-border);
     cursor: pointer;
     color: #ffffff;
     outline: none;
@@ -615,8 +665,8 @@ html, body {
     -o-transition: 0.3s all;
     transition: 0.3s all;
     box-shadow: 1px 1px 3px 0 #b0b0b0 !important;
-    border: 1px solid #d24502 !important;
-    background: #d24502 !important;
+    border: var(--button-modal-hover-border) !important;
+    background: var(--button-modal-hover-background) !important;
 }
 .student-information-section {
     height: 100%;
@@ -647,7 +697,7 @@ html, body {
 .student-information-header {
     text-align: center;
     width: 100%;
-    background-color: #f9570a;
+    background-color: var(--student-information-header-background-color);
     padding: 20px;
     color: #ffffff;
     font-weight: 600;
@@ -698,7 +748,7 @@ html, body {
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    border: 1px solid #cd4403 !important;
+    border: var(--custom-modal-border) !important;
     padding: 0 !important;
 }
 .column-group .label {
@@ -779,8 +829,8 @@ html, body {
 .advance-search-button {
     border-radius: 3px;
     display: none;
-    background-color: #f9570a;
-    border: 1px solid #f9570a;
+    background-color: var(--advance-search-button-background-color);
+    border: var(--advance-search-button-border);
     color: #ffffff;
     font-weight: 500;
     outline: none;
@@ -798,8 +848,8 @@ html, body {
     transition: 0.2s all;
     -webkit-box-shadow: 1px 2px 2px #b0b0b0;
     box-shadow: 1px 2px 2px #b0b0b0;
-    border: 1px solid #d24c0c !important;
-    background: #d24c0c !important;
+    border: var(--advance-search-button-hover-border) !important;
+    background: var(--advance-search-button-hover-background) !important;
 }
 .advance-input-radio {
     display: block;
@@ -866,7 +916,7 @@ body,
     margin: 0;
     z-index: 2;
     padding: 0;
-    background: #f9570a;
+    background: var(--student-logo-header-background);
     color: #fff;
     font-size: 26px;
     width: 100%;
@@ -881,7 +931,7 @@ body,
     background: rgba(248, 248, 247, 0.75);
 }
 .download-message-popup-container {
-    background: #f9570a;
+    background: var(--download-message-popup-container-background);
     display: inline-block;
     position: absolute;
     top: 50%;
@@ -953,7 +1003,7 @@ body,
     background: rgba(248, 248, 247, 0.75);
 }
 .popupContainer {
-    background: #F9570A;
+    background: var(--popupContainer-background);
     box-shadow: 0 1px 3px 0 #a2a2a2;
 }
 .errorPopupContainer .popup .linkButton {
@@ -980,7 +1030,7 @@ body,
 .search:hover {
     transform: scale(1.00) !important;
     transition: 0.3s all;
-    background: #f9570a !important;
+    background: var(--search-hover-background) !important;
     color: #ffffff;
 }
 .search:focus {
@@ -1049,11 +1099,11 @@ body,
 }
 .button-close {
     background: transparent;
-    color: #f9570a;
+    color: var(--button-close-color);
     margin-right:15px;
 }
 .button-close:hover {
-    color: #da4802;
+    color: var(--button-close-hover-color);
     background: transparent !important;
 }
 .yjsg-logo {
@@ -1161,7 +1211,7 @@ body,
 
 .grid-small-button:hover {
     color: #ffffff;
-    background-color: #e7680e;
+    background-color: var(--grid-small-button-hover-background-color);
     transition: 0.3s all;
 }
 .input-radio .input-text {
@@ -1350,7 +1400,7 @@ body,
 }
 .selectInputText:focus {
     background: #fdfbfb;
-    outline-color: #f9570a;
+    outline-color: var(--selectInputText-focus-outline-color);
 }
 .grid-scroll-page-wrapper {
     display: flex;
@@ -1382,7 +1432,7 @@ body,
     width:100%;
 }
 .student-id-cards{
-    border: 1px solid #d94803;
+    border: var(--student-id-cards-border);
     width:45%;
     float: left;
     margin:15px 15px 25px;
@@ -1426,7 +1476,7 @@ body,
     -webkit-print-color-adjust: exact;
 }
 .student-id-card-wrapper {
-    background-color: #f9570a;
+    background-color: var(--student-id-card-wrapper-background-color);
     color: #ffffff;
     font-weight:600;
     padding: 0;
@@ -1437,7 +1487,7 @@ body,
     -webkit-print-color-adjust: exact;
 }
 .student-id-cards-footer {
-    background-color: #fa8d19 !important;
+    background-color: var(--student-id-cards-footer-background-color) !important;
     color: #ffffff;
     padding: 0 5px;
     min-height:25px;
@@ -1685,8 +1735,9 @@ body,
 }
 .input-radio-container .checkbox-input {
     margin-right:5px;
-    height:15px;
-    width:15px;
+    cursor: pointer;
+    height: 20px;
+    width: 18px;
 }
 .input-field-container {
     padding:70px 50px;
@@ -2074,7 +2125,7 @@ body,
     }
     .grid-small-button {
         color: #ffffff;
-        background-color: #f9570a;
+        background-color: var(--grid-small-button-background-color);
         outline: none;
         text-align: center;
         line-height: 20px;
@@ -2103,7 +2154,7 @@ body,
         top: 0;
         margin: 0;
         z-index: 2;
-        background: #f9570a;
+        background: var(--student-information-Container-student-info-heading-background);
         color: #fff;
         width: 100%;
         text-align: center;
@@ -2281,7 +2332,7 @@ body,
     }
     .grid-small-button {
         color: #ffffff;
-        background-color: #f9570a;
+        background-color: var(--grid-small-button-background-color);
         outline: none;
         text-align: center;
         line-height: 20px;
@@ -2332,7 +2383,7 @@ body,
         top: 0;
         margin: 0;
         z-index: 2;
-        background: #f9570a;
+        background: var(--student-information-Container-student-info-heading-background);
         color: #fff;
         width: 100%;
         text-align: center;

@@ -22,3 +22,7 @@ export const PLEASE_SELECT_COLUMNS_TEXT = 'कृपया स्तंभों
 export const UPLOAD_FILE_TEXT = 'कृपिया फाइल को अपलोड करे';
 
 export const IS_THERE_TEXT = ' है |';
+
+export const ERROR_MESSAGE_OF_LOAD_APP_DATA = 'Error occurred to load application data.';
+
+export const FILE_DOWNLOAD_MESSAGE = 'File downloading started...';

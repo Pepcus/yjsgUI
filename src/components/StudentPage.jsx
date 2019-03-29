@@ -47,6 +47,7 @@ class StudentPage extends Component {
   }
 
   componentWillMount() {
+
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
     if (id && secretCode) {
