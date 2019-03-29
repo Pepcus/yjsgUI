@@ -131,17 +131,19 @@ class StudentRegistrationForm extends Component {
   isValidData() {
     return isValidUserInfo(this.state.errorMessage);
   }
-  /**
-   * onSubmitStudentData method will be call on onClick
-   * of submit button in student registration form.
-   * @param {Object} event
-   */
+
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-error');
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
+
+  /**
+   * onSubmitStudentData method will be call on onClick
+   * of submit button in student registration form.
+   * @param {Object} event
+   */
   onSubmitStudentData(event) {
     event.preventDefault();
     // call _verifyStudentFormData method to check data student

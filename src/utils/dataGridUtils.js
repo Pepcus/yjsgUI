@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import {
   gridMetaData,
 } from '../components/GridData';
+import { develop } from '../config/developmentColorCode';
 
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
@@ -94,4 +95,12 @@ export const chunkArray = (Array, chunkSize) => {
     results.push(temporaryArray.splice(0, chunkSize));
   }
   return results;
+};
+
+export const setAppColor = (mode) => {
+  for (const key in mode) {
+    if (mode.hasOwnProperty(key)) {
+      document.documentElement.style.setProperty(key, mode[key]);
+    }
+  }
 };
