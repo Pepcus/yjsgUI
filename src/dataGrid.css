@@ -458,6 +458,7 @@ html, body {
     flex-direction: column;
     width: 100%;
     height:auto;
+    overflow-y: auto;
 }
 .registrationFormContainer {
     background-color: #fff;
@@ -1009,7 +1010,7 @@ body,
     margin: 0;
 }
 .button-wrapper {
-    padding-top: 15px;
+    padding: 15px 0;
     transition: 0.3s all;
     display: flex;
     justify-content: space-around;
@@ -1909,7 +1910,7 @@ body,
     overflow-x: hidden;
 }
 .file-list-wrapper {
-    max-height: 521px;
+    max-height: 475px;
     height: 100%;
     overflow-y: scroll;
     width: 300px;
@@ -2407,6 +2408,10 @@ body,
         width:100%;
         display: block;
     }
+    .id-card-wrapper .buttonContainer:first-child, .id-card-wrapper
+    .buttonContainer:nth-child(2), .id-card-wrapper .buttonContainer:nth-child(3) {
+        display: none;
+    }
 
 }
 @media (max-width: 640px) {
@@ -2415,6 +2420,9 @@ body,
     }
     .inputFieldContainerWrapper {
         padding-bottom: 20px;
+    }
+    .yjsg-event-info .primary-color {
+        padding: 0 10px;
     }
     .student-form-marks-mobile-wrapper {
         margin-bottom: 20px;
