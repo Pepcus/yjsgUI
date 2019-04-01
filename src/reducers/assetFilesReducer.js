@@ -3,7 +3,7 @@ const initialState = {
   isLoading: false,
   errorMessage: '',
   filesConfig: {},
-  modeVariable: {},
+  modeVariable: '',
   isAppLoaded: false,
   isAppLoadedError: false,
 };
@@ -45,7 +45,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         errorMessage: action.errorMessage,
         fileData: [],
       };
-    case 'LOADED_APP_DATA_ACTION':
+    case 'LOAD_APP_DATA_ACTION':
       return {
         ...state,
         isAppLoaded: false,
@@ -56,15 +56,15 @@ export const assetFilesReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAppLoaded: true,
-        modeVariable: action.modeVariable,
+        modeVariable: action.modeVariable.environment,
         isAppLoadedError: false,
       };
-    case 'LOADED_APP_DATA_FAILED_ACTION':
+    case 'LOAD_APP_DATA_FAILED_ACTION':
       return {
         ...state,
         isLoading: false,
         errorMessage: action.errorMessage,
-        modeVariable: {},
+        modeVariable: '',
         isAppLoaded: false,
         isAppLoadedError: true,
       };
@@ -82,8 +82,8 @@ export const isLoading = state => state.assetFilesReducer.isLoading;
 
 export const getFilesConfig = state => state.assetFilesReducer.filesConfig;
 
-export const getModeVariable = state => state.assetFilesReducer.modeVariable;
+export const getApplicationMode = state => state.assetFilesReducer.modeVariable;
 
-export const getIsAppLoaded = state => state.assetFilesReducer.isAppLoaded;
+export const isAppLoaded = state => state.assetFilesReducer.isAppLoaded;
 
 export const getIsAppLoadedError = state => state.assetFilesReducer.isAppLoadedError;

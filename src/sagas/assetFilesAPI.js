@@ -23,8 +23,8 @@ export const fetchFileConfig = () => (
   })
 );
 
-export const loadAppData = () => (
+export const getAppConfig = () => (
   GET({
-    url: 'config/environmentVariable.json',
+    url: 'config/app.json',
   })
 );
