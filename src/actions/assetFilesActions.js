@@ -27,8 +27,8 @@ export const fetchFileConfigFailedAction = errorMessage => ({
   errorMessage,
 });
 
-export const loadedAppDataAction = () => ({
-  type: 'LOADED_APP_DATA_ACTION',
+export const loadAppDataAction = () => ({
+  type: 'LOAD_APP_DATA_ACTION',
 });
 
 export const loadedAppDataSuccessAction = modeVariable => ({
@@ -36,8 +36,8 @@ export const loadedAppDataSuccessAction = modeVariable => ({
   modeVariable,
 });
 
-export const loadedAppDataFailedAction = errorMessage => ({
-  type: 'LOADED_APP_DATA_FAILED_ACTION',
+export const loadAppDataFailedAction = errorMessage => ({
+  type: 'LOAD_APP_DATA_FAILED_ACTION',
   errorMessage,
 });
 

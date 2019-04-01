@@ -12,7 +12,7 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './rootSaga';
-import { fetchFilesConfigSaga, fetchFilesSaga, loadAppDataSaga } from './assetFilesSaga';
+import { fetchFilesConfigSaga, fetchFilesSaga, getAppConfigSaga } from './assetFilesSaga';
 
 const sagas = [
   takeLatest(['CREATE_STUDENT'], createStudentSaga),
@@ -28,6 +28,6 @@ const sagas = [
   takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga),
   takeLatest(['FETCH_FILE_ACTION'], fetchFilesSaga),
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
-  takeLatest(['LOADED_APP_DATA_ACTION'], loadAppDataSaga),
+  takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
 ];
 export default sagas;

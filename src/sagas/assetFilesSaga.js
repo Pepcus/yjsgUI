@@ -8,9 +8,9 @@ import {
   fetchFileFailedAction,
   fetchFileSuccessAction,
   loadedAppDataSuccessAction,
-  loadedAppDataFailedAction,
+  loadAppDataFailedAction,
 } from '../actions/assetFilesActions';
-import { fetchFile, fetchFileConfig, loadAppData } from './assetFilesAPI';
+import { fetchFile, fetchFileConfig, getAppConfig } from './assetFilesAPI';
 
 /**
  * fetchFilesSaga fetch csv/excel files to show them in a tabular form.
@@ -57,17 +57,17 @@ export function* fetchFilesConfigSaga() {
   }
 }
 
-export function* loadAppDataSaga() {
+export function* getAppConfigSaga() {
   const errorMessage = 'Unable to fetch  config.';
   try {
-    const response = yield loadAppData();
+    const response = yield getAppConfig();
     if (response) {
       yield put(loadedAppDataSuccessAction(response));
     } else {
-      yield put(loadedAppDataFailedAction(errorMessage));
+      yield put(loadAppDataFailedAction(errorMessage));
     }
   } catch (e) {
     console.error(e);
-    yield put(loadedAppDataFailedAction(errorMessage));
+    yield put(loadAppDataFailedAction(errorMessage));
   }
 }
