@@ -3,13 +3,15 @@ import { HashRouter, Route } from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 
-import { development } from '../../config/developmentColorCode.json';
-import { production } from '../../config/productionColorCode.json';
 import Routes from './Routes';
 import { loadAppDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
 import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
+import cssJSON from '../../config/cssVariables.json';
+
+const { development, production } = cssJSON;
+
 
 class AppContainer extends Component {
   componentDidMount() {
