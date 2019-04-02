@@ -144,6 +144,7 @@ class ColumnConfig extends Component {
         visibleColumnConfig: {
           ...this.state.visibleColumnConfig,
           [event.target.name]: false,
+          'edit': false,
         },
       });
     }

@@ -540,7 +540,7 @@ class StudentInformationGrid extends Component {
                   checkedIds={this.state.checkedIds}
                 />
                 <div className="column-option display-mobile-none">
-                  <UploadOptInFile />
+                  {/* <UploadOptInFile />*/}
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" title="Configure" onClick={this.openColumnOption}>
