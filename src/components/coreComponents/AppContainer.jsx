@@ -3,8 +3,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 
-import { development } from '../../config/developmentColorCode.json';
-import { production } from '../../config/productionColorCode.json';
+import { development, production } from '../../config/cssVariables.json';
 import Routes from './Routes';
 import { loadAppDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
