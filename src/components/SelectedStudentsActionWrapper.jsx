@@ -93,10 +93,10 @@ class SelectedStudentsActionWrapper extends Component {
               selectedStudents={this.props.selectedStudents}
 
             />
-            <MarkOptInOrOptOutButton
+            {/* <MarkOptInOrOptOutButton
               selectedStudents={this.props.selectedStudents}
               clearSelectedStudents={this.props.clearSelectedStudents}
-            />
+            />*/}
           </div>
         </div>
         <StudentIdCardModal
