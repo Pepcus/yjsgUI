@@ -546,8 +546,8 @@ class StudentInformationGrid extends Component {
                 <div className="column-option display-mobile-none">
                   {/* <UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
-                    <Link to="/files" className="column-option-container">
-                      <i className="fa fa-file-text" />Files
+                    <Link to="/files" className="column-option-container text-decoration-none">
+                      <i className="fa fa-file-text card-icon" />Files
                     </Link>
                   </div>
                   <UploadStudentsAttendanceFile />

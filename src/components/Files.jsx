@@ -186,7 +186,7 @@ class Files extends Component {
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
             >
-              <div onClick={this.onClickBackButton}>
+              <div onClick={this.onClickBackButton} className="file-view-list-button">
                 <a className="grid-small-button file-button-mobile">
                   <i className="fa fa-list" />
                 </a>
@@ -297,9 +297,9 @@ class Files extends Component {
               </Link>
             </div>
           </div>
-          <div className="logoutButtonContainer display-logout-desktop">
+          <div className="logoutButtonContainer file-logout-container display-logout-desktop">
             <div className="logoutLinkContainer">
-              <Link to="/admin" className="grid-small-button">
+              <Link to={this.props.context.previousLocation} className="grid-small-button">
                 <i className="fa fa-arrow-left" />
               </Link>
               <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
