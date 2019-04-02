@@ -15,6 +15,7 @@ export const formatXlsxToJson = (response) => {
   const worksheet = workbook.Sheets[firstSheetName];
   return XLSX.utils.sheet_to_json(worksheet, {
     raw: true,
+    defval: '',
   });
 };
 
