@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
 import '../card-print.css';
@@ -385,6 +385,7 @@ class StudentInformationGrid extends Component {
       students: this.formatStudents(result),
     });
   }
+
   /**
    * renderColumnConfig method the ColumnConfig react component in render method
    * @return {ReactComponent} ColumnConfig
@@ -515,6 +516,9 @@ class StudentInformationGrid extends Component {
                 <Link to="/admin" className="grid-small-button">
                   <i className="fa fa-arrow-left" />
                 </Link>
+                <Link to="/files" className="grid-small-button">
+                  <i className="fa fa-file-text" />
+                </Link>
                 <a className="grid-small-button" onClick={this.openColumnOption}>
                   <i className="fa fa-cog" />
                 </a>
@@ -541,6 +545,11 @@ class StudentInformationGrid extends Component {
                 />
                 <div className="column-option display-mobile-none">
                   {/* <UploadOptInFile />*/}
+                  <div className="column-option-configure display-inline">
+                    <Link to="/files" className="column-option-container">
+                      <i className="fa fa-file-text" />Files
+                    </Link>
+                  </div>
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" title="Configure" onClick={this.openColumnOption}>
