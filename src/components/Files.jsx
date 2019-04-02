@@ -188,7 +188,7 @@ class Files extends Component {
             >
               <div onClick={this.onClickBackButton}>
                 <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list"></i>
+                  <i className="fa fa-list" />
                 </a>
               </div>
               <DataGrid

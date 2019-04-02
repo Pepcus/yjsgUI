@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link, Switch } from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
 import '../card-print.css';
