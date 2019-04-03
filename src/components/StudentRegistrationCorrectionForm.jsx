@@ -298,6 +298,35 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   /**
+   * renderOptInField optIn field as per user condition.
+   * @return {ReactComponent}
+   */
+  renderOptInField = () => {
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="optIn2019"
+          label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+          options={optIn2019Options}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.optIn2019}
+        />
+      );
+    }
+    return (
+      <SelectListInputField
+        name="optIn2019"
+        label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+        options={optIn2019Options}
+        onInputChange={this._handleInputChange}
+        value={this.state.student.optIn2019}
+        isRequired
+        errorMessage={this.state.errorMessage.optIn2019.message}
+      />
+    );
+
+  };
+  /**
    * renderLavelField render Level field according to user type.
    * @return {Reactcomponent}
    */
@@ -311,7 +340,6 @@ class StudentRegistrationCorrectionForm extends Component {
             options={studiesArray}
             onInputChange={this._handleInputChange}
             value={this.state.student.classAttended2019}
-            isRequired
           />
         );
       }
@@ -334,8 +362,6 @@ class StudentRegistrationCorrectionForm extends Component {
           options={studiesArray}
           onInputChange={this._handleInputChange}
           value={this.state.student.classAttended2019}
-          errorMessage={this.state.errorMessage.classAttended2019.message}
-          isRequired
         />
       );
     }
@@ -405,7 +431,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
   };
   isValidData() {
-    return isValidUserInfo(this.state.errorMessage);
+    return isValidUserInfo(this.state.errorMessage, this.props.pageUser);
   }
 
   updateStudentData() {
@@ -450,14 +476,13 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   onClickRadioButton = (event) => {
-    let value = event.target.value;
+    const value = event.target.value;
     this.handleInputChange(value, 'optIn2019');
   };
   handleInputChange(value, name) {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
-
     errorMessageObject[name] = validateInput(value, name);
 
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
@@ -708,6 +733,7 @@ class StudentRegistrationCorrectionForm extends Component {
     );
   }
   render() {
+    // console.log("this.props.pageUser", this.props.pageUser);
     if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
       return this.renderOnlyOptIn2019();
     } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
@@ -729,15 +755,7 @@ class StudentRegistrationCorrectionForm extends Component {
           <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
             <div className="inputFieldContainer student-form-input-field" ref={this.formRef}>
               <div className="student-form-input-wrapper">
-                <SelectListInputField
-                  name="optIn2019"
-                  label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
-                  options={optIn2019Options}
-                  onInputChange={this._handleInputChange}
-                  value={this.state.student.optIn2019}
-                  isRequired
-                  errorMessage={this.state.errorMessage.optIn2019.message}
-                />
+                {this.renderOptInField()}
                 <InputField
                   type="number"
                   label={ID_LABEL}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import ErrorMessage from '../commonComponents/ErrorMessage';
 import {
   PLEASE_SELECT_ANY_ONE_TEXT,
@@ -9,7 +9,6 @@ class SelectListInputField extends Component {
 
   constructor(props) {
     super(props);
-
     this._handleOnChange = this.handleOnChange.bind(this);
     this._populateValue = this.populateValue.bind(this);
   }
@@ -43,7 +42,7 @@ class SelectListInputField extends Component {
 
     const newLabel = isRequired ? `${label} * ` : label;
 
-    if ( errorMessage ) {
+    if (errorMessage) {
       return (
         <div className={'inputWrapper'}>
           <div className={'has-error inputWrapperContainer errorInputField'}>
@@ -91,7 +90,7 @@ class SelectListInputField extends Component {
         </div>
       </div>
     );
-  };
+  }
 }
 
 SelectListInputField.propTypes = {
