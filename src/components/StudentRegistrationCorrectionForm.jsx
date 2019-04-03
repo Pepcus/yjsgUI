@@ -361,7 +361,6 @@ class StudentRegistrationCorrectionForm extends Component {
           options={studiesArray}
           onInputChange={this._handleInputChange}
           value={this.state.student.classAttended2019}
-          isRequired
         />
       );
     } else {
@@ -575,7 +574,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={optIn2019Options}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.optIn2019}
-                isRequired
               />
               <InputField
                 type="number"
@@ -583,7 +581,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="id"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.id}
-                isRequired
                 disabled
               />
               <InputField
@@ -592,7 +589,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="name"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.name}
-                isRequired
               />
               <InputField
                 type="text"
@@ -600,7 +596,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="fatherName"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.fatherName}
-                isRequired
               />
               <SelectListInputField
                 name="gender"
@@ -608,7 +603,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={gender}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.gender}
-                isRequired
               />
               <InputField
                 type="number"
@@ -616,7 +610,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="age"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.age}
-                isRequired
               />
               <InputField
                 type="number"
@@ -624,7 +617,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="mobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.mobile}
-                isRequired
               />
               <InputField
                 type="number"
@@ -640,7 +632,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="occupation"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.occupation}
-                isRequired={false}
               />
               <InputField
                 type="text"
@@ -648,7 +639,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="education"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.education}
-                isRequired={false}
               />
               <InputField
                 type="email"
@@ -656,14 +646,12 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="email"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
-                isRequired={false}
               />
               <TextAreaField
                 label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
-                isRequired
               />
               <SelectListInputField
                 type="text"
@@ -672,7 +660,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={busStops}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.busStop}
-                isRequired
               />
               {this.renderClassAttended2018()}
               {this.renderLevelField()}
