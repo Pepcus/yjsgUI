@@ -25,6 +25,7 @@ export const setRegistrationData = (value, name) => {
  *
  * @param {String} value
  * @param {String} name
+ * @param {String} user
  * @return {Object}
  */
 export const validateInput = (value, name) => {
@@ -47,7 +48,7 @@ export const validateInput = (value, name) => {
     return optionalMobileValidate(value, name);
   }
   if (name === 'gender' || name === 'busStop'
-    || name === 'classAttended2019' || name === 'optIn2019') {
+     || name === 'classAttended2019' || name === 'optIn2019') {
     return requireFieldsValidate(value, name);
   }
   return null;
@@ -208,7 +209,7 @@ export const optionalMobileValidate = (value, name) => {
 export const requireFieldsValidate = (value, name) => {
   const errorMessageObject = {};
 
-  if (value === '' || value === null || value === undefined) {
+  if (!value) {
     errorMessageObject.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else {
@@ -224,10 +225,22 @@ export const requireFieldsValidate = (value, name) => {
  * @param {Object} errorMessageObject
  * @return {boolean} isValid
  */
-export const isValidUserInfo = (errorMessageObject) => {
-
+export const isValidUserInfo = (errorMessageObject, user) => {
   let isValid = false;
-  if (errorMessageObject.name.isValid_name
+  if (user === 'admin') {
+    if (errorMessageObject.name.isValid_name
+      && errorMessageObject.fatherName.isValid_fatherName
+      && errorMessageObject.age.isValid_age
+      && errorMessageObject.gender.isValid_gender
+      && errorMessageObject.mobile.isValid_mobile
+      && errorMessageObject.motherMobile.isValid_motherMobile
+      && errorMessageObject.email.isValid_email
+      && errorMessageObject.address.isValid_address
+      && errorMessageObject.busStop.isValid_busStop
+    ) {
+      isValid = true;
+    }
+  } else if (errorMessageObject.name.isValid_name
     && errorMessageObject.fatherName.isValid_fatherName
     && errorMessageObject.age.isValid_age
     && errorMessageObject.gender.isValid_gender
