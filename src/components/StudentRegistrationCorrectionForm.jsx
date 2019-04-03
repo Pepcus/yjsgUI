@@ -331,18 +331,29 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {Reactcomponent}
    */
   renderLevelField = () => {
-    if (this.state.student.optIn2019 === 'N') {
-      if (this.props.pageUser === USER_TYPES.ADMIN) {
-        return (
-          <SelectListInputField
-            name="classAttended2019"
-            label={CLASS_LABEL}
-            options={studiesArray}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.classAttended2019}
-          />
-        );
-      }
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="classAttended2019"
+          label={CLASS_LABEL}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2019}
+        />
+      );
+    } else if (this.state.student.optIn2019 === 'Y' && this.props.pageUser !== USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="classAttended2019"
+          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2019}
+          errorMessage={this.state.errorMessage.classAttended2019.message}
+          isRequired
+        />
+      );
+    } else if (this.state.student.optIn2019 === 'N' && this.props.pageUser !== USER_TYPES.ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
@@ -353,29 +364,19 @@ class StudentRegistrationCorrectionForm extends Component {
           isRequired
         />
       );
-
-    } else if (this.props.pageUser === USER_TYPES.ADMIN) {
+    } else {
       return (
         <SelectListInputField
           name="classAttended2019"
-          label={CLASS_LABEL}
+          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
           options={studiesArray}
           onInputChange={this._handleInputChange}
           value={this.state.student.classAttended2019}
+          errorMessage={this.state.errorMessage.classAttended2019.message}
+          isRequired
         />
       );
     }
-    return (
-      <SelectListInputField
-        name="classAttended2019"
-        label={WHAT_YOU_WANT_TO_STUDY_LABEL}
-        options={studiesArray}
-        onInputChange={this._handleInputChange}
-        value={this.state.student.classAttended2019}
-        errorMessage={this.state.errorMessage.classAttended2019.message}
-        isRequired
-      />
-    );
   };
   /**
    * renderBackButton method render back button according to user type
@@ -733,7 +734,6 @@ class StudentRegistrationCorrectionForm extends Component {
     );
   }
   render() {
-    // console.log("this.props.pageUser", this.props.pageUser);
     if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
       return this.renderOnlyOptIn2019();
     } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
