@@ -25,6 +25,6 @@ export const fetchFileConfig = () => (
 
 export const getAppConfig = () => (
   GET({
-    url: 'config/app.json',
+    url: 'ui_config/app.json',
   })
 );
