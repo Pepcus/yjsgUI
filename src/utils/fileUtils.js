@@ -29,7 +29,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   }
   let metaData = {
     headerConfig,
-    recordsPerPage: 10,
+    recordsPerPage: 100,
     bottomDrawer: {
       'pagination': true,
     },
@@ -46,7 +46,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
       }
       metaData = {
         headerConfig: normalHeader,
-        recordsPerPage: 10,
+        recordsPerPage: 100,
       };
     } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
       let complexHeader = [];
@@ -58,7 +58,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
       }
       metaData = {
         headerConfig: complexHeader,
-        recordsPerPage: 10,
+        recordsPerPage: 100,
         bottomDrawer: {
           'pagination': true,
           'globalSearch': false,
