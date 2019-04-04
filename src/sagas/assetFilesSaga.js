@@ -7,8 +7,10 @@ import {
   fetchFileConfigSuccessAction,
   fetchFileFailedAction,
   fetchFileSuccessAction,
+  loadedAppDataSuccessAction,
+  loadAppDataFailedAction,
 } from '../actions/assetFilesActions';
-import { fetchFile, fetchFileConfig } from './assetFilesAPI';
+import { fetchFile, fetchFileConfig, getAppConfig } from './assetFilesAPI';
 
 /**
  * fetchFilesSaga fetch csv/excel files to show them in a tabular form.
@@ -52,5 +54,20 @@ export function* fetchFilesConfigSaga() {
   } catch (e) {
     console.error(e);
     yield put(fetchFileConfigFailedAction(errorMessage));
+  }
+}
+
+export function* getAppConfigSaga() {
+  const errorMessage = 'Unable to fetch  config.';
+  try {
+    const response = yield getAppConfig();
+    if (response) {
+      yield put(loadedAppDataSuccessAction(response));
+    } else {
+      yield put(loadAppDataFailedAction(errorMessage));
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(loadAppDataFailedAction(errorMessage));
   }
 }

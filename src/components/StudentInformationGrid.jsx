@@ -45,6 +45,7 @@ import {
   INFORMATION_NOT_AVAILABLE_MESSAGE,
 } from '../utils/messagesConstants';
 import reactLogo1 from '../assets/images/react-logo-1.png';
+import { FILE_DOWNLOAD_MESSAGE } from '../utils/textConstants';
 /**
  * StudentInformationGrid render student information grid.
  * @type {Class}
@@ -156,7 +157,7 @@ class StudentInformationGrid extends Component {
       return (
         <div className="download-message-popup">
           <div className="download-message-popup-container">
-            <h5 className="message">File downloading started...</h5>
+            <h5 className="message">{FILE_DOWNLOAD_MESSAGE}</h5>
             <div className="message-button-container">
               <button className="ok-button" onClick={() => { this.onClickAllExport(false); }}>OK</button>
             </div>

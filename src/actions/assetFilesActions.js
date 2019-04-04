@@ -26,3 +26,18 @@ export const fetchFileConfigFailedAction = errorMessage => ({
   type: 'FETCH_FILES_CONFIG_FAILED_ACTION',
   errorMessage,
 });
+
+export const loadAppDataAction = () => ({
+  type: 'LOAD_APP_DATA_ACTION',
+});
+
+export const loadedAppDataSuccessAction = modeVariable => ({
+  type: 'LOADED_APP_DATA_SUCCESS_ACTION',
+  modeVariable,
+});
+
+export const loadAppDataFailedAction = errorMessage => ({
+  type: 'LOAD_APP_DATA_FAILED_ACTION',
+  errorMessage,
+});
+

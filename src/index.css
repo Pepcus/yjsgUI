@@ -1,3 +1,8 @@
+
+:root {
+    --index-orange-color: #ee7c2a;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /*@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');*/
@@ -89,11 +94,11 @@ input[type=number]::-webkit-outer-spin-button {
     line-height: 30px;
 }
 .primary-color {
-    color: #ee7c2a;
+    color: var(--index-orange-color);
 }
 .linkButton {
     color: rgb(255, 255, 255);
-    background-color: #ee7c2a;
+    background-color: var(--index-orange-color);
     display: block;
     text-align: center;
     line-height: 20px;
@@ -114,14 +119,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 .buttonOrange {
     color: rgb(255, 255, 255);
-    background-color: #ee7c2a;
+    background-color: var(--index-orange-color);
     text-align: center;
     font-size: 14px;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    border: 2px solid #ee7c2a;
+    border: 2px solid var(--index-orange-color);
 }
 
 .buttonContainer {
@@ -217,7 +222,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     margin: 0;
     font-size:25px;
-    background-color: #ee7c2a;
+    background-color: var(--index-orange-color);
     padding: 17px 0;
     color: #ffffff;
     width: 100%;
@@ -234,7 +239,7 @@ input[type=number]::-webkit-outer-spin-button {
 .landing-page-container h2 {
     position: fixed;
     top: 0;
-    background: #ee7c2a;
+    background: var(--index-orange-color);
     padding: 15px 0;
     margin: 0;
     color: #fff;
@@ -288,7 +293,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: bold;
 }
 .footer {
-    background: #ee7c2a;
+    background: var(--index-orange-color);
     text-align: center;
     position: fixed;
     bottom: 0;
@@ -311,7 +316,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .popupContainer {
     padding: 50px;
-    background: #ee7c2a;
+    background: var(--index-orange-color);
     max-width: 600px;
     text-align: center;
     line-height: 30px;
@@ -508,7 +513,7 @@ input[type=number]::-webkit-outer-spin-button {
 .adminPanelHeading {
     text-align: center;
     margin: 0;
-    background-color: #ee7c2a;
+    background-color: var(--index-orange-color);
     padding: 17px 0;
     color: #ffffff;
     top: 0;

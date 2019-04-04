@@ -22,3 +22,9 @@ export const fetchFileConfig = () => (
     url: 'files/filesConfig.json',
   })
 );
+
+export const getAppConfig = () => (
+  GET({
+    url: 'config/app.json',
+  })
+);

@@ -1,0 +1,21 @@
+{
+  "development" : {
+    "--orange-color": "#0868ac",
+    "--orange-hover-color": "#015b9a",
+    "--enable-link-color": "#ebebec",
+    "enable-link-hover-color": "#dedede",
+    "--student-id-cards-footer-background-color" : "#2989ec",
+    "--tableGrid-row-border-bottom": "1px solid #064acf",
+    "--app-loader-color": "#0868ac"
+  },
+  "production" : {
+    "--orange-color": "#f9570a",
+    "--orange-hover-color": "#d24c0c",
+    "--enable-link-color": "#ebebec",
+    "--enable-link-hover-color": "#dedede",
+    "--student-id-cards-footer-background-color": "#fa8d19",
+    "--clear-filter-color": "#f1771f",
+    "--clear-filter-hover-color": "#d24c0c",
+    "--app-loader-color": "#f9570a"
+  }
+}
