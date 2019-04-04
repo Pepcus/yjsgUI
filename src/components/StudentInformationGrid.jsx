@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { manageStudentTableWidth } from '../utils/dataGridUtils';
-import '../card-print.css';
 
+import { manageStudentTableWidth, addedNAInCaseEmptyField } from '../utils/dataGridUtils';
+import '../card-print.css';
 import ColumnConfig from './ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from './GridData';
 import {
@@ -297,6 +297,7 @@ class StudentInformationGrid extends Component {
     });
     this.props.setVisibleColumnConfigAction(values, selectValue);
   }
+
   /**
    * formatMetaData method format headerConfig of metaData according to visibleColumnConfig object
    * (set the column which should be render in DataGrid)
@@ -429,6 +430,7 @@ class StudentInformationGrid extends Component {
    * @return {ReactComponent}
    */
   renderDataGrid() {
+    let studentData = addedNAInCaseEmptyField(this.state.metaData, this.state.students);
     if (isEmpty(this.state.metaData.headerConfig)) {
       return (
         <div>
@@ -456,7 +458,7 @@ class StudentInformationGrid extends Component {
       <div className="print-media-none">
         <DataGrid
           getSelectedRow={this.getSelectedRow}
-          data={this.state.students}
+          data={studentData}
           metaData={this.state.metaData}
           styles={getStyles()}
           onClickAllExport={this.onClickAllExport}

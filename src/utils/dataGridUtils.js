@@ -103,4 +103,25 @@ export const setAppColor = (mode) => {
       document.documentElement.style.setProperty(key, mode[key]);
     }
   }
-};
+
+/**
+ * addedNAInCaseEmptyField method replace blank field(which is type of string) to NA.
+ * @param {Object} metaData
+ * @param {Array} students
+ * @return {Array} temporaryStudentData
+ */
+export const addedNAInCaseEmptyField = (metaData, students) => {
+  const temporaryMetaData = cloneDeep(metaData);
+  const temporaryStudentData = cloneDeep(students);
+  temporaryMetaData.headerConfig.forEach((column) => {
+    if (column.type === 'string') {
+      temporaryStudentData.forEach((student) => {
+        if ((!student[column.key] || (student[column.key] === '')) && column.key) {
+          student[column.key] = 'NA';
+        }
+      });
+    }
+  });
+  return temporaryStudentData;};
+
+
