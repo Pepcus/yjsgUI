@@ -2,15 +2,15 @@ import React from 'react';
 import connect from 'react-redux/es/connect/connect';
 import { getLoaderState } from '../reducers/studentRegistrationReducer';
 import spinner from '../assets/images/spinner.gif';
+import CustomLoader from './commonComponents/CustomLoader';
 
 const Loader = ({ isLoading }) => {
   if (isLoading) {
     return (
-      <div className="new-loader-wrapper">
-        <div className="loader">
-          <img src={spinner} alt="logo" className="loader-img" />
-        </div>
-      </div>);
+      <div>
+        <CustomLoader loaderColor="var(--app-loader-color)" />
+      </div>
+    );
   }
   return null;
 };

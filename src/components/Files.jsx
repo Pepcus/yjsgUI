@@ -32,6 +32,8 @@ import {
 } from '../actions/studentRegistrationActions';
 import reactLogo1 from '../assets/images/react-logo-1.png';
 import spinner from '../assets/images/spinner.gif';
+import CustomLoader from './commonComponents/CustomLoader';
+
 
 class Files extends Component {
   constructor(props) {
@@ -267,10 +269,8 @@ class Files extends Component {
   renderLoader = () => {
     if (this.props.isLoading) {
       return (
-        <div className="new-loader-wrapper">
-          <div className="loader">
-            <img src={spinner} alt="logo" className="loader-img" />
-          </div>
+        <div>
+          <CustomLoader loaderColor="var(--app-loader-color)" />
         </div>
       );
     }
