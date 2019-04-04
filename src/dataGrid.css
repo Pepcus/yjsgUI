@@ -248,6 +248,9 @@ html, body {
     white-space: nowrap;
     width: auto;
 }
+.text-decoration-none {
+    text-decoration: none;
+}
 .wrapper-pagination-search {
     width: 100%;
     display: inline-block !important;
@@ -2425,6 +2428,7 @@ body,
         color: #0000EE;
         text-decoration: underline;
     }
+
 }
 @media (max-width: 736px) and (orientation: landscape) {
     .landing-page-block {
@@ -2496,6 +2500,18 @@ body,
         max-width: 100%;
         margin: 0;
         width: 100%;
+    }
+
+    .file-view-list-button {
+        position:relative;
+    }
+    .file-view-list-button .file-button-mobile {
+        position:absolute;
+        right: 10px;
+        z-index: 2;
+    }
+    .file-wrapper .data-grid {
+        margin-top: 5px;
     }
     .input-field-register-container {
         display:block;
@@ -2598,6 +2614,9 @@ body,
     .logoutLinkContainer .grid-small-button:nth-child(2) {
         margin-right: 5px;
     }
+    .file-logout-container .grid-small-button:nth-child(2) {
+        margin-right: 0;
+    }
     .modal {
         margin-top: 45px;
         display: block;
@@ -2692,7 +2711,7 @@ body,
     }
     .id-card-wrapper .selected-student-buttons .button-container-mobile {
         display: inline-block;
-        width: 50%;
+        width: 100%;
         margin-top: 12px;
         padding: 0 10px;
     }
@@ -2893,6 +2912,9 @@ body,
     .landing-page-block {
         display:block;
     }
+    .file-wrapper {
+        padding-top: 40px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -2921,6 +2943,12 @@ body,
 @media (max-width: 320px) {
     .custom-modal {
         width: 90% !important;
+    }
+    .file-view-list-button .file-button-mobile {
+        right: 0;
+    }
+    .file-wrapper div.content .table {
+        padding:0 !important;
     }
     .pagination-wrapper {
         margin-left: 0 !important;

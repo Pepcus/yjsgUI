@@ -461,6 +461,14 @@ export const classRoomNumber = [
 
 export const busNumber = [
   {
+    text: 'Self',
+    value: 'SELF',
+  },
+  {
+    text: 'B0',
+    value: 'B0',
+  },
+  {
     text: 'B1',
     value: 'B1',
   },

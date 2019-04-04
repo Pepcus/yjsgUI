@@ -186,9 +186,9 @@ class Files extends Component {
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
             >
-              <div onClick={this.onClickBackButton}>
+              <div onClick={this.onClickBackButton} className="file-view-list-button">
                 <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-arrow-left" />
+                  <i className="fa fa-list" />
                 </a>
               </div>
               <DataGrid
@@ -289,8 +289,21 @@ class Files extends Component {
           <h2 className="student-info-heading">{yjsgHeader}</h2>
           <div className="logoutButtonContainer display-mobile-none">
             <div className="logoutLinkContainer print-media-none">
+              <Link to={this.props.context.previousLocation} className="grid-small-button">
+                <i className="fa fa-arrow-left card-icon" />Back
+              </Link>
               <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
                 <i className="fa fa-power-off card-icon" />Logout
+              </Link>
+            </div>
+          </div>
+          <div className="logoutButtonContainer file-logout-container display-logout-desktop">
+            <div className="logoutLinkContainer">
+              <Link to={this.props.context.previousLocation} className="grid-small-button">
+                <i className="fa fa-arrow-left" />
+              </Link>
+              <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
+                <i className="fa fa-power-off" />
               </Link>
             </div>
           </div>

@@ -298,23 +298,50 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   /**
+   * renderOptInField optIn field as per user condition.
+   * @return {ReactComponent}
+   */
+  renderOptInField = () => {
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="optIn2019"
+          label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+          options={optIn2019Options}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.optIn2019}
+        />
+      );
+    }
+    return (
+      <SelectListInputField
+        name="optIn2019"
+        label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
+        options={optIn2019Options}
+        onInputChange={this._handleInputChange}
+        value={this.state.student.optIn2019}
+        isRequired
+        errorMessage={this.state.errorMessage.optIn2019.message}
+      />
+    );
+
+  };
+  /**
    * renderLavelField render Level field according to user type.
    * @return {Reactcomponent}
    */
   renderLevelField = () => {
-    if (this.state.student.optIn2019 === 'N') {
-      if (this.props.pageUser === USER_TYPES.ADMIN) {
-        return (
-          <SelectListInputField
-            name="classAttended2019"
-            label={CLASS_LABEL}
-            options={studiesArray}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.classAttended2019}
-            isRequired
-          />
-        );
-      }
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="classAttended2019"
+          label={CLASS_LABEL}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2019}
+        />
+      );
+    } else if (this.state.student.optIn2019 === 'Y' && this.props.pageUser !== USER_TYPES.ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
@@ -322,15 +349,25 @@ class StudentRegistrationCorrectionForm extends Component {
           options={studiesArray}
           onInputChange={this._handleInputChange}
           value={this.state.student.classAttended2019}
+          errorMessage={this.state.errorMessage.classAttended2019.message}
           isRequired
         />
       );
-
-    } else if (this.props.pageUser === USER_TYPES.ADMIN) {
+    } else if (this.state.student.optIn2019 === 'N' && this.props.pageUser !== USER_TYPES.ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
-          label={CLASS_LABEL}
+          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2019}
+        />
+      );
+    } else {
+      return (
+        <SelectListInputField
+          name="classAttended2019"
+          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
           options={studiesArray}
           onInputChange={this._handleInputChange}
           value={this.state.student.classAttended2019}
@@ -339,17 +376,6 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
-    return (
-      <SelectListInputField
-        name="classAttended2019"
-        label={WHAT_YOU_WANT_TO_STUDY_LABEL}
-        options={studiesArray}
-        onInputChange={this._handleInputChange}
-        value={this.state.student.classAttended2019}
-        errorMessage={this.state.errorMessage.classAttended2019.message}
-        isRequired
-      />
-    );
   };
   /**
    * renderBackButton method render back button according to user type
@@ -405,7 +431,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
   };
   isValidData() {
-    return isValidUserInfo(this.state.errorMessage);
+    return isValidUserInfo(this.state.errorMessage, this.props.pageUser);
   }
 
   updateStudentData() {
@@ -450,14 +476,13 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   onClickRadioButton = (event) => {
-    let value = event.target.value;
+    const value = event.target.value;
     this.handleInputChange(value, 'optIn2019');
   };
   handleInputChange(value, name) {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
-
     errorMessageObject[name] = validateInput(value, name);
 
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
@@ -549,7 +574,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={optIn2019Options}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.optIn2019}
-                isRequired
               />
               <InputField
                 type="number"
@@ -557,7 +581,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="id"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.id}
-                isRequired
                 disabled
               />
               <InputField
@@ -566,7 +589,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="name"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.name}
-                isRequired
               />
               <InputField
                 type="text"
@@ -574,7 +596,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="fatherName"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.fatherName}
-                isRequired
               />
               <SelectListInputField
                 name="gender"
@@ -582,7 +603,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={gender}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.gender}
-                isRequired
               />
               <InputField
                 type="number"
@@ -590,7 +610,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="age"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.age}
-                isRequired
               />
               <InputField
                 type="number"
@@ -598,7 +617,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="mobile"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.mobile}
-                isRequired
               />
               <InputField
                 type="number"
@@ -614,7 +632,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="occupation"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.occupation}
-                isRequired={false}
               />
               <InputField
                 type="text"
@@ -622,7 +639,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="education"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.education}
-                isRequired={false}
               />
               <InputField
                 type="email"
@@ -630,14 +646,12 @@ class StudentRegistrationCorrectionForm extends Component {
                 name="email"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
-                isRequired={false}
               />
               <TextAreaField
                 label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
-                isRequired
               />
               <SelectListInputField
                 type="text"
@@ -646,7 +660,6 @@ class StudentRegistrationCorrectionForm extends Component {
                 options={busStops}
                 onInputChange={this._handleInputChange}
                 value={this.state.student.busStop}
-                isRequired
               />
               {this.renderClassAttended2018()}
               {this.renderLevelField()}
@@ -729,15 +742,7 @@ class StudentRegistrationCorrectionForm extends Component {
           <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
             <div className="inputFieldContainer student-form-input-field" ref={this.formRef}>
               <div className="student-form-input-wrapper">
-                <SelectListInputField
-                  name="optIn2019"
-                  label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
-                  options={optIn2019Options}
-                  onInputChange={this._handleInputChange}
-                  value={this.state.student.optIn2019}
-                  isRequired
-                  errorMessage={this.state.errorMessage.optIn2019.message}
-                />
+                {this.renderOptInField()}
                 <InputField
                   type="number"
                   label={ID_LABEL}
