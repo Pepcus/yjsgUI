@@ -2240,7 +2240,7 @@ body,
 }
 
 .file-list-wrapper {
-    max-height: 475px;
+    max-height: 523px;
     height: 100%;
     overflow-y: scroll;
     width: 300px;
@@ -2314,7 +2314,7 @@ body,
     align-items: center;
     justify-content: center;
     max-height: 100%;
-    min-height: 430px;
+    min-height: 360px;
 }
 
 .file-text-message {
@@ -2370,7 +2370,38 @@ body,
 .popupContainer .buttonContainer .linkButton:hover {
     background-color: var(--enable-link-hover-color) !important;
 }
-
+.file-download-button {
+    color: #fff;
+    background-color: #807f7f;
+    outline: none;
+    box-shadow: 0 1px 3px 0 #d4d0d0;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.file-download-button:hover {
+    transition: 0.3s all;
+    background-color: #686666;
+}
+.file-text-format-wrapper {
+    max-width: 50%;
+    display: inline;
+    text-align: center;
+    background: #fafafa;
+    box-shadow: 0px 1px 2px 0px #eeecec;
+    padding: 46px 78px;
+    color: grey;
+    line-height: 25px;
+    font-size: 16px;
+}
+.file-extension-download-btn {
+    margin-top: 15px;
+}
 @media (max-width: 1024px) {
     .registration-file-container {
         padding-top: 0;
@@ -2884,6 +2915,12 @@ body,
     .custom-modal {
         width: 50% !important;
     }
+    .file-text-format-wrapper {
+        max-width: 100%;
+        padding: 46px 15px;
+        line-height: 22px;
+        font-size: 16px;
+    }
 
     .inputFieldContainerWrapper {
         padding-bottom: 20px;
@@ -2910,14 +2947,14 @@ body,
         height: 100%;
         width: 100%;
         left: auto;
-        margin: 10px;
+        margin: 0;
         overflow-y: inherit;
         position: relative;
     }
 
-    .file-icon {
-        display: none;
-    }
+    /*.file-icon {*/
+        /*display: none;*/
+    /*}*/
 
     .file-wrapper-list {
         padding: 15px;
@@ -3357,13 +3394,20 @@ body,
     .file-component-mobile-wrapper .table-cell {
         padding: 10px !important;
     }
+    .file-text-format-wrapper {
+        max-width:95%;
+    }
 }
 
 @media (max-width: 480px) {
     .search-input-bar {
         margin-top: 10px;
     }
-
+    .file-view-list-button .file-button-mobile {
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
     .custom-modal {
         width: 80% !important;
     }
@@ -3464,7 +3508,10 @@ body,
     }
 
     .file-wrapper {
-        padding-top: 40px;
+        padding: 45px 10px 0;
+    }
+    .file-text-format-wrapper {
+        max-width:100%;
     }
 }
 
@@ -3494,6 +3541,15 @@ body,
     .student-form-marks-mobile-wrapper .inputWrapper:last-child {
         width: 100% !important;
     }
+    .file-view-list-button .file-button-mobile {
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
+    .file-component-mobile-wrapper .data-grid div.content .table {
+        padding:0 !important;
+    }
+
 }
 
 @media (max-width: 320px) {

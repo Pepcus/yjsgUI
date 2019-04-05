@@ -50,3 +50,5 @@ export const ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE = 'मोबाइल
 export const ENTER_ID_NUMBER_MESSAGE = 'अपना आई.डी. नं. दर्ज करें';
 
 export const ENTER_SECRET_CODE_MESSAGE = 'अपना सीक्रेट कोड दर्ज करें';
+
+export const MESSAGE_FOR_PDF_FILE_DOWNLOAD = ' जानकारी दिखाने के लिए फ़ाइल का स्वरूप अमान्य है, कृपया फ़ाइल को डाउनलोड करें, तथा डाउनलोड करने के लिए नीचे दिए गए बटन पर क्लिक करें |';

@@ -15,9 +15,10 @@
       "isViewable": false
     },
     {
-      "fileName": "sample1",
-      "fileLabel": "fileLabelxlsx",
-      "fileType": "pdf"
+      "fileName": "sample-pdf",
+      "fileLabel": "sample-pdf",
+      "fileType": "pdf",
+      "isViewable": false
     },
     {
       "fileName": "studentFile2",
@@ -27,22 +28,27 @@
     {
       "fileName": "SampleXLSFile_3mb",
       "fileLabel": "SampleXLSFile_3mb",
-      "fileType": "pdf"
+      "fileType": "pdf",
+      "isViewable": false
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (10)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (10)",
-      "fileType": "txt"
+      "fileType": "txt",
+      "isViewable": false
+
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (2)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (2)",
-      "fileType": "doc"
+      "fileType": "doc",
+      "isViewable": false
     },
     {
       "fileName": "SampleDocsupdakb",
       "fileLabel": "SampleDocsupdakb",
-      "fileType": "docx"
+      "fileType": "docx",
+      "isViewable": false
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (13)",
