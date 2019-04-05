@@ -86,7 +86,7 @@ class Files extends Component {
       otherExtensionFileDetails: {},
       backPageButton: false,
     });
-    if (fileView === false) {
+    if (!fileView) {
       this.setState({
         otherExtensionFileDetails: {
           file,
