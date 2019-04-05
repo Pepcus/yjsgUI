@@ -263,7 +263,9 @@ class Files extends Component {
             >
               <div className="file-text-panel">
                 <span className="file-text-format-wrapper">
-                  <span>This is not the valid file format to show and to see more infomation then click the button given below:-</span>
+                  <span>
+                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                  </span>
                   <div className="file-extension-download-btn">
                     <a
                       download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
