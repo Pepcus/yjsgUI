@@ -276,6 +276,7 @@ export const gridHeaderData = () => ({
     'exportButton': false,
     'totalRecords': true,
   },
+  emptyCells: 'NA',
   enableRowSelection: true,
   enableAllRowSelection: true,
   recordsPerPage: 25,
