@@ -283,7 +283,7 @@ export const gridHeaderData = () => ({
   includeAllInGlobalFilter: false,
   includeGlobalFilter: true,
   exportFileName: `StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`,
-  loaderColor: '#f9570a',
+  loaderColor: 'var(--app-loader-color)',
 });
 
 export const getStyles = () => ({

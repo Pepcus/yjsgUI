@@ -3513,6 +3513,9 @@ body,
     .file-text-format-wrapper {
         max-width:100%;
     }
+    .file-component-mobile-wrapper .data-grid div.content .table {
+        padding:0 !important;
+    }
 }
 
 @media (max-width: 360px) {
@@ -3546,9 +3549,7 @@ body,
         right: 0;
         z-index: 2;
     }
-    .file-component-mobile-wrapper .data-grid div.content .table {
-        padding:0 !important;
-    }
+
 
 }
 
