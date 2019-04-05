@@ -97,13 +97,12 @@ export const chunkArray = (Array, chunkSize) => {
 };
 
 export const setAppColor = (mode) => {
-  console.log('mode --- ', mode);
   for (const key in mode) {
     if (mode.hasOwnProperty(key)) {
       document.documentElement.style.setProperty(key, mode[key]);
     }
   }
-
+};
 /**
  * addedNAInCaseEmptyField method replace blank field(which is type of string) to NA.
  * @param {Object} metaData
@@ -122,6 +121,5 @@ export const addedNAInCaseEmptyField = (metaData, students) => {
       });
     }
   });
-  return temporaryStudentData;};
-
-
+  return temporaryStudentData;
+};
