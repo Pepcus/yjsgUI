@@ -21,6 +21,7 @@ import {
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
 import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
+import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
 import { getDataGridHeadersForFileView } from '../utils/fileUtils';
@@ -41,6 +42,7 @@ class Files extends Component {
     this.widthRef = React.createRef();
     this.state = {
       showFileDetails: false,
+      otherExtensionFileDetails: {},
       currentFileDetails: {},
       activeFileId: null,
       backPageButton: true,
@@ -60,14 +62,14 @@ class Files extends Component {
 || SUPPORTED_FILE_TYPES.XLSX === fileType) {
       return 'file-label-heading';
     }
-    return 'file-label-heading-disabled';
+    return 'file-label-heading';
   };
   returnFlexClassName = (fileView, fileType) => {
     if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
       || SUPPORTED_FILE_TYPES.XLSX === fileType) {
       return 'file-flex-wrapper';
     }
-    return 'file-flex-wrapper file-flex-position';
+    return 'file-flex-wrapper';
   };
   performLogout = () => {
     this.props.resetAdminCredentialsAction();
@@ -76,13 +78,23 @@ class Files extends Component {
     this.props.resetVisibleColumnConfigAction();
     localStorage.clear();
   };
-  onClickViewFile = (file, index) => {
+  onClickViewFile = (file, index, href, fileView) => {
     this.setState({
       showFileDetails: true,
       currentFileDetails: file,
       activeFileId: index,
+      otherExtensionFileDetails: {},
       backPageButton: false,
     });
+    if (!fileView) {
+      this.setState({
+        otherExtensionFileDetails: {
+          file,
+          href,
+          fileView,
+        },
+      });
+    }
     this.props.fetchFileAction(file);
   };
   onClickBackButton = () => {
@@ -130,6 +142,7 @@ class Files extends Component {
         />
       </div>
     </div>);
+
   renderFileList = () => {
     if (!(this.props.adminLoginState)) {
       return this.renderLoginPopup();
@@ -146,7 +159,7 @@ class Files extends Component {
                 className={this.returnFlexClassName(file.isViewable, file.fileType)}
               >
                 <div
-                  onClick={() => this.onClickViewFile(file, index)}
+                  onClick={() => this.onClickViewFile(file, index, href, file.isViewable)}
                   className={this.returnDisableEnable(file.isViewable, file.fileType)}
                 >
                   <div className="flex-text-wrapper">
@@ -210,15 +223,73 @@ class Files extends Component {
               metaData={getDataGridHeadersForFileView(this.props.fileData, this.state.currentFileDetails)}
             />
           </div>);
+      } else if (!isEmpty(this.state.otherExtensionFileDetails)) {
+          return (
+            <div
+              className={this.returnTableWidthComponentClass()}
+              ref={this.widthRef}
+            >
+              <div onClick={this.onClickBackButton} className="file-view-list-button">
+                <a className="grid-small-button file-button-mobile">
+                  <i className="fa fa-list" />
+                </a>
+              </div>
+              <div className="file-text-panel">
+                <span className="file-text-format-wrapper">
+                  <span>
+                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                  </span>
+                  <div className="file-extension-download-btn">
+                    <a
+                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                      href={this.state.otherExtensionFileDetails.href}
+                      className="file-download-button"
+                    >
+                      Download
+                    <i className="fa fa-download file-icon" />
+                  </a>
+                </div>
+                </span>
+
+              </div>
+            </div>
+          );
       } else if (isMobile) {
+        if (!isEmpty(this.state.otherExtensionFileDetails)) {
+          return (
+            <div
+              className={this.returnTableWidthComponentClass()}
+              ref={this.widthRef}
+            >
+              <div className="file-text-panel">
+                <span className="file-text-format-wrapper">
+                  <span>
+                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                  </span>
+                  <div className="file-extension-download-btn">
+                    <a
+                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                      href={this.state.otherExtensionFileDetails.href}
+                      className="file-download-button"
+                    >
+                      Download
+                    <i className="fa fa-download file-icon" />
+                  </a>
+                </div>
+                </span>
+
+              </div>
+            </div>
+          );
+        }
         return (
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
           >
-            <div onClick={this.onClickBackButton}>
+            <div onClick={this.onClickBackButton} className="file-view-list-button">
               <a className="grid-small-button file-button-mobile">
-                <i className="fa fa-arrow-left" />
+                <i className="fa fa-list" />
               </a>
             </div>
             <div className="file-text-panel">
