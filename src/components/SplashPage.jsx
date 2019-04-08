@@ -60,7 +60,7 @@ class SplashPage extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
       isNewRegistration: false,
-      redirectToFileRoute: 'No',
+      redirectToFileRoute: false,
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -182,8 +182,8 @@ class SplashPage extends Component {
         // if admin credential is valid then it set admin login true in redux store
         // and redirect to "/student-search" route
         this.props.setAdminLoginStateAction(true);
-        if (redirectToFileRoute === 'Yes') {
-          this.setRedirectToFileRoute('No');
+        if (redirectToFileRoute) {
+          this.setRedirectToFileRoute(false);
           return <Switch><Redirect to="/files" /></Switch>;
         }
         return <Switch><Redirect to="/student-search" /></Switch>;
@@ -191,8 +191,8 @@ class SplashPage extends Component {
       }
       return null;
     }
-    if (redirectToFileRoute === 'Yes') {
-      this.setRedirectToFileRoute('No');
+    if (redirectToFileRoute) {
+      this.setRedirectToFileRoute(false);
       return <Switch><Redirect to="/files" /></Switch>;
     }
     // if admin is already login then it redirect to "/student-search"
