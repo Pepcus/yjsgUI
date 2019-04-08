@@ -92,6 +92,11 @@ class SplashPage extends Component {
       this.fetchStudentByURLParams(id, secretCode);
     }
   }
+
+  /**
+   * setRedirectToRoute set the path to which redirect
+   * @param {String} redirectToRoute
+   */
   setRedirectToRoute = (redirectToRoute) => {
     this.setState({
       redirectToRoute,
@@ -162,7 +167,7 @@ class SplashPage extends Component {
    */
   adminScreenRedirection() {
     // IF admin initial login.
-    const redirectToRoute = this.state.redirectToRoute;
+    const { redirectToRoute } = this.state;
     if (!this.props.adminLoginState) {
       const {
         id,

@@ -20,7 +20,7 @@ import {
   fetchFileAction,
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
-import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
+import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES, infoUpdateSuccessMessage } from '../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
@@ -32,10 +32,13 @@ import {
   resetVisibleColumnConfigAction,
 } from '../actions/studentRegistrationActions';
 import reactLogo1 from '../assets/images/react-logo-1.png';
-import spinner from '../assets/images/spinner.gif';
 import CustomLoader from './commonComponents/CustomLoader';
+import { Popup } from './Popup';
 
-
+/**
+ *  Files component render files list and file data table.
+ * @type {Class}
+ */
 class Files extends Component {
   constructor(props) {
     super(props);
@@ -132,16 +135,15 @@ class Files extends Component {
     return 'file-component';
   };
   renderLoginPopup = () => (
-    <div className="popup popupFile">
-      <div className="popupContainer">
-        <h5>Please Login</h5>
-        <LinkButton
-          type="button"
-          buttonText={goBackBtnText}
-          linkPath="/admin?fromRoute=/files"
-        />
-      </div>
-    </div>);
+    <Popup>
+      <h5>Please Login</h5>
+      <LinkButton
+        type="button"
+        buttonText={goBackBtnText}
+        linkPath="/admin?fromRoute=/files"
+      />
+    </Popup>
+  );
 
   renderFileList = () => {
     if (!(this.props.adminLoginState)) {
@@ -220,40 +222,43 @@ class Files extends Component {
           >
             <DataGrid
               data={this.props.fileData}
-              metaData={getDataGridHeadersForFileView(this.props.fileData, this.state.currentFileDetails)}
+              metaData={getDataGridHeadersForFileView(
+                this.props.fileData,
+                this.state.currentFileDetails)
+              }
             />
           </div>);
       } else if (!isEmpty(this.state.otherExtensionFileDetails)) {
-          return (
-            <div
-              className={this.returnTableWidthComponentClass()}
-              ref={this.widthRef}
-            >
-              <div onClick={this.onClickBackButton} className="file-view-list-button">
-                <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list" />
-                </a>
-              </div>
-              <div className="file-text-panel">
-                <span className="file-text-format-wrapper">
-                  <span>
-                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
-                  </span>
-                  <div className="file-extension-download-btn">
-                    <a
-                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                      href={this.state.otherExtensionFileDetails.href}
-                      className="file-download-button"
-                    >
+        return (
+          <div
+            className={this.returnTableWidthComponentClass()}
+            ref={this.widthRef}
+          >
+            <div onClick={this.onClickBackButton} className="file-view-list-button">
+              <a className="grid-small-button file-button-mobile">
+                <i className="fa fa-list" />
+              </a>
+            </div>
+            <div className="file-text-panel">
+              <span className="file-text-format-wrapper">
+                <span>
+                  { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                </span>
+                <div className="file-extension-download-btn">
+                  <a
+                    download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                    href={this.state.otherExtensionFileDetails.href}
+                    className="file-download-button"
+                  >
                       Download
                     <i className="fa fa-download file-icon" />
                   </a>
                 </div>
-                </span>
+              </span>
 
-              </div>
             </div>
-          );
+          </div>
+        );
       } else if (isMobile) {
         if (!isEmpty(this.state.otherExtensionFileDetails)) {
           return (
@@ -273,9 +278,9 @@ class Files extends Component {
                       className="file-download-button"
                     >
                       Download
-                    <i className="fa fa-download file-icon" />
-                  </a>
-                </div>
+                      <i className="fa fa-download file-icon" />
+                    </a>
+                  </div>
                 </span>
 
               </div>
