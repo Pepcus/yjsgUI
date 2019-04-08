@@ -20,7 +20,7 @@ import {
   fetchFileAction,
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
-import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES, infoUpdateSuccessMessage } from '../utils/yjsgConstants';
+import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';

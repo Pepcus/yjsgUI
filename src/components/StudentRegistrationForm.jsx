@@ -11,7 +11,7 @@ import {
   goBackBtnText,
   formSubmitBtnText,
   yjsgHeader,
-  USER_TYPES, noInfoChangeMessage,
+  USER_TYPES,
 } from '../utils/yjsgConstants';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
