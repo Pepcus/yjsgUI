@@ -138,7 +138,7 @@ class Files extends Component {
         <LinkButton
           type="button"
           buttonText={goBackBtnText}
-          linkPath="/admin?file=true"
+          linkPath="/admin?fromRoute=/files"
         />
       </div>
     </div>);

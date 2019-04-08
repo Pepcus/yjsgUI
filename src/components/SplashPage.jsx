@@ -60,7 +60,7 @@ class SplashPage extends Component {
       adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
       isNewRegistration: false,
-      redirectToFileRoute: false,
+      redirectToRoute: '',
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -84,17 +84,17 @@ class SplashPage extends Component {
   componentWillMount() {
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
-    const redirectToFileRoute = getParameterByName('file');
-    if (redirectToFileRoute) {
-      this.setRedirectToFileRoute(redirectToFileRoute);
+    const redirectToRoute = getParameterByName('fromRoute');
+    if (redirectToRoute) {
+      this.setRedirectToRoute(redirectToRoute);
     }
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
   }
-  setRedirectToFileRoute = (redirectToFileRoute) => {
+  setRedirectToRoute = (redirectToRoute) => {
     this.setState({
-      redirectToFileRoute,
+      redirectToRoute,
     });
   };
   /**
@@ -162,7 +162,7 @@ class SplashPage extends Component {
    */
   adminScreenRedirection() {
     // IF admin initial login.
-    const redirectToFileRoute = this.state.redirectToFileRoute;
+    const redirectToRoute = this.state.redirectToRoute;
     if (!this.props.adminLoginState) {
       const {
         id,
@@ -182,18 +182,18 @@ class SplashPage extends Component {
         // if admin credential is valid then it set admin login true in redux store
         // and redirect to "/student-search" route
         this.props.setAdminLoginStateAction(true);
-        if (redirectToFileRoute) {
-          this.setRedirectToFileRoute(false);
-          return <Switch><Redirect to="/files" /></Switch>;
+        if (redirectToRoute) {
+          this.setRedirectToRoute('');
+          return <Switch><Redirect to={redirectToRoute} /></Switch>;
         }
         return <Switch><Redirect to="/student-search" /></Switch>;
 
       }
       return null;
     }
-    if (redirectToFileRoute) {
-      this.setRedirectToFileRoute(false);
-      return <Switch><Redirect to="/files" /></Switch>;
+    if (redirectToRoute) {
+      this.setRedirectToRoute('');
+      return <Switch><Redirect to={redirectToRoute} /></Switch>;
     }
     // if admin is already login then it redirect to "/student-search"
     // without any credential.
