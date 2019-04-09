@@ -44,9 +44,8 @@ class StudentIdCardModal extends Component {
                 <div className="card-text"><span className="card-text-bold">Class:</span>
                   <span className="card-title-text">{object.education}</span>
                 </div>
-                {/* TODO: Use class room no of 2019.*/}
                 <div className="card-text"><span className="card-text-bold">Room:</span>
-                  <span className="card-title-text">{object.classRoomNo2017}</span>
+                  <span className="card-title-text">{object.classRoomNo2019}</span>
                 </div>
               </div>
               <div className="card-fields-wrapper">
