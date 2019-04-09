@@ -66,6 +66,7 @@ import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../utils/textConstants';
 import reactLogo1 from '../assets/images/react-logo-1.png';
+import { Popup } from './Popup';
 
 // FixMe: Add missing propTypes and defaultProps.
 //  Fix EsLint issues.
@@ -496,32 +497,27 @@ class StudentRegistrationCorrectionForm extends Component {
     this.checkError(updatedData);
   }
 
-  // FIXME: Create a separate reusable component to render success message popup
   renderSuccessMessage() {
     if (this.props.isUpdated) {
       return (
-        <div className="popup">
-          <div className="popupContainer">
-            <h5>{infoUpdateSuccessMessage}</h5>
-            <LinkButton
-              buttonText={goBackBtnText}
-              onClick={() => { this.props.isUpdatedResetAction(); }}
-              linkPath={this.props.context.previousLocation}
-            />
-          </div>
-        </div>
+        <Popup>
+          <h5>{infoUpdateSuccessMessage}</h5>
+          <LinkButton
+            buttonText={goBackBtnText}
+            linkPath={this.props.context.previousLocation}
+            onClick={() => { this.props.isUpdatedResetAction(); }}
+          />
+        </Popup>
       );
     } else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.isValidData()) {
       return (
-        <div className="popup">
-          <div className="popupContainer">
-            <h5>{noInfoChangeMessage}</h5>
-            <LinkButton
-              buttonText={goBackBtnText}
-              linkPath={this.props.context.previousLocation}
-            />
-          </div>
-        </div>
+        <Popup>
+          <h5>{noInfoChangeMessage}</h5>
+          <LinkButton
+            buttonText={goBackBtnText}
+            linkPath={this.props.context.previousLocation}
+          />
+        </Popup>
       );
     } return null;
   }
@@ -907,18 +903,13 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     }
     return (
-      // FIXME: Create a component to render error message popup
-      <div className="errorPopupContainer">
-        <div className="popup">
-          <div className="popupContainer">
-            <h5>{invalidIdMessage}</h5>
-            <LinkButton
-              buttonText={goBackBtnText}
-              linkPath={this.props.context.previousLocation}
-            />
-          </div>
-        </div>
-      </div>
+      <Popup>
+        <h5>{invalidIdMessage}</h5>
+        <LinkButton
+          buttonText={goBackBtnText}
+          linkPath={this.props.context.previousLocation}
+        />
+      </Popup>
     );
 
   }

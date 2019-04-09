@@ -60,6 +60,7 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import Button from './commonComponents/Button';
 import reactLogo1 from '../assets/images/react-logo-1.png';
+import { Popup } from './Popup';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -193,16 +194,14 @@ class StudentRegistrationForm extends Component {
       this.props.setStudentCredentials(student.id, student.secretKey);
 
       return (
-        <div className="popup">
-          <div className="popupContainer">
-            <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
-            <p>{YOUR_ID_TEXT}<strong>{student.id}</strong>{IS_THERE_TEXT}</p>
-            <p>{YOUR_SECRET_CODE_TEXT}<strong>{student.secretKey}</strong>{IS_THERE_TEXT}</p>
-            <p>{ID_NOTE_MESSAGE}</p>
-            <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
-            {this.renderBackButton()}
-          </div>
-        </div>
+        <Popup>
+          <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
+          <p>{YOUR_ID_TEXT}<strong>{student.id}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_SECRET_CODE_TEXT}<strong>{student.secretKey}</strong>{IS_THERE_TEXT}</p>
+          <p>{ID_NOTE_MESSAGE}</p>
+          <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
+          {this.renderBackButton()}
+        </Popup>
       );
     }
     return null;
