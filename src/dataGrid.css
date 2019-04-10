@@ -2748,7 +2748,10 @@ body,
     .modal {
         margin-top: 15px;
     }
-
+    .file-text-format-wrapper {
+        max-width: 76%;
+        padding: 46px 18px;
+    }
     .grid-small-button {
         color: #ffffff;
         background-color: var(--orange-color);

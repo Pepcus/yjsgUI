@@ -53,27 +53,32 @@
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (13)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (13)",
-      "fileType": "xlsx"
+      "fileType": "xlsx",
+      "isViewable": true
     },
     {
       "fileName": "SampleDocs-SampleXLSFile_6800kb (14)",
       "fileLabel": "SampleDocs-SampleXLSFile_6800kb (14)",
-      "fileType": "xlsx"
+      "fileType": "xlsx",
+      "isViewable": true
     },
     {
       "fileName": "studentFile6",
       "fileLabel": "fileLabel009",
-      "fileType": "xlsx"
+      "fileType": "xlsx",
+      "isViewable": true
     },
     {
       "fileName": "studentFile6",
       "fileLabel": "fileLabel009",
-      "fileType": "xlsx"
+      "fileType": "xlsx",
+      "isViewable": true
     },
     {
       "fileName": "studentFile6",
       "fileLabel": "fileLabel009",
-      "fileType": "xlsx"
+      "fileType": "xlsx",
+      "isViewable": true
     }
   ]
 }

@@ -229,39 +229,38 @@ class Files extends Component {
             />
           </div>);
       } else if (!isEmpty(this.state.otherExtensionFileDetails)) {
-        return (
-          <div
-            className={this.returnTableWidthComponentClass()}
-            ref={this.widthRef}
-          >
-            <div onClick={this.onClickBackButton} className="file-view-list-button">
-              <a className="grid-small-button file-button-mobile">
-                <i className="fa fa-list" />
-              </a>
-            </div>
-            <div className="file-text-panel">
-              <span className="file-text-format-wrapper">
-                <span>
-                  { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
-                </span>
-                <div className="file-extension-download-btn">
-                  <a
-                    download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                    href={this.state.otherExtensionFileDetails.href}
-                    className="file-download-button"
-                  >
+        if (isMobile) {
+          return (
+            <div
+              className={this.returnTableWidthComponentClass()}
+              ref={this.widthRef}
+            >
+              <div onClick={this.onClickBackButton} className="file-view-list-button">
+                <a className="grid-small-button file-button-mobile">
+                  <i className="fa fa-list" />
+                </a>
+              </div>
+              <div className="file-text-panel">
+                <span className="file-text-format-wrapper">
+                  <span>
+                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                  </span>
+                  <div className="file-extension-download-btn">
+                    <a
+                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                      href={this.state.otherExtensionFileDetails.href}
+                      className="file-download-button"
+                    >
                       Download
                     <i className="fa fa-download file-icon" />
                   </a>
                 </div>
               </span>
-
             </div>
           </div>
         );
-      } else if (isMobile) {
-        if (!isEmpty(this.state.otherExtensionFileDetails)) {
-          return (
+        }
+        return (
             <div
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
@@ -282,11 +281,10 @@ class Files extends Component {
                     </a>
                   </div>
                 </span>
-
               </div>
             </div>
-          );
-        }
+        );
+      } else if (isMobile) {
         return (
           <div
             className={this.returnTableWidthComponentClass()}
