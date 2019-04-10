@@ -18,19 +18,22 @@ import {
   isLoading,
 } from '../reducers/assetFilesReducer';
 import {
-  // fetchFileAction,
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
 import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
-import { formatXlsxToJson, getDataGridHeadersForFileView } from '../utils/fileUtils';
+import {
+  formatXlsxToJson,
+  getDataGridHeadersForFileView,
+} from '../utils/fileUtils';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
-  resetVisibleColumnConfigAction, setLoadingStateAction,
+  resetVisibleColumnConfigAction,
+  setLoadingStateAction,
 } from '../actions/studentRegistrationActions';
 import reactLogo1 from '../assets/images/react-logo-1.png';
 import CustomLoader from './commonComponents/CustomLoader';
