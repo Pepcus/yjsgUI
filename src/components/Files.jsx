@@ -6,6 +6,7 @@ import hasIn from 'lodash/hasIn';
 import PropTypes from 'prop-types';
 import DataGrid from 'simple-react-data-grid';
 import { Link } from 'react-router-dom';
+import csv from 'csvtojson';
 
 import {
   getSecretKey,
@@ -17,23 +18,27 @@ import {
   isLoading,
 } from '../reducers/assetFilesReducer';
 import {
-  fetchFileAction,
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
 import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
-import { getDataGridHeadersForFileView } from '../utils/fileUtils';
+import {
+  formatXlsxToJson,
+  getDataGridHeadersForFileView,
+} from '../utils/fileUtils';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
+  setLoadingStateAction,
 } from '../actions/studentRegistrationActions';
 import reactLogo1 from '../assets/images/react-logo-1.png';
 import CustomLoader from './commonComponents/CustomLoader';
 import { Popup } from './Popup';
+import { fetchFile } from '../sagas/assetFilesAPI';
 
 /**
  *  Files component render files list and file data table.
@@ -50,6 +55,7 @@ class Files extends Component {
       activeFileId: null,
       backPageButton: true,
       width: window.innerWidth,
+      fileData: [],
     };
   }
 
@@ -88,6 +94,7 @@ class Files extends Component {
       activeFileId: index,
       otherExtensionFileDetails: {},
       backPageButton: false,
+      fileData: [],
     });
     if (!fileView) {
       this.setState({
@@ -98,8 +105,51 @@ class Files extends Component {
         },
       });
     }
-    this.props.fetchFileAction(file);
+    // state Loader state true
+    this.props.setLoadingStateAction(true);
+    // fetch file data as per file details
+    this.fetchFileData(file);
   };
+  /**
+   * fetchFileData mathode will when click on any file and
+   * it fetch that file data and save it in state.
+   * @param{Object} file
+   */
+  fetchFileData = (file) => {
+    const fileDetails = file;
+    let fileData = [];
+    try {
+      fetchFile(fileDetails)
+        .then((response) => {
+          if (response) {
+            if (fileDetails.fileType === 'csv') {
+              fileData = csv().fromString(response).then((csvRow) => {
+                this.setState({
+                  fileData: csvRow,
+                });
+                this.props.setLoadingStateAction(false);
+              });
+            } else if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+              fileData = formatXlsxToJson(response);
+              this.setState({
+                fileData,
+              });
+              this.props.setLoadingStateAction(false);
+            }
+          } else {
+            this.props.setLoadingStateAction(false);
+          }
+        },
+        (error) => {
+          this.props.setLoadingStateAction(false);
+        });
+    } catch (e) {
+      this.props.setLoadingStateAction(false);
+      console.error(e);
+    }
+    return null;
+  };
+
   onClickBackButton = () => {
     this.setState({
       backPageButton: true,
@@ -196,7 +246,7 @@ class Files extends Component {
     const { width } = this.state;
     const isMobile = width <= 500;
     if (this.state.showFileDetails) {
-      if (!isEmpty(this.props.fileData)) {
+      if (!isEmpty(this.state.fileData)) {
         if (isMobile) {
           return (
             <div
@@ -209,8 +259,9 @@ class Files extends Component {
                 </a>
               </div>
               <DataGrid
-                data={this.props.fileData}
-                metaData={getDataGridHeadersForFileView(this.props.fileData, this.state.currentFileDetails)}
+                data={this.state.fileData}
+                metaData={
+                  getDataGridHeadersForFileView(this.state.fileData, this.state.currentFileDetails)}
               />
             </div>
           );
@@ -221,9 +272,9 @@ class Files extends Component {
             ref={this.widthRef}
           >
             <DataGrid
-              data={this.props.fileData}
+              data={this.state.fileData}
               metaData={getDataGridHeadersForFileView(
-                this.props.fileData,
+                this.state.fileData,
                 this.state.currentFileDetails)
               }
             />
@@ -252,37 +303,37 @@ class Files extends Component {
                       className="file-download-button"
                     >
                       Download
-                    <i className="fa fa-download file-icon" />
-                  </a>
-                </div>
-              </span>
-            </div>
-          </div>
-        );
-        }
-        return (
-            <div
-              className={this.returnTableWidthComponentClass()}
-              ref={this.widthRef}
-            >
-              <div className="file-text-panel">
-                <span className="file-text-format-wrapper">
-                  <span>
-                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
-                  </span>
-                  <div className="file-extension-download-btn">
-                    <a
-                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                      href={this.state.otherExtensionFileDetails.href}
-                      className="file-download-button"
-                    >
-                      Download
                       <i className="fa fa-download file-icon" />
                     </a>
                   </div>
                 </span>
               </div>
             </div>
+          );
+        }
+        return (
+          <div
+            className={this.returnTableWidthComponentClass()}
+            ref={this.widthRef}
+          >
+            <div className="file-text-panel">
+              <span className="file-text-format-wrapper">
+                <span>
+                  { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                </span>
+                <div className="file-extension-download-btn">
+                  <a
+                    download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                    href={this.state.otherExtensionFileDetails.href}
+                    className="file-download-button"
+                  >
+                      Download
+                    <i className="fa fa-download file-icon" />
+                  </a>
+                </div>
+              </span>
+            </div>
+          </div>
         );
       } else if (isMobile) {
         return (
@@ -394,7 +445,7 @@ class Files extends Component {
 Files.propsType = {
   fileData: PropTypes.array,
   fetchFilesConfigAction: PropTypes.func,
-  fetchFileAction: PropTypes.func,
+  setLoadingStateAction: PropTypes.func,
   adminLoginState: PropTypes.bool,
   filesConfig: PropTypes.object,
   isLoading: PropTypes.bool,
@@ -406,7 +457,7 @@ Files.propsType = {
 
 Files.defaultProps = {
   fileData: [],
-  fetchFileAction: () => {},
+  setLoadingStateAction: () => {},
   fetchFilesConfigAction: () => {},
   resetAdminCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
@@ -426,7 +477,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchFileAction,
+  setLoadingStateAction,
   fetchFilesConfigAction,
   resetAdminCredentialsAction,
   setAdminLoginStateAction,

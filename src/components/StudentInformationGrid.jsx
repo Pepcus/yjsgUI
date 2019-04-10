@@ -189,7 +189,6 @@ class StudentInformationGrid extends Component {
     this.setState({
       selectedStudents: checkedStudents,
     });
-    // checkedStudents = [];
   }
   /**
    * performLogout method will call when click on logout button
