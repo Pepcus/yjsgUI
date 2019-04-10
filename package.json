@@ -28,7 +28,7 @@
     "router": "^1.3.3",
     "routes": "^2.1.0",
     "shortid": "^2.2.14",
-    "simple-react-data-grid": "2.6.0",
+    "simple-react-data-grid": "^2.6.0",
     "xlsx": "^0.14.1"
   },
   "scripts": {

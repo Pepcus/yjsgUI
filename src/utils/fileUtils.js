@@ -25,6 +25,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
     headerConfig.push({
       label: key,
       key,
+      'type': 'string',
     });
   }
   let metaData = {
@@ -46,7 +47,6 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
       }
       metaData = {
         headerConfig: normalHeader,
-        recordsPerPage: 100,
       };
     } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
       let complexHeader = [];
@@ -54,6 +54,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
         complexHeader.push({
           label: key,
           key,
+          'type': 'string',
         });
       }
       metaData = {

@@ -12,7 +12,7 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './rootSaga';
-import { fetchFilesConfigSaga, fetchFilesSaga, getAppConfigSaga } from './assetFilesSaga';
+import { fetchFilesConfigSaga, getAppConfigSaga } from './assetFilesSaga';
 
 const sagas = [
   takeLatest(['CREATE_STUDENT'], createStudentSaga),
@@ -26,7 +26,6 @@ const sagas = [
   takeLatest(['MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT'], markSelectedStudentsOptInOrOptOutSaga),
   takeLatest(['UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS'], updateIdCardStatusSelectedStudentsSaga),
   takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga),
-  takeLatest(['FETCH_FILE_ACTION'], fetchFilesSaga),
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
   takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
 ];
