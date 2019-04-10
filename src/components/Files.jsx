@@ -307,37 +307,37 @@ class Files extends Component {
                       className="file-download-button"
                     >
                       Download
-                    <i className="fa fa-download file-icon" />
-                  </a>
-                </div>
-              </span>
-            </div>
-          </div>
-        );
-        }
-        return (
-            <div
-              className={this.returnTableWidthComponentClass()}
-              ref={this.widthRef}
-            >
-              <div className="file-text-panel">
-                <span className="file-text-format-wrapper">
-                  <span>
-                    { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
-                  </span>
-                  <div className="file-extension-download-btn">
-                    <a
-                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                      href={this.state.otherExtensionFileDetails.href}
-                      className="file-download-button"
-                    >
-                      Download
                       <i className="fa fa-download file-icon" />
                     </a>
                   </div>
                 </span>
               </div>
             </div>
+          );
+        }
+        return (
+          <div
+            className={this.returnTableWidthComponentClass()}
+            ref={this.widthRef}
+          >
+            <div className="file-text-panel">
+              <span className="file-text-format-wrapper">
+                <span>
+                  { MESSAGE_FOR_PDF_FILE_DOWNLOAD }
+                </span>
+                <div className="file-extension-download-btn">
+                  <a
+                    download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
+                    href={this.state.otherExtensionFileDetails.href}
+                    className="file-download-button"
+                  >
+                      Download
+                    <i className="fa fa-download file-icon" />
+                  </a>
+                </div>
+              </span>
+            </div>
+          </div>
         );
       } else if (isMobile) {
         return (
