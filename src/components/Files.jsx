@@ -119,34 +119,30 @@ class Files extends Component {
     const fileDetails = file;
     let fileData = [];
     try {
-      return new Promise((resolve, reject) => {
-        fetchFile(fileDetails)
-          .then(
-            (response) => {
-              if (response) {
-                if (fileDetails.fileType === 'csv') {
-                  fileData = csv().fromString(response).then((csvRow) => {
-                    this.setState({
-                      fileData: csvRow,
-                    });
-                    this.props.setLoadingStateAction(false);
-                  });
-                } else if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
-                  fileData = formatXlsxToJson(response);
-                  this.setState({
-                    fileData,
-                  });
-                  this.props.setLoadingStateAction(false);
-                }
-              } else {
+      fetchFile(fileDetails)
+        .then((response) => {
+          if (response) {
+            if (fileDetails.fileType === 'csv') {
+              fileData = csv().fromString(response).then((csvRow) => {
+                this.setState({
+                  fileData: csvRow,
+                });
                 this.props.setLoadingStateAction(false);
-              }
-            },
-            (error) => {
+              });
+            } else if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+              fileData = formatXlsxToJson(response);
+              this.setState({
+                fileData,
+              });
               this.props.setLoadingStateAction(false);
-              reject(error);
-            });
-      });
+            }
+          } else {
+            this.props.setLoadingStateAction(false);
+          }
+        },
+        (error) => {
+          this.props.setLoadingStateAction(false);
+        });
     } catch (e) {
       this.props.setLoadingStateAction(false);
       console.error(e);
