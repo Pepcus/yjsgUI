@@ -93,7 +93,7 @@ module.exports = {
 
     // Forbid certain propTypes (any, array, object)
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-prop-types.md
-    'react/forbid-prop-types': ['error', { forbid: ['any', 'array', 'object'] }],
+#    'react/forbid-prop-types': ['error', { forbid: ['any', 'array', 'object'] }],
 
     // Enforce boolean attributes notation in JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
@@ -101,7 +101,7 @@ module.exports = {
 
     // Validate closing bracket location in JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md
-    'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
+#    'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
 
     // Validate closing tag location in JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-tag-location.md
@@ -109,7 +109,7 @@ module.exports = {
 
     // Enforce or disallow spaces inside of curly braces in JSX attributes
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md
-    'react/jsx-curly-spacing': ['error', 'never', { allowMultiline: true }],
+#    'react/jsx-curly-spacing': ['error', 'never', { allowMultiline: true }],
 
     // Enforce event handler naming conventions in JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md
@@ -239,15 +239,11 @@ module.exports = {
 
     // Require stateless functions when not using lifecycle methods, setState or ref
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
-    'react/prefer-stateless-function': ['error', { ignorePureComponents: true }],
+    ,
 
     // Prevent missing props validation in a React component definition
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
-    'react/prop-types': ['error', {
-      ignore: [],
-      customValidators: [],
-      skipUndeclared: false
-    }],
+    ,
 
     // Prevent missing React when using JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md
@@ -259,23 +255,11 @@ module.exports = {
 
     // Prevent extra closing tags for components without children
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
-    'react/self-closing-comp': 'error',
+    ,
 
     // Enforce component methods order
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md
-    'react/sort-comp': ['error', {
-      order: [
-        'static-methods',
-        'lifecycle',
-        '/^on.+$/',
-        'getters',
-        'setters',
-        '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
-        'everything-else',
-        '/^render.+$/',
-        'render'
-      ],
-    }],
+    ,
 
     // Prevent missing parentheses around multilines JSX
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md
@@ -312,7 +296,7 @@ module.exports = {
 
     // disallow using React.render/ReactDOM.render's return value
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-render-return-value.md
-    'react/no-render-return-value': 'error',
+    ,
 
     // require a shouldComponentUpdate method, or PureRenderMixin
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-optimization.md
@@ -332,14 +316,11 @@ module.exports = {
 
     // Prevent problem with children and props.dangerouslySetInnerHTML
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-danger-with-children.md
-    'react/no-danger-with-children': 'error',
+    ,
 
     // Prevent unused propType definitions
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unused-prop-types.md
-    'react/no-unused-prop-types': ['error', {
-      customValidators: [],
-      skipShapeProps: true,
-    }],
+    ,
 
     // Require style prop value be an object or var
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/style-prop-object.md
@@ -368,11 +349,11 @@ module.exports = {
 
     // Prevent usage of Array index in keys
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
-    'react/no-array-index-key': 'error',
+    ,
 
     // Enforce a defaultProps definition for every prop that is not a required prop
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
-    'react/require-default-props': 'error',
+    ,
 
     // Forbids using non-exported propTypes
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-foreign-prop-types.md
@@ -502,19 +483,17 @@ module.exports = {
 
     // disallow use of undefined variable
     // https://eslint.org/docs/rules/no-undefined
-    // TODO: enable?
-    'no-undefined': 'off',
+    ,
 
     // disallow declaration of variables that are not used in the code
-    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
+    ,
 
     // disallow use of variables before they are defined
-    'no-use-before-define': ['error', { functions: true, classes: true, variables: true }],
+    ,
 
     // enforce line breaks after opening and before closing array brackets
     // https://eslint.org/docs/rules/array-bracket-newline
-    // TODO: enable? semver-major
-    'array-bracket-newline': ['off', 'consistent'], // object option alternative: { multiline: true, minItems: 3 }
+    , // object option alternative: { multiline: true, minItems: 3 }
 
     // enforce line breaks between array elements
     // https://eslint.org/docs/rules/array-element-newline
@@ -586,12 +565,11 @@ module.exports = {
 
     // require function expressions to have a name
     // https://eslint.org/docs/rules/func-names
-    'func-names': 'warn',
+    ,
 
     // enforces use of function declarations or expressions
     // https://eslint.org/docs/rules/func-style
-    // TODO: enable
-    'func-style': ['off', 'expression'],
+    ,
 
     // enforce consistent line breaks inside function parentheses
     // https://eslint.org/docs/rules/function-paren-newline
@@ -649,16 +627,11 @@ module.exports = {
 
     // enforce position of line comments
     // https://eslint.org/docs/rules/line-comment-position
-    // TODO: enable?
-    'line-comment-position': ['off', {
-      position: 'above',
-      ignorePattern: '',
-      applyDefaultPatterns: true,
-    }],
+    ,
 
     // disallow mixed 'LF' and 'CRLF' as linebreaks
     // https://eslint.org/docs/rules/linebreak-style
-    'linebreak-style': ['error', 'unix'],
+    ,
 
     // enforces empty lines around comments
     'lines-around-comment': 'off',
@@ -710,8 +683,7 @@ module.exports = {
 
     // require multiline ternary
     // https://eslint.org/docs/rules/multiline-ternary
-    // TODO: enable?
-    'multiline-ternary': ['off', 'never'],
+    ,
 
     // require a capital letter for constructors
     'new-cap': ['error', {
@@ -752,7 +724,7 @@ module.exports = {
 
     // disallow if as the only statement in an else block
     // https://eslint.org/docs/rules/no-lonely-if
-    'no-lonely-if': 'error',
+    ,
 
     // disallow un-paren'd mixes of different operators
     // https://eslint.org/docs/rules/no-mixed-operators
@@ -803,25 +775,7 @@ module.exports = {
 
     // disallow certain syntax forms
     // https://eslint.org/docs/rules/no-restricted-syntax
-    'no-restricted-syntax': [
-      'error',
-      {
-        selector: 'ForInStatement',
-        message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
-      },
-      {
-        selector: 'ForOfStatement',
-        message: 'iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them. Separately, loops should be avoided in favor of array iterations.',
-      },
-      {
-        selector: 'LabeledStatement',
-        message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
-      },
-      {
-        selector: 'WithStatement',
-        message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
-      },
-    ],
+    ,
 
     // disallow space between function identifier and application
     'no-spaced-func': 'error',
@@ -833,18 +787,10 @@ module.exports = {
     'no-ternary': 'off',
 
     // disallow trailing whitespace at the end of lines
-    'no-trailing-spaces': ['error', {
-      skipBlankLines: false,
-      ignoreComments: false,
-    }],
+    ,
 
     // disallow dangling underscores in identifiers
-    'no-underscore-dangle': ['error', {
-      allow: [],
-      allowAfterThis: false,
-      allowAfterSuper: false,
-      enforceInMethodNames: false,
-    }],
+    ,
 
     // disallow the use of Boolean literals in conditional expressions
     // also, prefer `a || b` over `a ? a : b`
@@ -891,7 +837,7 @@ module.exports = {
     'operator-linebreak': ['warn', 'before'],
 
     // disallow padding within blocks
-    'padded-blocks': ['error', { blocks: 'never', classes: 'never', switches: 'never' }],
+    ,
 
     // Require or disallow padding lines between statements
     // https://eslint.org/docs/rules/padding-line-between-statements
@@ -905,7 +851,7 @@ module.exports = {
     quotes: ['warn', 'single', { avoidEscape: true }],
 
     // require or disallow use of semicolons instead of ASI
-    semi: ['error', 'always'],
+    ,
 
     // enforce spacing before and after semicolons
     'semi-spacing': ['error', { before: false, after: true }],
@@ -925,17 +871,13 @@ module.exports = {
 
     // require or disallow space before function opening parenthesis
     // https://eslint.org/docs/rules/space-before-function-paren
-    'space-before-function-paren': ['error', {
-      anonymous: 'always',
-      named: 'never',
-      asyncArrow: 'always'
-    }],
+    ,
 
     // require or disallow spaces inside parentheses
     'space-in-parens': ['error', 'never'],
 
     // require spaces around operators
-    'space-infix-ops': 'error',
+    ,
 
     // Require or disallow spaces before/after unary operators
     // https://eslint.org/docs/rules/space-unary-ops
@@ -947,17 +889,7 @@ module.exports = {
 
     // require or disallow a space immediately following the // or /* in a comment
     // https://eslint.org/docs/rules/spaced-comment
-    'spaced-comment': ['error', 'always', {
-      line: {
-        exceptions: ['-', '+'],
-        markers: ['=', '!'], // space here to support sprockets directives
-      },
-      block: {
-        exceptions: ['-', '+'],
-        markers: ['=', '!'], // space here to support sprockets directives
-        balanced: true,
-      }
-    }],
+    ,
 
     // Enforce spacing around colons of switch statements
     // https://eslint.org/docs/rules/switch-colon-spacing
@@ -1036,11 +968,11 @@ module.exports = {
 
     // do not allow a default import name to match a named export
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default.md
-    'import/no-named-as-default': 'error',
+    ,
 
     // warn on accessing default export property names that are also named exports
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default-member.md
-    'import/no-named-as-default-member': 'error',
+    ,
 
     // disallow use of jsdoc-marked-deprecated imports
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-deprecated.md
@@ -1088,8 +1020,7 @@ module.exports = {
 
     // No Node.js builtin modules
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-nodejs-modules.md
-    // TODO: enable?
-    'import/no-nodejs-modules': 'off',
+    ,
 
     // Style guide:
 
@@ -1107,9 +1038,7 @@ module.exports = {
     'import/no-duplicates': 'error',
 
     // disallow namespace imports
-    // TODO: enable?
-    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-namespace.md
-    'import/no-namespace': 'off',
+    ,
 
     // Ensure consistent use of file extension within the import path
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/extensions.md
@@ -1120,11 +1049,7 @@ module.exports = {
 
     // Enforce a convention in module import order
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md
-    // TODO: enable?
-    'import/order': ['off', {
-      groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-      'newlines-between': 'never',
-    }],
+    ,
 
     // Require a newline after the last import/require in a group
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/newline-after-import.md
@@ -1174,7 +1099,7 @@ module.exports = {
 
     // Prevent importing the default as if it were named
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-default.md
-    'import/no-named-default': 'error',
+    ,
 
     // Reports if a module's default export is unnamed
     // https://github.com/benmosher/eslint-plugin-import/blob/d9b712ac7fd1fddc391f7b234827925c160d956f/docs/rules/no-anonymous-default-export.md
@@ -1189,15 +1114,11 @@ module.exports = {
 
     // This rule enforces that all exports are declared at the bottom of the file.
     // https://github.com/benmosher/eslint-plugin-import/blob/98acd6afd04dcb6920b81330114e146dc8532ea4/docs/rules/exports-last.md
-    // TODO: enable?
-    'import/exports-last': 'off',
+    ,
 
     // enforces no braces where they can be omitted
     // https://eslint.org/docs/rules/arrow-body-style
-    // TODO: enable requireReturnForObjectLiteral?
-    'arrow-body-style': ['warn', 'as-needed', {
-      requireReturnForObjectLiteral: false,
-    }],
+    ,
 
     // require parens in arrow function arguments
     // https://eslint.org/docs/rules/arrow-parens
@@ -1227,7 +1148,7 @@ module.exports = {
     }],
 
     // disallow modifying variables that are declared using const
-    'no-const-assign': 'error',
+    ,
 
     // disallow duplicate class members
     // https://eslint.org/docs/rules/no-dupe-class-members
@@ -1256,7 +1177,7 @@ module.exports = {
 
     // disallow unnecessary constructor
     // https://eslint.org/docs/rules/no-useless-constructor
-    'no-useless-constructor': 'error',
+    ,
 
     // disallow renaming import, export, and destructured assignments to the same name
     // https://eslint.org/docs/rules/no-useless-rename
@@ -1271,10 +1192,7 @@ module.exports = {
 
     // require method and property shorthand syntax for object literals
     // https://eslint.org/docs/rules/object-shorthand
-    'object-shorthand': ['error', 'always', {
-      ignoreConstructors: false,
-      avoidQuotes: true,
-    }],
+    ,
 
     // suggest using arrow functions as callbacks
     'prefer-arrow-callback': ['error', {
@@ -1283,10 +1201,7 @@ module.exports = {
     }],
 
     // suggest using of const declaration for variables that are never modified after declared
-    'prefer-const': ['error', {
-      destructuring: 'any',
-      ignoreReadBeforeAssign: true,
-    }],
+    ,
 
     // Prefer destructuring from arrays and objects
     // https://eslint.org/docs/rules/prefer-destructuring
@@ -1316,7 +1231,7 @@ module.exports = {
 
     // use rest parameters instead of arguments
     // https://eslint.org/docs/rules/prefer-rest-params
-    'prefer-rest-params': 'error',
+    ,
 
     // suggest using the spread operator instead of .apply()
     // https://eslint.org/docs/rules/prefer-spread
@@ -1376,7 +1291,7 @@ module.exports = {
     'no-cond-assign': ['error', 'always'],
 
     // disallow use of console
-    'no-console': 'warn',
+    ,
 
     // disallow use of constant expressions in conditions
     'no-constant-condition': 'warn',
@@ -1449,7 +1364,7 @@ module.exports = {
 
     // Disallow template literal placeholder syntax in regular strings
     // https://eslint.org/docs/rules/no-template-curly-in-string
-    'no-template-curly-in-string': 'error',
+    ,
 
     // Avoid code that looks like two expressions but is actually one
     // https://eslint.org/docs/rules/no-unexpected-multiline
@@ -1528,7 +1443,7 @@ module.exports = {
 
     // disallow lexical declarations in case/default clauses
     // https://eslint.org/docs/rules/no-case-declarations.html
-    'no-case-declarations': 'error',
+    ,
 
     // disallow division operators explicitly at beginning of regular expression
     // https://eslint.org/docs/rules/no-div-regex
@@ -1536,9 +1451,7 @@ module.exports = {
 
     // disallow else after a return in an if
     // https://eslint.org/docs/rules/no-else-return
-    'no-else-return': ['error', {
-      allowElseIf: false
-    }],
+    ,
 
     // disallow empty functions, except for standalone funcs/arrows
     // https://eslint.org/docs/rules/no-empty-function
@@ -1755,11 +1668,7 @@ module.exports = {
     'no-unmodified-loop-condition': 'off',
 
     // disallow usage of expressions in statement position
-    'no-unused-expressions': ['error', {
-      allowShortCircuit: false,
-      allowTernary: false,
-      allowTaggedTemplates: false,
-    }],
+    ,
 
     // disallow unused labels
     // https://eslint.org/docs/rules/no-unused-labels
@@ -1818,50 +1727,46 @@ module.exports = {
     // require or disallow Yoda conditions
     yoda: 'error',
 
-    'import/no-named-as-default': 'warn',
-    'import/no-named-as-default-member': 'warn',
-    'import/no-named-default': 'warn',
-    'linebreak-style': 'off',
-    'no-case-declarations': 'off',
-    'no-console': 'off',
-    'no-const-assign': 'warn',
-    'no-else-return': 'warn',
-    'no-lonely-if': 'warn',
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
     'no-param-reassign': 'warn',
-    'no-restricted-syntax': 'warn',
-    'no-template-curly-in-string': 'off',
-    'no-trailing-spaces': 'warn',
+    ,
+    ,
+    ,
     'no-unneeded-ternary': 'warn',
-    'no-unused-expressions': 'off',
-    'no-unused-vars': 'warn',
-    'no-useless-constructor': 'warn',
-    'object-shorthand': 'warn',
-    'padded-blocks': 'off',
-    'prefer-const': 'warn',
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
     'react/forbid-prop-types': 'off',
-    'react/no-render-return-value': 'warn',
+    ,
     'react/jsx-closing-bracket-location': 'warn',
     'react/jsx-curly-spacing': 'warn',
-    'react/no-array-index-key': 'warn',
-    'react/no-danger-with-children': 'warn',
-    'react/no-unused-prop-types': 'warn',
-    'react/prefer-stateless-function': 'warn',
-    'react/prop-types': 'warn',
-    'react/require-default-props': 'warn',
-    'react/self-closing-comp': 'warn',
-    'react/sort-comp': 'warn',
-    'semi': 2,
-    'no-use-before-define': 'warn',
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
 
-    'space-before-function-paren': ['error', {
-      'anonymous': 'never',
-      'named': 'never',
-      'asyncArrow': 'ignore'
-    }],
-    'func-names': 0,
+    ,
+    ,
 
-    'prefer-rest-params': 'warn',
-    'no-underscore-dangle': 0,
+    ,
+    ,
     'require-jsdoc': ['warn', {
       require: {
         FunctionDeclaration: false,
@@ -1870,9 +1775,9 @@ module.exports = {
         ArrowFunctionExpression: false,
       }
     }],
-    semi: 'warn',
-    'space-infix-ops': 'warn',
-    'spaced-comment': 'warn',
+    ,
+    ,
+    ,
     'valid-jsdoc': ['warn', {
       requireReturn: false,
       prefer: {
