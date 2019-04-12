@@ -9,7 +9,6 @@ import { Redirect, Link } from 'react-router-dom';
 import {
   adminId,
   adminPassword,
-  yjsgHeader,
 } from '../utils/yjsgConstants';
 import {
   getAdminId,
@@ -135,54 +134,6 @@ class AdminPanel extends Component {
 
     return (
       <div className="adminPanelContainer">
-        <div className="adminPanelHeader">
-          <div className="adminPanelHeading"><h3>{yjsgHeader}</h3></div>
-          <div className="backButtonContainer">
-            <div className="logoutLinkContainer">
-              <Link
-                to="/admin"
-                style={{
-                  color: '#fff',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  padding: '5px 17px',
-                  border: '1px solid #fffefd',
-
-                  '&:hover': {
-                    color: '#000',
-                    backgroundColor: 'rgb(231, 104, 14)',
-                    transition: '0.3s all',
-                  },
-                }}
-              >
-                Back
-              </Link>
-            </div>
-          </div>
-          <div className="logoutButtonContainer">
-            <div className="logoutLinkContainer">
-              <Link
-                to="/admin"
-                style={{
-                  color: '#fff',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  padding: '5px 17px',
-                  border: '1px solid #fffefd',
-
-                  '&:hover': {
-                    color: '#000',
-                    backgroundColor: 'rgb(231, 104, 14)',
-                    transition: '0.3s all',
-                  },
-                }}
-                onClick={this.performLogout}
-              >
-                Logout
-              </Link>
-            </div>
-          </div>
-        </div>
         <div className="student-information-section">
           <div className="student-registration-wrapper">
             <div className="student-information-wrapper">

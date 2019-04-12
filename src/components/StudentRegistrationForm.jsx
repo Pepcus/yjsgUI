@@ -10,7 +10,6 @@ import {
   gender,
   goBackBtnText,
   formSubmitBtnText,
-  yjsgHeader,
   USER_TYPES,
 } from '../utils/yjsgConstants';
 import {
@@ -59,7 +58,6 @@ import {
   getUserType,
 } from '../reducers/studentRegistrationReducer';
 import Button from './commonComponents/Button';
-import reactLogo1 from '../assets/images/react-logo-1.png';
 import { Popup } from './Popup';
 
 /**
@@ -238,16 +236,6 @@ class StudentRegistrationForm extends Component {
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
-        {/* FIXME: Create a separate reusable component to render logo*/}
-        <div className="student-logo-header">
-          <div className="yjsg-logo">
-            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-          </div>
-          {/* FIXME: Create a separate reusable component to render header*/}
-          <h2 className="student-info-heading">{yjsgHeader}</h2>
-        </div>
-        {/* FIXME: Commented code?*/}
-        {/* <h3 className="registrationFormHeading">{yjsgHeader}</h3>*/}
         {/* FIXME: Create a separate reusable component to render form*/}
         <div className="inputFieldContainerWrapper" >
           <form id="studentRegistrationForm" className="inputFieldContainer">

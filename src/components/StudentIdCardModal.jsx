@@ -52,7 +52,7 @@ class StudentIdCardModal extends Component {
                 <div className="card-text"><span className="card-text-bold">Father Name:</span>
                   <span className="card-title-text">{fatherName}</span>
                 </div>
-                <div className="card-text card-text-spacing"><span className="card-text-bold">Mobile No.:</span>
+                <div className="card-text card-text-spacing"><span className="card-text-bold">Mobile No:</span>
                   <span className="card-title-text">{object.mobile}</span>
                 </div>
               </div>
@@ -62,7 +62,7 @@ class StudentIdCardModal extends Component {
                   <span className="card-name-content card-title-text">{object.busStop}</span>
                 </div>
                 <div className="card-text card-text-spacing">
-                  <span className="card-text-bold">Bus No.:</span>
+                  <span className="card-text-bold">Bus No:</span>
                   <span className="card-title-text">{object.busNumber}</span>
                 </div>
               </div>

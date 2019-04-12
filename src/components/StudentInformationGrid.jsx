@@ -36,7 +36,6 @@ import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
 import UploadOptInFile from './UploadOptInFile';
 import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
 import {
-  yjsgHeader,
   adminPassword,
   USER_TYPES,
 } from '../utils/yjsgConstants';
@@ -44,8 +43,8 @@ import {
   NO_COLUMNS_SELECTED_MESSAGE,
   INFORMATION_NOT_AVAILABLE_MESSAGE,
 } from '../utils/messagesConstants';
-import reactLogo1 from '../assets/images/react-logo-1.png';
 import { FILE_DOWNLOAD_MESSAGE } from '../utils/textConstants';
+import { Header } from './Header';
 /**
  * StudentInformationGrid render student information grid.
  * @type {Class}
@@ -494,22 +493,6 @@ class StudentInformationGrid extends Component {
         <div className="grid-scroll-wrapper" ref={this.widthRef}>
           <div className="print-media-none" >
             <div className="student-information-Container">
-              <div className="student-logo-header">
-                <div className="yjsg-logo">
-                  <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-                </div>
-                <h2 className="student-info-heading">{yjsgHeader}</h2>
-                <div className="logoutButtonContainer display-mobile-none">
-                  <div className="logoutLinkContainer print-media-none">
-                    <Link to="/admin" className="grid-small-button">
-                      <i className="fa fa-arrow-left card-icon" />Back
-                    </Link>
-                    <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
-                      <i className="fa fa-power-off card-icon" />Logout
-                    </Link>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
