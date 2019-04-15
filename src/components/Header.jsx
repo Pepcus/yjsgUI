@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-import reactLogo1 from '../assets/images/react-logo-1.png';
+import headerLogo from '../assets/images/react-logo.png';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../actions/studentRegistrationActions';
-import { routeType } from '../config/headerConfig.json';
+import { routeType, title } from '../config/headerConfig.json';
 
 const Header = ({
   location,
@@ -32,41 +32,40 @@ const Header = ({
       return (
         <Link
           to={headerObject.backButtonRedirectTo}
-          style={headerObject.backButtonStyle}
-          className="grid-small-button">
+          className="grid-small-button"
+        >
           <i className="fa fa-arrow-left card-icon" />Back
         </Link>
       );
-    }
+    } return null;
   };
   const RenderLogOutButton = (headerObject) => {
     if (headerObject.logoutButton) {
       return (
         <Link
           to={headerObject.logoutButtonRedirectTo}
-          style={headerObject.logoutButtonStyle}
           onClick={performLogout}
-          className="grid-small-button">
+          className="grid-small-button"
+        >
           <i className="fa fa-power-off card-icon" />Logout
         </Link>
       );
-    }
+    } return null;
   };
-  const RenderHeaderName = (headerObject) => {
-    return (
-      <h2
-        style={headerObject.headerNameStyle}
-        className="student-info-heading">
-        {headerObject.headerName}
-      </h2>
-    );
-  };
+  const RenderHeaderName = headerObject => (
+    <h2
+      style={headerObject.titleStyle}
+      className="student-info-heading"
+    >
+      {headerObject.title ? headerObject.title : title}
+    </h2>
+  );
   const RenderButton = (headerObject) => {
-    if (headerObject.HeaderContainedButton === 'Yes') {
+    if (headerObject.HeaderContainedButton) {
       return (
         <div
-          style={headerObject.buttonWrapperStyle}
-          className="logoutButtonContainer display-mobile-none logoutLinkContainer ">
+          className="logoutButtonContainer display-mobile-none logoutLinkContainer "
+        >
           {RenderBackButton(headerObject)}
           {RenderLogOutButton(headerObject)}
         </div>
@@ -74,15 +73,14 @@ const Header = ({
     } return null;
   };
   const RenderLogo = (headerObject) => {
-    if (headerObject.logo === 'Yes') {
+    if (headerObject.logo) {
       return (
         <div
-          style={headerObject.logWrapperStyle}
-          className="yjsg-logo">
+          className="yjsg-logo"
+        >
           <img
-            src={reactLogo1}
+            src={headerLogo}
             alt="logo"
-            style={headerObject.logoStyle}
             className="yjsg-logo-img"
           />
         </div>

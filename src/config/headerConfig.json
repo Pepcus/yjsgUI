@@ -1,240 +1,141 @@
 {
+  "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
 "routeType":{
   "/" : {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {
-      "position": "fixed",
-      "top": "0",
-      "left": "0",
-      "background": "var(--orange-color)",
+    "titleStyle": {
       "padding": "15px 0",
-      "margin": "0",
-      "color": "#fff",
-      "fontSize": "25px",
-      "lineHeight": "30px",
-      "width": "100%",
-      "textAlign": "center"
+      "fontSize": "25px"
     },
     "headerWrapperStyle": {
       "height": "auto",
       "backgroundColor": "rgba(244, 233, 227, 0.21)"
     },
-    "logo": "No",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
+    "logo": false,
+    "HeaderContainedButton": false,
+    "backButton": false,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/admin": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {
-      "position": "fixed",
-      "top": "0",
-      "left": "0",
-      "background": "var(--orange-color)",
+    "titleStyle": {
       "padding": "15px 0",
-      "margin": "0",
-      "color": "#fff",
-      "fontSize": "25px",
-      "lineHeight": "30px",
-      "width": "100%",
-      "textAlign": "center"
+      "fontSize": "25px"
     },
     "headerWrapperStyle": {
       "height": "auto",
       "backgroundColor": "rgba(244, 233, 227, 0.21)"
     },
-    "logo": "No",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
+    "logo": false,
+    "HeaderContainedButton": false,
+    "backButton": false,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/student-search":{
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "Yes",
-    "backButton":"Yes",
+    "logo": true,
+    "HeaderContainedButton": true,
+    "backButton": true,
     "backButtonRedirectTo": "/admin",
-    "backButtonStyle": {},
-    "logoutButton": "Yes",
-    "logoutButtonRedirectTo": "/admin",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": true,
+    "logoutButtonRedirectTo": "/admin"
   },
   "/home": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {
-      "position": "fixed",
-      "top": "0",
-      "left": "0",
-      "background": "var(--orange-color)",
+    "titleStyle": {
       "padding": "15px 0",
-      "margin": "0",
-      "color": "#fff",
-      "fontSize": "25px",
-      "lineHeight": "30px",
-      "width": "100%",
-      "textAlign": "center"
+      "fontSize": "25px"
     },
     "headerWrapperStyle": {
       "height": "auto",
       "backgroundColor": "rgba(244, 233, 227, 0.21)"
     },
-    "logo": "No",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
+    "logo": false,
+    "HeaderContainedButton": false,
+    "backButton": false,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/studentRegister": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
-    "backButtonRedirectTo": {},
-    "backButtonStyle": {},
-    "logoutButton": {},
-    "logoutButtonRedirectTo": {},
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logo": true,
+    "HeaderContainedButton": false,
+    "backButton": false,
+    "backButtonRedirectTo": "",
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/studentCorrection": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
-    "backButtonRedirectTo": {},
-    "backButtonStyle": {},
-    "logoutButton": {},
-    "logoutButtonRedirectTo": {},
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logo": true,
+    "HeaderContainedButton": false,
+    "backButton": false,
+    "backButtonRedirectTo": "",
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/adminPanel": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "Yes",
-    "backButton":"Yes",
+    "logo": false,
+    "HeaderContainedButton": true,
+    "backButton": true,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "Yes",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": true,
+    "logoutButtonRedirectTo": ""
   },
   "/student-login": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {
-      "position": "fixed",
-      "top": "0",
-      "left": "0",
-      "background": "var(--orange-color)",
+    "titleStyle": {
       "padding": "15px 0",
-      "margin": "0",
-      "color": "#fff",
-      "fontSize": "25px",
-      "lineHeight": "30px",
-      "width": "100%",
-      "textAlign": "center"
+      "fontSize": "25px"
     },
     "headerWrapperStyle": {
       "height": "auto",
       "backgroundColor": "rgba(244, 233, 227, 0.21)"
     },
-    "logo": "No",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
+    "logo": false,
+    "HeaderContainedButton": false,
+    "backButton": false,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/event": {
-    "headerName": "अभिभावक सम्मलेन (Parents' Convention)",
-    "headerNameStyle": {},
+    "title": "अभिभावक सम्मलेन (Parents' Convention)",
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
-    "backButtonRedirectTo": {},
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": {},
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logo": true,
+    "HeaderContainedButton": false,
+    "backButton": false,
+    "backButtonRedirectTo": "",
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   },
   "/files": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "Yes",
-    "backButton":"Yes",
+    "logo": true,
+    "HeaderContainedButton": true,
+    "backButton": true,
     "backButtonRedirectTo": "/admin",
-    "backButtonStyle": {},
-    "logoutButton": "Yes",
-    "logoutButtonRedirectTo": "/admin",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": true,
+    "logoutButtonRedirectTo": "/admin"
     },
   "default": {
-    "headerName": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "headerNameStyle": {},
+    "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
+    "titleStyle": {},
     "headerWrapperStyle": {},
-    "logo": "Yes",
-    "logoStyle": {},
-    "logWrapperStyle": {},
-    "HeaderContainedButton": "No",
-    "backButton":"No",
+    "logo": true,
+    "HeaderContainedButton": false,
+    "backButton": true,
     "backButtonRedirectTo": "",
-    "backButtonStyle": {},
-    "logoutButton": "No",
-    "logoutButtonRedirectTo": "",
-    "logoutButtonStyle": {},
-    "buttonWrapperStyle": {}
+    "logoutButton": false,
+    "logoutButtonRedirectTo": ""
   }
 }
 }
