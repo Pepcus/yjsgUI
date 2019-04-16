@@ -14,6 +14,7 @@ import {
 import { routeType, title } from '../config/headerConfig.json';
 
 const Header = ({
+  context,
   location,
   resetAdminCredentials,
   setAdminLoginState,
@@ -31,7 +32,9 @@ const Header = ({
     if (headerObject.backButton) {
       return (
         <Link
-          to={headerObject.backButtonRedirectTo}
+          to={
+            headerObject.backButtonRedirectTo
+              ? headerObject.backButtonRedirectTo : context.previousLocation}
           className="grid-small-button"
         >
           <i className="fa fa-arrow-left card-icon" />Back
@@ -43,7 +46,9 @@ const Header = ({
     if (headerObject.logoutButton) {
       return (
         <Link
-          to={headerObject.logoutButtonRedirectTo}
+          to={
+            headerObject.logoutButtonRedirectTo
+              ? headerObject.logoutButtonRedirectTo : context.previousLocation}
           onClick={performLogout}
           className="grid-small-button"
         >
@@ -100,18 +105,24 @@ const Header = ({
 };
 
 Header.propTypes = {
+  routeType: PropTypes.object,
+  title: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
   resetVisibleColumnConfig: PropTypes.func,
   location: PropTypes.string,
+  context: PropTypes.object,
 };
 Header.defaultProps = {
+  routeType: {},
+  title: '',
   resetAdminCredentials: () => {},
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
   resetVisibleColumnConfig: () => {},
   location: '',
+  context: {},
 };
 
 const mapDispatchToProps = dispatch => ({
