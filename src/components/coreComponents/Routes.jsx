@@ -15,6 +15,7 @@ import StudentPage from '../StudentPage';
 import Context from './ConfigProvider';
 import ParentsRegistration from '../ParentsRegistrationForm';
 import Files from '../Files';
+import Header from '../Header';
 
 /**
  * Routes component maintain all routes
@@ -42,6 +43,9 @@ class Routes extends Component {
     return (
       <div>
         <Context.Provider previousLocation={this.state.previousLocation}>
+          <Consumer>
+            {context => <Header context={context} location={this.props.location.pathname} />}
+          </Consumer>
           <Route
             exact
             path="/"

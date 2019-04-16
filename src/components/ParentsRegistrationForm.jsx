@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { parentsRegistrationAction } from '../actions/studentRegistrationActions';
 import Button from './commonComponents/Button';
 import { formSubmitBtnText } from '../utils/yjsgConstants';
-import reactLogo1 from '../assets/images/react-logo-1.png';
 
 /**
  * ParentsRegistration component render parents registration form.
@@ -175,14 +174,6 @@ class ParentsRegistration extends Component {
       return (
         <div className="footer-none-wrapper">
           <div className="registrationFormContainer parent-register-container">
-            {/* FIXME: Create a separate reusable component to render logo*/}
-            <div className="student-logo-header">
-              <div className="yjsg-logo">
-                <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-              </div>
-              {/* FIXME: Create a separate reusable component to render header*/}
-              <h2 className="student-info-heading parent-info-heading">{'अभिभावक सम्मलेन (Parents\' Convention)'}</h2>
-            </div>
             {/* FIXME: Create a separate reusable component to render form*/}
             <form id="parentsRegistrationForm" className="inputFieldContainerWrapper input-field-register-container">
               <div className="inputFieldContainer input-field-register-wrapper">
@@ -259,12 +250,6 @@ class ParentsRegistration extends Component {
     return (
       <div className="footer-none-wrapper">
         <div className="registrationFormContainer">
-          <div className="student-logo-header">
-            <div className="yjsg-logo">
-              <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-            </div>
-            <h2 className="student-info-heading">{'अभिभावक सम्मलेन (Parents\' Convention)'}</h2>
-          </div>
           {this._renderPopUp()}
         </div>
         <div className="footer print-media-none footer-index">

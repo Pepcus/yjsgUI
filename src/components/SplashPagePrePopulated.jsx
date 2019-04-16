@@ -30,7 +30,6 @@ import {
 import {
   adminId,
   adminPassword,
-  yjsgHeader,
   eventDate,
   eventVenue,
   goBackBtnText,
@@ -352,9 +351,6 @@ class SplashPagePrePopulated extends Component {
   render() {
     return (
       <div className="landing-page-block">
-        <div className="landing-page-container">
-          <h2 className="student-heading">{yjsgHeader}</h2>
-        </div>
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">

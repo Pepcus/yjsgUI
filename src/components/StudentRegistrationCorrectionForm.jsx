@@ -17,7 +17,6 @@ import {
   invalidIdMessage,
   noInfoChangeMessage,
   infoUpdateSuccessMessage,
-  yjsgHeader,
   busNumber,
   classRoomNumber,
   USER_TYPES,
@@ -65,7 +64,6 @@ import {
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../utils/textConstants';
-import reactLogo1 from '../assets/images/react-logo-1.png';
 import { Popup } from './Popup';
 
 // FixMe: Add missing propTypes and defaultProps.
@@ -228,12 +226,6 @@ class StudentRegistrationCorrectionForm extends Component {
   renderOnlyOptIn2019 = () => (
     <div className="registrationFormContainer correction-form-container">
       {this.renderSuccessMessage()}
-      <div className="student-logo-header">
-        <div className="yjsg-logo">
-          <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-        </div>
-        <h2 className="student-info-heading">{yjsgHeader}</h2>
-      </div>
       <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
         <div className="inputFieldContainer input-field-container">
           <label className="name-label">{NAME_LABEL}: </label>
@@ -554,13 +546,6 @@ class StudentRegistrationCorrectionForm extends Component {
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
-        <div className="student-logo-header">
-          <div className="yjsg-logo">
-            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-          </div>
-          <h2 className="student-info-heading">{yjsgHeader}</h2>
-        </div>
-        {/* <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>*/}
         <form id="studentRegistrationForm" className="inputFieldContainerWrapper">
           <div className="inputFieldContainer student-form-input-field">
             <div className="student-form-input-wrapper">
@@ -726,14 +711,6 @@ class StudentRegistrationCorrectionForm extends Component {
       return (
         <div className="registrationFormContainer">
           {this.renderSuccessMessage()}
-          {/* FIXME: Create a separate reusable component to render logo*/}
-          <div className="student-logo-header">
-            <div className="yjsg-logo">
-              <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-            </div>
-            {/* FIXME: Create a separate reusable component to render header*/}
-            <h2 className="student-info-heading">{yjsgHeader}</h2>
-          </div>
           {/* FIXME: Create a separate reusable component to render form*/}
           <form id="studentCorrectionForm" className="inputFieldContainerWrapper">
             <div className="inputFieldContainer student-form-input-field" ref={this.formRef}>

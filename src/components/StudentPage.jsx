@@ -12,7 +12,6 @@ import {
 } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/images/yjsgLogo.png';
 import {
-  yjsgHeader,
   eventDate,
   eventVenue,
   alreadyRegisteredBtnText,
@@ -120,9 +119,6 @@ class StudentPage extends Component {
     }
     return (
       <div className="landing-page-block">
-        <div className="landing-page-container">
-          <h2 className="student-heading">{yjsgHeader}</h2>
-        </div>
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">

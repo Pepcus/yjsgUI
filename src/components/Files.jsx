@@ -20,7 +20,7 @@ import {
 import {
   fetchFilesConfigAction,
 } from '../actions/assetFilesActions';
-import { goBackBtnText, yjsgHeader, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
+import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
 import LinkButton from './commonComponents/LinkButton';
 import { manageStudentTableWidth } from '../utils/dataGridUtils';
@@ -35,7 +35,6 @@ import {
   resetVisibleColumnConfigAction,
   setLoadingStateAction,
 } from '../actions/studentRegistrationActions';
-import reactLogo1 from '../assets/images/react-logo-1.png';
 import CustomLoader from './commonComponents/CustomLoader';
 import { Popup } from './Popup';
 import { fetchFile } from '../sagas/assetFilesAPI';
@@ -406,31 +405,14 @@ class Files extends Component {
     return (
       <div className="registration-file-container">
         {this.renderLoader()}
-        <div className="student-logo-header">
-          <div className="yjsg-logo">
-            <img src={reactLogo1} alt="logo" className="yjsg-logo-img" />
-          </div>
-          {/* FIXME: Create a separate reusable component to render header*/}
-          <h2 className="student-info-heading">{yjsgHeader}</h2>
-          <div className="logoutButtonContainer display-mobile-none">
-            <div className="logoutLinkContainer print-media-none">
-              <Link to={this.props.context.previousLocation} className="grid-small-button">
-                <i className="fa fa-arrow-left card-icon" />Back
-              </Link>
-              <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
-                <i className="fa fa-power-off card-icon" />Logout
-              </Link>
-            </div>
-          </div>
-          <div className="logoutButtonContainer file-logout-container display-logout-desktop">
-            <div className="logoutLinkContainer">
-              <Link to={this.props.context.previousLocation} className="grid-small-button">
-                <i className="fa fa-arrow-left" />
-              </Link>
-              <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
-                <i className="fa fa-power-off" />
-              </Link>
-            </div>
+        <div className="logoutButtonContainer file-logout-container display-logout-desktop">
+          <div className="logoutLinkContainer">
+            <Link to={this.props.context.previousLocation} className="grid-small-button">
+              <i className="fa fa-arrow-left" />
+            </Link>
+            <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
+              <i className="fa fa-power-off" />
+            </Link>
           </div>
         </div>
         <div className="file-wrapper">
