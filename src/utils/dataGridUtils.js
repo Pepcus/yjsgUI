@@ -103,3 +103,18 @@ export const setAppColor = (mode) => {
     }
   }
 };
+/**
+ * getFormattedStudent method convert the studentID into four digit studentID.
+ * @param {Number} studentId
+ * @return {string} studentId
+ */
+export const getFormattedStudent = (studentId) => {
+  const lengthOfId = studentId.length;
+  if (lengthOfId === 1) {
+    return String(`000${studentId}`);
+  } else if (lengthOfId === 2) {
+    return String(`00${studentId}`);
+  } else if (lengthOfId === 3) {
+    return String(`0${studentId}`);
+  } return String(studentId);
+};
