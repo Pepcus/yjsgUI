@@ -39,6 +39,7 @@ import {
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
+import LoginForm from './LoginForm';
 
 /**
  *SplashPage render home page of admin
@@ -320,49 +321,6 @@ class SplashPage extends Component {
       </div>
     )
   }*/
-
-  // FIXME: Create a separate component to render admin login fields
-  renderAdminLoginFields() {
-    return (
-      <div>
-        <form id="adminCredential">
-          <div className="form-input-wrapper">
-            <InputField
-              type="text"
-              name="adminId"
-              label="Admin ID"
-              placeholder="Enter Admin ID"
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminId}
-            />
-            <InputField
-              type="password"
-              name="adminPassword"
-              label="Admin Password"
-              placeholder="Enter Admin Password"
-              onInputChange={this._handleInputChange}
-              value={this.state.admin.adminPassword}
-            />
-            {this._adminScreenRedirection()}
-          </div>
-          <div className="button-wrapper">
-            <Button
-              type="button"
-              buttonText={goBackBtnText}
-              onClick={this._disableAdminLoginButtons}
-            />
-            <Button
-              type="submit"
-              form="adminCredential"
-              buttonText={formSubmitBtnText}
-              onClick={this._setAdminLogin}
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-
   /**
    * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
    * of new registration button.
@@ -372,38 +330,6 @@ class SplashPage extends Component {
       isNewRegistration: true,
     });
     this.props.setHashLinkForNewRegistrationAction(USER_TYPES.ADMIN);
-  }
-  // FixMe: Use separate methods for redirection and rendering Button fields
-  renderLoginField() {
-    // this may be use in future
-    /* if (this.state.isCorrection) {
-      this.props.setHashLinkForStudentCredentialAction(USER_TYPES.ADMIN);
-      return <Switch><Redirect to="/student-login" /></Switch>;
-    } else*/ if (this.state.isAdmin) {
-      return this.renderAdminLoginFields();
-    } else if (this.state.isNewRegistration) {
-      return <Switch><Redirect to="/studentRegister" /></Switch>;
-    }
-    return (
-      <div>
-        {/* // this may be use in future
-        <Button
-          type="button"
-          buttonText={alreadyRegisteredBtnText}
-          onClick={this._enableStudentInfoCorrectionButtons}
-        />*/}
-        <Button
-          type="button"
-          buttonText={newRegistrationBtnText}
-          onClick={this.redirectToNewRegistrationPage}
-        />
-        <Button
-          type="button"
-          buttonText={adminLoginBtnText}
-          onClick={this._enableAdminLoginButtons}
-        />
-      </div>
-    );
   }
   render() {
     if (this.state.isURLParams) {
@@ -421,7 +347,17 @@ class SplashPage extends Component {
               <img src={yjsgLogo} alt="yjsg logo" />
             </div>
             <div className="landing-page-button-container">
-              {this.renderLoginField()}
+              <LoginForm
+                isAdmin={this.state.isAdmin}
+                admin={this.state.admin}
+                handleInputChange={this._handleInputChange}
+                adminScreenRedirection={this._adminScreenRedirection}
+                disableAdminLoginButtons={this._disableAdminLoginButtons}
+                setAdminLogin={this._setAdminLogin}
+                isNewRegistration={this.state.isNewRegistration}
+                redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
+                enableAdminLoginButtons={this._enableAdminLoginButtons}
+              />
             </div>
           </div>
         </div>
