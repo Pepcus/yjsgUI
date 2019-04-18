@@ -6,7 +6,7 @@ import { formSubmitBtnText, goBackBtnText } from '../utils/yjsgConstants';
 import Button from './commonComponents/Button';
 
 
-const RenderAdminLoginFields = ({ isAdmin, admin, handleInputChange, adminScreenRedirection, disableAdminLoginButtons, setAdminLogin }) => {
+const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirection, disableAdminLoginButtons, setAdminLogin }) => {
   if (isAdmin) {
     return (
       <div>
@@ -50,7 +50,7 @@ const RenderAdminLoginFields = ({ isAdmin, admin, handleInputChange, adminScreen
   return null;
 };
 
-RenderAdminLoginFields.propsType = {
+AdminLoginForm.propsType = {
   isAdmin: PropTypes.bool,
   admin: PropTypes.object,
   handleInputChange: PropTypes.func,
@@ -58,7 +58,7 @@ RenderAdminLoginFields.propsType = {
   disableAdminLoginButtons: PropTypes.func,
   setAdminLogin: PropTypes.func,
 };
-RenderAdminLoginFields.defaultProps = {
+AdminLoginForm.defaultProps = {
   isAdmin: false,
   admin: {},
   handleInputChange: () => {},
@@ -66,4 +66,4 @@ RenderAdminLoginFields.defaultProps = {
   disableAdminLoginButtons: () => {},
   setAdminLogin: () => {},
 };
-export default RenderAdminLoginFields;
+export default AdminLoginForm;

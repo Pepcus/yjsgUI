@@ -39,7 +39,7 @@ import {
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
-import RenderLoginFields from './RenderLoginFields';
+import LoginForm from './LoginForm';
 
 /**
  *SplashPage render home page of admin
@@ -347,7 +347,7 @@ class SplashPage extends Component {
               <img src={yjsgLogo} alt="yjsg logo" />
             </div>
             <div className="landing-page-button-container">
-              <RenderLoginFields
+              <LoginForm
                 isAdmin={this.state.isAdmin}
                 admin={this.state.admin}
                 handleInputChange={this._handleInputChange}

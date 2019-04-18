@@ -2,11 +2,11 @@ import { Redirect, Switch } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import RenderAdminLoginFields from './RenderAdminLoginFields';
+import AdminLoginForm from './AdminLoginForm';
 import { adminLoginBtnText, newRegistrationBtnText } from '../utils/yjsgConstants';
 import Button from './commonComponents/Button';
 
-const RenderLoginFields = ({ isAdmin,
+const LoginForm = ({ isAdmin,
   admin,
   handleInputChange,
   adminScreenRedirection,
@@ -18,7 +18,7 @@ const RenderLoginFields = ({ isAdmin,
 }) => {
   if (isAdmin) {
     return (
-      <RenderAdminLoginFields
+      <AdminLoginForm
         isAdmin={isAdmin}
         admin={admin}
         handleInputChange={handleInputChange}
@@ -47,7 +47,7 @@ const RenderLoginFields = ({ isAdmin,
   } return null;
 };
 
-RenderLoginFields.propsType = {
+LoginForm.propsType = {
   isAdmin: PropTypes.bool,
   admin: PropTypes.object,
   handleInputChange: PropTypes.func,
@@ -58,7 +58,7 @@ RenderLoginFields.propsType = {
   redirectToNewRegistrationPage: PropTypes.func,
   enableAdminLoginButtons: PropTypes.func,
 };
-RenderLoginFields.defaultProps = {
+LoginForm.defaultProps = {
   isAdmin: false,
   admin: {},
   handleInputChange: () => {},
@@ -69,4 +69,4 @@ RenderLoginFields.defaultProps = {
   redirectToNewRegistrationPage: () => {},
   enableAdminLoginButtons: () => {},
 };
-export default RenderLoginFields;
+export default LoginForm;
