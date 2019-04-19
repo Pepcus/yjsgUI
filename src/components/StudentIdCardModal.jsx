@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import upperFirst from 'lodash/upperFirst';
 import * as shortId from 'shortid';
 import Barcode from 'react-barcode';
+import { YJSG_ID_CARD_SMALL_HEADING, YJSG_ID_CARD_MAIN_HEADING } from '../utils/textConstants';
 
 class StudentIdCardModal extends Component {
   constructor(props) {
@@ -27,11 +28,16 @@ class StudentIdCardModal extends Component {
       return (
         <div key={shortId.generate()} className="student-id-cards">
           <div className="student-id-card-wrapper">
-            <div className="image-id-card">
-              <img src="../../LOGO.png" alt="yjsg-logo" />
-            </div>
-            <div>
-              <h2 className="student-id-cards-header"> Young Jain Study Group</h2>
+            <div className="student-card-text-wrapper">
+              <div className="image-id-card">
+                <img src="../../LOGO.png" alt="yjsg-logo" />
+              </div>
+              <div className="student-small-heading">
+                <p>{ YJSG_ID_CARD_SMALL_HEADING }</p>
+              </div>
+              <div className="student-heading-block">
+                <h2 className="student-id-cards-header">{ YJSG_ID_CARD_MAIN_HEADING }</h2>
+              </div>
             </div>
           </div>
           <div className="card-content-wrapper">
