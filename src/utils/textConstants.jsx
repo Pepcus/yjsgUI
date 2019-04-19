@@ -26,3 +26,9 @@ export const IS_THERE_TEXT = ' है |';
 export const ERROR_MESSAGE_OF_LOAD_APP_DATA = 'Error occurred to load application data.';
 
 export const FILE_DOWNLOAD_MESSAGE = 'File downloading started...';
+
+export const YJSG_ID_CARD_SMALL_HEADING = 'जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019';
+
+export const YJSG_ID_CARD_MAIN_HEADING = 'Young Jain Study Group (YJSG)';
+
+

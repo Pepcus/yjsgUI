@@ -1,6 +1,7 @@
 /*CSS FOR DATAGRID*/
 :root {
     --orange-color: #f9570a;
+    --yellow-card-color: #f6c458;
     --orange-hover-color: #d24c0c;
     --enable-link-color: #ebebec;
     --enable-link-hover-color: #dedede;
@@ -1644,24 +1645,33 @@ body,
 .student-id-cards-header {
     text-align: center;
     font-size: 18px;
-    color: #ffffff !important;
+    color: #1c1b1b !important;
     font-weight: bold;
     font-family: 'Roboto Condensed';
     -webkit-print-color-adjust: exact;
 }
 
 .student-id-card-wrapper {
-    background-color: var(--orange-color);
+    position:relative;
     color: #ffffff;
     font-weight: 600;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: "Roboto Condensed", Serif;
     -webkit-print-color-adjust: exact;
 }
 
+.student-heading-block {
+    background-color: var(--yellow-card-color);
+    padding: 8px;
+}
+
+.student-small-heading {
+    font-weight: 100;
+    background-color: var(--student-id-cards-footer-background-color) !important;
+    padding: 6px;
+    font-size: 13px;
+    text-align: center;
+}
 .student-id-cards-footer {
     background-color: var(--student-id-cards-footer-background-color) !important;
     color: #ffffff;
@@ -1679,9 +1689,10 @@ body,
 }
 
 .image-id-card {
-    width: 40px;
-    margin-top: 2px;
-    margin-right: 10px;
+    position:absolute;
+    float:left;
+    width: 50px;
+    margin: 5px 0 0 5px;
 }
 
 .image-id-card img {
@@ -1804,11 +1815,7 @@ body,
     margin: 4px 0 10px;
 }
 
-.image-id-card {
-    width: 40px;
-    margin-top: 2px;
-    margin-right: 10px;
-}
+
 
 .image-id-card img {
     max-width: 100%;

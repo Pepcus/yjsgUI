@@ -1,6 +1,7 @@
 {
   "development" : {
     "--orange-color": "#0868ac",
+    "--yellow-card-color": "#0868ac",
     "--orange-hover-color": "#015b9a",
     "--enable-link-color": "#ebebec",
     "enable-link-hover-color": "#dedede",
@@ -10,6 +11,7 @@
   },
   "production" : {
     "--orange-color": "#f9570a",
+    "--yellow-card-color": "#f6c458",
     "--orange-hover-color": "#d24c0c",
     "--enable-link-color": "#ebebec",
     "--enable-link-hover-color": "#dedede",
