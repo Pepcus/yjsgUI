@@ -45,6 +45,7 @@ import {
 } from '../utils/messagesConstants';
 import { FILE_DOWNLOAD_MESSAGE } from '../utils/textConstants';
 import { Header } from './Header';
+
 /**
  * StudentInformationGrid render student information grid.
  * @type {Class}
@@ -163,8 +164,9 @@ class StudentInformationGrid extends Component {
           </div>
         </div>
       );
-    }
+    } return null;
   };
+
   setAllStudentsAsUnchecked(students) {
     return students.map(student => ({ id: student.id, isChecked: false }));
   }
@@ -175,7 +177,7 @@ class StudentInformationGrid extends Component {
     });
   }
   getSelectedStudents(idCheckStatusList) {
-    let checkedStudents = [];
+    const checkedStudents = [];
     idCheckStatusList.forEach((idCheckStatusObject) => {
       this.props.students.forEach((student) => {
         if (idCheckStatusObject.isChecked) {
@@ -492,8 +494,6 @@ class StudentInformationGrid extends Component {
       <div className="grid-scroll-page-wrapper">
         <div className="grid-scroll-wrapper" ref={this.widthRef}>
           <div className="print-media-none" >
-            <div className="student-information-Container">
-            </div>
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
                 <Link to="/admin" className="grid-small-button">
@@ -580,7 +580,6 @@ class StudentInformationGrid extends Component {
 StudentInformationGrid.propTypes = {
   adminLoginState: PropTypes.bool,
   students: PropTypes.array,
-  isLoading: PropTypes.bool,
   visibleColumnConfig: PropTypes.object,
   selectValue: PropTypes.bool,
   redirect: PropTypes.bool,
@@ -594,12 +593,16 @@ StudentInformationGrid.propTypes = {
   setStudentDataAction: PropTypes.func,
   updateStudentByAdminAction: PropTypes.func,
   fetchStudentData: PropTypes.func,
+  studentData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  setUserTypeAction: PropTypes.func,
 };
 
 StudentInformationGrid.defaultProps = {
   adminLoginState: false,
   students: [],
-  isLoading: false,
   selectValue: true,
   redirect: false,
   visibleColumnConfig: {},
@@ -613,6 +616,8 @@ StudentInformationGrid.defaultProps = {
   setStudentDataAction: () => {},
   updateStudentByAdminAction: () => {},
   fetchStudentData: () => {},
+  studentData: {},
+  setUserTypeAction: () => {},
 };
 
 const mapStateToProps = state => ({
