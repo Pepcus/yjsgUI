@@ -39,6 +39,10 @@ export const NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE = 'नाम ३ 
 
 export const FULL_ADDRESS_MESSAGE = 'कृपया पूरा पता देंवे!';
 
+export const SINGLE_COT_ERROR_MESSAGE = 'पते में सिंगल कोट नहीं होनी चाहिए';
+
+export const DOUBLE_COT_ERROR_MESSAGE = 'पते में डब्बल कोट नहीं होनी चाहिए';
+
 export const INFORMATION_HELPFUL_TO_CONTACT_MESSAGE = 'यह जानकारी आपसे संपर्क करने में उपयोगी है !';
 
 export const ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE = 'केवल ८ - ४५ वर्ष तक ही मान्य';
