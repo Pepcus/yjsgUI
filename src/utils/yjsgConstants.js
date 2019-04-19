@@ -282,10 +282,6 @@ export const classRoomNumber = [
     value: '101',
   },
   {
-    text: '102',
-    value: '102',
-  },
-  {
     text: '103',
     value: '103',
   },
@@ -326,136 +322,100 @@ export const classRoomNumber = [
     value: '112',
   },
   {
-    text: '113',
-    value: '113',
+    text: '218',
+    value: '218',
   },
   {
-    text: '114',
-    value: '114',
+    text: '219',
+    value: '219',
   },
   {
-    text: '115',
-    value: '115',
+    text: '220',
+    value: '220',
   },
   {
-    text: '201',
-    value: '201',
+    text: '224',
+    value: '224',
   },
   {
-    text: '202',
-    value: '202',
+    text: '225',
+    value: '225',
   },
   {
-    text: '203',
-    value: '203',
+    text: '227',
+    value: '227',
   },
   {
-    text: '204',
-    value: '204',
+    text: '330',
+    value: '330',
   },
   {
-    text: '205',
-    value: '105',
+    text: '332',
+    value: '332',
   },
   {
-    text: '206',
-    value: '206',
+    text: '334',
+    value: '334',
   },
   {
-    text: '207',
-    value: '207',
+    text: '337',
+    value: '337',
   },
   {
-    text: '208',
-    value: '208',
+    text: '340',
+    value: '340',
   },
   {
-    text: '209',
-    value: '209',
+    text: '341',
+    value: '341',
   },
   {
-    text: '210',
-    value: '210',
+    text: '408',
+    value: '408',
   },
   {
-    text: '211',
-    value: '211',
+    text: '501',
+    value: '501',
   },
   {
-    text: '212',
-    value: '212',
+    text: '502',
+    value: '502',
   },
   {
-    text: '213',
-    value: '213',
+    text: '503',
+    value: '503',
   },
   {
-    text: '214',
-    value: '214',
+    text: '504',
+    value: '504',
   },
   {
-    text: '215',
-    value: '215',
+    text: '506',
+    value: '506',
   },
   {
-    text: '301',
-    value: '301',
+    text: '507',
+    value: '507',
   },
   {
-    text: '302',
-    value: '302',
+    text: '508',
+    value: '508',
   },
   {
-    text: '303',
-    value: '303',
+    text: '509',
+    value: '509',
   },
   {
-    text: '304',
-    value: '304',
+    text: '601',
+    value: '601',
   },
   {
-    text: '305',
-    value: '305',
+    text: '603',
+    value: '603',
   },
   {
-    text: '306',
-    value: '306',
-  },
-  {
-    text: '307',
-    value: '307',
-  },
-  {
-    text: '308',
-    value: '308',
-  },
-  {
-    text: '309',
-    value: '309',
-  },
-  {
-    text: '310',
-    value: '310',
-  },
-  {
-    text: '311',
-    value: '311',
-  },
-  {
-    text: '312',
-    value: '312',
-  },
-  {
-    text: '313',
-    value: '313',
-  },
-  {
-    text: '314',
-    value: '314',
-  },
-  {
-    text: '315',
-    value: '315',
+    text: '607',
+    value: '607',
   },
 ];
 
@@ -567,6 +527,14 @@ export const busNumber = [
   {
     text: 'B25',
     value: 'B25',
+  },
+  {
+    text: 'B26',
+    value: 'B26',
+  },
+  {
+    text: 'B27',
+    value: 'B27',
   },
 ];
 
