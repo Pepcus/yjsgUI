@@ -109,12 +109,11 @@ export const setAppColor = (mode) => {
  * @return {string} studentId
  */
 export const getFormattedStudent = (studentId) => {
-  const lengthOfId = studentId.length;
-  if (lengthOfId === 1) {
+  if (studentId.length === 1) {
     return String(`000${studentId}`);
-  } else if (lengthOfId === 2) {
+  } else if (studentId.length === 2) {
     return String(`00${studentId}`);
-  } else if (lengthOfId === 3) {
+  } else if (studentId.length === 3) {
     return String(`0${studentId}`);
   } return String(studentId);
 };
