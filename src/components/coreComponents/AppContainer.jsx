@@ -4,7 +4,7 @@ import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 
 import Routes from './Routes';
-import { loadAppDataAction } from '../../actions/assetFilesActions';
+import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
 import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
@@ -15,6 +15,7 @@ const { development, production } = cssJSON;
 
 class AppContainer extends Component {
   componentDidMount() {
+    this.props.loadBusCoordinatorsDataAction();
     this.props.loadAppDataAction();
     if (this.props.isAppLoaded) {
       setAppColor(this.props.mode === 'production' ? production : development);
@@ -51,12 +52,14 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
   loadAppDataAction: PropTypes.func,
+  loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadedError: PropTypes.bool,
   mode: PropTypes.string,
 };
 AppContainer.defaultProps = {
   loadAppDataAction: () => {},
+  loadBusCoordinatorsDataAction: () => {},
   isAppLoaded: false,
   isAppLoadedError: false,
   mode: '',
@@ -68,5 +71,6 @@ const mapStateToProps = state => ({
 });
 export default connect(mapStateToProps, {
   loadAppDataAction,
+  loadBusCoordinatorsDataAction,
 })(AppContainer);
 

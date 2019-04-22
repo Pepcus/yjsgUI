@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import connect from 'react-redux/es/connect/connect';
+import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import upperFirst from 'lodash/upperFirst';
 import * as shortId from 'shortid';
@@ -6,12 +8,45 @@ import Barcode from 'react-barcode';
 import { YJSG_ID_CARD_SMALL_HEADING, YJSG_ID_CARD_MAIN_HEADING } from '../utils/textConstants';
 
 import { getFormattedStudentId } from '../utils/dataGridUtils';
+import { getBusCoordinators } from '../reducers/assetFilesReducer';
 
+/**
+ * StudentIdCardModal render student IdCards
+ * @type {Class}
+ */
 class StudentIdCardModal extends Component {
   constructor(props) {
     super(props);
     this.renderStudentIdCards = this.renderStudentIdCards.bind(this);
   }
+  getCoordinatorName = (busNumber) => {
+    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
+      return (
+        <div className="card-text">
+          <span className="card-text-bold">Coordinator name:</span>
+          <span className="card-title-text"> { this.props.busCoordinators[busNumber].coordinatorName }</span>
+        </div>
+      );
+    } return (
+      <div className="card-text card-text-width">
+        <span className="card-text-bold">Coordinator name:</span>
+      </div>
+    );
+  };
+  getCoordinatorContactNumber = (busNumber) => {
+    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].contactNumber) {
+      return (
+        <div className="card-text">
+          <span className="card-text-bold ">Coordinator contact:</span>
+          <span className="card-title-text">{this.props.busCoordinators[busNumber].contactNumber}</span>
+        </div>
+      );
+    } return (
+      <div className="card-text card-text-width">
+        <span className="card-text-bold">Coordinator contact:</span>
+      </div>
+    );
+  };
   renderStudentIdCards(student) {
     const studentsIdCards = student.map((object) => {
       const name = object.name.split(' ');
@@ -93,16 +128,8 @@ class StudentIdCardModal extends Component {
             </div>
           </div>
           <div className="student-id-cards-footer">
-            <div className="card-text">
-              {/* TODO: Remove hard coded content.*/}
-              <span className="card-text-bold">Coordinator name:</span>
-              <span className="card-title-text">Bhagchand Jain</span>
-            </div>
-            <div className="card-text">
-              {/* TODO: Remove hard coded content.*/}
-              <span className="card-text-bold">Coordinator contact:</span>
-              <span className="card-title-text">8435534036</span>
-            </div>
+            {this.getCoordinatorName(object.busNumber)}
+            {this.getCoordinatorContactNumber(object.busNumber)}
           </div>
         </div>);
     });
@@ -141,4 +168,16 @@ class StudentIdCardModal extends Component {
     );
   }
 }
-export default StudentIdCardModal;
+
+StudentIdCardModal.propTypes = {
+  selectedStudents: PropTypes.array,
+  busCoordinators: PropTypes.object,
+};
+StudentIdCardModal.defoultProps = {
+  selectedStudents: [],
+  busCoordinators: {},
+};
+const mapStateToProps = state => ({
+  busCoordinators: getBusCoordinators(state),
+});
+export default connect(mapStateToProps, {})(StudentIdCardModal);

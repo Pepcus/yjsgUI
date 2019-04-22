@@ -3,11 +3,15 @@ import { CSVLink } from 'react-csv';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import connect from 'react-redux/es/connect/connect';
 
 import StudentIdCardModal from './StudentIdCardModal';
 import MarkSelectedStudentAttendance from './MarkSelectedStudentAttendance';
 // import MarkOptInOrOptOutButton from './MarkOptInOrOptOutButton';
 import UpdateIdCardStatusSelectedStudents from './UpdateIdCardStatusSelectedStudents';
+import { isBusCoordinatorsDataLoadedError } from '../reducers/assetFilesReducer';
+import { Popup } from './Popup';
+import Button from './commonComponents/Button';
 
 /**
  * SelectedStudentsActionWrapper render Export, Print Now, Print Later, Mark as Present and
@@ -19,6 +23,7 @@ class SelectedStudentsActionWrapper extends Component {
     super(props);
     this.state = {
       printOptionIsOpen: false,
+      isBusCoordinatorsError: false,
     };
     this.openPrintOption = this.openPrintOption.bind(this);
     this.printCards = this.printCards.bind(this);
@@ -30,8 +35,45 @@ class SelectedStudentsActionWrapper extends Component {
    */
   printCards() {
     window.print();
+    this.setStateOfCoordinatorErrorPopup(false);
   }
 
+  /**
+   * renderIsBusCoordinatorsDataLoadedErrorPopup render bus coordinator error popup
+   * @return {ReactComponent}
+   */
+  renderIsBusCoordinatorsDataLoadedErrorPopup = () => {
+    if (this.props.isBusCoordinatorsDataLoadedError && this.state.isBusCoordinatorsError) {
+      return (
+        <Popup>
+          <h5>Coordinator information was failed so, Do you want to proceed?</h5>
+          <div className="bus-coordinatorsErrorPopupButtonContainer">
+            <Button
+              type="button"
+              buttonText="Cancel"
+              onClick={() => { this.setStateOfCoordinatorErrorPopup(false); }}
+            />
+            <Button
+              type="button"
+              buttonText="OK"
+              onClick={this.printCards}
+            />
+          </div>
+        </Popup>
+
+      );
+    }
+    return null;
+  };
+  /**
+   * setStateOfCoordinatorErrorPopup set the boolean value of isBusCoordinatorsError
+   * @param {Boolean}value
+   */
+  setStateOfCoordinatorErrorPopup = (value) => {
+    this.setState({
+      isBusCoordinatorsError: value,
+    });
+  };
   /**
    * openPrintOption method open or close the print window.
    */
@@ -82,7 +124,14 @@ class SelectedStudentsActionWrapper extends Component {
               </CSVLink>
             </div>
             <div className="buttonContainer">
-              <button className={this.renderPrintNowClassName()} onClick={this.printCards}>
+              <button
+                className={this.renderPrintNowClassName()}
+                onClick={
+                  () => {
+                    this.props.isBusCoordinatorsDataLoadedError
+                      ? this.setStateOfCoordinatorErrorPopup(true) : window.print();
+                  }}
+              >
                 <i className="fa fa-print card-icon" />Print Now
               </button>
             </div>
@@ -97,6 +146,7 @@ class SelectedStudentsActionWrapper extends Component {
               selectedStudents={this.props.selectedStudents}
               clearSelectedStudents={this.props.clearSelectedStudents}
             />*/}
+            {this.renderIsBusCoordinatorsDataLoadedErrorPopup()}
           </div>
         </div>
         <StudentIdCardModal
@@ -119,5 +169,9 @@ SelectedStudentsActionWrapper.defaultProps = {
   metaData: {},
   clearSelectedStudents: () => {},
 };
+const mapStateToProps = state => ({
+  isBusCoordinatorsDataLoadedError: isBusCoordinatorsDataLoadedError(state),
+});
 
-export default SelectedStudentsActionWrapper;
+export default connect(mapStateToProps, {})(SelectedStudentsActionWrapper);
+
