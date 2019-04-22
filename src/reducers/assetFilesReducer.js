@@ -55,14 +55,14 @@ export const assetFilesReducer = (state = initialState, action) => {
     case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
       return {
         ...state,
-        isBusCoordinatorsDataLoadedError: false,
+        isBusCoordinatorsDataFailed: false,
       };
-    case 'LOADED_BUS_COORDINATORS_DATA_SUCCESS_ACTION':
+    case 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION':
       return {
         ...state,
         isLoading: false,
         busCoordinators: action.busCoordinators,
-        isBusCoordinatorsDataLoadedError: false,
+        isBusCoordinatorsDataFailed: false,
       };
     case 'LOAD_BUS_COORDINATORS_DATA_FAILED_ACTION':
       return {
@@ -70,7 +70,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         isLoading: false,
         errorMessage: action.errorMessage,
         busCoordinators: {},
-        isBusCoordinatorsDataLoadedError: true,
+        isBusCoordinatorsDataFailed: true,
       };
     default: {
       return {
@@ -94,4 +94,4 @@ export const getIsAppLoadedError = state => state.assetFilesReducer.isAppLoadedE
 
 export const getBusCoordinators = state => state.assetFilesReducer.busCoordinators;
 
-export const isBusCoordinatorsDataLoadedError = state => state.assetFilesReducer.isBusCoordinatorsDataLoadedError;
+export const isBusCoordinatorsDataFailed = state => state.assetFilesReducer.isBusCoordinatorsDataFailed;

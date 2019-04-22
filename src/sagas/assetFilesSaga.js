@@ -5,7 +5,7 @@ import {
   fetchFileConfigSuccessAction,
   loadedAppDataSuccessAction,
   loadAppDataFailedAction,
-  loadedBusCoordinatorsDataSuccessAction,
+  loadBusCoordinatorsDataSuccessAction,
   loadBusCoordinatorsDataFailedAction,
 } from '../actions/assetFilesActions';
 import { fetchFileConfig, getAppConfig, getBusCoordinatorsConfig } from './assetFilesAPI';
@@ -45,7 +45,7 @@ export function* getBusCoordinatorsConfigSaga() {
   try {
     const response = yield getBusCoordinatorsConfig();
     if (response) {
-      yield put(loadedBusCoordinatorsDataSuccessAction(response));
+      yield put(loadBusCoordinatorsDataSuccessAction(response));
     } else {
       yield put(loadBusCoordinatorsDataFailedAction(errorMessage));
     }
