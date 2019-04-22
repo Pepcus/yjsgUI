@@ -5,7 +5,7 @@ import * as shortId from 'shortid';
 import Barcode from 'react-barcode';
 import { YJSG_ID_CARD_SMALL_HEADING, YJSG_ID_CARD_MAIN_HEADING } from '../utils/textConstants';
 
-import { getFormattedStudent } from '../utils/dataGridUtils';
+import { getFormattedStudentId } from '../utils/dataGridUtils';
 
 class StudentIdCardModal extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class StudentIdCardModal extends Component {
   renderStudentIdCards(student) {
     const studentsIdCards = student.map((object) => {
       const name = object.name.split(' ');
-      const studentId = getFormattedStudent(object.studentId);
+      const studentId = getFormattedStudentId(object.studentId);
       name.forEach((element, index) => {
         name[index] = upperFirst(`${name[index].toLocaleLowerCase()} `);
       });
