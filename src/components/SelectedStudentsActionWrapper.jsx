@@ -12,6 +12,7 @@ import UpdateIdCardStatusSelectedStudents from './UpdateIdCardStatusSelectedStud
 import { isBusCoordinatorsDataLoadedError } from '../reducers/assetFilesReducer';
 import { Popup } from './Popup';
 import Button from './commonComponents/Button';
+import { BUS_COORDINATOR_ERROR_MESSAGE } from '../utils/messagesConstants';
 
 /**
  * SelectedStudentsActionWrapper render Export, Print Now, Print Later, Mark as Present and
@@ -46,16 +47,16 @@ class SelectedStudentsActionWrapper extends Component {
     if (this.props.isBusCoordinatorsDataLoadedError && this.state.isBusCoordinatorsError) {
       return (
         <Popup>
-          <h5>Coordinator information was failed so, Do you want to proceed?</h5>
+          <h5>{ BUS_COORDINATOR_ERROR_MESSAGE }</h5>
           <div className="bus-coordinatorsErrorPopupButtonContainer">
             <Button
               type="button"
-              buttonText="Cancel"
+              buttonText="No"
               onClick={() => { this.setStateOfCoordinatorErrorPopup(false); }}
             />
             <Button
               type="button"
-              buttonText="OK"
+              buttonText="Yes"
               onClick={this.printCards}
             />
           </div>
