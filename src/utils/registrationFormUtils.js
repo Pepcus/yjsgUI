@@ -12,6 +12,8 @@ import {
   ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE,
   ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE,
   ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
+  SINGLE_QUOTE_ERROR_MESSAGE,
+  DOUBLE_QUOTE_ERROR_MESSAGE,
 } from './messagesConstants';
 
 export const setRegistrationData = (value, name) => {
@@ -115,6 +117,12 @@ export const addressValidate = (value, name) => {
 
   if (isEmpty(value)) {
     errorMessageObject.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else if (value.includes("'")) {
+    errorMessageObject.message = SINGLE_QUOTE_ERROR_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else if (value.includes('"')) {
+    errorMessageObject.message = DOUBLE_QUOTE_ERROR_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else if (value.length < 15) {
     errorMessageObject.message = FULL_ADDRESS_MESSAGE+INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
