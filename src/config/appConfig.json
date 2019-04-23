@@ -177,5 +177,67 @@
       "label": "Last Modified Date",
       "key": "lastModifiedDate"
     }
+  ],
+  "RouteArray": [
+    {
+      "routName": "StudentPage",
+      "routePath": "/",
+      "componentName": "StudentPage",
+      "isActive": true
+    },
+    {
+      "routName": "admin",
+      "routePath": "/admin",
+      "componentName": "SplashPage",
+      "isActive": true
+    },
+    {
+      "routName": "student-search",
+      "routePath": "/student-search",
+      "componentName": "StudentInformationGrid",
+      "isActive": true
+    },
+    {
+      "routName": "home",
+      "routePath": "/home",
+      "componentName": "SplashPagePrePopulated",
+      "isActive": false
+    },
+    {
+      "routName": "studentRegister",
+      "routePath": "/studentRegister",
+      "componentName": "StudentRegistrationForm",
+      "isActive": true
+    },
+    {
+      "routName": "studentCorrection",
+      "routePath": "/studentCorrection",
+      "componentName": "StudentRegistrationCorrectionForm",
+      "isActive": true
+    },
+    {
+      "routName": "adminPanel",
+      "routePath": "/adminPanel",
+      "componentName": "AdminPanel",
+      "isActive": false
+    },
+    {
+      "routName": "student-login",
+      "routePath": "/student-login",
+      "componentName": "StudentCredentialPage",
+      "isActive": true
+    },
+    {
+      "routName": "event",
+      "routePath": "/event",
+      "componentName": "ParentsRegistration",
+      "isActive": true
+    },
+    {
+      "routName": "files",
+      "routePath": "/files",
+      "componentName": "Files",
+      "isActive": true
+    }
   ]
 }
