@@ -23,7 +23,7 @@ LinkButton.propTypes = {
 };
 
 LinkButton.defaultProps = {
-  buttonText: 'Add Link',
+  buttonText: '',
   onClick: () => {},
   linkPath: '',
 };

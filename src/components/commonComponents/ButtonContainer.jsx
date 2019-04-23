@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ButtonContainer = props => (
+  // FIXME: Incorrect class name convention
   <div style={props.style} className="buttonContainer">
     {props.children}
   </div>
@@ -14,7 +15,7 @@ ButtonContainer.propTypes = {
 
 ButtonContainer.defaultProps = {
   style: {},
-  children: '',
+  children: null,
 };
 
 export default ButtonContainer;

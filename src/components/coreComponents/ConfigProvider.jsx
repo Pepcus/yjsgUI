@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // Provider and Consumer are connected through their "parent" context
 const Context = createContext();
 
+// TODO: Fix ESLint warnings
 /**
  * Provider will be exported wrapped in ConfigProvider component.
  * @type {Class}
