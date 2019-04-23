@@ -5,8 +5,10 @@ import {
   fetchFileConfigSuccessAction,
   loadedAppDataSuccessAction,
   loadAppDataFailedAction,
+  loadBusCoordinatorsDataSuccessAction,
+  loadBusCoordinatorsDataFailedAction,
 } from '../actions/assetFilesActions';
-import { fetchFileConfig, getAppConfig } from './assetFilesAPI';
+import { fetchFileConfig, getAppConfig, getBusCoordinatorsConfig } from './assetFilesAPI';
 
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';
@@ -35,5 +37,20 @@ export function* getAppConfigSaga() {
   } catch (e) {
     console.error(e);
     yield put(loadAppDataFailedAction(errorMessage));
+  }
+}
+
+export function* getBusCoordinatorsConfigSaga() {
+  const errorMessage = 'Unable to fetch  bus coordinators config.';
+  try {
+    const response = yield getBusCoordinatorsConfig();
+    if (response) {
+      yield put(loadBusCoordinatorsDataSuccessAction(response));
+    } else {
+      yield put(loadBusCoordinatorsDataFailedAction(errorMessage));
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(loadBusCoordinatorsDataFailedAction(errorMessage));
   }
 }

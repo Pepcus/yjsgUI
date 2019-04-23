@@ -28,3 +28,9 @@ export const getAppConfig = () => (
     url: 'ui_config/app.json',
   })
 );
+
+export const getBusCoordinatorsConfig = () => (
+  GET({
+    url: 'ui_config/busCoordinators.json',
+  })
+);
