@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: Remove the component if not in use
 export const TableRow = ({ row }) => (
     <tr key={row.id}>
       <td>{row.id}</td>

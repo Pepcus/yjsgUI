@@ -2,6 +2,9 @@ import React from 'react';
 import times from 'lodash/times';
 import uniqueId from 'lodash/uniqueId';
 
+// TODO: Convert into arrow function
+// TODO: Proptypes
+// TODO: ESLint warnings
 function CustomLoader(props) {
   const styles = {
     loader: {

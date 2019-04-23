@@ -9,6 +9,7 @@ import {
   yjsgFooterContactInfo,
 } from '../../utils/yjsgConstants';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
+
 /**
  * Footer component is comment footer will will be render in bottom of all page
  * @type {Class}
@@ -20,6 +21,7 @@ class Footer extends Component {
    * renderClassName method render className according where footer show and hide
    * @return {string}
    */
+    // TODO: rename to getClassName
   renderClassName = () => {
     if (this.props.isLoading) {
       return ('disable-footer');
@@ -31,7 +33,8 @@ class Footer extends Component {
       <div className={this.renderClassName()} >
         <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span>
         </p>
-      </div>);
+      </div>
+    );
   }
 }
 
@@ -48,6 +51,5 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
 });
 
-export default connect(mapStateToProps, {
-})(Footer);
+export default connect(mapStateToProps, {})(Footer);
 

@@ -28,6 +28,7 @@ class AppContainer extends Component {
   }
 
   render() {
+    // TODO: Rename isAppLoadedError to isAppLoadingFailed
     if (this.props.isAppLoaded && !this.props.isAppLoadedError) {
       return (
         <HashRouter>
@@ -57,6 +58,7 @@ AppContainer.propTypes = {
   isAppLoadedError: PropTypes.bool,
   mode: PropTypes.string,
 };
+
 AppContainer.defaultProps = {
   loadAppDataAction: () => {},
   loadBusCoordinatorsDataAction: () => {},
@@ -64,11 +66,13 @@ AppContainer.defaultProps = {
   isAppLoadedError: false,
   mode: '',
 };
+
 const mapStateToProps = state => ({
   mode: getApplicationMode(state),
   isAppLoaded: isAppLoaded(state),
   isAppLoadedError: getIsAppLoadedError(state),
 });
+
 export default connect(mapStateToProps, {
   loadAppDataAction,
   loadBusCoordinatorsDataAction,
