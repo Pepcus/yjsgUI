@@ -31,7 +31,7 @@ Button.defaultProps = {
   disabled: false,
   buttonText: '',
   onClick: () => {},
-  type: '',
+  type: 'button',
   formName: '',
   styles: {},
 };
