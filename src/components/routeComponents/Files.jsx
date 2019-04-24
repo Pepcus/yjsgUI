@@ -36,7 +36,7 @@ import {
   setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
 import CustomLoader from '../commonComponents/CustomLoader';
-import { Popup } from '../Popup';
+import Popup from '../Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
 
 /**
@@ -435,6 +435,7 @@ Files.propsType = {
   setAdminLoginStateAction: PropTypes.func,
   setRedirectValueAction: PropTypes.func,
   resetVisibleColumnConfigAction: PropTypes.func,
+  context: PropTypes.object,
 };
 
 Files.defaultProps = {
@@ -448,6 +449,7 @@ Files.defaultProps = {
   adminLoginState: false,
   filesConfig: {},
   isLoading: false,
+  context: {},
 };
 
 const mapStateToProps = state => ({

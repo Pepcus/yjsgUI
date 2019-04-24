@@ -19,8 +19,15 @@ class StudentIdCardModal extends Component {
     super(props);
     this.renderStudentIdCards = this.renderStudentIdCards.bind(this);
   }
+
+  /**
+   * getCoordinatorName method render coordination Name into the student Id card footer
+   * @param {String} busNumber
+   * @return {ReactComponent}
+   */
   getCoordinatorName = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
+    if (busNumber && !isEmpty(this.props.busCoordinators)
+      && this.props.busCoordinators[busNumber].coordinatorName) {
       return (
         <div className="card-text">
           <span className="card-text-bold">Coordinator name:</span>
@@ -33,8 +40,15 @@ class StudentIdCardModal extends Component {
       </div>
     );
   };
+  /**
+   * getCoordinatorContactNumber method render coordination contact
+   * number into the student Id card footer
+   * @param {String} busNumber
+   * @return {ReactComponent}
+   */
   getCoordinatorContactNumber = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].contactNumber) {
+    if (busNumber && !isEmpty(this.props.busCoordinators)
+      && this.props.busCoordinators[busNumber].contactNumber) {
       return (
         <div className="card-text">
           <span className="card-text-bold ">Coordinator contact:</span>
@@ -47,6 +61,12 @@ class StudentIdCardModal extends Component {
       </div>
     );
   };
+
+  /**
+   * renderStudentIdCards method render students Id cards
+   * @param {Array} student
+   * @return {ReactComponent}
+   */
   renderStudentIdCards(student) {
     const studentsIdCards = student.map((object) => {
       const name = object.name.split(' ');

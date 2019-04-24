@@ -27,10 +27,6 @@ import { getStudent } from '../../reducers/studentRegistrationReducer';
 * Two buttons (Already Registered and New Registration) .
  * @type {class}
  * */
-// FIXME: Add missing propTypes and defaultProps.
-//  Fix EsLint issues.
-//  Add missing JSDocs
-
 class StudentPage extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +36,7 @@ class StudentPage extends Component {
       isNewRegistration: false,
     };
     // FIXME: Use arrow functions to avoid binding.
-    this.renderLoginField = this.renderLoginField.bind(this);
+    this.renderStudentLoginButtons = this.renderStudentLoginButtons.bind(this);
     this.redirectToStudentLogin = this.redirectToStudentLogin.bind(this);
     this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
@@ -89,13 +85,12 @@ class StudentPage extends Component {
     });
     this.props.setHashLinkForNewRegistrationAction(USER_TYPES.STUDENT);
   }
-// FixMe: Rename the method to renderStudentLoginButtons
   /**
-   * renderLoginField method return the react component in that
+   * renderStudentLoginButtons method return the react component in that
    * there are two buttons one is already register and anther is new registration.
    * @return {ReactComponent}
    */
-  renderLoginField() {
+  renderStudentLoginButtons() {
     return (
       <div>
         <Button
@@ -129,7 +124,7 @@ class StudentPage extends Component {
               <img src={yjsgLogo} alt="yjsg logo" />
             </div>
             <div className="landing-page-button-container">
-              {this.renderLoginField()}
+              {this.renderStudentLoginButtons()}
             </div>
           </div>
         </div>
@@ -143,6 +138,7 @@ StudentPage.propTypes = {
   setStudentCredentials: PropTypes.func,
   setHashLinkForStudentCredentialAction: PropTypes.func,
   setHashLinkForNewRegistrationAction: PropTypes.func,
+  setUserTypeAction: PropTypes.func,
 };
 
 StudentPage.defaultProps = {
@@ -150,6 +146,7 @@ StudentPage.defaultProps = {
   setStudentCredentials: () => {},
   setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
+  setUserTypeAction: () => {},
 };
 const mapStateToProps = state => ({
   studentData: getStudent(state),

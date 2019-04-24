@@ -44,11 +44,7 @@ import {
 } from '../../utils/textConstants';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
-/*
-* The StudentCredentialPage component for the student which will render -
-* Already Registered student credential field.
- * @type {class}
- * */
+
 // FixMe:This component is unnecessary.
 //  Please use splash page to show pre-populated data and remove this component
 /**
@@ -284,7 +280,7 @@ StudentCredentialPage.propTypes = {
   isFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  studentId: PropTypes.string,
+  studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   secretKey: PropTypes.string,
   hashLink: PropTypes.string,
 };

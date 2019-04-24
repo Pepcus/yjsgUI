@@ -55,7 +55,6 @@ import {
 import {
   getStudent,
   isFetched,
-  isLoading,
   isUpdated,
   getUserId,
   getUserSecretKey,
@@ -64,15 +63,15 @@ import {
 import SelectListInputField from '../formComponents/SelectListInputField';
 import Button from '../commonComponents/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../utils/textConstants';
-import { Popup } from '../Popup';
+import Popup from '../Popup';
 
-// FixMe: Add missing propTypes and defaultProps.
-//  Fix EsLint issues.
-//  Add missing JSDocs
+/**
+ * The StudentRegistrationCorrectionForm component render student correction form.
+ * @type {class}
+ */
 class StudentRegistrationCorrectionForm extends Component {
   constructor(props) {
     super(props);
-
     this.formRef = React.createRef();
     this.state = {
       student: {
@@ -95,7 +94,6 @@ class StudentRegistrationCorrectionForm extends Component {
       },
       onlyOptIn2019: true,
       isSubmitTriggered: false,
-      isValidId: false,
       isFormChanged: false,
       errorMessage: {
         name: {},
@@ -109,16 +107,14 @@ class StudentRegistrationCorrectionForm extends Component {
         busStop: {},
         classAttended2019: {},
         optIn2019: {},
-
       },
     };
     // FIXME: Use arrow functions to avoid binding.
-    this._submitStudentData = this.submitStudentData.bind(this);
+    this.onSubmitStudentData = this.onSubmitStudentData.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
     this.prePopulateCourse2019 = this.prePopulateCourse2019.bind(this);
     this.renderClassAttended2018 = this.renderClassAttended2018.bind(this);
   }
-
   componentDidMount() {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -129,14 +125,12 @@ class StudentRegistrationCorrectionForm extends Component {
     if (!isEmpty(studentData)) {
       this.setState({
         student: { ...this.state.student, ...studentData },
-        isValidId: true,
         isSubmitTriggered: false,
       });
       this.prePopulateCourse2019(studentData);
-      this.checkError({ email: '', motherMobile: '' });
+      this.verifyStudentFormData({ email: '', motherMobile: '' });
     }
   }
-
   componentWillReceiveProps(nextProps) {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -147,14 +141,12 @@ class StudentRegistrationCorrectionForm extends Component {
     if (!isEmpty(studentData)) {
       this.setState({
         student: { ...this.state.student, ...studentData },
-        isValidId: true,
         isSubmitTriggered: false,
       });
       this.prePopulateCourse2019(studentData);
-      this.checkError({ email: '', motherMobile: '' });
+      this.verifyStudentFormData({ email: '', motherMobile: '' });
     }
   }
-
   /**
    * renderAdminEditableFields render admin editable field which will edit by only admin.
    * @return {ReactComponent}
@@ -204,7 +196,7 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} e
    */
   submitStudentDataForOnlyOptInCase = (e) => {
-    this.checkError(this.state.student);
+    this.verifyStudentFormData(this.state.student);
     e.preventDefault();
     if (!isEmpty(this.state.student.optIn2019)) {
       this.setState({
@@ -213,6 +205,11 @@ class StudentRegistrationCorrectionForm extends Component {
       this.updateStudentData();
     }
   };
+  /**
+   * changeIsOnlyOptIn2019 method maintained flag value of onlyOptIn2019
+   * as per form contends show to user.
+   * @param {boolean}value
+   */
   changeIsOnlyOptIn2019 = (value) => {
     this.setState({
       onlyOptIn2019: value,
@@ -281,15 +278,17 @@ class StudentRegistrationCorrectionForm extends Component {
       </form>
     </div>
   );
-  // FIXME: Rename it to verifyStudentFormData
-  checkError(studentData) {
+  /**
+   * verifyStudentFormData check the student form data is valid or not.
+   * @param {Object} studentData
+   */
+  verifyStudentFormData(studentData) {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
       isDataCorrect(studentData));
     this.setState({
       errorMessage: errorMessageObject,
     });
   }
-
   /**
    * renderOptInField optIn field as per user condition.
    * @return {ReactComponent}
@@ -317,10 +316,9 @@ class StudentRegistrationCorrectionForm extends Component {
         errorMessage={this.state.errorMessage.optIn2019.message}
       />
     );
-
   };
   /**
-   * renderLavelField render Level field according to user type.
+   * renderLevelField render Level field according to user type.
    * @return {Reactcomponent}
    */
   renderLevelField = () => {
@@ -356,19 +354,18 @@ class StudentRegistrationCorrectionForm extends Component {
           value={this.state.student.classAttended2019}
         />
       );
-    } else {
-      return (
-        <SelectListInputField
-          name="classAttended2019"
-          label={WHAT_YOU_WANT_TO_STUDY_LABEL}
-          options={studiesArray}
-          onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2019}
-          errorMessage={this.state.errorMessage.classAttended2019.message}
-          isRequired
-        />
-      );
     }
+    return (
+      <SelectListInputField
+        name="classAttended2019"
+        label={WHAT_YOU_WANT_TO_STUDY_LABEL}
+        options={studiesArray}
+        onInputChange={this._handleInputChange}
+        value={this.state.student.classAttended2019}
+        errorMessage={this.state.errorMessage.classAttended2019.message}
+        isRequired
+      />
+    );
   };
   /**
    * renderBackButton method render back button according to user type
@@ -397,11 +394,10 @@ class StudentRegistrationCorrectionForm extends Component {
         linkPath={this.props.context.previousLocation}
       />
     );
-
   };
   /**
    * prePopulateCourse2019 method will use for pre populate the information of fetch student.
-   * @param {Object} nextProps
+   * @param {Object} studentData
    */
   prePopulateCourse2019(studentData) {
     // const lastCourse = nextProps.studentData.classAttended2018;
@@ -413,20 +409,29 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   /**
-  * This method is called to return the value of marks if marks doesn't exist then it will return N.A. otherwise reture the value
-  * @param {String} Marks
-  */
+   * This method is called to return the value of marks if marks doesn't
+   * exist then it will return N.A. otherwise return the value
+   * @param {String} marks
+   * @return {String} marks or 'N.A.'
+   */
   getMarks = (marks) => {
     if (!marks) {
       return 'N.A.';
     }
     return marks;
-
   };
+  /**
+   * isValidData method call the isValidUserInfo method
+   * to check the error message object and according error message
+   * object return it boolean value
+   * @return {boolean}
+   */
   isValidData() {
     return isValidUserInfo(this.state.errorMessage, this.props.pageUser);
   }
-
+  /**
+   * updateStudentData method update the particular student data.
+   */
   updateStudentData() {
     const { id, secretKey } = this.props;
     const { student } = this.state;
@@ -435,14 +440,21 @@ class StudentRegistrationCorrectionForm extends Component {
       secretKey,
       student });
   }
+  /**
+   * scrollToError method scroll to first form file which is in valid in mobile view only.
+   */
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-error');
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
-  // FIXME: Rename it to onSubmitStudentData
-  submitStudentData(e) {
+  /**
+   * onSubmitStudentData method will call when click on form submit button
+   * It submit the updated student data
+   * @param {Object} e
+   */
+  onSubmitStudentData(e) {
     e.preventDefault();
     if (this.state.student.optIn2019 === 'N') {
       this.setState({
@@ -450,7 +462,7 @@ class StudentRegistrationCorrectionForm extends Component {
       });
       this.updateStudentData();
     } else {
-      this.checkError(this.state.student);
+      this.verifyStudentFormData(this.state.student);
       if (!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
         this.setState({
           isSubmitTriggered: true,
@@ -469,27 +481,35 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   onClickRadioButton = (event) => {
-    const value = event.target.value;
-    this.handleInputChange(value, 'optIn2019');
+    this.handleInputChange(event.target.value, 'optIn2019');
   };
+  /**
+   * handleInputChange method set the form fields data in state
+   * and all in format value and name in key value format through
+   * setRegistrationData functional component.
+   * @param {String} value
+   * @param {String} name
+   */
   handleInputChange(value, name) {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
     errorMessageObject[name] = validateInput(value, name);
-
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
-
     this.setState({
       student: updatedData,
       errorMessage: updatedErrorState,
       isFormChanged: true,
       isSubmitTriggered: false,
     });
-    this.checkError(updatedData);
+    this.verifyStudentFormData(updatedData);
   }
-
+  /**
+   * renderSuccessMessage render the success message if form data is validate
+   * @return {ReactComponent}
+   */
   renderSuccessMessage() {
+    // if form data is update and valid and submitted successfully.
     if (this.props.isUpdated) {
       return (
         <Popup>
@@ -502,6 +522,7 @@ class StudentRegistrationCorrectionForm extends Component {
         </Popup>
       );
     } else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.isValidData()) {
+      // if form data is not update and valid.
       return (
         <Popup>
           <h5>{noInfoChangeMessage}</h5>
@@ -513,8 +534,12 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   }
-
+  /**
+   * renderClassAttended2018 method previous year level from field
+   * @return{ReactComponent}
+   */
   renderClassAttended2018() {
+    // if it contained value
     if (this.props.studentData.classAttended2018) {
       return (
         <InputField
@@ -528,6 +553,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
+    // if it is empty
     return (
       <InputField
         type="text"
@@ -538,10 +564,13 @@ class StudentRegistrationCorrectionForm extends Component {
         isRequired={false}
       />
     );
-
   }
-
-  // FIXME: Create a separate component to render no-validation input fields
+  // FIXME: Create a separate component to render no-validation input
+  /**
+   * renderNoValidationFields method render form field without validation if opt-in
+   * is 'N'
+   * @return {ReactComponent} Form
+   */
   renderNoValidationFields() {
     return (
       <div className="registrationFormContainer">
@@ -672,7 +701,7 @@ class StudentRegistrationCorrectionForm extends Component {
                       type="submit"
                       form="studentRegistrationForm"
                       value="Submit"
-                      onClick={this._submitStudentData}
+                      onClick={this.onSubmitStudentData}
                     />
                   </div>
                 </div>
@@ -702,7 +731,8 @@ class StudentRegistrationCorrectionForm extends Component {
     );
   }
   render() {
-    if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
+    if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL
+      && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
       return this.renderOnlyOptIn2019();
     } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
@@ -851,7 +881,7 @@ class StudentRegistrationCorrectionForm extends Component {
                       type="submit"
                       form="studentRegistrationForm"
                       value="Submit"
-                      onClick={this._submitStudentData}
+                      onClick={this.onSubmitStudentData}
                     />
                   </div>
                 </div>
@@ -888,37 +918,38 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       </Popup>
     );
-
   }
-
 }
-
 StudentRegistrationCorrectionForm.propTypes = {
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isUpdated: PropTypes.bool,
-  isLoading: PropTypes.bool,
   isFetched: PropTypes.bool,
   updateStudentData: PropTypes.func,
+  id: PropTypes.string,
+  secretKey: PropTypes.string,
+  context: PropTypes.object,
+  pageUser: PropTypes.string,
+  isUpdatedResetAction: PropTypes.func,
 };
-
 StudentRegistrationCorrectionForm.defaultProps = {
   studentData: {},
   isUpdated: false,
-  isLoading: false,
   isFetched: false,
   updateStudentData: () => {},
+  id: '',
+  secretKey: '',
+  context: {},
+  pageUser: '',
+  isUpdatedResetAction: () => {},
 };
-
 const mapStateToProps = state => ({
   studentData: getStudent(state),
   isUpdated: isUpdated(state),
-  isLoading: isLoading(state),
   isFetched: isFetched(state),
   id: getUserId(state),
   secretKey: getUserSecretKey(state),
   pageUser: getPageUserType(state),
 });
-
 export default connect(mapStateToProps, {
   updateStudentData,
   isUpdatedResetAction,

@@ -27,11 +27,6 @@ class AdvanceSearch extends Component {
     this._clearFilter = this.clearFilter.bind(this);
     this.clearButton = this.clearButton.bind(this);
   }
-  /**
-   * setInputValue method assign search value to inputValue in state.
-   * And in case search value is empty then reassign all student data.
-   * @param {Object} event
-   */
   componentDidMount() {
     this.setState({
       checkedIds: this.props.checkedIds,
@@ -43,13 +38,23 @@ class AdvanceSearch extends Component {
     });
   }
 
+  /**
+   * setInputValue method assign search value to inputValue in state
+   * and maintained the check and uncheck students.
+   * And in case search value is empty then reassign all student data.
+   * @param {Object} event
+   */
   setInputValue(event) {
     if (isEmpty(event.target.value)) {
       const studentsData = this.props.students.map((student) => {
         let finalStudentObject = student;
         this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
-            finalStudentObject = { ...student, studentId: String(checkedUncheckedIdObject.id), isChecked: checkedUncheckedIdObject.isChecked };
+            finalStudentObject = {
+              ...student,
+              studentId: String(checkedUncheckedIdObject.id),
+              isChecked: checkedUncheckedIdObject.isChecked,
+            };
           }
         });
         return finalStudentObject;
@@ -64,7 +69,7 @@ class AdvanceSearch extends Component {
    * clearFilter method clear the search result
    */
   // This may be use in future
-   clearFilter() {
+  clearFilter() {
     // set the search input value to empty string
     if (!isEmpty(this.state.inputValue)) {
       this.setState({
@@ -133,13 +138,18 @@ class AdvanceSearch extends Component {
       });
     }
   }
+
+  /**
+   * clearButton method return clear button when inputValue is not empty.
+   * @return {ReactComponent}
+   */
   clearButton() {
     if (!isEmpty(this.state.inputValue)) {
       return <span className="clear-search"><i className="fa fa-times-circle" onClick={this._clearFilter} /></span>;
     }
   }
   /**
-   * advanceSearch method find the search result.
+   * advanceSearch method find the search result and also maintained check and uncheck students.
    * @param {Object} event
    */
   advanceSearch(event) {
@@ -165,7 +175,11 @@ class AdvanceSearch extends Component {
           let finalStudentObject = student;
           this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
             if (String(student.id) === String(checkedUncheckedIdObject.id)) {
-              finalStudentObject = { ...student, studentId: String(checkedUncheckedIdObject.id), isChecked: checkedUncheckedIdObject.isChecked };
+              finalStudentObject = {
+                ...student,
+                studentId: String(checkedUncheckedIdObject.id),
+                isChecked: checkedUncheckedIdObject.isChecked,
+              };
             }
           });
           return finalStudentObject;
@@ -177,7 +191,8 @@ class AdvanceSearch extends Component {
       const searchStudentsIds = this.state.inputValue.split(',');
       const searchResult = [];
       for (const index in searchStudentsIds) {
-        const result = this.props.students.filter(student => student.id === Number(searchStudentsIds[index]));
+        const result = this.props.students.filter(student =>
+          student.id === Number(searchStudentsIds[index]));
         searchResult.push(...result);
       }
       const uniqSearchResult = uniqWith(searchResult, isEqual);
@@ -185,7 +200,11 @@ class AdvanceSearch extends Component {
         let finalStudentObject = student;
         this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
-            finalStudentObject = { ...student, studentId: String(checkedUncheckedIdObject.id), isChecked: checkedUncheckedIdObject.isChecked };
+            finalStudentObject = {
+              ...student,
+              studentId: String(checkedUncheckedIdObject.id),
+              isChecked: checkedUncheckedIdObject.isChecked,
+            };
           }
         });
         return finalStudentObject;

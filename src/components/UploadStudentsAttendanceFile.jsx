@@ -46,6 +46,10 @@ const customUploadStudentsAttendanceFileModalStyles = {
   },
 };
 
+/**
+ * UploadStudentsAttendanceFile render upload student attendance file modal
+ * @type {Class}
+ */
 class UploadStudentsAttendanceFile extends Component {
 
   constructor(props) {
@@ -69,9 +73,17 @@ class UploadStudentsAttendanceFile extends Component {
     this.renderOptions = this.renderOptions.bind(this);
   }
 
+  /**
+   * openUploadStudentsAttendanceFileOption method set isUploadStudentsAttendanceFileModal to true
+   */
   openUploadStudentsAttendanceFileOption() {
     this.setState({ isUploadStudentsAttendanceFileModal: true });
   }
+
+  /**
+   * closeUploadStudentsAttendanceFileOption method set isUploadStudentsAttendanceFileModal to false
+   * and reset isSuccess by calling resetIsSuccessAction action
+   */
   closeUploadStudentsAttendanceFileOption() {
     this.setState({ isUploadStudentsAttendanceFileModal: false });
     this.props.resetIsSuccessAction();
@@ -81,21 +93,38 @@ class UploadStudentsAttendanceFile extends Component {
     });
   }
 
-  onFormSubmit(e) {
-    e.preventDefault();
+  /**
+   *onFormSubmit method call fileUpload method to upload attendance file
+   * @param {Object} event
+   */
+  onFormSubmit(event) {
+    event.preventDefault();
     this.fileUpload(this.state.attendanceFile);
   }
 
-  onChange(e) {
-    this.setState({ attendanceFile: e.target.files[0] });
+  /**
+   * onChange method set attendance file in attendanceFile
+   * when browse the file.
+   * @param {Object} event
+   */
+  onChange(event) {
+    this.setState({ attendanceFile: event.target.files[0] });
   }
 
+  /**
+   * fileUpload method upload attendance file by calling uploadStudentsAttendanceFileAction action
+   * @param {Array} attendanceFile
+   */
   fileUpload(attendanceFile) {
     const { secretKey } = this.props;
     const day = this.state.selectedDay;
     this.props.uploadStudentsAttendanceFileAction({ secretKey, attendanceFile, day });
   }
 
+  /**
+   * renderFailRecordIds method method render failed records Ids
+   * @return {ReactComponent}
+   */
   renderFailRecordIds() {
     if (this.props.failRecordIds) {
       return (
@@ -107,6 +136,10 @@ class UploadStudentsAttendanceFile extends Component {
     return null;
   }
 
+  /**
+   * renderIdNotExistMessage method render Id not exist message
+   * @return {ReactComponent}
+   */
   renderIdNotExistMessage() {
     if (this.props.idNotExistErrorMessage) {
       return (
@@ -116,12 +149,22 @@ class UploadStudentsAttendanceFile extends Component {
     }
     return null;
   }
+
+  /**
+   * renderUploadButtonClassName method return the class name of upload button
+   * @return {string} class name
+   */
   renderUploadButtonClassName() {
     if (!this.state.attendanceFile || isEmpty(this.state.selectedDay)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
+
+  /**
+   * renderMessage method render success or failure message of upload attendance
+   * @return {ReactComponent}
+   */
   renderMessage() {
     if (this.props.isUploadAttendanceSuccess) {
       return (
@@ -166,6 +209,11 @@ class UploadStudentsAttendanceFile extends Component {
       selectedDay: event.target.value,
     });
   }
+
+  /**
+   * renderUploadStudentsAttendanceOption method render upload student attendance file modal
+   * @return {ReactComponent}
+   */
   renderUploadStudentsAttendanceOption() {
     if (this.state.isUploadStudentsAttendanceFileModal) {
       return (
