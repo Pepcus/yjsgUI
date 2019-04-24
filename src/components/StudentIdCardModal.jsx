@@ -193,7 +193,7 @@ StudentIdCardModal.propTypes = {
   selectedStudents: PropTypes.array,
   busCoordinators: PropTypes.object,
 };
-StudentIdCardModal.defoultProps = {
+StudentIdCardModal.defaultProps = {
   selectedStudents: [],
   busCoordinators: {},
 };

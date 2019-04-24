@@ -262,7 +262,7 @@ UpdateIdCardStatusSelectedStudents.propTypes = {
   secretKey: PropTypes.string,
   updateIdCardStatusSelectedStudentsAction: PropTypes.func,
 };
-UpdateIdCardStatusSelectedStudents.defoultProps = {
+UpdateIdCardStatusSelectedStudents.defaultProps = {
   resetIsUpdateIdCardStatusSuccessAction: () => {},
   selectedStudents: [],
   isUpdateIdCardStatusSuccess: false,
