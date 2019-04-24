@@ -76,7 +76,7 @@ html, body, #root, #root>div, .landing-page-container {
 input, select, textarea {
     font-family: 'Poppins', sans-serif;
 }
-.buttonContainer a {
+.button-container a {
     text-decoration: none;
 }
 
@@ -129,7 +129,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 2px solid var(--index-orange-color);
 }
 
-.buttonContainer {
+.button-container {
     width: 170px;
     display: inline-block;
     margin-left: 30px;
@@ -321,7 +321,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     line-height: 30px;
 }
-.errorMessageWrapper{
+.error-message-wrapper{
     position: relative;
 }
 
@@ -384,10 +384,10 @@ input[type=number]::-webkit-outer-spin-button {
     top: 0;
     right: 10px;
 }
-.backButtonContainer .buttonContainer {
+.backButtonContainer .button-container {
     margin-top: 5px;
 }
-.logoutButtonContainer .buttonContainer {
+.logoutButtonContainer .button-container {
     margin-top: 5px;
 }
 .registrationFormButtonContainer .buttonOrange {
@@ -426,7 +426,7 @@ input[type=number]::-webkit-outer-spin-button {
     .adminResultsContent {
         max-height: 500px;
     }
-    .buttonContainer {
+    .button-container {
         margin: 10px 0 0;
         width: 100%;
     }

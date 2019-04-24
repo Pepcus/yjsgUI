@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ErrorMessage from '../commonComponents/ErrorMessage';
 
+/**
+ * InputField render input field.
+ */
 class InputField extends Component {
 
   constructor(props) {
@@ -13,7 +16,7 @@ class InputField extends Component {
 
   handleOnChange(e) {
     this.props.onInputChange(e.target.value, this.props.name);
-  };
+  }
 
   populateValue() {
     if (this.props.value) {
@@ -34,14 +37,14 @@ class InputField extends Component {
 
     const newLabel = isRequired ? `${label} * ` : label;
 
-    if(errorMessage) {
+    if (errorMessage) {
       return (
-        <div className={'inputWrapper'}>
-          <div className={'has-error inputWrapperContainer errorInputField'}>
-            <div className={'inputLabel'}><label>{newLabel}</label></div>
+        <div className="inputWrapper">
+          <div className="has-error inputWrapperContainer errorInputField">
+            <div className="inputLabel"><label>{newLabel}</label></div>
             <div>
               <input
-                className={'inputText'}
+                className="inputText"
                 type={type}
                 placeholder={placeholder}
                 onChange={this._handleOnChange}
@@ -49,18 +52,18 @@ class InputField extends Component {
                 disabled={disabled}
               />
             </div>
-            <ErrorMessage errorMessage={errorMessage}/>
+            <ErrorMessage message={errorMessage} />
           </div>
         </div>
       );
     }
     return (
-      <div className={'inputWrapper'}>
-        <div className={'inputWrapperContainer'}>
-          <div className={'inputLabel'}><label>{newLabel}</label></div>
+      <div className="inputWrapper">
+        <div className="inputWrapperContainer">
+          <div className="inputLabel"><label>{newLabel}</label></div>
           <div>
             <input
-              className={'inputText'}
+              className="inputText"
               type={type}
               placeholder={placeholder}
               onChange={this._handleOnChange}
@@ -68,7 +71,7 @@ class InputField extends Component {
               disabled={disabled}
             />
           </div>
-          <ErrorMessage errorMessage={errorMessage}/>
+          <ErrorMessage message={errorMessage} />
         </div>
       </div>
     );
@@ -81,8 +84,7 @@ InputField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
-  style: PropTypes.object,
-  value:PropTypes.oneOfType([
+  value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
@@ -91,8 +93,6 @@ InputField.propTypes = {
   errorMessage: PropTypes.string,
   isRequired: PropTypes.bool,
   disabled: PropTypes.bool,
-  min: PropTypes.number,
-  max: PropTypes.number,
 };
 
 InputField.defaultProps = {

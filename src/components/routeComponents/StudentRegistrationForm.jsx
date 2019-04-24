@@ -357,11 +357,11 @@ class StudentRegistrationForm extends Component {
               <div className="registrationFormButtonContainer">
                 <div className="button-wrapper">
                   {this.renderBackButton()}
-                  <div className="buttonContainer">
+                  <div className="button-container">
                     <Button
                       buttonText={formSubmitBtnText}
                       type="submit"
-                      form="studentRegistrationForm"
+                      formName="studentRegistrationForm"
                       value="Submit"
                       onClick={this._onSubmitStudentData}
                     />

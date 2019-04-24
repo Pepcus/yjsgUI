@@ -38,7 +38,7 @@ const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirect
             />
             <Button
               type="submit"
-              form="adminCredential"
+              formName="adminCredential"
               buttonText={formSubmitBtnText}
               onClick={setAdminLogin}
             />

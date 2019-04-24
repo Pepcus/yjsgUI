@@ -18,11 +18,10 @@ import { isLoading } from '../../reducers/studentRegistrationReducer';
 class Footer extends Component {
 
   /**
-   * renderClassName method render className according where footer show and hide
+   * getClassName method render className according where footer show and hide
    * @return {string}
    */
-    // TODO: rename to getClassName
-  renderClassName = () => {
+  getClassName = () => {
     if (this.props.isLoading) {
       return ('disable-footer');
     }
@@ -30,7 +29,7 @@ class Footer extends Component {
   };
   render() {
     return (
-      <div className={this.renderClassName()} >
+      <div className={this.getClassName()} >
         <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span>
         </p>
       </div>

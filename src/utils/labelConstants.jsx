@@ -1,4 +1,3 @@
-
 export const PREVIOUS_YEAR_LEVEL_LABEL = 'पूर्व में किये गए धार्मिक अध्ययन का विवरण';
 
 export const IS_OPT_IN_OR_OPT_OUT_2019_LABEL = '2019 के शिविर की स्वीकृति ?';

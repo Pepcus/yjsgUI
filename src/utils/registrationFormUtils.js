@@ -27,7 +27,6 @@ export const setRegistrationData = (value, name) => {
  *
  * @param {String} value
  * @param {String} name
- * @param {String} user
  * @return {Object}
  */
 export const validateInput = (value, name) => {
@@ -231,6 +230,7 @@ export const requireFieldsValidate = (value, name) => {
  * checks errorMessageObject and return true if found isValid_name
  *
  * @param {Object} errorMessageObject
+ * @param {String} user
  * @return {boolean} isValid
  */
 export const isValidUserInfo = (errorMessageObject, user) => {

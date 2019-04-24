@@ -1,4 +1,3 @@
-
 export const PLEASE_SELECT_ANY_ONE_TEXT = 'कृपया एक चुनिए . . .';
 
 export const YES_TEXT = 'हाँ';
@@ -30,5 +29,3 @@ export const FILE_DOWNLOAD_MESSAGE = 'File downloading started...';
 export const YJSG_ID_CARD_SMALL_HEADING = 'जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019';
 
 export const YJSG_ID_CARD_MAIN_HEADING = 'Young Jain Study Group (YJSG)';
-
-

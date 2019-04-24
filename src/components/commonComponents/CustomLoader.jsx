@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import times from 'lodash/times';
 import uniqueId from 'lodash/uniqueId';
 
-// TODO: Convert into arrow function
-// TODO: Proptypes
-// TODO: ESLint warnings
-function CustomLoader(props) {
+/**
+ * CustomLoader will render loader.
+ * @param {Object} props
+ * @return {ReactComponent}
+ * @constructor
+ */
+const CustomLoader = (props) => {
   const styles = {
     loader: {
       position: 'absolute',
@@ -26,12 +30,20 @@ function CustomLoader(props) {
               (<div
                 key={uniqueId('loaderSection')}
                 style={{ background: loaderColor }}
-              />))
+               />))
           }
         </div>
       </div>
     </div>
   );
-}
+};
+
+CustomLoader.propTypes = {
+  loaderColor: PropTypes.string,
+};
+
+CustomLoader.defaultProps = {
+  loaderColor: '',
+};
 
 export default CustomLoader;

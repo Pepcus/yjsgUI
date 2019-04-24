@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
-// TODO: Add PropTypes
-const Button = ({ onClick, disabled, buttonText, type, form, }) => (
+const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
   <ButtonContainer>
     <button
+      style={styles}
       className="buttonOrange"
-      // TODO: Rename form to formId or formName. Whichever is applicable.
-      form={form}
+      form={formName}
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -23,12 +22,18 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   buttonText: PropTypes.string,
   onClick: PropTypes.func,
+  type: PropTypes.string,
+  formName: PropTypes.string,
+  styles: PropTypes.object,
 };
 
 Button.defaultProps = {
   disabled: false,
   buttonText: '',
   onClick: () => {},
+  type: '',
+  formName: '',
+  styles: {},
 };
 
 export default Button;
