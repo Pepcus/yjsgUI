@@ -10,7 +10,7 @@ import MarkSelectedStudentAttendance from './MarkSelectedStudentAttendance';
 // import MarkOptInOrOptOutButton from './MarkOptInOrOptOutButton';
 import UpdateIdCardStatusSelectedStudents from './UpdateIdCardStatusSelectedStudents';
 import { isBusCoordinatorsDataFailed } from '../reducers/assetFilesReducer';
-import { Popup } from './Popup';
+import Popup from './Popup';
 import Button from './commonComponents/Button';
 import { BUS_COORDINATOR_ERROR_MESSAGE } from '../utils/messagesConstants';
 

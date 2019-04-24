@@ -6,6 +6,21 @@ import AdminLoginForm from './AdminLoginForm';
 import { adminLoginBtnText, newRegistrationBtnText } from '../utils/yjsgConstants';
 import Button from './commonComponents/Button';
 
+/**
+ * LoginForm render login form
+ * @param {Boolean} isAdmin
+ * @param {Object} admin
+ * @param {Function} handleInputChange
+ * @param {Function} adminScreenRedirection
+ * @param {Function} disableAdminLoginButtons
+ * @param {Function} setAdminLogin
+ * @param {Boolean} isNewRegistration
+ * @param {Function} redirectToNewRegistrationPage
+ * @param {Function} enableAdminLoginButtons
+ * @type {Function}
+ * @return {ReactComponent}
+ * @constructor
+ */
 const LoginForm = ({ isAdmin,
   admin,
   handleInputChange,

@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Popup = ({ children }) => (
+/**
+ * Popup render popup
+ * @param {Node} children
+ * @type {Function}
+ * @return {ReactComponent}
+ * @constructor
+ */
+const Popup = ({ children }) => (
   <div className="popup">
     <div className="popupContainer">
       { children }
@@ -15,3 +22,5 @@ Popup.propstype = {
 Popup.defaultProps = {
   children: '',
 };
+
+export default Popup;

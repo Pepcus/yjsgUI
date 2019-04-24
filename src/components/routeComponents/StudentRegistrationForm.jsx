@@ -58,7 +58,7 @@ import {
   getUserType,
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../commonComponents/Button';
-import { Popup } from '../Popup';
+import Popup from '../Popup';
 
 /**
  * StudentRegistrationForm render student registration form

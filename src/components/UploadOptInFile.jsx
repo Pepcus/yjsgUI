@@ -40,6 +40,10 @@ const customUploadOptInFileModalStyles = {
   },
 };
 
+/**
+ * UploadOptInFile render upload optIn file modal
+ * @type {Class}
+ */
 class UploadOptInFile extends Component {
 
   constructor(props) {
@@ -61,9 +65,17 @@ class UploadOptInFile extends Component {
     this.renderIdNotPresentMessage = this.renderIdNotPresentMessage.bind(this);
   }
 
+  /**
+   * optionUploadOptInFileModal method set isUploadOptInFileModalOpen to true
+   */
   optionUploadOptInFileModal() {
     this.setState({ isUploadOptInFileModalOpen: true });
   }
+
+  /**
+   * closeUploadOptInFileModal method set isUploadOptInFileModalOpen to false
+   * and to reset IsOptIn it call resetIsOptInSuccessAction action
+   */
   closeUploadOptInFileModal() {
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
@@ -72,6 +84,11 @@ class UploadOptInFile extends Component {
       isFormSubmitted: false,
     });
   }
+
+  /**
+   * renderUploadButtonClassName method return the class name of Upload button
+   * @return {string} class name
+   */
   renderUploadButtonClassName() {
     if (!this.state.optInFile) {
       return 'popup-buttons-disable';
@@ -80,22 +97,41 @@ class UploadOptInFile extends Component {
     return 'btn-upload linkButton';
 
   }
-  onFormSubmit(e) {
-    e.preventDefault();
+
+  /**
+   * onFormSubmit method set isFormSubmitted to true
+   * and call fileUpload method
+   * @param {Object} event
+   */
+  onFormSubmit(event) {
+    event.preventDefault();
     this.fileUpload(this.state.optInFile);
     this.setState({
       isFormSubmitted: true,
     });
   }
 
-  onChange(e) {
-    this.setState({ optInFile: e.target.files[0] });
+  /**
+   * onChange method set optIn file in optInFile
+   * when browse the file.
+   * @param {Object} event
+   */
+  onChange(event) {
+    this.setState({ optInFile: event.target.files[0] });
   }
 
+  /**
+   * fileUpload method upload optIn file by calling uploadOptInFileAction action
+   * @param {Array} optInFile
+   */
   fileUpload(optInFile) {
     this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
   }
 
+  /**
+   * renderFailOptIn method render failed records Ids
+   * @return {ReactComponent}
+   */
   renderFailOptIn() {
     if (this.props.failOptIn) {
       return (
@@ -108,6 +144,10 @@ class UploadOptInFile extends Component {
     return null;
   }
 
+  /**
+   * renderIdNotPresentMessage method render unavailable Id error message
+   * @return {ReactComponent}
+   */
   renderIdNotPresentMessage() {
     if (this.props.unavailableIdErrorMessage) {
       return (
@@ -119,13 +159,17 @@ class UploadOptInFile extends Component {
     return null;
   }
 
+  /**
+   * renderMessage method render success or failure message of upload optIn file
+   * @return {ReactComponent}
+   */
   renderMessage() {
     if (this.props.isOptInSuccess) {
       return (
         <div className="upload-message-wrapper">
           <div className="success-block">
             <span>
-             {OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE}
+              {OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE}
             </span>
           </div>
           {this.renderFailOptIn()}
@@ -145,6 +189,11 @@ class UploadOptInFile extends Component {
     }
     return null;
   }
+
+  /**
+   * renderUploadOptInModal method render upload optIn modal
+   * @return {ReactComponent}
+   */
   renderUploadOptInModal() {
     if (this.state.isUploadOptInFileModalOpen) {
       return (

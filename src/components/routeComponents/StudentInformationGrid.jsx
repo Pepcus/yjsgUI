@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
-import '../../card-print.css';
+import '../../assets/css/card-print.css';
 
 import ColumnConfig from '../ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from '../GridData';
@@ -33,7 +33,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 import AdvanceSearch from '../AdvanceSearch';
 import UploadStudentsAttendanceFile from '../UploadStudentsAttendanceFile';
-import UploadOptInFile from '../UploadOptInFile';
+// import UploadOptInFile from '../UploadOptInFile';
 import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
@@ -44,7 +44,6 @@ import {
   INFORMATION_NOT_AVAILABLE_MESSAGE,
 } from '../../utils/messagesConstants';
 import { FILE_DOWNLOAD_MESSAGE } from '../../utils/textConstants';
-import { Header } from '../Header';
 
 /**
  * StudentInformationGrid render student information grid.
@@ -147,11 +146,20 @@ class StudentInformationGrid extends Component {
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
+
+  /**
+   * onClickAllExport method set all export popup message state.
+   * @param {boolean} value
+   */
   onClickAllExport = (value) => {
     this.setState({
       fileDownloadMessage: value,
     });
   };
+  /**
+   * renderFileDownloadMessagePopup method render the all export csv popup message
+   * @return {ReactComponent}
+   */
   renderFileDownloadMessagePopup = () => {
     if (this.state.fileDownloadMessage) {
       return (
@@ -167,15 +175,33 @@ class StudentInformationGrid extends Component {
     } return null;
   };
 
+  /**
+   * setAllStudentsAsUnchecked method make isChecked to false
+   * in student object
+   * @param {Array} students
+   * @return {Array}
+   */
   setAllStudentsAsUnchecked(students) {
     return students.map(student => ({ id: student.id, isChecked: false }));
   }
+
+  /**
+   * refreshStudentsGrid method refresh the student information in student grid
+   * by calling getAllStudentsAction
+   */
   refreshStudentsGrid() {
     this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
     this.setState({
       refresh: true,
     });
   }
+
+  /**
+   * getSelectedStudents method is call back function pass to the DataGrid
+   * which gives the selected and unselected students Id with isChecked flag.
+   * and modify the student object according to isChecked flag.
+   * @param {Array} idCheckStatusList
+   */
   getSelectedStudents(idCheckStatusList) {
     const checkedStudents = [];
     idCheckStatusList.forEach((idCheckStatusObject) => {

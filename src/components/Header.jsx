@@ -13,6 +13,18 @@ import {
 } from '../actions/studentRegistrationActions';
 import { routeType, title } from '../config/headerConfig.json';
 
+/**
+ * Header render the common header for all route
+ * @param {Object} context
+ * @param {String} location
+ * @param {Function} resetAdminCredentials
+ * @param {Function} setAdminLoginState
+ * @param {Function} setRedirectValue
+ * @param {Function} resetVisibleColumnConfig
+ * @type {Function}
+ * @return {ReactComponent}
+ * @constructor
+ */
 const Header = ({
   context,
   location,
@@ -21,6 +33,14 @@ const Header = ({
   setRedirectValue,
   resetVisibleColumnConfig,
 }) => {
+  /**
+   * performLogout method will call when click on logout button
+   * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
+   * It reset the admin login state to false by calling action setAdminLoginStateAction()
+   * It reset the visibleColumnConfig to initial
+   * state by calling action resetVisibleColumnConfigAction()
+   * And clear local store.
+   */
   const performLogout = () => {
     resetAdminCredentials();
     setAdminLoginState(false);
@@ -28,6 +48,12 @@ const Header = ({
     resetVisibleColumnConfig();
     localStorage.clear();
   };
+  /**
+   * RenderBackButton method render back button in header
+   * @param {Object} headerObject
+   * @return {ReactComponent}
+   * @constructor
+   */
   const RenderBackButton = (headerObject) => {
     if (headerObject.backButton) {
       return (
@@ -42,6 +68,12 @@ const Header = ({
       );
     } return null;
   };
+  /**
+   * RenderLogOutButton method render logout button in header
+    * @param {Object} headerObject
+   * @return {ReactComponent}
+   * @constructor
+   */
   const RenderLogOutButton = (headerObject) => {
     if (headerObject.logoutButton) {
       return (
@@ -57,6 +89,12 @@ const Header = ({
       );
     } return null;
   };
+  /**
+   * RenderHeaderName method render header name in header
+    * @param {Object} headerObject
+   * @return {ReactComponent}
+   * @constructor
+   */
   const RenderHeaderName = headerObject => (
     <h2
       style={headerObject.titleStyle}
@@ -65,6 +103,12 @@ const Header = ({
       {headerObject.title ? headerObject.title : title}
     </h2>
   );
+  /**
+   * RenderButton method render buttons with their button wrapper in header.
+   * @param {Object} headerObject
+   * @return {ReactComponent}
+   * @constructor
+   */
   const RenderButton = (headerObject) => {
     if (headerObject.HeaderContainedButton) {
       return (
@@ -77,6 +121,12 @@ const Header = ({
       );
     } return null;
   };
+  /**
+   * RenderLogo method render logo in header
+   * @param {Object} headerObject
+   * @return {ReactComponent}
+   * @constructor
+   */
   const RenderLogo = (headerObject) => {
     if (headerObject.logo) {
       return (
@@ -93,6 +143,7 @@ const Header = ({
     }
     return null;
   };
+  // render header with their contains according to route
   if (routeType[location]) {
     return (
       <div style={routeType[location].headerWrapperStyle} className="student-logo-header print-media-none">
