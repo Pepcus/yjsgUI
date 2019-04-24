@@ -9,18 +9,18 @@ import {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-} from '../actions/studentRegistrationActions';
-import yjsgLogo from '../assets/images/yjsgLogo.png';
+} from '../../actions/studentRegistrationActions';
+import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
   USER_TYPES,
-} from '../utils/yjsgConstants';
-import { getParameterByName } from '../utils/http';
-import Button from './commonComponents/Button';
-import { getStudent } from '../reducers/studentRegistrationReducer';
+} from '../../utils/yjsgConstants';
+import { getParameterByName } from '../../utils/http';
+import Button from '../commonComponents/Button';
+import { getStudent } from '../../reducers/studentRegistrationReducer';
 
 /**
 * The StudentPage component for the student which will render -

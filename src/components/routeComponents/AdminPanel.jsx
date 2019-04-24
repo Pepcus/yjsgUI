@@ -9,16 +9,16 @@ import { Redirect, Link } from 'react-router-dom';
 import {
   adminId,
   adminPassword,
-} from '../utils/yjsgConstants';
+} from '../../utils/yjsgConstants';
 import {
   getAdminId,
   getAdminPassword,
   getSearchResults,
   isLoading,
   stateOfAdminLogin,
-} from '../reducers/studentRegistrationReducer';
-import Table from './commonComponents/Table';
-import { setRegistrationData } from '../utils/registrationFormUtils';
+} from '../../reducers/studentRegistrationReducer';
+import Table from '../commonComponents/Table';
+import { setRegistrationData } from '../../utils/registrationFormUtils';
 import {
   clearSearchResultsAction,
   fetchSearchResultsAction,
@@ -26,8 +26,8 @@ import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
-} from '../actions/studentRegistrationActions';
-import LinkButton from './commonComponents/LinkButton';
+} from '../../actions/studentRegistrationActions';
+import LinkButton from '../commonComponents/LinkButton';
 
 // FIXME: Add missing propTypes and defaultProps.
 //  Fix EsLint issues.

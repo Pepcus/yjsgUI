@@ -11,33 +11,33 @@ import csv from 'csvtojson';
 import {
   getSecretKey,
   stateOfAdminLogin,
-} from '../reducers/studentRegistrationReducer';
+} from '../../reducers/studentRegistrationReducer';
 import {
   getFileData,
   getFilesConfig,
   isLoading,
-} from '../reducers/assetFilesReducer';
+} from '../../reducers/assetFilesReducer';
 import {
   fetchFilesConfigAction,
-} from '../actions/assetFilesActions';
-import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../utils/yjsgConstants';
-import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../utils/messagesConstants';
-import LinkButton from './commonComponents/LinkButton';
-import { manageStudentTableWidth } from '../utils/dataGridUtils';
+} from '../../actions/assetFilesActions';
+import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../utils/yjsgConstants';
+import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../utils/messagesConstants';
+import LinkButton from '../commonComponents/LinkButton';
+import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
-} from '../utils/fileUtils';
+} from '../../utils/fileUtils';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
   setLoadingStateAction,
-} from '../actions/studentRegistrationActions';
-import CustomLoader from './commonComponents/CustomLoader';
-import { Popup } from './Popup';
-import { fetchFile } from '../sagas/assetFilesAPI';
+} from '../../actions/studentRegistrationActions';
+import CustomLoader from '../commonComponents/CustomLoader';
+import { Popup } from '../Popup';
+import { fetchFile } from '../../sagas/assetFilesAPI';
 
 /**
  *  Files component render files list and file data table.

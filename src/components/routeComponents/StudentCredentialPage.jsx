@@ -5,14 +5,14 @@ import extend from 'lodash/extend';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import LinkButton from './commonComponents/LinkButton';
-import Button from './commonComponents/Button';
-import InputField from './formComponents/InputField';
+import LinkButton from '../commonComponents/LinkButton';
+import Button from '../commonComponents/Button';
+import InputField from '../formComponents/InputField';
 import {
   fetchStudentData,
   setStudentCredentials,
   setUserTypeAction,
-} from '../actions/studentRegistrationActions';
+} from '../../actions/studentRegistrationActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -23,9 +23,9 @@ import {
   getHash,
   getUserId,
   getUserSecretKey,
-} from '../reducers/studentRegistrationReducer';
+} from '../../reducers/studentRegistrationReducer';
 
-import yjsgLogo from '../assets/images/yjsgLogo.png';
+import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
@@ -33,17 +33,17 @@ import {
   viewEditInfoBtnText,
   invalidIdMessage,
   USER_TYPES,
-} from '../utils/yjsgConstants';
+} from '../../utils/yjsgConstants';
 import {
   ENTER_ID_NUMBER_MESSAGE,
   ENTER_SECRET_CODE_MESSAGE,
-} from '../utils/messagesConstants';
+} from '../../utils/messagesConstants';
 import {
   ID_NUMBER_TEXT,
   SECRET_CODE_TEXT,
-} from '../utils/textConstants';
-import { setRegistrationData } from '../utils/registrationFormUtils';
-import { getParameterByName } from '../utils/http';
+} from '../../utils/textConstants';
+import { setRegistrationData } from '../../utils/registrationFormUtils';
+import { getParameterByName } from '../../utils/http';
 /*
 * The StudentCredentialPage component for the student which will render -
 * Already Registered student credential field.

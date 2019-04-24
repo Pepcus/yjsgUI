@@ -177,5 +177,67 @@
       "label": "Last Modified Date",
       "key": "lastModifiedDate"
     }
+  ],
+  "routes": [
+    {
+      "name": "default",
+      "path": "/",
+      "component": "StudentPage",
+      "isActive": true
+    },
+    {
+      "name": "admin",
+      "path": "/admin",
+      "component": "SplashPage",
+      "isActive": true
+    },
+    {
+      "name": "memberSearch",
+      "path": "/student-search",
+      "component": "StudentInformationGrid",
+      "isActive": true
+    },
+    {
+      "name": "home",
+      "path": "/home",
+      "component": "SplashPagePrePopulated",
+      "isActive": false
+    },
+    {
+      "name": "memberRegister",
+      "path": "/studentRegister",
+      "component": "StudentRegistrationForm",
+      "isActive": true
+    },
+    {
+      "name": "registrationCorrection",
+      "path": "/studentCorrection",
+      "component": "StudentRegistrationCorrectionForm",
+      "isActive": true
+    },
+    {
+      "name": "adminPanel",
+      "path": "/adminPanel",
+      "component": "AdminPanel",
+      "isActive": false
+    },
+    {
+      "name": "memberLogin",
+      "path": "/student-login",
+      "component": "StudentCredentialPage",
+      "isActive": true
+    },
+    {
+      "name": "event",
+      "path": "/event",
+      "component": "ParentsRegistration",
+      "isActive": true
+    },
+    {
+      "name": "files",
+      "path": "/files",
+      "component": "Files",
+      "isActive": true
+    }
   ]
 }

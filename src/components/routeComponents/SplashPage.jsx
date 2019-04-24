@@ -1,21 +1,20 @@
-/* This component is deprecated. Please do not use this component*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
-import PropTypes from 'prop-types';
 import { Redirect, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import LinkButton from './commonComponents/LinkButton';
-import Button from './commonComponents/Button';
-import InputField from './formComponents/InputField';
+import Button from '../commonComponents/Button';
+import InputField from '../formComponents/InputField';
 import {
   fetchStudentData,
-  setAdminCredentialsAction,
   setStudentCredentials,
+  setAdminCredentialsAction,
   setAdminLoginStateAction,
-} from '../actions/studentRegistrationActions';
-import yjsgLogo from '../assets/images/yjsgLogo.png';
+  setHashLinkForStudentCredentialAction,
+  setHashLinkForNewRegistrationAction,
+} from '../../actions/studentRegistrationActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -24,72 +23,97 @@ import {
   isFetched,
   isLoading,
   stateOfAdminLogin,
-  getUserId,
-  getUserSecretKey,
-} from '../reducers/studentRegistrationReducer';
+} from '../../reducers/studentRegistrationReducer';
+
+import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   adminId,
   adminPassword,
   eventDate,
   eventVenue,
   goBackBtnText,
-  alreadyRegisteredBtnText,
   newRegistrationBtnText,
   adminLoginBtnText,
   invalidAdminMsg, formSubmitBtnText,
-} from '../utils/yjsgConstants';
-import { setRegistrationData } from '../utils/registrationFormUtils';
+  USER_TYPES,
+} from '../../utils/yjsgConstants';
+import { setRegistrationData } from '../../utils/registrationFormUtils';
+import { getParameterByName } from '../../utils/http';
+import LoginForm from '../LoginForm';
 
-// FixMe: This component is unnecessary.
-//  Please use splash page to show pre-populated data and remove this component
-
-/** This component may be use in future
- * SplashPage component is home page of admin panel
+/**
+ *SplashPage render home page of admin
  * @type {Class}
  */
-class SplashPagePrePopulated extends Component {
+class SplashPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isCorrection: false,
+      // this may be use in future
+      // isCorrection: false,
       isAdmin: false,
       credentials: {},
       admin: {},
-      adminCredentialErrorMessage: false,
       isURLParams: false,
       adminLoginState: false,
+      adminCredentialErrorMessage: false,
       registeredStudentCredentialErrorMessage: false,
+      isNewRegistration: false,
+      redirectToRoute: '',
     };
 
     // FIXME: Use arrow functions to avoid binding.
-    this.enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
-    this.disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
-    this.enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this.disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
+    this._enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
+    this._disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
-    this.adminScreenRedirection = this.adminScreenRedirection.bind(this);
-    // This may be use in future.
-    // this._fetchStudentById = this.fetchStudentById.bind(this);
+    this._adminScreenRedirection = this.adminScreenRedirection.bind(this);
+    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
+    // this may be use in future.
+    // this._enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
     // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
+    // this._fetchStudentById = this.fetchStudentById.bind(this);
+    // this._disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
   }
 
-  componentDidMount() {
+  /**
+   * when student login through URL then this method will
+   * get id and secretCode form URL and fetch data of that particular student.
+   */
+  componentWillMount() {
+    const id = getParameterByName('id');
+    const secretCode = getParameterByName('secretCode');
+    const redirectToRoute = getParameterByName('fromRoute');
+    if (redirectToRoute) {
+      this.setRedirectToRoute(redirectToRoute);
+    }
+    if (id && secretCode) {
+      this.fetchStudentByURLParams(id, secretCode);
+    }
+  }
+
+  /**
+   * setRedirectToRoute set the path to which redirect
+   * @param {String} redirectToRoute
+   */
+  setRedirectToRoute = (redirectToRoute) => {
     this.setState({
-      credentials: {
-        studentId: this.props.studentId,
-        secretKey: this.props.secretKey,
-      },
+      redirectToRoute,
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
+  };
+  /**
+   * fetchStudentByURLParams method fetch student data.
+   * And verify the student credential and if fetch student data is
+   * success then it set the value of isURLParams to true.
+   * @param {String} id
+   * @param {String} secretCode
+   */
+  fetchStudentByURLParams(id, secretCode) {
+    this.props.setStudentCredentials(id, secretCode);
+    this.props.fetchStudentData(id, secretCode);
     this.setState({
-      credentials: {
-        studentId: nextProps.studentId,
-        secretKey: nextProps.secretKey,
-      },
+      isURLParams: true,
     });
   }
 
@@ -98,11 +122,12 @@ class SplashPagePrePopulated extends Component {
    * corrections button by onClick of already register button.
    * It set the value of isCorrection to true.
    */
-  enableStudentInfoCorrectionButtons() {
+  // this may be use in future
+  /* enableStudentInfoCorrectionButtons() {
     this.setState({
       isCorrection: true,
     });
-  }
+  }*/
 
   /**
    * enableAdminLoginButtons method enable the admin login
@@ -114,7 +139,6 @@ class SplashPagePrePopulated extends Component {
       isAdmin: true,
     });
   }
-
   /**
    * disableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
@@ -131,36 +155,53 @@ class SplashPagePrePopulated extends Component {
    * corrections button by onClick of go back button.
    * It set the value of isCorrection to false.
    */
-  disableStudentInfoCorrectionButtons() {
+  // this may be use in future.
+  /* disableStudentInfoCorrectionButtons() {
     this.setState({
       isCorrection: false,
     });
-  }
-
+  }*/
   /**
    * adminScreenRedirection method redirect to admin page on some condition.
    * @return {ReactComponent}
    */
   adminScreenRedirection() {
+    // IF admin initial login.
+    const { redirectToRoute } = this.state;
     if (!this.props.adminLoginState) {
       const {
         id,
         password,
       } = this.props;
+      // Verify admin credential
       if (this.state.adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
+          // If admin credential is not valid it gives the error message.
           return (
+            // FIXME: Create a reusable component for error message popup.
             <div className="errorPopupContainer">
               <h5>{invalidAdminMsg}</h5>
             </div>
           );
         }
+        // if admin credential is valid then it set admin login true in redux store
+        // and redirect to "/student-search" route
         this.props.setAdminLoginStateAction(true);
+        if (redirectToRoute) {
+          this.setRedirectToRoute('');
+          return <Switch><Redirect to={redirectToRoute} /></Switch>;
+        }
         return <Switch><Redirect to="/student-search" /></Switch>;
 
       }
       return null;
     }
+    if (redirectToRoute) {
+      this.setRedirectToRoute('');
+      return <Switch><Redirect to={redirectToRoute} /></Switch>;
+    }
+    // if admin is already login then it redirect to "/student-search"
+    // without any credential.
     return <Switch><Redirect to="/student-search" /></Switch>;
 
   }
@@ -174,10 +215,12 @@ class SplashPagePrePopulated extends Component {
   // this may be use in future
   /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
-      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
-        return (<div>
-          <h5>{invalidIdMessage}</h5>
-        </div>);
+     if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+        return (
+            <div className = "errorPopupContainer">
+              <h5 className = "error-message">{invalidIdMessage}</h5>
+          </div>
+        );
       } else if (this.props.studentData && this.props.isFetched) {
         return (
           <div>
@@ -186,9 +229,8 @@ class SplashPagePrePopulated extends Component {
         )
       }
     }
-    return null;
+      return null;
   }*/
-
   /**
    * setAdminLogin method set the admin login credential
    * @param {Object} event
@@ -215,7 +257,6 @@ class SplashPagePrePopulated extends Component {
       registeredStudentCredentialErrorMessage: true,
     });
   };*/
-
   /**
    * handleInputChange method set the admin credential in state
    * and all in format value and name in key value format through
@@ -246,109 +287,54 @@ class SplashPagePrePopulated extends Component {
   /* renderRegistrationCorrectionFields() {
     return (
       <div>
-        <InputField
-          type={'number'}
-          name={'studentId'}
-          label={ID_NUMBER_TEXT}
-          placeholder={ENTER_ID_NUMBER_MESSAGE}
-          onInputChange={this._handleInputChange}
-          value={this.state.credentials.studentId}
-        />
-        <InputField
-          type={'text'}
-          name={'secretKey'}
-          label={SECRET_CODE_TEXT}
-          placeholder={ENTER_SECRET_CODE_MESSAGE}
-          onInputChange={this._handleInputChange}
-          value={this.state.credentials.secretKey}
-        />
-        {this.checkRegisteredStudentCredential()}
-        <div className="button-wrapper">
-          <Button
-            buttonText={goBackBtnText}
-            onClick={this.disableStudentInfoCorrectionButtons}
-          />
-          <Button
-            buttonText={viewEditInfoBtnText}
-            onClick={this._fetchStudentById}
-          />
+        <div className = "form-input-wrapper">
+            <InputField
+                type={'number'}
+                name={'studentId'}
+                label={ID_NUMBER_TEXT}
+                placeholder={ENTER_ID_NUMBER_MESSAGE}
+                onInputChange={this._handleInputChange}
+                value={this.state.credentials.studentId}
+            />
+            <InputField
+                type={'text'}
+                name={'secretKey'}
+                label={SECRET_CODE_TEXT}
+                placeholder={ENTER_SECRET_CODE_MESSAGE}
+                onInputChange={this._handleInputChange}
+                value={this.state.credentials.secretKey}
+            />
+            {this.checkRegisteredStudentCredential()}
         </div>
+          <div className = "button-wrapper">
+              <Button
+                  type="button"
+                  buttonText={goBackBtnText}
+                  onClick={this._disableStudentInfoCorrectionButtons}
+              />
+              <Button
+                type="button"
+                buttonText={viewEditInfoBtnText}
+                onClick={this._fetchStudentById}
+            />
+          </div>
       </div>
     )
   }*/
-
-  renderAdminLoginFields() {
-    return (
-      <div>
-        <form id="adminCredential">
-          <InputField
-            type="text"
-            name="adminId"
-            label="Admin ID"
-            placeholder="Enter Admin ID"
-            onInputChange={this._handleInputChange}
-            value={this.state.admin.adminId}
-          />
-          <InputField
-            type="password"
-            name="adminPassword"
-            label="Admin Password"
-            placeholder="Enter Admin Password"
-            onInputChange={this._handleInputChange}
-            value={this.state.admin.adminPassword}
-          />
-          {this.adminScreenRedirection()}
-          <div className="button-wrapper">
-            <Button
-              type="button"
-              buttonText={goBackBtnText}
-              onClick={this._disableAdminLoginButtons}
-            />
-            <Button
-              type="submit"
-              form="adminCredential"
-              buttonText={formSubmitBtnText}
-              onClick={this._setAdminLogin}
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-
   /**
-   * renderLoginField method redirect to "/student-login" or
-   * render admin login field or admin home page buttons
-   * according to condition.
-   * @return {ReactComponent}
+   * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
+   * of new registration button.
    */
-  renderLoginField() {
-    if (this.state.isCorrection) {
-      return <Switch><Redirect to="/student-login" /></Switch>;
-    } else if (this.state.isAdmin) {
-      return this.renderAdminLoginFields();
-    }
-
-    return (
-      <div>
-        <Button
-          buttonText={alreadyRegisteredBtnText}
-          onClick={this.enableStudentInfoCorrectionButtons}
-        />
-        <LinkButton
-          buttonText={newRegistrationBtnText}
-          linkPath="/studentRegister"
-        />
-        <Button
-          buttonText={adminLoginBtnText}
-          onClick={this.enableAdminLoginButtons}
-        />
-      </div>
-    );
-
+  redirectToNewRegistrationPage() {
+    this.setState({
+      isNewRegistration: true,
+    });
+    this.props.setHashLinkForNewRegistrationAction(USER_TYPES.ADMIN);
   }
-
   render() {
+    if (this.state.isURLParams) {
+      return <Switch><Redirect to="/studentCorrection" /></Switch>;
+    }
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
@@ -361,7 +347,17 @@ class SplashPagePrePopulated extends Component {
               <img src={yjsgLogo} alt="yjsg logo" />
             </div>
             <div className="landing-page-button-container">
-              {this.renderLoginField()}
+              <LoginForm
+                isAdmin={this.state.isAdmin}
+                admin={this.state.admin}
+                handleInputChange={this._handleInputChange}
+                adminScreenRedirection={this._adminScreenRedirection}
+                disableAdminLoginButtons={this._disableAdminLoginButtons}
+                setAdminLogin={this._setAdminLogin}
+                isNewRegistration={this.state.isNewRegistration}
+                redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
+                enableAdminLoginButtons={this._enableAdminLoginButtons}
+              />
             </div>
           </div>
         </div>
@@ -370,34 +366,31 @@ class SplashPagePrePopulated extends Component {
   }
 }
 
-SplashPagePrePopulated.propTypes = {
+SplashPage.propTypes = {
   fetchStudentData: PropTypes.func,
   setStudentCredentials: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
+  setHashLinkForStudentCredentialAction: PropTypes.func,
+  setHashLinkForNewRegistrationAction: PropTypes.func,
   setAdminCredentialsAction: PropTypes.func,
-  studentId: PropTypes.string,
-  secretKey: PropTypes.string,
   adminLoginState: PropTypes.bool,
   id: PropTypes.string,
   password: PropTypes.string,
 };
 
-SplashPagePrePopulated.defaultProps = {
+SplashPage.defaultProps = {
   fetchStudentData: () => {},
   setStudentCredentials: () => {},
   setAdminLoginStateAction: () => {},
+  setHashLinkForStudentCredentialAction: () => {},
+  setHashLinkForNewRegistrationAction: () => {},
   setAdminCredentialsAction: () => {},
-  studentId: '',
-  secretKey: '',
   adminLoginState: false,
   id: '',
   password: '',
 };
-
 const mapStateToProps = state => ({
-  studentId: getUserId(state),
   id: getAdminId(state),
-  secretKey: getUserSecretKey(state),
   password: getAdminPassword(state),
   isLoading: isLoading(state),
   searchResults: getSearchResults(state),
@@ -405,10 +398,11 @@ const mapStateToProps = state => ({
   studentData: getStudent(state),
   isFetched: isFetched(state),
 });
-
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-})(SplashPagePrePopulated);
+  setHashLinkForStudentCredentialAction,
+  setHashLinkForNewRegistrationAction,
+})(SplashPage);
