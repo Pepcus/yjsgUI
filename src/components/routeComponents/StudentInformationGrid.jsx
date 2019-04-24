@@ -4,11 +4,11 @@ import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { manageStudentTableWidth } from '../utils/dataGridUtils';
-import '../card-print.css';
+import { manageStudentTableWidth } from '../../utils/dataGridUtils';
+import '../../card-print.css';
 
-import ColumnConfig from './ColumnConfig';
-import { gridMetaData, gridHeaderData, getStyles } from './GridData';
+import ColumnConfig from '../ColumnConfig';
+import { gridMetaData, gridHeaderData, getStyles } from '../GridData';
 import {
   allStudentsData,
   getVisibleColumnConfig,
@@ -17,7 +17,7 @@ import {
   stateOfRedirect,
   stateOfAdminLogin,
   getStudent,
-} from '../reducers/studentRegistrationReducer';
+} from '../../reducers/studentRegistrationReducer';
 import {
   getAllStudentsAction,
   setStudentDataAction,
@@ -30,21 +30,21 @@ import {
   resetIsSuccessAction,
   fetchStudentData,
   setUserTypeAction,
-} from '../actions/studentRegistrationActions';
-import AdvanceSearch from './AdvanceSearch';
-import UploadStudentsAttendanceFile from './UploadStudentsAttendanceFile';
-import UploadOptInFile from './UploadOptInFile';
-import SelectedStudentsActionWrapper from './SelectedStudentsActionWrapper';
+} from '../../actions/studentRegistrationActions';
+import AdvanceSearch from '../AdvanceSearch';
+import UploadStudentsAttendanceFile from '../UploadStudentsAttendanceFile';
+import UploadOptInFile from '../UploadOptInFile';
+import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
   USER_TYPES,
-} from '../utils/yjsgConstants';
+} from '../../utils/yjsgConstants';
 import {
   NO_COLUMNS_SELECTED_MESSAGE,
   INFORMATION_NOT_AVAILABLE_MESSAGE,
-} from '../utils/messagesConstants';
-import { FILE_DOWNLOAD_MESSAGE } from '../utils/textConstants';
-import { Header } from './Header';
+} from '../../utils/messagesConstants';
+import { FILE_DOWNLOAD_MESSAGE } from '../../utils/textConstants';
+import { Header } from '../Header';
 
 /**
  * StudentInformationGrid render student information grid.

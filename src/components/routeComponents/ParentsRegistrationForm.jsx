@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 
-import { parentsRegistrationAction } from '../actions/studentRegistrationActions';
-import Button from './commonComponents/Button';
-import { formSubmitBtnText } from '../utils/yjsgConstants';
+import { parentsRegistrationAction } from '../../actions/studentRegistrationActions';
+import Button from '../commonComponents/Button';
+import { formSubmitBtnText } from '../../utils/yjsgConstants';
 
 /**
  * ParentsRegistration component render parents registration form.

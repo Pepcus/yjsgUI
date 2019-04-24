@@ -178,65 +178,65 @@
       "key": "lastModifiedDate"
     }
   ],
-  "RouteArray": [
+  "routes": [
     {
-      "routName": "StudentPage",
-      "routePath": "/",
-      "componentName": "StudentPage",
+      "name": "default",
+      "path": "/",
+      "component": "StudentPage",
       "isActive": true
     },
     {
-      "routName": "admin",
-      "routePath": "/admin",
-      "componentName": "SplashPage",
+      "name": "admin",
+      "path": "/admin",
+      "component": "SplashPage",
       "isActive": true
     },
     {
-      "routName": "student-search",
-      "routePath": "/student-search",
-      "componentName": "StudentInformationGrid",
+      "name": "memberSearch",
+      "path": "/student-search",
+      "component": "StudentInformationGrid",
       "isActive": true
     },
     {
-      "routName": "home",
-      "routePath": "/home",
-      "componentName": "SplashPagePrePopulated",
+      "name": "home",
+      "path": "/home",
+      "component": "SplashPagePrePopulated",
       "isActive": false
     },
     {
-      "routName": "studentRegister",
-      "routePath": "/studentRegister",
-      "componentName": "StudentRegistrationForm",
+      "name": "memberRegister",
+      "path": "/studentRegister",
+      "component": "StudentRegistrationForm",
       "isActive": true
     },
     {
-      "routName": "studentCorrection",
-      "routePath": "/studentCorrection",
-      "componentName": "StudentRegistrationCorrectionForm",
+      "name": "registrationCorrection",
+      "path": "/studentCorrection",
+      "component": "StudentRegistrationCorrectionForm",
       "isActive": true
     },
     {
-      "routName": "adminPanel",
-      "routePath": "/adminPanel",
-      "componentName": "AdminPanel",
+      "name": "adminPanel",
+      "path": "/adminPanel",
+      "component": "AdminPanel",
       "isActive": false
     },
     {
-      "routName": "student-login",
-      "routePath": "/student-login",
-      "componentName": "StudentCredentialPage",
+      "name": "memberLogin",
+      "path": "/student-login",
+      "component": "StudentCredentialPage",
       "isActive": true
     },
     {
-      "routName": "event",
-      "routePath": "/event",
-      "componentName": "ParentsRegistration",
+      "name": "event",
+      "path": "/event",
+      "component": "ParentsRegistration",
       "isActive": true
     },
     {
-      "routName": "files",
-      "routePath": "/files",
-      "componentName": "Files",
+      "name": "files",
+      "path": "/files",
+      "component": "Files",
       "isActive": true
     }
   ]

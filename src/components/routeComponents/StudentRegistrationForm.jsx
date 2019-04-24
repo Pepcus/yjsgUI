@@ -11,7 +11,7 @@ import {
   goBackBtnText,
   formSubmitBtnText,
   USER_TYPES,
-} from '../utils/yjsgConstants';
+} from '../../utils/yjsgConstants';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
   NAME_LABEL,
@@ -26,39 +26,39 @@ import {
   ADDRESS_LABEL,
   BUS_STOP_LABEL,
   WHAT_YOU_WANT_TO_STUDY_LABEL,
-} from '../utils/labelConstants';
+} from '../../utils/labelConstants';
 import {
   YJSG_REGISTRATION_SUCCESS_MESSAGE,
   ID_NOTE_MESSAGE,
   ID_CARD_SUGGESTION_MESSAGE,
-} from '../utils/messagesConstants';
+} from '../../utils/messagesConstants';
 import {
   YOUR_ID_TEXT,
   YOUR_SECRET_CODE_TEXT,
   IS_THERE_TEXT,
-} from '../utils/textConstants';
-import InputField from './formComponents/InputField';
-import TextAreaField from './formComponents/TextAreaField';
-import LinkButton from './commonComponents/LinkButton';
+} from '../../utils/textConstants';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
+import LinkButton from '../commonComponents/LinkButton';
 import {
   createStudentData,
   setStudentCredentials,
-} from '../actions/studentRegistrationActions';
+} from '../../actions/studentRegistrationActions';
 import {
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
   validateInput,
-} from '../utils/registrationFormUtils';
-import SelectListInputField from './formComponents/SelectListInputField';
+} from '../../utils/registrationFormUtils';
+import SelectListInputField from '../formComponents/SelectListInputField';
 import {
   getNewStudent,
   isCreated,
   isLoading,
   getUserType,
-} from '../reducers/studentRegistrationReducer';
-import Button from './commonComponents/Button';
-import { Popup } from './Popup';
+} from '../../reducers/studentRegistrationReducer';
+import Button from '../commonComponents/Button';
+import { Popup } from '../Popup';
 
 /**
  * StudentRegistrationForm render student registration form

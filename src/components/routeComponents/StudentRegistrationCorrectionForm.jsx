@@ -6,7 +6,7 @@ import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 
-import ErrorMessage from './commonComponents/ErrorMessage';
+import ErrorMessage from '../commonComponents/ErrorMessage';
 import {
   studiesArray,
   busStops,
@@ -20,7 +20,7 @@ import {
   busNumber,
   classRoomNumber,
   USER_TYPES,
-} from '../utils/yjsgConstants';
+} from '../../utils/yjsgConstants';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
   IS_OPT_IN_OR_OPT_OUT_2019_LABEL,
@@ -40,18 +40,18 @@ import {
   BUS_NUMBER_LABEL,
   CLASS_LABEL,
   ROOM_LABEL,
-} from '../utils/labelConstants';
-import InputField from './formComponents/InputField';
-import TextAreaField from './formComponents/TextAreaField';
-import LinkButton from './commonComponents/LinkButton';
-import { updateStudentData, isUpdatedResetAction } from '../actions/studentRegistrationActions';
+} from '../../utils/labelConstants';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
+import LinkButton from '../commonComponents/LinkButton';
+import { updateStudentData, isUpdatedResetAction } from '../../actions/studentRegistrationActions';
 import {
   updateClassAttended2019InStudentData,
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
   validateInput,
-} from '../utils/registrationFormUtils';
+} from '../../utils/registrationFormUtils';
 import {
   getStudent,
   isFetched,
@@ -60,11 +60,11 @@ import {
   getUserId,
   getUserSecretKey,
   getPageUserType,
-} from '../reducers/studentRegistrationReducer';
-import SelectListInputField from './formComponents/SelectListInputField';
-import Button from './commonComponents/Button';
-import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../utils/textConstants';
-import { Popup } from './Popup';
+} from '../../reducers/studentRegistrationReducer';
+import SelectListInputField from '../formComponents/SelectListInputField';
+import Button from '../commonComponents/Button';
+import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../utils/textConstants';
+import { Popup } from '../Popup';
 
 // FixMe: Add missing propTypes and defaultProps.
 //  Fix EsLint issues.

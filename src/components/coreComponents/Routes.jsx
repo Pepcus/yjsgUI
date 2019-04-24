@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import uniqueId from 'lodash/uniqueId';
 
 import Footer from './Footer';
 import Loader from '../Loader';
 import Context from './ConfigProvider';
-import components from '../routeComponents/index';
+import RouteComponents from '../routeComponents';
 import Header from '../Header';
-import { RouteArray } from '../../config/appConfig.json';
+import { routes } from '../../config/appConfig.json';
 
 
 /**
@@ -31,17 +30,17 @@ class Routes extends Component {
       });
     }
   }
-  getRouts = Consumer => RouteArray.map((routeObject) => {
-    const ComponentName = components[routeObject.componentName];
-    if (routeObject.isActive) {
+  renderRoutes = Consumer => routes.map((route) => {
+    const RouteComponent = RouteComponents[route.component];
+    if (route.isActive) {
       return (
         <Route
-          key={uniqueId(routeObject.componentName)}
+          key={route.name}
           exact
-          path={routeObject.routePath}
+          path={route.path}
           component={() => (
             <Consumer>
-              { context => <ComponentName context={context} /> }
+              { context => <RouteComponent context={context} /> }
             </Consumer>
             )}
         />
@@ -56,7 +55,7 @@ class Routes extends Component {
           <Consumer>
             {context => <Header context={context} location={this.props.location.pathname} />}
           </Consumer>
-          {this.getRouts(Consumer)}
+          {this.renderRoutes(Consumer)}
           <Loader />
           <Footer />
         </Context.Provider>
