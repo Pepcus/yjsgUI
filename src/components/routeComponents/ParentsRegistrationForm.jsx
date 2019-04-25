@@ -4,8 +4,9 @@ import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 
 import { parentsRegistrationAction } from '../../actions/studentRegistrationActions';
-import Button from '../commonComponents/Button';
+import Button from '../common/Button';
 import { formSubmitBtnText } from '../../utils/yjsgConstants';
+import Popup from '../common/Popup';
 
 /**
  * ParentsRegistration component render parents registration form.
@@ -111,15 +112,17 @@ class ParentsRegistration extends Component {
       ))
     );
   }
-  // FIXME: Please reuse the component to display message.
+
+  /**
+   * render close browser message
+   * @return {*}
+   */
   renderCloseBrowserMessage() {
     if (this.state.isCloseBrowserPopMessage) {
       return (
-        <div className="popup">
-          <div className="popupContainer">
-            <h5>Please close your browser manually.</h5>
-          </div>
-        </div>
+        <Popup>
+          <h5>Please close your browser manually.</h5>
+        </Popup>
       );
     }
   }

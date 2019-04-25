@@ -15,14 +15,13 @@ import {
 import {
   getFileData,
   getFilesConfig,
-  isLoading,
 } from '../../reducers/assetFilesReducer';
 import {
   fetchFilesConfigAction,
 } from '../../actions/assetFilesActions';
 import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../utils/yjsgConstants';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../utils/messagesConstants';
-import LinkButton from '../commonComponents/LinkButton';
+import LinkButton from '../common/LinkButton';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
   formatXlsxToJson,
@@ -35,12 +34,11 @@ import {
   resetVisibleColumnConfigAction,
   setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
-import CustomLoader from '../commonComponents/CustomLoader';
-import Popup from '../Popup';
+import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
 
 /**
- *  Files component render files list and file data table.
+ * Files component render files list and file data table.
  * @type {Class}
  */
 class Files extends Component {
@@ -232,7 +230,7 @@ class Files extends Component {
                 </div>
               </div>
             );
-          },
+            },
           )}
           </div>
         );
@@ -389,22 +387,9 @@ class Files extends Component {
       </div>
     );
   };
-
-  renderLoader = () => {
-    if (this.props.isLoading) {
-      return (
-        <div>
-          <CustomLoader loaderColor="var(--app-loader-color)" />
-        </div>
-      );
-    }
-    return null;
-  };
-
   render() {
     return (
       <div className="registration-file-container">
-        {this.renderLoader()}
         <div className="logoutButtonContainer file-logout-container display-logout-desktop">
           <div className="logoutLinkContainer">
             <Link to={this.props.context.previousLocation} className="grid-small-button">
@@ -430,7 +415,6 @@ Files.propsType = {
   setLoadingStateAction: PropTypes.func,
   adminLoginState: PropTypes.bool,
   filesConfig: PropTypes.object,
-  isLoading: PropTypes.bool,
   resetAdminCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
   setRedirectValueAction: PropTypes.func,
@@ -448,7 +432,6 @@ Files.defaultProps = {
   resetVisibleColumnConfigAction: () => {},
   adminLoginState: false,
   filesConfig: {},
-  isLoading: false,
   context: {},
 };
 
@@ -456,7 +439,6 @@ const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
   fileData: getFileData(state),
   filesConfig: getFilesConfig(state),
-  isLoading: isLoading(state),
   adminLoginState: stateOfAdminLogin(state),
 });
 

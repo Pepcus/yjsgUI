@@ -6,7 +6,7 @@ import extend from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 
-import ErrorMessage from '../commonComponents/ErrorMessage';
+import ErrorMessage from '../common/ErrorMessage';
 import {
   studiesArray,
   busStops,
@@ -41,9 +41,9 @@ import {
   CLASS_LABEL,
   ROOM_LABEL,
 } from '../../utils/labelConstants';
-import InputField from '../formComponents/InputField';
-import TextAreaField from '../formComponents/TextAreaField';
-import LinkButton from '../commonComponents/LinkButton';
+import InputField from '../form/InputField';
+import TextAreaField from '../form/TextAreaField';
+import LinkButton from '../common/LinkButton';
 import { updateStudentData, isUpdatedResetAction } from '../../actions/studentRegistrationActions';
 import {
   updateClassAttended2019InStudentData,
@@ -60,10 +60,10 @@ import {
   getUserSecretKey,
   getPageUserType,
 } from '../../reducers/studentRegistrationReducer';
-import SelectListInputField from '../formComponents/SelectListInputField';
-import Button from '../commonComponents/Button';
+import SelectListInputField from '../form/SelectListInputField';
+import Button from '../common/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../utils/textConstants';
-import Popup from '../Popup';
+import Popup from '../common/Popup';
 
 /**
  * The StudentRegistrationCorrectionForm component render student correction form.

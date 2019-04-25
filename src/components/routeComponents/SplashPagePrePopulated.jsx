@@ -6,9 +6,9 @@ import extend from 'lodash/extend';
 import PropTypes from 'prop-types';
 import { Redirect, Switch } from 'react-router-dom';
 
-import LinkButton from '../commonComponents/LinkButton';
-import Button from '../commonComponents/Button';
-import InputField from '../formComponents/InputField';
+import LinkButton from '../common/LinkButton';
+import Button from '../common/Button';
+import InputField from '../form/InputField';
 import {
   fetchStudentData,
   setAdminCredentialsAction,

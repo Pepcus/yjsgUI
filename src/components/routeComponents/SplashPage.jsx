@@ -5,14 +5,13 @@ import extend from 'lodash/extend';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Button from '../commonComponents/Button';
-import InputField from '../formComponents/InputField';
+import Button from '../common/Button';
+import InputField from '../form/InputField';
 import {
   fetchStudentData,
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-  setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
 } from '../../actions/studentRegistrationActions';
 import {
@@ -370,7 +369,6 @@ SplashPage.propTypes = {
   fetchStudentData: PropTypes.func,
   setStudentCredentials: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
-  setHashLinkForStudentCredentialAction: PropTypes.func,
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setAdminCredentialsAction: PropTypes.func,
   adminLoginState: PropTypes.bool,
@@ -382,7 +380,6 @@ SplashPage.defaultProps = {
   fetchStudentData: () => {},
   setStudentCredentials: () => {},
   setAdminLoginStateAction: () => {},
-  setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
   setAdminCredentialsAction: () => {},
   adminLoginState: false,
@@ -403,6 +400,5 @@ export default connect(mapStateToProps, {
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-  setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
 })(SplashPage);

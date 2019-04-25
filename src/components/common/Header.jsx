@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-import headerLogo from '../assets/images/react-logo.png';
+import headerLogo from '../../assets/images/react-logo.png';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
-} from '../actions/studentRegistrationActions';
-import { routeType, title } from '../config/headerConfig.json';
+} from '../../actions/studentRegistrationActions';
+import { routeType, title } from '../../config/headerConfig.json';
 
 /**
  * Header render the common header for all route

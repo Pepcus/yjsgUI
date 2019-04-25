@@ -37,9 +37,9 @@ import {
   YOUR_SECRET_CODE_TEXT,
   IS_THERE_TEXT,
 } from '../../utils/textConstants';
-import InputField from '../formComponents/InputField';
-import TextAreaField from '../formComponents/TextAreaField';
-import LinkButton from '../commonComponents/LinkButton';
+import InputField from '../form/InputField';
+import TextAreaField from '../form/TextAreaField';
+import LinkButton from '../common/LinkButton';
 import {
   createStudentData,
   setStudentCredentials,
@@ -50,15 +50,15 @@ import {
   setRegistrationData,
   validateInput,
 } from '../../utils/registrationFormUtils';
-import SelectListInputField from '../formComponents/SelectListInputField';
+import SelectListInputField from '../form/SelectListInputField';
 import {
   getNewStudent,
   isCreated,
   isLoading,
   getUserType,
 } from '../../reducers/studentRegistrationReducer';
-import Button from '../commonComponents/Button';
-import Popup from '../Popup';
+import Button from '../common/Button';
+import Popup from '../common/Popup';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -183,7 +183,6 @@ class StudentRegistrationForm extends Component {
     });
   }
 
-  // FIXME: Create a separate reusable component to render success message popup
   renderSuccessMessage() {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const student = this.props.newStudent;
@@ -209,7 +208,6 @@ class StudentRegistrationForm extends Component {
    * @return {ReactComponent}
    */
   renderBackButton() {
-    // FIXME: Create constant MAP for UserTypes
     if (this.props.userType === USER_TYPES.STUDENT) {
       return (
         <LinkButton
