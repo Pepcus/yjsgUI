@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import extend from 'lodash/extend';
 import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import {
   adminId,
@@ -17,7 +17,6 @@ import {
   isLoading,
   stateOfAdminLogin,
 } from '../../reducers/studentRegistrationReducer';
-import Table from '../commonComponents/Table';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import {
   clearSearchResultsAction,
@@ -79,18 +78,12 @@ class AdminPanel extends Component {
     this.props.clearSearchResultsAction();
     const { selectSearchOption, searchText } = this.state.search;
     if (!isEmpty(selectSearchOption) && !isEmpty(searchText)) {
-      this.props.fetchSearchResultsAction({ adminKey: adminPassword, searchKey: selectSearchOption, searchValue: searchText });
+      this.props.fetchSearchResultsAction({
+        adminKey: adminPassword,
+        searchKey: selectSearchOption,
+        searchValue: searchText,
+      });
     }
-  }
-
-  renderResultsTable() {
-    const { searchResults } = this.props;
-    if (!isEmpty(searchResults.students)) {
-      return <Table data={searchResults.students} headings={['ID', 'Name', 'Father Name', 'Mobile']} />;
-    } if (!isEmpty(searchResults.message)) {
-      return <h5>No search records found</h5>;
-    }
-    return <h5>Your Search Results will appear here.</h5>;
   }
 
   setRedirectValue() {

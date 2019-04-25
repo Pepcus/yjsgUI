@@ -114,7 +114,7 @@ class SelectedStudentsActionWrapper extends Component {
       <div>
         <div className="id-card-wrapper print-media-none">
           <div className="selected-student-buttons">
-            <div className="buttonContainer">
+            <div className="button-container">
               <CSVLink
                 headers={header}
                 data={this.props.selectedStudents}
@@ -124,7 +124,7 @@ class SelectedStudentsActionWrapper extends Component {
                 <i className="fa fa-download card-icon" />Export
               </CSVLink>
             </div>
-            <div className="buttonContainer">
+            <div className="button-container">
               <button
                 className={this.getPrintNowClassName()}
                 onClick={

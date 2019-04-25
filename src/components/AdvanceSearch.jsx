@@ -273,6 +273,7 @@ class AdvanceSearch extends Component {
 }
 
 AdvanceSearch.propTypes = {
+  checkedIds: PropTypes.array,
   onFilter: PropTypes.func,
   formatStudents: PropTypes.func,
   students: PropTypes.array,
@@ -280,6 +281,7 @@ AdvanceSearch.propTypes = {
 };
 
 AdvanceSearch.defaultProps = {
+  checkedIds: [],
   onFilter: () => {},
   formatStudents: () => {},
   students: [],

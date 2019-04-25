@@ -231,12 +231,12 @@ class StudentCredentialPage extends Component {
           </div>
           <div className="button-wrapper">
             {this.renderBackButton()}
-            <div className="buttonContainer">
+            <div className="button-container">
               <Button
                 buttonText={viewEditInfoBtnText}
                 type="submit"
                 value="Submit"
-                form="studentCredential"
+                formName="studentCredential"
                 onClick={this._fetchStudentById}
               />
             </div>

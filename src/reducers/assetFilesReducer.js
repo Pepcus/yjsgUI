@@ -5,7 +5,7 @@ const initialState = {
   filesConfig: {},
   modeVariable: '',
   isAppLoaded: false,
-  isAppLoadedError: false,
+  isAppLoadingFailed: false,
 };
 
 export const assetFilesReducer = (state = initialState, action) => {
@@ -33,7 +33,7 @@ export const assetFilesReducer = (state = initialState, action) => {
       return {
         ...state,
         isAppLoaded: false,
-        isAppLoadedError: false,
+        isAppLoadingFailed: false,
       };
     case 'LOADED_APP_DATA_SUCCESS_ACTION':
       return {
@@ -41,7 +41,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         isLoading: false,
         isAppLoaded: true,
         modeVariable: action.modeVariable.environment,
-        isAppLoadedError: false,
+        isAppLoadingFailed: false,
       };
     case 'LOAD_APP_DATA_FAILED_ACTION':
       return {
@@ -50,7 +50,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         errorMessage: action.errorMessage,
         modeVariable: '',
         isAppLoaded: false,
-        isAppLoadedError: true,
+        isAppLoadingFailed: true,
       };
     case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
       return {
@@ -90,7 +90,7 @@ export const getApplicationMode = state => state.assetFilesReducer.modeVariable;
 
 export const isAppLoaded = state => state.assetFilesReducer.isAppLoaded;
 
-export const getIsAppLoadedError = state => state.assetFilesReducer.isAppLoadedError;
+export const getIsAppLoadedError = state => state.assetFilesReducer.isAppLoadingFailed;
 
 export const getBusCoordinators = state => state.assetFilesReducer.busCoordinators;
 

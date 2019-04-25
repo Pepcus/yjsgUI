@@ -22,10 +22,10 @@ class AdvanceFilter extends Component {
     return (
       <Modal
         isOpen={this.props.advanceFilterIsOpen}
-        onAfterOpen={this.afterOpenModal}
         onRequestClose={this.closeAdvanceFilter}
         style={customAdvanceFilterStyles}
         contentLabel="Advance Filter"
+        ariaHideApp={false}
       >
 
         <h2> Enter fields to filter</h2>

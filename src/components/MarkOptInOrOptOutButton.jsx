@@ -236,7 +236,7 @@ class MarkOptInOrOptOutButton extends Component {
   }
   render() {
     return (
-      <div className="buttonContainer button-container-mobile">
+      <div className="button-container button-container-mobile">
         <button
           className={this.renderMarkOptInOrOutClassName()}
           onClick={this.openMarkSelectedStudentsOptInOrOptOutModal}

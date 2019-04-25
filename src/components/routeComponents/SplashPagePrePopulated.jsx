@@ -306,7 +306,7 @@ class SplashPagePrePopulated extends Component {
             />
             <Button
               type="submit"
-              form="adminCredential"
+              formName="adminCredential"
               buttonText={formSubmitBtnText}
               onClick={this._setAdminLogin}
             />

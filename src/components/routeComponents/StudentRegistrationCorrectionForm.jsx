@@ -253,17 +253,17 @@ class StudentRegistrationCorrectionForm extends Component {
                     <label htmlFor="Opt-Out">{NO_TEXT}</label>
                   </div>
                 </div>
-                <ErrorMessage errorMessage={this.state.errorMessage.optIn2019.message} />
+                <ErrorMessage message={this.state.errorMessage.optIn2019.message} />
               </div>
             </div>
           </div>
           <div className="registrationFormButtonContainer student-correction-button-container">
             <div className="button-wrapper student-correction-button-wrapper">
-              <div className="buttonContainer button-container-correction">
+              <div className="button-container button-container-correction">
                 <Button
                   buttonText={formSubmitBtnText}
                   type="submit"
-                  form="studentRegistrationForm"
+                  formName="studentRegistrationForm"
                   value="Submit"
                   onClick={this.submitStudentDataForOnlyOptInCase}
                 />
@@ -695,11 +695,11 @@ class StudentRegistrationCorrectionForm extends Component {
               <div className="registrationFormButtonContainer">
                 <div className="button-wrapper">
                   {this.renderBackButton()}
-                  <div className="buttonContainer">
+                  <div className="button-container">
                     <Button
                       buttonText={formSubmitBtnText}
                       type="submit"
-                      form="studentRegistrationForm"
+                      formName="studentRegistrationForm"
                       value="Submit"
                       onClick={this.onSubmitStudentData}
                     />
@@ -879,7 +879,7 @@ class StudentRegistrationCorrectionForm extends Component {
                     <Button
                       buttonText={formSubmitBtnText}
                       type="submit"
-                      form="studentRegistrationForm"
+                      formName="studentRegistrationForm"
                       value="Submit"
                       onClick={this.onSubmitStudentData}
                     />

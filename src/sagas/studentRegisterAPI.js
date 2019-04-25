@@ -10,13 +10,13 @@ export const updateStudent = ({ id, secretKey, student }) =>
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'secretKey': secretKey,
+      secretKey,
     },
     body: formatUpdateStudentDataPayload(student),
   });
-export const createStudent = (student) =>
+export const createStudent = student =>
   POST({
-    url: `/v1/students`,
+    url: '/v1/students',
     body: formatCreateStudentDataPayload(student),
   });
 
@@ -26,7 +26,7 @@ export const fetchStudent = (id, secretKey) =>
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'secretKey': secretKey,
+      secretKey,
     },
   });
 
@@ -40,13 +40,13 @@ export const searchStudent = (adminKey, searchKey, searchValue) =>
     },
   });
 
-export const getAllStudentsAPI = (secretKey) =>
+export const getAllStudentsAPI = secretKey =>
   GET({
-    url: `/v1/students`,
+    url: '/v1/students',
     headers: {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-    'secretKey': secretKey,
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      secretKey,
     },
   });
 
@@ -56,12 +56,12 @@ export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
   file.append('day', day);
   return (
     PATCH({
-    url: `v1/students/bulk-attendance`,
-    headers: {
-      'secretKey': secretKey,
-    },
-    body: file,
-  }));
+      url: 'v1/students/bulk-attendance',
+      headers: {
+        secretKey,
+      },
+      body: file,
+    }));
 };
 
 export const uploadOptInAPI = (secretKey, optInFile) => {
@@ -69,12 +69,12 @@ export const uploadOptInAPI = (secretKey, optInFile) => {
   file.append('file', optInFile);
   return (
     PATCH({
-    url: `v1/students/bulk-optin`,
-    headers: {
-      'secretKey': secretKey,
-    },
-    body: file,
-  }));
+      url: 'v1/students/bulk-optin',
+      headers: {
+        secretKey,
+      },
+      body: file,
+    }));
 };
 
 export const markSelectedStudentsAttendanceAPI = (secretKey, selectedStudentsId, day) =>
@@ -82,7 +82,7 @@ export const markSelectedStudentsAttendanceAPI = (secretKey, selectedStudentsId,
     url: `v1/students/attendance?id=${selectedStudentsId}`,
     headers: {
       'Content-type': 'application/json',
-      'secretKey': secretKey,
+      secretKey,
     },
     body: day,
   });
@@ -92,7 +92,7 @@ export const markSelectedStudentsOptInOrOptOutAPI = (secretKey, selectedStudents
     url: `v1/students/optin?id=${selectedStudentsId}`,
     headers: {
       'Content-type': 'application/json',
-      'secretKey': secretKey,
+      secretKey,
     },
     body: JSON.stringify(opt),
   });
@@ -102,17 +102,17 @@ export const updateIdCardStatusSelectedStudentsAPI = (secretKey, selectedStudent
     url: `v1/students/reprint?id=${selectedStudentsId}`,
     headers: {
       'Content-type': 'application/json',
-      'secretKey': secretKey,
+      secretKey,
     },
     body: JSON.stringify(IdCardStatus),
   });
 
 export const parentsRegistrationAPI = (name, members, phoneNumber) =>
   POST({
-    url: `/v1/events`,
+    url: '/v1/events',
     body: {
-      'name': name,
-      'members': members,
-      'phoneNumber': phoneNumber
+      name,
+      members,
+      phoneNumber,
     },
   });

@@ -241,7 +241,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   }
   render() {
     return (
-      <div className="buttonContainer">
+      <div className="button-container">
         <button
           className={this.renderIdCardStatusButtonClassName()}
           onClick={this.openUpdateIdCardStatusSelectedStudentsModal}

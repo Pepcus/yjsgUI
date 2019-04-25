@@ -796,26 +796,26 @@ html, body {
     color: #525151;
 }
 
-.student-information-wrapper .buttonContainer {
+.student-information-wrapper .button-container {
     margin: 0;
     padding-top: 30px;
 }
 
-.buttonContainer {
+.button-container {
     width: 170px;
     display: inline-block;
 }
 
-.button-wrapper .buttonContainer {
+.button-wrapper .button-container {
     margin: 0;
     cursor: pointer;
 }
 
-.registrationFormButtonContainer .button-wrapper .buttonContainer:first-child {
+.registrationFormButtonContainer .button-wrapper .button-container:first-child {
     margin-right: 30px;
 }
 
-.modal .buttonContainer {
+.modal .button-container {
     width: auto;
     float: left;
     display: inline-block;
@@ -1197,7 +1197,7 @@ body,
     justify-content: space-between;
 }
 
-.adminButtonContainer .buttonContainer {
+.adminButtonContainer .button-container {
     margin: 0;
 }
 
@@ -1277,7 +1277,7 @@ body,
     margin-top: 0;
 }
 
-.id-card-wrapper .buttons-wrapper .buttonContainer {
+.id-card-wrapper .buttons-wrapper .button-container {
     width: auto;
     margin: 0 0 0 10px;
     cursor: pointer;
@@ -1395,7 +1395,7 @@ body,
     margin-left: 10px;
 }
 
-.id-card-wrapper .selected-student-buttons .buttonContainer {
+.id-card-wrapper .selected-student-buttons .button-container {
     display: inline-block;
     width: auto;
     margin: 0 10px 0 0;
@@ -1483,7 +1483,7 @@ body,
     width: 100%;
 }
 
-.selected-student-buttons .buttonContainer .linkButton {
+.selected-student-buttons .button-container .linkButton {
     color: #5c5b5b;
     background-color: #ebebec;
     outline: none;
@@ -1497,17 +1497,17 @@ body,
     cursor: pointer;
 }
 
-.selected-student-buttons .buttonContainer .linkButton:hover {
+.selected-student-buttons .button-container .linkButton:hover {
     transition: 0.3s all;
     box-shadow: 0 1px 3px 0 #d4d0d0;
     background-color: #e1e1e4;
 }
 
-.selected-student-buttons .buttonContainer .disable-link-button-new {
+.selected-student-buttons .button-container .disable-link-button-new {
     position: relative;
 }
 
-.selected-student-buttons .buttonContainer .disable-link-button-new::after {
+.selected-student-buttons .button-container .disable-link-button-new::after {
     position: absolute;
     content: 'Please select students...';
     right: 0;
@@ -1523,16 +1523,16 @@ body,
     opacity: 0;
 }
 
-.selected-student-buttons .buttonContainer:hover .disable-link-button-new::after {
+.selected-student-buttons .button-container:hover .disable-link-button-new::after {
     transition: 0.6s all;
     opacity: 1;
 }
 
-.selected-student-buttons .buttonContainer.disable-link {
+.selected-student-buttons .button-container.disable-link {
     position: relative;
 }
 
-.selected-student-buttons .buttonContainer .disable-link::after {
+.selected-student-buttons .button-container .disable-link::after {
     position: absolute;
     content: 'Please select students...';
     left: 0;
@@ -1548,7 +1548,7 @@ body,
     opacity: 0;
 }
 
-.selected-student-buttons .buttonContainer:hover .disable-link::after {
+.selected-student-buttons .button-container:hover .disable-link::after {
     transition: 0.6s all;
     opacity: 1;
 }
@@ -2122,7 +2122,7 @@ body,
     max-width: 100%;
 }
 
-.student-already-register-form .button-wrapper .buttonContainer:nth-child(2) .buttonOrange {
+.student-already-register-form .button-wrapper .button-container:nth-child(2) .buttonOrange {
     padding: 8px 0;
 }
 
@@ -2233,14 +2233,14 @@ body,
     padding: 10px 20px 8px;
 }
 
-.render-file-list .buttonContainer {
+.render-file-list .button-container {
     width: auto !important;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
 }
 
-.render-file-list .buttonContainer .buttonOrange {
+.render-file-list .button-container .buttonOrange {
     padding: 5px 12px;
     margin-left: 10px;
 }
@@ -2380,20 +2380,20 @@ body,
     background-color: var(--orange-hover-color) !important;
 }
 
-.selected-student-buttons .buttonContainer .linkButton {
+.selected-student-buttons .button-container .linkButton {
     background-color: var(--enable-link-color) !important;
 }
 
-.selected-student-buttons .buttonContainer .linkButton:hover {
+.selected-student-buttons .button-container .linkButton:hover {
     background-color: var(--enable-link-hover-color) !important;
 }
 
-.popupContainer .buttonContainer .linkButton {
+.popupContainer .button-container .linkButton {
     background-color: var(--enable-link-color) !important;
     color: #000;
 }
 
-.popupContainer .buttonContainer .linkButton:hover {
+.popupContainer .button-container .linkButton:hover {
     background-color: var(--enable-link-hover-color) !important;
 }
 .file-download-button {
@@ -2933,8 +2933,8 @@ body,
         display: block;
     }
 
-    .id-card-wrapper .buttonContainer:first-child, .id-card-wrapper
-    .buttonContainer:nth-child(2), .id-card-wrapper .buttonContainer:nth-child(3) {
+    .id-card-wrapper .button-container:first-child, .id-card-wrapper
+    .button-container:nth-child(2), .id-card-wrapper .button-container:nth-child(3) {
         display: none;
     }
 
@@ -3066,16 +3066,16 @@ body,
         flex-direction: column;
     }
 
-    .button-wrapper .buttonContainer {
+    .button-wrapper .button-container {
         width: 100%;
         margin-top: 10px;
     }
 
-    .button-wrapper .buttonContainer:first-child {
+    .button-wrapper .button-container:first-child {
         order: 1;
     }
 
-    .landing-page-button-container .buttonContainer {
+    .landing-page-button-container .button-container {
         width: 100%;
     }
 
@@ -3093,7 +3093,7 @@ body,
         max-width: 100%;
     }
 
-    .buttonContainer {
+    .button-container {
         margin: 12px 0 0;
         width: 100%;
     }
@@ -3250,7 +3250,7 @@ body,
         display: inline-block;
     }
 
-    .id-card-wrapper .selected-student-buttons .buttonContainer {
+    .id-card-wrapper .selected-student-buttons .button-container {
         flex: 1 0 50%;
         margin: 0 0 10px 0;
         display: inline-block;
@@ -3261,15 +3261,15 @@ body,
         padding: 8px;
     }
 
-    .id-card-wrapper .buttonContainer:nth-child(1) {
+    .id-card-wrapper .button-container:nth-child(1) {
         display: none;
     }
 
-    .id-card-wrapper .buttonContainer:nth-child(2) {
+    .id-card-wrapper .button-container:nth-child(2) {
         display: none;
     }
 
-    .id-card-wrapper .buttonContainer:nth-child(3) {
+    .id-card-wrapper .button-container:nth-child(3) {
         display: none;
     }
 
@@ -3280,12 +3280,12 @@ body,
         padding: 0 10px;
     }
 
-    .selected-student-buttons .buttonContainer .disable-link-button-new::after {
+    .selected-student-buttons .button-container .disable-link-button-new::after {
         content: none;
         display: none;
     }
 
-    .selected-student-buttons .buttonContainer .disable-link-new::after {
+    .selected-student-buttons .button-container .disable-link-new::after {
         content: none;
         display: none;
     }
@@ -3317,7 +3317,7 @@ body,
         margin-top: 0;
     }
 
-    .registrationFormButtonContainer .button-wrapper .buttonContainer {
+    .registrationFormButtonContainer .button-wrapper .button-container {
         padding: 0;
     }
 
@@ -3624,7 +3624,7 @@ body,
         min-width: 90%;
     }
 
-    .selected-student-buttons .buttonContainer .linkButton {
+    .selected-student-buttons .button-container .linkButton {
         padding: 10px;
     }
 

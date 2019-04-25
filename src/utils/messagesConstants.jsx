@@ -1,4 +1,3 @@
-
 export const NO_COLUMNS_SELECTED_MESSAGE = 'आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है ।';
 
 export const INFORMATION_NOT_AVAILABLE_MESSAGE = 'यहाँ जानकारी उपलब्ध नहीं है ।';

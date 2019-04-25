@@ -161,7 +161,7 @@ class ParentsRegistration extends Component {
           <div className="parent-register-success">
             <span>धन्यवाद्</span>
           </div>
-          <div className="buttonContainer">
+          <div className="button-container">
             <button onClick={this._closePopUp} className="linkButton margin-none full-width">Close</button>
           </div>
         </div>
@@ -213,11 +213,11 @@ class ParentsRegistration extends Component {
                 <div>
                   {this._renderErrorMessage()}
                 </div>
-                <div className="buttonContainer button-register-submit">
+                <div className="button-container button-register-submit">
                   <Button
                     buttonText={formSubmitBtnText}
                     type="submit"
-                    form="parentsRegistrationForm"
+                    formName="parentsRegistrationForm"
                     value="Submit"
                     onClick={this._onSubmitParentsData}
                   />

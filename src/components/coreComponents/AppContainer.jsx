@@ -12,7 +12,9 @@ import cssJSON from '../../config/cssVariables.json';
 
 const { development, production } = cssJSON;
 
-
+/**
+ * AppContainer is the wrapper of application.
+ */
 class AppContainer extends Component {
   componentDidMount() {
     this.props.loadBusCoordinatorsDataAction();
@@ -28,14 +30,13 @@ class AppContainer extends Component {
   }
 
   render() {
-    // TODO: Rename isAppLoadedError to isAppLoadingFailed
-    if (this.props.isAppLoaded && !this.props.isAppLoadedError) {
+    if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
       return (
         <HashRouter>
           <Route path="/" component={Routes} />
         </HashRouter>
       );
-    } else if (this.props.isAppLoadedError) {
+    } else if (this.props.isAppLoadingFailed) {
       return (
         <div>
           <div className="empty-column-message">
@@ -55,7 +56,7 @@ AppContainer.propTypes = {
   loadAppDataAction: PropTypes.func,
   loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
-  isAppLoadedError: PropTypes.bool,
+  isAppLoadingFailed: PropTypes.bool,
   mode: PropTypes.string,
 };
 
@@ -63,14 +64,14 @@ AppContainer.defaultProps = {
   loadAppDataAction: () => {},
   loadBusCoordinatorsDataAction: () => {},
   isAppLoaded: false,
-  isAppLoadedError: false,
+  isAppLoadingFailed: false,
   mode: '',
 };
 
 const mapStateToProps = state => ({
   mode: getApplicationMode(state),
   isAppLoaded: isAppLoaded(state),
-  isAppLoadedError: getIsAppLoadedError(state),
+  isAppLoadingFailed: getIsAppLoadedError(state),
 });
 
 export default connect(mapStateToProps, {

@@ -98,7 +98,10 @@ class ColumnConfig extends Component {
    * and call closeColumnOption() method.
    */
   setValuesOfVisibleColumnConfig() {
-    this.props.setValuesOfVisibleColumnConfig(this.state.visibleColumnConfig, this.state.selectValue);
+    this.props.setValuesOfVisibleColumnConfig(
+      this.state.visibleColumnConfig,
+      this.state.selectValue,
+    );
     this.props.closeColumnOption();
   }
 

@@ -5,6 +5,10 @@ import {
   PLEASE_SELECT_ANY_ONE_TEXT,
 } from '../../utils/textConstants';
 
+/**
+ * SelectListInputField render dropdown list.
+ * @type {Class}
+ * */
 class SelectListInputField extends Component {
 
   constructor(props) {
@@ -14,15 +18,17 @@ class SelectListInputField extends Component {
   }
 
   renderOptionStatements() {
-    return this.props.options.map((iterator, index) => {
-      return <option value={iterator.value} key={index}>{iterator.text}</option>
-    });
+    return this.props.options.map((iterator, index) =>
+      (
+        <option value={iterator.value} key={index}>
+          {iterator.text}
+        </option>),
+    );
   }
-
   populateValue(value) {
     if (!value) {
       return 'select';
-    } else return value;
+    } return value;
   }
 
   handleOnChange(e) {
@@ -44,14 +50,14 @@ class SelectListInputField extends Component {
 
     if (errorMessage) {
       return (
-        <div className={'inputWrapper'}>
-          <div className={'has-error inputWrapperContainer errorInputField'}>
-            <div className={'inputLabel'}>
+        <div className="inputWrapper">
+          <div className="has-error inputWrapperContainer errorInputField">
+            <div className="inputLabel">
               <label>{newLabel}</label>
             </div>
             <div>
               <select
-                className={'selectInputText'}
+                className="selectInputText"
                 name={name}
                 onChange={this._handleOnChange}
                 value={this._populateValue(value)}
@@ -62,20 +68,20 @@ class SelectListInputField extends Component {
                 {this.renderOptionStatements()}
               </select>
             </div>
-            <ErrorMessage errorMessage={errorMessage} />
+            <ErrorMessage message={errorMessage} />
           </div>
         </div>
       );
     }
     return (
-      <div className={'inputWrapper'}>
-        <div className={'inputWrapperContainer'}>
-          <div className={'inputLabel'}>
+      <div className="inputWrapper">
+        <div className="inputWrapperContainer">
+          <div className="inputLabel">
             <label>{newLabel}</label>
           </div>
           <div>
             <select
-              className={'selectInputText'}
+              className="selectInputText"
               name={name}
               onChange={this._handleOnChange}
               value={this._populateValue(value)}
@@ -86,7 +92,7 @@ class SelectListInputField extends Component {
               {this.renderOptionStatements()}
             </select>
           </div>
-          <ErrorMessage errorMessage={errorMessage} />
+          <ErrorMessage message={errorMessage} />
         </div>
       </div>
     );
@@ -105,6 +111,7 @@ SelectListInputField.propTypes = {
   isRequired: PropTypes.bool,
   disabled: PropTypes.bool,
   onInputChange: PropTypes.func,
+  style: PropTypes.object,
 };
 
 SelectListInputField.defaultProps = {
@@ -116,6 +123,7 @@ SelectListInputField.defaultProps = {
   errorMessage: '',
   label: '',
   onInputChange: () => {},
+  style: {},
 };
 
 export default SelectListInputField;

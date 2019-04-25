@@ -243,7 +243,7 @@ class MarkSelectedStudentAttendance extends Component {
   }
   render() {
     return (
-      <div className="buttonContainer button-container-mobile">
+      <div className="button-container button-container-mobile">
         <button
           className={this.renderMarkPresentButtonClassName()}
           onClick={this.openMarkSelectedStudentsAttendanceModal}
