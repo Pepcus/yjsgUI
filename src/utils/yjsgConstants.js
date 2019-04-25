@@ -261,7 +261,7 @@ export const loginBtnText = 'Login';
 
 export const adminId = 'yjsgadmin';
 
-export const adminPassword = '451725';
+export const adminPassword = '451727';
 
 export const invalidAdminMsg = 'यह जानकारी अनिवार्य है|';
 
