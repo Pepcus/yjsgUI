@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ErrorMessage from '../commonComponents/ErrorMessage';
+import ErrorMessage from '../common/ErrorMessage';
 
 /**
  * TextAreaField render textArea field

@@ -6,7 +6,7 @@ import './assets/css/index.css';
 import './assets/css/dataGrid.css';
 import './assets/css/tableGrid.css';
 import './assets/css/card-print.css';
-import AppContainer from './components/coreComponents/AppContainer';
+import AppContainer from './components/core/AppContainer';
 import store from './store/store';
 
 ReactDOM.render(

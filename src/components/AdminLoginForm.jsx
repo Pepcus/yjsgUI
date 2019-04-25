@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputField from './formComponents/InputField';
+import InputField from './form/InputField';
 import { formSubmitBtnText, goBackBtnText } from '../utils/yjsgConstants';
-import Button from './commonComponents/Button';
+import Button from './common/Button';
 
 
 const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirection, disableAdminLoginButtons, setAdminLogin }) => {

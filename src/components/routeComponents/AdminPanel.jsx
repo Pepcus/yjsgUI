@@ -26,7 +26,7 @@ import {
   setAdminLoginStateAction,
   setRedirectValueAction,
 } from '../../actions/studentRegistrationActions';
-import LinkButton from '../commonComponents/LinkButton';
+import LinkButton from '../common/LinkButton';
 
 // FIXME: Add missing propTypes and defaultProps.
 //  Fix EsLint issues.

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Footer from './Footer';
-import Loader from '../Loader';
+import Footer from '../common/Footer';
+import Loader from '../common/Loader';
 import Context from './ConfigProvider';
 import RouteComponents from '../routeComponents';
-import Header from '../Header';
+import Header from '../common/Header';
 import { routes } from '../../config/appConfig.json';
 
 

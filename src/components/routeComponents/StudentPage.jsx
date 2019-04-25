@@ -19,7 +19,7 @@ import {
   USER_TYPES,
 } from '../../utils/yjsgConstants';
 import { getParameterByName } from '../../utils/http';
-import Button from '../commonComponents/Button';
+import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
 
 /**

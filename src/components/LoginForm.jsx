@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import AdminLoginForm from './AdminLoginForm';
 import { adminLoginBtnText, newRegistrationBtnText } from '../utils/yjsgConstants';
-import Button from './commonComponents/Button';
+import Button from './common/Button';
 
 /**
  * LoginForm render login form
