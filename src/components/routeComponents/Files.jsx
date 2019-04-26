@@ -65,7 +65,7 @@ class Files extends Component {
         if (fileInfo.routeName === collections[1]) {
           if (fileInfo.fileType === 'pdf') {
             const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
-            window.open(`${url}`);
+            window.open(`${url}`, '_self');
           }
           const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
           this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable);
