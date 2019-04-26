@@ -152,7 +152,13 @@ const Header = ({
         {RenderButton(routeType[location])}
       </div>
     );
-  } return null;
+  } return (
+    <div style={routeType.default.headerWrapperStyle} className="student-logo-header print-media-none">
+      {RenderLogo(routeType.default)}
+      {RenderHeaderName(routeType.default)}
+      {RenderButton(routeType.default)}
+    </div>
+  );
 };
 
 Header.propTypes = {

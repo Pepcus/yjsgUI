@@ -36,6 +36,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
+import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
 
 /**
  * Files component render files list and file data table.
@@ -58,6 +59,19 @@ class Files extends Component {
 
   componentDidMount() {
     this.props.fetchFilesConfigAction();
+    const collections = window.location.hash.split('/files/');
+    if (collections[1]) {
+      this.props.filesConfig.files.forEach((fileInfo, index) => {
+        if (fileInfo.routeName === collections[1]) {
+          if (fileInfo.fileType === 'pdf') {
+            const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
+            window.open(`${url}`);
+          }
+          const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+          this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable);
+        }
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -175,7 +189,7 @@ class Files extends Component {
     return 'file-component';
   };
   renderFileList = () => {
-   if (!isEmpty(this.props.filesConfig)) {
+    if (!isEmpty(this.props.filesConfig)) {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
           <div className={this.returnFileListDisplayBlock()}>
@@ -376,7 +390,7 @@ class Files extends Component {
               <i className="fa fa-arrow-left" />
             </Link>
             {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
-              {/* <i className="fa fa-power-off" />*/}
+            {/* <i className="fa fa-power-off" />*/}
             {/* </Link>*/}
           </div>
         </div>

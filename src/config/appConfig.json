@@ -235,6 +235,12 @@
     },
     {
       "name": "files",
+      "path": "/files/*",
+      "component": "Files",
+      "isActive": true
+    },
+    {
+      "name": "files",
       "path": "/files",
       "component": "Files",
       "isActive": true
