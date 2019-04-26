@@ -77,14 +77,6 @@ class Files extends Component {
     }
     return 'file-flex-wrapper';
   };
-  // this method may be use in feature.
-  /* performLogout = () => {
-    this.props.resetAdminCredentialsAction();
-    this.props.setAdminLoginStateAction(false);
-    this.props.setRedirectValueAction(false);
-    this.props.resetVisibleColumnConfigAction();
-    localStorage.clear();
-  };*/
   onClickViewFile = (file, index, href, fileView) => {
     this.setState({
       showFileDetails: true,
@@ -182,23 +174,8 @@ class Files extends Component {
     }
     return 'file-component';
   };
-  // this method may be use in feature
- /* renderLoginPopup = () => (
-    <Popup>
-      <h5>Please Login</h5>
-      <LinkButton
-        type="button"
-        buttonText={goBackBtnText}
-        linkPath="/admin?fromRoute=/files"
-      />
-    </Popup>
-  );*/
-
   renderFileList = () => {
-    // this code may be use in feature.
-    /* if (!(this.props.adminLoginState)) {
-      return this.renderLoginPopup();
-    } else*/ if (!isEmpty(this.props.filesConfig)) {
+   if (!isEmpty(this.props.filesConfig)) {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
           <div className={this.returnFileListDisplayBlock()}>
