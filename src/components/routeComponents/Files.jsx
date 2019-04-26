@@ -34,7 +34,7 @@ import {
   resetVisibleColumnConfigAction,
   setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
-import Popup from '../common/Popup';
+// import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
 
 /**
@@ -76,13 +76,6 @@ class Files extends Component {
       return 'file-flex-wrapper';
     }
     return 'file-flex-wrapper';
-  };
-  performLogout = () => {
-    this.props.resetAdminCredentialsAction();
-    this.props.setAdminLoginStateAction(false);
-    this.props.setRedirectValueAction(false);
-    this.props.resetVisibleColumnConfigAction();
-    localStorage.clear();
   };
   onClickViewFile = (file, index, href, fileView) => {
     this.setState({
@@ -181,21 +174,8 @@ class Files extends Component {
     }
     return 'file-component';
   };
-  renderLoginPopup = () => (
-    <Popup>
-      <h5>Please Login</h5>
-      <LinkButton
-        type="button"
-        buttonText={goBackBtnText}
-        linkPath="/admin?fromRoute=/files"
-      />
-    </Popup>
-  );
-
   renderFileList = () => {
-    if (!(this.props.adminLoginState)) {
-      return this.renderLoginPopup();
-    } else if (!isEmpty(this.props.filesConfig)) {
+   if (!isEmpty(this.props.filesConfig)) {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
           <div className={this.returnFileListDisplayBlock()}>
@@ -395,9 +375,9 @@ class Files extends Component {
             <Link to={this.props.context.previousLocation} className="grid-small-button">
               <i className="fa fa-arrow-left" />
             </Link>
-            <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>
-              <i className="fa fa-power-off" />
-            </Link>
+            {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
+              {/* <i className="fa fa-power-off" />*/}
+            {/* </Link>*/}
           </div>
         </div>
         <div className="file-wrapper">
