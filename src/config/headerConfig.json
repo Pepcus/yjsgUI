@@ -67,8 +67,7 @@
     "/files": {
       "logo": true,
       "HeaderContainedButton": true,
-      "backButton": true,
-      "logoutButton": true
+      "backButton": true
     },
     "default": {
       "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
