@@ -54,7 +54,7 @@ class Files extends Component {
       backPageButton: true,
       width: window.innerWidth,
       fileData: [],
-      hasFileRoute: false
+      hasFileRoute: false,
     };
   }
 
@@ -67,7 +67,7 @@ class Files extends Component {
           if (fileInfo.routeName === collections[1]) {
             if (fileInfo.fileType === 'pdf') {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
-              window.open(`${url}`, '_self');
+              window.open(`${url}`, '_self', 'resizable=0');
             }
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
@@ -260,6 +260,19 @@ class Files extends Component {
     }
     return null;
   };
+
+  renderFileListViewButton = () => {
+    if (!this.state.hasFileRoute) {
+      return (
+        <div onClick={this.onClickBackButton} className="file-view-list-button">
+          <a className="grid-small-button file-button-mobile">
+            <i className="fa fa-list" />
+          </a>
+        </div>
+      );
+    } return null;
+  }
+
   renderFileDetails = () => {
     const { width } = this.state;
     const isMobile = width <= 500;
@@ -272,11 +285,7 @@ class Files extends Component {
               ref={this.widthRef}
               style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
-              <div onClick={this.onClickBackButton} className="file-view-list-button">
-                <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list" />
-                </a>
-              </div>
+              {this.renderFileListViewButton()}
               <DataGrid
                 data={this.state.fileData}
                 metaData={
@@ -307,11 +316,7 @@ class Files extends Component {
               ref={this.widthRef}
               style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
-              <div onClick={this.onClickBackButton} className="file-view-list-button">
-                <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list" />
-                </a>
-              </div>
+              {this.renderFileListViewButton()}
               <div className="file-text-panel">
                 <span className="file-text-format-wrapper">
                   <span>
@@ -364,11 +369,7 @@ class Files extends Component {
             ref={this.widthRef}
             style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
-            <div onClick={this.onClickBackButton} className="file-view-list-button">
-              <a className="grid-small-button file-button-mobile">
-                <i className="fa fa-list" />
-              </a>
-            </div>
+            {this.renderFileListViewButton()}
             <div className="file-text-panel">
               <span className="file-text-message">
                   No Data Found.
@@ -414,14 +415,23 @@ class Files extends Component {
       </div>
     );
   };
+
+  renderBackButton = () => {
+    if (!this.state.hasFileRoute) {
+      return (
+        <Link to={this.props.context.previousLocation} className="grid-small-button">
+          <i className="fa fa-arrow-left" />
+        </Link>
+      );
+    } return null;
+  }
+
   render() {
     return (
       <div className="registration-file-container">
         <div className="logoutButtonContainer file-logout-container display-logout-desktop">
           <div className="logoutLinkContainer">
-            <Link to={this.props.context.previousLocation} className="grid-small-button">
-              <i className="fa fa-arrow-left" />
-            </Link>
+            {this.renderBackButton()}
             {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
             {/* <i className="fa fa-power-off" />*/}
             {/* </Link>*/}
