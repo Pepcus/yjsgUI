@@ -5,25 +5,29 @@
       "fileLabel": "fileLabel001",
       "fileType": "csv",
       "presentationType": "normalTabular",
-      "isViewable": true
+      "isViewable": true,
+      "routeName": "routeNameSample1"
     },
     {
       "fileName": "studentFile2",
       "fileLabel": "fileLabel002",
       "fileType": "csv",
       "presentationType": "complexGrid",
-      "isViewable": false
+      "isViewable": false,
+      "routeName": "routeNameSample2"
     },
     {
       "fileName": "sample-pdf",
       "fileLabel": "sample-pdf",
       "fileType": "pdf",
-      "isViewable": false
+      "isViewable": false,
+      "routeName": "routeNameSample3"
     },
     {
       "fileName": "studentFile2",
       "fileLabel": "fileLabelxls",
-      "fileType": "csv"
+      "fileType": "csv",
+      "routeName": "routeNameSample4"
     },
     {
       "fileName": "SampleXLSFile_3mb",
