@@ -54,6 +54,7 @@ class Files extends Component {
       backPageButton: true,
       width: window.innerWidth,
       fileData: [],
+      hasFileRoute: false
     };
   }
 
@@ -61,16 +62,38 @@ class Files extends Component {
     this.props.fetchFilesConfigAction();
     const collections = window.location.hash.split('/files/');
     if (collections[1]) {
-      this.props.filesConfig.files.forEach((fileInfo, index) => {
-        if (fileInfo.routeName === collections[1]) {
-          if (fileInfo.fileType === 'pdf') {
-            const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
-            window.open(`${url}`, '_self');
+      if (this.props.filesConfig.files) {
+        this.props.filesConfig.files.forEach((fileInfo, index) => {
+          if (fileInfo.routeName === collections[1]) {
+            if (fileInfo.fileType === 'pdf') {
+              const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
+              window.open(`${url}`, '_self');
+            }
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const hasFileRoute = true;
+            this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
-          const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
-          this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable);
-        }
-      });
+        });
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filesConfig !== nextProps.filesConfig) {
+      const collections = window.location.hash.split('/files/');
+      if (collections[1]) {
+        nextProps.filesConfig.files.forEach((fileInfo, index) => {
+          if (fileInfo.routeName === collections[1]) {
+            if (fileInfo.fileType === 'pdf') {
+              const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
+              window.open(`${url}`, '_self');
+            }
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const hasFileRoute = true;
+            this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
+          }
+        });
+      }
     }
   }
 
@@ -91,7 +114,7 @@ class Files extends Component {
     }
     return 'file-flex-wrapper';
   };
-  onClickViewFile = (file, index, href, fileView) => {
+  onClickViewFile = (file, index, href, fileView, hasFileRoute) => {
     this.setState({
       showFileDetails: true,
       currentFileDetails: file,
@@ -99,6 +122,7 @@ class Files extends Component {
       otherExtensionFileDetails: {},
       backPageButton: false,
       fileData: [],
+      hasFileRoute,
     });
     if (!fileView) {
       this.setState({
@@ -189,6 +213,9 @@ class Files extends Component {
     return 'file-component';
   };
   renderFileList = () => {
+    if (this.state.hasFileRoute) {
+      return null;
+    }
     if (!isEmpty(this.props.filesConfig)) {
       if (hasIn(this.props.filesConfig, 'files')) {
         return (
@@ -243,6 +270,7 @@ class Files extends Component {
             <div
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
+              style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
               <div onClick={this.onClickBackButton} className="file-view-list-button">
                 <a className="grid-small-button file-button-mobile">
@@ -261,6 +289,7 @@ class Files extends Component {
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
+            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
             <DataGrid
               data={this.state.fileData}
@@ -276,6 +305,7 @@ class Files extends Component {
             <div
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
+              style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
               <div onClick={this.onClickBackButton} className="file-view-list-button">
                 <a className="grid-small-button file-button-mobile">
@@ -306,6 +336,7 @@ class Files extends Component {
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
+            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
             <div className="file-text-panel">
               <span className="file-text-format-wrapper">
@@ -331,6 +362,7 @@ class Files extends Component {
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
+            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
             <div onClick={this.onClickBackButton} className="file-view-list-button">
               <a className="grid-small-button file-button-mobile">
@@ -349,6 +381,7 @@ class Files extends Component {
         <div
           className={this.returnTableWidthComponentClass()}
           ref={this.widthRef}
+          style={this.state.hasFileRoute ? { margin: 'auto' } : null}
         >
           <div className="file-text-panel">
             <span className="file-text-message">
@@ -362,7 +395,7 @@ class Files extends Component {
       !isEmpty(this.props.filesConfig)
       && hasIn(this.props.filesConfig, 'files')) {
       return (
-        <div className="file-component" ref={this.widthRef}>
+        <div className="file-component" style={this.state.hasFileRoute ? { margin: 'auto' } : null} ref={this.widthRef}>
           <div className="file-text-panel">
             <span className="file-text-message">
           Please select a file to view.
