@@ -54,7 +54,7 @@ class Files extends Component {
       backPageButton: true,
       width: window.innerWidth,
       fileData: [],
-      hasFileRoute: false,
+      hasFileRoute: false
     };
   }
 
@@ -67,7 +67,7 @@ class Files extends Component {
           if (fileInfo.routeName === collections[1]) {
             if (fileInfo.fileType === 'pdf') {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
-              window.open(`${url}`, '_self', 'resizable=0');
+              window.open(`${url}`, '_self');
             }
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
