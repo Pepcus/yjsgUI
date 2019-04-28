@@ -278,18 +278,6 @@ export const days = [
 
 export const classRoomNumber = [
   {
-    text: '101',
-    value: '101',
-  },
-  {
-    text: '103',
-    value: '103',
-  },
-  {
-    text: '104',
-    value: '104',
-  },
-  {
     text: '105',
     value: '105',
   },
@@ -350,10 +338,6 @@ export const classRoomNumber = [
     value: '330',
   },
   {
-    text: '332',
-    value: '332',
-  },
-  {
     text: '334',
     value: '334',
   },
@@ -382,10 +366,6 @@ export const classRoomNumber = [
     value: '403',
   },
   {
-    text: '408',
-    value: '408',
-  },
-  {
     text: '501',
     value: '501',
   },
@@ -402,16 +382,8 @@ export const classRoomNumber = [
     value: '504',
   },
   {
-    text: '506',
-    value: '506',
-  },
-  {
     text: '507',
     value: '507',
-  },
-  {
-    text: '508',
-    value: '508',
   },
   {
     text: '509',
