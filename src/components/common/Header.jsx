@@ -11,7 +11,7 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
-import { routeType, title } from '../../config/headerConfig.json';
+import { headerConfig } from '../../config/appConfig.json';
 
 /**
  * Header render the common header for all route
@@ -100,7 +100,7 @@ const Header = ({
       style={headerObject.titleStyle}
       className="student-info-heading"
     >
-      {headerObject.title ? headerObject.title : title}
+      {headerObject.title ? headerObject.title : headerConfig.title}
     </h2>
   );
   /**
@@ -144,26 +144,25 @@ const Header = ({
     return null;
   };
   // render header with their contains according to route
-  if (routeType[location]) {
+  if (headerConfig.routeType[location]) {
     return (
-      <div style={routeType[location].headerWrapperStyle} className="student-logo-header print-media-none">
-        {RenderLogo(routeType[location])}
-        {RenderHeaderName(routeType[location])}
-        {RenderButton(routeType[location])}
+      <div style={headerConfig.routeType[location].headerWrapperStyle} className="student-logo-header print-media-none">
+        {RenderLogo(headerConfig.routeType[location])}
+        {RenderHeaderName(headerConfig.routeType[location])}
+        {RenderButton(headerConfig.routeType[location])}
       </div>
     );
   } return (
-    <div style={routeType.default.headerWrapperStyle} className="student-logo-header print-media-none">
-      {RenderLogo(routeType.default)}
-      {RenderHeaderName(routeType.default)}
-      {RenderButton(routeType.default)}
+    <div style={headerConfig.routeType.default.headerWrapperStyle} className="student-logo-header print-media-none">
+      {RenderLogo(headerConfig.routeType.default)}
+      {RenderHeaderName(headerConfig.routeType.default)}
+      {RenderButton(headerConfig.routeType.default)}
     </div>
   );
 };
 
 Header.propTypes = {
-  routeType: PropTypes.object,
-  title: PropTypes.string,
+  headerConfig: PropTypes.object,
   resetAdminCredentials: PropTypes.func,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
@@ -172,8 +171,7 @@ Header.propTypes = {
   context: PropTypes.object,
 };
 Header.defaultProps = {
-  routeType: {},
-  title: '',
+  headerConfig: {},
   resetAdminCredentials: () => {},
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
