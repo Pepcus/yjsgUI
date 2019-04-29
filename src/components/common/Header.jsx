@@ -144,21 +144,21 @@ const Header = ({
     return null;
   };
   // render header with their contains according to route
-  return routes.map((rout) => {
-    if (rout.path === location) {
+  return routes.map((route) => {
+    if (route.path === location) {
       return (
-        <div key={rout.path} style={rout.header.headerWrapperStyle} className="student-logo-header print-media-none">
-          {RenderLogo(rout.header)}
-          {RenderHeaderName(rout.header)}
-          {RenderButton(rout.header)}
+        <div key={route.path} style={route.header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {RenderLogo(route.header)}
+          {RenderHeaderName(route.header)}
+          {RenderButton(route.header)}
         </div>
       );
     } else if (location === '/files') {
       return (
-        <div key={rout.path} style={rout.header.headerWrapperStyle} className="student-logo-header print-media-none">
-          {RenderLogo(rout.header)}
-          {RenderHeaderName(rout.header)}
-          {RenderButton(rout.header)}
+        <div key={route.path} style={route.header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {RenderLogo(route.header)}
+          {RenderHeaderName(route.header)}
+          {RenderButton(route.header)}
         </div>
       );
     } return null;
