@@ -2,16 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
+import { withTheme } from './../HOC/ThemeProvider';
 
-const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
+// TODO: Add PropTypes
+const Button = ({ theme, onClick, disabled, buttonText, type, form, }) => (
   <ButtonContainer>
     <button
-      style={styles}
-      className="buttonOrange"
+      // TODO: Rename form to formId or formName. Whichever is applicable.
       form={formName}
       type={type}
       onClick={onClick}
       disabled={disabled}
+      style={theme.buttonStyles}
     >
       {buttonText}
     </button>
@@ -36,4 +38,4 @@ Button.defaultProps = {
   styles: {},
 };
 
-export default Button;
+export default withTheme(Button);

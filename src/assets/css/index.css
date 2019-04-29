@@ -117,18 +117,6 @@ input[type=number]::-webkit-outer-spin-button {
     color: #4c4c4c;
 }
 
-.buttonOrange {
-    color: rgb(255, 255, 255);
-    background-color: var(--index-orange-color);
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    border: 2px solid var(--index-orange-color);
-}
-
 .button-container {
     width: 170px;
     display: inline-block;
