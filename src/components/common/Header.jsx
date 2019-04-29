@@ -11,7 +11,7 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
-import { headerConfig } from '../../config/appConfig.json';
+import { routes, title } from '../../config/appConfig.json';
 
 /**
  * Header render the common header for all route
@@ -100,7 +100,7 @@ const Header = ({
       style={headerObject.titleStyle}
       className="student-info-heading"
     >
-      {headerObject.title ? headerObject.title : headerConfig.title}
+      {headerObject.title ? headerObject.title : title}
     </h2>
   );
   /**
@@ -144,40 +144,46 @@ const Header = ({
     return null;
   };
   // render header with their contains according to route
-  if (headerConfig.routeType[location]) {
-    return (
-      <div style={headerConfig.routeType[location].headerWrapperStyle} className="student-logo-header print-media-none">
-        {RenderLogo(headerConfig.routeType[location])}
-        {RenderHeaderName(headerConfig.routeType[location])}
-        {RenderButton(headerConfig.routeType[location])}
-      </div>
-    );
-  } return (
-    <div style={headerConfig.routeType.default.headerWrapperStyle} className="student-logo-header print-media-none">
-      {RenderLogo(headerConfig.routeType.default)}
-      {RenderHeaderName(headerConfig.routeType.default)}
-      {RenderButton(headerConfig.routeType.default)}
-    </div>
-  );
+  return routes.map((rout) => {
+    if (rout.path === location) {
+      return (
+        <div key={rout.path} style={rout.header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {RenderLogo(rout.header)}
+          {RenderHeaderName(rout.header)}
+          {RenderButton(rout.header)}
+        </div>
+      );
+    } else if (location === '/files') {
+      return (
+        <div key={rout.path} style={rout.header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {RenderLogo(rout.header)}
+          {RenderHeaderName(rout.header)}
+          {RenderButton(rout.header)}
+        </div>
+      );
+    } return null;
+  });
 };
 
 Header.propTypes = {
-  headerConfig: PropTypes.object,
+  title: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
   resetVisibleColumnConfig: PropTypes.func,
   location: PropTypes.string,
   context: PropTypes.object,
+  routes: PropTypes.array,
 };
 Header.defaultProps = {
-  headerConfig: {},
+  title: '',
   resetAdminCredentials: () => {},
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
   resetVisibleColumnConfig: () => {},
   location: '',
   context: {},
+  routes: [],
 };
 
 const mapDispatchToProps = dispatch => ({

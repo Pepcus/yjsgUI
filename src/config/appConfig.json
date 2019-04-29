@@ -1,4 +1,5 @@
 {
+  "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
   "columnsList": [
     {
       "label": "ID",
@@ -183,95 +184,54 @@
       "name": "default",
       "path": "/",
       "component": "StudentPage",
-      "isActive": true
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "15px 0",
+          "fontSize": "25px"
+        },
+        "headerWrapperStyle": {
+          "height": "auto",
+          "backgroundColor": "rgba(244, 233, 227, 0.21)"
+        }
+      }
     },
     {
       "name": "admin",
       "path": "/admin",
       "component": "SplashPage",
-      "isActive": true
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "15px 0",
+          "fontSize": "25px"
+        },
+        "headerWrapperStyle": {
+          "height": "auto",
+          "backgroundColor": "rgba(244, 233, 227, 0.21)"
+        }
+      }
     },
     {
       "name": "memberSearch",
       "path": "/student-search",
       "component": "StudentInformationGrid",
-      "isActive": true
-    },
-    {
-      "name": "home",
-      "path": "/home",
-      "component": "SplashPagePrePopulated",
-      "isActive": false
-    },
-    {
-      "name": "memberRegister",
-      "path": "/studentRegister",
-      "component": "StudentRegistrationForm",
-      "isActive": true
-    },
-    {
-      "name": "registrationCorrection",
-      "path": "/studentCorrection",
-      "component": "StudentRegistrationCorrectionForm",
-      "isActive": true
-    },
-    {
-      "name": "adminPanel",
-      "path": "/adminPanel",
-      "component": "AdminPanel",
-      "isActive": false
-    },
-    {
-      "name": "memberLogin",
-      "path": "/student-login",
-      "component": "StudentCredentialPage",
-      "isActive": true
-    },
-    {
-      "name": "event",
-      "path": "/event",
-      "component": "ParentsRegistration",
-      "isActive": true
-    },
-    {
-      "name": "files",
-      "path": "/files*",
-      "component": "Files",
-      "isActive": true
-    }
-  ],
-  "headerConfig": {
-    "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-    "routeType":{
-      "/" : {
-        "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
-        },
-        "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
-        }
-      },
-      "/admin": {
-        "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
-        },
-        "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
-        }
-      },
-      "/student-search":{
+      "isActive": true,
+      "header": {
         "logo": true,
         "HeaderContainedButton": true,
         "backButton": true,
         "backButtonRedirectTo": "/admin",
         "logoutButton": true,
         "logoutButtonRedirectTo": "/admin"
-      },
-      "/home": {
+      }
+    },
+    {
+      "name": "home",
+      "path": "/home",
+      "component": "SplashPagePrePopulated",
+      "isActive": false,
+      "header": {
         "titleStyle": {
           "padding": "15px 0",
           "fontSize": "25px"
@@ -280,19 +240,43 @@
           "height": "auto",
           "backgroundColor": "rgba(244, 233, 227, 0.21)"
         }
-      },
-      "/studentRegister": {
+      }
+    },
+    {
+      "name": "memberRegister",
+      "path": "/studentRegister",
+      "component": "StudentRegistrationForm",
+      "isActive": true,
+      "header": {
         "logo": true
-      },
-      "/studentCorrection": {
+      }
+    },
+    {
+      "name": "registrationCorrection",
+      "path": "/studentCorrection",
+      "component": "StudentRegistrationCorrectionForm",
+      "isActive": true,
+      "header": {
         "logo": true
-      },
-      "/adminPanel": {
+      }
+    },
+    {
+      "name": "adminPanel",
+      "path": "/adminPanel",
+      "component": "AdminPanel",
+      "isActive": false,
+      "header": {
         "HeaderContainedButton": true,
         "backButton": true,
         "logoutButton": true
-      },
-      "/student-login": {
+      }
+    },
+    {
+      "name": "memberLogin",
+      "path": "/student-login",
+      "component": "StudentCredentialPage",
+      "isActive": true,
+      "header": {
         "titleStyle": {
           "padding": "15px 0",
           "fontSize": "25px"
@@ -301,20 +285,28 @@
           "height": "auto",
           "backgroundColor": "rgba(244, 233, 227, 0.21)"
         }
-      },
-      "/event": {
+      }
+    },
+    {
+      "name": "event",
+      "path": "/event",
+      "component": "ParentsRegistration",
+      "isActive": true,
+      "header": {
         "title": "अभिभावक सम्मलेन (Parents' Convention)",
         "logo": true
-      },
-      "/files": {
+      }
+    },
+    {
+      "name": "files",
+      "path": "/files*",
+      "component": "Files",
+      "isActive": true,
+      "header": {
         "logo": true,
         "HeaderContainedButton": true,
         "backButton": true
-      },
-      "default": {
-        "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-        "logo": true
       }
     }
-  }
+  ]
 }
