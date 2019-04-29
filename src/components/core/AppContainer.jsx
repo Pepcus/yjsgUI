@@ -9,6 +9,7 @@ import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../redu
 import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
 import cssJSON from '../../config/cssVariables.json';
+import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 
 const { development, production } = cssJSON;
 
@@ -19,6 +20,7 @@ class AppContainer extends Component {
   componentDidMount() {
     this.props.loadBusCoordinatorsDataAction();
     this.props.loadAppDataAction();
+    this.props.setLoadingStateAction(false);
     if (this.props.isAppLoaded) {
       setAppColor(this.props.mode === 'production' ? production : development);
     }
@@ -54,6 +56,7 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
   loadAppDataAction: PropTypes.func,
+  setLoadingStateAction: PropTypes.func.isRequired,
   loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
@@ -77,5 +80,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   loadAppDataAction,
   loadBusCoordinatorsDataAction,
+  setLoadingStateAction,
 })(AppContainer);
 
