@@ -54,7 +54,7 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderBackButton = (headerObject) => {
+  const renderBackButton = (headerObject) => {
     if (headerObject.backButton) {
       return (
         <Link
@@ -69,12 +69,12 @@ const Header = ({
     } return null;
   };
   /**
-   * RenderLogOutButton method render logout button in header
+   * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderLogOutButton = (headerObject) => {
+  const renderLogOutButton = (headerObject) => {
     if (headerObject.logoutButton) {
       return (
         <Link
@@ -95,7 +95,7 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderHeaderName = headerObject => (
+  const renderHeaderName = headerObject => (
     <h2
       style={headerObject.titleStyle}
       className="student-info-heading"
@@ -109,25 +109,25 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderButton = (headerObject) => {
-    if (headerObject.HeaderContainedButton) {
+  const renderButton = (headerObject) => {
+    if (headerObject.hasButtons) {
       return (
         <div
           className="logoutButtonContainer display-mobile-none logoutLinkContainer "
         >
-          {RenderBackButton(headerObject)}
-          {RenderLogOutButton(headerObject)}
+          {renderBackButton(headerObject)}
+          {renderLogOutButton(headerObject)}
         </div>
       );
     } return null;
   };
   /**
-   * RenderLogo method render logo in header
+   * renderLogo method render logo in header
    * @param {Object} headerObject
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderLogo = (headerObject) => {
+  const renderLogo = (headerObject) => {
     if (headerObject.logo) {
       return (
         <div
@@ -145,20 +145,21 @@ const Header = ({
   };
   // render header with their contains according to route
   return routes.map((route) => {
-    if (route.path === location) {
+    const { header, path } = route;
+    if (path === location) {
       return (
-        <div key={route.path} style={route.header.headerWrapperStyle} className="student-logo-header print-media-none">
-          {RenderLogo(route.header)}
-          {RenderHeaderName(route.header)}
-          {RenderButton(route.header)}
+        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {renderLogo(header)}
+          {renderHeaderName(header)}
+          {renderButton(header)}
         </div>
       );
     } else if (location === '/files') {
       return (
-        <div key={route.path} style={route.header.headerWrapperStyle} className="student-logo-header print-media-none">
-          {RenderLogo(route.header)}
-          {RenderHeaderName(route.header)}
-          {RenderButton(route.header)}
+        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {renderLogo(header)}
+          {renderHeaderName(header)}
+          {renderButton(header)}
         </div>
       );
     } return null;

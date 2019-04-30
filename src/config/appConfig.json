@@ -219,7 +219,7 @@
       "isActive": true,
       "header": {
         "logo": true,
-        "HeaderContainedButton": true,
+        "hasButtons": true,
         "backButton": true,
         "backButtonRedirectTo": "/admin",
         "logoutButton": true,
@@ -266,7 +266,7 @@
       "component": "AdminPanel",
       "isActive": false,
       "header": {
-        "HeaderContainedButton": true,
+        "hasButtons": true,
         "backButton": true,
         "logoutButton": true
       }
@@ -304,7 +304,7 @@
       "isActive": true,
       "header": {
         "logo": true,
-        "HeaderContainedButton": true,
+        "hasButtons": true,
         "backButton": true
       }
     }
