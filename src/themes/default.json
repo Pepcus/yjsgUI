@@ -1,13 +1,7 @@
 {
   "buttonStyles": {
     "color": "rgb(255, 255, 255)",
-    "backgroundColor": "#ee7c2a",
-    "text-align": "center",
-    "font-size": "14px",
-    "padding": "10px",
-    "borderRadius": "4px",
-    "cursor": "pointer",
-    "width": "100%",
+    "background-color": "#ee7c2a",
     "border": "2px solid #ee7c2a"
   }
 }
