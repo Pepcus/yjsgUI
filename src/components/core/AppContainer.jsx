@@ -7,7 +7,7 @@ import Routes from './Routes';
 import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
 import { setAppColor } from '../../utils/dataGridUtils';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
+import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
 import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 

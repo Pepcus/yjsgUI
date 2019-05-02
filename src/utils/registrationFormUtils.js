@@ -14,7 +14,7 @@ import {
   ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
   DOUBLE_QUOTE_ERROR_MESSAGE,
-} from './messagesConstants';
+} from '../constants/messages';
 
 export const setRegistrationData = (value, name) => {
   const formData = {};

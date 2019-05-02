@@ -19,8 +19,8 @@ import {
 import {
   fetchFilesConfigAction,
 } from '../../actions/assetFilesActions';
-import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../utils/yjsgConstants';
-import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../utils/messagesConstants';
+import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
+import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../constants/messages';
 import LinkButton from '../common/LinkButton';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
@@ -36,7 +36,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
+import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 
 /**
  * Files component render files list and file data table.
