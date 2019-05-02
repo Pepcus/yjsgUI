@@ -14,7 +14,7 @@ import {
   ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
   DOUBLE_QUOTE_ERROR_MESSAGE,
-} from './messagesConstants';
+} from '../constants/messages';
 
 export const setRegistrationData = (value, name) => {
   const formData = {};
@@ -284,7 +284,13 @@ export const checkLevelValue = (value) => {
  * @return {Object} studentData
  */
 export const updateClassAttended2019InStudentData = (studentData) => {
-  const lastCourse = studentData.classAttended2018;
+  const { classAttended2018, classAttended2019 } = studentData;
+
+  if (classAttended2019) {
+    return studentData;
+  }
+
+  const lastCourse = classAttended2018;
   const level = checkLevelValue(lastCourse);
   /* In classAttended2018 Level is greater than 0 (level > 0) condition will satisfied.*/
   if (level > 0) {

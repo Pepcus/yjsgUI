@@ -19,8 +19,8 @@ import {
 import {
   fetchFilesConfigAction,
 } from '../../actions/assetFilesActions';
-import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../utils/yjsgConstants';
-import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../utils/messagesConstants';
+import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
+import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../constants/messages';
 import LinkButton from '../common/LinkButton';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
@@ -36,7 +36,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../utils/textConstants';
+import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 
 /**
  * Files component render files list and file data table.
@@ -260,6 +260,19 @@ class Files extends Component {
     }
     return null;
   };
+
+  renderFileListViewButton = () => {
+    if (!this.state.hasFileRoute) {
+      return (
+        <div onClick={this.onClickBackButton} className="file-view-list-button">
+          <a className="grid-small-button file-button-mobile">
+            <i className="fa fa-list" />
+          </a>
+        </div>
+      );
+    } return null;
+  }
+
   renderFileDetails = () => {
     const { width } = this.state;
     const isMobile = width <= 500;
@@ -272,11 +285,7 @@ class Files extends Component {
               ref={this.widthRef}
               style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
-              <div onClick={this.onClickBackButton} className="file-view-list-button">
-                <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list" />
-                </a>
-              </div>
+              {this.renderFileListViewButton()}
               <DataGrid
                 data={this.state.fileData}
                 metaData={
@@ -307,11 +316,7 @@ class Files extends Component {
               ref={this.widthRef}
               style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
-              <div onClick={this.onClickBackButton} className="file-view-list-button">
-                <a className="grid-small-button file-button-mobile">
-                  <i className="fa fa-list" />
-                </a>
-              </div>
+              {this.renderFileListViewButton()}
               <div className="file-text-panel">
                 <span className="file-text-format-wrapper">
                   <span>
@@ -364,11 +369,7 @@ class Files extends Component {
             ref={this.widthRef}
             style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
-            <div onClick={this.onClickBackButton} className="file-view-list-button">
-              <a className="grid-small-button file-button-mobile">
-                <i className="fa fa-list" />
-              </a>
-            </div>
+            {this.renderFileListViewButton()}
             <div className="file-text-panel">
               <span className="file-text-message">
                   No Data Found.
@@ -414,14 +415,23 @@ class Files extends Component {
       </div>
     );
   };
+
+  renderBackButton = () => {
+    if (!this.state.hasFileRoute) {
+      return (
+        <Link to={this.props.context.previousLocation} className="grid-small-button">
+          <i className="fa fa-arrow-left" />
+        </Link>
+      );
+    } return null;
+  }
+
   render() {
     return (
       <div className="registration-file-container">
         <div className="logoutButtonContainer file-logout-container display-logout-desktop">
           <div className="logoutLinkContainer">
-            <Link to={this.props.context.previousLocation} className="grid-small-button">
-              <i className="fa fa-arrow-left" />
-            </Link>
+            {this.renderBackButton()}
             {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
             {/* <i className="fa fa-power-off" />*/}
             {/* </Link>*/}

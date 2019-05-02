@@ -16,13 +16,13 @@ import {
 import {
   ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE,
   ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE,
-} from '../utils/messagesConstants';
+} from '../constants/messages';
 import {
   UPLOAD_FILE_TEXT,
-} from '../utils/textConstants';
+} from '../constants/text';
 import {
   days,
-} from '../utils/yjsgConstants';
+} from '../constants/yjsg';
 
 
 const customUploadStudentsAttendanceFileModalStyles = {
