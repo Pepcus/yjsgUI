@@ -20,7 +20,7 @@ import {
   busNumber,
   classRoomNumber,
   USER_TYPES,
-} from '../../utils/yjsgConstants';
+} from '../../appConstance/yjsgConstants';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
   IS_OPT_IN_OR_OPT_OUT_2019_LABEL,
@@ -40,7 +40,7 @@ import {
   BUS_NUMBER_LABEL,
   CLASS_LABEL,
   ROOM_LABEL,
-} from '../../utils/labelConstants';
+} from '../../appConstance/labelConstants';
 import InputField from '../form/InputField';
 import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';
@@ -62,7 +62,7 @@ import {
 } from '../../reducers/studentRegistrationReducer';
 import SelectListInputField from '../form/SelectListInputField';
 import Button from '../common/Button';
-import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../utils/textConstants';
+import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../appConstance/textConstants';
 import Popup from '../common/Popup';
 
 /**

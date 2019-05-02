@@ -11,7 +11,7 @@ import {
   goBackBtnText,
   formSubmitBtnText,
   USER_TYPES,
-} from '../../utils/yjsgConstants';
+} from '../../appConstance/yjsgConstants';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
   NAME_LABEL,
@@ -26,17 +26,17 @@ import {
   ADDRESS_LABEL,
   BUS_STOP_LABEL,
   WHAT_YOU_WANT_TO_STUDY_LABEL,
-} from '../../utils/labelConstants';
+} from '../../appConstance/labelConstants';
 import {
   YJSG_REGISTRATION_SUCCESS_MESSAGE,
   ID_NOTE_MESSAGE,
   ID_CARD_SUGGESTION_MESSAGE,
-} from '../../utils/messagesConstants';
+} from '../../appConstance/messagesConstants';
 import {
   YOUR_ID_TEXT,
   YOUR_SECRET_CODE_TEXT,
   IS_THERE_TEXT,
-} from '../../utils/textConstants';
+} from '../../appConstance/textConstants';
 import InputField from '../form/InputField';
 import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';

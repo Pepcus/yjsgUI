@@ -33,15 +33,15 @@ import {
   viewEditInfoBtnText,
   invalidIdMessage,
   USER_TYPES,
-} from '../../utils/yjsgConstants';
+} from '../../appConstance/yjsgConstants';
 import {
   ENTER_ID_NUMBER_MESSAGE,
   ENTER_SECRET_CODE_MESSAGE,
-} from '../../utils/messagesConstants';
+} from '../../appConstance/messagesConstants';
 import {
   ID_NUMBER_TEXT,
   SECRET_CODE_TEXT,
-} from '../../utils/textConstants';
+} from '../../appConstance/textConstants';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
 

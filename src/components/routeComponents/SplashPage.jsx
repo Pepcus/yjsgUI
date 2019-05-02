@@ -35,7 +35,7 @@ import {
   adminLoginBtnText,
   invalidAdminMsg, formSubmitBtnText,
   USER_TYPES,
-} from '../../utils/yjsgConstants';
+} from '../../appConstance/yjsgConstants';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
 import LoginForm from '../LoginForm';

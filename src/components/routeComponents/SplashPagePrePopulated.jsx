@@ -37,7 +37,7 @@ import {
   newRegistrationBtnText,
   adminLoginBtnText,
   invalidAdminMsg, formSubmitBtnText,
-} from '../../utils/yjsgConstants';
+} from '../../appConstance/yjsgConstants';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 
 // FixMe: This component is unnecessary.
