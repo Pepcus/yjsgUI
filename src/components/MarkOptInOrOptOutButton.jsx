@@ -16,15 +16,15 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import {
   OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-} from '../appConstance/labelConstants';
+} from '../appConstants/labelConstants';
 import {
   OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE,
   OPT_IN_OR_OPT_OUT_FAILED_MESSAGE,
-} from '../appConstance/messagesConstants';
+} from '../appConstants/messagesConstants';
 import {
   YES_TEXT,
   NO_TEXT,
-} from '../appConstance/textConstants';
+} from '../appConstants/textConstants';
 
 const customSelectedStudentsOptInOrOptOutStyles = {
   overlay: {

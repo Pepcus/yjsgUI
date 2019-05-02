@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import {
   gridMetaData,
-} from '../appConstance/GridData';
+} from '../appConstants/GridData';
 
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
