@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { parentsRegistrationAction } from '../../actions/studentRegistrationActions';
 import Button from '../common/Button';
-import { formSubmitBtnText } from '../../appConstants/yjsgConstants';
+import { formSubmitBtnText } from '../../constance/yjsgConstants';
 import Popup from '../common/Popup';
 
 /**

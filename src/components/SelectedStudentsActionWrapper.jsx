@@ -12,7 +12,7 @@ import UpdateIdCardStatusSelectedStudents from './UpdateIdCardStatusSelectedStud
 import { isBusCoordinatorsDataFailed } from '../reducers/assetFilesReducer';
 import Popup from './common/Popup';
 import Button from './common/Button';
-import { BUS_COORDINATOR_ERROR_MESSAGE } from '../appConstants/messagesConstants';
+import { BUS_COORDINATOR_ERROR_MESSAGE } from '../constance/messagesConstants';
 
 /**
  * SelectedStudentsActionWrapper render Export, Print Now, Print Later, Mark as Present and

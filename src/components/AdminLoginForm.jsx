@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import InputField from './form/InputField';
-import { formSubmitBtnText, goBackBtnText } from '../appConstants/yjsgConstants';
+import { formSubmitBtnText, goBackBtnText } from '../constance/yjsgConstants';
 import Button from './common/Button';
 
 

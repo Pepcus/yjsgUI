@@ -7,14 +7,14 @@ import * as shortId from 'shortid';
 
 import {
   MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL,
-} from '../appConstants/labelConstants';
+} from '../constance/labelConstants';
 import {
   MARK_ATTENDANCE_SUCCESS_MESSAGE,
   MARK_ATTENDANCE_FAILED_MESSAGE,
-} from '../appConstants/messagesConstants';
+} from '../constance/messagesConstants';
 import {
   days,
-} from '../appConstants/yjsgConstants';
+} from '../constance/yjsgConstants';
 import {
   resetIsMarkAttendanceSuccessAction,
   markSelectedStudentsAttendanceAction,

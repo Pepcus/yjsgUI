@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../common/ErrorMessage';
 import {
   PLEASE_SELECT_ANY_ONE_TEXT,
-} from '../../appConstants/textConstants';
+} from '../../constance/textConstants';
 
 /**
  * SelectListInputField render dropdown list.

@@ -8,7 +8,7 @@ import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
 
 import ColumnConfig from '../ColumnConfig';
-import { gridMetaData, gridHeaderData, getStyles } from '../../appConstants/GridData';
+import { gridMetaData, gridHeaderData, getStyles } from '../../constance/GridData';
 import {
   allStudentsData,
   getVisibleColumnConfig,
@@ -38,12 +38,12 @@ import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
   USER_TYPES,
-} from '../../appConstants/yjsgConstants';
+} from '../../constance/yjsgConstants';
 import {
   NO_COLUMNS_SELECTED_MESSAGE,
   INFORMATION_NOT_AVAILABLE_MESSAGE,
-} from '../../appConstants/messagesConstants';
-import { FILE_DOWNLOAD_MESSAGE } from '../../appConstants/textConstants';
+} from '../../constance/messagesConstants';
+import { FILE_DOWNLOAD_MESSAGE } from '../../constance/textConstants';
 
 /**
  * StudentInformationGrid render student information grid.

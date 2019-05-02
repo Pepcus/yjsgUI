@@ -16,11 +16,11 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import {
   ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-} from '../appConstants/labelConstants';
+} from '../constance/labelConstants';
 import {
   UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE,
   UPDATED_ID_CARD_STATUS_FAILED_MESSAGE,
-} from '../appConstants/messagesConstants';
+} from '../constance/messagesConstants';
 
 const customUpdateIdCardStatusSelectedStudentsModalStyles = {
   overlay: {

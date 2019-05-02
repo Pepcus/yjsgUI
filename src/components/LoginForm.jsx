@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AdminLoginForm from './AdminLoginForm';
-import { adminLoginBtnText, newRegistrationBtnText } from '../appConstants/yjsgConstants';
+import { adminLoginBtnText, newRegistrationBtnText } from '../constance/yjsgConstants';
 import Button from './common/Button';
 
 /**
