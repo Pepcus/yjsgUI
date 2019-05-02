@@ -11,7 +11,7 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
-import { routeType, title } from '../../config/headerConfig.json';
+import { routes, title } from '../../config/appConfig.json';
 
 /**
  * Header render the common header for all route
@@ -54,7 +54,7 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderBackButton = (headerObject) => {
+  const renderBackButton = (headerObject) => {
     if (headerObject.backButton) {
       return (
         <Link
@@ -69,12 +69,12 @@ const Header = ({
     } return null;
   };
   /**
-   * RenderLogOutButton method render logout button in header
+   * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderLogOutButton = (headerObject) => {
+  const renderLogOutButton = (headerObject) => {
     if (headerObject.logoutButton) {
       return (
         <Link
@@ -95,7 +95,7 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderHeaderName = headerObject => (
+  const renderHeaderName = headerObject => (
     <h2
       style={headerObject.titleStyle}
       className="student-info-heading"
@@ -109,25 +109,25 @@ const Header = ({
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderButton = (headerObject) => {
-    if (headerObject.HeaderContainedButton) {
+  const renderButton = (headerObject) => {
+    if (headerObject.hasButtons) {
       return (
         <div
           className="logoutButtonContainer display-mobile-none logoutLinkContainer "
         >
-          {RenderBackButton(headerObject)}
-          {RenderLogOutButton(headerObject)}
+          {renderBackButton(headerObject)}
+          {renderLogOutButton(headerObject)}
         </div>
       );
     } return null;
   };
   /**
-   * RenderLogo method render logo in header
+   * renderLogo method render logo in header
    * @param {Object} headerObject
    * @return {ReactComponent}
    * @constructor
    */
-  const RenderLogo = (headerObject) => {
+  const renderLogo = (headerObject) => {
     if (headerObject.logo) {
       return (
         <div
@@ -144,25 +144,29 @@ const Header = ({
     return null;
   };
   // render header with their contains according to route
-  if (routeType[location]) {
-    return (
-      <div style={routeType[location].headerWrapperStyle} className="student-logo-header print-media-none">
-        {RenderLogo(routeType[location])}
-        {RenderHeaderName(routeType[location])}
-        {RenderButton(routeType[location])}
-      </div>
-    );
-  } return (
-    <div style={routeType.default.headerWrapperStyle} className="student-logo-header print-media-none">
-      {RenderLogo(routeType.default)}
-      {RenderHeaderName(routeType.default)}
-      {RenderButton(routeType.default)}
-    </div>
-  );
+  return routes.map((route) => {
+    const { header, path } = route;
+    if (path === location) {
+      return (
+        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {renderLogo(header)}
+          {renderHeaderName(header)}
+          {renderButton(header)}
+        </div>
+      );
+    } else if (location === '/files') {
+      return (
+        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+          {renderLogo(header)}
+          {renderHeaderName(header)}
+          {renderButton(header)}
+        </div>
+      );
+    } return null;
+  });
 };
 
 Header.propTypes = {
-  routeType: PropTypes.object,
   title: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
   setAdminLoginState: PropTypes.func,
@@ -170,9 +174,9 @@ Header.propTypes = {
   resetVisibleColumnConfig: PropTypes.func,
   location: PropTypes.string,
   context: PropTypes.object,
+  routes: PropTypes.array,
 };
 Header.defaultProps = {
-  routeType: {},
   title: '',
   resetAdminCredentials: () => {},
   setAdminLoginState: () => {},
@@ -180,6 +184,7 @@ Header.defaultProps = {
   resetVisibleColumnConfig: () => {},
   location: '',
   context: {},
+  routes: [],
 };
 
 const mapDispatchToProps = dispatch => ({
