@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {
   yjsgFooterText,
   yjsgFooterContactInfo,
-} from '../../constance/yjsgConstants';
+} from '../../constants/yjsg';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
 
 /**

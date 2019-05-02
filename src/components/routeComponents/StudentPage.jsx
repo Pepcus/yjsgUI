@@ -17,7 +17,7 @@ import {
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
   USER_TYPES,
-} from '../../constance/yjsgConstants';
+} from '../../constants/yjsg';
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';

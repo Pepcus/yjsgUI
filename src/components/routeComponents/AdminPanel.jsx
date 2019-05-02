@@ -9,7 +9,7 @@ import { Redirect } from 'react-router-dom';
 import {
   adminId,
   adminPassword,
-} from '../../constance/yjsgConstants';
+} from '../../constants/yjsg';
 import {
   getAdminId,
   getAdminPassword,

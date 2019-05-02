@@ -6,7 +6,7 @@ import * as shortId from 'shortid';
 
 import {
   PLEASE_SELECT_COLUMNS_TEXT,
-} from '../constance/textConstants';
+} from '../constants/text';
 import {
   columnsList,
 } from '../config/appConfig.json';

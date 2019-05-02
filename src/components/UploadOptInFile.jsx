@@ -14,10 +14,10 @@ import {
 import {
   OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
   OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
-} from '../constance/messagesConstants';
+} from '../constants/messages';
 import {
   UPLOAD_FILE_TEXT,
-} from '../constance/textConstants';
+} from '../constants/text';
 
 const customUploadOptInFileModalStyles = {
   overlay: {
