@@ -2253,9 +2253,13 @@ body,
 .file-component {
     width: 100%;
     max-width: 78%;
-    padding-top: 30px;
+    padding-top: 10px;
     margin: 0 0 0 300px;
     overflow-x: hidden;
+}
+
+.file-component .data-grid {
+    margin-top: 0 !important;
 }
 
 .no-files-available {
@@ -3422,6 +3426,9 @@ body,
 
     .file-component-mobile-wrapper .table-cell {
         padding: 10px !important;
+    }
+    .file-component-mobile-wrapper .data-grid .table-drawer__top {
+        display: none;
     }
     .file-text-format-wrapper {
         max-width:95%;

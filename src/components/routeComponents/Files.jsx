@@ -271,7 +271,34 @@ class Files extends Component {
         </div>
       );
     } return null;
-  }
+  };
+
+  renderFileDescription = () => {
+    const { currentFileDetails, width } = this.state;
+    const isMobile = width <= 500;
+
+    const fileDescription = currentFileDetails.description || '';
+
+    const style = {
+      textAlign: 'center',
+      fontSize: '20px',
+      color: 'var(--orange-color)',
+    };
+
+    if (isMobile) {
+      style.marginTop = '45px';
+    }
+
+    if (fileDescription) {
+      return (
+        <p style={style}>
+          {fileDescription}
+        </p>
+      );
+    }
+
+    return null;
+  };
 
   renderFileDetails = () => {
     const { width } = this.state;
@@ -286,6 +313,7 @@ class Files extends Component {
               style={this.state.hasFileRoute ? { margin: 'auto' } : null}
             >
               {this.renderFileListViewButton()}
+              {this.renderFileDescription()}
               <DataGrid
                 data={this.state.fileData}
                 metaData={
@@ -300,6 +328,7 @@ class Files extends Component {
             ref={this.widthRef}
             style={this.state.hasFileRoute ? { margin: 'auto' } : null}
           >
+            {this.renderFileDescription()}
             <DataGrid
               data={this.state.fileData}
               metaData={getDataGridHeadersForFileView(
