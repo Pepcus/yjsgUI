@@ -71,28 +71,16 @@ class StudentIdCardModal extends Component {
       const name = object.name ? object.name.split(' ') : [object.name];
       const studentId = getFormattedStudentId(object.studentId);
       name.forEach((element, index) => {
-        if (element) {
-          name[index] = upperFirst(`${name[index].toLocaleLowerCase()} `);
-        } else {
-          name[index] = '';
-        }
+        name[index] = element ? upperFirst(`${name[index].toLocaleLowerCase()} `) : '';
       });
       const fatherName = object.fatherName ? object.fatherName.split(' ') : [object.fatherName];
       fatherName.forEach((element, index) => {
-        if (element) {
-          fatherName[index] = upperFirst(`${fatherName[index].toLocaleLowerCase()} `);
-        } else {
-          fatherName[index] = '';
-        }
+        fatherName[index] = element ? upperFirst(`${fatherName[index].toLocaleLowerCase()} `) : '';
       });
       const addressString = object.address ? object.address.replace(/,/g, ', ') : object.address;
       const address = addressString ? addressString.split(' ') : [addressString];
       address.forEach((element, index) => {
-        if (element) {
-          address[index] = upperFirst(`${address[index].toLocaleLowerCase()} `);
-        } else {
-          address[index] = '';
-        }
+        address[index] = element ? upperFirst(`${address[index].toLocaleLowerCase()} `) : '';
       });
       return (
         <div key={shortId.generate()} className="student-id-cards">
