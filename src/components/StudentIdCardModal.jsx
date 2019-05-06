@@ -26,8 +26,7 @@ class StudentIdCardModal extends Component {
    * @return {ReactComponent}
    */
   getCoordinatorName = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators)
-      && this.props.busCoordinators[busNumber].coordinatorName) {
+    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
       return (
         <div className="card-text">
           <span className="card-text-bold">Coordinator name:</span>
@@ -69,19 +68,31 @@ class StudentIdCardModal extends Component {
    */
   renderStudentIdCards(student) {
     const studentsIdCards = student.map((object) => {
-      const name = object.name.split(' ');
+      const name = object.name ? object.name.split(' ') : [object.name];
       const studentId = getFormattedStudentId(object.studentId);
       name.forEach((element, index) => {
-        name[index] = upperFirst(`${name[index].toLocaleLowerCase()} `);
+        if (element) {
+          name[index] = upperFirst(`${name[index].toLocaleLowerCase()} `);
+        } else {
+          name[index] = '';
+        }
       });
-      const fatherName = object.fatherName.split(' ');
+      const fatherName = object.fatherName ? object.fatherName.split(' ') : [object.fatherName];
       fatherName.forEach((element, index) => {
-        fatherName[index] = upperFirst(`${fatherName[index].toLocaleLowerCase()} `);
+        if (element) {
+          fatherName[index] = upperFirst(`${fatherName[index].toLocaleLowerCase()} `);
+        } else {
+          fatherName[index] = '';
+        }
       });
-      const addressString = object.address.replace(/,/g, ', ');
-      const address = addressString.split(' ');
+      const addressString = object.address ? object.address.replace(/,/g, ', ') : object.address;
+      const address = addressString ? addressString.split(' ') : [addressString];
       address.forEach((element, index) => {
-        address[index] = upperFirst(`${address[index].toLocaleLowerCase()} `);
+        if (element) {
+          address[index] = upperFirst(`${address[index].toLocaleLowerCase()} `);
+        } else {
+          address[index] = '';
+        }
       });
       return (
         <div key={shortId.generate()} className="student-id-cards">
