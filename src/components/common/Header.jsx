@@ -154,7 +154,7 @@ const Header = ({
           {renderButton(header)}
         </div>
       );
-    } else if (location === '/files') {
+    } else if (path === '/files*' && location === '/files') {
       return (
         <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
           {renderLogo(header)}
