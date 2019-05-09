@@ -26,8 +26,7 @@ class StudentIdCardModal extends Component {
    * @return {ReactComponent}
    */
   getCoordinatorName = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators)
-      && this.props.busCoordinators[busNumber].coordinatorName) {
+    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
       return (
         <div className="card-text">
           <span className="card-text-bold">Coordinator name:</span>
@@ -64,24 +63,24 @@ class StudentIdCardModal extends Component {
 
   /**
    * renderStudentIdCards method render students Id cards
-   * @param {Array} student
+   * @param {Array} students
    * @return {ReactComponent}
    */
-  renderStudentIdCards(student) {
-    const studentsIdCards = student.map((object) => {
-      const name = object.name.split(' ');
-      const studentId = getFormattedStudentId(object.studentId);
-      name.forEach((element, index) => {
-        name[index] = upperFirst(`${name[index].toLocaleLowerCase()} `);
+  renderStudentIdCards(students) {
+    const studentsIdCards = students.map((student) => {
+      const name = student.name ? student.name.split(' ') : [student.name];
+      const studentId = getFormattedStudentId(student.studentId);
+      name.forEach((character, index) => {
+        name[index] = character ? upperFirst(`${name[index].toLocaleLowerCase()} `) : '';
       });
-      const fatherName = object.fatherName.split(' ');
-      fatherName.forEach((element, index) => {
-        fatherName[index] = upperFirst(`${fatherName[index].toLocaleLowerCase()} `);
+      const fatherName = student.fatherName ? student.fatherName.split(' ') : [student.fatherName];
+      fatherName.forEach((character, index) => {
+        fatherName[index] = character ? upperFirst(`${fatherName[index].toLocaleLowerCase()} `) : '';
       });
-      const addressString = object.address.replace(/,/g, ', ');
-      const address = addressString.split(' ');
-      address.forEach((element, index) => {
-        address[index] = upperFirst(`${address[index].toLocaleLowerCase()} `);
+      const addressString = student.address ? student.address.replace(/,/g, ', ') : student.address;
+      const address = addressString ? addressString.split(' ') : [addressString];
+      address.forEach((character, index) => {
+        address[index] = character ? upperFirst(`${address[index].toLocaleLowerCase()} `) : '';
       });
       return (
         <div key={shortId.generate()} className="student-id-cards">
@@ -106,10 +105,10 @@ class StudentIdCardModal extends Component {
                   <span className="card-text-content card-name-content card-title-text"> {name}</span>
                 </div>
                 <div className="card-text"><span className="card-text-bold">Class:</span>
-                  <span className="card-title-text">{object.education}</span>
+                  <span className="card-title-text">{student.education}</span>
                 </div>
                 <div className="card-text"><span className="card-text-bold">Room:</span>
-                  <span className="card-title-text">{object.classRoomNo2019}</span>
+                  <span className="card-title-text">{student.classRoomNo2019}</span>
                 </div>
               </div>
               <div className="card-fields-wrapper">
@@ -117,17 +116,17 @@ class StudentIdCardModal extends Component {
                   <span className="card-title-text">{fatherName}</span>
                 </div>
                 <div className="card-text card-text-spacing"><span className="card-text-bold">Mobile No:</span>
-                  <span className="card-title-text">{object.mobile}</span>
+                  <span className="card-title-text">{student.mobile}</span>
                 </div>
               </div>
               <div className="card-fields-wrapper">
                 <div className="card-text card-text-bus-stop card-flex">
                   <span className="card-text-bold card-bus-stop">Bus Stop:</span>
-                  <span className="card-name-content card-title-text">{object.busStop}</span>
+                  <span className="card-name-content card-title-text">{student.busStop}</span>
                 </div>
                 <div className="card-text card-text-spacing">
                   <span className="card-text-bold">Bus No:</span>
-                  <span className="card-title-text">{object.busNumber}</span>
+                  <span className="card-title-text">{student.busNumber}</span>
                 </div>
               </div>
               <div className="card-fields-wrapper">
@@ -139,7 +138,7 @@ class StudentIdCardModal extends Component {
               <div className="card-fields-wrapper card-field-student-wrapper">
                 <div className="card-text card-text-student card-student-flex">
                   <span className="card-text-bold">Student Id:</span>
-                  <span className="card-student-num card-title-text">{object.studentId}</span>
+                  <span className="card-student-num card-title-text">{student.studentId}</span>
                 </div>
                 <div className="card-text card-barcode" >
                   <Barcode height={25} width={3} format="CODE128" background="transparent" fontSize={16} textPosition="left" value={studentId} />
@@ -148,8 +147,8 @@ class StudentIdCardModal extends Component {
             </div>
           </div>
           <div className="student-id-cards-footer">
-            {this.getCoordinatorName(object.busNumber)}
-            {this.getCoordinatorContactNumber(object.busNumber)}
+            {this.getCoordinatorName(student.busNumber)}
+            {this.getCoordinatorContactNumber(student.busNumber)}
           </div>
         </div>);
     });
