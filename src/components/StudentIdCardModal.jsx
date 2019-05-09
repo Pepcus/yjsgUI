@@ -26,11 +26,19 @@ class StudentIdCardModal extends Component {
    * @return {ReactComponent}
    */
   getCoordinatorName = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
-      return (
-        <div className="card-text">
+    const { busCoordinators = {} } = this.props;
+    if (busNumber && busCoordinators[busNumber]) {
+      const { coordinatorName } = busCoordinators[busNumber];
+      if (coordinatorName) {
+        return (
+          <div className="card-text">
+            <span className="card-text-bold">Coordinator name:</span>
+            <span className="card-title-text"> {coordinatorName}</span>
+          </div>
+        );
+      } return (
+        <div className="card-text card-text-width">
           <span className="card-text-bold">Coordinator name:</span>
-          <span className="card-title-text"> { this.props.busCoordinators[busNumber].coordinatorName }</span>
         </div>
       );
     } return (
@@ -46,15 +54,24 @@ class StudentIdCardModal extends Component {
    * @return {ReactComponent}
    */
   getCoordinatorContactNumber = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators)
-      && this.props.busCoordinators[busNumber].contactNumber) {
+    const { busCoordinators = {} } = this.props;
+    if (busNumber && busCoordinators[busNumber]) {
+      const { contactNumber } = busCoordinators[busNumber];
+      if (contactNumber) {
+        return (
+          <div className="card-text">
+            <span className="card-text-bold ">Coordinator contact:</span>
+            <span className="card-title-text">{contactNumber}</span>
+          </div>
+        );
+      }
       return (
-        <div className="card-text">
-          <span className="card-text-bold ">Coordinator contact:</span>
-          <span className="card-title-text">{this.props.busCoordinators[busNumber].contactNumber}</span>
+        <div className="card-text card-text-width">
+          <span className="card-text-bold">Coordinator contact:</span>
         </div>
       );
-    } return (
+    }
+    return (
       <div className="card-text card-text-width">
         <span className="card-text-bold">Coordinator contact:</span>
       </div>
