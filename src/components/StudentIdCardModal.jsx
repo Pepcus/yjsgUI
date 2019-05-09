@@ -21,42 +21,35 @@ class StudentIdCardModal extends Component {
   }
 
   /**
-   * getCoordinatorName method render coordination Name into the student Id card footer
-   * @param {String} busNumber
-   * @return {ReactComponent}
-   */
-  getCoordinatorName = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators) && this.props.busCoordinators[busNumber].coordinatorName) {
-      return (
-        <div className="card-text">
-          <span className="card-text-bold">Coordinator name:</span>
-          <span className="card-title-text"> { this.props.busCoordinators[busNumber].coordinatorName }</span>
-        </div>
-      );
-    } return (
-      <div className="card-text card-text-width">
-        <span className="card-text-bold">Coordinator name:</span>
-      </div>
-    );
-  };
-  /**
-   * getCoordinatorContactNumber method render coordination contact
+   * getCoordinatorInformation method render coordination contact
    * number into the student Id card footer
    * @param {String} busNumber
+   * @param {String} value
+   * @param {string} label
    * @return {ReactComponent}
    */
-  getCoordinatorContactNumber = (busNumber) => {
-    if (busNumber && !isEmpty(this.props.busCoordinators)
-      && this.props.busCoordinators[busNumber].contactNumber) {
+  getCoordinatorInformation = ({ busNumber, value, label }) => {
+    const { busCoordinators = {} } = this.props;
+    if (busNumber && busCoordinators[busNumber]) {
+      const busNumbers = busCoordinators[busNumber];
+      const information = busNumbers[value];
+      if (information) {
+        return (
+          <div className="card-text">
+            <span className="card-text-bold ">{ label }:</span>
+            <span className="card-title-text">{information}</span>
+          </div>
+        );
+      }
       return (
-        <div className="card-text">
-          <span className="card-text-bold ">Coordinator contact:</span>
-          <span className="card-title-text">{this.props.busCoordinators[busNumber].contactNumber}</span>
+        <div className="card-text card-text-width">
+          <span className="card-text-bold">{ label }:</span>
         </div>
       );
-    } return (
+    }
+    return (
       <div className="card-text card-text-width">
-        <span className="card-text-bold">Coordinator contact:</span>
+        <span className="card-text-bold">{ label }:</span>
       </div>
     );
   };
@@ -147,8 +140,22 @@ class StudentIdCardModal extends Component {
             </div>
           </div>
           <div className="student-id-cards-footer">
-            {this.getCoordinatorName(student.busNumber)}
-            {this.getCoordinatorContactNumber(student.busNumber)}
+            {
+              this.getCoordinatorInformation(
+              {
+                busNumber: student.busNumber,
+                value: 'coordinatorName',
+                label: 'Coordinator name',
+              })
+            }
+            {
+              this.getCoordinatorInformation(
+              {
+                busNumber: student.busNumber,
+                value: 'contactNumber',
+                label: 'Coordinator contact',
+              })
+            }
           </div>
         </div>);
     });
