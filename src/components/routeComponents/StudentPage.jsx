@@ -21,7 +21,7 @@ import {
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
 * The StudentPage component for the student which will render -
@@ -153,7 +153,7 @@ StudentPage.defaultProps = {
 };
 const mapStateToProps = state => ({
   studentData: getStudent(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
@@ -161,5 +161,5 @@ export default connect(mapStateToProps, {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-  getApplicationTangent,
+  getApplicationTenant,
 })(StudentPage);

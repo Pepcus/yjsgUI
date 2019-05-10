@@ -10,7 +10,7 @@ import {
   gender,
   goBackBtnText,
   formSubmitBtnText,
-  USER_TYPES,
+  USER_TYPES, TENANT,
 } from '../../constants/yjsg';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
@@ -59,7 +59,7 @@ import {
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../common/Button';
 import Popup from '../common/Popup';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -205,7 +205,7 @@ class StudentRegistrationForm extends Component {
     return null;
   }
   renderBusStopOptions = () => {
-    if (this.props.tenant === 'INDORE') {
+    if (this.props.tenant === TENANT.INDORE) {
       return (
         <SelectListInputField
           type="text"
@@ -409,12 +409,12 @@ const mapStateToProps = state => ({
   isCreated: isCreated(state),
   newStudent: getNewStudent(state),
   userType: getUserType(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentData,
   setStudentCredentials,
-  getApplicationTangent,
+  getApplicationTenant,
 })(StudentRegistrationForm);
 

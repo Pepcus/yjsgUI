@@ -39,7 +39,7 @@ import {
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
 import LoginForm from '../LoginForm';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  *SplashPage render home page of admin
@@ -397,7 +397,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
   isFetched: isFetched(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
@@ -405,5 +405,5 @@ export default connect(mapStateToProps, {
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-  getApplicationTangent,
+  getApplicationTenant,
 })(SplashPage);

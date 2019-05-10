@@ -9,7 +9,7 @@ import {
   yjsgFooterContactInfo,
 } from '../../constants/yjsg';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  * Footer component is comment footer will will be render in bottom of all page
@@ -51,10 +51,10 @@ Footer.defaultProps = {
 
 const mapStateToProps = state => ({
   isLoading: isLoading(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, {
-  getApplicationTangent,
+  getApplicationTenant,
 })(Footer);
 

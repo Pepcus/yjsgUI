@@ -15,6 +15,7 @@ import {
   SINGLE_QUOTE_ERROR_MESSAGE,
   DOUBLE_QUOTE_ERROR_MESSAGE,
 } from '../constants/messages';
+import { TENANT } from '../constants/yjsg';
 
 export const setRegistrationData = (value, name) => {
   const formData = {};
@@ -53,7 +54,7 @@ export const validateInput = ({ value, name, tenant }) => {
      ||*/ || name === 'classAttended2019' || name === 'optIn2019') {
     return requireFieldsValidate(value, name);
   }
-  if (name === 'busStop' && tenant === 'INDORE') {
+  if (name === 'busStop' && tenant === TENANT.INDORE) {
     return requireFieldsValidate(value, name);
   }
   return null;
@@ -240,7 +241,7 @@ export const requireFieldsValidate = (value, name) => {
  */
 export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
   let isValid = false;
-  if (user === 'admin' && tenant === 'INDORE') {
+  if (user === 'admin' && tenant === TENANT.INDORE) {
     if (errorMessageObject.name.isValid_name
       && errorMessageObject.fatherName.isValid_fatherName
       && errorMessageObject.age.isValid_age
@@ -253,7 +254,7 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
     ) {
       isValid = true;
     }
-  } else if (user === 'admin' && tenant === 'BHOPAL') {
+  } else if (user === 'admin' && tenant === TENANT.BHOPAL) {
     if (errorMessageObject.name.isValid_name
       && errorMessageObject.fatherName.isValid_fatherName
       && errorMessageObject.age.isValid_age
@@ -265,7 +266,7 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
     ) {
       isValid = true;
     }
-  } else if (tenant === 'BHOPAL') {
+  } else if (tenant === TENANT.BHOPAL) {
     if (errorMessageObject.name.isValid_name
       && errorMessageObject.fatherName.isValid_fatherName
       && errorMessageObject.age.isValid_age

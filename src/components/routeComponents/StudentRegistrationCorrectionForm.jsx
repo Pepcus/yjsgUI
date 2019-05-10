@@ -19,7 +19,7 @@ import {
   infoUpdateSuccessMessage,
   busNumber,
   classRoomNumber,
-  USER_TYPES,
+  USER_TYPES, TENANT,
 } from '../../constants/yjsg';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
@@ -64,7 +64,7 @@ import SelectListInputField from '../form/SelectListInputField';
 import Button from '../common/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../constants/text';
 import Popup from '../common/Popup';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 
 /**
@@ -157,7 +157,7 @@ class StudentRegistrationCorrectionForm extends Component {
     }
   }
   renderBusStopOptions = () => {
-    if (this.props.tenant === 'INDORE' && this.state.student.optIn2019 === 'N') {
+    if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
       return (
         <SelectListInputField
           type="text"
@@ -168,7 +168,7 @@ class StudentRegistrationCorrectionForm extends Component {
           value={this.state.student.busStop}
         />
       );
-    } else if (this.props.tenant === 'INDORE' && this.state.student.optIn2019 === 'Y') {
+    } else if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'Y') {
       return (
         <SelectListInputField
           type="text"
@@ -184,7 +184,7 @@ class StudentRegistrationCorrectionForm extends Component {
     } return null;
   };
      renderBusNumberOption = () => {
-       if (this.props.tenant === 'INDORE' && this.props.pageUser === USER_TYPES.ADMIN) {
+       if (this.props.tenant === TENANT.INDORE && this.props.pageUser === USER_TYPES.ADMIN) {
          return (
            <SelectListInputField
              name="busNumber"
@@ -988,10 +988,10 @@ const mapStateToProps = state => ({
   id: getUserId(state),
   secretKey: getUserSecretKey(state),
   pageUser: getPageUserType(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   updateStudentData,
   isUpdatedResetAction,
-  getApplicationTangent,
+  getApplicationTenant,
 })(StudentRegistrationCorrectionForm);

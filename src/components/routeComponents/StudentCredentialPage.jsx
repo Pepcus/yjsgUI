@@ -24,7 +24,7 @@ import {
   getUserId,
   getUserSecretKey,
 } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   eventDate,
@@ -306,11 +306,11 @@ const mapStateToProps = state => ({
   studentData: getStudent(state),
   isFetched: isFetched(state),
   hashLink: getHash(state),
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
   setUserTypeAction,
-  getApplicationTangent,
+  getApplicationTenant,
 })(StudentCredentialPage);

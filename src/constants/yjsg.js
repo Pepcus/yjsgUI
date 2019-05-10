@@ -536,6 +536,11 @@ export const USER_TYPES = {
   STUDENT_WITH_URL: 'student_with_url',
 };
 
+export const TENANT = {
+  INDORE: 'INDORE',
+  BHOPAL: 'BHOPAL',
+};
+
 export const FILE_PRESENTATION_TYPE = {
   NORMAL_TABULAR: 'normalTabular',
   COMPLEX_GRID: 'complexGrid',

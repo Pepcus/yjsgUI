@@ -99,4 +99,4 @@ export const getBusCoordinators = state => state.assetFilesReducer.busCoordinato
 
 export const isBusCoordinatorsDataFailed = state => state.assetFilesReducer.isBusCoordinatorsDataFailed;
 
-export const getApplicationTangent = state => state.assetFilesReducer.tenant;
+export const getApplicationTenant = state => state.assetFilesReducer.tenant;

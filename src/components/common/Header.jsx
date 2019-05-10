@@ -12,7 +12,7 @@ import {
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
 import { routes, title } from '../../config/appConfig.json';
-import { getApplicationTangent } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  * Header render the common header for all route
@@ -200,7 +200,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  tenant: getApplicationTangent(state),
+  tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
