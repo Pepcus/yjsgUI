@@ -132,9 +132,6 @@ class StudentRegistrationCorrectionForm extends Component {
       });
       this.prePopulateCourse2019(studentData);
       this.verifyStudentFormData({ email: '', motherMobile: '' });
-    } else {
-      this.setState({
-      });
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -151,9 +148,6 @@ class StudentRegistrationCorrectionForm extends Component {
       });
       this.prePopulateCourse2019(studentData);
       this.verifyStudentFormData({ email: '', motherMobile: '' });
-    } else {
-      this.setState({
-      });
     }
   }
   renderBusStopOptions = () => {
