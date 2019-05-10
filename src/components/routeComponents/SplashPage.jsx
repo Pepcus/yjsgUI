@@ -39,6 +39,7 @@ import {
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
 import LoginForm from '../LoginForm';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  *SplashPage render home page of admin
@@ -339,8 +340,8 @@ class SplashPage extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate}</h5>
-              <h5 className="header-text">{eventVenue}</h5>
+              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
+              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -374,6 +375,7 @@ SplashPage.propTypes = {
   adminLoginState: PropTypes.bool,
   id: PropTypes.string,
   password: PropTypes.string,
+  tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
@@ -385,6 +387,7 @@ SplashPage.defaultProps = {
   adminLoginState: false,
   id: '',
   password: '',
+  tenant: '',
 };
 const mapStateToProps = state => ({
   id: getAdminId(state),
@@ -394,6 +397,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
   isFetched: isFetched(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
@@ -401,4 +405,5 @@ export default connect(mapStateToProps, {
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
+  getApplicationTenant,
 })(SplashPage);

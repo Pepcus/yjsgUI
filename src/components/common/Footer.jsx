@@ -9,6 +9,7 @@ import {
   yjsgFooterContactInfo,
 } from '../../constants/yjsg';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  * Footer component is comment footer will will be render in bottom of all page
@@ -30,7 +31,7 @@ class Footer extends Component {
   render() {
     return (
       <div className={this.getClassName()} >
-        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span>
+        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo[this.props.tenant]}</span>
         </p>
       </div>
     );
@@ -40,15 +41,20 @@ class Footer extends Component {
 
 Footer.propTypes = {
   isLoading: PropTypes.bool,
+  tenant: PropTypes.string,
 };
 
 Footer.defaultProps = {
   isLoading: false,
+  tenant: '',
 };
 
 const mapStateToProps = state => ({
   isLoading: isLoading(state),
+  tenant: getApplicationTenant(state),
 });
 
-export default connect(mapStateToProps, {})(Footer);
+export default connect(mapStateToProps, {
+  getApplicationTenant,
+})(Footer);
 

@@ -10,7 +10,7 @@ import {
   gender,
   goBackBtnText,
   formSubmitBtnText,
-  USER_TYPES,
+  USER_TYPES, TENANT,
 } from '../../constants/yjsg';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
@@ -59,6 +59,7 @@ import {
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../common/Button';
 import Popup from '../common/Popup';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -116,7 +117,7 @@ class StudentRegistrationForm extends Component {
    */
   verifyStudentFormData(studentData) {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
-      isDataCorrect(studentData));
+      isDataCorrect(studentData, this.props.tenant));
     this.setState({
       errorMessage: errorMessageObject,
     });
@@ -128,7 +129,7 @@ class StudentRegistrationForm extends Component {
    * @return {boolean}
    */
   isValidData() {
-    return isValidUserInfo(this.state.errorMessage);
+    return isValidUserInfo({ errorMessageObject: this.state.errorMessage, tenant: this.props.tenant });
   }
 
   scrollToError = () => {
@@ -169,7 +170,7 @@ class StudentRegistrationForm extends Component {
   handleInputChange(value, name) {
     const errorMessageObject = {};
     // validateInput set the error message in error message object according to input value and name
-    errorMessageObject[name] = validateInput(value, name);
+    errorMessageObject[name] = validateInput( { value, name, tenant: this.props.tenant });
     // this will update the error object and updated error message object will be set into state.
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
     // this will get update student data
@@ -203,6 +204,22 @@ class StudentRegistrationForm extends Component {
     }
     return null;
   }
+  renderBusStopOptions = () => {
+    if (this.props.tenant === TENANT.INDORE) {
+      return (
+        <SelectListInputField
+          type="text"
+          label={BUS_STOP_LABEL}
+          name="busStop"
+          options={busStops}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.busStop}
+          isRequired
+          errorMessage={this.state.errorMessage.busStop.message}
+        />
+      );
+    } return null;
+  };
   /**
    * renderBackButton method return link button according to user type
    * @return {ReactComponent}
@@ -325,16 +342,7 @@ class StudentRegistrationForm extends Component {
                 isRequired
                 errorMessage={this.state.errorMessage.address.message}
               />
-              <SelectListInputField
-                type="text"
-                label={BUS_STOP_LABEL}
-                name="busStop"
-                options={busStops}
-                onInputChange={this._handleInputChange}
-                value={this.state.student.busStop}
-                isRequired
-                errorMessage={this.state.errorMessage.busStop.message}
-              />
+              {this.renderBusStopOptions()}
               <SelectListInputField
                 name="classAttended2019"
                 label={WHAT_YOU_WANT_TO_STUDY_LABEL}
@@ -382,6 +390,7 @@ StudentRegistrationForm.propTypes = {
   setStudentCredentials: PropTypes.func,
   userType: PropTypes.string,
   context: PropTypes.object,
+  tenant: PropTypes.string,
 };
 
 StudentRegistrationForm.defaultProps = {
@@ -392,6 +401,7 @@ StudentRegistrationForm.defaultProps = {
   setStudentCredentials: () => {},
   userType: '',
   context: {},
+  tenant: '',
 };
 
 const mapStateToProps = state => ({
@@ -399,10 +409,12 @@ const mapStateToProps = state => ({
   isCreated: isCreated(state),
   newStudent: getNewStudent(state),
   userType: getUserType(state),
+  tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentData,
   setStudentCredentials,
+  getApplicationTenant,
 })(StudentRegistrationForm);
 
