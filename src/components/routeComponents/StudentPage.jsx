@@ -21,6 +21,7 @@ import {
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
+import { getApplicationTangent } from '../../reducers/assetFilesReducer';
 
 /**
 * The StudentPage component for the student which will render -
@@ -117,8 +118,8 @@ class StudentPage extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate}</h5>
-              <h5 className="header-text">{eventVenue}</h5>
+              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
+              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -139,6 +140,7 @@ StudentPage.propTypes = {
   setHashLinkForStudentCredentialAction: PropTypes.func,
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
+  tenant: PropTypes.string,
 };
 
 StudentPage.defaultProps = {
@@ -147,9 +149,11 @@ StudentPage.defaultProps = {
   setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
   setUserTypeAction: () => {},
+  tenant: '',
 };
 const mapStateToProps = state => ({
   studentData: getStudent(state),
+  tenant: getApplicationTangent(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
@@ -157,4 +161,5 @@ export default connect(mapStateToProps, {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
+  getApplicationTangent,
 })(StudentPage);

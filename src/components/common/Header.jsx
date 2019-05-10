@@ -12,6 +12,7 @@ import {
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
 import { routes, title } from '../../config/appConfig.json';
+import { getApplicationTangent } from '../../reducers/assetFilesReducer';
 
 /**
  * Header render the common header for all route
@@ -21,6 +22,7 @@ import { routes, title } from '../../config/appConfig.json';
  * @param {Function} setAdminLoginState
  * @param {Function} setRedirectValue
  * @param {Function} resetVisibleColumnConfig
+ * @param {String} tenant
  * @type {Function}
  * @return {ReactComponent}
  * @constructor
@@ -32,6 +34,7 @@ const Header = ({
   setAdminLoginState,
   setRedirectValue,
   resetVisibleColumnConfig,
+  tenant,
 }) => {
   /**
    * performLogout method will call when click on logout button
@@ -100,7 +103,7 @@ const Header = ({
       style={headerObject.titleStyle}
       className="student-info-heading"
     >
-      {headerObject.title ? headerObject.title : title}
+      {headerObject.title ? headerObject.title : title[tenant]}
     </h2>
   );
   /**
@@ -175,6 +178,7 @@ Header.propTypes = {
   location: PropTypes.string,
   context: PropTypes.object,
   routes: PropTypes.array,
+  tenant: PropTypes.string,
 };
 Header.defaultProps = {
   title: '',
@@ -185,6 +189,7 @@ Header.defaultProps = {
   location: '',
   context: {},
   routes: [],
+  tenant: '',
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -194,5 +199,8 @@ const mapDispatchToProps = dispatch => ({
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
 });
 
+const mapStateToProps = state => ({
+  tenant: getApplicationTangent(state),
+});
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

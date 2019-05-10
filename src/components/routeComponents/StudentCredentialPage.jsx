@@ -24,7 +24,7 @@ import {
   getUserId,
   getUserSecretKey,
 } from '../../reducers/studentRegistrationReducer';
-
+import { getApplicationTangent } from '../../reducers/assetFilesReducer';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   eventDate,
@@ -256,8 +256,8 @@ class StudentCredentialPage extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate}</h5>
-              <h5 className="header-text">{eventVenue}</h5>
+              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
+              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -306,9 +306,11 @@ const mapStateToProps = state => ({
   studentData: getStudent(state),
   isFetched: isFetched(state),
   hashLink: getHash(state),
+  tenant: getApplicationTangent(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
   setStudentCredentials,
   setUserTypeAction,
+  getApplicationTangent,
 })(StudentCredentialPage);

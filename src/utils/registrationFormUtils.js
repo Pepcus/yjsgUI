@@ -27,9 +27,10 @@ export const setRegistrationData = (value, name) => {
  *
  * @param {String} value
  * @param {String} name
+ * @param {String} tenant
  * @return {Object}
  */
-export const validateInput = (value, name) => {
+export const validateInput = ({ value, name, tenant }) => {
   if (name === 'name' || name === 'fatherName') {
     return nameValidate(value, name);
   }
@@ -48,8 +49,11 @@ export const validateInput = (value, name) => {
   if (name === 'motherMobile') {
     return optionalMobileValidate(value, name);
   }
-  if (name === 'gender' || name === 'busStop'
-     || name === 'classAttended2019' || name === 'optIn2019') {
+  if (name === 'gender' /* name === 'busStop'
+     ||*/ || name === 'classAttended2019' || name === 'optIn2019') {
+    return requireFieldsValidate(value, name);
+  }
+  if (name === 'busStop' && tenant === 'INDORE') {
     return requireFieldsValidate(value, name);
   }
   return null;
@@ -231,11 +235,12 @@ export const requireFieldsValidate = (value, name) => {
  *
  * @param {Object} errorMessageObject
  * @param {String} user
+ * @param {String} tenant
  * @return {boolean} isValid
  */
-export const isValidUserInfo = (errorMessageObject, user) => {
+export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
   let isValid = false;
-  if (user === 'admin') {
+  if (user === 'admin' && tenant === 'INDORE') {
     if (errorMessageObject.name.isValid_name
       && errorMessageObject.fatherName.isValid_fatherName
       && errorMessageObject.age.isValid_age
@@ -245,6 +250,32 @@ export const isValidUserInfo = (errorMessageObject, user) => {
       && errorMessageObject.email.isValid_email
       && errorMessageObject.address.isValid_address
       && errorMessageObject.busStop.isValid_busStop
+    ) {
+      isValid = true;
+    }
+  } else if (user === 'admin' && tenant === 'BHOPAL') {
+    if (errorMessageObject.name.isValid_name
+      && errorMessageObject.fatherName.isValid_fatherName
+      && errorMessageObject.age.isValid_age
+      && errorMessageObject.gender.isValid_gender
+      && errorMessageObject.mobile.isValid_mobile
+      && errorMessageObject.motherMobile.isValid_motherMobile
+      && errorMessageObject.email.isValid_email
+      && errorMessageObject.address.isValid_address
+    ) {
+      isValid = true;
+    }
+  } else if (tenant === 'BHOPAL') {
+    if (errorMessageObject.name.isValid_name
+      && errorMessageObject.fatherName.isValid_fatherName
+      && errorMessageObject.age.isValid_age
+      && errorMessageObject.gender.isValid_gender
+      && errorMessageObject.mobile.isValid_mobile
+      && errorMessageObject.motherMobile.isValid_motherMobile
+      && errorMessageObject.email.isValid_email
+      && errorMessageObject.address.isValid_address
+      && errorMessageObject.optIn2019.isValid_optIn2019
+      && errorMessageObject.classAttended2019.isValid_classAttended2019
     ) {
       isValid = true;
     }
@@ -265,10 +296,10 @@ export const isValidUserInfo = (errorMessageObject, user) => {
   return isValid;
 };
 
-export const isDataCorrect = (studentData) => {
+export const isDataCorrect = (studentData, tenant) => {
   const errorMessageObject = {};
   for (const info in studentData) {
-    errorMessageObject[info] = validateInput(studentData[info], info);
+    errorMessageObject[info] = validateInput({ value: studentData[info], name: info, tenant });
   }
   return errorMessageObject;
 };

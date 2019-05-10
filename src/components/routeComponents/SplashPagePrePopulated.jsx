@@ -39,6 +39,7 @@ import {
   invalidAdminMsg, formSubmitBtnText,
 } from '../../constants/yjsg';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
+import { getApplicationTangent } from '../../reducers/assetFilesReducer';
 
 // FixMe: This component is unnecessary.
 //  Please use splash page to show pre-populated data and remove this component
@@ -354,8 +355,8 @@ class SplashPagePrePopulated extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate}</h5>
-              <h5 className="header-text">{eventVenue}</h5>
+              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
+              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -380,6 +381,7 @@ SplashPagePrePopulated.propTypes = {
   adminLoginState: PropTypes.bool,
   id: PropTypes.string,
   password: PropTypes.string,
+  tenant: PropTypes.string,
 };
 
 SplashPagePrePopulated.defaultProps = {
@@ -392,6 +394,7 @@ SplashPagePrePopulated.defaultProps = {
   adminLoginState: false,
   id: '',
   password: '',
+  tenant: '',
 };
 
 const mapStateToProps = state => ({
@@ -404,6 +407,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
   isFetched: isFetched(state),
+  tenant: getApplicationTangent(state),
 });
 
 export default connect(mapStateToProps, {
@@ -411,4 +415,5 @@ export default connect(mapStateToProps, {
   setStudentCredentials,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
+  getApplicationTangent,
 })(SplashPagePrePopulated);
