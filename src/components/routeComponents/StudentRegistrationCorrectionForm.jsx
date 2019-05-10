@@ -19,7 +19,7 @@ import {
   infoUpdateSuccessMessage,
   busNumber,
   classRoomNumber,
-  USER_TYPES,
+  USER_TYPES, TENANT,
 } from '../../constants/yjsg';
 import {
   PREVIOUS_YEAR_LEVEL_LABEL,
@@ -64,6 +64,8 @@ import SelectListInputField from '../form/SelectListInputField';
 import Button from '../common/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../constants/text';
 import Popup from '../common/Popup';
+import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+
 
 /**
  * The StudentRegistrationCorrectionForm component render student correction form.
@@ -115,6 +117,7 @@ class StudentRegistrationCorrectionForm extends Component {
     this.prePopulateCourse2019 = this.prePopulateCourse2019.bind(this);
     this.renderClassAttended2018 = this.renderClassAttended2018.bind(this);
   }
+
   componentDidMount() {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -147,48 +150,86 @@ class StudentRegistrationCorrectionForm extends Component {
       this.verifyStudentFormData({ email: '', motherMobile: '' });
     }
   }
-  /**
-   * renderAdminEditableFields render admin editable field which will edit by only admin.
-   * @return {ReactComponent}
-   */
-  renderAdminEditableFields = () => {
+  renderBusStopOptions = () => {
+    if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
+      return (
+        <SelectListInputField
+          type="text"
+          label={BUS_STOP_LABEL}
+          name="busStop"
+          options={busStops}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.busStop}
+        />
+      );
+    } else if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'Y') {
+      return (
+        <SelectListInputField
+          type="text"
+          label={BUS_STOP_LABEL}
+          name="busStop"
+          options={busStops}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.busStop}
+          isRequired
+          errorMessage={this.state.errorMessage.busStop.message}
+        />
+      );
+    } return null;
+  };
+     renderBusNumberOption = () => {
+       if (this.props.tenant === TENANT.INDORE && this.props.pageUser === USER_TYPES.ADMIN) {
+         return (
+           <SelectListInputField
+             name="busNumber"
+             label={BUS_NUMBER_LABEL}
+             options={busNumber}
+             onInputChange={this._handleInputChange}
+             value={this.state.student.busNumber}
+           />
+         );
+       } return null;
+     };
+  renderMark2019Field = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
-        <div>
-          <InputField
-            type="text"
-            label="Marks 2019"
-            name="marks2019"
-            onInputChange={this._handleInputChange}
-            value={this.state.student.marks2019}
-          />
-          <SelectListInputField
-            name="busNumber"
-            label={BUS_NUMBER_LABEL}
-            options={busNumber}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.busNumber}
-          />
-          <SelectListInputField
-            name="classRoomNo2019"
-            label={ROOM_LABEL}
-            options={classRoomNumber}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.classRoomNo2019}
-            style={{ fontFamily: 'sans-serif' }}
-            optionsStyle={{ fontFamily: 'Poppins' }}
-          />
-          <TextAreaField
-            label="Remark"
-            name="remark"
-            onInputChange={this._handleInputChange}
-            value={this.state.student.remark}
-            isRequired={false}
-          />
-        </div>
+        <InputField
+          type="text"
+          label="Marks 2019"
+          name="marks2019"
+          onInputChange={this._handleInputChange}
+          value={this.state.student.marks2019}
+        />
       );
-    }
-    return null;
+    } return null;
+  } ;
+  renderClassRoom2019Field = () => {
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="classRoomNo2019"
+          label={ROOM_LABEL}
+          options={classRoomNumber}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classRoomNo2019}
+          style={{ fontFamily: 'sans-serif' }}
+          optionsStyle={{ fontFamily: 'Poppins' }}
+        />
+      );
+    } return null;
+  };
+  renderRemarkField = () => {
+    if (this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <TextAreaField
+          label="Remark"
+          name="remark"
+          onInputChange={this._handleInputChange}
+          value={this.state.student.remark}
+          isRequired={false}
+        />
+      );
+    } return null;
   };
   /**
    * submitStudentDataForOnlyOptInCase method will call
@@ -284,7 +325,7 @@ class StudentRegistrationCorrectionForm extends Component {
    */
   verifyStudentFormData(studentData) {
     const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
-      isDataCorrect(studentData));
+      isDataCorrect(studentData, this.props.tenant));
     this.setState({
       errorMessage: errorMessageObject,
     });
@@ -427,7 +468,7 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {boolean}
    */
   isValidData() {
-    return isValidUserInfo(this.state.errorMessage, this.props.pageUser);
+    return isValidUserInfo({ errorMessageObject: this.state.errorMessage, user: this.props.pageUser, tenant: this.props.tenant });
   }
   /**
    * updateStudentData method update the particular student data.
@@ -494,7 +535,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
-    errorMessageObject[name] = validateInput(value, name);
+    errorMessageObject[name] = validateInput({ value, name, tenant: this.props.tenant });
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
     this.setState({
       student: updatedData,
@@ -657,23 +698,19 @@ class StudentRegistrationCorrectionForm extends Component {
                 onInputChange={this._handleInputChange}
                 value={this.state.student.email}
               />
+              {this.renderBusStopOptions()}
+              {this.renderClassAttended2018()}
+              {this.renderLevelField()}
+              {this.renderMark2019Field()}
+              {this.renderBusNumberOption()}
+              {this.renderClassRoom2019Field()}
               <TextAreaField
                 label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
                 value={this.state.student.address}
               />
-              <SelectListInputField
-                type="text"
-                label={BUS_STOP_LABEL}
-                name="busStop"
-                options={busStops}
-                onInputChange={this._handleInputChange}
-                value={this.state.student.busStop}
-              />
-              {this.renderClassAttended2018()}
-              {this.renderLevelField()}
-              {this.renderAdminEditableFields()}
+              {this.renderRemarkField()}
               <div className="student-form-marks-container student-form-marks-desktop-none">
                 <div className="student-form-marks-wrapper student-form-marks-mobile-wrapper">
                   <div className="student-form-marks-content">
@@ -834,6 +871,12 @@ class StudentRegistrationCorrectionForm extends Component {
                   isRequired={false}
                   errorMessage={this.state.errorMessage.email.message}
                 />
+                {this.renderBusStopOptions()}
+                {this.renderClassAttended2018()}
+                {this.renderLevelField()}
+                {this.renderMark2019Field()}
+                {this.renderBusNumberOption()}
+                {this.renderClassRoom2019Field()}
                 <TextAreaField
                   label={ADDRESS_LABEL}
                   name="address"
@@ -842,19 +885,7 @@ class StudentRegistrationCorrectionForm extends Component {
                   isRequired
                   errorMessage={this.state.errorMessage.address.message}
                 />
-                <SelectListInputField
-                  type="text"
-                  label={BUS_STOP_LABEL}
-                  name="busStop"
-                  options={busStops}
-                  onInputChange={this._handleInputChange}
-                  value={this.state.student.busStop}
-                  isRequired
-                  errorMessage={this.state.errorMessage.busStop.message}
-                />
-                {this.renderClassAttended2018()}
-                {this.renderLevelField()}
-                {this.renderAdminEditableFields()}
+                {this.renderRemarkField()}
                 <div className="student-form-marks-container student-form-marks-desktop-none">
                   <div className="student-form-marks-wrapper student-form-marks-mobile-wrapper">
                     <div className="student-form-marks-content">
@@ -930,6 +961,7 @@ StudentRegistrationCorrectionForm.propTypes = {
   context: PropTypes.object,
   pageUser: PropTypes.string,
   isUpdatedResetAction: PropTypes.func,
+  tenant: PropTypes.string,
 };
 StudentRegistrationCorrectionForm.defaultProps = {
   studentData: {},
@@ -941,6 +973,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   context: {},
   pageUser: '',
   isUpdatedResetAction: () => {},
+  tenant: '',
 };
 const mapStateToProps = state => ({
   studentData: getStudent(state),
@@ -949,8 +982,10 @@ const mapStateToProps = state => ({
   id: getUserId(state),
   secretKey: getUserSecretKey(state),
   pageUser: getPageUserType(state),
+  tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   updateStudentData,
   isUpdatedResetAction,
+  getApplicationTenant,
 })(StudentRegistrationCorrectionForm);
