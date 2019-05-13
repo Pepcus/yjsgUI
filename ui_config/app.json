@@ -1,4 +1,5 @@
 {
   "environment": "production",
-  "tenant": "BHOPAL"
+  "tenant": "BHOPAL",
+  "isRegisterCorrectionEnabled": false
 }
