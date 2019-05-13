@@ -21,7 +21,7 @@ import {
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getApplicationTenant, isRegisterCorrectionEnabled } from '../../reducers/assetFilesReducer';
 
 /**
 * The StudentPage component for the student which will render -
@@ -86,6 +86,16 @@ class StudentPage extends Component {
     });
     this.props.setHashLinkForNewRegistrationAction(USER_TYPES.STUDENT);
   }
+  renderAlreadyRegisteredButton = () => {
+    if (this.props.isAlreadyRegisteredButtonEnabled) {
+      return (
+        <Button
+          buttonText={alreadyRegisteredBtnText}
+          onClick={this.redirectToStudentLogin}
+        />
+      );
+    } return null;
+  };
   /**
    * renderStudentLoginButtons method return the react component in that
    * there are two buttons one is already register and anther is new registration.
@@ -94,10 +104,7 @@ class StudentPage extends Component {
   renderStudentLoginButtons() {
     return (
       <div>
-        <Button
-          buttonText={alreadyRegisteredBtnText}
-          onClick={this.redirectToStudentLogin}
-        />
+        {this.renderAlreadyRegisteredButton()}
         <Button
           buttonText={newRegistrationBtnText}
           onClick={this.redirectToNewRegistrationPage}
@@ -154,6 +161,7 @@ StudentPage.defaultProps = {
 const mapStateToProps = state => ({
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
+  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
@@ -162,4 +170,5 @@ export default connect(mapStateToProps, {
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
   getApplicationTenant,
+  isRegisterCorrectionEnabled,
 })(StudentPage);
