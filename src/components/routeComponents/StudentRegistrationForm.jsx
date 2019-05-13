@@ -170,7 +170,7 @@ class StudentRegistrationForm extends Component {
   handleInputChange(value, name) {
     const errorMessageObject = {};
     // validateInput set the error message in error message object according to input value and name
-    errorMessageObject[name] = validateInput( { value, name, tenant: this.props.tenant });
+    errorMessageObject[name] = validateInput({ value, name, tenant: this.props.tenant });
     // this will update the error object and updated error message object will be set into state.
     const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
     // this will get update student data
@@ -216,6 +216,21 @@ class StudentRegistrationForm extends Component {
           value={this.state.student.busStop}
           isRequired
           errorMessage={this.state.errorMessage.busStop.message}
+        />
+      );
+    } return null;
+  };
+  renderMotherMobileNumberField = () => {
+    if (this.props.tenant === TENANT.INDORE) {
+      return (
+        <InputField
+          type="number"
+          label={MOTHER_MOBILE_NUMBER_LABEL}
+          name="motherMobile"
+          onInputChange={this._handleInputChange}
+          value={this.state.student.motherMobile}
+          isRequired={false}
+          errorMessage={this.state.errorMessage.motherMobile.message}
         />
       );
     } return null;
@@ -300,15 +315,7 @@ class StudentRegistrationForm extends Component {
                 isRequired
                 errorMessage={this.state.errorMessage.mobile.message}
               />
-              <InputField
-                type="number"
-                label={MOTHER_MOBILE_NUMBER_LABEL}
-                name="motherMobile"
-                onInputChange={this._handleInputChange}
-                value={this.state.student.motherMobile}
-                isRequired={false}
-                errorMessage={this.state.errorMessage.motherMobile.message}
-              />
+              {this.renderMotherMobileNumberField()}
               <InputField
                 type="text"
                 label={OCCUPATION_LABEL}

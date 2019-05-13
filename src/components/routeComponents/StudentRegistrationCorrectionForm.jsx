@@ -150,6 +150,32 @@ class StudentRegistrationCorrectionForm extends Component {
       this.verifyStudentFormData({ email: '', motherMobile: '' });
     }
   }
+  renderMotherMobileNumberField = () => {
+    if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
+      return (
+        <InputField
+          type="number"
+          label={MOTHER_MOBILE_NUMBER_LABEL}
+          name="motherMobile"
+          onInputChange={this._handleInputChange}
+          value={this.state.student.motherMobile}
+          isRequired={false}
+        />
+      );
+    } else if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'Y') {
+      return (
+        <InputField
+          type="number"
+          label={MOTHER_MOBILE_NUMBER_LABEL}
+          name="motherMobile"
+          onInputChange={this._handleInputChange}
+          value={this.state.student.motherMobile}
+          isRequired={false}
+          errorMessage={this.state.errorMessage.motherMobile.message}
+        />
+      );
+    } return null;
+  };
   renderBusStopOptions = () => {
     if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
       return (
@@ -669,14 +695,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 onInputChange={this._handleInputChange}
                 value={this.state.student.mobile}
               />
-              <InputField
-                type="number"
-                label={MOTHER_MOBILE_NUMBER_LABEL}
-                name="motherMobile"
-                onInputChange={this._handleInputChange}
-                value={this.state.student.motherMobile}
-                isRequired={false}
-              />
+              {this.renderMotherMobileNumberField()}
               <InputField
                 type="text"
                 label={OCCUPATION_LABEL}
@@ -837,15 +856,7 @@ class StudentRegistrationCorrectionForm extends Component {
                   isRequired
                   errorMessage={this.state.errorMessage.mobile.message}
                 />
-                <InputField
-                  type="number"
-                  label={MOTHER_MOBILE_NUMBER_LABEL}
-                  name="motherMobile"
-                  onInputChange={this._handleInputChange}
-                  value={this.state.student.motherMobile}
-                  isRequired={false}
-                  errorMessage={this.state.errorMessage.motherMobile.message}
-                />
+                {this.renderMotherMobileNumberField()}
                 <InputField
                   type="text"
                   label={OCCUPATION_LABEL}

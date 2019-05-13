@@ -7,6 +7,7 @@ const initialState = {
   tenant: '',
   isAppLoaded: false,
   isAppLoadingFailed: false,
+  isRegisterCorrectionEnabled: false,
 };
 
 export const assetFilesReducer = (state = initialState, action) => {
@@ -44,6 +45,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         modeVariable: action.modeVariable.environment,
         tenant: action.modeVariable.tenant,
         isAppLoadingFailed: false,
+        isRegisterCorrectionEnabled: action.modeVariable.isRegisterCorrectionEnabled,
       };
     case 'LOAD_APP_DATA_FAILED_ACTION':
       return {
@@ -54,6 +56,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         tenant: '',
         isAppLoaded: false,
         isAppLoadingFailed: true,
+        isRegisterCorrectionEnabled: false,
       };
     case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
       return {
@@ -100,3 +103,5 @@ export const getBusCoordinators = state => state.assetFilesReducer.busCoordinato
 export const isBusCoordinatorsDataFailed = state => state.assetFilesReducer.isBusCoordinatorsDataFailed;
 
 export const getApplicationTenant = state => state.assetFilesReducer.tenant;
+
+export const isRegisterCorrectionEnabled = state => state.assetFilesReducer.isRegisterCorrectionEnabled;
