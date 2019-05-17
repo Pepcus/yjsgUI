@@ -184,6 +184,33 @@ export const mobileValidate = (value, name) => {
 
 /**
  *
+ * @param {Number} value
+ * @param {String} name
+ * @return {Object} errorMessageObject
+ */
+export const optionalMobileValidate = (value, name) => {
+  const errorMessageObject = {};
+  const mobileRegExp = /^[0-9]+$/;
+
+  if (isEmpty(value)) {
+    errorMessageObject.message = '';
+    errorMessageObject[`isValid_${name}`] = true;
+  } else if (value.length !== 10) {
+    errorMessageObject.message = ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else if (!mobileRegExp.test(value)) {
+    errorMessageObject.message = ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else {
+    errorMessageObject.message = '';
+    errorMessageObject[`isValid_${name}`] = true;
+  }
+  return errorMessageObject;
+};
+
+
+/**
+ *
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
