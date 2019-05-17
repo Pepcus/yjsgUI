@@ -18,6 +18,81 @@ html, body {
     display: flex;
 }
 
+
+.rjsf {
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    padding: 30px 0;
+    margin: 15px auto;
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.form-group {
+    padding: 12px 20px 5px;
+}
+.text-danger {
+    font-size: 11px;
+    color: red;
+    margin: 2px;
+}
+.control-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #4c4c4c;
+    font-size: 14px;
+}
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+.form-container {
+    background-color: #fff;
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btn-info {
+    color: #ffffff;
+    background-color: var(--orange-color) !important;
+    outline: none;
+    box-shadow: 0 1px 3px 0 #777978;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow-y: auto;
+    transition: 0.3s all;
+    margin-left: 40px;
+    justify-content: space-around;
+}
+
+.btn-info:hover {
+    transition: 0.3s all;
+    box-shadow: 0 2px 4px 0 #777978;
+    background-color: var(--orange-hover-color) !important;
+}
+
+.form-control {
+    width: 100%;
+    max-width: 330px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    height: auto;
+}
 .logoutButtonContainer {
     z-index: 2;
 }
