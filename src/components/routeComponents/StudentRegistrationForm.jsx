@@ -54,7 +54,6 @@ import SelectListInputField from '../form/SelectListInputField';
 import {
   getNewStudent,
   isCreated,
-  isLoading,
   getUserType,
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../common/Button';
@@ -373,7 +372,6 @@ class StudentRegistrationForm extends Component {
 }
 
 StudentRegistrationForm.propTypes = {
-  isLoading: PropTypes.bool,
   isCreated: PropTypes.bool,
   newStudent: PropTypes.object,
   createStudentData: PropTypes.func,
@@ -384,7 +382,6 @@ StudentRegistrationForm.propTypes = {
 };
 
 StudentRegistrationForm.defaultProps = {
-  isLoading: false,
   isCreated: false,
   newStudent: {},
   createStudentData: () => {},
@@ -395,7 +392,6 @@ StudentRegistrationForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isLoading: isLoading(state),
   isCreated: isCreated(state),
   newStudent: getNewStudent(state),
   userType: getUserType(state),

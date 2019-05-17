@@ -146,7 +146,7 @@ class StudentCredentialPage extends Component {
     //   registeredStudentCredentialErrorMessage: true,
     // });
 
-    this.props.setUserTypeAction(USER_TYPES.STUDENT_WITH_URL);
+    this.props.setUserTypeAction(USER_TYPES.STUDENT);
     this.setState({
       redirectToStudentCorrectionByUrl: true,
     });

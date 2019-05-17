@@ -419,7 +419,7 @@ class StudentRegistrationCorrectionForm extends Component {
           linkPath={this.props.context.previousLocation}
         />
       );
-    } else if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL) {
+    } else if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT) {
       return (
         <Button
           type="button"
@@ -759,7 +759,7 @@ class StudentRegistrationCorrectionForm extends Component {
     );
   }
   render() {
-    if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL
+    if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
       && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
       return this.renderOnlyOptIn2019();
     } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
