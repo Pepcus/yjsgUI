@@ -12,7 +12,7 @@ export const GENDER_LABEL = 'लिंग';
 
 export const AGE_LABEL = 'उम्र';
 
-export const MOBILE_NUMBER_LABEL = "मोबाइल नं ( What's App / SMS के लिये )";
+export const MOBILE_NUMBER_LABEL = 'मोबाइल नं ( Whats App / SMS के लिये )';
 
 export const MOTHER_MOBILE_NUMBER_LABEL = 'मोबाइल नं. ( माता का )';
 
