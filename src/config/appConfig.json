@@ -33,10 +33,6 @@
       "key": "occupation"
     },
     {
-      "label": "Mother Mobile No.",
-      "key": "motherMobile"
-    },
-    {
       "label": "Mobile",
       "key": "mobile"
     },

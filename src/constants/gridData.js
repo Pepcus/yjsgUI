@@ -54,12 +54,6 @@ export const gridMetaData = [
     'emptyCells': 'NA',
   },
   {
-    'label': 'Mother Mobile No.',
-    'key': 'motherMobile',
-    'type': 'Number',
-    'emptyCells': 'NA',
-  },
-  {
     'label': 'Mobile',
     'key': 'mobile',
     'type': 'Number',

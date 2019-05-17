@@ -76,7 +76,6 @@ class StudentRegistrationForm extends Component {
         gender: '',
         age: '',
         mobile: '',
-        motherMobile: '',
         email: '',
         address: '',
         busStop: '',
@@ -90,7 +89,6 @@ class StudentRegistrationForm extends Component {
         gender: {},
         age: {},
         mobile: {},
-        motherMobile: {},
         email: {},
         address: {},
         busStop: {},
@@ -108,7 +106,7 @@ class StudentRegistrationForm extends Component {
 
   componentDidMount() {
     // Since the below fields are optional. we are setting them blank explicitly
-    this._verifyStudentFormData({ email: '', motherMobile: '', optIn2019: 'Y' });
+    this._verifyStudentFormData({ email: '', optIn2019: 'Y' });
   }
   /**
    * verifyStudentFormData method verify the student data.
@@ -220,21 +218,6 @@ class StudentRegistrationForm extends Component {
       );
     } return null;
   };
-  renderMotherMobileNumberField = () => {
-    if (this.props.tenant === TENANT.INDORE) {
-      return (
-        <InputField
-          type="number"
-          label={MOTHER_MOBILE_NUMBER_LABEL}
-          name="motherMobile"
-          onInputChange={this._handleInputChange}
-          value={this.state.student.motherMobile}
-          isRequired={false}
-          errorMessage={this.state.errorMessage.motherMobile.message}
-        />
-      );
-    } return null;
-  };
   /**
    * renderBackButton method return link button according to user type
    * @return {ReactComponent}
@@ -315,7 +298,6 @@ class StudentRegistrationForm extends Component {
                 isRequired
                 errorMessage={this.state.errorMessage.mobile.message}
               />
-              {this.renderMotherMobileNumberField()}
               <InputField
                 type="text"
                 label={OCCUPATION_LABEL}
@@ -341,14 +323,6 @@ class StudentRegistrationForm extends Component {
                 isRequired={false}
                 errorMessage={this.state.errorMessage.email.message}
               />
-              <TextAreaField
-                label={ADDRESS_LABEL}
-                name="address"
-                onInputChange={this._handleInputChange}
-                value={this.state.student.address}
-                isRequired
-                errorMessage={this.state.errorMessage.address.message}
-              />
               {this.renderBusStopOptions()}
               <SelectListInputField
                 name="classAttended2019"
@@ -358,6 +332,14 @@ class StudentRegistrationForm extends Component {
                 value={this.state.student.classAttended2019}
                 isRequired
                 errorMessage={this.state.errorMessage.classAttended2019.message}
+              />
+              <TextAreaField
+                label={ADDRESS_LABEL}
+                name="address"
+                onInputChange={this._handleInputChange}
+                value={this.state.student.address}
+                isRequired
+                errorMessage={this.state.errorMessage.address.message}
               />
               <InputField
                 type="text"

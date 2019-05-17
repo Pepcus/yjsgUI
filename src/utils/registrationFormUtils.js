@@ -47,9 +47,6 @@ export const validateInput = ({ value, name, tenant }) => {
   if (name === 'mobile') {
     return mobileValidate(value, name);
   }
-  if (name === 'motherMobile') {
-    return optionalMobileValidate(value, name);
-  }
   if (name === 'gender' /* name === 'busStop'
      ||*/ || name === 'classAttended2019' || name === 'optIn2019') {
     return requireFieldsValidate(value, name);
@@ -247,7 +244,6 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
       && errorMessageObject.age.isValid_age
       && errorMessageObject.gender.isValid_gender
       && errorMessageObject.mobile.isValid_mobile
-      && errorMessageObject.motherMobile.isValid_motherMobile
       && errorMessageObject.email.isValid_email
       && errorMessageObject.address.isValid_address
       && errorMessageObject.busStop.isValid_busStop
@@ -260,7 +256,6 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
       && errorMessageObject.age.isValid_age
       && errorMessageObject.gender.isValid_gender
       && errorMessageObject.mobile.isValid_mobile
-      && errorMessageObject.motherMobile.isValid_motherMobile
       && errorMessageObject.email.isValid_email
       && errorMessageObject.address.isValid_address
     ) {
@@ -272,7 +267,6 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
       && errorMessageObject.age.isValid_age
       && errorMessageObject.gender.isValid_gender
       && errorMessageObject.mobile.isValid_mobile
-      && errorMessageObject.motherMobile.isValid_motherMobile
       && errorMessageObject.email.isValid_email
       && errorMessageObject.address.isValid_address
       && errorMessageObject.optIn2019.isValid_optIn2019
@@ -285,7 +279,6 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
     && errorMessageObject.age.isValid_age
     && errorMessageObject.gender.isValid_gender
     && errorMessageObject.mobile.isValid_mobile
-    && errorMessageObject.motherMobile.isValid_motherMobile
     && errorMessageObject.email.isValid_email
     && errorMessageObject.address.isValid_address
     && errorMessageObject.busStop.isValid_busStop
