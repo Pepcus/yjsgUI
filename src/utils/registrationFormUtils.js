@@ -13,7 +13,7 @@ import {
   ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE,
   ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
-  DOUBLE_QUOTE_ERROR_MESSAGE,
+  DOUBLE_QUOTE_ERROR_MESSAGE, ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
 } from '../constants/messages';
 import { TENANT } from '../constants/yjsg';
 
@@ -41,14 +41,16 @@ export const validateInput = ({ value, name, tenant }) => {
   if (name === 'email') {
     return optionalEmailValidate(value, name);
   }
-  if (name === 'age') {
+  if (name === 'age' && tenant === TENANT.INDORE) {
     return ageValidate(value, name);
+  }
+  if (name === 'age' && tenant === TENANT.BHOPAL) {
+    return ageValidateForBhpoal(value, name);
   }
   if (name === 'mobile') {
     return mobileValidate(value, name);
   }
-  if (name === 'gender' /* name === 'busStop'
-     ||*/ || name === 'classAttended2019' || name === 'optIn2019') {
+  if (name === 'gender' || name === 'classAttended2019' || name === 'optIn2019') {
     return requireFieldsValidate(value, name);
   }
   if (name === 'busStop' && tenant === TENANT.INDORE) {
@@ -148,6 +150,21 @@ export const ageValidate = (value, name) => {
     errorMessageObject[`isValid_${name}`] = false;
   } else if (value > 45 || value < 8) {
     errorMessageObject.message = ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else {
+    errorMessageObject.message = '';
+    errorMessageObject[`isValid_${name}`] = true;
+  }
+  return errorMessageObject;
+};
+
+export const ageValidateForBhpoal = (value, name) => {
+  const errorMessageObject = {};
+  if (isEmpty(value)) {
+    errorMessageObject.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
+    errorMessageObject[`isValid_${name}`] = false;
+  } else if (value > 66 || value < 5) {
+    errorMessageObject.message = ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else {
     errorMessageObject.message = '';
