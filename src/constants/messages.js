@@ -46,6 +46,8 @@ export const INFORMATION_HELPFUL_TO_CONTACT_MESSAGE = 'यह जानकार
 
 export const ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE = 'केवल ८ - ४५ वर्ष तक ही मान्य';
 
+export const ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE = 'केवल ५ - ६६ वर्ष तक ही मान्य';
+
 export const ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE = 'मोबाइल नं. केवल १० अंको का ही मान्य';
 
 export const ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE = 'मोबाइल नं. में केवल नंबर ही मान्य';
