@@ -168,76 +168,6 @@
                     "Level 8 : छहढाला-ढाल 4-5"
                   ]
                 },
-                "classRoomNo2019": {
-                  "title": "Room",
-                  "type": ["string","null"],
-                  "enum": [
-                    "105",
-                    "106",
-                    "107",
-                    "108",
-                    "109",
-                    "110",
-                    "111",
-                    "112",
-                    "218",
-                    "219",
-                    "220",
-                    "224",
-                    "225",
-                    "227",
-                    "330",
-                    "334",
-                    "337",
-                    "340",
-                    "341",
-                    "401",
-                    "402",
-                    "403",
-                    "501",
-                    "502",
-                    "503",
-                    "504",
-                    "507",
-                    "509",
-                    "601",
-                    "603",
-                    "607"
-                  ],
-                  "enumNames": [
-                    "105",
-                    "106",
-                    "107",
-                    "108",
-                    "109",
-                    "110",
-                    "111",
-                    "112",
-                    "218",
-                    "219",
-                    "220",
-                    "224",
-                    "225",
-                    "227",
-                    "330",
-                    "334",
-                    "337",
-                    "340",
-                    "341",
-                    "401",
-                    "402",
-                    "403",
-                    "501",
-                    "502",
-                    "503",
-                    "504",
-                    "507",
-                    "509",
-                    "601",
-                    "603",
-                    "607"
-                  ]
-                },
                 "address": {
                   "title": "पूरा पता",
                   "type": ["string","null"]
@@ -283,9 +213,6 @@
         "ui:disabled": true
       },
       "busNumber": {
-        "ui:placeholder": "कृपया एक चुनिए . . ."
-      },
-      "classRoomNo2019": {
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "remark": {
@@ -379,7 +306,7 @@
                  },
                  "classRoomNo2019": {
                    "title": "Room",
-                   "type": ["string","null"],
+                   "type": ["string"],
                    "enum": [
                      "105",
                      "106",
@@ -545,7 +472,7 @@
                  },
                  "classRoomNo2019": {
                    "title": "Room",
-                   "type": ["string","null"],
+                   "type": ["string"],
                    "enum": [
                      "105",
                      "106",
@@ -1094,9 +1021,6 @@
       "busNumber": {
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
-      "classRoomNo2019": {
-        "ui:placeholder": "कृपया एक चुनिए . . ."
-      },
       "remark": {
         "ui:widget": "textarea"
       }
@@ -1356,7 +1280,7 @@
                 },
                 "classRoomNo2019": {
                   "title": "Room",
-                  "type": ["string", "null"],
+                  "type": ["string"],
                   "enum": [
                     "105",
                     "106",
@@ -1691,7 +1615,7 @@
                 },
                 "classRoomNo2019": {
                   "title": "Room",
-                  "type": ["string", "null"],
+                  "type": ["string"],
                   "enum": [
                     "105",
                     "106",
@@ -1854,5 +1778,32 @@
       }
     },
     "Data": {}
-  }
+  },
+  "validation":
+  [
+    {
+      "field": "name",
+      "validates": "nameValidation"
+    },
+    {
+      "field": "fatherName",
+      "validates": "nameValidation"
+    },
+    {
+      "field": "mobile",
+      "validates": "mobileValidation"
+    },
+    {
+      "field": "age",
+      "validates": "ageValidation"
+    },
+    {
+      "field": "email",
+      "validates": "optionalEmailValidation"
+    },
+    {
+      "field": "address",
+      "validates": "addressValidation"
+    }
+  ]
 }

@@ -10,7 +10,6 @@ import csv from 'csvtojson';
 
 import {
   getSecretKey,
-  stateOfAdminLogin,
 } from '../../reducers/studentRegistrationReducer';
 import {
   getFileData,
@@ -19,24 +18,18 @@ import {
 import {
   fetchFilesConfigAction,
 } from '../../actions/assetFilesActions';
-import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
+import { SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../constants/messages';
-import LinkButton from '../common/LinkButton';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
 } from '../../utils/fileUtils';
 import {
-  resetAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  resetVisibleColumnConfigAction,
   setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 
 /**
  * Files component render files list and file data table.
@@ -54,7 +47,7 @@ class Files extends Component {
       backPageButton: true,
       width: window.innerWidth,
       fileData: [],
-      hasFileRoute: false
+      hasFileRoute: false,
     };
   }
 
@@ -142,6 +135,7 @@ class Files extends Component {
    * fetchFileData mathode will when click on any file and
    * it fetch that file data and save it in state.
    * @param{Object} file
+   * @return {Object} null
    */
   fetchFileData = (file) => {
     const fileDetails = file;
@@ -453,7 +447,7 @@ class Files extends Component {
         </Link>
       );
     } return null;
-  }
+  };
 
   render() {
     return (
@@ -475,28 +469,16 @@ class Files extends Component {
   }
 }
 
-Files.propsType = {
-  fileData: PropTypes.array,
+Files.propTypes = {
   fetchFilesConfigAction: PropTypes.func,
   setLoadingStateAction: PropTypes.func,
-  adminLoginState: PropTypes.bool,
   filesConfig: PropTypes.object,
-  resetAdminCredentialsAction: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setRedirectValueAction: PropTypes.func,
-  resetVisibleColumnConfigAction: PropTypes.func,
   context: PropTypes.object,
 };
 
 Files.defaultProps = {
-  fileData: [],
   setLoadingStateAction: () => {},
   fetchFilesConfigAction: () => {},
-  resetAdminCredentialsAction: () => {},
-  setAdminLoginStateAction: () => {},
-  setRedirectValueAction: () => {},
-  resetVisibleColumnConfigAction: () => {},
-  adminLoginState: false,
   filesConfig: {},
   context: {},
 };
@@ -505,14 +487,9 @@ const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
   fileData: getFileData(state),
   filesConfig: getFilesConfig(state),
-  adminLoginState: stateOfAdminLogin(state),
 });
 
 export default connect(mapStateToProps, {
   setLoadingStateAction,
   fetchFilesConfigAction,
-  resetAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  resetVisibleColumnConfigAction,
 })(Files);

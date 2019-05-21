@@ -148,6 +148,7 @@ StudentPage.propTypes = {
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
+  isAlreadyRegisteredButtonEnabled: PropTypes.bool,
 };
 
 StudentPage.defaultProps = {
@@ -157,6 +158,7 @@ StudentPage.defaultProps = {
   setHashLinkForNewRegistrationAction: () => {},
   setUserTypeAction: () => {},
   tenant: '',
+  isAlreadyRegisteredButtonEnabled: false,
 };
 const mapStateToProps = state => ({
   studentData: getStudent(state),

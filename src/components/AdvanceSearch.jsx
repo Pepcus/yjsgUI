@@ -146,7 +146,7 @@ class AdvanceSearch extends Component {
   clearButton() {
     if (!isEmpty(this.state.inputValue)) {
       return <span className="clear-search"><i className="fa fa-times-circle" onClick={this._clearFilter} /></span>;
-    }
+    } return null;
   }
   /**
    * advanceSearch method find the search result and also maintained check and uncheck students.

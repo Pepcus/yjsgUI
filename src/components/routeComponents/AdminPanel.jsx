@@ -161,10 +161,22 @@ AdminPanel.propTypes = {
   resetAdminCredentialsAction: PropTypes.func.isRequired,
   clearSearchResultsAction: PropTypes.func.isRequired,
   searchResults: PropTypes.object,
+  adminLoginState: PropTypes.bool,
+  setRedirectValueAction: PropTypes.func,
+  setAdminLoginStateAction: PropTypes.func,
+  id: PropTypes.string,
+  password: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 AdminPanel.defaultProps = {
   searchResults: {},
+  adminLoginState: false,
+  setRedirectValueAction: () => {},
+  setAdminLoginStateAction: () => {},
+  id: '',
+  password: '',
+  isLoading: false,
 };
 
 const mapStateToProps = state => ({

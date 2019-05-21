@@ -16,7 +16,7 @@ const Popup = ({ children }) => (
   </div>
 );
 
-Popup.propstype = {
+Popup.propTypes = {
   children: PropTypes.node,
 };
 Popup.defaultProps = {

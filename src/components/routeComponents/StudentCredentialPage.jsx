@@ -276,6 +276,7 @@ class StudentCredentialPage extends Component {
 StudentCredentialPage.propTypes = {
   fetchStudentData: PropTypes.func,
   setStudentCredentials: PropTypes.func,
+  setUserTypeAction: PropTypes.func,
   context: PropTypes.object,
   isFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
@@ -283,9 +284,11 @@ StudentCredentialPage.propTypes = {
   studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   secretKey: PropTypes.string,
   hashLink: PropTypes.string,
+  tenant: PropTypes.string,
 };
 
 StudentCredentialPage.defaultProps = {
+  setUserTypeAction: () => {},
   fetchStudentData: () => {},
   setStudentCredentials: () => {},
   studentData: '',
@@ -295,6 +298,7 @@ StudentCredentialPage.defaultProps = {
   studentId: '',
   secretKey: '',
   hashLink: '',
+  tenant: '',
 };
 const mapStateToProps = state => ({
   studentId: getUserId(state),

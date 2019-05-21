@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
   isLoading: getLoaderState(state),
 });
 
-Loader.propsType = {
+Loader.propTypes = {
   isLoading: PropTypes.bool,
 };
 Loader.defaultProps = {

@@ -5,8 +5,12 @@ import InputField from './form/InputField';
 import { formSubmitBtnText, goBackBtnText } from '../constants/yjsg';
 import Button from './common/Button';
 
-
-const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirection, disableAdminLoginButtons, setAdminLogin }) => {
+const AdminLoginForm = ({ isAdmin,
+  admin,
+  handleInputChange,
+  adminScreenRedirection,
+  disableAdminLoginButtons,
+  setAdminLogin }) => {
   if (isAdmin) {
     return (
       <div>
@@ -50,7 +54,7 @@ const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirect
   return null;
 };
 
-AdminLoginForm.propsType = {
+AdminLoginForm.propTypes = {
   isAdmin: PropTypes.bool,
   admin: PropTypes.object,
   handleInputChange: PropTypes.func,

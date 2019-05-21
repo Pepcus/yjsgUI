@@ -18,7 +18,6 @@ import {
   setStudentCredentials,
   updateStudentData,
 } from '../../actions/studentRegistrationActions';
-import { validates } from '../../utils/SampleFormValidation';
 import {
   INVALID_EMAIL_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -37,11 +36,15 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import { updateClassAttended2019InStudentData } from '../../utils/registrationFormUtils';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
-import { defaultStudent, defaultAdmin, indoreStudent, indoreAdmin, onlyOptin2019 } from '../../config/studentRegisrationCurrectionFormShema.json';
+import { defaultStudent, defaultAdmin, indoreStudent, indoreAdmin, onlyOptin2019, validation } from '../../config/memberRegisrationCurrectionFormShema.json';
 import { CLICK_HERE_TEXT, UPDATE_FURTHER_INFORMATION_TEXT } from '../../constants/text';
-import { NAME_LABEL } from '../../constants/label';
+import validations from '../../utils/validation';
 
-
+/**
+ * MemberRegistrationCorrectionForm render member registration correction form.
+ * @type {Class}
+ * @return {ReactComponent}
+ */
 class MemberRegistrationCorrectionForm extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +64,7 @@ class MemberRegistrationCorrectionForm extends Component {
         marks2019: '',
         busNumber: '',
         classAttended2019: '',
-        classRoomNo2019: '',
+        classRoomNo2019: undefined,
         optIn2019: '',
         remark: '',
         occupation: '',
@@ -84,6 +87,7 @@ class MemberRegistrationCorrectionForm extends Component {
         ...studentData,
         mobile: !studentData.mobile ? null : Number(studentData.mobile),
         age: !studentData.age ? null : Number(studentData.age),
+        classRoomNo2019: !studentData.classRoomNo2019 ? undefined : Number(studentData.classRoomNo2019),
       };
     }
     if (!isEmpty(studentData)) {
@@ -92,6 +96,7 @@ class MemberRegistrationCorrectionForm extends Component {
           ...studentData,
           mobile: !this.state.student.mobile ? null : Number(this.state.student.mobile),
           age: !this.state.student.age ? null : Number(this.state.student.age),
+          classRoomNo2019: !this.state.student.classRoomNo2019 ? undefined : Number(this.state.student.classRoomNo2019),
         },
         isSubmitTriggered: false,
       });
@@ -111,6 +116,7 @@ class MemberRegistrationCorrectionForm extends Component {
         ...studentData,
         mobile: !studentData.mobile ? null : Number(studentData.mobile),
         age: !studentData.age ? null : Number(studentData.age),
+        classRoomNo2019: !studentData.classRoomNo2019 ? undefined : Number(studentData.classRoomNo2019),
       };
     }
     if (!isEmpty(studentData)) {
@@ -120,6 +126,7 @@ class MemberRegistrationCorrectionForm extends Component {
           ...studentData,
           mobile: !this.state.student.mobile ? null : Number(this.state.student.mobile),
           age: !this.state.student.age ? null : Number(this.state.student.age),
+          classRoomNo2019: !this.state.student.classRoomNo2019 ? undefined : Number(this.state.student.classRoomNo2019),
         },
         isSubmitTriggered: false,
       });
@@ -131,6 +138,186 @@ class MemberRegistrationCorrectionForm extends Component {
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
+  };
+  validate = (formData, errors) => {
+    if (this.state.student.optIn2019 === 'Y') {
+      validation.forEach((valid) => {
+        const error = validations[valid.validates](formData[valid.field]);
+        if (!isEmpty(error)) {
+          errors[valid.field].addError(error);
+        }
+      });
+      return errors;
+    }
+    return {};
+  };
+  renderForm = () => {
+    if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
+      && this.state.onlyOptIn2019) {
+      return (
+        <div className="form-container">
+          <div className="form-wrapper" ref={this.formRef}>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              validate={this.validate}
+              liveValidate
+              schema={onlyOptin2019.Schema}
+              uiSchema={onlyOptin2019.UISchema}
+              formData={{ ...onlyOptin2019.Data, ...this.state.student }}
+              onChange={this.onChange}
+              transformErrors={this.transformErrors}
+            >
+              <div>
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  formName=""
+                  value="Submit"
+                  onClick={this.submitStudentDataForOnlyOptInCase}
+                />
+              </div>
+              <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
+                <a className="student-portal-link" onClick={() => { this.changeIsOnlyOptIn2019(false); }}>{CLICK_HERE_TEXT}
+                </a>
+              </span>
+            </Form>
+            {this.renderSuccessMessage()}
+          </div>
+        </div>
+      );
+    } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant === TENANT.INDORE) {
+      return (
+        <div className="form-container">
+          <div className="form-wrapper" ref={this.formRef}>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              validate={this.validate}
+              liveValidate
+              schema={indoreAdmin.Schema}
+              uiSchema={indoreAdmin.UISchema}
+              formData={{ ...indoreAdmin.Data, ...this.state.student }}
+              onChange={this.onChange}
+              transformErrors={this.transformErrors}
+            >
+              {this.renderMarksInMobileView()}
+              <div>
+                {this.renderBackButton()}
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  formName=""
+                  value="Submit"
+                  onClick={this.handleSubmit}
+                />
+              </div>
+              {this.renderMarksInDesktopView()}
+            </Form>
+            {this.renderSuccessMessage()}
+          </div>
+        </div>
+      );
+    } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
+      && this.props.tenant === TENANT.INDORE) {
+      return (
+        <div className="form-container">
+          <div className="form-wrapper" ref={this.formRef}>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              validate={this.validate}
+              liveValidate
+              schema={indoreStudent.Schema}
+              uiSchema={indoreStudent.UISchema}
+              formData={{ ...indoreStudent.Data, ...this.state.student }}
+              onChange={this.onChange}
+              transformErrors={this.transformErrors}
+            >
+              {this.renderMarksInMobileView()}
+              <div>
+                {this.renderBackButton()}
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  formName=""
+                  value="Submit"
+                  onClick={this.handleSubmit}
+                />
+              </div>
+              {this.renderMarksInDesktopView()}
+            </Form>
+            {this.renderSuccessMessage()}
+          </div>
+        </div>
+      );
+    } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant !== TENANT.INDORE) {
+      return (
+        <div className="form-container">
+          <div className="form-wrapper" ref={this.formRef}>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              validate={this.validate}
+              liveValidate
+              schema={defaultAdmin.Schema}
+              uiSchema={defaultAdmin.UISchema}
+              formData={{ ...defaultAdmin.Data, ...this.state.student }}
+              onChange={this.onChange}
+              transformErrors={this.transformErrors}
+            >
+              {this.renderMarksInMobileView()}
+              <div>
+                {this.renderBackButton()}
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  formName=""
+                  value="Submit"
+                  onClick={this.handleSubmit}
+                />
+              </div>
+              {this.renderMarksInDesktopView()}
+            </Form>
+            {this.renderSuccessMessage()}
+          </div>
+        </div>
+      );
+    } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
+      && this.props.tenant !== TENANT.INDORE) {
+      return (
+        <div className="form-container">
+          <div className="form-wrapper" ref={this.formRef}>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              validate={this.validate}
+              liveValidate
+              schema={defaultStudent.Schema}
+              uiSchema={defaultStudent.UISchema}
+              formData={{ ...defaultStudent.Data, ...this.state.student }}
+              onChange={this.onChange}
+              transformErrors={this.transformErrors}
+            >
+              {this.renderMarksInMobileView()}
+              <div>
+                {this.renderBackButton()}
+                <Button
+                  buttonText={formSubmitBtnText}
+                  type="submit"
+                  formName=""
+                  value="Submit"
+                  onClick={this.handleSubmit}
+                />
+              </div>
+              {this.renderMarksInDesktopView()}
+            </Form>
+            {this.renderSuccessMessage()}
+          </div>
+        </div>
+      );
+    }
+    return null;
   };
   renderMarksInMobileView = () => (
     <div className="student-form-marks-container student-form-marks-desktop-none">
@@ -258,6 +445,7 @@ class MemberRegistrationCorrectionForm extends Component {
       this.updateStudentData();
     }
   };
+
   transformErrors = (errors) => {
     const temError = [];
     if (this.state.student.optIn2019 !== 'Y') {
@@ -276,6 +464,7 @@ class MemberRegistrationCorrectionForm extends Component {
     });
     return temError;
   };
+
   renderBackButton = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
@@ -300,6 +489,7 @@ class MemberRegistrationCorrectionForm extends Component {
       />
     );
   };
+
   onChange = (event) => {
     this.setState({
       student: {
@@ -311,191 +501,23 @@ class MemberRegistrationCorrectionForm extends Component {
       hasError: isEmpty(event.errors),
     });
   };
+
   render() {
     if (this.props.isFetched && this.props.studentData) {
-      if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
-        && this.state.onlyOptIn2019) {
-        return (
-          <div className="form-container">
-            <div className="form-wrapper" ref={this.formRef}>
-              <Form
-                showErrorList={false}
-                noHtml5Validate
-                validate={validates}
-                liveValidate
-                schema={onlyOptin2019.Schema}
-                uiSchema={onlyOptin2019.UISchema}
-                formData={{ ...onlyOptin2019.Data, ...this.state.student }}
-                onChange={this.onChange}
-                transformErrors={this.transformErrors}
-                // onError={console.log('event===Y')}
-              >
-                <div>
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    formName=""
-                    value="Submit"
-                    onClick={this.submitStudentDataForOnlyOptInCase}
-                  />
-                </div>
-                <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
-                  <a className="student-portal-link" onClick={() => { this.changeIsOnlyOptIn2019(false); }}>{CLICK_HERE_TEXT}
-                  </a>
-                </span>
-              </Form>
-              {this.renderSuccessMessage()}
-            </div>
-          </div>
-        );
-      } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant === TENANT.INDORE) {
-        return (
-          <div className="form-container">
-            <div className="form-wrapper" ref={this.formRef}>
-              <Form
-                showErrorList={false}
-                noHtml5Validate
-                validate={validates}
-                liveValidate
-                schema={indoreAdmin.Schema}
-                uiSchema={indoreAdmin.UISchema}
-                formData={{ ...indoreAdmin.Data, ...this.state.student }}
-                onChange={this.onChange}
-                transformErrors={this.transformErrors}
-                // onError={console.log('event===Y')}
-              >
-                {this.renderMarksInMobileView()}
-                <div>
-                  {this.renderBackButton()}
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    formName=""
-                    value="Submit"
-                    onClick={this.handleSubmit}
-                  />
-                </div>
-                {this.renderMarksInDesktopView()}
-              </Form>
-              {this.renderSuccessMessage()}
-            </div>
-          </div>
-        );
-      } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
-        && this.props.tenant === TENANT.INDORE) {
-        return (
-          <div className="form-container">
-            <div className="form-wrapper" ref={this.formRef}>
-              <Form
-                showErrorList={false}
-                noHtml5Validate
-                validate={validates}
-                liveValidate
-                schema={indoreStudent.Schema}
-                uiSchema={indoreStudent.UISchema}
-                formData={{ ...indoreStudent.Data, ...this.state.student }}
-                onChange={this.onChange}
-                transformErrors={this.transformErrors}
-                // onError={console.log('event===Y')}
-              >
-                {this.renderMarksInMobileView()}
-                <div>
-                  {this.renderBackButton()}
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    formName=""
-                    value="Submit"
-                    onClick={this.handleSubmit}
-                  />
-                </div>
-                {this.renderMarksInDesktopView()}
-              </Form>
-              {this.renderSuccessMessage()}
-            </div>
-          </div>
-        );
-      } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant !== TENANT.INDORE) {
-        return (
-          <div className="form-container">
-            <div className="form-wrapper" ref={this.formRef}>
-              <Form
-                showErrorList={false}
-                noHtml5Validate
-                validate={validates}
-                liveValidate
-                schema={defaultAdmin.Schema}
-                uiSchema={defaultAdmin.UISchema}
-                formData={{ ...defaultAdmin.Data, ...this.state.student }}
-                onChange={this.onChange}
-                transformErrors={this.transformErrors}
-                // onError={console.log('event===Y')}
-              >
-                {this.renderMarksInMobileView()}
-                <div>
-                  {this.renderBackButton()}
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    formName=""
-                    value="Submit"
-                    onClick={this.handleSubmit}
-                  />
-                </div>
-                {this.renderMarksInDesktopView()}
-              </Form>
-              {this.renderSuccessMessage()}
-            </div>
-          </div>
-        );
-      } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
-        && this.props.tenant !== TENANT.INDORE) {
-        return (
-          <div className="form-container">
-            <div className="form-wrapper" ref={this.formRef}>
-              <Form
-                showErrorList={false}
-                noHtml5Validate
-                validate={validates}
-                liveValidate
-                schema={defaultStudent.Schema}
-                uiSchema={defaultStudent.UISchema}
-                formData={{ ...defaultStudent.Data, ...this.state.student }}
-                onChange={this.onChange}
-                transformErrors={this.transformErrors}
-                // onError={console.log('event===Y')}
-              >
-                {this.renderMarksInMobileView()}
-                <div>
-                  {this.renderBackButton()}
-                  <Button
-                    buttonText={formSubmitBtnText}
-                    type="submit"
-                    formName=""
-                    value="Submit"
-                    onClick={this.handleSubmit}
-                  />
-                </div>
-                {this.renderMarksInDesktopView()}
-              </Form>
-              {this.renderSuccessMessage()}
-            </div>
-          </div>
-        );
-      }
-    } else {
-      return (
-        <Popup>
-          <h5>{invalidIdMessage}</h5>
-          <LinkButton
-            buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
-          />
-        </Popup>
-      );
+      return this.renderForm();
     }
+    return (
+      <Popup>
+        <h5>{invalidIdMessage}</h5>
+        <LinkButton
+          buttonText={goBackBtnText}
+          linkPath={this.props.context.previousLocation}
+        />
+      </Popup>
+    );
   }
 }
+
 MemberRegistrationCorrectionForm.propTypes = {
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isUpdated: PropTypes.bool,
@@ -508,6 +530,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   isUpdatedResetAction: PropTypes.func,
   tenant: PropTypes.string,
 };
+
 MemberRegistrationCorrectionForm.defaultProps = {
   studentData: {},
   isUpdated: false,
@@ -520,6 +543,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   isUpdatedResetAction: () => {},
   tenant: '',
 };
+
 const mapStateToProps = state => ({
   studentData: getStudent(state),
   isCreated: isCreated(state),
@@ -531,6 +555,7 @@ const mapStateToProps = state => ({
   tenant: getApplicationTenant(state),
   pageUser: getPageUserType(state),
 });
+
 export default connect(mapStateToProps, {
   createStudentData,
   setStudentCredentials,

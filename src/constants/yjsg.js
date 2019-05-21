@@ -200,18 +200,6 @@ export const optIn2019Options = [
     text: 'नहीं',
     value: 'N',
   },
-  /* {
-    text: 'पक्का  नहीं',
-    value: 2
-  },
-  {
-    text: 'गलत फ़ोन नंबर',
-    value: 3
-  },
-  {
-    text: 'फ़ोन  नहीं  उठाया',
-    value: 4
-  }*/
 ];
 
 export const adminSearchOptions = [

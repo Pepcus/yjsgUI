@@ -556,7 +556,7 @@ export const setUserTypeAction = pageUser => ({
  * @return {{isLoading: boolean, type: string}}
  */
 export const setLoadingStateAction = isLoading => ({
-    type: 'SET_LOADING_STATE',
-    isLoading,
-  });
+  type: 'SET_LOADING_STATE',
+  isLoading,
+});
 
