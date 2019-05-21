@@ -30,7 +30,6 @@ import {
   GENDER_LABEL,
   AGE_LABEL,
   MOBILE_NUMBER_LABEL,
-  MOTHER_MOBILE_NUMBER_LABEL,
   OCCUPATION_LABEL,
   EDUCATION_LABEL,
   EMAIL_LABEL,
@@ -467,7 +466,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {boolean}
    */
   isValidData() {
-    return isValidUserInfo({ errorMessageObject: this.state.errorMessage, user: this.props.pageUser, tenant: this.props.tenant });
+    return isValidUserInfo({
+      errorMessageObject: this.state.errorMessage,
+      user: this.props.pageUser,
+      tenant: this.props.tenant,
+    });
   }
   /**
    * updateStudentData method update the particular student data.

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import * as shortId from 'shortid';
 
-import { uploadStudentsAttendanceFileAction, resetIsSuccessAction } from '../actions/studentRegistrationActions';
+import {
+  uploadStudentsAttendanceFileAction,
+  resetIsSuccessAction } from '../actions/studentRegistrationActions';
 import {
   getSecretKey,
   getSuccess,

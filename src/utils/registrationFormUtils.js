@@ -24,42 +24,6 @@ export const setRegistrationData = (value, name) => {
 };
 
 /**
- * returns the validating function on the basis of name of the input field.
- *
- * @param {String} value
- * @param {String} name
- * @param {String} tenant
- * @return {Object}
- */
-export const validateInput = ({ value, name, tenant }) => {
-  if (name === 'name' || name === 'fatherName') {
-    return nameValidate(value, name);
-  }
-  if (name === 'address') {
-    return addressValidate(value, name);
-  }
-  if (name === 'email') {
-    return optionalEmailValidate(value, name);
-  }
-  if (name === 'age' && tenant === TENANT.INDORE) {
-    return ageValidate(value, name);
-  }
-  if (name === 'age' && tenant === TENANT.BHOPAL) {
-    return ageValidateForBhpoal(value, name);
-  }
-  if (name === 'mobile') {
-    return mobileValidate(value, name);
-  }
-  if (name === 'gender' || name === 'classAttended2019' || name === 'optIn2019') {
-    return requireFieldsValidate(value, name);
-  }
-  if (name === 'busStop' && tenant === TENANT.INDORE) {
-    return requireFieldsValidate(value, name);
-  }
-  return null;
-};
-
-/**
  * Validates the email with the help of regex and return the error object containing the error message
  *
  * @param {String} value
@@ -158,7 +122,7 @@ export const ageValidate = (value, name) => {
   return errorMessageObject;
 };
 
-export const ageValidateForBhpoal = (value, name) => {
+export const ageValidateForBhopal = (value, name) => {
   const errorMessageObject = {};
   if (isEmpty(value)) {
     errorMessageObject.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
@@ -305,6 +269,42 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
     isValid = true;
   }
   return isValid;
+};
+
+/**
+ * returns the validating function on the basis of name of the input field.
+ *
+ * @param {String} value
+ * @param {String} name
+ * @param {String} tenant
+ * @return {Object}
+ */
+export const validateInput = ({ value, name, tenant }) => {
+  if (name === 'name' || name === 'fatherName') {
+    return nameValidate(value, name);
+  }
+  if (name === 'address') {
+    return addressValidate(value, name);
+  }
+  if (name === 'email') {
+    return optionalEmailValidate(value, name);
+  }
+  if (name === 'age' && tenant === TENANT.INDORE) {
+    return ageValidate(value, name);
+  }
+  if (name === 'age' && tenant === TENANT.BHOPAL) {
+    return ageValidateForBhopal(value, name);
+  }
+  if (name === 'mobile') {
+    return mobileValidate(value, name);
+  }
+  if (name === 'gender' || name === 'classAttended2019' || name === 'optIn2019') {
+    return requireFieldsValidate(value, name);
+  }
+  if (name === 'busStop' && tenant === TENANT.INDORE) {
+    return requireFieldsValidate(value, name);
+  }
+  return null;
 };
 
 export const isDataCorrect = (studentData, tenant) => {

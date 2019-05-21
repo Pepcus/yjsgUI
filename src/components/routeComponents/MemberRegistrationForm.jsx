@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import {
-  ADDRESS_LABEL,
-  AGE_LABEL, BUS_STOP_LABEL, EDUCATION_LABEL, EMAIL_LABEL,
-  FATHER_OR_HUSBAND_NAME_LABEL,
-  GENDER_LABEL,
-  MOBILE_NUMBER_LABEL, MOTHER_MOBILE_NUMBER_LABEL,
-  NAME_LABEL, OCCUPATION_LABEL, PREVIOUS_YEAR_LEVEL_LABEL, WHAT_YOU_WANT_TO_STUDY_LABEL,
-} from '../../constants/label';
-import { busStops, formSubmitBtnText, gender, goBackBtnText, studiesArray, USER_TYPES } from '../../constants/yjsg';
+import validations from '../../utils/validation';
+import { formSubmitBtnText, goBackBtnText, USER_TYPES } from '../../constants/yjsg';
 import { createStudentData, setStudentCredentials } from '../../actions/studentRegistrationActions';
-import { validates } from '../../utils/SampleFormValidation';
+
 import {
   ID_CARD_SUGGESTION_MESSAGE,
   ID_NOTE_MESSAGE,
@@ -23,153 +17,29 @@ import {
 } from '../../constants/messages';
 import { getNewStudent, getUserType, isCreated } from '../../reducers/studentRegistrationReducer';
 import Popup from '../common/Popup';
-import { IS_THERE_TEXT, PLEASE_SELECT_ANY_ONE_TEXT, YOUR_ID_TEXT, YOUR_SECRET_CODE_TEXT } from '../../constants/text';
+import { IS_THERE_TEXT, YOUR_ID_TEXT, YOUR_SECRET_CODE_TEXT } from '../../constants/text';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
+import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 
-const schema = {
-  type: 'object',
-  required: [
-    'name',
-    'fatherName',
-    'gender',
-    'age',
-    'mobile',
-    'busStop',
-    'address',
-    'classAttended2019',
-  ],
-  dependencies: {
-    gender: {
-      oneOf: [
-        {
-          properties: {
-            gender: {
-              enum: [
-                'Female',
-              ],
-            },
-            ID1: {
-              type: 'number',
-            },
-          },
-          required: ['ID1'],
-        },
-        {
-          properties: {
-            gender: {
-              enum: [
-                'Male',
-              ],
-            },
-            'ID2': {
-              type: 'number',
-            },
-          },
-        },
-      ],
-    },
-  },
-  properties: {
-    name: {
-      title: NAME_LABEL,
-      type: 'string',
-    },
-    fatherName: {
-      title: FATHER_OR_HUSBAND_NAME_LABEL,
-      type: 'string',
-    },
-    gender: {
-      title: GENDER_LABEL,
-      type: 'string',
-      enum: gender.map(option => (option.value)),
-      enumNames: gender.map(option => (option.text)),
-    },
-    age: {
-      title: AGE_LABEL,
-      type: 'integer',
-    },
-    mobile: {
-      title: MOBILE_NUMBER_LABEL,
-      type: 'integer',
-    },
-    motherMobile: {
-      title: MOTHER_MOBILE_NUMBER_LABEL,
-      type: 'integer',
-    },
-    occupation: {
-      title: OCCUPATION_LABEL,
-      type: 'string',
-    },
-    education: {
-      title: EDUCATION_LABEL,
-      type: 'string',
-    },
-    email: {
-      title: EMAIL_LABEL,
-      type: 'string',
-      format: 'email',
-    },
-    address: {
-      title: ADDRESS_LABEL,
-      type: 'string',
-    },
-    busStop: {
-      title: BUS_STOP_LABEL,
-      type: 'string',
-      enum: busStops.map(busStop => (busStop.value)),
-      enumNames: busStops.map(busStop => (busStop.text)),
-    },
-    classAttended2019: {
-      title: WHAT_YOU_WANT_TO_STUDY_LABEL,
-      type: 'string',
-      enum: studiesArray.map(level => (level.value)),
-      enumNames: studiesArray.map(level => (level.text)),
-    },
-    classAttended2018: {
-      title: PREVIOUS_YEAR_LEVEL_LABEL,
-      type: 'string',
-    },
-  },
-};
-
-const UISchema = {
-  address: {
-    'ui:widget': 'textarea',
-  },
-  busStop: {
-    'ui:placeholder': PLEASE_SELECT_ANY_ONE_TEXT,
-  },
-  age: {
-    'ui:widget': 'updown',
-  },
-  gender: {
-    'ui:placeholder': PLEASE_SELECT_ANY_ONE_TEXT,
-  },
-  classAttended2019: {
-    'ui:placeholder': PLEASE_SELECT_ANY_ONE_TEXT,
-  },
-};
-const Data = {
-  optIn2019: 'Y',
-  classAttended2018: '',
-  education: '',
-  occupation: '',
-};
-
+/**
+ * MemberRegistrationForm render member registration form.
+ * @type {Class}
+ * @return {ReactComponent}
+ */
 class MemberRegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.formRef = React.createRef();
     this.state = {
       isSubmitTriggered: false,
-      student: {},
+      member: {},
       hasError: false,
     };
   }
   handleSubmit = () => {
     if (this.state.hasError) {
-      this.props.createStudentData(this.state.student);
+      this.props.createStudentData(this.state.member);
       this.setState({
         isSubmitTriggered: true,
         hasError: false,
@@ -220,16 +90,16 @@ class MemberRegistrationForm extends Component {
   }
   renderSuccessMessage = () => {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
-      const student = this.props.newStudent;
+      const member = this.props.newStudent;
 
       // for pre-population on splash page
-      this.props.setStudentCredentials(student.id, student.secretKey);
+      this.props.setStudentCredentials(member.id, member.secretKey);
 
       return (
         <Popup>
           <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
-          <p>{YOUR_ID_TEXT}<strong>{student.id}</strong>{IS_THERE_TEXT}</p>
-          <p>{YOUR_SECRET_CODE_TEXT}<strong>{student.secretKey}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_ID_TEXT}<strong>{member.id}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_SECRET_CODE_TEXT}<strong>{member.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
           <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
           {this.renderBackButton()}
@@ -240,12 +110,21 @@ class MemberRegistrationForm extends Component {
   };
   onChange = (event) => {
     this.setState({
-      student: {
-        ...this.state.student,
+      member: {
+        ...this.state.member,
         ...event.formData,
       },
       hasError: isEmpty(event.errors),
     });
+  };
+  validate = (formData, errors) => {
+    memberRegistration.validation.forEach((valid) => {
+      const error = validations[valid.validates](formData[valid.field]);
+      if (!isEmpty(error)) {
+        errors[valid.field].addError(error);
+      }
+    });
+    return errors;
   };
   render() {
     return (
@@ -254,11 +133,11 @@ class MemberRegistrationForm extends Component {
           <Form
             showErrorList={false}
             noHtml5Validate
-            validate={validates}
+            validate={this.validate}
             liveValidate
-            schema={schema}
-            uiSchema={UISchema}
-            formData={{ ...Data, ...this.state.student }}
+            schema={memberRegistration.schema}
+            uiSchema={memberRegistration.UISchema}
+            formData={{ ...memberRegistration.Data, ...this.state.member }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           >
@@ -279,6 +158,24 @@ class MemberRegistrationForm extends Component {
     );
   }
 }
+
+MemberRegistrationForm.propTypes = {
+  createStudentData: PropTypes.func,
+  userType: PropTypes.string,
+  context: PropTypes.object,
+  isCreated: PropTypes.bool,
+  newStudent: PropTypes.object,
+  setStudentCredentials: PropTypes.func,
+};
+
+MemberRegistrationForm.defaultProps = {
+  createStudentData: () => {},
+  userType: '',
+  context: {},
+  isCreated: false,
+  newStudent: {},
+  setStudentCredentials: () => {},
+};
 
 const mapStateToProps = state => ({
   newStudent: getNewStudent(state),

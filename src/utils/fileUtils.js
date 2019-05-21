@@ -38,7 +38,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   };
   if (fileDetails.presentationType) {
     if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.NORMAL_TABULAR) {
-      let normalHeader = [];
+      const normalHeader = [];
       for (const key in fileData[0]) {
         normalHeader.push({
           key,
@@ -49,7 +49,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
         headerConfig: normalHeader,
       };
     } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
-      let complexHeader = [];
+      const complexHeader = [];
       for (const key in fileData[0]) {
         complexHeader.push({
           label: key,

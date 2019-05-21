@@ -186,6 +186,7 @@ class StudentIdCardModal extends Component {
         </div>
       );
     }
+    return null;
   }
 
   render() {

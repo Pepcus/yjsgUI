@@ -5,8 +5,6 @@ import extend from 'lodash/extend';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Button from '../common/Button';
-import InputField from '../form/InputField';
 import {
   fetchStudentData,
   setStudentCredentials,
@@ -30,10 +28,7 @@ import {
   adminPassword,
   eventDate,
   eventVenue,
-  goBackBtnText,
-  newRegistrationBtnText,
-  adminLoginBtnText,
-  invalidAdminMsg, formSubmitBtnText,
+  invalidAdminMsg,
   USER_TYPES,
 } from '../../constants/yjsg';
 import { setRegistrationData } from '../../utils/registrationFormUtils';

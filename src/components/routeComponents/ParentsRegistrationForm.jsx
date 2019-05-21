@@ -125,6 +125,7 @@ class ParentsRegistration extends Component {
         </Popup>
       );
     }
+    return null;
   }
   /**
    * closePopUp method call on onClick on close button in popup
@@ -227,16 +228,16 @@ class ParentsRegistration extends Component {
                 </div>
                 <div className="register-form-content-wrapper">
                   <div className="form-content-title">
-                    <span className="form-title-small">{'दिनांक :'}</span>
+                    <span className="form-title-small">दिनांक :</span>
                     <span className="form-title-text"> {'रविवार १७ फरवरी'}</span>
                   </div>
                   <div className="form-content-title">
-                    <span className="form-title-small">{'समय :'}</span>
-                    <span className="form-title-text">{'प्रातः ९ से १ बजे'}</span>
+                    <span className="form-title-small">समय :</span>
+                    <span className="form-title-text">प्रातः ९ से १ बजे</span>
                   </div>
                   <div className="form-content-title form-content-flex">
-                    <span className="form-title-small">{'स्थान : '}</span>
-                    <span className="form-content-flex-content form-title-text">{'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर'}</span>
+                    <span className="form-title-small">स्थान : </span>
+                    <span className="form-content-flex-content form-title-text">श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर</span>
                   </div>
                 </div>
               </div>
@@ -273,7 +274,7 @@ class ParentsRegistration extends Component {
     );
   }
 }
-ParentsRegistration.propsType = {
+ParentsRegistration.propTypes = {
   parentsRegistrationAction: PropTypes.func,
 };
 

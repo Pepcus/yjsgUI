@@ -25,6 +25,7 @@ class SelectListInputField extends Component {
         </option>),
     );
   }
+
   populateValue(value) {
     if (!value) {
       return 'select';

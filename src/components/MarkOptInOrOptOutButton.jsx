@@ -250,7 +250,7 @@ class MarkOptInOrOptOutButton extends Component {
   }
 }
 
-MarkOptInOrOptOutButton.propsType = {
+MarkOptInOrOptOutButton.propTypes = {
   resetIsMarkOptInOrOptOutSuccessAction: PropTypes.func,
   selectedStudents: PropTypes.array,
   isMarkOptInOrOptOutSuccess: PropTypes.bool,

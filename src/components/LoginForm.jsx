@@ -62,7 +62,7 @@ const LoginForm = ({ isAdmin,
   } return null;
 };
 
-LoginForm.propsType = {
+LoginForm.propTypes = {
   isAdmin: PropTypes.bool,
   admin: PropTypes.object,
   handleInputChange: PropTypes.func,
