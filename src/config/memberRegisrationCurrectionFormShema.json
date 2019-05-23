@@ -190,33 +190,143 @@
             "नहीं"
           ],
           "default": "Y"
+        },
+        "backButton": {
+          "type": ["string", "null"]
+        },
+        "submitButton": {
+          "type": ["string", "null"]
+        },
+        "marks2018": {
+          "title": "Marks 2018:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2017": {
+          "title": "Marks 2017:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2016": {
+          "title": "Marks 2016:",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "UISchema" : {
+      "ui:order": ["optIn2019",
+        "id",
+        "name",
+        "fatherName",
+        "gender",
+        "age",
+        "mobile",
+        "occupation",
+        "education",
+        "email",
+        "classAttended2018",
+        "classAttended2019",
+        "marks2019",
+        "classRoomNo2019",
+        "address",
+        "backButton",
+        "submitButton",
+        "marks2018",
+        "marks2017",
+        "marks2016"
+      ],
+      "backButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submitButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "optIn2019": {
+        "classNames": "field-style"
+      },
+      "name": {
+        "classNames": "field-style"
+      },
+      "fatherName": {
+        "classNames": "field-style"
+      },
+      "mobile": {
+        "classNames": "field-style"
+      },
+      "occupation": {
+        "classNames": "field-style"
+      },
+      "education": {
+        "classNames": "field-style"
+      },
+      "email": {
+        "classNames": "field-style"
+      },
+      "classAttended2018": {
+        "classNames": "field-style"
+      },
+      "marks2019": {
+        "classNames": "field-style"
+      },
+      "classRoomNo2019": {
+        "classNames": "field-style"
+      },
       "address": {
+        "classNames": "field-style",
         "ui:widget": "textarea"
       },
       "busStop": {
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "age": {
+        "classNames": "field-style",
         "ui:widget": "updown"
       },
       "gender": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "classAttended2019": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "id": {
-        "ui:disabled": true
+        "ui:disabled": true,
+        "classNames": "field-style"
       },
       "busNumber": {
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "remark": {
         "ui:widget": "textarea"
+      },
+      "marks2018": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
+      },
+      "marks2017": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
+      },
+      "marks2016": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
       }
     },
     "Data": {}
@@ -236,49 +346,88 @@
                  },
                  "id": {
                    "title": "आई.डी.",
-                   "type": ["number","null"]
+                   "type": [
+                     "number",
+                     "null"
+                   ]
                  },
                  "name": {
                    "title": "नाम",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "fatherName": {
                    "title": "पिता / पति का नाम",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "gender": {
                    "title": "लिंग",
-                   "type": ["string","null"],
-                   "enum": ["Male", "Female"],
-                   "enumNames": ["पुरुष", "स्त्री"]
+                   "type": [
+                     "string",
+                     "null"
+                   ],
+                   "enum": [
+                     "Male",
+                     "Female"
+                   ],
+                   "enumNames": [
+                     "पुरुष",
+                     "स्त्री"
+                   ]
                  },
                  "age": {
                    "title": "उम्र",
-                   "type": ["number","null"]
+                   "type": [
+                     "number",
+                     "null"
+                   ]
                  },
                  "mobile": {
                    "title": "मोबाइल नं",
-                   "type": ["number","null"]
+                   "type": [
+                     "number",
+                     "null"
+                   ]
                  },
                  "occupation": {
                    "title": "व्यवसाय (युवा वर्ग हेतु)",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "education": {
                    "title": "स्कूल शिक्षा",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "email": {
                    "title": "ई-मेल",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "classAttended2018": {
                    "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "classAttended2019": {
                    "title": "Class",
-                   "type": ["string","null"],
+                   "type": [
+                     "string",
+                     "null"
+                   ],
                    "enum": [
                      "Level 1",
                      "Level 2",
@@ -302,11 +451,16 @@
                  },
                  "marks2019": {
                    "title": "Marks 2019",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "classRoomNo2019": {
                    "title": "Room",
-                   "type": ["string"],
+                   "type": [
+                     "string"
+                   ],
                    "enum": [
                      "105",
                      "106",
@@ -376,22 +530,28 @@
                  },
                  "address": {
                    "title": "पूरा पता",
-                   "type": ["string","null"]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
                  },
                  "remark": {
                    "title": "Remark",
-                   "type": ["string","null"]
-                 }
-               },
-               "required": [
-                 "id",
-                 "name",
-                 "fatherName",
-                 "gender",
-                 "age",
-                 "mobile",
-                 "address"
-               ]
+                   "type": [
+                     "string",
+                     "null"
+                   ]
+                 },
+                 "required": [
+                   "id",
+                   "name",
+                   "fatherName",
+                   "gender",
+                   "age",
+                   "mobile",
+                   "address"
+                 ]
+               }
              },
              {
                "properties": {
@@ -566,35 +726,145 @@
              "नहीं"
            ],
            "default": "Y"
+         },
+         "backButton": {
+           "type": ["string", "null"]
+         },
+         "submitButton": {
+           "type": ["string", "null"]
+         },
+         "marks2018": {
+           "title": "Marks 2018:",
+           "type": [
+             "string",
+             "null"
+           ]
+         },
+         "marks2017": {
+           "title": "Marks 2017:",
+           "type": [
+             "string",
+             "null"
+           ]
+         },
+         "marks2016": {
+           "title": "Marks 2016:",
+           "type": [
+             "string",
+             "null"
+           ]
          }
        }
      },
      "UISchema" : {
+       "ui:order": ["optIn2019",
+         "id",
+         "name",
+         "fatherName",
+         "gender",
+         "age",
+         "mobile",
+         "occupation",
+         "education",
+         "email",
+         "classAttended2018",
+         "classAttended2019",
+         "marks2019",
+         "classRoomNo2019",
+         "address",
+         "remark",
+         "backButton",
+         "submitButton",
+         "marks2018",
+         "marks2017",
+         "marks2016"
+       ],
+       "optIn2019": {
+         "classNames": "field-style"
+       },
+       "name": {
+         "classNames": "field-style"
+       },
+       "fatherName": {
+         "classNames": "field-style"
+       },
+       "mobile": {
+         "classNames": "field-style"
+       },
+       "occupation": {
+         "classNames": "field-style"
+       },
+       "education": {
+         "classNames": "field-style"
+       },
+       "email": {
+         "classNames": "field-style"
+       },
+       "classAttended2018": {
+         "classNames": "field-style"
+       },
+       "marks2019": {
+         "classNames": "field-style"
+       },
+       "backButton": {
+         "classNames": "button-style",
+         "ui:options": {
+           "label": false
+         }
+       },
+       "submitButton": {
+         "classNames": "button-style",
+         "ui:options": {
+           "label": false
+         }
+       },
        "address": {
-         "ui:widget": "textarea"
+         "ui:widget": "textarea",
+         "classNames": "field-style"
        },
        "busStop": {
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },
        "age": {
+         "classNames": "field-style",
          "ui:widget": "updown"
        },
        "gender": {
+         "classNames": "field-style",
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },
        "classAttended2019": {
+         "classNames": "field-style",
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },
        "id": {
-         "ui:disabled": true
+         "ui:disabled": true,
+         "classNames": "field-style"
        },
+       "marks2018": {
+         "ui:placeholder": "N.A.",
+         "ui:disabled": true,
+         "classNames": "marks-style"
+       },
+       "marks2017": {
+         "ui:placeholder": "N.A.",
+         "ui:disabled": true,
+         "classNames": "marks-style"
+       },
+       "marks2016": {
+             "ui:placeholder": "N.A.",
+             "ui:disabled": true,
+             "classNames": "marks-style"
+         },
        "busNumber": {
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },
        "classRoomNo2019": {
+         "classNames": "field-style",
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },
        "remark": {
+         "classNames": "field-style",
          "ui:widget": "textarea"
        }
      },
@@ -996,33 +1266,139 @@
             "नहीं"
           ],
           "default": "Y"
+        },
+        "backButton": {
+          "type": ["string", "null"]
+        },
+        "submitButton": {
+          "type": ["string", "null"]
+        },
+        "marks2018": {
+          "title": "Marks 2018:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2017": {
+          "title": "Marks 2017:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2016": {
+          "title": "Marks 2016:",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "UISchema" : {
+      "ui:order": ["optIn2019",
+        "id",
+        "name",
+        "fatherName",
+        "gender",
+        "age",
+        "mobile",
+        "occupation",
+        "education",
+        "email",
+        "busStop",
+        "classAttended2018",
+        "classAttended2019",
+        "marks2019",
+        "classRoomNo2019",
+        "address",
+        "backButton",
+        "submitButton",
+        "marks2018",
+        "marks2017",
+        "marks2016"
+      ],
+      "backButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submitButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "optIn2019": {
+        "classNames": "field-style"
+      },
+      "name": {
+        "classNames": "field-style"
+      },
+      "fatherName": {
+        "classNames": "field-style"
+      },
+      "mobile": {
+        "classNames": "field-style"
+      },
+      "occupation": {
+        "classNames": "field-style"
+      },
+      "education": {
+        "classNames": "field-style"
+      },
+      "email": {
+        "classNames": "field-style"
+      },
+      "classAttended2018": {
+        "classNames": "field-style"
+      },
+      "marks2019": {
+        "classNames": "field-style"
+      },
+      "classRoomNo2019": {
+        "classNames": "field-style"
+      },
       "address": {
+        "classNames": "field-style",
         "ui:widget": "textarea"
       },
       "busStop": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "age": {
-        "ui:widget": "updown"
+        "ui:widget": "updown",
+        "classNames": "field-style"
       },
       "gender": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "classAttended2019": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "id": {
-        "ui:disabled": true
+        "ui:disabled": true,
+        "classNames": "field-style"
       },
-      "busNumber": {
-        "ui:placeholder": "कृपया एक चुनिए . . ."
+      "marks2018": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
       },
-      "remark": {
-        "ui:widget": "textarea"
+      "marks2017": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
+      },
+      "marks2016": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
       }
     },
     "Data": {}
@@ -1709,35 +2085,149 @@
             "नहीं"
           ],
           "default": "Y"
+        },
+        "backButton": {
+          "type": ["string", "null"]
+        },
+        "submitButton": {
+          "type": ["string", "null"]
+        },
+        "marks2018": {
+          "title": "Marks 2018:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2017": {
+          "title": "Marks 2017:",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marks2016": {
+          "title": "Marks 2016:",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "UISchema" : {
+      "ui:order": ["optIn2019",
+        "id",
+        "name",
+        "fatherName",
+        "gender",
+        "age",
+        "mobile",
+        "occupation",
+        "education",
+        "email",
+        "busStop",
+        "classAttended2018",
+        "classAttended2019",
+        "marks2019",
+        "busNumber",
+        "classRoomNo2019",
+        "address",
+        "remark",
+        "backButton",
+        "submitButton",
+        "marks2018",
+        "marks2017",
+        "marks2016"
+      ],
+      "backButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submitButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "optIn2019": {
+        "classNames": "field-style"
+      },
+      "mobile": {
+        "classNames": "field-style"
+      },
+      "occupation": {
+        "classNames": "field-style"
+      },
+      "education": {
+        "classNames": "field-style"
+      },
+      "email": {
+        "classNames": "field-style"
+      },
+      "name": {
+        "classNames": "field-style"
+      },
+      "fatherName": {
+        "classNames": "field-style"
+      },
       "address": {
+        "classNames": "field-style",
         "ui:widget": "textarea"
       },
       "busStop": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "age": {
+        "classNames": "field-style",
         "ui:widget": "updown"
       },
       "gender": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "classAttended2019": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
+      "classAttended2018": {
+        "classNames": "field-style"
+      },
+      "marks2019": {
+        "classNames": "field-style"
+      },
       "id": {
-        "ui:disabled": true
+        "ui:disabled": true,
+        "classNames": "field-style"
+      },
+      "marks2018": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
+      },
+      "marks2017": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
+      },
+      "marks2016": {
+        "ui:placeholder": "N.A.",
+        "ui:disabled": true,
+        "classNames": "marks-style"
       },
       "busNumber": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "classRoomNo2019": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "remark": {
+        "classNames": "field-style",
         "ui:widget": "textarea"
       }
     },

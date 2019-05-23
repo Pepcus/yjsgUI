@@ -7,7 +7,6 @@ import isEmpty from 'lodash/isEmpty';
 import validations from '../../utils/validation';
 import { formSubmitBtnText, goBackBtnText, USER_TYPES } from '../../constants/yjsg';
 import { createStudentData, setStudentCredentials } from '../../actions/studentRegistrationActions';
-
 import {
   ID_CARD_SUGGESTION_MESSAGE,
   ID_NOTE_MESSAGE,
@@ -37,6 +36,7 @@ class MemberRegistrationForm extends Component {
       hasError: false,
     };
   }
+
   handleSubmit = () => {
     if (this.state.hasError) {
       this.props.createStudentData(this.state.member);
@@ -50,12 +50,14 @@ class MemberRegistrationForm extends Component {
       });
     }
   };
+
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-danger');
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
+
   transformErrors = errors => errors.map((error) => {
     if (error.name === 'required') {
       error.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
@@ -65,6 +67,7 @@ class MemberRegistrationForm extends Component {
     }
     return error;
   });
+
   renderBackButton() {
     if (this.props.userType === USER_TYPES.STUDENT) {
       return (
@@ -88,6 +91,7 @@ class MemberRegistrationForm extends Component {
       />
     );
   }
+
   renderSuccessMessage = () => {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const member = this.props.newStudent;
@@ -108,6 +112,7 @@ class MemberRegistrationForm extends Component {
     }
     return null;
   };
+
   onChange = (event) => {
     this.setState({
       member: {
@@ -117,6 +122,7 @@ class MemberRegistrationForm extends Component {
       hasError: isEmpty(event.errors),
     });
   };
+
   validate = (formData, errors) => {
     memberRegistration.validation.forEach((valid) => {
       const error = validations[valid.validates](formData[valid.field]);
@@ -126,6 +132,7 @@ class MemberRegistrationForm extends Component {
     });
     return errors;
   };
+
   render() {
     return (
       <div className="form-container">
@@ -183,6 +190,7 @@ const mapStateToProps = state => ({
   userType: getUserType(state),
 
 });
+
 export default connect(mapStateToProps, {
   createStudentData,
   setStudentCredentials,
