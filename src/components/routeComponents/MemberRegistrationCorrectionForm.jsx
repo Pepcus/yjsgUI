@@ -43,7 +43,6 @@ import validations from '../../utils/validation';
 /**
  * MemberRegistrationCorrectionForm render member registration correction form.
  * @type {Class}
- * @return {ReactComponent}
  */
 class MemberRegistrationCorrectionForm extends Component {
   constructor(props) {
@@ -103,6 +102,7 @@ class MemberRegistrationCorrectionForm extends Component {
       this.prePopulateCourse2019(studentData);
     }
   }
+
   componentWillReceiveProps(nextProps) {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -133,12 +133,14 @@ class MemberRegistrationCorrectionForm extends Component {
       this.prePopulateCourse2019(studentData);
     }
   }
+
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-danger');
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
+
   validate = (formData, errors) => {
     if (this.state.student.optIn2019 === 'Y') {
       validation.forEach((valid) => {
@@ -151,12 +153,24 @@ class MemberRegistrationCorrectionForm extends Component {
     }
     return {};
   };
+
+  renderSubmitButtons = () => (
+    <Button
+      buttonText={formSubmitBtnText}
+      type="submit"
+      formName=""
+      value="Submit"
+      onClick={this.handleSubmit}
+    />
+  );
+
   renderForm = () => {
     if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
       && this.state.onlyOptIn2019) {
       return (
         <div className="form-container">
           <div className="form-wrapper" ref={this.formRef}>
+            {this.renderSuccessMessage()}
             <Form
               showErrorList={false}
               noHtml5Validate
@@ -182,189 +196,143 @@ class MemberRegistrationCorrectionForm extends Component {
                 </a>
               </span>
             </Form>
-            {this.renderSuccessMessage()}
           </div>
         </div>
       );
     } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant === TENANT.INDORE) {
+      const newUISchema = {
+        ...indoreAdmin.UISchema,
+        backButton: {
+          ...indoreAdmin.UISchema.backButton,
+          'ui:widget': () => (
+            this.renderBackButton()
+          ),
+        },
+        submitButton: {
+          ...indoreAdmin.UISchema.submitButton,
+          'ui:widget': () => (
+            this.renderSubmitButtons()
+          ),
+        },
+      };
       return (
-        <div className="form-container">
-          <div className="form-wrapper" ref={this.formRef}>
-            <Form
-              showErrorList={false}
-              noHtml5Validate
-              validate={this.validate}
-              liveValidate
-              schema={indoreAdmin.Schema}
-              uiSchema={indoreAdmin.UISchema}
-              formData={{ ...indoreAdmin.Data, ...this.state.student }}
-              onChange={this.onChange}
-              transformErrors={this.transformErrors}
-            >
-              {this.renderMarksInMobileView()}
-              <div>
-                {this.renderBackButton()}
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  formName=""
-                  value="Submit"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-              {this.renderMarksInDesktopView()}
-            </Form>
-            {this.renderSuccessMessage()}
-          </div>
+        <div ref={this.formRef}>
+          {this.renderSuccessMessage()}
+          <Form
+            showErrorList={false}
+            noHtml5Validate
+            validate={this.validate}
+            liveValidate
+            schema={indoreAdmin.Schema}
+            uiSchema={newUISchema}
+            formData={{ ...indoreAdmin.Data, ...this.state.student }}
+            onChange={this.onChange}
+            transformErrors={this.transformErrors}
+          />
         </div>
       );
     } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
       && this.props.tenant === TENANT.INDORE) {
+      const newUISchema = {
+        ...indoreStudent.UISchema,
+        backButton: {
+          ...indoreStudent.UISchema.backButton,
+          'ui:widget': () => (
+            this.renderBackButton()
+          ),
+        },
+        submitButton: {
+          ...indoreStudent.UISchema.submitButton,
+          'ui:widget': () => (
+            this.renderSubmitButtons()
+          ),
+        },
+      };
       return (
-        <div className="form-container">
-          <div className="form-wrapper" ref={this.formRef}>
-            <Form
-              showErrorList={false}
-              noHtml5Validate
-              validate={this.validate}
-              liveValidate
-              schema={indoreStudent.Schema}
-              uiSchema={indoreStudent.UISchema}
-              formData={{ ...indoreStudent.Data, ...this.state.student }}
-              onChange={this.onChange}
-              transformErrors={this.transformErrors}
-            >
-              {this.renderMarksInMobileView()}
-              <div>
-                {this.renderBackButton()}
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  formName=""
-                  value="Submit"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-              {this.renderMarksInDesktopView()}
-            </Form>
-            {this.renderSuccessMessage()}
-          </div>
+        <div ref={this.formRef}>
+          {this.renderSuccessMessage()}
+          <Form
+            showErrorList={false}
+            noHtml5Validate
+            validate={this.validate}
+            liveValidate
+            schema={indoreStudent.Schema}
+            uiSchema={newUISchema}
+            formData={{ ...indoreStudent.Data, ...this.state.student }}
+            onChange={this.onChange}
+            transformErrors={this.transformErrors}
+          />
         </div>
       );
     } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant !== TENANT.INDORE) {
+      const newUISchema = {
+        ...defaultAdmin.UISchema,
+        backButton: {
+          ...defaultAdmin.UISchema.backButton,
+          'ui:widget': () => (
+            this.renderBackButton()
+          ),
+        },
+        submitButton: {
+          ...defaultAdmin.UISchema.submitButton,
+          'ui:widget': () => (
+            this.renderSubmitButtons()
+          ),
+        },
+      };
       return (
-        <div className="form-container">
-          <div className="form-wrapper" ref={this.formRef}>
-            <Form
-              showErrorList={false}
-              noHtml5Validate
-              validate={this.validate}
-              liveValidate
-              schema={defaultAdmin.Schema}
-              uiSchema={defaultAdmin.UISchema}
-              formData={{ ...defaultAdmin.Data, ...this.state.student }}
-              onChange={this.onChange}
-              transformErrors={this.transformErrors}
-            >
-              {this.renderMarksInMobileView()}
-              <div>
-                {this.renderBackButton()}
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  formName=""
-                  value="Submit"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-              {this.renderMarksInDesktopView()}
-            </Form>
-            {this.renderSuccessMessage()}
-          </div>
+        <div ref={this.formRef}>
+          {this.renderSuccessMessage()}
+          <Form
+            showErrorList={false}
+            noHtml5Validate
+            validate={this.validate}
+            liveValidate
+            schema={defaultAdmin.Schema}
+            uiSchema={newUISchema}
+            formData={{ ...defaultAdmin.Data, ...this.state.student }}
+            onChange={this.onChange}
+            transformErrors={this.transformErrors}
+          />
         </div>
       );
     } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
       && this.props.tenant !== TENANT.INDORE) {
+      const newUISchema = {
+        ...defaultStudent.UISchema,
+        backButton: {
+          ...defaultStudent.UISchema.backButton,
+          'ui:widget': () => (
+            this.renderBackButton()
+          ),
+        },
+        submitButton: {
+          ...defaultAdmin.UISchema.submitButton,
+          'ui:widget': () => (
+            this.renderSubmitButtons()
+          ),
+        },
+      };
       return (
-        <div className="form-container">
-          <div className="form-wrapper" ref={this.formRef}>
-            <Form
-              showErrorList={false}
-              noHtml5Validate
-              validate={this.validate}
-              liveValidate
-              schema={defaultStudent.Schema}
-              uiSchema={defaultStudent.UISchema}
-              formData={{ ...defaultStudent.Data, ...this.state.student }}
-              onChange={this.onChange}
-              transformErrors={this.transformErrors}
-            >
-              {this.renderMarksInMobileView()}
-              <div>
-                {this.renderBackButton()}
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  formName=""
-                  value="Submit"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-              {this.renderMarksInDesktopView()}
-            </Form>
-            {this.renderSuccessMessage()}
-          </div>
+        <div ref={this.formRef}>
+          {this.renderSuccessMessage()}
+          <Form
+            showErrorList={false}
+            noHtml5Validate
+            validate={this.validate}
+            liveValidate
+            schema={defaultStudent.Schema}
+            uiSchema={newUISchema}
+            formData={{ ...defaultStudent.Data, ...this.state.student }}
+            onChange={this.onChange}
+            transformErrors={this.transformErrors}
+          />
         </div>
       );
     }
     return null;
   };
-  renderMarksInMobileView = () => (
-    <div className="student-form-marks-container student-form-marks-desktop-none">
-      <div className="student-form-marks-wrapper student-form-marks-mobile-wrapper">
-        <div className="student-form-marks-content">
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2018:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
-          </div>
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2017:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
-          </div>
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2016:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-  renderMarksInDesktopView = () => (
-    <div className="student-form-marks-container student-form-marks-mobile-none">
-      <div className="student-form-marks-wrapper">
-        <div className="student-form-marks-content">
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2018:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
-          </div>
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2017:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
-          </div>
-          <div className="inputWrapper">
-            <label className="marks-input-label">Marks 2016:</label>
-            <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-  getMarks = (marks) => {
-    if (!marks) {
-      return 'N.A.';
-    }
-    return marks;
-  };
+
   renderSuccessMessage() {
     // if form data is update and valid and submitted successfully.
     if (this.props.isUpdated) {
@@ -391,6 +359,7 @@ class MemberRegistrationCorrectionForm extends Component {
       );
     } return null;
   }
+
   updateStudentData() {
     const { id, secretKey } = this.props;
     const { student } = this.state;
@@ -399,6 +368,7 @@ class MemberRegistrationCorrectionForm extends Component {
       secretKey,
       student });
   }
+
   prePopulateCourse2019(studentData) {
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
@@ -407,11 +377,13 @@ class MemberRegistrationCorrectionForm extends Component {
       student: updatedData,
     });
   }
+
   changeIsOnlyOptIn2019 = (value) => {
     this.setState({
       onlyOptIn2019: value,
     });
   };
+
   handleSubmit = (e) => {
     const studentData = {
       ...this.props.studentData,
@@ -436,6 +408,7 @@ class MemberRegistrationCorrectionForm extends Component {
       }, () => { this.scrollToError(); });
     }
   };
+
   submitStudentDataForOnlyOptInCase = (e) => {
     e.preventDefault();
     if (!isEmpty(this.state.student.optIn2019)) {
@@ -506,6 +479,7 @@ class MemberRegistrationCorrectionForm extends Component {
     if (this.props.isFetched && this.props.studentData) {
       return this.renderForm();
     }
+
     return (
       <Popup>
         <h5>{invalidIdMessage}</h5>
