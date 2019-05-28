@@ -5,8 +5,15 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import validations from '../../utils/validation';
-import { formSubmitBtnText, goBackBtnText, USER_TYPES } from '../../constants/yjsg';
-import { createStudentData, setStudentCredentials } from '../../actions/studentRegistrationActions';
+import {
+  formSubmitBtnText,
+  goBackBtnText,
+  USER_TYPES,
+} from '../../constants/yjsg';
+import {
+  createStudentData,
+  setStudentCredentials,
+} from '../../actions/studentRegistrationActions';
 import {
   ID_CARD_SUGGESTION_MESSAGE,
   ID_NOTE_MESSAGE,
@@ -14,9 +21,17 @@ import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
   YJSG_REGISTRATION_SUCCESS_MESSAGE,
 } from '../../constants/messages';
-import { getNewStudent, getUserType, isCreated } from '../../reducers/studentRegistrationReducer';
+import {
+  getNewStudent,
+  getUserType,
+  isCreated,
+} from '../../reducers/studentRegistrationReducer';
 import Popup from '../common/Popup';
-import { IS_THERE_TEXT, YOUR_ID_TEXT, YOUR_SECRET_CODE_TEXT } from '../../constants/text';
+import {
+  IS_THERE_TEXT,
+  YOUR_ID_TEXT,
+  YOUR_SECRET_CODE_TEXT,
+} from '../../constants/text';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
@@ -68,15 +83,19 @@ class MemberRegistrationForm extends Component {
     return error;
   });
 
-  renderBackButton() {
-    if (this.props.userType === USER_TYPES.STUDENT) {
+  renderBackButton = () => {
+    const {
+      userType,
+      context,
+    } = this.props;
+    if (userType === USER_TYPES.STUDENT) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath="/"
         />
       );
-    } else if (this.props.userType === USER_TYPES.ADMIN) {
+    } else if (userType === USER_TYPES.ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -87,18 +106,16 @@ class MemberRegistrationForm extends Component {
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
-  }
+  };
 
   renderSuccessMessage = () => {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const member = this.props.newStudent;
-
       // for pre-population on splash page
       this.props.setStudentCredentials(member.id, member.secretKey);
-
       return (
         <Popup>
           <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
@@ -144,7 +161,10 @@ class MemberRegistrationForm extends Component {
             liveValidate
             schema={memberRegistration.schema}
             uiSchema={memberRegistration.UISchema}
-            formData={{ ...memberRegistration.Data, ...this.state.member }}
+            formData={{
+              ...memberRegistration.Data,
+              ...this.state.member,
+            }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           >
@@ -188,7 +208,6 @@ const mapStateToProps = state => ({
   newStudent: getNewStudent(state),
   isCreated: isCreated(state),
   userType: getUserType(state),
-
 });
 
 export default connect(mapStateToProps, {
