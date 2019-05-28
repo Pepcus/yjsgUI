@@ -221,7 +221,8 @@
       }
     },
     "UISchema" : {
-      "ui:order": ["optIn2019",
+      "ui:order": [
+        "optIn2019",
         "id",
         "name",
         "fatherName",
@@ -757,7 +758,8 @@
        }
      },
      "UISchema" : {
-       "ui:order": ["optIn2019",
+       "ui:order": [
+         "optIn2019",
          "id",
          "name",
          "fatherName",
@@ -852,10 +854,10 @@
          "classNames": "marks-style"
        },
        "marks2016": {
-             "ui:placeholder": "N.A.",
-             "ui:disabled": true,
-             "classNames": "marks-style"
-         },
+         "ui:placeholder": "N.A.",
+         "ui:disabled": true,
+         "classNames": "marks-style"
+       },
        "busNumber": {
          "ui:placeholder": "कृपया एक चुनिए . . ."
        },

@@ -8,7 +8,9 @@ import PropTypes from 'prop-types';
 import {
   formSubmitBtnText,
   goBackBtnText,
-  infoUpdateSuccessMessage, invalidIdMessage, noInfoChangeMessage,
+  infoUpdateSuccessMessage,
+  invalidIdMessage,
+  noInfoChangeMessage,
   TENANT,
   USER_TYPES,
 } from '../../constants/yjsg';
@@ -25,7 +27,8 @@ import {
 import {
   getPageUserType,
   getStudent,
-  getUserId, getUserSecretKey,
+  getUserId,
+  getUserSecretKey,
   getUserType,
   isCreated,
   isFetched,
@@ -36,8 +39,18 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import { updateClassAttended2019InStudentData } from '../../utils/registrationFormUtils';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
-import { defaultStudent, defaultAdmin, indoreStudent, indoreAdmin, onlyOptin2019, validation } from '../../config/memberRegisrationCurrectionFormShema.json';
-import { CLICK_HERE_TEXT, UPDATE_FURTHER_INFORMATION_TEXT } from '../../constants/text';
+import {
+  defaultStudent,
+  defaultAdmin,
+  indoreStudent,
+  indoreAdmin,
+  onlyOptin2019,
+  validation,
+} from '../../config/memberRegisrationCurrectionFormShema.json';
+import {
+  CLICK_HERE_TEXT,
+  UPDATE_FURTHER_INFORMATION_TEXT,
+} from '../../constants/text';
 import validations from '../../utils/validation';
 
 /**
@@ -81,21 +94,35 @@ class MemberRegistrationCorrectionForm extends Component {
     let studentData = !isEmpty(this.props.studentData)
       ? this.props.studentData : studentDataFromSession;
     if (studentData) {
-      studentData = { ...studentData, optIn2019: !studentData.optIn2019 ? 'Y' : studentData.optIn2019 };
+      const {
+        optIn2019,
+        mobile,
+        age,
+        classRoomNo2019,
+      } = studentData;
       studentData = {
         ...studentData,
-        mobile: !studentData.mobile ? null : Number(studentData.mobile),
-        age: !studentData.age ? null : Number(studentData.age),
-        classRoomNo2019: !studentData.classRoomNo2019 ? undefined : Number(studentData.classRoomNo2019),
+        optIn2019: !optIn2019 ? 'Y' : optIn2019,
+      };
+      studentData = {
+        ...studentData,
+        mobile: !mobile ? null : Number(mobile),
+        age: !age ? null : Number(age),
+        classRoomNo2019: !classRoomNo2019 ? undefined : Number(classRoomNo2019),
       };
     }
     if (!isEmpty(studentData)) {
+      const {
+        mobile,
+        age,
+        classRoomNo2019,
+      } = this.state.student;
       this.setState({
         student: { ...this.state.student,
           ...studentData,
-          mobile: !this.state.student.mobile ? null : Number(this.state.student.mobile),
-          age: !this.state.student.age ? null : Number(this.state.student.age),
-          classRoomNo2019: !this.state.student.classRoomNo2019 ? undefined : Number(this.state.student.classRoomNo2019),
+          mobile: !mobile ? null : Number(mobile),
+          age: !age ? null : Number(age),
+          classRoomNo2019: !classRoomNo2019 ? undefined : Number(classRoomNo2019),
         },
         isSubmitTriggered: false,
       });
@@ -111,22 +138,35 @@ class MemberRegistrationCorrectionForm extends Component {
     let studentData = !isEmpty(nextProps.studentData)
       ? nextProps.studentData : studentDataFromSession;
     if (studentData) {
-      studentData = { ...studentData, optIn2019: !studentData.optIn2019 ? 'Y' : studentData.optIn2019 };
+      const {
+        optIn2019,
+        mobile,
+        age,
+        classRoomNo2019,
+      } = studentData;
       studentData = {
         ...studentData,
-        mobile: !studentData.mobile ? null : Number(studentData.mobile),
-        age: !studentData.age ? null : Number(studentData.age),
-        classRoomNo2019: !studentData.classRoomNo2019 ? undefined : Number(studentData.classRoomNo2019),
+        optIn2019: !optIn2019 ? 'Y' : optIn2019 };
+      studentData = {
+        ...studentData,
+        mobile: !mobile ? null : Number(mobile),
+        age: !age ? null : Number(age),
+        classRoomNo2019: !classRoomNo2019 ? undefined : Number(classRoomNo2019),
       };
     }
     if (!isEmpty(studentData)) {
+      const {
+        mobile,
+        age,
+        classRoomNo2019,
+      } = this.state.student;
       this.setState({
         student: {
           ...this.state.student,
           ...studentData,
-          mobile: !this.state.student.mobile ? null : Number(this.state.student.mobile),
-          age: !this.state.student.age ? null : Number(this.state.student.age),
-          classRoomNo2019: !this.state.student.classRoomNo2019 ? undefined : Number(this.state.student.classRoomNo2019),
+          mobile: !mobile ? null : Number(mobile),
+          age: !age ? null : Number(age),
+          classRoomNo2019: !classRoomNo2019 ? undefined : Number(classRoomNo2019),
         },
         isSubmitTriggered: false,
       });
@@ -165,7 +205,11 @@ class MemberRegistrationCorrectionForm extends Component {
   );
 
   renderForm = () => {
-    if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
+    const {
+      pageUser,
+      tenant,
+    } = this.props;
+    if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
       && this.state.onlyOptIn2019) {
       return (
         <div className="form-container">
@@ -178,7 +222,10 @@ class MemberRegistrationCorrectionForm extends Component {
               liveValidate
               schema={onlyOptin2019.Schema}
               uiSchema={onlyOptin2019.UISchema}
-              formData={{ ...onlyOptin2019.Data, ...this.state.student }}
+              formData={{
+                ...onlyOptin2019.Data,
+                ...this.state.student,
+              }}
               onChange={this.onChange}
               transformErrors={this.transformErrors}
             >
@@ -199,7 +246,7 @@ class MemberRegistrationCorrectionForm extends Component {
           </div>
         </div>
       );
-    } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant === TENANT.INDORE) {
+    } else if (pageUser === USER_TYPES.ADMIN && tenant === TENANT.INDORE) {
       const newUISchema = {
         ...indoreAdmin.UISchema,
         backButton: {
@@ -225,14 +272,17 @@ class MemberRegistrationCorrectionForm extends Component {
             liveValidate
             schema={indoreAdmin.Schema}
             uiSchema={newUISchema}
-            formData={{ ...indoreAdmin.Data, ...this.state.student }}
+            formData={{
+              ...indoreAdmin.Data,
+              ...this.state.student,
+            }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           />
         </div>
       );
-    } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
-      && this.props.tenant === TENANT.INDORE) {
+    } else if ((pageUser === USER_TYPES.STUDENT || pageUser === USER_TYPES.STUDENT_WITH_URL)
+      && tenant === TENANT.INDORE) {
       const newUISchema = {
         ...indoreStudent.UISchema,
         backButton: {
@@ -258,13 +308,16 @@ class MemberRegistrationCorrectionForm extends Component {
             liveValidate
             schema={indoreStudent.Schema}
             uiSchema={newUISchema}
-            formData={{ ...indoreStudent.Data, ...this.state.student }}
+            formData={{
+              ...indoreStudent.Data,
+              ...this.state.student,
+            }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           />
         </div>
       );
-    } else if (this.props.pageUser === USER_TYPES.ADMIN && this.props.tenant !== TENANT.INDORE) {
+    } else if (pageUser === USER_TYPES.ADMIN && tenant !== TENANT.INDORE) {
       const newUISchema = {
         ...defaultAdmin.UISchema,
         backButton: {
@@ -290,14 +343,17 @@ class MemberRegistrationCorrectionForm extends Component {
             liveValidate
             schema={defaultAdmin.Schema}
             uiSchema={newUISchema}
-            formData={{ ...defaultAdmin.Data, ...this.state.student }}
+            formData={{
+              ...defaultAdmin.Data,
+              ...this.state.student,
+            }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           />
         </div>
       );
-    } else if ((this.props.pageUser === USER_TYPES.STUDENT || this.props.pageUser === USER_TYPES.STUDENT_WITH_URL)
-      && this.props.tenant !== TENANT.INDORE) {
+    } else if ((pageUser === USER_TYPES.STUDENT || pageUser === USER_TYPES.STUDENT_WITH_URL)
+      && tenant !== TENANT.INDORE) {
       const newUISchema = {
         ...defaultStudent.UISchema,
         backButton: {
@@ -323,7 +379,10 @@ class MemberRegistrationCorrectionForm extends Component {
             liveValidate
             schema={defaultStudent.Schema}
             uiSchema={newUISchema}
-            formData={{ ...defaultStudent.Data, ...this.state.student }}
+            formData={{
+              ...defaultStudent.Data,
+              ...this.state.student,
+            }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           />
@@ -333,7 +392,12 @@ class MemberRegistrationCorrectionForm extends Component {
     return null;
   };
 
-  renderSuccessMessage() {
+  renderSuccessMessage = () => {
+    const {
+      isSubmitTriggered,
+      isFormChanged,
+      hasError,
+    } = this.state;
     // if form data is update and valid and submitted successfully.
     if (this.props.isUpdated) {
       return (
@@ -346,7 +410,7 @@ class MemberRegistrationCorrectionForm extends Component {
           />
         </Popup>
       );
-    } else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.state.hasError) {
+    } else if (isSubmitTriggered && !isFormChanged && hasError) {
       // if form data is not update and valid.
       return (
         <Popup>
@@ -358,25 +422,30 @@ class MemberRegistrationCorrectionForm extends Component {
         </Popup>
       );
     } return null;
-  }
+  };
 
-  updateStudentData() {
-    const { id, secretKey } = this.props;
+  updateStudentData = () => {
+    const {
+      id,
+      secretKey,
+    } = this.props;
     const { student } = this.state;
     // Calls api to update student data
-    this.props.updateStudentData({ id,
+    this.props.updateStudentData({
+      id,
       secretKey,
-      student });
-  }
+      student,
+    });
+  };
 
-  prePopulateCourse2019(studentData) {
+  prePopulateCourse2019 = (studentData) => {
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
     const updatedData = updateClassAttended2019InStudentData(studentData);
     this.setState({
       student: updatedData,
     });
-  }
+  };
 
   changeIsOnlyOptIn2019 = (value) => {
     this.setState({
@@ -385,10 +454,14 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   handleSubmit = (e) => {
+    const {
+      age,
+      mobile,
+    } = this.props.studentData;
     const studentData = {
       ...this.props.studentData,
-      age: !this.props.studentData.age ? null : Number(this.props.studentData.age),
-      mobile: !this.props.studentData.mobile ? null : Number(this.props.studentData.mobile),
+      age: !age ? null : Number(age),
+      mobile: !mobile ? null : Number(mobile),
     };
     e.preventDefault();
     if (this.state.student.optIn2019 === 'N') {
@@ -439,14 +512,18 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   renderBackButton = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+    const {
+      pageUser,
+      context,
+    } = this.props;
+    if (pageUser === USER_TYPES.ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath={this.props.context.previousLocation}
+          linkPath={context.previousLocation}
         />
       );
-    } else if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT) {
+    } else if (pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT) {
       return (
         <Button
           type="button"
@@ -458,7 +535,7 @@ class MemberRegistrationCorrectionForm extends Component {
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
   };
@@ -476,7 +553,12 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   render() {
-    if (this.props.isFetched && this.props.studentData) {
+    const {
+      isFetch,
+      studentData,
+      context,
+    } = this.props;
+    if (isFetch && studentData) {
       return this.renderForm();
     }
 
@@ -485,7 +567,7 @@ class MemberRegistrationCorrectionForm extends Component {
         <h5>{invalidIdMessage}</h5>
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath={this.props.context.previousLocation}
+          linkPath={context.previousLocation}
         />
       </Popup>
     );
@@ -495,7 +577,7 @@ class MemberRegistrationCorrectionForm extends Component {
 MemberRegistrationCorrectionForm.propTypes = {
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isUpdated: PropTypes.bool,
-  isFetched: PropTypes.bool,
+  isFetch: PropTypes.bool,
   updateStudentData: PropTypes.func,
   id: PropTypes.string,
   secretKey: PropTypes.string,
@@ -508,7 +590,7 @@ MemberRegistrationCorrectionForm.propTypes = {
 MemberRegistrationCorrectionForm.defaultProps = {
   studentData: {},
   isUpdated: false,
-  isFetched: false,
+  isFetch: false,
   updateStudentData: () => {},
   id: '',
   secretKey: '',
@@ -523,7 +605,7 @@ const mapStateToProps = state => ({
   isCreated: isCreated(state),
   userType: getUserType(state),
   isUpdated: isUpdated(state),
-  isFetched: isFetched(state),
+  isFetch: isFetched(state),
   id: getUserId(state),
   secretKey: getUserSecretKey(state),
   tenant: getApplicationTenant(state),
