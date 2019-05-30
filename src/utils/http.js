@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 /**
  *
  * @param {String} url

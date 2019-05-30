@@ -76,7 +76,8 @@ class UploadOptInFile extends Component {
    * closeUploadOptInFileModal method set isUploadOptInFileModalOpen to false
    * and to reset IsOptIn it call resetIsOptInSuccessAction action
    */
-  closeUploadOptInFileModal() {
+  closeUploadOptInFileModal(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
     this.setState({
@@ -104,7 +105,7 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.fileUpload(this.state.optInFile);
     this.setState({
       isFormSubmitted: true,

@@ -82,7 +82,8 @@ class MarkSelectedStudentAttendance extends Component {
    * isMarkSelectedStudentsAttendanceModalOpen to false.
    * And on the basis of this close the mark selected student modal
    */
-  closeMarkSelectedStudentsAttendanceModal() {
+  closeMarkSelectedStudentsAttendanceModal(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({ isMarkSelectedStudentsAttendanceModalOpen: false });
     this.props.resetIsMarkAttendanceSuccessAction();
     this.setState({
@@ -177,7 +178,7 @@ class MarkSelectedStudentAttendance extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     const { secretKey } = this.props;
     const selectedStudentsId = this.state.studentsId;
     const day = this.state.selectedDay;
@@ -231,7 +232,12 @@ class MarkSelectedStudentAttendance extends Component {
                     onClick={this.closeMarkSelectedStudentsAttendanceModal}
                   >Close
                   </button>
-                  <button className={this.renderMarkButtonClassName()} type="submit">Submit</button>
+                  <button
+                    className={this.renderMarkButtonClassName()}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </form>

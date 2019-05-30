@@ -82,7 +82,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * isUpdateSelectedStudentsOptInOrOptOutModalOpen to false
    * and selectedCardOption to empty string
    */
-  closeUpdateIdCardStatusSelectedStudentsModal() {
+  closeUpdateIdCardStatusSelectedStudentsModal(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({
       isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
       selectedCardOption: '',
@@ -168,7 +169,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     const { secretKey } = this.props;
     const selectedStudentsId = this.state.studentsId;
     const IdCardStatus = this.state.selectedCardOption;
