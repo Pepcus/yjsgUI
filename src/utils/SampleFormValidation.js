@@ -1,4 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
+import cloneDeep from 'lodash/cloneDeep';
+
+import { defaultStudentData } from '../config/memberRegisrationCurrectionFormShema.json';
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE, FULL_ADDRESS_MESSAGE, INFORMATION_HELPFUL_TO_CONTACT_MESSAGE, INVALID_EMAIL_MESSAGE,
   INVALID_NAME_MESSAGE,
@@ -143,4 +146,31 @@ export const validates = (formData, errors) => {
     return errors;
   }
   return [];
+};
+
+export const prePopulateOptIn = (studentData) => {
+  if (studentData) {
+    const {
+      optIn2019,
+    } = studentData;
+    studentData = {
+      ...studentData,
+      optIn2019: !optIn2019 ? 'Y' : optIn2019,
+    };
+  }
+  return studentData;
+};
+
+export const InitialStudentData = (studentData) => {
+  let tempData = cloneDeep(studentData);
+  defaultStudentData.forEach((obj) => {
+    if (!tempData[obj.formFiled]) {
+      tempData = { ...tempData, [obj.formFiled]: undefined };
+    } else if (obj.dataType === 'string') {
+      tempData = { ...tempData, [obj.formFiled]: String(tempData[obj.formFiled]) };
+    } else if (obj.dataType === 'number') {
+      tempData = { ...tempData, [obj.formFiled]: Number(tempData[obj.formFiled]) };
+    }
+  });
+  return tempData;
 };

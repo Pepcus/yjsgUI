@@ -36,6 +36,8 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 
+const JSONSchemaForm = Form;
+
 /**
  * MemberRegistrationForm render member registration form.
  * @type {Class}
@@ -154,7 +156,7 @@ class MemberRegistrationForm extends Component {
     return (
       <div className="form-container">
         <div className="form-wrapper" ref={this.formRef}>
-          <Form
+          <JSONSchemaForm
             showErrorList={false}
             noHtml5Validate
             validate={this.validate}
@@ -178,7 +180,7 @@ class MemberRegistrationForm extends Component {
                 onClick={this.handleSubmit}
               />
             </div>
-          </Form>
+          </JSONSchemaForm>
           {this.renderSuccessMessage()}
         </div>
       </div>

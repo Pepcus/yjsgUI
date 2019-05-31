@@ -119,6 +119,7 @@ class AdvanceSearch extends Component {
       });
     }
   }
+
   /**
    * onChangeMultipleIdSearchCheckBox method set the values of
    * thresholdValue, isDeepSearchCheck and isMultipleIdSearchCheck
@@ -148,6 +149,7 @@ class AdvanceSearch extends Component {
       return <span className="clear-search"><i className="fa fa-times-circle" onClick={this._clearFilter} /></span>;
     } return null;
   }
+
   /**
    * advanceSearch method find the search result and also maintained check and uncheck students.
    * @param {Object} event
@@ -212,6 +214,7 @@ class AdvanceSearch extends Component {
       this.props.onFilter(this.props.formatStudents(studentsData));
     }
   }
+
   render() {
     return (
       <form id="advanceSearch" className="advanceSearchForm">
