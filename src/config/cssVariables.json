@@ -4,7 +4,7 @@
     "--yellow-card-color": "#0868ac",
     "--orange-hover-color": "#015b9a",
     "--enable-link-color": "#ebebec",
-    "enable-link-hover-color": "#dedede",
+    "--enable-link-hover-color": "#dedede",
     "--student-id-cards-footer-background-color" : "#2989ec",
     "--tableGrid-row-border-bottom": "1px solid #064acf",
     "--app-loader-color": "#0868ac"

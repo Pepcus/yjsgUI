@@ -260,6 +260,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .landing-page-logo {
     width: 50%;
+    height: 50%;
     max-width: 200px;
     padding: 20px;
     background-color: #ffffff;
@@ -392,6 +393,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .registrationFormButtonContainer .buttonOrange {
     padding:8px;
+    height: 41px;
 }
 @media (max-width:1280px) {
     .inputFieldContainer{

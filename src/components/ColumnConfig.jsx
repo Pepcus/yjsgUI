@@ -28,7 +28,7 @@ const customColumnOptionStyles = {
     padding: '0px !important',
     marginRight: '-50%',
     maxWidth: '100%',
-    minWidth: '50%',
+    minWidth: '65%',
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },

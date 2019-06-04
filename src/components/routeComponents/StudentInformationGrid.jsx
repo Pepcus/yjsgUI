@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link } from 'react-router-dom';
+import {Redirect, Link, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
@@ -65,6 +65,7 @@ class StudentInformationGrid extends Component {
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
       refresh: false,
+      fileRedirection: false,
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -497,6 +498,12 @@ class StudentInformationGrid extends Component {
   redirectToAdminLogin() {
     return <Redirect to="/adminPanel" />;
   }
+
+  redirectToFile = () => {
+    this.setState({
+      fileRedirection: true,
+    });
+  };
   /**
    * clearSelectedStudents method will clear all selected records".
    */
@@ -509,6 +516,9 @@ class StudentInformationGrid extends Component {
   };
 
   render() {
+    if (this.state.fileRedirection) {
+      return <Redirect to="/files" />;
+    }
     if (!(this.props.adminLoginState)) {
       return (
         <div>
@@ -555,9 +565,11 @@ class StudentInformationGrid extends Component {
                 <div className="column-option display-mobile-none">
                   {/* <UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
-                    <Link to="/files" className="column-option-container text-decoration-none">
+                    <button className="column-option-container" onClick={this.redirectToFile}>
+                      {/* <Link to="/files" className="text-decoration-none">*/}
                       <i className="fa fa-file-text card-icon" />Files
-                    </Link>
+                      {/* </Link>*/}
+                    </button>
                   </div>
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">

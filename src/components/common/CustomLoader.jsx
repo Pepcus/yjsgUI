@@ -9,6 +9,8 @@ import uniqueId from 'lodash/uniqueId';
  * @return {ReactComponent}
  * @constructor
  */
+
+
 const CustomLoader = (props) => {
   const styles = {
     loader: {
@@ -29,7 +31,7 @@ const CustomLoader = (props) => {
             () =>
               (<div
                 key={uniqueId('loaderSection')}
-                style={{ background: loaderColor }}
+                style={loaderColor ? { background: loaderColor } : { background: 'orange' }}
                />))
           }
         </div>
