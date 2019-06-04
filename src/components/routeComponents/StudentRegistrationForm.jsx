@@ -358,6 +358,7 @@ class StudentRegistrationForm extends Component {
                       type="submit"
                       formName="studentRegistrationForm"
                       value="Submit"
+                      disabled={this.props.isLoading}
                       onClick={this._onSubmitStudentData}
                     />
                   </div>
