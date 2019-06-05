@@ -12,7 +12,8 @@ import uniqueId from 'lodash/uniqueId';
 
 
 const CustomLoader = (props) => {
-  const styles = {
+  const { loaderColor, styles } = props;
+  const customStyles = {
     loader: {
       position: 'absolute',
       top: '50%',
@@ -22,16 +23,16 @@ const CustomLoader = (props) => {
       transform: 'translate(-50%, -50%)',
     },
   };
-  const { loaderColor } = props;
   return (
-    <div style={styles.loader}>
+    <div style={customStyles.loader}>
       <div className="lds-css">
-        <div className="lds-spinner" style={{ 'width': '100%', 'height': '100%' }}>
+        <div className="lds-spinner">
           {times(12,
             () =>
               (<div
+                className="lds-spinner-color"
                 key={uniqueId('loaderSection')}
-                style={loaderColor ? { background: loaderColor } : { background: 'orange' }}
+                style={{ 'background': loaderColor }}
                />))
           }
         </div>
@@ -42,10 +43,12 @@ const CustomLoader = (props) => {
 
 CustomLoader.propTypes = {
   loaderColor: PropTypes.string,
+  styles: PropTypes.object,
 };
 
 CustomLoader.defaultProps = {
   loaderColor: '',
+  styles: {},
 };
 
 export default CustomLoader;

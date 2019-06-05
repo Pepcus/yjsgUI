@@ -1,3 +1,10 @@
+:root {
+    --app-loader-color: #f9570a;
+}
+
+.lds-spinner-color {
+    background: var(--app-loader-color);
+}
 @keyframes lds-spinner {
     0% {
         opacity: 1;

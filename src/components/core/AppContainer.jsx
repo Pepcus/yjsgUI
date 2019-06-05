@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import Routes from './Routes';
 import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
-import { setAppColor } from '../../utils/dataGridUtils';
+// import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
-import cssJSON from '../../config/cssVariables.json';
+// import cssJSON from '../../config/cssVariables.json';
 import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 
-const { development, production } = cssJSON;
+// const { development, production } = cssJSON;
 
 /**
  * AppContainer is the wrapper of application.
@@ -21,15 +21,15 @@ class AppContainer extends Component {
     this.props.loadBusCoordinatorsDataAction();
     this.props.loadAppDataAction();
     this.props.setLoadingStateAction(false);
-    if (this.props.isAppLoaded) {
-      setAppColor(this.props.mode === 'production' ? production : development);
-    }
+    /* if (this.props.isAppLoaded) {
+      // setAppColor(this.props.mode === 'production' ? production : development);
+    }*/
   }
-  componentWillReceiveProps(nextProps) {
+  /* componentWillReceiveProps(nextProps) {
     if (nextProps.isAppLoaded) {
-      setAppColor(nextProps.mode === 'production' ? production : development);
+      // setAppColor(nextProps.mode === 'production' ? production : development);
     }
-  }
+  }*/
 
   render() {
     if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
@@ -60,7 +60,7 @@ AppContainer.propTypes = {
   loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
-  mode: PropTypes.string,
+  // mode: PropTypes.string,
 };
 
 AppContainer.defaultProps = {
@@ -68,7 +68,7 @@ AppContainer.defaultProps = {
   loadBusCoordinatorsDataAction: () => {},
   isAppLoaded: false,
   isAppLoadingFailed: false,
-  mode: '',
+  // mode: '',
 };
 
 const mapStateToProps = state => ({

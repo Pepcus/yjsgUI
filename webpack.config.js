@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 var path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   watch: true,
@@ -51,6 +52,9 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
       favicon: './src/assets/images/LOGO.png',
+    }),
+    new webpack.DefinePlugin({
+      appMode: JSON.stringify(process.env.appMode),
     }),
   ],
 };

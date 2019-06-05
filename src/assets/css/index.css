@@ -294,13 +294,12 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: bold;
 }
 .footer {
-    background: var(--index-orange-color);
     text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
     z-index: 1;
-    color: #fff;
+    color: #858585;;
     padding: 10px 0;
 }
 /* Popup  */
