@@ -119,16 +119,6 @@ class MemberRegistrationCorrectionForm extends Component {
     return {};
   };
 
-  renderSubmitButtons = () => (
-    <Button
-      buttonText={formSubmitBtnText}
-      type="submit"
-      formName=""
-      value="Submit"
-      onClick={this.handleSubmit}
-    />
-  );
-
   renderSuccessMessage = () => {
     const {
       isSubmitTriggered,
@@ -190,6 +180,16 @@ class MemberRegistrationCorrectionForm extends Component {
     });
   };
 
+  renderSubmitButtons = () => (
+    <Button
+      buttonText={formSubmitBtnText}
+      type="submit"
+      formName=""
+      value="Submit"
+      onClick={this.handleSubmit}
+    />
+  );
+
   handleSubmit = (e) => {
     const { student } = this.state;
     delete student.backButton;
@@ -225,7 +225,7 @@ class MemberRegistrationCorrectionForm extends Component {
 
   transformErrors = (errors) => {
     const temError = [];
-    if (this.props.studentData.optIn2019 !== 'Y') {
+    if (this.props.studentData.optIn2019 === 'N') {
       return [];
     }
     errors.forEach((error) => {
@@ -295,7 +295,6 @@ class MemberRegistrationCorrectionForm extends Component {
       onlyOptIn2019,
       student,
     } = this.state;
-
     if (isFetch && studentData) {
       return (
         <CorrectionsForm
@@ -310,8 +309,8 @@ class MemberRegistrationCorrectionForm extends Component {
           submitStudentDataForOnlyOptInCase={this.submitStudentDataForOnlyOptInCase}
           changeIsOnlyOptIn2019={this.changeIsOnlyOptIn2019}
           renderBackButton={this.renderBackButton}
-          renderSubmitButtons={this.renderSubmitButtons}
           formRef={this.formRef}
+          renderSubmitButtons={this.renderSubmitButtons}
         />
       );
     }

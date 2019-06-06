@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import validations from '../../utils/validation';
+import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 import {
   formSubmitBtnText,
   goBackBtnText,
@@ -34,7 +35,6 @@ import {
 } from '../../constants/text';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 
 const JSONSchemaForm = Form;
 
@@ -154,35 +154,33 @@ class MemberRegistrationForm extends Component {
 
   render() {
     return (
-      <div className="form-container">
-        <div className="form-wrapper" ref={this.formRef}>
-          <JSONSchemaForm
-            showErrorList={false}
-            noHtml5Validate
-            validate={this.validate}
-            liveValidate
-            schema={memberRegistration.schema}
-            uiSchema={memberRegistration.UISchema}
-            formData={{
-              ...memberRegistration.Data,
-              ...this.state.member,
-            }}
-            onChange={this.onChange}
-            transformErrors={this.transformErrors}
-          >
-            <div>
-              {this.renderBackButton()}
-              <Button
-                buttonText={formSubmitBtnText}
-                type="submit"
-                formName=""
-                value="Submit"
-                onClick={this.handleSubmit}
-              />
-            </div>
-          </JSONSchemaForm>
-          {this.renderSuccessMessage()}
-        </div>
+      <div ref={this.formRef}>
+        <JSONSchemaForm
+          showErrorList={false}
+          noHtml5Validate
+          validate={this.validate}
+          liveValidate
+          schema={memberRegistration.schema}
+          uiSchema={memberRegistration.UISchema}
+          formData={{
+            ...memberRegistration.Data,
+            ...this.state.member,
+          }}
+          onChange={this.onChange}
+          transformErrors={this.transformErrors}
+        >
+          <div className="register-button-wrapper">
+            {this.renderBackButton()}
+            <Button
+              buttonText={formSubmitBtnText}
+              type="submit"
+              formName=""
+              value="Submit"
+              onClick={this.handleSubmit}
+            />
+          </div>
+        </JSONSchemaForm>
+        {this.renderSuccessMessage()}
       </div>
     );
   }

@@ -46,8 +46,7 @@
         },
         "email": {
           "title": "ई-मेल",
-          "type": "string",
-          "format": "email"
+          "type": "string"
         },
         "address": {
           "title": "पूरा पता",
@@ -186,20 +185,46 @@
       }
     },
     "UISchema": {
+      "name": {
+        "classNames": "field-style"
+      },
+      "fatherName": {
+        "classNames": "field-style"
+      },
+      "mobile": {
+        "classNames": "field-style"
+      },
+      "occupation": {
+        "classNames": "field-style"
+      },
+      "education": {
+        "classNames": "field-style"
+      },
       "address": {
+        "classNames": "field-style",
         "ui:widget": "textarea"
       },
+      "email": {
+        "classNames": "field-style"
+      },
       "busStop": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "age": {
+        "classNames": "field-style",
         "ui:widget": "updown"
       },
       "gender": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       },
       "classAttended2019": {
+        "classNames": "field-style",
         "ui:placeholder": "कृपया एक चुनिए . . ."
+      },
+      "classAttended2018": {
+        "classNames": "field-style"
       }
     },
     "Data": {
@@ -223,12 +248,16 @@
         "validates": "ageValidation"
       },
       {
-        "field": "mobileValidation",
+        "field": "mobile",
         "validates": "mobileValidation"
       },
       {
         "field": "address",
         "validates": "addressValidation"
+      },
+      {
+        "field": "email",
+        "validates": "optionalEmailValidation"
       }
     ]
   }
