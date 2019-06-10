@@ -39,7 +39,10 @@ import { updateClassAttended2019InStudentData } from '../../utils/registrationFo
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 import { validation } from '../../config/memberRegisrationCurrectionFormShema.json';
 import validations from '../../utils/validation';
-import { InitialStudentData, prePopulateOptIn } from '../../utils/SampleFormValidation';
+import {
+  InitialStudentData,
+  prePopulateOptIn,
+} from '../../utils/SampleFormValidation';
 import CorrectionsForm from '../CorrectionsForm';
 
 /**

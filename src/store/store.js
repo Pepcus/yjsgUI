@@ -1,4 +1,7 @@
-import { createStore, applyMiddleware } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import { all } from 'redux-saga/effects';

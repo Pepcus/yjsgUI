@@ -19,7 +19,11 @@ import {
   resetIsMarkAttendanceSuccessAction,
   markSelectedStudentsAttendanceAction,
 } from '../actions/studentRegistrationActions';
-import { getSecretKey, isMarkAttendanceSuccess, isMarkAttendanceFailed } from '../reducers/studentRegistrationReducer';
+import {
+  getSecretKey,
+  isMarkAttendanceSuccess,
+  isMarkAttendanceFailed,
+} from '../reducers/studentRegistrationReducer';
 
 const customSelectedStudentsAttendanceModalStyles = {
   overlay: {

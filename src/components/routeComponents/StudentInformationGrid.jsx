@@ -9,7 +9,11 @@ import '../../assets/css/card-print.css';
 
 import { getApplicationMode } from '../../reducers/assetFilesReducer';
 import ColumnConfig from '../ColumnConfig';
-import { gridMetaData, gridHeaderData, getStyles } from '../../constants/gridData';
+import {
+  gridMetaData,
+  gridHeaderData,
+  getStyles,
+} from '../../constants/gridData';
 import {
   allStudentsData,
   getVisibleColumnConfig,

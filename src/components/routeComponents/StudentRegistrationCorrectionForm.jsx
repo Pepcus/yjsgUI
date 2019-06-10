@@ -43,7 +43,10 @@ import {
 import InputField from '../form/InputField';
 import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';
-import { updateStudentData, isUpdatedResetAction } from '../../actions/studentRegistrationActions';
+import {
+  updateStudentData,
+  isUpdatedResetAction,
+} from '../../actions/studentRegistrationActions';
 import {
   updateClassAttended2019InStudentData,
   isDataCorrect,
@@ -61,7 +64,11 @@ import {
 } from '../../reducers/studentRegistrationReducer';
 import SelectListInputField from '../form/SelectListInputField';
 import Button from '../common/Button';
-import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../constants/text';
+import {
+  CLICK_HERE_TEXT,
+  NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT,
+  YES_TEXT,
+} from '../../constants/text';
 import Popup from '../common/Popup';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 

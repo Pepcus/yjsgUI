@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import InputField from './form/InputField';
-import { formSubmitBtnText, goBackBtnText } from '../constants/yjsg';
+import {
+  formSubmitBtnText,
+  goBackBtnText,
+} from '../constants/yjsg';
 import Button from './common/Button';
 
 const AdminLoginForm = ({ isAdmin,

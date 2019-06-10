@@ -7,7 +7,8 @@ import * as shortId from 'shortid';
 
 import {
   uploadStudentsAttendanceFileAction,
-  resetIsSuccessAction } from '../actions/studentRegistrationActions';
+  resetIsSuccessAction,
+} from '../actions/studentRegistrationActions';
 import {
   getSecretKey,
   getSuccess,
