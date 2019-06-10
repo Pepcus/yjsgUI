@@ -53,8 +53,10 @@ module.exports = {
       filename: './index.html',
       favicon: './src/assets/images/LOGO.png',
     }),
-    new webpack.DefinePlugin({
+    /* new webpack.DefinePlugin({
       appMode: JSON.stringify(process.env.appMode),
-    }),
+      tenant: JSON.stringify(process.env.tenant),
+      isRegisterCorrectionEnabled: JSON.parse(process.env.isRegisterCorrectionEnabled),
+    }),*/
   ],
 };

@@ -35,8 +35,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production",
+    "build": "webpack",
     "test": "mocha \"src/**/*.spec.js\" --require babel-register"
   },
   "devDependencies": {

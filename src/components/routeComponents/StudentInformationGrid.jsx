@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import {Redirect, Link, Switch} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
 
+import { getApplicationMode } from '../../reducers/assetFilesReducer';
 import ColumnConfig from '../ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from '../../constants/gridData';
 import {
@@ -59,7 +60,7 @@ class StudentInformationGrid extends Component {
       selectedStudents: [],
       selectValue: this.props.selectValue,
       students: [],
-      metaData: gridHeaderData(),
+      metaData: gridHeaderData({ mode: this.props.mode }),
       columnOptionIsOpen: false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
@@ -636,6 +637,7 @@ StudentInformationGrid.propTypes = {
     PropTypes.object,
   ]),
   setUserTypeAction: PropTypes.func,
+  mode: PropTypes.string,
 };
 
 StudentInformationGrid.defaultProps = {
@@ -656,6 +658,7 @@ StudentInformationGrid.defaultProps = {
   fetchStudentData: () => {},
   studentData: {},
   setUserTypeAction: () => {},
+  mode: '',
 };
 
 const mapStateToProps = state => ({
@@ -666,6 +669,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   secretKey: getSecretKey(state),
   studentData: getStudent(state),
+  mode: getApplicationMode(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,

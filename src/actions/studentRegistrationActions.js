@@ -83,11 +83,11 @@ export const fetchStudentFailedAction = message => ({
  * @return {{updatedStudent: {Object}, secretKey: {String}, id: {String}, type: string}}
  */
 export const updateStudentData = ({ id, secretKey, student }) => ({
-    type: 'UPDATE_STUDENT',
-    id,
-    secretKey,
-    student,
-  });
+  type: 'UPDATE_STUDENT',
+  id,
+  secretKey,
+  student,
+});
 /**
  * updateStudentSuccessAction action will call when
  * update student data AIP response is success
@@ -556,7 +556,7 @@ export const setUserTypeAction = pageUser => ({
  * @return {{isLoading: boolean, type: string}}
  */
 export const setLoadingStateAction = isLoading => ({
-    type: 'SET_LOADING_STATE',
-    isLoading,
-  });
+  type: 'SET_LOADING_STATE',
+  isLoading,
+});
 
