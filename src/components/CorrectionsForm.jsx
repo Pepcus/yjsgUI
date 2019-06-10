@@ -2,7 +2,11 @@ import React from 'react';
 import Form from 'react-jsonschema-form';
 import PropTypes from 'prop-types';
 
-import { formSubmitBtnText, TENANT, USER_TYPES } from '../constants/yjsg';
+import {
+  formSubmitBtnText,
+  TENANT,
+  USER_TYPES,
+} from '../constants/yjsg';
 import {
   defaultAdmin,
   defaultStudent,
@@ -11,7 +15,10 @@ import {
   onlyOptin2019,
 } from '../config/memberRegisrationCurrectionFormShema.json';
 import Button from './common/Button';
-import { CLICK_HERE_TEXT, UPDATE_FURTHER_INFORMATION_TEXT } from '../constants/text';
+import {
+  CLICK_HERE_TEXT,
+  UPDATE_FURTHER_INFORMATION_TEXT,
+} from '../constants/text';
 
 const JSONSchemaForm = Form;
 

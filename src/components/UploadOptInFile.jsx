@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
-import { uploadOptInFileAction, resetIsOptInSuccessAction } from '../actions/studentRegistrationActions';
+import {
+  uploadOptInFileAction,
+  resetIsOptInSuccessAction,
+} from '../actions/studentRegistrationActions';
 import {
   getSecretKey,
   isOptInSuccess,

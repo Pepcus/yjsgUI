@@ -1,4 +1,3 @@
-
 export const fetchFilesConfigAction = () => ({
   type: 'FETCH_FILES_CONFIG_ACTION',
 });

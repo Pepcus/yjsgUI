@@ -8,7 +8,11 @@ import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
 
 import ColumnConfig from '../ColumnConfig';
-import { gridMetaData, gridHeaderData, getStyles } from '../../constants/gridData';
+import {
+  gridMetaData,
+  gridHeaderData,
+  getStyles,
+} from '../../constants/gridData';
 import {
   allStudentsData,
   getVisibleColumnConfig,

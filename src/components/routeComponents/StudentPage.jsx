@@ -21,7 +21,10 @@ import {
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant, isRegisterCorrectionEnabled } from '../../reducers/assetFilesReducer';
+import {
+  getApplicationTenant,
+  isRegisterCorrectionEnabled,
+} from '../../reducers/assetFilesReducer';
 
 /**
 * The StudentPage component for the student which will render -
