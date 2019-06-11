@@ -58,19 +58,19 @@ const AdminLoginForm = ({ isAdmin,
 };
 
 AdminLoginForm.propTypes = {
-  isAdmin: PropTypes.bool,
   admin: PropTypes.object,
-  handleInputChange: PropTypes.func,
   adminScreenRedirection: PropTypes.func,
   disableAdminLoginButtons: PropTypes.func,
+  handleInputChange: PropTypes.func,
+  isAdmin: PropTypes.bool,
   setAdminLogin: PropTypes.func,
 };
 AdminLoginForm.defaultProps = {
-  isAdmin: false,
   admin: {},
-  handleInputChange: () => {},
   adminScreenRedirection: () => {},
   disableAdminLoginButtons: () => {},
+  handleInputChange: () => {},
+  isAdmin: false,
   setAdminLogin: () => {},
 };
 export default AdminLoginForm;

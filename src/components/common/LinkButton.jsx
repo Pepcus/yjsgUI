@@ -18,14 +18,14 @@ const LinkButton = ({ linkPath, onClick, buttonText }) => (
 
 LinkButton.propTypes = {
   buttonText: PropTypes.string,
-  onClick: PropTypes.func,
   linkPath: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 LinkButton.defaultProps = {
   buttonText: '',
-  onClick: () => {},
   linkPath: '',
+  onClick: () => {},
 };
 
 export default LinkButton;

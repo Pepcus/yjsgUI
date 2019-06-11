@@ -28,7 +28,6 @@ import {
   getUserId,
   getUserSecretKey,
   getUserType,
-  isCreated,
   isFetched,
   isUpdated,
 } from '../../reducers/studentRegistrationReducer';
@@ -56,7 +55,7 @@ class MemberRegistrationCorrectionForm extends Component {
     this.state = {
       student: {},
       oldStudentDate: {},
-      onlyOptIn2019: true,
+      onlyOptInForm: true,
       isSubmitTriggered: false,
       hasError: false,
       isFormChanged: false,
@@ -177,9 +176,9 @@ class MemberRegistrationCorrectionForm extends Component {
     });
   };
 
-  changeIsOnlyOptIn2019 = (value) => {
+  changeIsOnlyOptIn = (value) => {
     this.setState({
-      onlyOptIn2019: value,
+      onlyOptInForm: value,
     });
   };
 
@@ -262,7 +261,7 @@ class MemberRegistrationCorrectionForm extends Component {
         <Button
           type="button"
           buttonText={goBackBtnText}
-          onClick={() => { this.changeIsOnlyOptIn2019(true); }}
+          onClick={() => { this.changeIsOnlyOptIn(true); }}
         />
       );
     }
@@ -295,7 +294,7 @@ class MemberRegistrationCorrectionForm extends Component {
       tenant,
     } = this.props;
     const {
-      onlyOptIn2019,
+      onlyOptInForm,
       student,
     } = this.state;
     if (isFetch && studentData) {
@@ -303,14 +302,14 @@ class MemberRegistrationCorrectionForm extends Component {
         <CorrectionsForm
           pageUser={pageUser}
           tenant={tenant}
-          onlyOptIn2019={onlyOptIn2019}
+          onlyOptInForm={onlyOptInForm}
           renderSuccessMessage={this.renderSuccessMessage}
           validate={this.validate}
           student={student}
           onChange={this.onChange}
           transformErrors={this.transformErrors}
           submitStudentDataForOnlyOptInCase={this.submitStudentDataForOnlyOptInCase}
-          changeIsOnlyOptIn2019={this.changeIsOnlyOptIn2019}
+          changeIsOnlyOptIn={this.changeIsOnlyOptIn}
           renderBackButton={this.renderBackButton}
           formRef={this.formRef}
           renderSubmitButtons={this.renderSubmitButtons}
@@ -330,46 +329,45 @@ class MemberRegistrationCorrectionForm extends Component {
 }
 
 MemberRegistrationCorrectionForm.propTypes = {
-  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  isUpdated: PropTypes.bool,
-  isFetch: PropTypes.bool,
-  updateStudentData: PropTypes.func,
-  id: PropTypes.string,
-  secretKey: PropTypes.string,
   context: PropTypes.object,
-  pageUser: PropTypes.string,
+  id: PropTypes.string,
+  isFetch: PropTypes.bool,
+  isUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
+  pageUser: PropTypes.string,
+  secretKey: PropTypes.string,
+  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tenant: PropTypes.string,
+  updateStudentData: PropTypes.func,
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
-  studentData: {},
-  isUpdated: false,
-  isFetch: false,
-  updateStudentData: () => {},
-  id: '',
-  secretKey: '',
   context: {},
-  pageUser: '',
+  id: '',
+  isFetch: false,
+  isUpdated: false,
   isUpdatedResetAction: () => {},
+  pageUser: '',
+  secretKey: '',
+  studentData: {},
   tenant: '',
+  updateStudentData: () => {},
 };
 
 const mapStateToProps = state => ({
-  studentData: getStudent(state),
-  isCreated: isCreated(state),
-  userType: getUserType(state),
-  isUpdated: isUpdated(state),
-  isFetch: isFetched(state),
   id: getUserId(state),
-  secretKey: getUserSecretKey(state),
-  tenant: getApplicationTenant(state),
+  isFetch: isFetched(state),
+  isUpdated: isUpdated(state),
   pageUser: getPageUserType(state),
+  secretKey: getUserSecretKey(state),
+  studentData: getStudent(state),
+  tenant: getApplicationTenant(state),
+  userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentData,
-  setStudentCredentials,
   isUpdatedResetAction,
+  setStudentCredentials,
   updateStudentData,
 })(MemberRegistrationCorrectionForm);

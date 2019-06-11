@@ -160,17 +160,17 @@ class SelectedStudentsActionWrapper extends Component {
 }
 
 SelectedStudentsActionWrapper.propTypes = {
-  selectedStudents: PropTypes.array,
-  metaData: PropTypes.object,
   clearSelectedStudents: PropTypes.func,
   isBusCoordinatorsDataFailed: PropTypes.bool,
+  metaData: PropTypes.object,
+  selectedStudents: PropTypes.array,
 };
 
 SelectedStudentsActionWrapper.defaultProps = {
-  selectedStudents: [],
-  metaData: {},
   clearSelectedStudents: () => {},
   isBusCoordinatorsDataFailed: false,
+  metaData: {},
+  selectedStudents: [],
 };
 const mapStateToProps = state => ({
   isBusCoordinatorsDataFailed: isBusCoordinatorsDataFailed(state),

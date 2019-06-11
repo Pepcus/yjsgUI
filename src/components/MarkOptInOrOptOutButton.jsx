@@ -251,31 +251,31 @@ class MarkOptInOrOptOutButton extends Component {
 }
 
 MarkOptInOrOptOutButton.propTypes = {
-  resetIsMarkOptInOrOptOutSuccessAction: PropTypes.func,
-  selectedStudents: PropTypes.array,
-  isMarkOptInOrOptOutSuccess: PropTypes.bool,
-  isMarkOptInOrOptOutFailed: PropTypes.bool,
-  markSelectedStudentsOptInOrOptOutAction: PropTypes.func,
-  secretKey: PropTypes.string,
   clearSelectedStudents: PropTypes.func,
+  isMarkOptInOrOptOutFailed: PropTypes.bool,
+  isMarkOptInOrOptOutSuccess: PropTypes.bool,
+  markSelectedStudentsOptInOrOptOutAction: PropTypes.func,
+  resetIsMarkOptInOrOptOutSuccessAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  selectedStudents: PropTypes.array,
 };
 MarkOptInOrOptOutButton.defaultProps = {
-  resetIsMarkOptInOrOptOutSuccessAction: () => {},
-  selectedStudents: [],
+  clearSelectedStudents: () => {},
   isMarkOptInOrOptOutFailed: false,
   isMarkOptInOrOptOutSuccess: false,
   markSelectedStudentsOptInOrOptOutAction: () => {},
+  resetIsMarkOptInOrOptOutSuccessAction: () => {},
   secretKey: '',
-  clearSelectedStudents: () => {},
+  selectedStudents: [],
 };
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
-  isMarkOptInOrOptOutSuccess: isMarkOptInOrOptOutSuccess(state),
   isMarkOptInOrOptOutFailed: isMarkOptInOrOptOutFailed(state),
+  isMarkOptInOrOptOutSuccess: isMarkOptInOrOptOutSuccess(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
-  resetIsMarkOptInOrOptOutSuccessAction,
   markSelectedStudentsOptInOrOptOutAction,
+  resetIsMarkOptInOrOptOutSuccessAction,
 }, null, { pure: false })(MarkOptInOrOptOutButton);
 

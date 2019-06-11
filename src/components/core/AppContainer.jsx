@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import {
+  HashRouter,
+  Route,
+} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 
 import Routes from './Routes';
-import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
-import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
+import {
+  loadAppDataAction,
+  loadBusCoordinatorsDataAction,
+} from '../../actions/assetFilesActions';
+import {
+  getApplicationMode,
+  isAppLoaded,
+  getIsAppLoadedError,
+} from '../../reducers/assetFilesReducer';
 import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
@@ -55,26 +65,26 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  loadAppDataAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func.isRequired,
-  loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
+  loadAppDataAction: PropTypes.func,
+  loadBusCoordinatorsDataAction: PropTypes.func,
   mode: PropTypes.string,
+  setLoadingStateAction: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
-  loadAppDataAction: () => {},
-  loadBusCoordinatorsDataAction: () => {},
   isAppLoaded: false,
   isAppLoadingFailed: false,
+  loadAppDataAction: () => {},
+  loadBusCoordinatorsDataAction: () => {},
   mode: '',
 };
 
 const mapStateToProps = state => ({
-  mode: getApplicationMode(state),
   isAppLoaded: isAppLoaded(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
+  mode: getApplicationMode(state),
 });
 
 export default connect(mapStateToProps, {

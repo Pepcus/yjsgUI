@@ -260,34 +260,34 @@ class UploadOptInFile extends Component {
 }
 
 UploadOptInFile.propTypes = {
-  resetIsOptInSuccessAction: PropTypes.func,
-  uploadOptInFileAction: PropTypes.func,
-  secretKey: PropTypes.string,
   failOptIn: PropTypes.string,
-  unavailableIdErrorMessage: PropTypes.string,
   isOptInSuccess: PropTypes.bool,
   isUploadOptInFailed: PropTypes.bool,
+  resetIsOptInSuccessAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  unavailableIdErrorMessage: PropTypes.string,
+  uploadOptInFileAction: PropTypes.func,
 };
 
 UploadOptInFile.defaultProps = {
-  resetIsOptInSuccessAction: () => {},
-  uploadOptInFileAction: () => {},
-  secretKey: '',
   failOptIn: '',
-  unavailableIdErrorMessage: '',
   isOptInSuccess: false,
   isUploadOptInFailed: false,
+  resetIsOptInSuccessAction: () => {},
+  secretKey: '',
+  unavailableIdErrorMessage: '',
+  uploadOptInFileAction: () => {},
 };
 
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
+  failOptIn: getFailOptIn(state),
   isOptInSuccess: isOptInSuccess(state),
   isUploadOptInFailed: isUploadOptInFailed(state),
-  failOptIn: getFailOptIn(state),
+  secretKey: getSecretKey(state),
   unavailableIdErrorMessage: unavailableIdErrorMessage(state),
 });
 
 export default connect(mapStateToProps, {
-  uploadOptInFileAction,
   resetIsOptInSuccessAction,
+  uploadOptInFileAction,
 })(UploadOptInFile);

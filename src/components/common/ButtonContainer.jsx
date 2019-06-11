@@ -8,13 +8,13 @@ const ButtonContainer = props => (
 );
 
 ButtonContainer.propTypes = {
-  style: PropTypes.object,
   children: PropTypes.node,
+  style: PropTypes.object,
 };
 
 ButtonContainer.defaultProps = {
-  style: {},
   children: null,
+  style: {},
 };
 
 export default ButtonContainer;

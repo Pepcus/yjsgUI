@@ -25,9 +25,7 @@ import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
 } from '../../utils/fileUtils';
-import {
-  setLoadingStateAction,
-} from '../../actions/studentRegistrationActions';
+import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
 
@@ -470,26 +468,26 @@ class Files extends Component {
 }
 
 Files.propTypes = {
-  fetchFilesConfigAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func,
-  filesConfig: PropTypes.object,
   context: PropTypes.object,
+  fetchFilesConfigAction: PropTypes.func,
+  filesConfig: PropTypes.object,
+  setLoadingStateAction: PropTypes.func,
 };
 
 Files.defaultProps = {
-  setLoadingStateAction: () => {},
+  context: {},
   fetchFilesConfigAction: () => {},
   filesConfig: {},
-  context: {},
+  setLoadingStateAction: () => {},
 };
 
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
   fileData: getFileData(state),
   filesConfig: getFilesConfig(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
-  setLoadingStateAction,
   fetchFilesConfigAction,
+  setLoadingStateAction,
 })(Files);

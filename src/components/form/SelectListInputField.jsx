@@ -101,30 +101,30 @@ class SelectListInputField extends Component {
 }
 
 SelectListInputField.propTypes = {
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isRequired: PropTypes.bool,
+  label: PropTypes.string,
   name: PropTypes.string,
+  onInputChange: PropTypes.func,
+  options: PropTypes.array,
+  style: PropTypes.object,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  options: PropTypes.array,
-  label: PropTypes.string,
-  errorMessage: PropTypes.string,
-  isRequired: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onInputChange: PropTypes.func,
-  style: PropTypes.object,
 };
 
 SelectListInputField.defaultProps = {
-  name: '',
-  options: [],
-  value: '',
-  isRequired: false,
   disabled: false,
   errorMessage: '',
+  isRequired: false,
   label: '',
+  name: '',
   onInputChange: () => {},
+  options: [],
   style: {},
+  value: '',
 };
 
 export default SelectListInputField;

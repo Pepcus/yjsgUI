@@ -56,7 +56,7 @@ html, body {
 
 .button-style {
     display: inline-block;
-    width: 50%;
+    width: 100%;
 }
 
 .btn-info {
@@ -2544,6 +2544,9 @@ body,
         width: 100%;
         max-width: 100%;
     }
+    .form-group {
+        margin-top: 7px;
+    }
     .marks-style {
         width: 100%;
         max-width: 100%;
@@ -2554,11 +2557,17 @@ body,
     }
     .rjsf {
         padding: 5px 4px;
-        margin: 15px auto;
+        margin: 0;
     }
 }
 
 @media (max-width: 1024px) {
+    .rjsf {
+        margin: 50px auto;
+    }
+    .form-group {
+      margin-top: 15px;
+    }
     .input-radio {
         padding: 20px 18px;
     }
@@ -2900,6 +2909,26 @@ body,
 }
 
 @media (max-width: 768px) {
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-wrapper {
+        display: block;
+    }
+    .rjsf {
+        margin: 0px auto;
+    }
+    .form-group {
+        margin-top: 15px;
+    }
     .custom-modal {
         width: 70% !important;
     }
@@ -3568,6 +3597,21 @@ body,
 }
 
 @media (max-width: 480px) {
+    .rjsf {
+        margin: 50px auto;
+        box-shadow: none;
+    }
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .search-input-bar {
         margin-top: 10px;
     }
@@ -3722,6 +3766,9 @@ body,
 }
 
 @media (max-width: 320px) {
+    .form-group {
+        padding: 8px 8px 8px;
+    }
     .custom-modal {
         width: 90% !important;
     }

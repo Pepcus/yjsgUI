@@ -255,25 +255,25 @@ class UpdateIdCardStatusSelectedStudents extends Component {
 }
 
 UpdateIdCardStatusSelectedStudents.propTypes = {
-  resetIsUpdateIdCardStatusSuccessAction: PropTypes.func,
-  selectedStudents: PropTypes.array,
-  isUpdateIdCardStatusSuccess: PropTypes.bool,
   isUpdateIdCardStatusFailed: PropTypes.bool,
+  isUpdateIdCardStatusSuccess: PropTypes.bool,
+  resetIsUpdateIdCardStatusSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
+  selectedStudents: PropTypes.array,
   updateIdCardStatusSelectedStudentsAction: PropTypes.func,
 };
 UpdateIdCardStatusSelectedStudents.defaultProps = {
-  resetIsUpdateIdCardStatusSuccessAction: () => {},
-  selectedStudents: [],
-  isUpdateIdCardStatusSuccess: false,
   isUpdateIdCardStatusFailed: false,
+  isUpdateIdCardStatusSuccess: false,
+  resetIsUpdateIdCardStatusSuccessAction: () => {},
   secretKey: '',
+  selectedStudents: [],
   updateIdCardStatusSelectedStudentsAction: () => {},
 };
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
   isUpdateIdCardStatusFailed: isUpdateIdCardStatusFailed(state),
   isUpdateIdCardStatusSuccess: isUpdateIdCardStatusSuccess(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {

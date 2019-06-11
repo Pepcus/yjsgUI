@@ -85,36 +85,36 @@ class TextAreaField extends Component {
 }
 
 TextAreaField.propTypes = {
-  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isRequired: PropTypes.bool,
   label: PropTypes.string,
+  max: PropTypes.number,
+  min: PropTypes.number,
   name: PropTypes.string,
+  onInputChange: PropTypes.func,
+  placeholder: PropTypes.string,
   style: PropTypes.object,
+  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  placeholder: PropTypes.string,
-  onInputChange: PropTypes.func,
-  errorMessage: PropTypes.string,
-  isRequired: PropTypes.bool,
-  disabled: PropTypes.bool,
-  min: PropTypes.number,
-  max: PropTypes.number,
 };
 
 TextAreaField.defaultProps = {
-  style: {},
-  type: 'text',
-  label: '',
-  name: '',
-  placeholder: '',
-  onInputChange: () => {},
-  errorMessage: '',
-  value: '',
-  isRequired: false,
   disabled: false,
+  errorMessage: '',
+  isRequired: false,
+  label: '',
   min: 0,
   max: 0,
+  name: '',
+  onInputChange: () => {},
+  placeholder: '',
+  style: {},
+  type: 'text',
+  value: '',
 };
 
 

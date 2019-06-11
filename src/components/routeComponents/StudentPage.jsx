@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
@@ -146,34 +149,34 @@ class StudentPage extends Component {
 
 StudentPage.propTypes = {
   fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setHashLinkForStudentCredentialAction: PropTypes.func,
+  isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setHashLinkForNewRegistrationAction: PropTypes.func,
+  setHashLinkForStudentCredentialAction: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
-  isAlreadyRegisteredButtonEnabled: PropTypes.bool,
 };
 
 StudentPage.defaultProps = {
   fetchStudentData: () => {},
-  setStudentCredentials: () => {},
+  isAlreadyRegisteredButtonEnabled: false,
   setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
+  setStudentCredentials: () => {},
   setUserTypeAction: () => {},
   tenant: '',
-  isAlreadyRegisteredButtonEnabled: false,
 };
 const mapStateToProps = state => ({
+  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
-  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
-  setStudentCredentials,
-  setHashLinkForStudentCredentialAction,
-  setHashLinkForNewRegistrationAction,
-  setUserTypeAction,
   getApplicationTenant,
   isRegisterCorrectionEnabled,
+  setHashLinkForNewRegistrationAction,
+  setHashLinkForStudentCredentialAction,
+  setStudentCredentials,
+  setUserTypeAction,
 })(StudentPage);

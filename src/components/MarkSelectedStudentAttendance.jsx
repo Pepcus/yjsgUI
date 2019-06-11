@@ -261,31 +261,31 @@ class MarkSelectedStudentAttendance extends Component {
 }
 
 MarkSelectedStudentAttendance.propTypes = {
-  resetIsMarkAttendanceSuccessAction: PropTypes.func,
-  selectedStudents: PropTypes.array,
-  isMarkAttendanceSuccess: PropTypes.bool,
   isMarkAttendanceFailed: PropTypes.bool,
+  isMarkAttendanceSuccess: PropTypes.bool,
   markSelectedStudentsAttendanceAction: PropTypes.func,
+  resetIsMarkAttendanceSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
+  selectedStudents: PropTypes.array,
 };
 
 MarkSelectedStudentAttendance.defaultProps = {
-  resetIsMarkAttendanceSuccessAction: () => {},
-  selectedStudents: [],
-  isMarkAttendanceSuccess: false,
   isMarkAttendanceFailed: false,
+  isMarkAttendanceSuccess: false,
   markSelectedStudentsAttendanceAction: () => {},
+  resetIsMarkAttendanceSuccessAction: () => {},
   secretKey: '',
+  selectedStudents: [],
 };
 
 const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
-  isMarkAttendanceSuccess: isMarkAttendanceSuccess(state),
   isMarkAttendanceFailed: isMarkAttendanceFailed(state),
+  isMarkAttendanceSuccess: isMarkAttendanceSuccess(state),
 });
 
 export default connect(mapStateToProps, {
-  resetIsMarkAttendanceSuccessAction,
   markSelectedStudentsAttendanceAction,
+  resetIsMarkAttendanceSuccessAction,
 }, null, { pure: false })(MarkSelectedStudentAttendance);
 

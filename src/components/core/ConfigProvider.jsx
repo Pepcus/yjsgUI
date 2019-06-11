@@ -19,8 +19,8 @@ const Provider = ({ previousLocation, children }) => (
 );
 
 Provider.propTypes = {
-  previousLocation: PropTypes.string,
   children: PropTypes.node.isRequired,
+  previousLocation: PropTypes.string,
 };
 
 Provider.dedaultProps = {
@@ -28,6 +28,6 @@ Provider.dedaultProps = {
 };
 // I make this default since it will probably be exported most often.
 export default {
-  Provider,
   Consumer: Context.Consumer,
+  Provider,
 };

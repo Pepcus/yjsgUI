@@ -370,35 +370,35 @@ class StudentRegistrationForm extends Component {
 }
 
 StudentRegistrationForm.propTypes = {
+  context: PropTypes.object,
+  createStudentData: PropTypes.func,
   isCreated: PropTypes.bool,
   newStudent: PropTypes.object,
-  createStudentData: PropTypes.func,
   setStudentCredentials: PropTypes.func,
-  userType: PropTypes.string,
-  context: PropTypes.object,
   tenant: PropTypes.string,
+  userType: PropTypes.string,
 };
 
 StudentRegistrationForm.defaultProps = {
+  context: {},
+  createStudentData: () => {},
   isCreated: false,
   newStudent: {},
-  createStudentData: () => {},
   setStudentCredentials: () => {},
-  userType: '',
-  context: {},
   tenant: '',
+  userType: '',
 };
 
 const mapStateToProps = state => ({
   isCreated: isCreated(state),
   newStudent: getNewStudent(state),
-  userType: getUserType(state),
   tenant: getApplicationTenant(state),
+  userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentData,
-  setStudentCredentials,
   getApplicationTenant,
+  setStudentCredentials,
 })(StudentRegistrationForm);
 

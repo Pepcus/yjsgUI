@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import LinkButton from '../common/LinkButton';
@@ -274,47 +277,47 @@ class StudentCredentialPage extends Component {
 }
 
 StudentCredentialPage.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setUserTypeAction: PropTypes.func,
   context: PropTypes.object,
+  fetchStudentData: PropTypes.func,
+  hashLink: PropTypes.string,
   isFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
+  secretKey: PropTypes.string,
+  setStudentCredentials: PropTypes.func,
+  setUserTypeAction: PropTypes.func,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  secretKey: PropTypes.string,
-  hashLink: PropTypes.string,
   tenant: PropTypes.string,
 };
 
 StudentCredentialPage.defaultProps = {
-  setUserTypeAction: () => {},
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
-  studentData: '',
   context: {},
+  fetchStudentData: () => {},
+  hashLink: '',
   isFetched: false,
   isLoading: false,
-  studentId: '',
   secretKey: '',
-  hashLink: '',
+  setStudentCredentials: () => {},
+  setUserTypeAction: () => {},
+  studentData: '',
+  studentId: '',
   tenant: '',
 };
 const mapStateToProps = state => ({
-  studentId: getUserId(state),
-  id: getAdminId(state),
-  secretKey: getUserSecretKey(state),
-  password: getAdminPassword(state),
-  isLoading: isLoading(state),
-  searchResults: getSearchResults(state),
-  studentData: getStudent(state),
-  isFetched: isFetched(state),
   hashLink: getHash(state),
+  id: getAdminId(state),
+  isFetched: isFetched(state),
+  isLoading: isLoading(state),
+  password: getAdminPassword(state),
+  searchResults: getSearchResults(state),
+  secretKey: getUserSecretKey(state),
+  studentData: getStudent(state),
+  studentId: getUserId(state),
   tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
+  getApplicationTenant,
   setStudentCredentials,
   setUserTypeAction,
-  getApplicationTenant,
 })(StudentCredentialPage);
