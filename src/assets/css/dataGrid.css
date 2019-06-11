@@ -29,14 +29,18 @@ html, body {
     overflow-y: auto;
     max-width: 1170px;
 }
-
+.field-radio-group {
+    margin-top: 20px;
+}
 .marks-style .form-control{
     border: none;
     background: none;
     width: auto;
     padding: 0;
 }
-
+.default-form-container {
+    height: 100%;
+}
 .marks-style .control-label{
     width: auto;;
 }
@@ -2907,7 +2911,11 @@ body,
     }
 
 }
-
+@media (max-width: 990px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 768px) {
     .form-container {
         display: block;
@@ -3081,10 +3089,17 @@ body,
         color: #0000EE;
         text-decoration: underline;
     }
+    .field-style {
+        display: inline-grid;
+        width: 50%;
+    }
 
 }
 
 @media (max-width: 736px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
     .landing-page-block {
         height: auto;
     }
@@ -3595,9 +3610,24 @@ body,
     .file-text-format-wrapper {
         max-width:95%;
     }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
 }
-
+@media (max-width: 640px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 480px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
     .rjsf {
         box-shadow: none;
     }
@@ -3731,6 +3761,13 @@ body,
 }
 
 @media (max-width: 360px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
     .landing-page-logo {
         max-width: 120px;
     }
@@ -3766,6 +3803,13 @@ body,
 }
 
 @media (max-width: 320px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
     .form-group {
         padding: 8px 8px 8px;
     }
