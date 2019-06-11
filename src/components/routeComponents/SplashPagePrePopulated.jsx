@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
 import PropTypes from 'prop-types';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
@@ -372,28 +375,28 @@ class SplashPagePrePopulated extends Component {
 }
 
 SplashPagePrePopulated.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setAdminCredentialsAction: PropTypes.func,
-  studentId: PropTypes.string,
-  secretKey: PropTypes.string,
   adminLoginState: PropTypes.bool,
+  fetchStudentData: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
+  secretKey: PropTypes.string,
+  setAdminCredentialsAction: PropTypes.func,
+  setAdminLoginStateAction: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
+  studentId: PropTypes.string,
   tenant: PropTypes.string,
 };
 
 SplashPagePrePopulated.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
-  setAdminLoginStateAction: () => {},
-  setAdminCredentialsAction: () => {},
-  studentId: '',
-  secretKey: '',
   adminLoginState: false,
+  fetchStudentData: () => {},
   id: '',
   password: '',
+  secretKey: '',
+  setAdminCredentialsAction: () => {},
+  setAdminLoginStateAction: () => {},
+  setStudentCredentials: () => {},
+  studentId: '',
   tenant: '',
 };
 
@@ -412,8 +415,8 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchStudentData,
-  setStudentCredentials,
+  getApplicationTenant,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-  getApplicationTenant,
+  setStudentCredentials,
 })(SplashPagePrePopulated);

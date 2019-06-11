@@ -2157,7 +2157,7 @@
     },
     "Data": {}
   },
-  "onlyOptin2019" : {
+  "onlyOptIn" : {
     "Schema": {
       "type": "object",
       "required": ["optIn2019"],

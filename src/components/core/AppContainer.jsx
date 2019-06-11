@@ -1,61 +1,43 @@
-import connect from 'react-redux/es/connect/connect';
-import cssVars from 'css-vars-ponyfill';
-import { HashRouter, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import {
+  HashRouter,
+  Route,
+} from 'react-router-dom';
+import connect from 'react-redux/es/connect/connect';
+import PropTypes from 'prop-types';
 
 import Routes from './Routes';
-import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
-import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
+import {
+  loadAppDataAction,
+  loadBusCoordinatorsDataAction,
+} from '../../actions/assetFilesActions';
+import {
+  getApplicationMode,
+  isAppLoaded,
+  getIsAppLoadedError,
+} from '../../reducers/assetFilesReducer';
+import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
-import {
-  setLoadingStateAction,
-} from '../../actions/studentRegistrationActions';
+import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 
+const { development, production } = cssJSON;
 
 /**
  * AppContainer is the wrapper of application.
  */
 class AppContainer extends Component {
   componentDidMount() {
-    const {
-      loadBusCoordinatorsData,
-      loadAppData,
-      mode,
-      setLoadingState,
-    } = this.props;
-
-    loadBusCoordinatorsData();
-    loadAppData();
-    setLoadingState(false);
-    /**
-     * CSS variable doesn't support in IE for that we use 'css-vars-ponyfill'.
-     * reference:- https://jhildenbiddle.github.io/css-vars-ponyfill/#/
-     */
+    this.props.loadBusCoordinatorsDataAction();
+    this.props.loadAppDataAction();
+    this.props.setLoadingStateAction(false);
     if (this.props.isAppLoaded) {
-      cssVars({
-        // Only styles from CodePen's CSS panel
-        include: 'style:not([data-ignore])',
-        // Treat all browsers as legacy
-        variables: {
-          ...cssJSON[mode],
-        },
-        onlyLegacy: true,
-      });
+      setAppColor(this.props.mode === 'production' ? production : development);
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAppLoaded) {
-      cssVars({
-        // Only styles from CodePen's CSS panel
-        include: 'style:not([data-ignore])',
-        // Treat all browsers as legacy
-        variables: {
-          ...cssJSON[nextProps.mode],
-        },
-        onlyLegacy: true,
-      });
+      setAppColor(nextProps.mode === 'production' ? production : development);
     }
   }
 
@@ -83,36 +65,31 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  loadAppData: PropTypes.func,
-  setLoadingState: PropTypes.func.isRequired,
-  loadBusCoordinatorsData: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
+  loadAppDataAction: PropTypes.func,
+  loadBusCoordinatorsDataAction: PropTypes.func,
   mode: PropTypes.string,
+  setLoadingStateAction: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
-  loadAppData: () => {},
-  loadBusCoordinatorsData: () => {},
   isAppLoaded: false,
   isAppLoadingFailed: false,
+  loadAppDataAction: () => {},
+  loadBusCoordinatorsDataAction: () => {},
   mode: '',
 };
 
 const mapStateToProps = state => ({
-  mode: getApplicationMode(state),
   isAppLoaded: isAppLoaded(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
+  mode: getApplicationMode(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadAppData: () => dispatch(loadAppDataAction()),
-  loadBusCoordinatorsData: () => dispatch(loadBusCoordinatorsDataAction()),
-  setLoadingState: () => dispatch(setLoadingStateAction()),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AppContainer);
+export default connect(mapStateToProps, {
+  loadAppDataAction,
+  loadBusCoordinatorsDataAction,
+  setLoadingStateAction,
+})(AppContainer);
 

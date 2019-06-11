@@ -81,28 +81,28 @@ class InputField extends Component {
 export default InputField;
 
 InputField.propTypes = {
-  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isRequired: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string,
+  onInputChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  placeholder: PropTypes.string,
-  onInputChange: PropTypes.func,
-  errorMessage: PropTypes.string,
-  isRequired: PropTypes.bool,
-  disabled: PropTypes.bool,
 };
 
 InputField.defaultProps = {
-  type: 'text',
+  disabled: false,
+  errorMessage: '',
+  isRequired: false,
   label: '',
   name: '',
-  placeholder: '',
   onInputChange: () => {},
-  errorMessage: '',
+  placeholder: '',
+  type: 'text',
   value: '',
-  isRequired: false,
-  disabled: false,
 };

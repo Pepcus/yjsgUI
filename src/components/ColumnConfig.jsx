@@ -192,18 +192,18 @@ class ColumnConfig extends Component {
 }
 
 ColumnConfig.propTypes = {
-  visibleColumnConfig: PropTypes.object,
-  setValuesOfVisibleColumnConfig: PropTypes.func,
-  selectValue: PropTypes.bool,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
+  selectValue: PropTypes.bool,
+  setValuesOfVisibleColumnConfig: PropTypes.func,
+  visibleColumnConfig: PropTypes.object,
 };
 
 ColumnConfig.defaultProps = {
-  visibleColumnConfig: {},
-  setValuesOfVisibleColumnConfig: () => {},
-  selectValue: true,
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
+  selectValue: true,
+  setValuesOfVisibleColumnConfig: () => {},
+  visibleColumnConfig: {},
 };
 export default ColumnConfig;

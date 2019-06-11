@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
@@ -362,43 +365,43 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setHashLinkForNewRegistrationAction: PropTypes.func,
-  setAdminCredentialsAction: PropTypes.func,
   adminLoginState: PropTypes.bool,
+  fetchStudentData: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
+  setAdminCredentialsAction: PropTypes.func,
+  setAdminLoginStateAction: PropTypes.func,
+  setHashLinkForNewRegistrationAction: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
-  setAdminLoginStateAction: () => {},
-  setHashLinkForNewRegistrationAction: () => {},
-  setAdminCredentialsAction: () => {},
   adminLoginState: false,
+  fetchStudentData: () => {},
   id: '',
   password: '',
+  setAdminCredentialsAction: () => {},
+  setAdminLoginStateAction: () => {},
+  setHashLinkForNewRegistrationAction: () => {},
+  setStudentCredentials: () => {},
   tenant: '',
 };
 const mapStateToProps = state => ({
-  id: getAdminId(state),
-  password: getAdminPassword(state),
-  isLoading: isLoading(state),
-  searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
-  studentData: getStudent(state),
+  id: getAdminId(state),
   isFetched: isFetched(state),
+  isLoading: isLoading(state),
+  password: getAdminPassword(state),
+  searchResults: getSearchResults(state),
+  studentData: getStudent(state),
   tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
-  setStudentCredentials,
+  getApplicationTenant,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-  getApplicationTenant,
+  setStudentCredentials,
 })(SplashPage);

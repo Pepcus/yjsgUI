@@ -200,12 +200,12 @@ class StudentIdCardModal extends Component {
 }
 
 StudentIdCardModal.propTypes = {
-  selectedStudents: PropTypes.array,
   busCoordinators: PropTypes.object,
+  selectedStudents: PropTypes.array,
 };
 StudentIdCardModal.defaultProps = {
-  selectedStudents: [],
   busCoordinators: {},
+  selectedStudents: [],
 };
 const mapStateToProps = state => ({
   busCoordinators: getBusCoordinators(state),

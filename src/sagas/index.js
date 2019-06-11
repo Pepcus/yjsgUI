@@ -12,7 +12,11 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './rootSaga';
-import { fetchFilesConfigSaga, getAppConfigSaga, getBusCoordinatorsConfigSaga } from './assetFilesSaga';
+import {
+  fetchFilesConfigSaga,
+  getAppConfigSaga,
+  getBusCoordinatorsConfigSaga,
+} from './assetFilesSaga';
 
 const sagas = [
   takeLatest(['CREATE_STUDENT'], createStudentSaga),

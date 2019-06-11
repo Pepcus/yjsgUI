@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FormContainer = props => (
+const FormContainer = ({ children }) => (
   <form>
-    { props.children }
+    { children }
   </form>
 );
 

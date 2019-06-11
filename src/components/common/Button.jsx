@@ -19,21 +19,21 @@ const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
 );
 
 Button.propTypes = {
-  disabled: PropTypes.bool,
   buttonText: PropTypes.string,
-  onClick: PropTypes.func,
-  type: PropTypes.string,
+  disabled: PropTypes.bool,
   formName: PropTypes.string,
+  onClick: PropTypes.func,
   styles: PropTypes.object,
+  type: PropTypes.string,
 };
 
 Button.defaultProps = {
-  disabled: false,
   buttonText: '',
-  onClick: () => {},
-  type: 'button',
+  disabled: false,
   formName: '',
+  onClick: () => {},
   styles: {},
+  type: 'button',
 };
 
 export default Button;

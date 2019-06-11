@@ -156,42 +156,42 @@ class AdminPanel extends Component {
 }
 
 AdminPanel.propTypes = {
-  fetchSearchResultsAction: PropTypes.func.isRequired,
-  setAdminCredentialsAction: PropTypes.func.isRequired,
-  resetAdminCredentialsAction: PropTypes.func.isRequired,
-  clearSearchResultsAction: PropTypes.func.isRequired,
-  searchResults: PropTypes.object,
   adminLoginState: PropTypes.bool,
-  setRedirectValueAction: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
+  clearSearchResultsAction: PropTypes.func.isRequired,
+  fetchSearchResultsAction: PropTypes.func.isRequired,
   id: PropTypes.string,
-  password: PropTypes.string,
   isLoading: PropTypes.bool,
+  password: PropTypes.string,
+  resetAdminCredentialsAction: PropTypes.func.isRequired,
+  searchResults: PropTypes.object,
+  setAdminCredentialsAction: PropTypes.func.isRequired,
+  setAdminLoginStateAction: PropTypes.func,
+  setRedirectValueAction: PropTypes.func,
 };
 
 AdminPanel.defaultProps = {
-  searchResults: {},
   adminLoginState: false,
-  setRedirectValueAction: () => {},
-  setAdminLoginStateAction: () => {},
   id: '',
-  password: '',
   isLoading: false,
+  password: '',
+  searchResults: {},
+  setAdminLoginStateAction: () => {},
+  setRedirectValueAction: () => {},
 };
 
 const mapStateToProps = state => ({
-  id: getAdminId(state),
-  password: getAdminPassword(state),
-  isLoading: isLoading(state),
-  searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
+  id: getAdminId(state),
+  isLoading: isLoading(state),
+  password: getAdminPassword(state),
+  searchResults: getSearchResults(state),
 });
 
 export default connect(mapStateToProps, {
-  fetchSearchResultsAction,
-  setAdminCredentialsAction,
   clearSearchResultsAction,
-  setRedirectValueAction,
+  fetchSearchResultsAction,
   resetAdminCredentialsAction,
+  setAdminCredentialsAction,
   setAdminLoginStateAction,
+  setRedirectValueAction,
 })(AdminPanel);

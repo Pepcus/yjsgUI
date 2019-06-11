@@ -277,17 +277,17 @@ class AdvanceSearch extends Component {
 
 AdvanceSearch.propTypes = {
   checkedIds: PropTypes.array,
-  onFilter: PropTypes.func,
   formatStudents: PropTypes.func,
-  students: PropTypes.array,
   metaData: PropTypes.object,
+  onFilter: PropTypes.func,
+  students: PropTypes.array,
 };
 
 AdvanceSearch.defaultProps = {
   checkedIds: [],
-  onFilter: () => {},
   formatStudents: () => {},
-  students: [],
   metaData: {},
+  onFilter: () => {},
+  students: [],
 };
 export default AdvanceSearch;

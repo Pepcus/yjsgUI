@@ -284,34 +284,34 @@ class UploadStudentsAttendanceFile extends Component {
 }
 
 UploadStudentsAttendanceFile.propTypes = {
-  resetIsSuccessAction: PropTypes.func,
-  uploadStudentsAttendanceFileAction: PropTypes.func,
-  secretKey: PropTypes.string,
   failRecordIds: PropTypes.string,
   idNotExistErrorMessage: PropTypes.string,
-  isUploadAttendanceSuccess: PropTypes.bool,
   isUploadAttendanceFailed: PropTypes.bool,
+  isUploadAttendanceSuccess: PropTypes.bool,
+  resetIsSuccessAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  uploadStudentsAttendanceFileAction: PropTypes.func,
 };
 
 UploadStudentsAttendanceFile.defaultProps = {
-  resetIsSuccessAction: () => {},
-  uploadStudentsAttendanceFileAction: () => {},
-  secretKey: '',
   failRecordIds: '',
   idNotExistErrorMessage: '',
-  isUploadAttendanceSuccess: false,
   isUploadAttendanceFailed: false,
+  isUploadAttendanceSuccess: false,
+  resetIsSuccessAction: () => {},
+  secretKey: '',
+  uploadStudentsAttendanceFileAction: () => {},
 };
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
-  isUploadAttendanceSuccess: getSuccess(state),
-  isUploadAttendanceFailed: isUploadAttendanceFailed(state),
   failRecordIds: getFailRecordIds(state),
   idNotExistErrorMessage: idNotExistErrorMessage(state),
+  isUploadAttendanceFailed: isUploadAttendanceFailed(state),
+  isUploadAttendanceSuccess: getSuccess(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
-  uploadStudentsAttendanceFileAction,
   resetIsSuccessAction,
+  uploadStudentsAttendanceFileAction,
 })(UploadStudentsAttendanceFile);
 

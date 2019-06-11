@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataGrid from 'simple-react-data-grid';
 import isEmpty from 'lodash/isEmpty';
-import { Redirect, Link } from 'react-router-dom';
+import {
+  Redirect,
+  Link,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
-
-import { getApplicationMode } from '../../reducers/assetFilesReducer';
 import ColumnConfig from '../ColumnConfig';
 import {
   gridMetaData,
@@ -64,7 +66,7 @@ class StudentInformationGrid extends Component {
       selectedStudents: [],
       selectValue: this.props.selectValue,
       students: [],
-      metaData: gridHeaderData({ mode: this.props.mode }),
+      metaData: gridHeaderData(),
       columnOptionIsOpen: false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
@@ -623,69 +625,66 @@ class StudentInformationGrid extends Component {
 }
 StudentInformationGrid.propTypes = {
   adminLoginState: PropTypes.bool,
-  students: PropTypes.array,
-  visibleColumnConfig: PropTypes.object,
-  selectValue: PropTypes.bool,
-  redirect: PropTypes.bool,
+  fetchStudentData: PropTypes.func,
   getAllStudentsAction: PropTypes.func,
-  secretKey: PropTypes.string,
+  redirect: PropTypes.bool,
   resetAdminCredentialsAction: PropTypes.func,
+  resetVisibleColumnConfigAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  selectValue: PropTypes.bool,
   setAdminLoginStateAction: PropTypes.func,
   setRedirectValueAction: PropTypes.func,
-  resetVisibleColumnConfigAction: PropTypes.func,
-  setVisibleColumnConfigAction: PropTypes.func,
   setStudentDataAction: PropTypes.func,
-  updateStudentByAdminAction: PropTypes.func,
-  fetchStudentData: PropTypes.func,
+  setVisibleColumnConfigAction: PropTypes.func,
+  setUserTypeAction: PropTypes.func,
+  students: PropTypes.array,
   studentData: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]),
-  setUserTypeAction: PropTypes.func,
-  mode: PropTypes.string,
+  visibleColumnConfig: PropTypes.object,
+  updateStudentByAdminAction: PropTypes.func,
 };
 
 StudentInformationGrid.defaultProps = {
   adminLoginState: false,
-  students: [],
-  selectValue: true,
-  redirect: false,
-  visibleColumnConfig: {},
+  fetchStudentData: () => {},
   getAllStudentsAction: () => {},
-  secretKey: '',
+  redirect: false,
   resetAdminCredentialsAction: () => {},
+  resetVisibleColumnConfigAction: () => {},
+  secretKey: '',
+  selectValue: true,
   setAdminLoginStateAction: () => {},
   setRedirectValueAction: () => {},
-  resetVisibleColumnConfigAction: () => {},
-  setVisibleColumnConfigAction: () => {},
   setStudentDataAction: () => {},
-  updateStudentByAdminAction: () => {},
-  fetchStudentData: () => {},
-  studentData: {},
+  setVisibleColumnConfigAction: () => {},
   setUserTypeAction: () => {},
-  mode: '',
+  studentData: {},
+  students: [],
+  visibleColumnConfig: {},
+  updateStudentByAdminAction: () => {},
 };
 
 const mapStateToProps = state => ({
+  adminLoginState: stateOfAdminLogin(state),
+  redirect: stateOfRedirect(state),
+  secretKey: getSecretKey(state),
+  selectValue: getSelectValue(state),
+  studentData: getStudent(state),
   students: allStudentsData(state),
   visibleColumnConfig: getVisibleColumnConfig(state),
-  selectValue: getSelectValue(state),
-  redirect: stateOfRedirect(state),
-  adminLoginState: stateOfAdminLogin(state),
-  secretKey: getSecretKey(state),
-  studentData: getStudent(state),
-  mode: getApplicationMode(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,
   getAllStudentsAction,
-  setStudentDataAction,
-  updateStudentByAdminAction,
   resetAdminCredentialsAction,
+  resetIsSuccessAction,
+  resetVisibleColumnConfigAction,
   setAdminLoginStateAction,
+  setStudentDataAction,
   setRedirectValueAction,
   setVisibleColumnConfigAction,
-  resetVisibleColumnConfigAction,
-  resetIsSuccessAction,
   setUserTypeAction,
+  updateStudentByAdminAction,
 })(StudentInformationGrid);

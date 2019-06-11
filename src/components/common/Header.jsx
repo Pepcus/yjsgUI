@@ -11,7 +11,10 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
-import { routes, title } from '../../config/appConfig.json';
+import {
+  routes,
+  title,
+} from '../../config/appConfig.json';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
@@ -170,26 +173,26 @@ const Header = ({
 };
 
 Header.propTypes = {
-  title: PropTypes.string,
+  context: PropTypes.object,
+  location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
+  resetVisibleColumnConfig: PropTypes.func,
+  routes: PropTypes.array,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
-  resetVisibleColumnConfig: PropTypes.func,
-  location: PropTypes.string,
-  context: PropTypes.object,
-  routes: PropTypes.array,
   tenant: PropTypes.string,
+  title: PropTypes.string,
 };
 Header.defaultProps = {
-  title: '',
+  context: {},
+  location: '',
   resetAdminCredentials: () => {},
+  resetVisibleColumnConfig: () => {},
+  routes: [],
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
-  resetVisibleColumnConfig: () => {},
-  location: '',
-  context: {},
-  routes: [],
   tenant: '',
+  title: '',
 };
 
 const mapDispatchToProps = dispatch => ({

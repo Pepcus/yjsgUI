@@ -1,4 +1,7 @@
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -66,25 +69,25 @@ const LoginForm = ({ isAdmin,
 };
 
 LoginForm.propTypes = {
-  isAdmin: PropTypes.bool,
   admin: PropTypes.object,
-  handleInputChange: PropTypes.func,
   adminScreenRedirection: PropTypes.func,
   disableAdminLoginButtons: PropTypes.func,
-  setAdminLogin: PropTypes.func,
+  enableAdminLoginButtons: PropTypes.func,
+  handleInputChange: PropTypes.func,
+  isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
   redirectToNewRegistrationPage: PropTypes.func,
-  enableAdminLoginButtons: PropTypes.func,
+  setAdminLogin: PropTypes.func,
 };
 LoginForm.defaultProps = {
-  isAdmin: false,
   admin: {},
-  handleInputChange: () => {},
   adminScreenRedirection: () => {},
   disableAdminLoginButtons: () => {},
-  setAdminLogin: () => {},
+  enableAdminLoginButtons: () => {},
+  handleInputChange: () => {},
+  isAdmin: false,
   isNewRegistration: false,
   redirectToNewRegistrationPage: () => {},
-  enableAdminLoginButtons: () => {},
+  setAdminLogin: () => {},
 };
 export default LoginForm;
