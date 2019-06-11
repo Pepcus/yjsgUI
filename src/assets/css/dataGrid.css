@@ -2924,6 +2924,7 @@ body,
         display: block;
     }
     .rjsf {
+        box-shadow: none;
         margin: 0px auto;
     }
     .form-group {
@@ -3598,7 +3599,6 @@ body,
 
 @media (max-width: 480px) {
     .rjsf {
-        margin: 50px auto;
         box-shadow: none;
     }
     .form-container {
