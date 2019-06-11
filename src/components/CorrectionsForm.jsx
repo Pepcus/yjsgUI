@@ -72,7 +72,7 @@ const CorrectionsForm = ({ pageUser,
   if (formDetails) {
     return (
       <div className={(pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
-      && onlyOptInForm ? 'form-container' : ''}
+      && onlyOptInForm ? 'form-container' : 'default-form-container'}
       >
         <div
           className={(pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
