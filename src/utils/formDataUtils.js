@@ -10,6 +10,16 @@ import {
   USER_TYPES,
 } from '../constants/yjsg';
 
+/**
+ * getFormData method return the form data for json form schema
+ * @param {String} pageUser
+ * @param {Boolean} onlyOptInForm
+ * @param {String} tenant
+ * @param {Object} student
+ * @param {Function} renderBackButton
+ * @param {Function} renderSubmitButtons
+ * @return {{schema: Object, uiSchema: Object , formData: Object}}
+ */
 export const getFormData = ({
   pageUser,
   onlyOptInForm,

@@ -17,6 +17,10 @@ class SelectListInputField extends Component {
     this._populateValue = this.populateValue.bind(this);
   }
 
+  /**
+   * renderOptionStatements method render options
+   * @return {*[]} options
+   */
   renderOptionStatements() {
     return this.props.options.map((iterator, index) =>
       (
@@ -26,14 +30,23 @@ class SelectListInputField extends Component {
     );
   }
 
+  /**
+   * populateValue method return conditional value into option
+   * @param {String} value
+   * @return {*}
+   */
   populateValue(value) {
     if (!value) {
       return 'select';
     } return value;
   }
 
-  handleOnChange(e) {
-    this.props.onInputChange(e.target.value, this.props.name);
+  /**
+   * handleOnChange handle onChange value in drop down option
+   * @param {Object} event
+   */
+  handleOnChange(event) {
+    this.props.onInputChange(event.target.value, this.props.name);
   }
 
   render() {

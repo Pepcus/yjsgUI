@@ -26,6 +26,7 @@ class SelectedStudentsActionWrapper extends Component {
       printOptionIsOpen: false,
       isBusCoordinatorsError: false,
     };
+
     this.openPrintOption = this.openPrintOption.bind(this);
     this.printCards = this.printCards.bind(this);
   }
@@ -41,7 +42,7 @@ class SelectedStudentsActionWrapper extends Component {
 
   /**
    * renderCoordinatorUnavailableWarningPopup render bus coordinator error popup
-   * @return {ReactComponent}
+   * @return {*} bus coordinator warning popup
    */
   renderCoordinatorUnavailableWarningPopup = () => {
     if (this.props.isBusCoordinatorsDataFailed && this.state.isBusCoordinatorsError) {
@@ -66,6 +67,7 @@ class SelectedStudentsActionWrapper extends Component {
     }
     return null;
   };
+
   /**
    * onClickPrintCancel set the boolean value of isBusCoordinatorsError
    * @param {Boolean}value
@@ -75,6 +77,7 @@ class SelectedStudentsActionWrapper extends Component {
       isBusCoordinatorsError: value,
     });
   };
+
   /**
    * openPrintOption method open or close the print window.
    */
@@ -93,6 +96,7 @@ class SelectedStudentsActionWrapper extends Component {
     }
     return 'export';
   }
+
   /**
    * getPrintNowClassName method return the className
    * Print Now button as per students selected or not.
@@ -104,6 +108,7 @@ class SelectedStudentsActionWrapper extends Component {
     }
     return 'linkButton';
   }
+
   render() {
     const filterHeader = this.props.metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
@@ -172,6 +177,7 @@ SelectedStudentsActionWrapper.defaultProps = {
   metaData: {},
   selectedStudents: [],
 };
+
 const mapStateToProps = state => ({
   isBusCoordinatorsDataFailed: isBusCoordinatorsDataFailed(state),
 });

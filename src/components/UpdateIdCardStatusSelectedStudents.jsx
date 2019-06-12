@@ -55,6 +55,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
       selectedCardOption: '',
       isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
     };
+
     this.openUpdateIdCardStatusSelectedStudentsModal = this.openUpdateIdCardStatusSelectedStudentsModal.bind(this);
     this.closeUpdateIdCardStatusSelectedStudentsModal = this.closeUpdateIdCardStatusSelectedStudentsModal.bind(this);
     this.onClickRadioButton = this.onClickRadioButton.bind(this);
@@ -98,9 +99,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
     if (isEmpty(this.state.selectedCardOption)) {
       return 'popup-buttons-disable';
     }
-
     return 'display-inline linkButton btn-upload';
-
   }
 
   /**
@@ -121,15 +120,13 @@ class UpdateIdCardStatusSelectedStudents extends Component {
     if (isEmpty(this.props.selectedStudents)) {
       return 'disable-link-button-new';
     }
-
     return 'linkButton';
-
   }
 
   /**
    * renderMessage method render the success or failed
    * message of update students Id card status
-   * @return {ReactComponent}
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isUpdateIdCardStatusSuccess) {
@@ -182,7 +179,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   /**
    * renderUpdateIdCardStatusSelectedStudentsModal method render
    * the modal of update Id card status of selected students.
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderUpdateIdCardStatusSelectedStudentsModal() {
     if (this.state.isUpdateSelectedStudentsOptInOrOptOutModalOpen) {
@@ -239,6 +236,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
       );
     }
   }
+
   render() {
     return (
       <div className="button-container">
@@ -262,6 +260,7 @@ UpdateIdCardStatusSelectedStudents.propTypes = {
   selectedStudents: PropTypes.array,
   updateIdCardStatusSelectedStudentsAction: PropTypes.func,
 };
+
 UpdateIdCardStatusSelectedStudents.defaultProps = {
   isUpdateIdCardStatusFailed: false,
   isUpdateIdCardStatusSuccess: false,
@@ -270,6 +269,7 @@ UpdateIdCardStatusSelectedStudents.defaultProps = {
   selectedStudents: [],
   updateIdCardStatusSelectedStudentsAction: () => {},
 };
+
 const mapStateToProps = state => ({
   isUpdateIdCardStatusFailed: isUpdateIdCardStatusFailed(state),
   isUpdateIdCardStatusSuccess: isUpdateIdCardStatusSuccess(state),

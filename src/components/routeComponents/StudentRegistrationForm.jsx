@@ -62,6 +62,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * StudentRegistrationForm render student registration form
  * @type {Class}
+ * @return {*} registration form
  */
 class StudentRegistrationForm extends Component {
   constructor(props) {
@@ -78,6 +79,7 @@ class StudentRegistrationForm extends Component {
         address: '',
         busStop: '',
         classAttended2019: '',
+        classAttended2018: '',
         optIn2019: 'Y',
       },
       isSubmitTriggered: false,
@@ -106,6 +108,7 @@ class StudentRegistrationForm extends Component {
     // Since the below fields are optional. we are setting them blank explicitly
     this._verifyStudentFormData({ email: '', optIn2019: 'Y' });
   }
+
   /**
    * verifyStudentFormData method verify the student data.
    * according to student data it set the error message object.
@@ -118,6 +121,7 @@ class StudentRegistrationForm extends Component {
       errorMessage: errorMessageObject,
     });
   }
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
@@ -128,6 +132,9 @@ class StudentRegistrationForm extends Component {
     return isValidUserInfo({ errorMessageObject: this.state.errorMessage, tenant: this.props.tenant });
   }
 
+  /**
+   * scrollToError method scroll to first form file which is in valid in mobile view only.
+   */
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-error');
     if (errorNode) {
@@ -157,6 +164,7 @@ class StudentRegistrationForm extends Component {
       }, () => { this.scrollToError(); });
     }
   }
+
   /**
    * handleInputChange method set the value and name of input field
    * of student registration form.
@@ -180,6 +188,10 @@ class StudentRegistrationForm extends Component {
     });
   }
 
+  /**
+   * renderSuccessMessage method render success message popup when form submitted successfully
+   * @return {*} success message popup
+   */
   renderSuccessMessage() {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const student = this.props.newStudent;
@@ -200,6 +212,11 @@ class StudentRegistrationForm extends Component {
     }
     return null;
   }
+
+  /**
+   * renderBusStopOptions method render bus stop form field conditionally
+   * @return {*} bus stop form field
+   */
   renderBusStopOptions = () => {
     if (this.props.tenant === TENANT.INDORE) {
       return (
@@ -216,9 +233,10 @@ class StudentRegistrationForm extends Component {
       );
     } return null;
   };
+
   /**
    * renderBackButton method return link button according to user type
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderBackButton() {
     if (this.props.userType === USER_TYPES.STUDENT) {
@@ -243,6 +261,7 @@ class StudentRegistrationForm extends Component {
       />
     );
   }
+
   render() {
     return (
       <div className="registrationFormContainer">

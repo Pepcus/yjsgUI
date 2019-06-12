@@ -1,6 +1,11 @@
 import * as XLSX from 'xlsx';
 import { FILE_PRESENTATION_TYPE } from '../constants/yjsg';
 
+/**
+ * formatXlsxToJson method format response of xlsx file type json type.
+ * @param {Object} response
+ * @return {any[]}
+ */
 export const formatXlsxToJson = (response) => {
   const data = new Uint8Array(response);
   const xlsxData = [];
@@ -19,6 +24,16 @@ export const formatXlsxToJson = (response) => {
   });
 };
 
+/**
+ * getDataGridHeadersForFileView method return the metaData for file according to
+ * file presentation type
+ * @param {Array} fileData
+ * @param {Object} fileDetails
+ * @return {{drawerPosition: string,
+ * bottomDrawer: {pagination: boolean},
+ * headerConfig: Array,
+ * recordsPerPage: number}} metaData
+ */
 export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   const headerConfig = [];
   for (const key in fileData[0]) {

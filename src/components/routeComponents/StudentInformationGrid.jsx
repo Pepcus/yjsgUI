@@ -104,6 +104,7 @@ class StudentInformationGrid extends Component {
       metaData: this.formatMetaData(this.state.visibleColumnConfig),
     });
   }
+
   componentDidMount() {
     if (isEmpty(this.props.students)) {
       this.props.getAllStudentsAction({ secretKey: this.props.secretKey });
@@ -120,6 +121,7 @@ class StudentInformationGrid extends Component {
     }
 
   }
+
   componentWillReceiveProps(nextProps) {
     if (isEmpty(this.props.students)) {
       if (nextProps.students !== this.props.students) {
@@ -150,6 +152,7 @@ class StudentInformationGrid extends Component {
       }
     }
   }
+
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
@@ -163,9 +166,10 @@ class StudentInformationGrid extends Component {
       fileDownloadMessage: value,
     });
   };
+
   /**
    * renderFileDownloadMessagePopup method render the all export csv popup message
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderFileDownloadMessagePopup = () => {
     if (this.state.fileDownloadMessage) {
@@ -224,6 +228,7 @@ class StudentInformationGrid extends Component {
       selectedStudents: checkedStudents,
     });
   }
+
   /**
    * performLogout method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -239,6 +244,7 @@ class StudentInformationGrid extends Component {
     this.props.resetVisibleColumnConfigAction();
     localStorage.clear();
   }
+
   /**
    * getSelectedRow method is call back function which is pass to DataGrid
    * It give selected row data of student on check of check box.
@@ -279,6 +285,7 @@ class StudentInformationGrid extends Component {
     });
     listOfIsCheckedStatusStudentIds = [];
   }
+
   /**
    * openColumnOption method call when onClick of columnConfig button
    * It set the true value of columnOptionIsOpen.
@@ -286,6 +293,7 @@ class StudentInformationGrid extends Component {
   openColumnOption() {
     this.setState({ columnOptionIsOpen: true });
   }
+
   /**
    * closeColumnOption method call when onClick of close button of columnConfig modal
    * It set the false value of columnOptionIsOpen.
@@ -293,6 +301,7 @@ class StudentInformationGrid extends Component {
   closeColumnOption() {
     this.setState({ columnOptionIsOpen: false });
   }
+
   /**
    * Todo: This feature will be implemented in future scope.
    */
@@ -302,6 +311,7 @@ class StudentInformationGrid extends Component {
   closeAdvanceFilter() {
     this.setState({ advanceFilterIsOpen: false });
   }*/
+
   /**
    * setValuesOfVisibleColumnConfig method set the value of visibleColumnConfig and selectValue
    * And call the formatMetaData method.
@@ -330,6 +340,7 @@ class StudentInformationGrid extends Component {
     });
     this.props.setVisibleColumnConfigAction(values, selectValue);
   }
+
   /**
    * formatMetaData method format headerConfig of metaData according to visibleColumnConfig object
    * (set the column which should be render in DataGrid)
@@ -352,6 +363,7 @@ class StudentInformationGrid extends Component {
     }
     return { ...this.state.metaData, headerConfig: metaData };
   };
+
   /**
    * handleEditClick method call when click on edit button of particular column in DataGrid.
    * And it will converted all value of properties of rowData object into string
@@ -371,10 +383,11 @@ class StudentInformationGrid extends Component {
       });
     }
   }
+
   /**
    * redirectToStudentCorrection method redirect to "/studentCorrection"
    * when isStudentDataSet value is true(fetch student success)
-   * @return {ReactComponent}
+   * @return {*}
    */
   redirectToStudentCorrection() {
     if (this.state.isStudentDataSet) {
@@ -385,13 +398,14 @@ class StudentInformationGrid extends Component {
     }
     return null;
   }
+
   /**
    * EditButton is custom component which is pass to DataGrid
    * (Edit button render in each row of DataGrid)
    * And onClick of this button handleEditClick method will call and pass the
    * rowData object(data of that particular row) as a parameter to handleEditClick method
    * @param {Object} rowData,
-   * @return {ReactComponent} component,
+   * @return {*} component,
    */
   EditButton = ({ rowData }) => (
     <div>
@@ -406,8 +420,8 @@ class StudentInformationGrid extends Component {
         </button>
       </div>
     </div>
-
   );
+
   /**
    * onFilter method pass as call back function to AdvanceSearch react component.
    * onFilter method call the formatStudents call back function and
@@ -422,7 +436,7 @@ class StudentInformationGrid extends Component {
 
   /**
    * renderColumnConfig method the ColumnConfig react component in render method
-   * @return {ReactComponent} ColumnConfig
+   * @return {*} ColumnConfig
    */
   renderColumnConfig() {
     if (this.state.columnOptionIsOpen) {
@@ -438,6 +452,7 @@ class StudentInformationGrid extends Component {
     }
     return null;
   }
+
   /**
    * formatStudents method format students array in which
    * assign id as studentId to object.
@@ -453,13 +468,14 @@ class StudentInformationGrid extends Component {
     },
     );
   }
+
   /**
    * renderDataGrid method render DataGrid react component in render method.
    * In case if data is not present than it will render
    * "यहाँ जानकारी उपलब्ध नहीं है।" message instead
    * of DataGrid OR when data is present and headerConfig is empty(column not present)
    * than it will render "आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।" message.
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderDataGrid() {
     if (isEmpty(this.state.metaData.headerConfig)) {
@@ -497,6 +513,7 @@ class StudentInformationGrid extends Component {
       </div>
     );
   }
+
   /**
   * redirectToAdminLogin method will redirect to "/adminPanel".
   * @return {String}
@@ -504,6 +521,7 @@ class StudentInformationGrid extends Component {
   redirectToAdminLogin() {
     return <Redirect to="/adminPanel" />;
   }
+
   /**
    * clearSelectedStudents method will clear all selected records".
    */

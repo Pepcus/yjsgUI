@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
+/**
+ * render link button which will use for redirection.
+ * @param {String} linkPath
+ * @param {Function} onClick
+ * @param {String} buttonText
+ * @return {*}
+ * @constructor
+ */
 const LinkButton = ({ linkPath, onClick, buttonText }) => (
   <ButtonContainer>
     <Link

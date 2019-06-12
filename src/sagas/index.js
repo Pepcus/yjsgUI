@@ -34,4 +34,5 @@ const sagas = [
   takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
   takeLatest(['LOAD_BUS_COORDINATORS_DATA_ACTION'], getBusCoordinatorsConfigSaga),
 ];
+
 export default sagas;

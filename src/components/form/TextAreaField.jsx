@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../common/ErrorMessage';
 
 /**
- * TextAreaField render textArea field
+ * TextAreaField render textArea field with custom properties
  * @type {Class}
  */
 class TextAreaField extends Component {
@@ -15,10 +15,18 @@ class TextAreaField extends Component {
     this._populateValue = this.populateValue.bind(this);
   }
 
-  handleOnChange(e) {
-    this.props.onInputChange(e.target.value, this.props.name);
+  /**
+   * handleOnChange handle onChange of text area input field
+   * @param {Object} event
+   */
+  handleOnChange(event) {
+    this.props.onInputChange(event.target.value, this.props.name);
   }
 
+  /**
+   * populateValue method populate value of text area input field
+   * @return {*}
+   */
   populateValue() {
     if (this.props.value) {
       return this.props.value;

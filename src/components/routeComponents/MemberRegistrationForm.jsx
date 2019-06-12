@@ -41,7 +41,6 @@ const JSONSchemaForm = Form;
 /**
  * MemberRegistrationForm render member registration form.
  * @type {Class}
- * @return {ReactComponent}
  */
 class MemberRegistrationForm extends Component {
   constructor(props) {
@@ -50,16 +49,20 @@ class MemberRegistrationForm extends Component {
     this.state = {
       isSubmitTriggered: false,
       member: {},
-      hasError: false,
+      notHasAnError: false,
     };
   }
 
+  /**
+   * handleSubmit method submit registration form data if form data is valid
+   * onClick of submit button.
+   */
   handleSubmit = () => {
-    if (this.state.hasError) {
+    if (this.state.notHasAnError) {
       this.props.createStudentData(this.state.member);
       this.setState({
         isSubmitTriggered: true,
-        hasError: false,
+        notHasAnError: false,
       });
     } else {
       this.setState({}, () => {
@@ -68,6 +71,10 @@ class MemberRegistrationForm extends Component {
     }
   };
 
+  /**
+   * scrollToError scroll page upto first form field which fielded by invalid data
+   * onclick of submit button
+   */
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-danger');
     if (errorNode) {
@@ -75,6 +82,11 @@ class MemberRegistrationForm extends Component {
     }
   };
 
+  /**
+   * transformErrors method transform required form filed error.
+   * @param {Array} errors
+   * @return {Array} errors
+   */
   transformErrors = errors => errors.map((error) => {
     if (error.name === 'required') {
       error.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
@@ -85,6 +97,11 @@ class MemberRegistrationForm extends Component {
     return error;
   });
 
+
+  /**
+   * renderBackButton method render back button conditionally into form
+   * @return {*} back button
+   */
   renderBackButton = () => {
     const {
       userType,
@@ -113,6 +130,10 @@ class MemberRegistrationForm extends Component {
     );
   };
 
+  /**
+   * renderSuccessMessage method render success message popup when form submitted successfully
+   * @return {*} success message popup
+   */
   renderSuccessMessage = () => {
     if (this.props.isCreated && this.state.isSubmitTriggered) {
       const member = this.props.newStudent;
@@ -132,16 +153,26 @@ class MemberRegistrationForm extends Component {
     return null;
   };
 
+  /**
+   * onChange method handle on change of form fields
+   * @param {Object} event
+   */
   onChange = (event) => {
     this.setState({
       member: {
         ...this.state.member,
         ...event.formData,
       },
-      hasError: isEmpty(event.errors),
+      notHasAnError: isEmpty(event.errors),
     });
   };
 
+  /**
+   * validate method check the validation for individual form fields
+   * @param {Object} formData
+   * @param {Object} errors
+   * @return {Object} errors
+   */
   validate = (formData, errors) => {
     memberRegistration.validation.forEach((valid) => {
       const error = validations[valid.validates](formData[valid.field]);

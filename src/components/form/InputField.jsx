@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../common/ErrorMessage';
 
 /**
- * InputField render input field.
+ * InputField render input field custom properties.
  */
 class InputField extends Component {
 

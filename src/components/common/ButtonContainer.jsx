@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * It button wrapper
+ * @param {Object} props
+ * @return {*}
+ * @constructor
+ */
 const ButtonContainer = props => (
   <div style={props.style} className="button-container">
     {props.children}

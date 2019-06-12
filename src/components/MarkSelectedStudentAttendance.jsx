@@ -58,6 +58,7 @@ class MarkSelectedStudentAttendance extends Component {
       selectedDay: '',
       isMarkSelectedStudentsAttendanceModalOpen: false,
     };
+
     this.openMarkSelectedStudentsAttendanceModal = this.openMarkSelectedStudentsAttendanceModal.bind(this);
     this.closeMarkSelectedStudentsAttendanceModal = this.closeMarkSelectedStudentsAttendanceModal.bind(this);
     this.renderMarkSelectedStudentsModal = this.renderMarkSelectedStudentsModal.bind(this);
@@ -80,6 +81,7 @@ class MarkSelectedStudentAttendance extends Component {
     this.setState({ isMarkSelectedStudentsAttendanceModalOpen: true });
     this.filterIdsOfStudents();
   }
+
   /**
    * closeMarkSelectedStudentsAttendanceModal method
    * on Onclick close button set the value of
@@ -94,6 +96,7 @@ class MarkSelectedStudentAttendance extends Component {
       studentsId: [],
     });
   }
+
   /**
    * filterIdsOfStudents method filter Ids of selected students
    * for marking the attendance.
@@ -104,6 +107,7 @@ class MarkSelectedStudentAttendance extends Component {
       studentsId: Ids,
     });
   }
+
   /**
    * renderMarkPresentButtonClassName method return className
    * of mark as present button as per students are selected or not.
@@ -115,6 +119,7 @@ class MarkSelectedStudentAttendance extends Component {
     }
     return 'linkButton';
   }
+
   /**
    * renderMarkButtonClassName method return className
    * of submit button as per students attendance mark or not.
@@ -126,10 +131,12 @@ class MarkSelectedStudentAttendance extends Component {
     }
     return 'btn-upload linkButton';
   }
+
   /**
    * renderMessage method render success message
-   * as per selected students attendance marked.
-   * @return {ReactComponent}
+   * as per selected students attendance marked successfully.
+   * otherwise render failed message
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isMarkAttendanceSuccess) {
@@ -155,7 +162,7 @@ class MarkSelectedStudentAttendance extends Component {
   /**
    * addOptions method return options of drop down list
    * of days
-   * @return {ReactComponent}
+   * @return {*} day drop down list option
    */
   renderOptions() {
     return days.map(
@@ -190,7 +197,7 @@ class MarkSelectedStudentAttendance extends Component {
 
   /**
    * renderMarkSelectedStudentsModal method render mark selected students attendance modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderMarkSelectedStudentsModal() {
     if (this.state.isMarkSelectedStudentsAttendanceModalOpen) {
@@ -245,6 +252,7 @@ class MarkSelectedStudentAttendance extends Component {
     }
     return null;
   }
+
   render() {
     return (
       <div className="button-container button-container-mobile">

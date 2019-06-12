@@ -111,7 +111,7 @@ class StudentCredentialPage extends Component {
   /**
    * checkRegisteredStudentCredential method check the credential
    * of which is already registered.
-   * @return {ReactComponent}
+   * @return {*}
    */
   checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
@@ -179,7 +179,7 @@ class StudentCredentialPage extends Component {
 
   /**
    * renderBackButton method return back button according to user type.
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderBackButton() {
     if (this.props.hashLink === USER_TYPES.ADMIN) {
@@ -207,7 +207,7 @@ class StudentCredentialPage extends Component {
 
   /**
    * renderRegistrationCorrectionFields method return student login fields
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderRegistrationCorrectionFields() {
     return (
@@ -248,6 +248,7 @@ class StudentCredentialPage extends Component {
       </div>
     );
   }
+
   render() {
     if (this.state.isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;

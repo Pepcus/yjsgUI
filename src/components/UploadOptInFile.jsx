@@ -48,7 +48,6 @@ const customUploadOptInFileModalStyles = {
  * @type {Class}
  */
 class UploadOptInFile extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +55,7 @@ class UploadOptInFile extends Component {
       isUploadOptInFileModalOpen: false,
       isFormSubmitted: false,
     };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
@@ -96,9 +96,7 @@ class UploadOptInFile extends Component {
     if (!this.state.optInFile) {
       return 'popup-buttons-disable';
     }
-
     return 'btn-upload linkButton';
-
   }
 
   /**
@@ -133,7 +131,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderFailOptIn method render failed records Ids
-   * @return {ReactComponent}
+   * @return {*} failed records
    */
   renderFailOptIn() {
     if (this.props.failOptIn) {
@@ -149,7 +147,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderIdNotPresentMessage method render unavailable Id error message
-   * @return {ReactComponent}
+   * @return {*} not present Id's
    */
   renderIdNotPresentMessage() {
     if (this.props.unavailableIdErrorMessage) {
@@ -164,7 +162,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderMessage method render success or failure message of upload optIn file
-   * @return {ReactComponent}
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isOptInSuccess) {
@@ -195,7 +193,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderUploadOptInModal method render upload optIn modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderUploadOptInModal() {
     if (this.state.isUploadOptInFileModalOpen) {
@@ -255,7 +253,6 @@ class UploadOptInFile extends Component {
         {this.renderUploadOptInModal()}
       </div>
     );
-
   }
 }
 

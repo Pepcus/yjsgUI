@@ -19,6 +19,7 @@ class AdvanceSearch extends Component {
       isDeepSearchCheck: false,
       checkedIds: [],
     };
+
     this.advanceSearch = this.advanceSearch.bind(this);
     this.onChangeDeepSearchCheckBox = this.onChangeDeepSearchCheckBox.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
@@ -27,11 +28,13 @@ class AdvanceSearch extends Component {
     this._clearFilter = this.clearFilter.bind(this);
     this.clearButton = this.clearButton.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       checkedIds: this.props.checkedIds,
     });
   }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       checkedIds: nextProps.checkedIds,
@@ -65,6 +68,7 @@ class AdvanceSearch extends Component {
       inputValue: event.target.value,
     });
   }
+
   /**
    * clearFilter method clear the search result
    */
@@ -99,6 +103,7 @@ class AdvanceSearch extends Component {
     this.props.onFilter(this.props.formatStudents(studentsData));
     // this.props.onFilter(this.props.formatStudents(this.props.students));
   }
+
   /**
    * onChangeDeepSearchCheckBox method on OnChange of search option check box
    * And manage thresholdValue, isDeepSearchCheck and isMultipleIdSearchCheck value
@@ -142,7 +147,7 @@ class AdvanceSearch extends Component {
 
   /**
    * clearButton method return clear button when inputValue is not empty.
-   * @return {ReactComponent}
+   * @return {*} clear button
    */
   clearButton() {
     if (!isEmpty(this.state.inputValue)) {
@@ -290,4 +295,5 @@ AdvanceSearch.defaultProps = {
   onFilter: () => {},
   students: [],
 };
+
 export default AdvanceSearch;

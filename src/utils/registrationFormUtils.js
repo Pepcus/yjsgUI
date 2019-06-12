@@ -17,6 +17,12 @@ import {
 } from '../constants/messages';
 import { TENANT } from '../constants/yjsg';
 
+/**
+ * setRegistrationData method set form field data in key value pair format
+ * @param {String} value
+ * @param {String} name
+ * @return {Object} formData
+ */
 export const setRegistrationData = (value, name) => {
   const formData = {};
   formData[name] = value;
@@ -25,7 +31,6 @@ export const setRegistrationData = (value, name) => {
 
 /**
  * Validates the email with the help of regex and return the error object containing the error message
- *
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -48,7 +53,7 @@ export const optionalEmailValidate = (value, name) => {
 };
 
 /**
- *
+ * nameValidate method check validations for name form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -74,7 +79,7 @@ export const nameValidate = (value, name) => {
 };
 
 /**
- *
+ * addressValidate method check validations for address form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -102,7 +107,7 @@ export const addressValidate = (value, name) => {
 };
 
 /**
- *
+ * ageValidate method check validations for age form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -122,6 +127,12 @@ export const ageValidate = (value, name) => {
   return errorMessageObject;
 };
 
+/**
+ * ageValidateForBhopal method check validations for age form field in Bhopal tenant case
+ * @param {String} value
+ * @param {String} name
+ * @return {Object} errorMessageObject
+ */
 export const ageValidateForBhopal = (value, name) => {
   const errorMessageObject = {};
   if (isEmpty(value)) {
@@ -138,7 +149,7 @@ export const ageValidateForBhopal = (value, name) => {
 };
 
 /**
- *
+ * mobileValidate method check validations for mobile number form field
  * @param {Number} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -164,7 +175,7 @@ export const mobileValidate = (value, name) => {
 };
 
 /**
- *
+ * optionalMobileValidate method check validations for optional mobile number form field
  * @param {Number} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -191,7 +202,7 @@ export const optionalMobileValidate = (value, name) => {
 
 
 /**
- *
+ * requireFieldsValidate method check validations for form field which are required
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -211,7 +222,6 @@ export const requireFieldsValidate = (value, name) => {
 
 /**
  * checks errorMessageObject and return true if found isValid_name
- *
  * @param {Object} errorMessageObject
  * @param {String} user
  * @param {String} tenant
@@ -273,7 +283,6 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
 
 /**
  * returns the validating function on the basis of name of the input field.
- *
  * @param {String} value
  * @param {String} name
  * @param {String} tenant
@@ -307,6 +316,12 @@ export const validateInput = ({ value, name, tenant }) => {
   return null;
 };
 
+/**
+ * isDataCorrect method return errorObject of student data fields
+ * @param {Object} studentData
+ * @param {String} tenant
+ * @return {Object} errorMessageObject
+ */
 export const isDataCorrect = (studentData, tenant) => {
   const errorMessageObject = {};
   for (const info in studentData) {
@@ -315,10 +330,16 @@ export const isDataCorrect = (studentData, tenant) => {
   return errorMessageObject;
 };
 
+/**
+ * checkLevelValue method check level value and return it into number type
+ * @param {String} value
+ * @return {number}
+ */
 export const checkLevelValue = (value) => {
   const level = value ? value.slice(6, 8) : -1;
   return (Number(level));
 };
+
 /**
  * updateStudentDataAccordingClassAttended2018Level method manipulate the student data
  * according to classAttended level value of previous year.
@@ -327,11 +348,9 @@ export const checkLevelValue = (value) => {
  */
 export const updateClassAttended2019InStudentData = (studentData) => {
   const { classAttended2018, classAttended2019 } = studentData;
-
   if (classAttended2019) {
     return studentData;
   }
-
   const lastCourse = classAttended2018;
   const level = checkLevelValue(lastCourse);
   /* In classAttended2018 Level is greater than 0 (level > 0) condition will satisfied.*/

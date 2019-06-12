@@ -91,13 +91,27 @@ class Files extends Component {
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
+
+  /**
+   * returnDisableEnable return conditional className
+   * @param {String} fileView
+   * @param {String} fileType
+   * @return {string} className
+   */
   returnDisableEnable = (fileView, fileType) => {
     if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
-|| SUPPORTED_FILE_TYPES.XLSX === fileType) {
+      || SUPPORTED_FILE_TYPES.XLSX === fileType) {
       return 'file-label-heading';
     }
     return 'file-label-heading';
   };
+
+  /**
+   * returnFlexClassName return conditional className
+   * @param {String} fileView
+   * @param {String} fileType
+   * @return {string} className
+   */
   returnFlexClassName = (fileView, fileType) => {
     if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
       || SUPPORTED_FILE_TYPES.XLSX === fileType) {
@@ -105,6 +119,15 @@ class Files extends Component {
     }
     return 'file-flex-wrapper';
   };
+
+  /**
+   * onClickViewFile handle onClick of file view
+   * @param {Object} file
+   * @param {Number} index
+   * @param {String} href
+   * @param {Boolean} fileView
+   * @param {Boolean} hasFileRoute
+   */
   onClickViewFile = (file, index, href, fileView, hasFileRoute) => {
     this.setState({
       showFileDetails: true,
@@ -129,8 +152,9 @@ class Files extends Component {
     // fetch file data as per file details
     this.fetchFileData(file);
   };
+
   /**
-   * fetchFileData mathode will when click on any file and
+   * fetchFileData method will when click on any file and
    * it fetch that file data and save it in state.
    * @param{Object} file
    * @return {Object} null
@@ -170,11 +194,19 @@ class Files extends Component {
     return null;
   };
 
+  /**
+   * onClickBackButton handle onClick event of back button which will display back from file data table to file list.
+   */
   onClickBackButton = () => {
     this.setState({
       backPageButton: true,
     });
   };
+
+  /**
+   * returnFileListDisplayBlock method will return conditional className of file list wrapper
+   * @return {String} className
+   */
   returnFileListDisplayBlock = () => {
     const { width } = this.state;
     const isMobile = width <= 600;
@@ -189,6 +221,11 @@ class Files extends Component {
     }
     return 'file-list-wrapper';
   };
+
+  /**
+   * returnTableWidthComponentClass return conditional class name of table which contained file data.
+   * @return {String} className
+   */
   returnTableWidthComponentClass = () => {
     const { width } = this.state;
     const isMobile = width <= 600;
@@ -198,12 +235,16 @@ class Files extends Component {
           return 'file-component-none';
         }
         return 'file-component-mobile-wrapper';
-
       }
       return 'file-component';
     }
     return 'file-component';
   };
+
+  /**
+   * renderFileList method render file list
+   * @return {*} file list react component
+   */
   renderFileList = () => {
     if (this.state.hasFileRoute) {
       return null;
@@ -253,6 +294,10 @@ class Files extends Component {
     return null;
   };
 
+  /**
+   * renderFileListViewButton render conditional file view button
+   * @return {*} back button react component
+   */
   renderFileListViewButton = () => {
     if (!this.state.hasFileRoute) {
       return (
@@ -265,22 +310,22 @@ class Files extends Component {
     } return null;
   };
 
+  /**
+   * renderFileDescription method render file description at the top of the table of file data
+   * @return {*} paragraph of file description.
+   */
   renderFileDescription = () => {
     const { currentFileDetails, width } = this.state;
     const isMobile = width <= 500;
-
     const fileDescription = currentFileDetails.description || '';
-
     const style = {
       textAlign: 'center',
       fontSize: '20px',
       color: 'var(--orange-color)',
     };
-
     if (isMobile) {
       style.marginTop = '45px';
     }
-
     if (fileDescription) {
       return (
         <p style={style}>
@@ -288,10 +333,13 @@ class Files extends Component {
         </p>
       );
     }
-
     return null;
   };
 
+  /**
+   * renderFileDetails method render table of file data
+   * @return {*} file data table
+   */
   renderFileDetails = () => {
     const { width } = this.state;
     const isMobile = width <= 500;
@@ -375,7 +423,7 @@ class Files extends Component {
                     href={this.state.otherExtensionFileDetails.href}
                     className="file-download-button"
                   >
-                      Download
+                    Download
                     <i className="fa fa-download file-icon" />
                   </a>
                 </div>
@@ -393,7 +441,7 @@ class Files extends Component {
             {this.renderFileListViewButton()}
             <div className="file-text-panel">
               <span className="file-text-message">
-                  No Data Found.
+                No Data Found.
               </span>
             </div>
           </div>
@@ -420,7 +468,7 @@ class Files extends Component {
         <div className="file-component" style={this.state.hasFileRoute ? { margin: 'auto' } : null} ref={this.widthRef}>
           <div className="file-text-panel">
             <span className="file-text-message">
-          Please select a file to view.
+              Please select a file to view.
             </span>
           </div>
         </div>
@@ -430,13 +478,17 @@ class Files extends Component {
       <div className="no-files-available" ref={this.widthRef}>
         <div className="file-text-panel">
           <span className="file-text-message">
-          No files available.
+            No files available.
           </span>
         </div>
       </div>
     );
   };
 
+  /**
+   * renderBackButton render back button for redirect to previous location.
+   * @return {*} back button
+   */
   renderBackButton = () => {
     if (!this.state.hasFileRoute) {
       return (
@@ -453,9 +505,6 @@ class Files extends Component {
         <div className="logoutButtonContainer file-logout-container display-logout-desktop">
           <div className="logoutLinkContainer">
             {this.renderBackButton()}
-            {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
-            {/* <i className="fa fa-power-off" />*/}
-            {/* </Link>*/}
           </div>
         </div>
         <div className="file-wrapper">

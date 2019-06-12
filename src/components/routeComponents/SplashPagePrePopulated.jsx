@@ -143,7 +143,7 @@ class SplashPagePrePopulated extends Component {
 
   /**
    * adminScreenRedirection method redirect to admin page on some condition.
-   * @return {ReactComponent}
+   * @return {*}
    */
   adminScreenRedirection() {
     if (!this.props.adminLoginState) {
@@ -173,7 +173,7 @@ class SplashPagePrePopulated extends Component {
    * checkRegisteredStudentCredential method verify the student credential
    * if student credential is not valid give the error message
    * else redirect to student correction form
-   * @return {ReactComponent}
+   * @return {*}
    */
   // this may be use in future
   /* checkRegisteredStudentCredential() {
@@ -244,7 +244,7 @@ class SplashPagePrePopulated extends Component {
 
   /**
    * renderRegistrationCorrectionFields method return student credential fields
-   * @return {ReactComponent}
+   * @return {*}
    */
   // This may be use in future
   /* renderRegistrationCorrectionFields() {
@@ -281,6 +281,10 @@ class SplashPagePrePopulated extends Component {
     )
   }*/
 
+  /**
+   * renderAdminLoginFields method render admin login fields
+   * @return {*} Admin login fields
+   */
   renderAdminLoginFields() {
     return (
       <div>
@@ -324,7 +328,7 @@ class SplashPagePrePopulated extends Component {
    * renderLoginField method redirect to "/student-login" or
    * render admin login field or admin home page buttons
    * according to condition.
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderLoginField() {
     if (this.state.isCorrection) {

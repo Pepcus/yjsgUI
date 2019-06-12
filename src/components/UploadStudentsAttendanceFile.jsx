@@ -54,7 +54,6 @@ const customUploadStudentsAttendanceFileModalStyles = {
  * @type {Class}
  */
 class UploadStudentsAttendanceFile extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -62,6 +61,7 @@ class UploadStudentsAttendanceFile extends Component {
       isUploadStudentsAttendanceFileModal: false,
       selectedDay: '',
     };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
@@ -126,7 +126,7 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderFailRecordIds method method render failed records Ids
-   * @return {ReactComponent}
+   * @return {*} failed records
    */
   renderFailRecordIds() {
     if (this.props.failRecordIds) {
@@ -141,7 +141,7 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderIdNotExistMessage method render Id not exist message
-   * @return {ReactComponent}
+   * @return {*} not exist Id's
    */
   renderIdNotExistMessage() {
     if (this.props.idNotExistErrorMessage) {
@@ -166,7 +166,7 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderMessage method render success or failure message of upload attendance
-   * @return {ReactComponent}
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isUploadAttendanceSuccess) {
@@ -190,10 +190,11 @@ class UploadStudentsAttendanceFile extends Component {
     }
     return null;
   }
+
   /**
    * addOptions method return options of drop down list
    * of days
-   * @return {ReactComponent}
+   * @return {*} options of day in drop down list
    */
   renderOptions() {
     return days.map(
@@ -203,6 +204,7 @@ class UploadStudentsAttendanceFile extends Component {
         </option>
       ));
   }
+
   /**
    * handleSelectChange method set the value of selected day in selectedDay.
    * @param {Object} event
@@ -215,7 +217,7 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderUploadStudentsAttendanceOption method render upload student attendance file modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderUploadStudentsAttendanceOption() {
     if (this.state.isUploadStudentsAttendanceFileModal) {
@@ -261,7 +263,6 @@ class UploadStudentsAttendanceFile extends Component {
                 </div>
               </div>
             </form>
-
           </div>
         </Modal>
       );
@@ -301,6 +302,7 @@ UploadStudentsAttendanceFile.defaultProps = {
   secretKey: '',
   uploadStudentsAttendanceFileAction: () => {},
 };
+
 const mapStateToProps = state => ({
   failRecordIds: getFailRecordIds(state),
   idNotExistErrorMessage: idNotExistErrorMessage(state),

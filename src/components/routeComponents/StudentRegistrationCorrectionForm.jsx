@@ -76,6 +76,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * The StudentRegistrationCorrectionForm component render student correction form.
  * @type {class}
+ * @return {*} registration correction form
  */
 class StudentRegistrationCorrectionForm extends Component {
   constructor(props) {
@@ -138,6 +139,7 @@ class StudentRegistrationCorrectionForm extends Component {
       this.verifyStudentFormData({ email: '' });
     }
   }
+
   componentWillReceiveProps(nextProps) {
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -155,6 +157,10 @@ class StudentRegistrationCorrectionForm extends Component {
     }
   }
 
+  /**
+   * renderBusStopOptions method render bus stop form field conditionally
+   * @return {*} bus stop form field
+   */
   renderBusStopOptions = () => {
     if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
       return (
@@ -182,19 +188,29 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   };
-     renderBusNumberOption = () => {
-       if (this.props.tenant === TENANT.INDORE && this.props.pageUser === USER_TYPES.ADMIN) {
-         return (
-           <SelectListInputField
-             name="busNumber"
-             label={BUS_NUMBER_LABEL}
-             options={busNumber}
-             onInputChange={this._handleInputChange}
-             value={this.state.student.busNumber}
-           />
-         );
-       } return null;
-     };
+
+  /**
+   * renderBusNumberOption method render bus number form field conditionally
+   * @return {*} bus number field
+   */
+  renderBusNumberOption = () => {
+    if (this.props.tenant === TENANT.INDORE && this.props.pageUser === USER_TYPES.ADMIN) {
+      return (
+        <SelectListInputField
+          name="busNumber"
+          label={BUS_NUMBER_LABEL}
+          options={busNumber}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.busNumber}
+        />
+      );
+    } return null;
+  };
+
+  /**
+   * renderMark2019Field method render current year mark form field conditionally
+   * @return {*} mark field
+   */
   renderMark2019Field = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
@@ -208,6 +224,11 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   } ;
+
+  /**
+   * renderClassRoom2019Field method render current year class room form field conditionally
+   * @return {*} current year class room field
+   */
   renderClassRoom2019Field = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
@@ -223,6 +244,11 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   };
+
+  /**
+   * renderRemarkField method remark form field only in admin case
+   * @return {*} remark form field
+   */
   renderRemarkField = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
       return (
@@ -236,6 +262,7 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   };
+
   /**
    * submitStudentDataForOnlyOptInCase method will call
    * in case when student only edit optIn2019 and submit it.
@@ -251,6 +278,7 @@ class StudentRegistrationCorrectionForm extends Component {
       this.updateStudentData();
     }
   };
+
   /**
    * changeIsOnlyOptIn2019 method maintained flag value of onlyOptIn2019
    * as per form contends show to user.
@@ -261,6 +289,7 @@ class StudentRegistrationCorrectionForm extends Component {
       onlyOptIn2019: value,
     });
   };
+
   /**
    * renderOnlyOptIn2019 method render react component with OptIn2019,
    * submit button and edit all information form link.
@@ -324,6 +353,7 @@ class StudentRegistrationCorrectionForm extends Component {
       </form>
     </div>
   );
+
   /**
    * verifyStudentFormData check the student form data is valid or not.
    * @param {Object} studentData
@@ -335,9 +365,10 @@ class StudentRegistrationCorrectionForm extends Component {
       errorMessage: errorMessageObject,
     });
   }
+
   /**
    * renderOptInField optIn field as per user condition.
-   * @return {ReactComponent}
+   * @return {*} optIn form field
    */
   renderOptInField = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
@@ -363,9 +394,10 @@ class StudentRegistrationCorrectionForm extends Component {
       />
     );
   };
+
   /**
    * renderLevelField render Level field according to user type.
-   * @return {Reactcomponent}
+   * @return {*}
    */
   renderLevelField = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
@@ -413,9 +445,10 @@ class StudentRegistrationCorrectionForm extends Component {
       />
     );
   };
+
   /**
    * renderBackButton method render back button according to user type
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderBackButton = () => {
     if (this.props.pageUser === USER_TYPES.ADMIN) {
@@ -441,6 +474,7 @@ class StudentRegistrationCorrectionForm extends Component {
       />
     );
   };
+
   /**
    * prePopulateCourse2019 method will use for pre populate the information of fetch student.
    * @param {Object} studentData
@@ -466,6 +500,7 @@ class StudentRegistrationCorrectionForm extends Component {
     }
     return marks;
   };
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
@@ -479,6 +514,7 @@ class StudentRegistrationCorrectionForm extends Component {
       tenant: this.props.tenant,
     });
   }
+
   /**
    * updateStudentData method update the particular student data.
    */
@@ -490,6 +526,7 @@ class StudentRegistrationCorrectionForm extends Component {
       secretKey,
       student });
   }
+
   /**
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
@@ -499,6 +536,7 @@ class StudentRegistrationCorrectionForm extends Component {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
+
   /**
    * onSubmitStudentData method will call when click on form submit button
    * It submit the updated student data
@@ -526,6 +564,7 @@ class StudentRegistrationCorrectionForm extends Component {
       }
     }
   }
+
   /**
    * onClickRadioButton method call onchange of optIn or optOut radio button
    * @param {Object} event
@@ -533,6 +572,7 @@ class StudentRegistrationCorrectionForm extends Component {
   onClickRadioButton = (event) => {
     this.handleInputChange(event.target.value, 'optIn2019');
   };
+
   /**
    * handleInputChange method set the form fields data in state
    * and all in format value and name in key value format through
@@ -554,9 +594,10 @@ class StudentRegistrationCorrectionForm extends Component {
     });
     this.verifyStudentFormData(updatedData);
   }
+
   /**
    * renderSuccessMessage render the success message if form data is validate
-   * @return {ReactComponent}
+   * @return {*} message popup
    */
   renderSuccessMessage() {
     // if form data is update and valid and submitted successfully.
@@ -584,9 +625,10 @@ class StudentRegistrationCorrectionForm extends Component {
       );
     } return null;
   }
+
   /**
    * renderClassAttended2018 method previous year level from field
-   * @return{ReactComponent}
+   * @return{*}
    */
   renderClassAttended2018() {
     // if it contained value
@@ -615,11 +657,12 @@ class StudentRegistrationCorrectionForm extends Component {
       />
     );
   }
+
   // FIXME: Create a separate component to render no-validation input
   /**
    * renderNoValidationFields method render form field without validation if opt-in
    * is 'N'
-   * @return {ReactComponent} Form
+   * @return {*} Form
    */
   renderNoValidationFields() {
     return (
@@ -768,6 +811,7 @@ class StudentRegistrationCorrectionForm extends Component {
       </div>
     );
   }
+
   render() {
     if ((this.props.pageUser === USER_TYPES.STUDENT_WITH_URL || this.props.pageUser === USER_TYPES.STUDENT)
       && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
@@ -943,6 +987,7 @@ class StudentRegistrationCorrectionForm extends Component {
     );
   }
 }
+
 StudentRegistrationCorrectionForm.propTypes = {
   context: PropTypes.object,
   id: PropTypes.string,
@@ -955,6 +1000,7 @@ StudentRegistrationCorrectionForm.propTypes = {
   tenant: PropTypes.string,
   updateStudentData: PropTypes.func,
 };
+
 StudentRegistrationCorrectionForm.defaultProps = {
   context: {},
   id: '',
@@ -967,6 +1013,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   tenant: '',
   updateStudentData: () => {},
 };
+
 const mapStateToProps = state => ({
   id: getUserId(state),
   isFetched: isFetched(state),
@@ -976,6 +1023,7 @@ const mapStateToProps = state => ({
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
   getApplicationTenant,
   isUpdatedResetAction,

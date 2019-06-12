@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * render radio button with custom properties.
+ * @param {Object} props
+ * @return {*}
+ * @constructor
+ */
 const Radios = (props) => {
 
   const { name, value, checked, text, onInputChange } = props;

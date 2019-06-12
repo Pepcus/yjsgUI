@@ -29,7 +29,7 @@ class StudentIdCardModal extends Component {
    * @param {String} busNumber
    * @param {String} value
    * @param {string} label
-   * @return {ReactComponent}
+   * @return {*} bus coordinator information
    */
   getCoordinatorInformation = ({ busNumber, value, label }) => {
     const { busCoordinators = {} } = this.props;
@@ -60,7 +60,7 @@ class StudentIdCardModal extends Component {
   /**
    * renderStudentIdCards method render students Id cards
    * @param {Array} students
-   * @return {ReactComponent}
+   * @return {*} student Id cards
    */
   renderStudentIdCards(students) {
     const studentsIdCards = students.map((student) => {
@@ -203,11 +203,14 @@ StudentIdCardModal.propTypes = {
   busCoordinators: PropTypes.object,
   selectedStudents: PropTypes.array,
 };
+
 StudentIdCardModal.defaultProps = {
   busCoordinators: {},
   selectedStudents: [],
 };
+
 const mapStateToProps = state => ({
   busCoordinators: getBusCoordinators(state),
 });
+
 export default connect(mapStateToProps, {})(StudentIdCardModal);

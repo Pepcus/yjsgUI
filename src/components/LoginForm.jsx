@@ -24,7 +24,7 @@ import Button from './common/Button';
  * @param {Function} redirectToNewRegistrationPage
  * @param {Function} enableAdminLoginButtons
  * @type {Function}
- * @return {ReactComponent}
+ * @return {*} admin login form
  * @constructor
  */
 const LoginForm = ({ isAdmin,

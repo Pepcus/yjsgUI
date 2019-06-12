@@ -1,7 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 
 import headerLogo from '../../assets/images/react-logo.png';
@@ -27,7 +27,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
  * @type {Function}
- * @return {ReactComponent}
+ * @return {*}
  * @constructor
  */
 const Header = ({
@@ -57,7 +57,7 @@ const Header = ({
   /**
    * RenderBackButton method render back button in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {*}
    * @constructor
    */
   const renderBackButton = (headerObject) => {
@@ -77,7 +77,7 @@ const Header = ({
   /**
    * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {*}
    * @constructor
    */
   const renderLogOutButton = (headerObject) => {
@@ -98,7 +98,7 @@ const Header = ({
   /**
    * RenderHeaderName method render header name in header
     * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {*}
    * @constructor
    */
   const renderHeaderName = headerObject => (
@@ -112,7 +112,7 @@ const Header = ({
   /**
    * RenderButton method render buttons with their button wrapper in header.
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {*}
    * @constructor
    */
   const renderButton = (headerObject) => {
@@ -130,7 +130,7 @@ const Header = ({
   /**
    * renderLogo method render logo in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {*}
    * @constructor
    */
   const renderLogo = (headerObject) => {

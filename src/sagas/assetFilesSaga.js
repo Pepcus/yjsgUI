@@ -10,6 +10,9 @@ import {
 } from '../actions/assetFilesActions';
 import { fetchFileConfig, getAppConfig, getBusCoordinatorsConfig } from './assetFilesAPI';
 
+/**
+ * fetchFilesConfigSaga saga call for fetching fileConfig json file
+ */
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';
   try {
@@ -25,6 +28,9 @@ export function* fetchFilesConfigSaga() {
   }
 }
 
+/**
+ * getAppConfigSaga saga call for fetching app json file
+ */
 export function* getAppConfigSaga() {
   const errorMessage = 'Unable to fetch  config.';
   try {
@@ -40,6 +46,9 @@ export function* getAppConfigSaga() {
   }
 }
 
+/**
+ * getBusCoordinatorsConfigSaga saga call for fetching busCoordinators json file
+ */
 export function* getBusCoordinatorsConfigSaga() {
   const errorMessage = 'Unable to fetch  bus coordinators config.';
   try {

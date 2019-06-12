@@ -8,6 +8,17 @@ import {
 } from '../constants/yjsg';
 import Button from './common/Button';
 
+/**
+ * AdminLoginForm method render admin login form
+ * @param {Boolean} isAdmin
+ * @param {Object} admin
+ * @param {Function} handleInputChange
+ * @param {Function} adminScreenRedirection
+ * @param {Function} disableAdminLoginButtons
+ * @param {Function} setAdminLogin
+ * @return {*} admin login form
+ * @constructor
+ */
 const AdminLoginForm = ({ isAdmin,
   admin,
   handleInputChange,

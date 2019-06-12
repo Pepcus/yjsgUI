@@ -33,6 +33,7 @@ const customColumnOptionStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
+
 /**
  * ColumnConfig component render column config option
  * @type {Class}
@@ -59,7 +60,7 @@ class ColumnConfig extends Component {
 
   /**
    * renderColumns method render the column options in column config.
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderColumnOptions = () => {
     const columnsListTemporary = cloneDeep(columnsList);
@@ -93,6 +94,7 @@ class ColumnConfig extends Component {
       </div>
     );
   };
+
   /**
    * setValuesOfVisibleColumnConfig method call callBack setValuesOfVisibleColumnConfig()
    * and call closeColumnOption() method.
@@ -130,6 +132,7 @@ class ColumnConfig extends Component {
       });
     }
   }
+
   /**
    * handleChange method set value of visibleColumnConfig(all columns value)
    * @param {Object} event
@@ -206,4 +209,5 @@ ColumnConfig.defaultProps = {
   setValuesOfVisibleColumnConfig: () => {},
   visibleColumnConfig: {},
 };
+
 export default ColumnConfig;
