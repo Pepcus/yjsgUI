@@ -1,27 +1,142 @@
-export const studiesArray = [
-  { text: 'Level 1  : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत',
-    value: 'Level 1',
+export const adminId = 'yjsgadmin';
+
+export const adminLoginBtnText = 'Admin Login';
+
+export const adminPassword = '451727';
+
+export const adminSearchOptions = [
+  {
+    text: 'id',
+    value: 'id',
   },
-  { text: 'Level 2  : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति',
-    value: 'Level 2',
+  {
+    text: 'name',
+    value: 'name',
   },
-  { text: 'Level 3  : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति',
-    value: 'Level 3',
+  {
+    text: 'mobile',
+    value: 'mobile',
   },
-  { text: 'Level 4  : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति',
-    value: 'Level 4',
+];
+
+export const alreadyRegisteredBtnText = 'Already Registered';
+
+export const busNumber = [
+  {
+    text: 'Self',
+    value: 'SELF',
   },
-  { text: 'Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना',
-    value: 'Level 5',
+  {
+    text: 'B0',
+    value: 'B0',
   },
-  { text: 'Level 6  :  छहढाला-ढाल 1-2',
-    value: 'Level 6',
+  {
+    text: 'B1',
+    value: 'B1',
   },
-  { text: 'Level 7 : छहढाला-ढाल 3',
-    value: 'Level 7',
+  {
+    text: 'B2',
+    value: 'B2',
   },
-  { text: 'Level 8 : छहढाला-ढाल 4-5',
-    value: 'Level 8',
+  {
+    text: 'B3',
+    value: 'B3',
+  },
+  {
+    text: 'B4',
+    value: 'B4',
+  },
+  {
+    text: 'B5',
+    value: 'B5',
+  },
+  {
+    text: 'B6',
+    value: 'B6',
+  },
+  {
+    text: 'B7',
+    value: 'B7',
+  },
+  {
+    text: 'B8',
+    value: 'B8',
+  },
+  {
+    text: 'B9',
+    value: 'B9',
+  },
+  {
+    text: 'B10',
+    value: 'B10',
+  },
+  {
+    text: 'B11',
+    value: 'B11',
+  },
+  {
+    text: 'B12',
+    value: 'B12',
+  },
+  {
+    text: 'B13',
+    value: 'B13',
+  },
+  {
+    text: 'B14',
+    value: 'B14',
+  },
+  {
+    text: 'B15',
+    value: 'B15',
+  },
+  {
+    text: 'B16',
+    value: 'B16',
+  },
+  {
+    text: 'B17',
+    value: 'B17',
+  },
+  {
+    text: 'B18',
+    value: 'B18',
+  },
+  {
+    text: 'B19',
+    value: 'B19',
+  },
+  {
+    text: 'B20',
+    value: 'B20',
+  },
+  {
+    text: 'B21',
+    value: 'B21',
+  },
+  {
+    text: 'B22',
+    value: 'B22',
+  },
+  {
+    text: 'B23',
+    value: 'B23',
+  },
+  {
+    text: 'B24',
+    value: 'B24',
+  },
+  {
+    text: 'B25',
+    value: 'B25',
+  },
+  {
+    text: 'B26',
+    value: 'B26',
+  },
+  {
+    text: 'B27',
+    value: 'B27',
   },
 ];
 
@@ -169,109 +284,6 @@ export const busStops = [
   },
 ];
 
-export const gender = [
-  {
-    text: 'पुरुष',
-    value: 'Male',
-  },
-  {
-    text: 'स्त्री',
-    value: 'Female',
-  },
-];
-
-export const yesOrNo = [
-  {
-    text: 'हाँ',
-    value: 'Y',
-  },
-  {
-    text: 'नहीं',
-    value: 'N',
-  },
-];
-
-export const optIn2019Options = [
-  {
-    text: 'हाँ',
-    value: 'Y',
-  },
-  {
-    text: 'नहीं',
-    value: 'N',
-  },
-];
-
-export const adminSearchOptions = [
-  {
-    text: 'id',
-    value: 'id',
-  },
-  {
-    text: 'name',
-    value: 'name',
-  },
-  {
-    text: 'mobile',
-    value: 'mobile',
-  },
-];
-
-export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)';
-
-export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
-
-export const yjsgFooterContactInfo = {
-  INDORE: ' 74470-56789',
-  BHOPAL: ' अनुभव जैन, मो. 9179834281, 9303131737',
-};
-
-export const eventDate = {
-  BHOPAL: 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
-  INDORE: 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
-};
-export const eventVenue = {
-  BHOPAL: 'स्थान: श्री दिगम्बर जैन हा. से. स्कूल, जैन रोड, चौक, भोपाल ',
-  INDORE: 'स्थान: सन्मति स्कूल, इन्दौर',
-};
-
-export const goBackBtnText = 'Back';
-
-export const formSubmitBtnText = 'Submit';
-
-export const alreadyRegisteredBtnText = 'Already Registered';
-
-export const newRegistrationBtnText = 'New Registration';
-
-export const viewEditInfoBtnText = 'View/Edit Information';
-
-export const invalidIdMessage = 'आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है । कृपया पुनः प्रयास करे ।';
-
-export const noInfoChangeMessage = 'जानकारी में कोई बदलाव नहीं ';
-
-export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलतापूवर्क अपडेट कर दी गई है |';
-
-export const adminLoginBtnText = 'Admin Login';
-
-export const loginBtnText = 'Login';
-
-export const adminId = 'yjsgadmin';
-
-export const adminPassword = '451727';
-
-export const invalidAdminMsg = 'यह जानकारी अनिवार्य है|';
-
-export const days = [
-  { 'day': '1' },
-  { 'day': '2' },
-  { 'day': '3' },
-  { 'day': '4' },
-  { 'day': '5' },
-  { 'day': '6' },
-  { 'day': '7' },
-  { 'day': '8' },
-];
-
 export const classRoomNumber = [
   {
     text: '105',
@@ -399,134 +411,25 @@ export const classRoomNumber = [
   },
 ];
 
-export const busNumber = [
-  {
-    text: 'Self',
-    value: 'SELF',
-  },
-  {
-    text: 'B0',
-    value: 'B0',
-  },
-  {
-    text: 'B1',
-    value: 'B1',
-  },
-  {
-    text: 'B2',
-    value: 'B2',
-  },
-  {
-    text: 'B3',
-    value: 'B3',
-  },
-  {
-    text: 'B4',
-    value: 'B4',
-  },
-  {
-    text: 'B5',
-    value: 'B5',
-  },
-  {
-    text: 'B6',
-    value: 'B6',
-  },
-  {
-    text: 'B7',
-    value: 'B7',
-  },
-  {
-    text: 'B8',
-    value: 'B8',
-  },
-  {
-    text: 'B9',
-    value: 'B9',
-  },
-  {
-    text: 'B10',
-    value: 'B10',
-  },
-  {
-    text: 'B11',
-    value: 'B11',
-  },
-  {
-    text: 'B12',
-    value: 'B12',
-  },
-  {
-    text: 'B13',
-    value: 'B13',
-  },
-  {
-    text: 'B14',
-    value: 'B14',
-  },
-  {
-    text: 'B15',
-    value: 'B15',
-  },
-  {
-    text: 'B16',
-    value: 'B16',
-  },
-  {
-    text: 'B17',
-    value: 'B17',
-  },
-  {
-    text: 'B18',
-    value: 'B18',
-  },
-  {
-    text: 'B19',
-    value: 'B19',
-  },
-  {
-    text: 'B20',
-    value: 'B20',
-  },
-  {
-    text: 'B21',
-    value: 'B21',
-  },
-  {
-    text: 'B22',
-    value: 'B22',
-  },
-  {
-    text: 'B23',
-    value: 'B23',
-  },
-  {
-    text: 'B24',
-    value: 'B24',
-  },
-  {
-    text: 'B25',
-    value: 'B25',
-  },
-  {
-    text: 'B26',
-    value: 'B26',
-  },
-  {
-    text: 'B27',
-    value: 'B27',
-  },
+export const days = [
+  { 'day': '1' },
+  { 'day': '2' },
+  { 'day': '3' },
+  { 'day': '4' },
+  { 'day': '5' },
+  { 'day': '6' },
+  { 'day': '7' },
+  { 'day': '8' },
 ];
 
-export const USER_TYPES = {
-  STUDENT: 'student',
-  ADMIN: 'admin',
-  STUDENT_WITH_URL: 'student_with_url',
+export const eventDate = {
+  BHOPAL: 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
+  INDORE: 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
 };
 
-export const TENANT = {
-  INDORE: 'INDORE',
-  BHOPAL: 'BHOPAL',
+export const eventVenue = {
+  BHOPAL: 'स्थान: श्री दिगम्बर जैन हा. से. स्कूल, जैन रोड, चौक, भोपाल ',
+  INDORE: 'स्थान: सन्मति स्कूल, इन्दौर',
 };
 
 export const FILE_PRESENTATION_TYPE = {
@@ -534,8 +437,106 @@ export const FILE_PRESENTATION_TYPE = {
   COMPLEX_GRID: 'complexGrid',
 };
 
+export const formSubmitBtnText = 'Submit';
+
+export const gender = [
+  {
+    text: 'पुरुष',
+    value: 'Male',
+  },
+  {
+    text: 'स्त्री',
+    value: 'Female',
+  },
+];
+
+export const goBackBtnText = 'Back';
+
+export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलतापूवर्क अपडेट कर दी गई है |';
+
+export const invalidAdminMsg = 'यह जानकारी अनिवार्य है|';
+
+export const invalidIdMessage = 'आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है । कृपया पुनः प्रयास करे ।';
+
+export const loginBtnText = 'Login';
+
+export const newRegistrationBtnText = 'New Registration';
+
+export const noInfoChangeMessage = 'जानकारी में कोई बदलाव नहीं ';
+
+export const optIn2019Options = [
+  {
+    text: 'हाँ',
+    value: 'Y',
+  },
+  {
+    text: 'नहीं',
+    value: 'N',
+  },
+];
+
+export const studiesArray = [
+  { text: 'Level 1  : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत',
+    value: 'Level 1',
+  },
+  { text: 'Level 2  : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति',
+    value: 'Level 2',
+  },
+  { text: 'Level 3  : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति',
+    value: 'Level 3',
+  },
+  { text: 'Level 4  : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति',
+    value: 'Level 4',
+  },
+  { text: 'Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना',
+    value: 'Level 5',
+  },
+  { text: 'Level 6  :  छहढाला-ढाल 1-2',
+    value: 'Level 6',
+  },
+  { text: 'Level 7 : छहढाला-ढाल 3',
+    value: 'Level 7',
+  },
+  { text: 'Level 8 : छहढाला-ढाल 4-5',
+    value: 'Level 8',
+  },
+];
+
 export const SUPPORTED_FILE_TYPES = {
   CSV: 'csv',
   XLSX: 'xlsx',
   XLS: 'xls',
 };
+
+export const TENANT = {
+  INDORE: 'INDORE',
+  BHOPAL: 'BHOPAL',
+};
+
+export const USER_TYPES = {
+  STUDENT: 'student',
+  ADMIN: 'admin',
+  STUDENT_WITH_URL: 'student_with_url',
+};
+
+export const viewEditInfoBtnText = 'View/Edit Information';
+
+export const yesOrNo = [
+  {
+    text: 'हाँ',
+    value: 'Y',
+  },
+  {
+    text: 'नहीं',
+    value: 'N',
+  },
+];
+
+export const yjsgFooterContactInfo = {
+  INDORE: ' 74470-56789',
+  BHOPAL: ' अनुभव जैन, मो. 9179834281, 9303131737',
+};
+
+export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
+
+export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)';
