@@ -16,6 +16,11 @@ import {
   SINGLE_QUOTE_ERROR_MESSAGE,
 } from '../constants/messages';
 
+/**
+ * nameValidate method check validations for name field of form
+ * @param {String} value
+ * @return {string} message
+ */
 export const nameValidation = (value) => {
   const nameRegExp = /^[a-zA-Z\s\.]+$/;
   let message = '';
@@ -31,6 +36,11 @@ export const nameValidation = (value) => {
   return message;
 };
 
+/**
+ * ageValidation method check validations for age field of form
+ * @param {number} value
+ * @return {string} message
+ */
 export const ageValidation = (value) => {
   const temporaryValue = !value ? null : String(value);
   let message = '';
@@ -44,6 +54,11 @@ export const ageValidation = (value) => {
   return message;
 };
 
+/**
+ * mobileValidation method check validations for mobile field of form
+ * @param {Number} value
+ * @return {string} message
+ */
 export const mobileValidation = (value) => {
   const temporaryValue = !value ? null : String(value);
   let message = '';
@@ -61,6 +76,11 @@ export const mobileValidation = (value) => {
   return message;
 };
 
+/**
+ * optionalMobileValidation method check validations for optional mobile field of form
+ * @param {Number} value
+ * @return {string} message
+ */
 export const optionalMobileValidation = (value) => {
   let message = '';
   const mobileRegExp = /^[0-9]+$/;
@@ -77,6 +97,11 @@ export const optionalMobileValidation = (value) => {
   return message;
 };
 
+/**
+ * optionalEmailValidation method check validations for email field of form
+ * @param {String} value
+ * @return {string} message
+ */
 export const optionalEmailValidation = (value) => {
   let message = '';
   const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -91,6 +116,11 @@ export const optionalEmailValidation = (value) => {
   return message;
 };
 
+/**
+ * addressValidation method check validations for address field of form
+ * @param {String} value
+ * @return {string} message
+ */
 export const addressValidation = (value) => {
   let message = '';
   if (isEmpty(value)) {
@@ -107,6 +137,11 @@ export const addressValidation = (value) => {
   return message;
 };
 
+/**
+ * bhopalAgeValidate method check validations for age field of form for Bhopal tenant
+ * @param {Number} value
+ * @return {string} message
+ */
 export const bhopalAgeValidate = (value) => {
   let message = '';
   if (isEmpty(value)) {
@@ -119,6 +154,12 @@ export const bhopalAgeValidate = (value) => {
   return message;
 };
 
+/**
+ * validates method check validation of form fields and return errors object
+ * @param {Object} formData
+ * @param {Object} errors
+ * @return {Object} errors
+ */
 export const validates = (formData, errors) => {
   if (formData.optIn2019 === 'Y') {
     const nameError = nameValidation(formData.name);
@@ -151,9 +192,14 @@ export const validates = (formData, errors) => {
     }
     return errors;
   }
-  return [];
+  return {};
 };
 
+/**
+ * prePopulateOptIn method pre populate the optIn value
+ * @param {Object} studentData
+ * @return {Object} studentData
+ */
 export const prePopulateOptIn = (studentData) => {
   if (studentData) {
     const {
@@ -167,16 +213,22 @@ export const prePopulateOptIn = (studentData) => {
   return studentData;
 };
 
+/**
+ * InitialStudentData method format the form data into corresponding data type
+ * @param {Object} studentData
+ * @return {Object}
+ * @constructor formattedStudentData
+ */
 export const InitialStudentData = (studentData) => {
-  let tempData = cloneDeep(studentData);
+  let formattedStudentData = cloneDeep(studentData);
   defaultStudentData.forEach((obj) => {
-    if (!tempData[obj.formFiled]) {
-      tempData = { ...tempData, [obj.formFiled]: undefined };
+    if (!formattedStudentData[obj.formFiled]) {
+      formattedStudentData = { ...formattedStudentData, [obj.formFiled]: undefined };
     } else if (obj.dataType === 'string') {
-      tempData = { ...tempData, [obj.formFiled]: String(tempData[obj.formFiled]) };
+      formattedStudentData = { ...formattedStudentData, [obj.formFiled]: String(formattedStudentData[obj.formFiled]) };
     } else if (obj.dataType === 'number') {
-      tempData = { ...tempData, [obj.formFiled]: Number(tempData[obj.formFiled]) };
+      formattedStudentData = { ...formattedStudentData, [obj.formFiled]: Number(formattedStudentData[obj.formFiled]) };
     }
   });
-  return tempData;
+  return formattedStudentData;
 };

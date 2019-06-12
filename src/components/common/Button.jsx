@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
+/**
+ * render button with costume property
+ * @param {Function} onClick
+ * @param {Boolean} disabled
+ * @param {String} buttonText
+ * @param {String} type
+ * @param {String} formName
+ * @param {Object} styles
+ * @return {*}
+ * @constructor
+ */
 const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
   <ButtonContainer>
     <button

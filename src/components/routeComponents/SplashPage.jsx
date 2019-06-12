@@ -100,6 +100,7 @@ class SplashPage extends Component {
       redirectToRoute,
     });
   };
+
   /**
    * fetchStudentByURLParams method fetch student data.
    * And verify the student credential and if fetch student data is
@@ -137,6 +138,7 @@ class SplashPage extends Component {
       isAdmin: true,
     });
   }
+
   /**
    * disableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
@@ -159,6 +161,7 @@ class SplashPage extends Component {
       isCorrection: false,
     });
   }*/
+
   /**
    * adminScreenRedirection method redirect to admin page on some condition.
    * @return {ReactComponent}
@@ -229,6 +232,7 @@ class SplashPage extends Component {
     }
       return null;
   }*/
+
   /**
    * setAdminLogin method set the admin login credential
    * @param {Object} event
@@ -255,6 +259,7 @@ class SplashPage extends Component {
       registeredStudentCredentialErrorMessage: true,
     });
   };*/
+
   /**
    * handleInputChange method set the admin credential in state
    * and all in format value and name in key value format through
@@ -319,6 +324,7 @@ class SplashPage extends Component {
       </div>
     )
   }*/
+
   /**
    * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
    * of new registration button.

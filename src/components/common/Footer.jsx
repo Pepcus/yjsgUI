@@ -12,7 +12,8 @@ import { isLoading } from '../../reducers/studentRegistrationReducer';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
- * Footer component is comment footer will will be render in bottom of all page
+ * Footer component is common footer for all route.
+ * It will be render in bottom of all page.
  * @type {Class}
  * @return {ReactComponent}
  */

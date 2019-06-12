@@ -92,6 +92,11 @@ class StudentPage extends Component {
     });
     this.props.setHashLinkForNewRegistrationAction(USER_TYPES.STUDENT);
   }
+
+  /**
+   * renderAlreadyRegisteredButton render already register button conditionally
+   * @return {*}
+   */
   renderAlreadyRegisteredButton = () => {
     if (this.props.isAlreadyRegisteredButtonEnabled) {
       return (
@@ -102,10 +107,11 @@ class StudentPage extends Component {
       );
     } return null;
   };
+
   /**
    * renderStudentLoginButtons method return the react component in that
    * there are two buttons one is already register and anther is new registration.
-   * @return {ReactComponent}
+   * @return {*}
    */
   renderStudentLoginButtons() {
     return (
@@ -118,6 +124,7 @@ class StudentPage extends Component {
       </div>
     );
   }
+
   render() {
     if (this.state.isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;

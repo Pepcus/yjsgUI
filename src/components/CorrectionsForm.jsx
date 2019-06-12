@@ -17,7 +17,7 @@ const JSONSchemaForm = Form;
 
 /**
  * CorrectionsForm is functional component which render the correction form according to user type
- * @return {ReactComponent}
+ * @return {*} correction form
  */
 const CorrectionsForm = ({ pageUser,
   tenant,
@@ -41,6 +41,10 @@ const CorrectionsForm = ({ pageUser,
     renderSubmitButtons,
   });
 
+  /**
+   * getBackButton render back button conditionally
+   * @return {*} back button
+   */
   const getBackButton = () => {
     if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
       && onlyOptInForm) {
@@ -58,6 +62,10 @@ const CorrectionsForm = ({ pageUser,
     } return null;
   };
 
+  /**
+   * getLink method render link of update other information conditionally
+   * @return {*} update other information link
+   */
   const getLink = () => {
     if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
       && onlyOptInForm) {
@@ -69,6 +77,7 @@ const CorrectionsForm = ({ pageUser,
       );
     } return null;
   };
+
   if (formDetails) {
     return (
       <div className={(pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)

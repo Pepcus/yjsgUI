@@ -59,6 +59,7 @@ class MarkOptInOrOptOutButton extends Component {
       selectedOptOption: '',
       isMarkSelectedStudentsOptInOrOptOutModalOpen: false,
     };
+
     this.openMarkSelectedStudentsOptInOrOptOutModal = this.openMarkSelectedStudentsOptInOrOptOutModal.bind(this);
     this.closeMarkSelectedStudentsOptInOrOptOutModal = this.closeMarkSelectedStudentsOptInOrOptOutModal.bind(this);
     this.onClickRadioButton = this.onClickRadioButton.bind(this);
@@ -69,6 +70,7 @@ class MarkOptInOrOptOutButton extends Component {
     this.renderSubmitButtonClassName = this.renderSubmitButtonClassName.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
+
   /**
    * openMarkSelectedStudentsOptInOrOptOutModal method
    * on Onclick optIn or optOut button set the value of
@@ -81,6 +83,7 @@ class MarkOptInOrOptOutButton extends Component {
     });
     this.filterIdsOfStudents();
   }
+
   /**
    * closeMarkSelectedStudentsOptInOrOptOutModal method
    * on Onclick close button set the value of
@@ -95,6 +98,7 @@ class MarkOptInOrOptOutButton extends Component {
     this.props.resetIsMarkOptInOrOptOutSuccessAction();
     this.props.clearSelectedStudents();
   }
+
   /**
    * filterIdsOfStudents method filter Ids of selected students
    * for marking the optIn/optOut.
@@ -105,6 +109,7 @@ class MarkOptInOrOptOutButton extends Component {
       studentsId: Ids,
     });
   }
+
   /**
    * renderMarkOptInOrOutClassName method return className
    * of mark optIn/optOut button as per students are selected or not.
@@ -116,6 +121,7 @@ class MarkOptInOrOptOutButton extends Component {
     }
     return 'linkButton';
   }
+
   /**
    * renderSubmitButtonClassName method return className
    * of submit button as per students optIn/optOut mark or not.
@@ -127,10 +133,12 @@ class MarkOptInOrOptOutButton extends Component {
     }
     return 'btn-upload linkButton';
   }
+
   /**
    * renderMessage method render success message
-   * as per selected students optIn/optOut marked.
-   * @return {ReactComponent}
+   * as per selected students optIn/optOut marked successfully.
+   * otherwise render failed message
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isMarkOptInOrOptOutSuccess) {
@@ -162,6 +170,7 @@ class MarkOptInOrOptOutButton extends Component {
       selectedOptOption: { 'optIn2019': event.target.value },
     });
   }
+
   /**
    * onFormSubmit method call on submission of selected student optIn/optOut
    * @param {Object} event
@@ -173,10 +182,11 @@ class MarkOptInOrOptOutButton extends Component {
     const opt = this.state.selectedOptOption;
     this.props.markSelectedStudentsOptInOrOptOutAction({ secretKey, selectedStudentsId, opt });
   }
+
   /**
    * renderMarkSelectedStudentsOptInOrOptOutModal method render
    * mark selected students optIn/optOut modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
     if (this.state.isMarkSelectedStudentsOptInOrOptOutModalOpen) {
@@ -234,6 +244,7 @@ class MarkOptInOrOptOutButton extends Component {
     }
     return null;
   }
+
   render() {
     return (
       <div className="button-container button-container-mobile">
@@ -259,6 +270,7 @@ MarkOptInOrOptOutButton.propTypes = {
   secretKey: PropTypes.string,
   selectedStudents: PropTypes.array,
 };
+
 MarkOptInOrOptOutButton.defaultProps = {
   clearSelectedStudents: () => {},
   isMarkOptInOrOptOutFailed: false,
@@ -268,6 +280,7 @@ MarkOptInOrOptOutButton.defaultProps = {
   secretKey: '',
   selectedStudents: [],
 };
+
 const mapStateToProps = state => ({
   isMarkOptInOrOptOutFailed: isMarkOptInOrOptOutFailed(state),
   isMarkOptInOrOptOutSuccess: isMarkOptInOrOptOutSuccess(state),

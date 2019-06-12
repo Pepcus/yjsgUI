@@ -14,7 +14,7 @@ import { routes } from '../../config/appConfig.json';
  * Routes component maintain all routes
  * And send all previous location path to all routes.
  * @type {Class}
- * @return {ReactComponent}
+ * @return {*}
  */
 class Routes extends Component {
   constructor(props) {

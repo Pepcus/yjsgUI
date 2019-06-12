@@ -6,8 +6,10 @@ import {
 
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
- * It finds a table class and take dynamic width of it and assigned to footer class after that whole table width managed accordingly.
- * Also gives styling according to the table's width and also will add or remove class according to browser window width.
+ * It finds a table class and take dynamic width of it and assigned to footer class after that
+ * whole table width managed accordingly.
+ * Also gives styling according to the table's width and also will
+ * add or remove class according to browser window width.
  * @param {Object} widthRef
  */
 export const manageStudentTableWidth = (widthRef) => {
@@ -68,6 +70,7 @@ export const manageStudentTableWidth = (widthRef) => {
     }
   }
 };
+
 /**
  * getInitialVisibleColumnConfig method set initially all column
  * visible that is set true value of all column
@@ -80,6 +83,7 @@ export const getInitialVisibleColumnConfig = () => {
   });
   return temporaryVisibleColumnConfig;
 };
+
 /**
  * chunkArray divide array into chunk of array
  * @param {Array} Array
@@ -103,6 +107,7 @@ export const setAppColor = (mode) => {
     }
   }
 };
+
 /**
  * getFormattedStudentId method convert the studentID into four digit studentID.
  * @param {Number} studentId

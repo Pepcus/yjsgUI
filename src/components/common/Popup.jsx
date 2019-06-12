@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
  * Popup render popup
  * @param {Node} children
  * @type {Function}
- * @return {ReactComponent}
+ * @return {*}
  * @constructor
  */
 const Popup = ({ children }) => (

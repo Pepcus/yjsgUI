@@ -108,6 +108,12 @@ class MemberRegistrationCorrectionForm extends Component {
     }
   };
 
+  /**
+   * validate method check validation for only optIn is 'Y' form field and return conditional error for form field
+   * @param {Object} formData
+   * @param {Object} errors
+   * @return {*}
+   */
   validate = (formData, errors) => {
     if (this.state.student.optIn2019 === 'Y') {
       validation.forEach((valid) => {
@@ -121,6 +127,11 @@ class MemberRegistrationCorrectionForm extends Component {
     return {};
   };
 
+  /**
+   * renderSuccessMessage render success message when form updated and submit successfully.
+   * Otherwise render not success message
+   * @return {*}
+   */
   renderSuccessMessage = () => {
     const {
       isSubmitTriggered,
@@ -153,6 +164,10 @@ class MemberRegistrationCorrectionForm extends Component {
     } return null;
   };
 
+
+  /**
+   * updateStudentData method will update student data by onClick of submit button
+   */
   updateStudentData = () => {
     const {
       id,
@@ -167,6 +182,10 @@ class MemberRegistrationCorrectionForm extends Component {
     });
   };
 
+  /**
+   * prePopulateCourse2019 method pre populate course (level) of year 2019
+   * @param {Object} studentData
+   */
   prePopulateCourse2019 = (studentData) => {
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
@@ -176,12 +195,20 @@ class MemberRegistrationCorrectionForm extends Component {
     });
   };
 
+  /**
+   * changeIsOnlyOptIn method set only optIn file form
+   * @param {String} value
+   */
   changeIsOnlyOptIn = (value) => {
     this.setState({
       onlyOptInForm: value,
     });
   };
 
+  /**
+   * renderSubmitButtons method render submit button
+   * @return {*} submit button
+   */
   renderSubmitButtons = () => (
     <Button
       buttonText={formSubmitBtnText}
@@ -192,11 +219,15 @@ class MemberRegistrationCorrectionForm extends Component {
     />
   );
 
-  handleSubmit = (e) => {
+  /**
+   * handleSubmit submit updated form data on conditional
+   * @param {Object} event
+   */
+  handleSubmit = (event) => {
     const { student } = this.state;
     delete student.backButton;
     delete student.submitButton;
-    e.preventDefault();
+    event.preventDefault();
     if (this.state.student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
@@ -215,8 +246,12 @@ class MemberRegistrationCorrectionForm extends Component {
     }
   };
 
-  submitStudentDataForOnlyOptInCase = (e) => {
-    e.preventDefault();
+  /**
+   * submitStudentDataForOnlyOptInCase method submit form data for only optIn field
+   * @param {Object} event
+   */
+  submitStudentDataForOnlyOptInCase = (event) => {
+    event.preventDefault();
     if (!isEmpty(this.state.student.optIn2019)) {
       this.setState({
         isSubmitTriggered: true,
@@ -225,6 +260,12 @@ class MemberRegistrationCorrectionForm extends Component {
     }
   };
 
+  /**
+   * transformErrors method transform error of form field conditionally
+   * optIn value should not be 'N'
+   * @param {Array} errors
+   * @return {Array} temError
+   */
   transformErrors = (errors) => {
     const temError = [];
     if (this.props.studentData.optIn2019 === 'N') {
@@ -244,6 +285,10 @@ class MemberRegistrationCorrectionForm extends Component {
     return temError;
   };
 
+  /**
+   * renderBackButton render back button conditionally for redirect to previous location .
+   * @return {*}
+   */
   renderBackButton = () => {
     const {
       pageUser,
@@ -273,6 +318,10 @@ class MemberRegistrationCorrectionForm extends Component {
     );
   };
 
+  /**
+   * onChange method handle onChange of form
+   * @param {Object} event
+   */
   onChange = (event) => {
     this.setState({
       student: {
