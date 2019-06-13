@@ -114,7 +114,8 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {string} className
    */
   renderMarkPresentButtonClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
@@ -126,7 +127,8 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {string} className
    */
   renderMarkButtonClassName() {
-    if (isEmpty(this.state.selectedDay)) {
+    const { selectedDay } = this.state;
+    if (isEmpty(selectedDay)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
@@ -189,10 +191,9 @@ class MarkSelectedStudentAttendance extends Component {
    */
   onFormSubmit(event) {
     event.preventDefault();
+    const { studentsId, selectedDay } = this.state;
     const { secretKey } = this.props;
-    const selectedStudentsId = this.state.studentsId;
-    const day = this.state.selectedDay;
-    this.props.markSelectedStudentsAttendanceAction({ secretKey, selectedStudentsId, day });
+    this.props.markSelectedStudentsAttendanceAction({ secretKey, selectedStudentsId: studentsId, day: selectedDay });
   }
 
   /**
@@ -200,10 +201,11 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsModal() {
-    if (this.state.isMarkSelectedStudentsAttendanceModalOpen) {
+    const { isMarkSelectedStudentsAttendanceModalOpen, studentsId, selectedDay } = this.state;
+    if (isMarkSelectedStudentsAttendanceModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isMarkSelectedStudentsAttendanceModalOpen}
+          isOpen={isMarkSelectedStudentsAttendanceModalOpen}
           onRequestClose={this.closeMarkSelectedStudentsAttendanceModal}
           style={customSelectedStudentsAttendanceModalStyles}
           contentLabel="Column Options"
@@ -221,14 +223,14 @@ class MarkSelectedStudentAttendance extends Component {
                   <span>Selected Students Id:</span>
                   <div className="selected-student-wrapper-id">
                     {
-                      this.state.studentsId.map(student =>
+                      studentsId.map(student =>
                         <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
                     }
                   </div>
                 </div>
                 <div className="column-content-student-wrapper">
                   <span className="column-content-students">Select Day:</span>
-                  <select onChange={this.handleSelectChange} value={this.state.selectedDay.day} className="selected-day-list">
+                  <select onChange={this.handleSelectChange} value={selectedDay.day} className="selected-day-list">
                     <option selected hidden disabled="disabled" value="" />
                     {this.renderOptions()}
                   </select>

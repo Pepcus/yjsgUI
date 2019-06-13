@@ -52,9 +52,10 @@ class ColumnConfig extends Component {
   }
 
   componentWillMount() {
+    const { visibleColumnConfig, selectValue } = this.props;
     this.setState({
-      visibleColumnConfig: this.props.visibleColumnConfig,
-      selectValue: this.props.selectValue,
+      visibleColumnConfig,
+      selectValue,
     });
   }
 
@@ -63,6 +64,7 @@ class ColumnConfig extends Component {
    * @return {*}
    */
   renderColumnOptions = () => {
+    const { visibleColumnConfig } = this.state;
     const columnsListTemporary = cloneDeep(columnsList);
     let columnListChunks = [];
     const chunkLength = Math.ceil(columnsList.length / 4);
@@ -82,7 +84,7 @@ class ColumnConfig extends Component {
                     type="checkbox"
                     name={option.key}
                     onChange={this.handleChange}
-                    checked={this.state.visibleColumnConfig[option.key] ? 'checked' : ''}
+                    checked={visibleColumnConfig[option.key] ? 'checked' : ''}
                   />
                   <span>{option.label}</span>
                 </label>
@@ -100,9 +102,10 @@ class ColumnConfig extends Component {
    * and call closeColumnOption() method.
    */
   setValuesOfVisibleColumnConfig() {
+    const { visibleColumnConfig, selectValue } = this.state;
     this.props.setValuesOfVisibleColumnConfig(
-      this.state.visibleColumnConfig,
-      this.state.selectValue,
+      visibleColumnConfig,
+      selectValue,
     );
     this.props.closeColumnOption();
   }
@@ -112,8 +115,10 @@ class ColumnConfig extends Component {
    * of selectValue value set the value of visibleColumnConfig(all column value)
    */
   setCheckValue() {
-    const temporarySelectValue = this.state.selectValue !== true;
-    const temporaryVisibleColumnConfig = cloneDeep(this.props.visibleColumnConfig);
+    const { selectValue } = this.state;
+    const { visibleColumnConfig } = this.props;
+    const temporarySelectValue = selectValue !== true;
+    const temporaryVisibleColumnConfig = cloneDeep(visibleColumnConfig);
     if (temporarySelectValue) {
       for (const key in temporaryVisibleColumnConfig) {
         temporaryVisibleColumnConfig[key] = true;
@@ -138,17 +143,18 @@ class ColumnConfig extends Component {
    * @param {Object} event
    */
   handleChange = (event) => {
+    const { visibleColumnConfig } = this.state;
     if (event.target.checked) {
       this.setState({
         visibleColumnConfig: {
-          ...this.state.visibleColumnConfig,
+          ...visibleColumnConfig,
           [event.target.name]: true,
         },
       });
     } else if (!event.target.checked) {
       this.setState({
         visibleColumnConfig: {
-          ...this.state.visibleColumnConfig,
+          ...visibleColumnConfig,
           [event.target.name]: false,
           'edit': false,
         },
@@ -157,6 +163,7 @@ class ColumnConfig extends Component {
   };
 
   render() {
+    const { selectValue } = this.state;
     return (
       <Modal
         isOpen={this.props.columnOptionIsOpen}
@@ -175,7 +182,7 @@ class ColumnConfig extends Component {
             <div className="column-group-wrapper">
               <div className="select-button-wrapper">
                 <label className="label">
-                  <input type="checkbox" onChange={() => this.setCheckValue()} checked={this.state.selectValue ? 'checked' : ''} />
+                  <input type="checkbox" onChange={() => this.setCheckValue()} checked={selectValue ? 'checked' : ''} />
                   <span className="select-none-wrapper">Select All</span>
                 </label>
               </div>

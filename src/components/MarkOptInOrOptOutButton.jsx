@@ -104,7 +104,8 @@ class MarkOptInOrOptOutButton extends Component {
    * for marking the optIn/optOut.
    */
   filterIdsOfStudents() {
-    const Ids = this.props.selectedStudents.map(student => String(student.studentId));
+    const { selectedStudents } = this.props;
+    const Ids = selectedStudents.map(student => String(student.studentId));
     this.setState({
       studentsId: Ids,
     });
@@ -116,7 +117,8 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {string} className
    */
   renderMarkOptInOrOutClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
@@ -128,7 +130,8 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {string} className
    */
   renderSubmitButtonClassName() {
-    if (isEmpty(this.state.selectedOptOption)) {
+    const { selectedOptOption } = this.state;
+    if (isEmpty(selectedOptOption)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
@@ -177,10 +180,13 @@ class MarkOptInOrOptOutButton extends Component {
    */
   onFormSubmit(event) {
     event.preventDefault();
+    const { studentsId, selectedOptOption } = this.state;
     const { secretKey } = this.props;
-    const selectedStudentsId = this.state.studentsId;
-    const opt = this.state.selectedOptOption;
-    this.props.markSelectedStudentsOptInOrOptOutAction({ secretKey, selectedStudentsId, opt });
+    this.props.markSelectedStudentsOptInOrOptOutAction({
+      secretKey,
+      selectedStudentsId: studentsId,
+      opt: selectedOptOption,
+    });
   }
 
   /**
@@ -189,10 +195,11 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
-    if (this.state.isMarkSelectedStudentsOptInOrOptOutModalOpen) {
+    const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentsId } = this.state;
+    if (isMarkSelectedStudentsOptInOrOptOutModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isMarkSelectedStudentsOptInOrOptOutModalOpen}
+          isOpen={isMarkSelectedStudentsOptInOrOptOutModalOpen}
           onRequestClose={this.closeMarkSelectedStudentsOptInOrOptOutModal}
           style={customSelectedStudentsOptInOrOptOutStyles}
           contentLabel="Column Options"
@@ -210,7 +217,7 @@ class MarkOptInOrOptOutButton extends Component {
                   <span>Selected Students Id: </span>
                   <div className="selected-student-wrapper-id">
                     {
-                      this.state.studentsId.map(student =>
+                      studentsId.map(student =>
                         <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
                     }
                   </div>

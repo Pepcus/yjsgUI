@@ -73,14 +73,15 @@ class StudentCredentialPage extends Component {
   }
 
   componentWillMount() {
+    const { context, studentId, secretKey } = this.props;
     // If admin redirect to student credential page in that case
     // pre populate the id and secretKey of previous login student
-    if (this.props.context.previousLocation === '/admin') {
+    if (context.previousLocation === '/admin') {
       this.setState({
-        credentials: { studentId: this.props.studentId, secretKey: this.props.secretKey },
+        credentials: { studentId, secretKey },
       });
     // else student credential fields are empty
-    } else if (this.props.context.previousLocation === '/') {
+    } else if (context.previousLocation === '/') {
       this.setState({
         credentials: {},
       });
@@ -114,15 +115,18 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   checkRegisteredStudentCredential() {
-    if (this.state.registeredStudentCredentialErrorMessage) {
-      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+    const { registeredStudentCredentialErrorMessage } = this.state;
+    const { studentData } = this.props;
+    const { STUDENT } = USER_TYPES;
+    if (registeredStudentCredentialErrorMessage) {
+      if ((!studentData || !this.props.isFetched) && !this.props.isLoading) {
         return (
           <div className="errorPopupContainer">
             <h5 className="error-message">{invalidIdMessage}</h5>
           </div>
         );
-      } else if (this.props.studentData && this.props.isFetched) {
-        this.props.setUserTypeAction(USER_TYPES.STUDENT);
+      } else if (studentData && this.props.isFetched) {
+        this.props.setUserTypeAction(STUDENT);
         return (
           <div>
             <Redirect to="/studentCorrection" />
@@ -139,17 +143,19 @@ class StudentCredentialPage extends Component {
    * @param {Object} event
    */
   fetchStudentById(event) {
+    const { credentials } = this.state;
+    const { STUDENT } = USER_TYPES;
     event.preventDefault();
-    this.props.setStudentCredentials(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
+    this.props.setStudentCredentials(credentials.studentId,
+      credentials.secretKey);
+    this.props.fetchStudentData(credentials.studentId,
+      credentials.secretKey);
 
     // this.setState({
     //   registeredStudentCredentialErrorMessage: true,
     // });
 
-    this.props.setUserTypeAction(USER_TYPES.STUDENT);
+    this.props.setUserTypeAction(STUDENT);
     this.setState({
       redirectToStudentCorrectionByUrl: true,
     });
@@ -163,10 +169,11 @@ class StudentCredentialPage extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.credentials),
+    const { credentials, admin } = this.state;
+    const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
 
-    const adminData = extend(cloneDeep(this.state.admin),
+    const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -182,14 +189,16 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   renderBackButton() {
-    if (this.props.hashLink === USER_TYPES.ADMIN) {
+    const { hashLink, context } = this.props;
+    const { ADMIN, STUDENT } = USER_TYPES;
+    if (hashLink === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath="/admin"
         />
       );
-    } else if (this.props.hashLink === USER_TYPES.STUDENT) {
+    } else if (hashLink === STUDENT) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -200,7 +209,7 @@ class StudentCredentialPage extends Component {
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
   }
@@ -210,6 +219,7 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   renderRegistrationCorrectionFields() {
+    const { credentials } = this.state;
     return (
       <div className="student-already-register-form">
         <form id="studentCredential">
@@ -220,7 +230,7 @@ class StudentCredentialPage extends Component {
               label={ID_NUMBER_TEXT}
               placeholder={ENTER_ID_NUMBER_MESSAGE}
               onInputChange={this._handleInputChange}
-              value={this.state.credentials.studentId}
+              value={credentials.studentId}
             />
             <InputField
               type="text"
@@ -228,7 +238,7 @@ class StudentCredentialPage extends Component {
               label={SECRET_CODE_TEXT}
               placeholder={ENTER_SECRET_CODE_MESSAGE}
               onInputChange={this._handleInputChange}
-              value={this.state.credentials.secretKey}
+              value={credentials.secretKey}
             />
             {this.checkRegisteredStudentCredential()}
           </div>
@@ -250,9 +260,11 @@ class StudentCredentialPage extends Component {
   }
 
   render() {
-    if (this.state.isURLParams) {
+    const { isURLParams, redirectToStudentCorrectionByUrl } = this.state;
+    const { tenant } = this.props;
+    if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
-    } else if (this.state.redirectToStudentCorrectionByUrl) {
+    } else if (redirectToStudentCorrectionByUrl) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
     }
     return (
@@ -260,8 +272,8 @@ class StudentCredentialPage extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />

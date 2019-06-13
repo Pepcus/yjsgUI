@@ -15,7 +15,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * Footer component is common footer for all route.
  * It will be render in bottom of all page.
  * @type {Class}
- * @return {ReactComponent}
+ * @return {*} Footer Information
  */
 class Footer extends Component {
 
@@ -38,7 +38,6 @@ class Footer extends Component {
     );
   }
 }
-
 
 Footer.propTypes = {
   isLoading: PropTypes.bool,

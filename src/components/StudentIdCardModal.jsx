@@ -193,8 +193,9 @@ class StudentIdCardModal extends Component {
   }
 
   render() {
+    const { selectedStudents } = this.props;
     return (
-      <div>{this.renderStudentIdCards(this.props.selectedStudents)}</div>
+      <div>{this.renderStudentIdCards(selectedStudents)}</div>
     );
   }
 }

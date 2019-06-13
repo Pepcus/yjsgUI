@@ -45,7 +45,8 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {*} bus coordinator warning popup
    */
   renderCoordinatorUnavailableWarningPopup = () => {
-    if (this.props.isBusCoordinatorsDataFailed && this.state.isBusCoordinatorsError) {
+    const { isBusCoordinatorsError } = this.state;
+    if (this.props.isBusCoordinatorsDataFailed && isBusCoordinatorsError) {
       return (
         <Popup>
           <h5>{ BUS_COORDINATOR_ERROR_MESSAGE }</h5>
@@ -82,7 +83,8 @@ class SelectedStudentsActionWrapper extends Component {
    * openPrintOption method open or close the print window.
    */
   openPrintOption() {
-    this.setState({ printOptionIsOpen: !this.state.printOptionIsOpen });
+    const { printOptionIsOpen } = this.state;
+    this.setState({ printOptionIsOpen: !printOptionIsOpen });
   }
 
   /**
@@ -91,7 +93,8 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {string} className
    */
   renderExportClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link';
     }
     return 'export';
@@ -103,14 +106,17 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {string} className
    */
   getPrintNowClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
   }
 
   render() {
-    const filterHeader = this.props.metaData.headerConfig.filter(obj =>
+    const { metaData, selectedStudents } = this.props;
+    const { printOptionIsOpen } = this.state;
+    const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
     const header = filterHeader.map(item =>
       ({ label: item.label, key: item.key, disable: item.disable }),
@@ -122,7 +128,7 @@ class SelectedStudentsActionWrapper extends Component {
             <div className="button-container">
               <CSVLink
                 headers={header}
-                data={this.props.selectedStudents}
+                data={selectedStudents}
                 className={this.renderExportClassName()}
                 filename={`StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`}
               >
@@ -142,10 +148,10 @@ class SelectedStudentsActionWrapper extends Component {
               </button>
             </div>
             <UpdateIdCardStatusSelectedStudents
-              selectedStudents={this.props.selectedStudents}
+              selectedStudents={selectedStudents}
             />
             <MarkSelectedStudentAttendance
-              selectedStudents={this.props.selectedStudents}
+              selectedStudents={selectedStudents}
 
             />
             {/* <MarkOptInOrOptOutButton
@@ -156,8 +162,8 @@ class SelectedStudentsActionWrapper extends Component {
           </div>
         </div>
         <StudentIdCardModal
-          printOptionIsOpen={this.state.printOptionIsOpen}
-          selectedStudents={this.props.selectedStudents}
+          printOptionIsOpen={printOptionIsOpen}
+          selectedStudents={selectedStudents}
         />
       </div>
     );

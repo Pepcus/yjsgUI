@@ -96,7 +96,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * @return {string} class name
    */
   renderSubmitButtonClassName() {
-    if (isEmpty(this.state.selectedCardOption)) {
+    const { selectedCardOption } = this.state;
+    if (isEmpty(selectedCardOption)) {
       return 'popup-buttons-disable';
     }
     return 'display-inline linkButton btn-upload';
@@ -106,7 +107,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * filterIdsOfStudents method set the selected students Id into studentId Array
    */
   filterIdsOfStudents() {
-    const Ids = this.props.selectedStudents.map(student => String(student.studentId));
+    const { selectedStudents } = this.props;
+    const Ids = selectedStudents.map(student => String(student.studentId));
     this.setState({
       studentsId: Ids,
     });
@@ -117,7 +119,8 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * @return {string} class name
    */
   renderIdCardStatusButtonClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
@@ -167,12 +170,11 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   onFormSubmit(event) {
     event.preventDefault();
     const { secretKey } = this.props;
-    const selectedStudentsId = this.state.studentsId;
-    const IdCardStatus = this.state.selectedCardOption;
+    const { studentsId, selectedCardOption } = this.state;
     this.props.updateIdCardStatusSelectedStudentsAction({
       secretKey,
-      selectedStudentsId,
-      IdCardStatus,
+      selectedStudentsId: studentsId,
+      IdCardStatus: selectedCardOption,
     });
   }
 
@@ -182,10 +184,11 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * @return {*} modal
    */
   renderUpdateIdCardStatusSelectedStudentsModal() {
-    if (this.state.isUpdateSelectedStudentsOptInOrOptOutModalOpen) {
+    const { isUpdateSelectedStudentsOptInOrOptOutModalOpen, studentsId } = this.state;
+    if (isUpdateSelectedStudentsOptInOrOptOutModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isUpdateSelectedStudentsOptInOrOptOutModalOpen}
+          isOpen={isUpdateSelectedStudentsOptInOrOptOutModalOpen}
           onRequestClose={this.closeUpdateIdCardStatusSelectedStudentsModal}
           style={customUpdateIdCardStatusSelectedStudentsModalStyles}
           contentLabel="Column Options"
@@ -203,7 +206,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
                   <span>Selected Students Id: </span>
                   <div className="selected-student-wrapper-id">
                     {
-                      this.state.studentsId.map(student =>
+                      studentsId.map(student =>
                         <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
                     }
                   </div>
@@ -235,6 +238,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
         </Modal>
       );
     }
+    return null;
   }
 
   render() {

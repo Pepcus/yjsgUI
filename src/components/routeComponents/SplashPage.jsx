@@ -164,18 +164,15 @@ class SplashPage extends Component {
 
   /**
    * adminScreenRedirection method redirect to admin page on some condition.
-   * @return {ReactComponent}
+   * @return {*} message
    */
   adminScreenRedirection() {
     // IF admin initial login.
-    const { redirectToRoute } = this.state;
-    if (!this.props.adminLoginState) {
-      const {
-        id,
-        password,
-      } = this.props;
+    const { redirectToRoute, adminCredentialErrorMessage } = this.state;
+    const { id, password, adminLoginState } = this.props;
+    if (!adminLoginState) {
       // Verify admin credential
-      if (this.state.adminCredentialErrorMessage) {
+      if (adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
           // If admin credential is not valid it gives the error message.
           return (
@@ -238,12 +235,13 @@ class SplashPage extends Component {
    * @param {Object} event
    */
   setAdminLogin(event) {
+    const { admin } = this.state;
     event.preventDefault();
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
-    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
   }
 
   /**
@@ -268,10 +266,11 @@ class SplashPage extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.credentials),
+    const { credentials, admin } = this.state;
+    const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
 
-    const adminData = extend(cloneDeep(this.state.admin),
+    const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -330,35 +329,47 @@ class SplashPage extends Component {
    * of new registration button.
    */
   redirectToNewRegistrationPage() {
+    const { ADMIN } = USER_TYPES;
     this.setState({
       isNewRegistration: true,
     });
-    this.props.setHashLinkForNewRegistrationAction(USER_TYPES.ADMIN);
+    this.props.setHashLinkForNewRegistrationAction(ADMIN);
   }
+
   render() {
-    if (this.state.isURLParams) {
+    const {
+      isURLParams,
+      isAdmin,
+      admin,
+      isNewRegistration,
+    } = this.state;
+
+    const { tenant } = this.props;
+
+    if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
     }
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
             </div>
             <div className="landing-page-button-container">
               <LoginForm
-                isAdmin={this.state.isAdmin}
-                admin={this.state.admin}
+                isAdmin={isAdmin}
+                admin={admin}
                 handleInputChange={this._handleInputChange}
                 adminScreenRedirection={this._adminScreenRedirection}
                 disableAdminLoginButtons={this._disableAdminLoginButtons}
                 setAdminLogin={this._setAdminLogin}
-                isNewRegistration={this.state.isNewRegistration}
+                isNewRegistration={isNewRegistration}
                 redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
                 enableAdminLoginButtons={this._enableAdminLoginButtons}
               />

@@ -63,17 +63,17 @@ class MemberRegistrationCorrectionForm extends Component {
   }
 
   componentDidMount() {
+    const { studentData } = this.props;
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
-    const studentData = !isEmpty(this.props.studentData)
-      ? this.props.studentData : studentDataFromSession;
-    const prePopulateOptInStudentData = prePopulateOptIn(studentData);
+    const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
+    const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
     if (!isEmpty(prePopulateOptInStudentData)) {
       this.setState({
         student: InitialStudentData(prePopulateOptInStudentData),
-        oldStudentDate: InitialStudentData(studentData),
+        oldStudentDate: InitialStudentData(finalStudentData),
         isSubmitTriggered: false,
       });
       this.prePopulateCourse2019(InitialStudentData(prePopulateOptInStudentData));
@@ -81,17 +81,17 @@ class MemberRegistrationCorrectionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { studentData } = nextProps;
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
-    const studentData = !isEmpty(nextProps.studentData)
-      ? nextProps.studentData : studentDataFromSession;
-    const prePopulateOptInStudentData = prePopulateOptIn(studentData);
+    const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
+    const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
     if (!isEmpty(prePopulateOptInStudentData)) {
       this.setState({
         student: InitialStudentData(prePopulateOptInStudentData),
-        oldStudentDate: InitialStudentData(studentData),
+        oldStudentDate: InitialStudentData(finalStudentData),
         isSubmitTriggered: false,
       });
       this.prePopulateCourse2019(InitialStudentData(prePopulateOptInStudentData));
@@ -115,7 +115,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   validate = (formData, errors) => {
-    if (this.state.student.optIn2019 === 'Y') {
+    const { student } = this.state;
+    if (student.optIn2019 === 'Y') {
       validation.forEach((valid) => {
         const error = validations[valid.validates](formData[valid.field]);
         if (!isEmpty(error)) {
@@ -138,6 +139,7 @@ class MemberRegistrationCorrectionForm extends Component {
       isFormChanged,
       hasError,
     } = this.state;
+    const { context } = this.props;
     // if form data is update and valid and submitted successfully.
     if (this.props.isUpdated) {
       return (
@@ -145,7 +147,7 @@ class MemberRegistrationCorrectionForm extends Component {
           <h5>{infoUpdateSuccessMessage}</h5>
           <LinkButton
             buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
+            linkPath={context.previousLocation}
             onClick={() => { this.props.isUpdatedResetAction(); }}
           />
         </Popup>
@@ -157,7 +159,7 @@ class MemberRegistrationCorrectionForm extends Component {
           <h5>{noInfoChangeMessage}</h5>
           <LinkButton
             buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
+            linkPath={context.previousLocation}
           />
         </Popup>
       );
@@ -224,16 +226,16 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   handleSubmit = (event) => {
-    const { student } = this.state;
+    const { student, oldStudentDate, hasError } = this.state;
     delete student.backButton;
     delete student.submitButton;
     event.preventDefault();
-    if (this.state.student.optIn2019 === 'N') {
+    if (student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
-    } else if (!isEqual(this.state.oldStudentDate, student) && this.state.hasError) {
+    } else if (!isEqual(oldStudentDate, student) && hasError) {
       this.setState({
         isSubmitTriggered: true,
       });
@@ -251,8 +253,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   submitStudentDataForOnlyOptInCase = (event) => {
+    const { student } = this.state;
     event.preventDefault();
-    if (!isEmpty(this.state.student.optIn2019)) {
+    if (!isEmpty(student.optIn2019)) {
       this.setState({
         isSubmitTriggered: true,
       });
@@ -268,11 +271,12 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   transformErrors = (errors) => {
     const temError = [];
-    if (this.props.studentData.optIn2019 === 'N') {
+    const { studentData } = this.props;
+    if (studentData.optIn2019 === 'N') {
       return [];
     }
     errors.forEach((error) => {
-      if (this.props.studentData.optIn2019 !== 'N') {
+      if (studentData.optIn2019 !== 'N') {
         if (error.name === 'required' || error.name === 'enum') {
           temError.push({ ...error, message: THIS_INFORMATION_IS_COMPULSORY_MESSAGE });
         } else if (error.name === 'format' && error.params.format === 'email') {
@@ -294,14 +298,15 @@ class MemberRegistrationCorrectionForm extends Component {
       pageUser,
       context,
     } = this.props;
-    if (pageUser === USER_TYPES.ADMIN) {
+    const { ADMIN, STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+    if (pageUser === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath={context.previousLocation}
         />
       );
-    } else if (pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT) {
+    } else if (pageUser === STUDENT_WITH_URL || pageUser === STUDENT) {
       return (
         <Button
           type="button"

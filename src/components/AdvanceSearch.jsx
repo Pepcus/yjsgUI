@@ -30,14 +30,16 @@ class AdvanceSearch extends Component {
   }
 
   componentDidMount() {
+    const { checkedIds } = this.props;
     this.setState({
-      checkedIds: this.props.checkedIds,
+      checkedIds,
     });
   }
 
   componentWillReceiveProps(nextProps) {
+    const { checkedIds } = nextProps;
     this.setState({
-      checkedIds: nextProps.checkedIds,
+      checkedIds,
     });
   }
 
@@ -48,10 +50,12 @@ class AdvanceSearch extends Component {
    * @param {Object} event
    */
   setInputValue(event) {
+    const { checkedIds } = this.state;
+    const { students } = this.props;
     if (isEmpty(event.target.value)) {
-      const studentsData = this.props.students.map((student) => {
+      const studentsData = students.map((student) => {
         let finalStudentObject = student;
-        this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
+        checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
             finalStudentObject = {
               ...student,
@@ -74,8 +78,10 @@ class AdvanceSearch extends Component {
    */
   // This may be use in future
   clearFilter() {
+    const { inputValue, checkedIds } = this.state;
+    const { students } = this.props;
     // set the search input value to empty string
-    if (!isEmpty(this.state.inputValue)) {
+    if (!isEmpty(inputValue)) {
       this.setState({
         inputValue: '',
       });
@@ -87,9 +93,9 @@ class AdvanceSearch extends Component {
       isMultipleIdSearchCheck: false,
       isDeepSearchCheck: false,
     });
-    const studentsData = this.props.students.map((student) => {
+    const studentsData = students.map((student) => {
       let finalStudentObject = student;
-      this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
+      checkedIds.forEach((checkedUncheckedIdObject) => {
         if (String(student.id) === String(checkedUncheckedIdObject.id)) {
           finalStudentObject = {
             ...student,
@@ -150,7 +156,8 @@ class AdvanceSearch extends Component {
    * @return {*} clear button
    */
   clearButton() {
-    if (!isEmpty(this.state.inputValue)) {
+    const { inputValue } = this.state;
+    if (!isEmpty(inputValue)) {
       return <span className="clear-search"><i className="fa fa-times-circle" onClick={this._clearFilter} /></span>;
     } return null;
   }
@@ -160,27 +167,34 @@ class AdvanceSearch extends Component {
    * @param {Object} event
    */
   advanceSearch(event) {
+    const {
+      isMultipleIdSearchCheck,
+      thresholdValue,
+      inputValue,
+      checkedIds,
+    } = this.state;
+    const { metaData, students } = this.props;
     event.preventDefault();
     // isMultipleIdSearchCheck is uncheck it do the search result according to search string
     // type of search (thresholdValue)
-    if (!this.state.isMultipleIdSearchCheck) {
-      const foundKeys = this.props.metaData.headerConfig.map(object => object.key,
+    if (!isMultipleIdSearchCheck) {
+      const foundKeys = metaData.headerConfig.map(object => object.key,
       );
       const options = {
         shouldSort: true,
-        threshold: Number(this.state.thresholdValue),
+        threshold: Number(thresholdValue),
         location: 0,
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: foundKeys,
       };
-      if (!isEmpty(this.state.inputValue)) {
-        const fuse = new Fuse(this.props.students, options);
-        const result = fuse.search(this.state.inputValue);
+      if (!isEmpty(inputValue)) {
+        const fuse = new Fuse(students, options);
+        const result = fuse.search(inputValue);
         const studentsData = result.map((student) => {
           let finalStudentObject = student;
-          this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
+          checkedIds.forEach((checkedUncheckedIdObject) => {
             if (String(student.id) === String(checkedUncheckedIdObject.id)) {
               finalStudentObject = {
                 ...student,
@@ -193,19 +207,19 @@ class AdvanceSearch extends Component {
         });
         this.props.onFilter(this.props.formatStudents(studentsData));
       }
-    } else if (!isEmpty(this.state.inputValue)) {
+    } else if (!isEmpty(inputValue)) {
       // isMultipleIdSearchCheck is check it do the search result according to search Ids.
-      const searchStudentsIds = this.state.inputValue.split(',');
+      const searchStudentsIds = inputValue.split(',');
       const searchResult = [];
       for (const index in searchStudentsIds) {
-        const result = this.props.students.filter(student =>
+        const result = students.filter(student =>
           student.id === Number(searchStudentsIds[index]));
         searchResult.push(...result);
       }
       const uniqSearchResult = uniqWith(searchResult, isEqual);
       const studentsData = uniqSearchResult.map((student) => {
         let finalStudentObject = student;
-        this.state.checkedIds.forEach((checkedUncheckedIdObject) => {
+        checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
             finalStudentObject = {
               ...student,
@@ -221,11 +235,12 @@ class AdvanceSearch extends Component {
   }
 
   render() {
+    const { inputValue, isDeepSearchCheck, isMultipleIdSearchCheck } = this.state;
     return (
       <form id="advanceSearch" className="advanceSearchForm">
         <div className="input-radio">
           <label htmlFor="search_input" className="input-text">
-            <input type="text" onChange={this.setInputValue} value={this.state.inputValue} className="search-input-advance" />
+            <input type="text" onChange={this.setInputValue} value={inputValue} className="search-input-advance" />
             {this.clearButton()}
             <button type="submit" form="advanceSearch" value="Submit" title="Search" className="search" onClick={this.advanceSearch}>
               <i className="fa fa-search" />
@@ -258,7 +273,7 @@ class AdvanceSearch extends Component {
                 className="checkbox-input"
                 value="0.6"
                 onChange={this.onChangeDeepSearchCheckBox}
-                checked={this.state.isDeepSearchCheck}
+                checked={isDeepSearchCheck}
               />
               <label htmlFor="deep_search">Deep Search</label>
             </div>
@@ -267,9 +282,9 @@ class AdvanceSearch extends Component {
                 type="checkbox"
                 name="thresholdValue"
                 className="checkbox-input"
-                value={this.state.isMultipleIdSearchCheck}
+                value={isMultipleIdSearchCheck}
                 onChange={this.onChangeMultipleIdSearchCheckBox}
-                checked={this.state.isMultipleIdSearchCheck}
+                checked={isMultipleIdSearchCheck}
               />
               <label htmlFor="deep_search">Multiple ID Search</label>
             </div>

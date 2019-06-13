@@ -93,7 +93,8 @@ class UploadOptInFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
-    if (!this.state.optInFile) {
+    const { optInFile } = this.state;
+    if (!optInFile) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
@@ -105,8 +106,9 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
+    const { optInFile } = this.state;
     event.preventDefault();
-    this.fileUpload(this.state.optInFile);
+    this.fileUpload(optInFile);
     this.setState({
       isFormSubmitted: true,
     });
@@ -126,7 +128,8 @@ class UploadOptInFile extends Component {
    * @param {Array} optInFile
    */
   fileUpload(optInFile) {
-    this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
+    const { secretKey } = this.props;
+    this.props.uploadOptInFileAction(secretKey, optInFile);
   }
 
   /**
@@ -134,11 +137,12 @@ class UploadOptInFile extends Component {
    * @return {*} failed records
    */
   renderFailOptIn() {
-    if (this.props.failOptIn) {
+    const { failOptIn } = this.props;
+    if (failOptIn) {
       return (
         <div className="failure-block">
           Failed Records are:
-          <div className="failure-block-records">{this.props.failOptIn}</div>
+          <div className="failure-block-records">{failOptIn}</div>
         </div>
       );
     }
@@ -196,10 +200,11 @@ class UploadOptInFile extends Component {
    * @return {*} modal
    */
   renderUploadOptInModal() {
-    if (this.state.isUploadOptInFileModalOpen) {
+    const { isUploadOptInFileModalOpen, isFormSubmitted } = this.state;
+    if (isUploadOptInFileModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isUploadOptInFileModalOpen}
+          isOpen={isUploadOptInFileModalOpen}
           onRequestClose={this.closeUploadOptInFileModal}
           style={customUploadOptInFileModalStyles}
           contentLabel="Column Options"
@@ -228,7 +233,7 @@ class UploadOptInFile extends Component {
                   <button
                     type="submit"
                     className={this.renderUploadButtonClassName()}
-                    disabled={this.state.isFormSubmitted}
+                    disabled={isFormSubmitted}
                   >
                     <i className="fa fa-file-text card-icon" />
                     Upload

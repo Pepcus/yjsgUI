@@ -26,6 +26,7 @@ const AdminLoginForm = ({ isAdmin,
   disableAdminLoginButtons,
   setAdminLogin }) => {
   if (isAdmin) {
+    const { adminId, adminPassword } = admin;
     return (
       <div>
         <form id="adminCredential">
@@ -36,7 +37,7 @@ const AdminLoginForm = ({ isAdmin,
               label="Admin ID"
               placeholder="Enter Admin ID"
               onInputChange={handleInputChange}
-              value={admin.adminId}
+              value={adminId}
             />
             <InputField
               type="password"
@@ -44,7 +45,7 @@ const AdminLoginForm = ({ isAdmin,
               label="Admin Password"
               placeholder="Enter Admin Password"
               onInputChange={handleInputChange}
-              value={admin.adminPassword}
+              value={adminPassword}
             />
             {adminScreenRedirection()}
           </div>

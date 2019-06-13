@@ -58,8 +58,9 @@ class MemberRegistrationForm extends Component {
    * onClick of submit button.
    */
   handleSubmit = () => {
-    if (this.state.notHasAnError) {
-      this.props.createStudentData(this.state.member);
+    const { notHasAnError, member } = this.state;
+    if (notHasAnError) {
+      this.props.createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
         notHasAnError: false,
@@ -107,14 +108,15 @@ class MemberRegistrationForm extends Component {
       userType,
       context,
     } = this.props;
-    if (userType === USER_TYPES.STUDENT) {
+    const { STUDENT, ADMIN } = USER_TYPES;
+    if (userType === STUDENT) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath="/"
         />
       );
-    } else if (userType === USER_TYPES.ADMIN) {
+    } else if (userType === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -135,7 +137,8 @@ class MemberRegistrationForm extends Component {
    * @return {*} success message popup
    */
   renderSuccessMessage = () => {
-    if (this.props.isCreated && this.state.isSubmitTriggered) {
+    const { isSubmitTriggered } = this.state;
+    if (this.props.isCreated && isSubmitTriggered) {
       const member = this.props.newStudent;
       // for pre-population on splash page
       this.props.setStudentCredentials(member.id, member.secretKey);

@@ -53,11 +53,12 @@ class ParentsRegistration extends Component {
    * @param {Object} event
    */
   handleInputChangeMobile(event) {
+    const { value } = event.target;
     // validation only for number with max length 10 only
     const validationForMobile = /^[0-9\b]+$/;
-    if (((event.target.value === '') || validationForMobile.test(event.target.value)) && event.target.value !== 'e' && event.target.value.length <= 10) {
+    if (((value === '') || validationForMobile.test(value)) && value !== 'e' && value.length <= 10) {
       this.setState({
-        mobile: event.target.value,
+        mobile: value,
         isError: false,
       });
     }
@@ -78,20 +79,21 @@ class ParentsRegistration extends Component {
    * @param {Object} event
    */
   onSubmitParentsData(event) {
+    const { name, mobile, selectedCountOfMembers } = this.state;
     // to prevent form action default
     event.preventDefault();
     // name and mobile number are compulsory for from submission
-    if (isEmpty(this.state.name) || isEmpty(this.state.mobile)) {
+    if (isEmpty(name) || isEmpty(mobile)) {
       this.setState({
         isSubmitTriggered: false,
         isError: true,
       });
     } else {
       // call action to submit form data
-      const name = String(this.state.name);
-      const members = Number(this.state.selectedCountOfMembers);
-      const phoneNumber = this.state.mobile;
-      this.props.parentsRegistrationAction({ name, members, phoneNumber });
+      this.props.parentsRegistrationAction({
+        name: String(name),
+        members: Number(selectedCountOfMembers),
+        phoneNumber: mobile });
       this.setState({
         isSubmitTriggered: true,
         isError: false,
@@ -100,10 +102,11 @@ class ParentsRegistration extends Component {
   }
   /**
    * addOptions method return number of member option in member drop down list.
-   * @return {ReactComponent}
+   * @return {*} option
    */
   addOptions() {
-    return (this.state.members.map(
+    const { members } = this.state;
+    return (members.map(
       optionCount => (
         <option
           key={optionCount}
@@ -118,7 +121,8 @@ class ParentsRegistration extends Component {
    * @return {*}
    */
   renderCloseBrowserMessage() {
-    if (this.state.isCloseBrowserPopMessage) {
+    const { isCloseBrowserPopMessage } = this.state;
+    if (isCloseBrowserPopMessage) {
       return (
         <Popup>
           <h5>Please close your browser manually.</h5>
@@ -144,7 +148,8 @@ class ParentsRegistration extends Component {
 
   // FIXME: Reuse the component to render error message popup
   renderErrorMessage() {
-    if (this.state.isError) {
+    const { isError } = this.state;
+    if (isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
           <span className="error-message">
@@ -156,7 +161,8 @@ class ParentsRegistration extends Component {
   }
   // FIXME: Reuse the component to render message popup
   renderPopUp() {
-    if (this.state.isSubmitTriggered) {
+    const { isSubmitTriggered } = this.state;
+    if (isSubmitTriggered) {
       return (
         <div className="inputFieldContainer parent-register-message-wrapper">
           <div>
@@ -174,7 +180,15 @@ class ParentsRegistration extends Component {
     return null;
   }
   render() {
-    if (!this.state.isSubmitTriggered && !this.state.isCloseBrowserPopMessage) {
+    const {
+      isSubmitTriggered,
+      isCloseBrowserPopMessage,
+      name,
+      mobile,
+      members,
+      selectedCountOfMembers,
+    } = this.state;
+    if (!isSubmitTriggered && !isCloseBrowserPopMessage) {
       return (
         <div className="footer-none-wrapper">
           <div className="registrationFormContainer parent-register-container">
@@ -190,7 +204,7 @@ class ParentsRegistration extends Component {
                     type="text"
                     name="name"
                     className="parent-input-text"
-                    value={this.state.name}
+                    value={name}
                     onChange={this._handleInputChangeName}
                     required
                   />
@@ -201,7 +215,7 @@ class ParentsRegistration extends Component {
                     type="number"
                     name="mobile"
                     className="parent-input-text"
-                    value={this.state.mobile}
+                    value={mobile}
                     onChange={this._handleInputChangeMobile}
                     required
                   />
@@ -209,7 +223,7 @@ class ParentsRegistration extends Component {
                 <span className="column-content-students">आपके अलावा साथ आने वालो की संख्या : </span>
                 <select
                   onChange={this._handleSelectChange}
-                  value={this.state.members[this.state.selectedCountOfMembers]}
+                  value={members[selectedCountOfMembers]}
                   className="selected-day-list"
                 >
                   {this._addOptions()}
