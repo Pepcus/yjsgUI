@@ -80,19 +80,21 @@ class SplashPagePrePopulated extends Component {
   }
 
   componentDidMount() {
+    const { studentId, secretKey } = this.props;
     this.setState({
       credentials: {
-        studentId: this.props.studentId,
-        secretKey: this.props.secretKey,
+        studentId,
+        secretKey,
       },
     });
   }
 
   componentWillReceiveProps(nextProps) {
+    const { studentId, secretKey } = nextProps;
     this.setState({
       credentials: {
-        studentId: nextProps.studentId,
-        secretKey: nextProps.secretKey,
+        studentId,
+        secretKey,
       },
     });
   }
@@ -146,12 +148,10 @@ class SplashPagePrePopulated extends Component {
    * @return {*}
    */
   adminScreenRedirection() {
-    if (!this.props.adminLoginState) {
-      const {
-        id,
-        password,
-      } = this.props;
-      if (this.state.adminCredentialErrorMessage) {
+    const { id, password, adminLoginState } = this.props;
+    const { adminCredentialErrorMessage } = this.state;
+    if (!adminLoginState) {
+      if (adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
           return (
             <div className="errorPopupContainer">
@@ -198,12 +198,13 @@ class SplashPagePrePopulated extends Component {
    * @param {Object} event
    */
   setAdminLogin(event) {
+    const { admin } = this.state;
     event.preventDefault();
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
-    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
   }
 
   /**
@@ -228,10 +229,11 @@ class SplashPagePrePopulated extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.credentials),
+    const { credentials, admin } = this.state;
+    const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
 
-    const adminData = extend(cloneDeep(this.state.admin),
+    const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -286,6 +288,7 @@ class SplashPagePrePopulated extends Component {
    * @return {*} Admin login fields
    */
   renderAdminLoginFields() {
+    const { admin } = this.state;
     return (
       <div>
         <form id="adminCredential">
@@ -295,7 +298,7 @@ class SplashPagePrePopulated extends Component {
             label="Admin ID"
             placeholder="Enter Admin ID"
             onInputChange={this._handleInputChange}
-            value={this.state.admin.adminId}
+            value={admin.adminId}
           />
           <InputField
             type="password"
@@ -303,7 +306,7 @@ class SplashPagePrePopulated extends Component {
             label="Admin Password"
             placeholder="Enter Admin Password"
             onInputChange={this._handleInputChange}
-            value={this.state.admin.adminPassword}
+            value={admin.adminPassword}
           />
           {this.adminScreenRedirection()}
           <div className="button-wrapper">
@@ -331,12 +334,12 @@ class SplashPagePrePopulated extends Component {
    * @return {*}
    */
   renderLoginField() {
-    if (this.state.isCorrection) {
+    const { isCorrection, isAdmin } = this.state;
+    if (isCorrection) {
       return <Switch><Redirect to="/student-login" /></Switch>;
-    } else if (this.state.isAdmin) {
+    } else if (isAdmin) {
       return this.renderAdminLoginFields();
     }
-
     return (
       <div>
         <Button
@@ -353,17 +356,17 @@ class SplashPagePrePopulated extends Component {
         />
       </div>
     );
-
   }
 
   render() {
+    const { tenant } = this.props;
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />

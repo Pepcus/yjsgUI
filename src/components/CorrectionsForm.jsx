@@ -41,12 +41,14 @@ const CorrectionsForm = ({ pageUser,
     renderSubmitButtons,
   });
 
+  const { STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+
   /**
    * getBackButton render back button conditionally
    * @return {*} back button
    */
   const getBackButton = () => {
-    if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
+    if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
       && onlyOptInForm) {
       return (
         <div>
@@ -67,7 +69,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {*} update other information link
    */
   const getLink = () => {
-    if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
+    if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
       && onlyOptInForm) {
       return (
         <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
@@ -80,11 +82,11 @@ const CorrectionsForm = ({ pageUser,
 
   if (formDetails) {
     return (
-      <div className={(pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
+      <div className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
       && onlyOptInForm ? 'form-container' : 'default-form-container'}
       >
         <div
-          className={(pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT)
+          className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
           && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >

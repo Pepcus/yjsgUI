@@ -28,18 +28,20 @@ export const getFormData = ({
   renderBackButton,
   renderSubmitButtons,
 }) => {
+  const { STUDENT_WITH_URL, STUDENT, ADMIN } = USER_TYPES;
+  const { INDORE } = TENANT;
   let schema = {};
   let uiSchema = {};
   let formData = {};
-  if ((pageUser === USER_TYPES.STUDENT_WITH_URL || pageUser === USER_TYPES.STUDENT) && onlyOptInForm) {
+  if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT) && onlyOptInForm) {
     schema = onlyOptIn.Schema;
     uiSchema = onlyOptIn.UISchema;
     formData = {
       ...onlyOptIn.Data,
       ...student,
     };
-  } else if (tenant === TENANT.INDORE) {
-    if (pageUser === USER_TYPES.ADMIN) {
+  } else if (tenant === INDORE) {
+    if (pageUser === ADMIN) {
       schema = indoreAdmin.Schema;
       uiSchema = {
         ...indoreAdmin.UISchema,
@@ -60,7 +62,7 @@ export const getFormData = ({
         ...indoreAdmin.Data,
         ...student,
       };
-    } else if (pageUser === USER_TYPES.STUDENT || pageUser === USER_TYPES.STUDENT_WITH_URL) {
+    } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
       schema = indoreStudent.Schema;
       uiSchema = {
         ...indoreStudent.UISchema,
@@ -82,7 +84,7 @@ export const getFormData = ({
         ...student,
       };
     }
-  } else if (pageUser === USER_TYPES.ADMIN) {
+  } else if (pageUser === ADMIN) {
     schema = defaultAdmin.Schema;
     uiSchema = {
       ...defaultAdmin.UISchema,
@@ -103,7 +105,7 @@ export const getFormData = ({
       ...defaultAdmin.Data,
       ...student,
     };
-  } else if (pageUser === USER_TYPES.STUDENT || pageUser === USER_TYPES.STUDENT_WITH_URL) {
+  } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
     schema = defaultStudent.Schema;
     uiSchema = {
       ...defaultStudent.UISchema,

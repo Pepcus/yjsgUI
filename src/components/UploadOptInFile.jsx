@@ -56,6 +56,7 @@ class UploadOptInFile extends Component {
       isUploadOptInFileModalOpen: false,
       isFormSubmitted: false,
     };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
@@ -79,8 +80,7 @@ class UploadOptInFile extends Component {
    * closeUploadOptInFileModal method set isUploadOptInFileModalOpen to false
    * and to reset IsOptIn it call resetIsOptInSuccessAction action
    */
-  closeUploadOptInFileModal(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+  closeUploadOptInFileModal() {
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
     this.setState({
@@ -94,12 +94,11 @@ class UploadOptInFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
-    if (!this.state.optInFile) {
+    const { optInFile } = this.state;
+    if (!optInFile) {
       return 'popup-buttons-disable';
     }
-
     return 'btn-upload linkButton';
-
   }
 
   /**
@@ -108,8 +107,9 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-    this.fileUpload(this.state.optInFile);
+    const { optInFile } = this.state;
+    event.preventDefault();
+    this.fileUpload(optInFile);
     this.setState({
       isFormSubmitted: true,
     });
@@ -129,19 +129,21 @@ class UploadOptInFile extends Component {
    * @param {Array} optInFile
    */
   fileUpload(optInFile) {
-    this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
+    const { secretKey } = this.props;
+    this.props.uploadOptInFileAction(secretKey, optInFile);
   }
 
   /**
    * renderFailOptIn method render failed records Ids
-   * @return {ReactComponent}
+   * @return {*} failed records
    */
   renderFailOptIn() {
-    if (this.props.failOptIn) {
+    const { failOptIn } = this.props;
+    if (failOptIn) {
       return (
         <div className="failure-block">
           Failed Records are:
-          <div className="failure-block-records">{this.props.failOptIn}</div>
+          <div className="failure-block-records">{failOptIn}</div>
         </div>
       );
     }
@@ -150,7 +152,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderIdNotPresentMessage method render unavailable Id error message
-   * @return {ReactComponent}
+   * @return {*} not present Id's
    */
   renderIdNotPresentMessage() {
     if (this.props.unavailableIdErrorMessage) {
@@ -165,7 +167,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderMessage method render success or failure message of upload optIn file
-   * @return {ReactComponent}
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isOptInSuccess) {
@@ -196,13 +198,14 @@ class UploadOptInFile extends Component {
 
   /**
    * renderUploadOptInModal method render upload optIn modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderUploadOptInModal() {
-    if (this.state.isUploadOptInFileModalOpen) {
+    const { isUploadOptInFileModalOpen, isFormSubmitted } = this.state;
+    if (isUploadOptInFileModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isUploadOptInFileModalOpen}
+          isOpen={isUploadOptInFileModalOpen}
           onRequestClose={this.closeUploadOptInFileModal}
           style={customUploadOptInFileModalStyles}
           contentLabel="Column Options"
@@ -231,7 +234,7 @@ class UploadOptInFile extends Component {
                   <button
                     type="submit"
                     className={this.renderUploadButtonClassName()}
-                    disabled={this.state.isFormSubmitted}
+                    disabled={isFormSubmitted}
                   >
                     <i className="fa fa-file-text card-icon" />
                     Upload
@@ -256,7 +259,6 @@ class UploadOptInFile extends Component {
         {this.renderUploadOptInModal()}
       </div>
     );
-
   }
 }
 

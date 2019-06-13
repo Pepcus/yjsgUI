@@ -28,8 +28,9 @@ class TextAreaField extends Component {
    * @return {*}
    */
   populateValue() {
-    if (this.props.value) {
-      return this.props.value;
+    const { value } = this.props;
+    if (value) {
+      return value;
     }
     return '';
   }

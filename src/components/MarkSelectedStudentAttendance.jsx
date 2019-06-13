@@ -86,8 +86,7 @@ class MarkSelectedStudentAttendance extends Component {
    * isMarkSelectedStudentsAttendanceModalOpen to false.
    * And on the basis of this close the mark selected student modal
    */
-  closeMarkSelectedStudentsAttendanceModal(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+  closeMarkSelectedStudentsAttendanceModal() {
     this.setState({ isMarkSelectedStudentsAttendanceModalOpen: false });
     this.props.resetIsMarkAttendanceSuccessAction();
     this.setState({
@@ -95,6 +94,7 @@ class MarkSelectedStudentAttendance extends Component {
       studentsId: [],
     });
   }
+
   /**
    * filterIdsOfStudents method filter Ids of selected students
    * for marking the attendance.
@@ -105,32 +105,38 @@ class MarkSelectedStudentAttendance extends Component {
       studentsId: Ids,
     });
   }
+
   /**
    * renderMarkPresentButtonClassName method return className
    * of mark as present button as per students are selected or not.
    * @return {string} className
    */
   renderMarkPresentButtonClassName() {
-    if (isEmpty(this.props.selectedStudents)) {
+    const { selectedStudents } = this.props;
+    if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
     return 'linkButton';
   }
+
   /**
    * renderMarkButtonClassName method return className
    * of submit button as per students attendance mark or not.
    * @return {string} className
    */
   renderMarkButtonClassName() {
-    if (isEmpty(this.state.selectedDay)) {
+    const { selectedDay } = this.state;
+    if (isEmpty(selectedDay)) {
       return 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
+
   /**
    * renderMessage method render success message
-   * as per selected students attendance marked.
-   * @return {ReactComponent}
+   * as per selected students attendance marked successfully.
+   * otherwise render failed message
+   * @return {*} message
    */
   renderMessage() {
     if (this.props.isMarkAttendanceSuccess) {
@@ -156,7 +162,7 @@ class MarkSelectedStudentAttendance extends Component {
   /**
    * addOptions method return options of drop down list
    * of days
-   * @return {ReactComponent}
+   * @return {*} day drop down list option
    */
   renderOptions() {
     return days.map(
@@ -182,22 +188,22 @@ class MarkSelectedStudentAttendance extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+    event.preventDefault();
+    const { studentsId, selectedDay } = this.state;
     const { secretKey } = this.props;
-    const selectedStudentsId = this.state.studentsId;
-    const day = this.state.selectedDay;
-    this.props.markSelectedStudentsAttendanceAction({ secretKey, selectedStudentsId, day });
+    this.props.markSelectedStudentsAttendanceAction({ secretKey, selectedStudentsId: studentsId, day: selectedDay });
   }
 
   /**
    * renderMarkSelectedStudentsModal method render mark selected students attendance modal
-   * @return {ReactComponent}
+   * @return {*} modal
    */
   renderMarkSelectedStudentsModal() {
-    if (this.state.isMarkSelectedStudentsAttendanceModalOpen) {
+    const { isMarkSelectedStudentsAttendanceModalOpen, studentsId, selectedDay } = this.state;
+    if (isMarkSelectedStudentsAttendanceModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isMarkSelectedStudentsAttendanceModalOpen}
+          isOpen={isMarkSelectedStudentsAttendanceModalOpen}
           onRequestClose={this.closeMarkSelectedStudentsAttendanceModal}
           style={customSelectedStudentsAttendanceModalStyles}
           contentLabel="Column Options"
@@ -215,14 +221,14 @@ class MarkSelectedStudentAttendance extends Component {
                   <span>Selected Students Id:</span>
                   <div className="selected-student-wrapper-id">
                     {
-                      this.state.studentsId.map(student =>
+                      studentsId.map(student =>
                         <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
                     }
                   </div>
                 </div>
                 <div className="column-content-student-wrapper">
                   <span className="column-content-students">Select Day:</span>
-                  <select onChange={this.handleSelectChange} value={this.state.selectedDay.day} className="selected-day-list">
+                  <select onChange={this.handleSelectChange} value={selectedDay.day} className="selected-day-list">
                     <option selected hidden disabled="disabled" value="" />
                     {this.renderOptions()}
                   </select>
@@ -251,6 +257,7 @@ class MarkSelectedStudentAttendance extends Component {
     }
     return null;
   }
+
   render() {
     return (
       <div className="button-container button-container-mobile">

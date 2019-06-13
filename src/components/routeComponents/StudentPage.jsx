@@ -61,9 +61,10 @@ class StudentPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
+    const { STUDENT_WITH_URL } = USER_TYPES;
     this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
-    this.props.setUserTypeAction(USER_TYPES.STUDENT_WITH_URL);
+    this.props.setUserTypeAction(STUDENT_WITH_URL);
     this.setState({
       isURLParams: true,
     });
@@ -75,10 +76,11 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
    */
   redirectToStudentLogin() {
+    const { STUDENT } = USER_TYPES;
     this.setState({
       isStudentLogin: true,
     });
-    this.props.setHashLinkForStudentCredentialAction(USER_TYPES.STUDENT);
+    this.props.setHashLinkForStudentCredentialAction(STUDENT);
   }
 
   /**
@@ -87,10 +89,11 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
    */
   redirectToNewRegistrationPage() {
+    const { STUDENT } = USER_TYPES;
     this.setState({
       isNewRegistration: true,
     });
-    this.props.setHashLinkForNewRegistrationAction(USER_TYPES.STUDENT);
+    this.props.setHashLinkForNewRegistrationAction(STUDENT);
   }
 
   /**
@@ -126,11 +129,13 @@ class StudentPage extends Component {
   }
 
   render() {
-    if (this.state.isURLParams) {
+    const { isURLParams, isStudentLogin, isNewRegistration } = this.state;
+    const { tenant } = this.props;
+    if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
-    } else if (this.state.isStudentLogin) {
+    } else if (isStudentLogin) {
       return <Switch><Redirect to="/student-login" /></Switch>;
-    } else if (this.state.isNewRegistration) {
+    } else if (isNewRegistration) {
       return <Switch><Redirect to="/studentRegister" /></Switch>;
     }
     return (
@@ -138,8 +143,8 @@ class StudentPage extends Component {
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />

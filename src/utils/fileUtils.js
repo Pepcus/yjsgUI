@@ -35,6 +35,7 @@ export const formatXlsxToJson = (response) => {
  * recordsPerPage: number}} metaData
  */
 export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
+  const { NORMAL_TABULAR, COMPLEX_GRID } = FILE_PRESENTATION_TYPE;
   const headerConfig = [];
   for (const key in fileData[0]) {
     headerConfig.push({
@@ -52,7 +53,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
     drawerPosition: 'top',
   };
   if (fileDetails.presentationType) {
-    if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.NORMAL_TABULAR) {
+    if (fileDetails.presentationType === NORMAL_TABULAR) {
       const normalHeader = [];
       for (const key in fileData[0]) {
         normalHeader.push({
@@ -63,7 +64,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
       metaData = {
         headerConfig: normalHeader,
       };
-    } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
+    } else if (fileDetails.presentationType === COMPLEX_GRID) {
       const complexHeader = [];
       for (const key in fileData[0]) {
         complexHeader.push({
