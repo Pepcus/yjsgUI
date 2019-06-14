@@ -147,10 +147,11 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} not exist Id's
    */
   renderIdNotExistMessage() {
-    if (this.props.idNotExistErrorMessage) {
+    const { errorMessageOfIdNotExist } = this.props;
+    if (errorMessageOfIdNotExist) {
       return (
         <div className="failure-block">
-          <div className="failure-block-records">{this.props.idNotExistErrorMessage}</div>
+          <div className="failure-block-records">{errorMessageOfIdNotExist}</div>
         </div>);
     }
     return null;
@@ -173,7 +174,8 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} message
    */
   renderMessage() {
-    if (this.props.isUploadAttendanceSuccess) {
+    const { isAttendanceUploadFailed, isUploadAttendanceSuccess } = this.props;
+    if (isUploadAttendanceSuccess) {
       return (
         <div className="upload-message-wrapper">
           <div className="success-block">
@@ -183,7 +185,7 @@ class UploadStudentsAttendanceFile extends Component {
           {this.renderIdNotExistMessage()}
         </div>
       );
-    } else if (!this.props.isUploadAttendanceSuccess && this.props.isUploadAttendanceFailed) {
+    } else if (!isUploadAttendanceSuccess && isAttendanceUploadFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -295,8 +297,8 @@ class UploadStudentsAttendanceFile extends Component {
 
 UploadStudentsAttendanceFile.propTypes = {
   failRecordIds: PropTypes.string,
-  idNotExistErrorMessage: PropTypes.string,
-  isUploadAttendanceFailed: PropTypes.bool,
+  errorMessageOfIdNotExist: PropTypes.string,
+  isAttendanceUploadFailed: PropTypes.bool,
   isUploadAttendanceSuccess: PropTypes.bool,
   resetIsSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
@@ -305,8 +307,8 @@ UploadStudentsAttendanceFile.propTypes = {
 
 UploadStudentsAttendanceFile.defaultProps = {
   failRecordIds: '',
-  idNotExistErrorMessage: '',
-  isUploadAttendanceFailed: false,
+  errorMessageOfIdNotExist: '',
+  isAttendanceUploadFailed: false,
   isUploadAttendanceSuccess: false,
   resetIsSuccessAction: () => {},
   secretKey: '',
@@ -315,8 +317,8 @@ UploadStudentsAttendanceFile.defaultProps = {
 
 const mapStateToProps = state => ({
   failRecordIds: getFailRecordIds(state),
-  idNotExistErrorMessage: idNotExistErrorMessage(state),
-  isUploadAttendanceFailed: isUploadAttendanceFailed(state),
+  errorMessageOfIdNotExist: idNotExistErrorMessage(state),
+  isAttendanceUploadFailed: isUploadAttendanceFailed(state),
   isUploadAttendanceSuccess: getSuccess(state),
   secretKey: getSecretKey(state),
 });

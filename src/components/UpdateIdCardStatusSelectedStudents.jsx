@@ -136,13 +136,14 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * @return {ReactComponent}
    */
   renderMessage() {
-    if (this.props.isUpdateIdCardStatusSuccess) {
+    const { isIdCardUpdateStatusSuccess, isIdCardUpdateStatusFailed } = this.props;
+    if (isIdCardUpdateStatusSuccess) {
       return (
         <div className="success-block">
           <span>{UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE}</span>
         </div>
       );
-    } else if (!this.props.isUpdateIdCardStatusSuccess && this.props.isUpdateIdCardStatusFailed) {
+    } else if (!isIdCardUpdateStatusSuccess && isIdCardUpdateStatusFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -260,24 +261,24 @@ class UpdateIdCardStatusSelectedStudents extends Component {
 }
 
 UpdateIdCardStatusSelectedStudents.propTypes = {
-  isUpdateIdCardStatusFailed: PropTypes.bool,
-  isUpdateIdCardStatusSuccess: PropTypes.bool,
+  isIdCardUpdateStatusFailed: PropTypes.bool,
+  isIdCardUpdateStatusSuccess: PropTypes.bool,
   resetIsUpdateIdCardStatusSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
   selectedStudents: PropTypes.array,
   updateIdCardStatusSelectedStudentsAction: PropTypes.func,
 };
 UpdateIdCardStatusSelectedStudents.defaultProps = {
-  isUpdateIdCardStatusFailed: false,
-  isUpdateIdCardStatusSuccess: false,
+  isIdCardUpdateStatusFailed: false,
+  isIdCardUpdateStatusSuccess: false,
   resetIsUpdateIdCardStatusSuccessAction: () => {},
   secretKey: '',
   selectedStudents: [],
   updateIdCardStatusSelectedStudentsAction: () => {},
 };
 const mapStateToProps = state => ({
-  isUpdateIdCardStatusFailed: isUpdateIdCardStatusFailed(state),
-  isUpdateIdCardStatusSuccess: isUpdateIdCardStatusSuccess(state),
+  isIdCardUpdateStatusFailed: isUpdateIdCardStatusFailed(state),
+  isIdCardUpdateStatusSuccess: isUpdateIdCardStatusSuccess(state),
   secretKey: getSecretKey(state),
 });
 

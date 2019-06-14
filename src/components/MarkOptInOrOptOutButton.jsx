@@ -144,13 +144,14 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {*} message
    */
   renderMessage() {
-    if (this.props.isMarkOptInOrOptOutSuccess) {
+    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed } = this.props;
+    if (isMarkOptOutOrOptInSuccess) {
       return (
         <div className="success-block">
           <span>{OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE}</span>
         </div>
       );
-    } else if (!this.props.isMarkOptInOrOptOutSuccess && this.props.isMarkOptInOrOptOutFailed) {
+    } else if (!isMarkOptOutOrOptInSuccess && isMarkOptOutOrOptInFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -270,8 +271,8 @@ class MarkOptInOrOptOutButton extends Component {
 
 MarkOptInOrOptOutButton.propTypes = {
   clearSelectedStudents: PropTypes.func,
-  isMarkOptInOrOptOutFailed: PropTypes.bool,
-  isMarkOptInOrOptOutSuccess: PropTypes.bool,
+  isMarkOptOutOrOptInFailed: PropTypes.bool,
+  isMarkOptOutOrOptInSuccess: PropTypes.bool,
   markSelectedStudentsOptInOrOptOutAction: PropTypes.func,
   resetIsMarkOptInOrOptOutSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
@@ -280,8 +281,8 @@ MarkOptInOrOptOutButton.propTypes = {
 
 MarkOptInOrOptOutButton.defaultProps = {
   clearSelectedStudents: () => {},
-  isMarkOptInOrOptOutFailed: false,
-  isMarkOptInOrOptOutSuccess: false,
+  isMarkOptOutOrOptInFailed: false,
+  isMarkOptOutOrOptInSuccess: false,
   markSelectedStudentsOptInOrOptOutAction: () => {},
   resetIsMarkOptInOrOptOutSuccessAction: () => {},
   secretKey: '',
@@ -289,8 +290,8 @@ MarkOptInOrOptOutButton.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isMarkOptInOrOptOutFailed: isMarkOptInOrOptOutFailed(state),
-  isMarkOptInOrOptOutSuccess: isMarkOptInOrOptOutSuccess(state),
+  isMarkOptOutOrOptInFailed: isMarkOptInOrOptOutFailed(state),
+  isMarkOptOutOrOptInSuccess: isMarkOptInOrOptOutSuccess(state),
   secretKey: getSecretKey(state),
 });
 

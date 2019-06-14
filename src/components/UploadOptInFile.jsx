@@ -155,10 +155,11 @@ class UploadOptInFile extends Component {
    * @return {*} not present Id's
    */
   renderIdNotPresentMessage() {
-    if (this.props.unavailableIdErrorMessage) {
+    const { errorMessageOfUnavailableId } = this.props;
+    if (errorMessageOfUnavailableId) {
       return (
         <div className="failure-block">
-          <div className="failure-block-records">{this.props.unavailableIdErrorMessage}</div>
+          <div className="failure-block-records">{errorMessageOfUnavailableId}</div>
         </div>
       );
     }
@@ -170,7 +171,8 @@ class UploadOptInFile extends Component {
    * @return {*} message
    */
   renderMessage() {
-    if (this.props.isOptInSuccess) {
+    const { isSuccessOptIn, isOptInUploadFailed } = this.props;
+    if (isSuccessOptIn) {
       return (
         <div className="upload-message-wrapper">
           <div className="success-block">
@@ -182,7 +184,7 @@ class UploadOptInFile extends Component {
           {this.renderIdNotPresentMessage()}
         </div>
       );
-    } else if (!this.props.isOptInSuccess && this.props.isUploadOptInFailed) {
+    } else if (!isSuccessOptIn && isOptInUploadFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -264,30 +266,30 @@ class UploadOptInFile extends Component {
 
 UploadOptInFile.propTypes = {
   failOptIn: PropTypes.string,
-  isOptInSuccess: PropTypes.bool,
-  isUploadOptInFailed: PropTypes.bool,
+  isSuccessOptIn: PropTypes.bool,
+  isOptInUploadFailed: PropTypes.bool,
   resetIsOptInSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
-  unavailableIdErrorMessage: PropTypes.string,
+  errorMessageOfUnavailableId: PropTypes.string,
   uploadOptInFileAction: PropTypes.func,
 };
 
 UploadOptInFile.defaultProps = {
   failOptIn: '',
-  isOptInSuccess: false,
-  isUploadOptInFailed: false,
+  isSuccessOptIn: false,
+  isOptInUploadFailed: false,
   resetIsOptInSuccessAction: () => {},
   secretKey: '',
-  unavailableIdErrorMessage: '',
+  errorMessageOfUnavailableId: '',
   uploadOptInFileAction: () => {},
 };
 
 const mapStateToProps = state => ({
   failOptIn: getFailOptIn(state),
-  isOptInSuccess: isOptInSuccess(state),
-  isUploadOptInFailed: isUploadOptInFailed(state),
+  isSuccessOptIn: isOptInSuccess(state),
+  isOptInUploadFailed: isUploadOptInFailed(state),
   secretKey: getSecretKey(state),
-  unavailableIdErrorMessage: unavailableIdErrorMessage(state),
+  errorMessageOfUnavailableId: unavailableIdErrorMessage(state),
 });
 
 export default connect(mapStateToProps, {

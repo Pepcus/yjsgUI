@@ -642,9 +642,9 @@ class StudentRegistrationCorrectionForm extends Component {
    */
   renderSuccessMessage() {
     const { isSubmitTriggered, isFormChanged } = this.state;
-    const { context } = this.props;
+    const { context, isStudentUpdated } = this.props;
     // if form data is update and valid and submitted successfully.
-    if (this.props.isUpdated) {
+    if (isStudentUpdated) {
       return (
         <Popup>
           <h5>{infoUpdateSuccessMessage}</h5>
@@ -860,14 +860,14 @@ class StudentRegistrationCorrectionForm extends Component {
 
   render() {
     const { student, errorMessage, onlyOptIn2019 } = this.state;
-    const { pageUser, studentData, context } = this.props;
+    const { pageUser, studentData, context, isStudentFetched } = this.props;
     const { STUDENT_WITH_URL, STUDENT } = USER_TYPES;
     if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
-      && onlyOptIn2019 && studentData && this.props.isFetched) {
+      && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
-    } else if (this.props.isFetched && student.optIn2019 === 'N') {
+    } else if (isStudentFetched && student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
-    } else if (studentData && this.props.isFetched) {
+    } else if (studentData && isStudentFetched) {
       // when student is going to attend the session
       return (
         <div className="registrationFormContainer">
@@ -1040,8 +1040,8 @@ class StudentRegistrationCorrectionForm extends Component {
 StudentRegistrationCorrectionForm.propTypes = {
   context: PropTypes.object,
   id: PropTypes.string,
-  isFetched: PropTypes.bool,
-  isUpdated: PropTypes.bool,
+  isStudentFetched: PropTypes.bool,
+  isStudentUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
   pageUser: PropTypes.string,
   secretKey: PropTypes.string,
@@ -1053,8 +1053,8 @@ StudentRegistrationCorrectionForm.propTypes = {
 StudentRegistrationCorrectionForm.defaultProps = {
   context: {},
   id: '',
-  isFetched: false,
-  isUpdated: false,
+  isStudentFetched: false,
+  isStudentUpdated: false,
   isUpdatedResetAction: () => {},
   pageUser: '',
   secretKey: '',
@@ -1065,8 +1065,8 @@ StudentRegistrationCorrectionForm.defaultProps = {
 
 const mapStateToProps = state => ({
   id: getUserId(state),
-  isFetched: isFetched(state),
-  isUpdated: isUpdated(state),
+  isStudentFetched: isFetched(state),
+  isStudentUpdated: isUpdated(state),
   pageUser: getPageUserType(state),
   secretKey: getUserSecretKey(state),
   studentData: getStudent(state),

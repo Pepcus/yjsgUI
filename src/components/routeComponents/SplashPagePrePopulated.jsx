@@ -178,11 +178,11 @@ class SplashPagePrePopulated extends Component {
   // this may be use in future
   /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
-      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+      if ((!this.props.studentData || !this.props.isStudentFetched) && !this.props.isLoading) {
         return (<div>
           <h5>{invalidIdMessage}</h5>
         </div>);
-      } else if (this.props.studentData && this.props.isFetched) {
+      } else if (this.props.studentData && this.props.isStudentFetched) {
         return (
           <div>
             <Redirect to={'/studentCorrection'}/>
@@ -416,7 +416,7 @@ const mapStateToProps = state => ({
   searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
-  isFetched: isFetched(state),
+  isStudentFetched: isFetched(state),
   tenant: getApplicationTenant(state),
 });
 

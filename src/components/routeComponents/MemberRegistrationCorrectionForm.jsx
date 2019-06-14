@@ -139,9 +139,9 @@ class MemberRegistrationCorrectionForm extends Component {
       isFormChanged,
       hasError,
     } = this.state;
-    const { context } = this.props;
+    const { context, isStudentUpdated } = this.props;
     // if form data is update and valid and submitted successfully.
-    if (this.props.isUpdated) {
+    if (isStudentUpdated) {
       return (
         <Popup>
           <h5>{infoUpdateSuccessMessage}</h5>
@@ -386,7 +386,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   context: PropTypes.object,
   id: PropTypes.string,
   isFetch: PropTypes.bool,
-  isUpdated: PropTypes.bool,
+  isStudentUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
   pageUser: PropTypes.string,
   secretKey: PropTypes.string,
@@ -399,7 +399,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   context: {},
   id: '',
   isFetch: false,
-  isUpdated: false,
+  isStudentUpdated: false,
   isUpdatedResetAction: () => {},
   pageUser: '',
   secretKey: '',
@@ -411,7 +411,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
 const mapStateToProps = state => ({
   id: getUserId(state),
   isFetch: isFetched(state),
-  isUpdated: isUpdated(state),
+  isStudentUpdated: isUpdated(state),
   pageUser: getPageUserType(state),
   secretKey: getUserSecretKey(state),
   studentData: getStudent(state),
