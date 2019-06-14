@@ -46,7 +46,8 @@ class SelectedStudentsActionWrapper extends Component {
    */
   renderCoordinatorUnavailableWarningPopup = () => {
     const { isBusCoordinatorsError } = this.state;
-    if (this.props.isBusCoordinatorsDataFailed && isBusCoordinatorsError) {
+    const { isDataOfBusCoordinatorsFailed } = this.props;
+    if (isDataOfBusCoordinatorsFailed && isBusCoordinatorsError) {
       return (
         <Popup>
           <h5>{ BUS_COORDINATOR_ERROR_MESSAGE }</h5>
@@ -114,7 +115,7 @@ class SelectedStudentsActionWrapper extends Component {
   }
 
   render() {
-    const { metaData, selectedStudents } = this.props;
+    const { metaData, selectedStudents, isDataOfBusCoordinatorsFailed } = this.props;
     const { printOptionIsOpen } = this.state;
     const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
@@ -140,7 +141,7 @@ class SelectedStudentsActionWrapper extends Component {
                 className={this.getPrintNowClassName()}
                 onClick={
                   () => {
-                    this.props.isBusCoordinatorsDataFailed
+                    isDataOfBusCoordinatorsFailed
                       ? this.onClickPrintCancel(true) : window.print();
                   }}
               >
@@ -172,20 +173,20 @@ class SelectedStudentsActionWrapper extends Component {
 
 SelectedStudentsActionWrapper.propTypes = {
   clearSelectedStudents: PropTypes.func,
-  isBusCoordinatorsDataFailed: PropTypes.bool,
+  isDataOfBusCoordinatorsFailed: PropTypes.bool,
   metaData: PropTypes.object,
   selectedStudents: PropTypes.array,
 };
 
 SelectedStudentsActionWrapper.defaultProps = {
   clearSelectedStudents: () => {},
-  isBusCoordinatorsDataFailed: false,
+  isDataOfBusCoordinatorsFailed: false,
   metaData: {},
   selectedStudents: [],
 };
 
 const mapStateToProps = state => ({
-  isBusCoordinatorsDataFailed: isBusCoordinatorsDataFailed(state),
+  isDataOfBusCoordinatorsFailed: isBusCoordinatorsDataFailed(state),
 });
 
 export default connect(mapStateToProps, {})(SelectedStudentsActionWrapper);

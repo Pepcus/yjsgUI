@@ -213,13 +213,13 @@ class SplashPage extends Component {
   // this may be use in future
   /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
-     if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+     if ((!this.props.studentData || !this.props.isStudentFetched) && !this.props.isLoading) {
         return (
             <div className = "errorPopupContainer">
               <h5 className = "error-message">{invalidIdMessage}</h5>
           </div>
         );
-      } else if (this.props.studentData && this.props.isFetched) {
+      } else if (this.props.studentData && this.props.isStudentFetched) {
         return (
           <div>
             <Redirect to={'/studentCorrection'}/>
@@ -407,7 +407,7 @@ SplashPage.defaultProps = {
 const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   id: getAdminId(state),
-  isFetched: isFetched(state),
+  isStudentFetched: isFetched(state),
   isLoading: isLoading(state),
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),

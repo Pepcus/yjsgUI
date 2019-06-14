@@ -138,7 +138,8 @@ class MemberRegistrationForm extends Component {
    */
   renderSuccessMessage = () => {
     const { isSubmitTriggered } = this.state;
-    if (this.props.isCreated && isSubmitTriggered) {
+    const { isStudentCreated } = this.props;
+    if (isStudentCreated && isSubmitTriggered) {
       const member = this.props.newStudent;
       // for pre-population on splash page
       this.props.setStudentCredentials(member.id, member.secretKey);
@@ -223,7 +224,7 @@ class MemberRegistrationForm extends Component {
 MemberRegistrationForm.propTypes = {
   context: PropTypes.object,
   createStudentData: PropTypes.func,
-  isCreated: PropTypes.bool,
+  isStudentCreated: PropTypes.bool,
   newStudent: PropTypes.object,
   setStudentCredentials: PropTypes.func,
   userType: PropTypes.string,
@@ -232,14 +233,14 @@ MemberRegistrationForm.propTypes = {
 MemberRegistrationForm.defaultProps = {
   context: {},
   createStudentData: () => {},
-  isCreated: false,
+  isStudentCreated: false,
   newStudent: {},
   setStudentCredentials: () => {},
   userType: '',
 };
 
 const mapStateToProps = state => ({
-  isCreated: isCreated(state),
+  isStudentCreated: isCreated(state),
   newStudent: getNewStudent(state),
   userType: getUserType(state),
 });

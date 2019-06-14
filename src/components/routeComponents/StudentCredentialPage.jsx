@@ -116,16 +116,16 @@ class StudentCredentialPage extends Component {
    */
   checkRegisteredStudentCredential() {
     const { registeredStudentCredentialErrorMessage } = this.state;
-    const { studentData } = this.props;
+    const { studentData, isStudentFetched } = this.props;
     const { STUDENT } = USER_TYPES;
     if (registeredStudentCredentialErrorMessage) {
-      if ((!studentData || !this.props.isFetched) && !this.props.isLoading) {
+      if ((!studentData || !isStudentFetched) && !this.props.isLoading) {
         return (
           <div className="errorPopupContainer">
             <h5 className="error-message">{invalidIdMessage}</h5>
           </div>
         );
-      } else if (studentData && this.props.isFetched) {
+      } else if (studentData && isStudentFetched) {
         this.props.setUserTypeAction(STUDENT);
         return (
           <div>
@@ -293,7 +293,7 @@ StudentCredentialPage.propTypes = {
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
-  isFetched: PropTypes.bool,
+  isStudentFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
   secretKey: PropTypes.string,
   setStudentCredentials: PropTypes.func,
@@ -307,7 +307,7 @@ StudentCredentialPage.defaultProps = {
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
-  isFetched: false,
+  isStudentFetched: false,
   isLoading: false,
   secretKey: '',
   setStudentCredentials: () => {},
@@ -319,7 +319,7 @@ StudentCredentialPage.defaultProps = {
 const mapStateToProps = state => ({
   hashLink: getHash(state),
   id: getAdminId(state),
-  isFetched: isFetched(state),
+  isStudentFetched: isFetched(state),
   isLoading: isLoading(state),
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),

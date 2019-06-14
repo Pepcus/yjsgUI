@@ -141,13 +141,14 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {*} message
    */
   renderMessage() {
-    if (this.props.isMarkAttendanceSuccess) {
+    const { isAttendanceMarkSuccess, isAttendanceMarkFailed } = this.props;
+    if (isAttendanceMarkSuccess) {
       return (
         <div className="success-block">
           <span>{MARK_ATTENDANCE_SUCCESS_MESSAGE}</span>
         </div>
       );
-    } else if (!this.props.isMarkAttendanceSuccess && this.props.isMarkAttendanceFailed) {
+    } else if (!isAttendanceMarkSuccess && isAttendanceMarkFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -271,8 +272,8 @@ class MarkSelectedStudentAttendance extends Component {
 }
 
 MarkSelectedStudentAttendance.propTypes = {
-  isMarkAttendanceFailed: PropTypes.bool,
-  isMarkAttendanceSuccess: PropTypes.bool,
+  isAttendanceMarkFailed: PropTypes.bool,
+  isAttendanceMarkSuccess: PropTypes.bool,
   markSelectedStudentsAttendanceAction: PropTypes.func,
   resetIsMarkAttendanceSuccessAction: PropTypes.func,
   secretKey: PropTypes.string,
@@ -280,8 +281,8 @@ MarkSelectedStudentAttendance.propTypes = {
 };
 
 MarkSelectedStudentAttendance.defaultProps = {
-  isMarkAttendanceFailed: false,
-  isMarkAttendanceSuccess: false,
+  isAttendanceMarkFailed: false,
+  isAttendanceMarkSuccess: false,
   markSelectedStudentsAttendanceAction: () => {},
   resetIsMarkAttendanceSuccessAction: () => {},
   secretKey: '',
@@ -290,8 +291,8 @@ MarkSelectedStudentAttendance.defaultProps = {
 
 const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
-  isMarkAttendanceFailed: isMarkAttendanceFailed(state),
-  isMarkAttendanceSuccess: isMarkAttendanceSuccess(state),
+  isAttendanceMarkFailed: isMarkAttendanceFailed(state),
+  isAttendanceMarkSuccess: isMarkAttendanceSuccess(state),
 });
 
 export default connect(mapStateToProps, {
