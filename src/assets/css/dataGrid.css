@@ -1,8 +1,8 @@
 /*CSS FOR DATAGRID*/
 :root {
-    --orange-color: #f9570a;
-    --yellow-card-color: #f6c458;
-    --orange-hover-color: #d24c0c;
+    --theme-color: #f9570a;
+    --Id-card-main-heading-background-color: #f6c458;
+    --theme-hover-color: #d24c0c;
     --enable-link-color: #ebebec;
     --enable-link-hover-color: #dedede;
     --student-id-cards-footer-background-color: #fa8d19;
@@ -29,7 +29,7 @@ html, body {
 
 .adminPanelHeading {
     z-index: 1;
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
 }
 
 .adminPanelContainer {
@@ -65,13 +65,13 @@ html, body {
 
 .logoutLinkContainer a:hover {
     border-radius: 4px;
-    border: 1px solid var(--orange-hover-color) !important;
-    background-color: var(--orange-hover-color);
+    border: 1px solid var(--theme-hover-color) !important;
+    background-color: var(--theme-hover-color);
     transition: 0.3s all;
 }
 
 .primary-color {
-    color: var(--orange-color) !important;
+    color: var(--theme-color) !important;
     font-weight: 600;
     font-size: 18px;
 }
@@ -112,7 +112,7 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--orange-color) !important;
+    background: var(--theme-color) !important;
     padding: 15px 0;
     margin: 0;
     color: #fff;
@@ -167,7 +167,7 @@ html, body {
 
 .linkButton {
     color: #ffffff;
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
     outline: none;
     box-shadow: 0 1px 3px 0 #777978;
     display: block;
@@ -182,7 +182,7 @@ html, body {
 .linkButton:hover {
     transition: 0.3s all;
     box-shadow: 0 2px 4px 0 #777978;
-    background-color: var(--orange-hover-color) !important;
+    background-color: var(--theme-hover-color) !important;
 }
 
 .footer-index {
@@ -193,7 +193,7 @@ html, body {
 .buttonOrange {
     color: #ffffff;
     outline: none;
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
     box-shadow: 0 1px 3px 0 #777978;
     text-align: center;
     font-size: 14px;
@@ -201,14 +201,14 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    border: 2px solid var(--orange-color) !important;
+    border: 2px solid var(--theme-color) !important;
 }
 
 .buttonOrange:hover {
     transition: 0.3s all;
     box-shadow: 0 2px 4px 0 #777978;
-    background-color: var(--orange-hover-color) !important;
-    border: 2px solid var(--orange-hover-color) !important;
+    background-color: var(--theme-hover-color) !important;
+    border: 2px solid var(--theme-hover-color) !important;
 }
 
 .render-table {
@@ -513,7 +513,7 @@ html, body {
 }
 
 .btn-block .btn-grid {
-    background: var(--orange-color) !important;
+    background: var(--theme-color) !important;
     border: none;
     cursor: pointer;
     color: #fff;
@@ -525,7 +525,7 @@ html, body {
 
 .btn-block .btn-grid:hover {
     transition: 0.3s all;
-    background: var(--orange-hover-color) !important;
+    background: var(--theme-hover-color) !important;
 }
 
 .btn-grid .fa-edit {
@@ -580,7 +580,7 @@ html, body {
 .inputText:focus,
 .textAreaText:focus {
     background: #f9f9f9;
-    outline-color: var(--orange-hover-color);
+    outline-color: var(--theme-hover-color);
 }
 
 .table-footer-row {
@@ -597,8 +597,8 @@ html, body {
 
 .column-option-container {
     border-radius: 4px;
-    background-color: var(--orange-color) !important;
-    border: 1px solid var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
+    border: 1px solid var(--theme-color) !important;
     color: #ffffff;
     outline: none;
     cursor: pointer;
@@ -638,18 +638,18 @@ html, body {
 .column-option-container:hover {
     transition: 0.3s all;
     box-shadow: 1px 2px 3px #b0b0b0;
-    border: 1px solid var(--orange-hover-color) !important;
-    background: var(--orange-hover-color) !important;
+    border: 1px solid var(--theme-hover-color) !important;
+    background: var(--theme-hover-color) !important;
 }
 
 .column-modal {
-    background: var(--orange-color) !important;
+    background: var(--theme-color) !important;
     color: #ffffff;
     padding: 20px;
 }
 
 .registrationFormHeading {
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
 }
 
 .sort-order-up,
@@ -729,8 +729,8 @@ html, body {
 }
 
 .button-modal {
-    background: var(--orange-color);
-    border: 1px solid var(--orange-color);
+    background: var(--theme-color);
+    border: 1px solid var(--theme-color);
     cursor: pointer;
     color: #ffffff;
     outline: none;
@@ -746,8 +746,8 @@ html, body {
     -o-transition: 0.3s all;
     transition: 0.3s all;
     box-shadow: 1px 1px 3px 0 #b0b0b0 !important;
-    border: 1px solid var(--orange-hover-color) !important;
-    background: var(--orange-hover-color) !important;
+    border: 1px solid var(--theme-hover-color) !important;
+    background: var(--theme-hover-color) !important;
 }
 
 .student-information-section {
@@ -782,7 +782,7 @@ html, body {
 .student-information-header {
     text-align: center;
     width: 100%;
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
     padding: 20px;
     color: #ffffff;
     font-weight: 600;
@@ -842,7 +842,7 @@ html, body {
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    border: 1px solid var(--orange-color) !important;
+    border: 1px solid var(--theme-color) !important;
     padding: 0 !important;
 }
 
@@ -942,8 +942,8 @@ html, body {
 .advance-search-button {
     border-radius: 3px;
     display: none;
-    background-color: var(--orange-color) !important;
-    border: 1px solid var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
+    border: 1px solid var(--theme-color) !important;
     color: #ffffff;
     font-weight: 500;
     outline: none;
@@ -962,8 +962,8 @@ html, body {
     transition: 0.2s all;
     -webkit-box-shadow: 1px 2px 2px #b0b0b0;
     box-shadow: 1px 2px 2px #b0b0b0;
-    border: 1px solid var(--orange-hover-color) !important;
-    background: var(--orange-hover-color) !important;
+    border: 1px solid var(--theme-hover-color) !important;
+    background: var(--theme-hover-color) !important;
 }
 
 .advance-input-radio {
@@ -1042,7 +1042,7 @@ body,
     margin: 0;
     z-index: 2;
     padding: 0;
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
     color: #fff;
     font-size: 26px;
     width: 100%;
@@ -1059,7 +1059,7 @@ body,
 }
 
 .download-message-popup-container {
-    background: var(--orange-color) !important;
+    background: var(--theme-color) !important;
     display: inline-block;
     position: absolute;
     top: 50%;
@@ -1145,7 +1145,7 @@ body,
 }
 
 .popupContainer {
-    background: var(--orange-color);
+    background: var(--theme-color);
     box-shadow: 0 1px 3px 0 #a2a2a2;
 }
 
@@ -1178,7 +1178,7 @@ body,
 .search:hover {
     transform: scale(1.00) !important;
     transition: 0.3s all;
-    background: var(--orange-hover-color) !important;
+    background: var(--theme-hover-color) !important;
     color: #ffffff;
 }
 
@@ -1260,14 +1260,14 @@ body,
 
 .button-close {
     background: transparent;
-    color: var(--orange-color);
+    color: var(--theme-color);
     margin-right: 15px;
     line-height: 20px;
     padding: 7px;
 }
 
 .button-close:hover {
-    color: var(--orange-hover-color);
+    color: var(--theme-hover-color);
     background: transparent !important;
 }
 
@@ -1381,7 +1381,7 @@ body,
 
 .grid-small-button:hover {
     color: #ffffff;
-    background-color: var(--orange-hover-color);
+    background-color: var(--theme-hover-color);
     transition: 0.3s all;
 }
 
@@ -1592,7 +1592,7 @@ body,
 
 .selectInputText:focus {
     background: #fdfbfb;
-    outline-color: var(--orange-color);
+    outline-color: var(--theme-color);
 }
 
 .grid-scroll-page-wrapper {
@@ -1631,7 +1631,7 @@ body,
 }
 
 .student-id-cards {
-    border: 1px solid var(--orange-color);
+    border: 1px solid var(--theme-color);
     width: 45%;
     float: left;
     margin: 15px 15px 25px;
@@ -1694,7 +1694,7 @@ body,
 }
 
 .student-heading-block {
-    background-color: var(--yellow-card-color);
+    background-color: var(--Id-card-main-heading-background-color);
     padding: 8px;
 }
 
@@ -2200,7 +2200,7 @@ body,
 }
 
 .download-link:hover {
-    color: var(--orange-hover-color);
+    color: var(--theme-hover-color);
     transition: 0.3s all;
 }
 
@@ -2211,7 +2211,7 @@ body,
 }
 
 .active-download-link {
-    color: var(--orange-color);
+    color: var(--theme-color);
     transition: 0.3s all;
 }
 
@@ -2315,7 +2315,7 @@ body,
 }
 
 .file-label-heading:hover {
-    color: var(--orange-hover-color);
+    color: var(--theme-hover-color);
     transition: 0.3s all;
 }
 
@@ -2348,7 +2348,7 @@ body,
 .active-class-icon {
     margin-right: 10px;
     font-size: 14px;
-    color: var(--orange-color);
+    color: var(--theme-color);
 }
 
 .file-component .table-drawer__top {
@@ -2386,7 +2386,7 @@ body,
     max-width: 100%;
     white-space: nowrap;
     display: inline-block;
-    color: var(--orange-color);
+    color: var(--theme-color);
 }
 
 .student-form-marks-desktop-none {
@@ -2394,11 +2394,11 @@ body,
 }
 
 .btn-upload {
-    background-color: var(--orange-color) !important;
+    background-color: var(--theme-color) !important;
 }
 
 .btn-upload:hover {
-    background-color: var(--orange-hover-color) !important;
+    background-color: var(--theme-hover-color) !important;
 }
 
 .selected-student-buttons .button-container .linkButton {
@@ -2548,7 +2548,7 @@ body,
 
     .grid-small-button {
         color: #ffffff;
-        background-color: var(--orange-color);
+        background-color: var(--theme-color);
         outline: none;
         text-align: center;
         line-height: 20px;
@@ -2581,7 +2581,7 @@ body,
         top: 0;
         margin: 0;
         z-index: 2;
-        background: var(--orange-color);
+        background: var(--theme-color);
         color: #fff;
         width: 100%;
         text-align: center;
@@ -2805,7 +2805,7 @@ body,
     }
     .grid-small-button {
         color: #ffffff;
-        background-color: var(--orange-color);
+        background-color: var(--theme-color);
         outline: none;
         text-align: center;
         line-height: 20px;
@@ -2866,7 +2866,7 @@ body,
         top: 0;
         margin: 0;
         z-index: 2;
-        background: var(--orange-color);
+        background: var(--theme-color);
         color: #fff;
         width: 100%;
         text-align: center;

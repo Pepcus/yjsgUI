@@ -564,12 +564,13 @@ class StudentInformationGrid extends Component {
                   checkedIds={this.state.checkedIds}
                 />
                 <div className="column-option display-mobile-none">
+                  {/**
+                   TODO: This will be use in future scope.
+                   */}
                   {/* <UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" onClick={this.redirectToFile}>
-                      {/* <Link to="/files" className="text-decoration-none">*/}
                       <i className="fa fa-file-text card-icon" />Files
-                      {/* </Link>*/}
                     </button>
                   </div>
                   <UploadStudentsAttendanceFile />
