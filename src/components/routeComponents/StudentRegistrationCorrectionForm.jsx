@@ -79,9 +79,12 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @return {*} registration correction form
  */
 class StudentRegistrationCorrectionForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       student: {
         name: '',
@@ -116,6 +119,7 @@ class StudentRegistrationCorrectionForm extends Component {
         optIn2019: {},
       },
     };
+
     // FIXME: Use arrow functions to avoid binding.
     this.onSubmitStudentData = this.onSubmitStudentData.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
@@ -124,6 +128,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   componentDidMount() {
+
     const { studentData } = this.props;
     const { student } = this.state;
     // get student data from session if present
@@ -132,6 +137,7 @@ class StudentRegistrationCorrectionForm extends Component {
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = !isEmpty(studentData)
       ? studentData : studentDataFromSession;
+
     if (!isEmpty(finalStudentData)) {
       this.setState({
         student: { ...student, ...finalStudentData },
@@ -143,6 +149,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     const { studentData } = nextProps;
     const { student } = this.state;
     // get student data from session if present
@@ -151,6 +158,7 @@ class StudentRegistrationCorrectionForm extends Component {
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = !isEmpty(studentData)
       ? studentData : studentDataFromSession;
+
     if (!isEmpty(finalStudentData)) {
       this.setState({
         student: { ...student, ...finalStudentData },
@@ -166,9 +174,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} bus stop form field
    */
   renderBusStopOptions = () => {
+
     const { student, errorMessage } = this.state;
     const { tenant } = this.props;
     const { INDORE } = TENANT;
+
     if (tenant === INDORE && student.optIn2019 === 'N') {
       return (
         <SelectListInputField
@@ -180,6 +190,7 @@ class StudentRegistrationCorrectionForm extends Component {
           value={student.busStop}
         />
       );
+
     } else if (tenant === INDORE && student.optIn2019 === 'Y') {
       return (
         <SelectListInputField
@@ -201,10 +212,12 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} bus number field
    */
   renderBusNumberOption = () => {
+
     const { student } = this.state;
     const { tenant, pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
     const { INDORE } = TENANT;
+
     if (tenant === INDORE && pageUser === ADMIN) {
       return (
         <SelectListInputField
@@ -223,9 +236,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} mark field
    */
   renderMark2019Field = () => {
+
     const { student } = this.state;
     const { pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <InputField
@@ -244,9 +259,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} current year class room field
    */
   renderClassRoom2019Field = () => {
+
     const { student } = this.state;
     const { pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <SelectListInputField
@@ -267,9 +284,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} remark form field
    */
   renderRemarkField = () => {
+
     const { student } = this.state;
     const { pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <TextAreaField
@@ -289,9 +308,12 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} e
    */
   submitStudentDataForOnlyOptInCase = (e) => {
+
     const { student } = this.state;
+
     this.verifyStudentFormData(student);
     e.preventDefault();
+
     if (!isEmpty(student.optIn2019)) {
       this.setState({
         isSubmitTriggered: true,
@@ -317,7 +339,9 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   renderOnlyOptIn2019 = () => {
+
     const { student, errorMessage } = this.state;
+
     return (
       <div className="registrationFormContainer correction-form-container">
         {this.renderSuccessMessage()}
@@ -384,10 +408,12 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} studentData
    */
   verifyStudentFormData(studentData) {
+
     const { errorMessage } = this.state;
     const { tenant } = this.props;
     const errorMessageObject = extend(cloneDeep(errorMessage),
       isDataCorrect(studentData, tenant));
+
     this.setState({
       errorMessage: errorMessageObject,
     });
@@ -398,9 +424,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} optIn form field
    */
   renderOptInField = () => {
+
     const { student, errorMessage } = this.state;
     const { pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <SelectListInputField
@@ -412,6 +440,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     return (
       <SelectListInputField
         name="optIn2019"
@@ -430,9 +459,11 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   renderLevelField = () => {
+
     const { student, errorMessage } = this.state;
     const { pageUser } = this.props;
     const { ADMIN } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <SelectListInputField
@@ -443,6 +474,7 @@ class StudentRegistrationCorrectionForm extends Component {
           value={student.classAttended2019}
         />
       );
+
     } else if (student.optIn2019 === 'Y' && pageUser !== ADMIN) {
       return (
         <SelectListInputField
@@ -455,6 +487,7 @@ class StudentRegistrationCorrectionForm extends Component {
           isRequired
         />
       );
+
     } else if (student.optIn2019 === 'N' && pageUser !== ADMIN) {
       return (
         <SelectListInputField
@@ -466,6 +499,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     return (
       <SelectListInputField
         name="classAttended2019"
@@ -484,8 +518,10 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   renderBackButton = () => {
+
     const { pageUser, context } = this.props;
     const { ADMIN, STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <LinkButton
@@ -493,6 +529,7 @@ class StudentRegistrationCorrectionForm extends Component {
           linkPath={context.previousLocation}
         />
       );
+
     } else if (pageUser === STUDENT_WITH_URL || pageUser === STUDENT) {
       return (
         <Button
@@ -502,6 +539,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
@@ -515,9 +553,9 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} studentData
    */
   prePopulateCourse2019(studentData) {
-    // const lastCourse = nextProps.studentData.classAttended2018;
-    // const level = checkLevelValue(lastCourse);
+
     const updatedData = updateClassAttended2019InStudentData(studentData);
+
     this.setState({
       student: updatedData,
     });
@@ -543,8 +581,10 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {boolean}
    */
   isValidData() {
+
     const { errorMessage } = this.state;
     const { pageUser, tenant } = this.props;
+
     return isValidUserInfo({
       errorMessageObject: errorMessage,
       user: pageUser,
@@ -556,8 +596,10 @@ class StudentRegistrationCorrectionForm extends Component {
    * updateStudentData method update the particular student data.
    */
   updateStudentData() {
+
     const { id, secretKey } = this.props;
     const { student } = this.state;
+
     // Calls api to update student data
     this.props.updateStudentData({ id,
       secretKey,
@@ -568,7 +610,9 @@ class StudentRegistrationCorrectionForm extends Component {
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-error');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
@@ -580,21 +624,27 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {Object} e
    */
   onSubmitStudentData(e) {
+
     const { student } = this.state;
     const { studentData } = this.props;
+
     e.preventDefault();
+
     if (student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
+
     } else {
       this.verifyStudentFormData(student);
+
       if (!isEqual(studentData, student) && this.isValidData()) {
         this.setState({
           isSubmitTriggered: true,
         });
         this.updateStudentData();
+
       } else {
         this.setState({
           isFormChanged: false,
@@ -620,6 +670,7 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
     const { student, errorMessage } = this.state;
     const { tenant } = this.props;
     const updatedData = extend(cloneDeep(student),
@@ -627,6 +678,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const errorMessageObject = {};
     errorMessageObject[name] = validateInput({ value, name, tenant });
     const updatedErrorState = extend(cloneDeep(errorMessage), errorMessageObject);
+
     this.setState({
       student: updatedData,
       errorMessage: updatedErrorState,
@@ -641,8 +693,10 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} message popup
    */
   renderSuccessMessage() {
+
     const { isSubmitTriggered, isFormChanged } = this.state;
     const { context, isStudentUpdated } = this.props;
+
     // if form data is update and valid and submitted successfully.
     if (isStudentUpdated) {
       return (
@@ -655,6 +709,7 @@ class StudentRegistrationCorrectionForm extends Component {
           />
         </Popup>
       );
+
     } else if (isSubmitTriggered && !isFormChanged && this.isValidData()) {
       // if form data is not update and valid.
       return (
@@ -674,8 +729,10 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return{*}
    */
   renderClassAttended2018() {
+
     const { student } = this.state;
     const { studentData } = this.props;
+
     // if it contained value
     if (studentData.classAttended2018) {
       return (
@@ -690,6 +747,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     // if it is empty
     return (
       <InputField
@@ -710,7 +768,9 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {*} Form
    */
   renderNoValidationFields() {
+
     const { student } = this.state;
+
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
@@ -859,14 +919,18 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   render() {
+
     const { student, errorMessage, onlyOptIn2019 } = this.state;
     const { pageUser, studentData, context, isStudentFetched } = this.props;
     const { STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+
     if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
       && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
+
     } else if (isStudentFetched && student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
+
     } else if (studentData && isStudentFetched) {
       // when student is going to attend the session
       return (
@@ -1025,6 +1089,7 @@ class StudentRegistrationCorrectionForm extends Component {
         </div>
       );
     }
+
     return (
       <Popup>
         <h5>{invalidIdMessage}</h5>

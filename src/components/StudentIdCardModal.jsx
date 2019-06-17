@@ -18,8 +18,10 @@ import { getBusCoordinators } from '../reducers/assetFilesReducer';
  * @type {Class}
  */
 class StudentIdCardModal extends Component {
+
   constructor(props) {
     super(props);
+
     this.renderStudentIdCards = this.renderStudentIdCards.bind(this);
   }
 
@@ -32,10 +34,14 @@ class StudentIdCardModal extends Component {
    * @return {*} bus coordinator information
    */
   getCoordinatorInformation = ({ busNumber, value, label }) => {
+
     const { busCoordinators = {} } = this.props;
+
     if (busNumber && busCoordinators[busNumber]) {
+
       const busNumbers = busCoordinators[busNumber];
       const information = busNumbers[value];
+
       if (information) {
         return (
           <div className="card-text">
@@ -44,12 +50,14 @@ class StudentIdCardModal extends Component {
           </div>
         );
       }
+
       return (
         <div className="card-text card-text-width">
           <span className="card-text-bold">{ label }:</span>
         </div>
       );
     }
+
     return (
       <div className="card-text card-text-width">
         <span className="card-text-bold">{ label }:</span>
@@ -63,21 +71,28 @@ class StudentIdCardModal extends Component {
    * @return {*} student Id cards
    */
   renderStudentIdCards(students) {
+
     const studentsIdCards = students.map((student) => {
       const name = student.name ? student.name.split(' ') : [student.name];
       const studentId = getFormattedStudentId(student.studentId);
+
       name.forEach((character, index) => {
         name[index] = character ? upperFirst(`${name[index].toLocaleLowerCase()} `) : '';
       });
+
       const fatherName = student.fatherName ? student.fatherName.split(' ') : [student.fatherName];
+
       fatherName.forEach((character, index) => {
         fatherName[index] = character ? upperFirst(`${fatherName[index].toLocaleLowerCase()} `) : '';
       });
+
       const addressString = student.address ? student.address.replace(/,/g, ', ') : student.address;
       const address = addressString ? addressString.split(' ') : [addressString];
+
       address.forEach((character, index) => {
         address[index] = character ? upperFirst(`${address[index].toLocaleLowerCase()} `) : '';
       });
+
       return (
         <div key={shortId.generate()} className="student-id-cards">
           <div className="student-id-card-wrapper">
@@ -162,12 +177,15 @@ class StudentIdCardModal extends Component {
           </div>
         </div>);
     });
+
     const studentsTemplate = [];
     let groupOfTwoStudents = [];
 
     studentsIdCards.forEach((obj) => {
+
       if (groupOfTwoStudents.length !== 2) {
         groupOfTwoStudents.push(obj);
+
       } else {
         studentsTemplate.push((
           <div key={shortId.generate()} className="group-of-two-students">{groupOfTwoStudents}</div>
@@ -177,9 +195,11 @@ class StudentIdCardModal extends Component {
       }
     },
     );
+
     if (!isEmpty(groupOfTwoStudents)) {
       studentsTemplate.push((<div key={shortId.generate()} className="group-of-two-students">{groupOfTwoStudents}</div>));
     }
+
     if (!isEmpty(studentsTemplate)) {
       return (
         <div>

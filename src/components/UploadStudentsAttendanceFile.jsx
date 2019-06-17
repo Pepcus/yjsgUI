@@ -33,6 +33,7 @@ const customUploadStudentsAttendanceFileModalStyles = {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -54,8 +55,10 @@ const customUploadStudentsAttendanceFileModalStyles = {
  * @type {Class}
  */
 class UploadStudentsAttendanceFile extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       attendanceFile: null,
       isUploadStudentsAttendanceFileModal: false,
@@ -101,8 +104,11 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
+
     const { attendanceFile } = this.state;
+
     event.preventDefault();
+
     this.fileUpload(attendanceFile);
   }
 
@@ -120,8 +126,10 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Array} attendanceFile
    */
   fileUpload(attendanceFile) {
+
     const { secretKey } = this.props;
     const { selectedDay } = this.state;
+
     this.props.uploadStudentsAttendanceFileAction({ secretKey, attendanceFile, day: selectedDay });
   }
 
@@ -130,7 +138,9 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} failed records
    */
   renderFailRecordIds() {
+
     const { failRecordIds } = this.props;
+
     if (failRecordIds) {
       return (
         <div className="failure-block">
@@ -146,7 +156,9 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} not exist Id's
    */
   renderIdNotExistMessage() {
+
     const { errorMessageOfIdNotExist } = this.props;
+
     if (errorMessageOfIdNotExist) {
       return (
         <div className="failure-block">
@@ -161,7 +173,9 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
+
     const { attendanceFile, selectedDay } = this.state;
+
     if (!attendanceFile || isEmpty(selectedDay)) {
       return 'popup-buttons-disable';
     }
@@ -173,7 +187,9 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} message
    */
   renderMessage() {
+
     const { isAttendanceUploadFailed, isUploadAttendanceSuccess } = this.props;
+
     if (isUploadAttendanceSuccess) {
       return (
         <div className="upload-message-wrapper">
@@ -184,6 +200,7 @@ class UploadStudentsAttendanceFile extends Component {
           {this.renderIdNotExistMessage()}
         </div>
       );
+
     } else if (!isUploadAttendanceSuccess && isAttendanceUploadFailed) {
       return (
         <div className="upload-message-wrapper">
@@ -225,7 +242,9 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {*} modal
    */
   renderUploadStudentsAttendanceOption() {
+
     const { isUploadStudentsAttendanceFileModal, selectedDay } = this.state;
+
     if (isUploadStudentsAttendanceFileModal) {
       return (
         <Modal

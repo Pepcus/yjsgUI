@@ -10,8 +10,10 @@ import PropTypes from 'prop-types';
  * @type {class}
  */
 class AdvanceSearch extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       thresholdValue: '0.0',
       inputValue: '',
@@ -30,14 +32,18 @@ class AdvanceSearch extends Component {
   }
 
   componentDidMount() {
+
     const { checkedIds } = this.props;
+
     this.setState({
       checkedIds,
     });
   }
 
   componentWillReceiveProps(nextProps) {
+
     const { checkedIds } = nextProps;
+
     this.setState({
       checkedIds,
     });
@@ -50,8 +56,10 @@ class AdvanceSearch extends Component {
    * @param {Object} event
    */
   setInputValue(event) {
+
     const { checkedIds } = this.state;
     const { students } = this.props;
+
     if (isEmpty(event.target.value)) {
       const studentsData = students.map((student) => {
         let finalStudentObject = student;
@@ -68,6 +76,7 @@ class AdvanceSearch extends Component {
       });
       this.props.onFilter(this.props.formatStudents(studentsData));
     }
+
     this.setState({
       inputValue: event.target.value,
     });
@@ -78,14 +87,17 @@ class AdvanceSearch extends Component {
    */
   // This may be use in future
   clearFilter() {
+
     const { inputValue, checkedIds } = this.state;
     const { students } = this.props;
+
     // set the search input value to empty string
     if (!isEmpty(inputValue)) {
       this.setState({
         inputValue: '',
       });
     }
+
     // assign default thresholdValue to 0.0
     // And set isMultipleIdSearchCheck to false.
     this.setState({
@@ -93,6 +105,7 @@ class AdvanceSearch extends Component {
       isMultipleIdSearchCheck: false,
       isDeepSearchCheck: false,
     });
+
     const studentsData = students.map((student) => {
       let finalStudentObject = student;
       checkedIds.forEach((checkedUncheckedIdObject) => {
@@ -106,6 +119,7 @@ class AdvanceSearch extends Component {
       });
       return finalStudentObject;
     });
+
     this.props.onFilter(this.props.formatStudents(studentsData));
     // this.props.onFilter(this.props.formatStudents(this.props.students));
   }
@@ -123,6 +137,7 @@ class AdvanceSearch extends Component {
         isDeepSearchCheck: true,
         isMultipleIdSearchCheck: false,
       });
+
     } else {
       this.setState({
         thresholdValue: '0.0',
@@ -144,6 +159,7 @@ class AdvanceSearch extends Component {
         isDeepSearchCheck: false,
         isMultipleIdSearchCheck: true,
       });
+
     } else {
       this.setState({
         isMultipleIdSearchCheck: false,
@@ -156,7 +172,9 @@ class AdvanceSearch extends Component {
    * @return {*} clear button
    */
   clearButton() {
+
     const { inputValue } = this.state;
+
     if (!isEmpty(inputValue)) {
       return <span className="clear-search"><i className="fa fa-times-circle" onClick={this._clearFilter} /></span>;
     } return null;
@@ -167,6 +185,7 @@ class AdvanceSearch extends Component {
    * @param {Object} event
    */
   advanceSearch(event) {
+
     const {
       isMultipleIdSearchCheck,
       thresholdValue,
@@ -174,7 +193,9 @@ class AdvanceSearch extends Component {
       checkedIds,
     } = this.state;
     const { metaData, students } = this.props;
+
     event.preventDefault();
+
     // isMultipleIdSearchCheck is uncheck it do the search result according to search string
     // type of search (thresholdValue)
     if (!isMultipleIdSearchCheck) {
@@ -189,9 +210,12 @@ class AdvanceSearch extends Component {
         minMatchCharLength: 1,
         keys: foundKeys,
       };
+
       if (!isEmpty(inputValue)) {
+
         const fuse = new Fuse(students, options);
         const result = fuse.search(inputValue);
+
         const studentsData = result.map((student) => {
           let finalStudentObject = student;
           checkedIds.forEach((checkedUncheckedIdObject) => {
@@ -207,16 +231,21 @@ class AdvanceSearch extends Component {
         });
         this.props.onFilter(this.props.formatStudents(studentsData));
       }
+
     } else if (!isEmpty(inputValue)) {
       // isMultipleIdSearchCheck is check it do the search result according to search Ids.
+
       const searchStudentsIds = inputValue.split(',');
       const searchResult = [];
+
       for (const index in searchStudentsIds) {
         const result = students.filter(student =>
           student.id === Number(searchStudentsIds[index]));
         searchResult.push(...result);
       }
+
       const uniqSearchResult = uniqWith(searchResult, isEqual);
+
       const studentsData = uniqSearchResult.map((student) => {
         let finalStudentObject = student;
         checkedIds.forEach((checkedUncheckedIdObject) => {
@@ -230,12 +259,15 @@ class AdvanceSearch extends Component {
         });
         return finalStudentObject;
       });
+
       this.props.onFilter(this.props.formatStudents(studentsData));
     }
   }
 
   render() {
+
     const { inputValue, isDeepSearchCheck, isMultipleIdSearchCheck } = this.state;
+
     return (
       <form id="advanceSearch" className="advanceSearchForm">
         <div className="input-radio">

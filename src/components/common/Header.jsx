@@ -39,6 +39,7 @@ const Header = ({
   resetVisibleColumnConfig,
   tenant,
 }) => {
+
   /**
    * performLogout method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -54,6 +55,7 @@ const Header = ({
     resetVisibleColumnConfig();
     localStorage.clear();
   };
+
   /**
    * RenderBackButton method render back button in header
    * @param {Object} headerObject
@@ -74,6 +76,7 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
@@ -95,6 +98,7 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * RenderHeaderName method render header name in header
     * @param {Object} headerObject
@@ -109,6 +113,7 @@ const Header = ({
       {headerObject.title ? headerObject.title : title[tenant]}
     </h2>
   );
+
   /**
    * RenderButton method render buttons with their button wrapper in header.
    * @param {Object} headerObject
@@ -127,6 +132,7 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * renderLogo method render logo in header
    * @param {Object} headerObject
@@ -149,10 +155,12 @@ const Header = ({
     }
     return null;
   };
+
   // render header with their contains according to route
   return routes.map((route) => {
     const { header, path } = route;
     if (path === location) {
+
       return (
         <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
           {renderLogo(header)}
@@ -161,6 +169,7 @@ const Header = ({
         </div>
       );
     } else if (path === '/files*' && location === '/files') {
+
       return (
         <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
           {renderLogo(header)}
@@ -168,6 +177,7 @@ const Header = ({
           {renderButton(header)}
         </div>
       );
+
     } return null;
   });
 };
@@ -183,6 +193,7 @@ Header.propTypes = {
   tenant: PropTypes.string,
   title: PropTypes.string,
 };
+
 Header.defaultProps = {
   context: {},
   location: '',

@@ -45,6 +45,7 @@ class AdminPanel extends Component {
       search: {},
       redirect: false,
     };
+
     // FIXME: Use arrow functions to avoid binding.
     this.props.clearSearchResultsAction();
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,6 +54,7 @@ class AdminPanel extends Component {
     this._checkValidKey = this.checkValidKey.bind(this);
     this._setRedirectValue = this.setRedirectValue.bind(this);
   }
+
   componentWillMount() {
     if (this.props.adminLoginState) {
       this.props.setRedirectValueAction(true);
@@ -60,6 +62,7 @@ class AdminPanel extends Component {
   }
 
   handleInputChange(value, name) {
+
     const updatedData = extend(cloneDeep(this.state.search),
       setRegistrationData(value, name));
 
@@ -76,8 +79,11 @@ class AdminPanel extends Component {
 
   populateResults() {
     this.props.clearSearchResultsAction();
+
     const { selectSearchOption, searchText } = this.state.search;
+
     if (!isEmpty(selectSearchOption) && !isEmpty(searchText)) {
+
       this.props.fetchSearchResultsAction({
         adminKey: adminPassword,
         searchKey: selectSearchOption,
@@ -88,6 +94,7 @@ class AdminPanel extends Component {
 
   setRedirectValue() {
     if (this.props.adminLoginState) {
+
       this.setState({
         redirect: true,
       });
@@ -96,12 +103,15 @@ class AdminPanel extends Component {
       alert('Invalid Admin');
     }
   }
+
   checkValidKey() {
     if (this.state.redirect) {
       return <Redirect to="/adminPanel" />;
     }
   }
+
   render() {
+
     const {
       id,
       password,

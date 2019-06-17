@@ -65,9 +65,12 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @return {*} registration form
  */
 class StudentRegistrationForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       student: {
         name: '',
@@ -115,10 +118,12 @@ class StudentRegistrationForm extends Component {
    * @param {Object} studentData
    */
   verifyStudentFormData(studentData) {
+
     const { errorMessage } = this.state;
     const { tenant } = this.props;
     const errorMessageObject = extend(cloneDeep(errorMessage),
       isDataCorrect(studentData, tenant));
+
     this.setState({
       errorMessage: errorMessageObject,
     });
@@ -131,8 +136,10 @@ class StudentRegistrationForm extends Component {
    * @return {boolean}
    */
   isValidData() {
+
     const { errorMessage } = this.state;
     const { tenant } = this.props;
+
     return isValidUserInfo({ errorMessageObject: errorMessage, tenant });
   }
 
@@ -140,7 +147,9 @@ class StudentRegistrationForm extends Component {
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-error');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
@@ -152,8 +161,11 @@ class StudentRegistrationForm extends Component {
    * @param {Object} event
    */
   onSubmitStudentData(event) {
+
     const { student } = this.state;
+
     event.preventDefault();
+
     // call _verifyStudentFormData method to check data student
     this._verifyStudentFormData(student);
     // call isValidData method to check error message
@@ -164,6 +176,7 @@ class StudentRegistrationForm extends Component {
       this.setState({
         isSubmitTriggered: true,
       });
+
     } else {
       this.setState({
       }, () => { this.scrollToError(); });
@@ -177,15 +190,19 @@ class StudentRegistrationForm extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
     const { errorMessage, student } = this.state;
     const { tenant } = this.props;
     const errorMessageObject = {};
+
     // validateInput set the error message in error message object according to input value and name
     errorMessageObject[name] = validateInput({ value, name, tenant });
+
     // this will update the error object and updated error message object will be set into state.
     const updatedErrorState = extend(cloneDeep(errorMessage), errorMessageObject);
     // this will get update student data
     const updatedData = extend(cloneDeep(student),
+
     // setRegistrationData method format name and value in key value format
       setRegistrationData(value, name));
     this.setState({
@@ -200,8 +217,10 @@ class StudentRegistrationForm extends Component {
    * @return {*} success message popup
    */
   renderSuccessMessage() {
+
     const { isSubmitTriggered } = this.state;
     const { newStudent, isStudentCreated } = this.props;
+
     if (isStudentCreated && isSubmitTriggered) {
       // for pre-population on splash page
       this.props.setStudentCredentials(newStudent.id, newStudent.secretKey);
@@ -224,9 +243,11 @@ class StudentRegistrationForm extends Component {
    * @return {*} bus stop form field
    */
   renderBusStopOptions = () => {
+
     const { student, errorMessage } = this.state;
     const { tenant } = this.props;
     const { INDORE } = TENANT;
+
     if (tenant === INDORE) {
       return (
         <SelectListInputField
@@ -248,8 +269,10 @@ class StudentRegistrationForm extends Component {
    * @return {*}
    */
   renderBackButton() {
+
     const { userType, context } = this.props;
     const { STUDENT, ADMIN } = USER_TYPES;
+
     if (userType === STUDENT) {
       return (
         <LinkButton
@@ -257,6 +280,7 @@ class StudentRegistrationForm extends Component {
           linkPath="/"
         />
       );
+
     } else if (userType === ADMIN) {
       return (
         <LinkButton
@@ -265,6 +289,7 @@ class StudentRegistrationForm extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
@@ -274,7 +299,9 @@ class StudentRegistrationForm extends Component {
   }
 
   render() {
+
     const { student, errorMessage } = this.state;
+
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}

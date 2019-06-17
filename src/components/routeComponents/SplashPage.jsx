@@ -24,7 +24,6 @@ import {
   isLoading,
   stateOfAdminLogin,
 } from '../../reducers/studentRegistrationReducer';
-
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   adminId,
@@ -44,6 +43,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @type {Class}
  */
 class SplashPage extends Component {
+
   constructor(props) {
     super(props);
 
@@ -80,12 +80,15 @@ class SplashPage extends Component {
    * get id and secretCode form URL and fetch data of that particular student.
    */
   componentWillMount() {
+
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
     const redirectToRoute = getParameterByName('fromRoute');
+
     if (redirectToRoute) {
       this.setRedirectToRoute(redirectToRoute);
     }
+
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
@@ -167,9 +170,11 @@ class SplashPage extends Component {
    * @return {*} message
    */
   adminScreenRedirection() {
+
     // IF admin initial login.
     const { redirectToRoute, adminCredentialErrorMessage } = this.state;
     const { id, password, adminLoginState } = this.props;
+
     if (!adminLoginState) {
       // Verify admin credential
       if (adminCredentialErrorMessage) {
@@ -194,6 +199,7 @@ class SplashPage extends Component {
       }
       return null;
     }
+
     if (redirectToRoute) {
       this.setRedirectToRoute('');
       return <Switch><Redirect to={redirectToRoute} /></Switch>;
@@ -235,8 +241,11 @@ class SplashPage extends Component {
    * @param {Object} event
    */
   setAdminLogin(event) {
+
     const { admin } = this.state;
+
     event.preventDefault();
+
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
@@ -266,10 +275,10 @@ class SplashPage extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
     const { credentials, admin } = this.state;
     const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
-
     const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
@@ -329,7 +338,9 @@ class SplashPage extends Component {
    * of new registration button.
    */
   redirectToNewRegistrationPage() {
+
     const { ADMIN } = USER_TYPES;
+
     this.setState({
       isNewRegistration: true,
     });
@@ -337,13 +348,13 @@ class SplashPage extends Component {
   }
 
   render() {
+
     const {
       isURLParams,
       isAdmin,
       admin,
       isNewRegistration,
     } = this.state;
-
     const { tenant } = this.props;
 
     if (isURLParams) {
@@ -404,6 +415,7 @@ SplashPage.defaultProps = {
   setStudentCredentials: () => {},
   tenant: '',
 };
+
 const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   id: getAdminId(state),
@@ -414,6 +426,7 @@ const mapStateToProps = state => ({
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
   fetchStudentData,
   getApplicationTenant,

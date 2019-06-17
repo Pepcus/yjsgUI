@@ -26,6 +26,7 @@ Provider.propTypes = {
 Provider.dedaultProps = {
   previousLocation: '',
 };
+
 // I make this default since it will probably be exported most often.
 export default {
   Consumer: Context.Consumer,

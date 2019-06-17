@@ -13,6 +13,7 @@ class SelectListInputField extends Component {
 
   constructor(props) {
     super(props);
+
     this._handleOnChange = this.handleOnChange.bind(this);
     this._populateValue = this.populateValue.bind(this);
   }
@@ -50,6 +51,7 @@ class SelectListInputField extends Component {
   }
 
   render() {
+
     const {
       name,
       value,
@@ -63,6 +65,7 @@ class SelectListInputField extends Component {
     const newLabel = isRequired ? `${label} * ` : label;
 
     if (errorMessage) {
+
       return (
         <div className="inputWrapper">
           <div className="has-error inputWrapperContainer errorInputField">
@@ -87,6 +90,7 @@ class SelectListInputField extends Component {
         </div>
       );
     }
+
     return (
       <div className="inputWrapper">
         <div className="inputWrapperContainer">

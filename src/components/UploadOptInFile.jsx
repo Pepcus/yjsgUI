@@ -27,6 +27,7 @@ const customUploadOptInFileModalStyles = {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -48,8 +49,10 @@ const customUploadOptInFileModalStyles = {
  * @type {Class}
  */
 class UploadOptInFile extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       optInFile: null,
       isUploadOptInFileModalOpen: false,
@@ -93,7 +96,9 @@ class UploadOptInFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
+
     const { optInFile } = this.state;
+
     if (!optInFile) {
       return 'popup-buttons-disable';
     }
@@ -106,8 +111,11 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
+
     const { optInFile } = this.state;
+
     event.preventDefault();
+
     this.fileUpload(optInFile);
     this.setState({
       isFormSubmitted: true,
@@ -128,7 +136,9 @@ class UploadOptInFile extends Component {
    * @param {Array} optInFile
    */
   fileUpload(optInFile) {
+
     const { secretKey } = this.props;
+
     this.props.uploadOptInFileAction(secretKey, optInFile);
   }
 
@@ -137,7 +147,9 @@ class UploadOptInFile extends Component {
    * @return {*} failed records
    */
   renderFailOptIn() {
+
     const { failOptIn } = this.props;
+
     if (failOptIn) {
       return (
         <div className="failure-block">
@@ -154,7 +166,9 @@ class UploadOptInFile extends Component {
    * @return {*} not present Id's
    */
   renderIdNotPresentMessage() {
+
     const { errorMessageOfUnavailableId } = this.props;
+
     if (errorMessageOfUnavailableId) {
       return (
         <div className="failure-block">
@@ -170,7 +184,9 @@ class UploadOptInFile extends Component {
    * @return {*} message
    */
   renderMessage() {
+
     const { isSuccessOptIn, isOptInUploadFailed } = this.props;
+
     if (isSuccessOptIn) {
       return (
         <div className="upload-message-wrapper">
@@ -183,6 +199,7 @@ class UploadOptInFile extends Component {
           {this.renderIdNotPresentMessage()}
         </div>
       );
+
     } else if (!isSuccessOptIn && isOptInUploadFailed) {
       return (
         <div className="upload-message-wrapper">
@@ -202,7 +219,9 @@ class UploadOptInFile extends Component {
    * @return {*} modal
    */
   renderUploadOptInModal() {
+
     const { isUploadOptInFileModalOpen, isFormSubmitted } = this.state;
+
     if (isUploadOptInFileModalOpen) {
       return (
         <Modal

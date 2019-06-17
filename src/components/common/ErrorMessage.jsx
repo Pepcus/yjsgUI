@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
  * @return {*}
  * @constructor
  */
+
 const ErrorMessage = ({ message }) => (
   <div className="error-message-wrapper">
     <span className="errorMessage">{message}</span>

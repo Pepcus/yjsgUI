@@ -35,8 +35,10 @@ import {
  * @type {class}
  * */
 class StudentPage extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       isURLParams: false,
       isStudentLogin: false,
@@ -49,8 +51,10 @@ class StudentPage extends Component {
   }
 
   componentWillMount() {
+
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
+
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
@@ -61,7 +65,9 @@ class StudentPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
+
     const { STUDENT_WITH_URL } = USER_TYPES;
+
     this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
     this.props.setUserTypeAction(STUDENT_WITH_URL);
@@ -76,7 +82,9 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
    */
   redirectToStudentLogin() {
+
     const { STUDENT } = USER_TYPES;
+
     this.setState({
       isStudentLogin: true,
     });
@@ -89,7 +97,9 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
    */
   redirectToNewRegistrationPage() {
+
     const { STUDENT } = USER_TYPES;
+
     this.setState({
       isNewRegistration: true,
     });
@@ -129,15 +139,20 @@ class StudentPage extends Component {
   }
 
   render() {
+
     const { isURLParams, isStudentLogin, isNewRegistration } = this.state;
     const { tenant } = this.props;
+
     if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
+
     } else if (isStudentLogin) {
       return <Switch><Redirect to="/student-login" /></Switch>;
+
     } else if (isNewRegistration) {
       return <Switch><Redirect to="/studentRegister" /></Switch>;
     }
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
@@ -178,11 +193,13 @@ StudentPage.defaultProps = {
   setUserTypeAction: () => {},
   tenant: '',
 };
+
 const mapStateToProps = state => ({
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
   fetchStudentData,
   getApplicationTenant,

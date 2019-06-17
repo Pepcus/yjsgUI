@@ -21,6 +21,7 @@ const CustomLoader = (props) => {
     },
   };
   const { loaderColor } = props;
+
   return (
     <div style={styles.loader}>
       <div className="lds-css">
@@ -30,8 +31,7 @@ const CustomLoader = (props) => {
               (<div
                 key={uniqueId('loaderSection')}
                 style={{ background: loaderColor }}
-               />))
-          }
+               />))}
         </div>
       </div>
     </div>

@@ -55,6 +55,7 @@ import { getParameterByName } from '../../utils/http';
  * @type {Class}
  */
 class StudentCredentialPage extends Component {
+
   constructor(props) {
     super(props);
 
@@ -73,23 +74,27 @@ class StudentCredentialPage extends Component {
   }
 
   componentWillMount() {
+
     const { context, studentId, secretKey } = this.props;
+
     // If admin redirect to student credential page in that case
     // pre populate the id and secretKey of previous login student
     if (context.previousLocation === '/admin') {
       this.setState({
         credentials: { studentId, secretKey },
-      });
-    // else student credential fields are empty
+      });// else student credential fields are empty
+
     } else if (context.previousLocation === '/') {
       this.setState({
         credentials: {},
       });
     }
+
     // If student login through URL
     // then get the id and secretKey form URL and fetch the student data
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
+
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
@@ -115,16 +120,20 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   checkRegisteredStudentCredential() {
+
     const { registeredStudentCredentialErrorMessage } = this.state;
     const { studentData, isStudentFetched } = this.props;
     const { STUDENT } = USER_TYPES;
+
     if (registeredStudentCredentialErrorMessage) {
+
       if ((!studentData || !isStudentFetched) && !this.props.isLoading) {
         return (
           <div className="errorPopupContainer">
             <h5 className="error-message">{invalidIdMessage}</h5>
           </div>
         );
+
       } else if (studentData && isStudentFetched) {
         this.props.setUserTypeAction(STUDENT);
         return (
@@ -134,6 +143,7 @@ class StudentCredentialPage extends Component {
         );
       }
     }
+
     return null;
   }
 
@@ -143,9 +153,12 @@ class StudentCredentialPage extends Component {
    * @param {Object} event
    */
   fetchStudentById(event) {
+
     const { credentials } = this.state;
     const { STUDENT } = USER_TYPES;
+
     event.preventDefault();
+
     this.props.setStudentCredentials(credentials.studentId,
       credentials.secretKey);
     this.props.fetchStudentData(credentials.studentId,
@@ -169,10 +182,10 @@ class StudentCredentialPage extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
     const { credentials, admin } = this.state;
     const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
-
     const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
@@ -189,8 +202,10 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   renderBackButton() {
+
     const { hashLink, context } = this.props;
     const { ADMIN, STUDENT } = USER_TYPES;
+
     if (hashLink === ADMIN) {
       return (
         <LinkButton
@@ -198,6 +213,7 @@ class StudentCredentialPage extends Component {
           linkPath="/admin"
         />
       );
+
     } else if (hashLink === STUDENT) {
       return (
         <LinkButton
@@ -206,6 +222,7 @@ class StudentCredentialPage extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
@@ -219,7 +236,9 @@ class StudentCredentialPage extends Component {
    * @return {*}
    */
   renderRegistrationCorrectionFields() {
+
     const { credentials } = this.state;
+
     return (
       <div className="student-already-register-form">
         <form id="studentCredential">
@@ -260,13 +279,17 @@ class StudentCredentialPage extends Component {
   }
 
   render() {
+
     const { isURLParams, redirectToStudentCorrectionByUrl } = this.state;
     const { tenant } = this.props;
+
     if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
+
     } else if (redirectToStudentCorrectionByUrl) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
     }
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
@@ -316,6 +339,7 @@ StudentCredentialPage.defaultProps = {
   studentId: '',
   tenant: '',
 };
+
 const mapStateToProps = state => ({
   hashLink: getHash(state),
   id: getAdminId(state),
@@ -328,6 +352,7 @@ const mapStateToProps = state => ({
   studentId: getUserId(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
   fetchStudentData,
   getApplicationTenant,

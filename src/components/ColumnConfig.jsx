@@ -39,12 +39,15 @@ const customColumnOptionStyles = {
  * @type {Class}
  */
 class ColumnConfig extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       visibleColumnConfig: {},
       selectValue: '',
     };
+
     this.setValuesOfVisibleColumnConfig = this.setValuesOfVisibleColumnConfig.bind(this);
     this.setCheckValue = this.setCheckValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -52,7 +55,9 @@ class ColumnConfig extends Component {
   }
 
   componentWillMount() {
+
     const { visibleColumnConfig, selectValue } = this.props;
+
     this.setState({
       visibleColumnConfig,
       selectValue,
@@ -64,15 +69,19 @@ class ColumnConfig extends Component {
    * @return {*}
    */
   renderColumnOptions = () => {
+
     const { visibleColumnConfig } = this.state;
     const columnsListTemporary = cloneDeep(columnsList);
     let columnListChunks = [];
     const chunkLength = Math.ceil(columnsList.length / 4);
+
     if (chunkLength >= 10) {
       columnListChunks = chunkArray(columnsListTemporary, chunkLength);
+
     } else {
       columnListChunks = chunkArray(columnsListTemporary, 10);
     }
+
     return (
       <div className="column-group">
         { columnListChunks.map(columnChunk => (
@@ -102,7 +111,9 @@ class ColumnConfig extends Component {
    * and call closeColumnOption() method.
    */
   setValuesOfVisibleColumnConfig() {
+
     const { visibleColumnConfig, selectValue } = this.state;
+
     this.props.setValuesOfVisibleColumnConfig(
       visibleColumnConfig,
       selectValue,
@@ -115,10 +126,12 @@ class ColumnConfig extends Component {
    * of selectValue value set the value of visibleColumnConfig(all column value)
    */
   setCheckValue() {
+
     const { selectValue } = this.state;
     const { visibleColumnConfig } = this.props;
     const temporarySelectValue = selectValue !== true;
     const temporaryVisibleColumnConfig = cloneDeep(visibleColumnConfig);
+
     if (temporarySelectValue) {
       for (const key in temporaryVisibleColumnConfig) {
         temporaryVisibleColumnConfig[key] = true;
@@ -127,6 +140,7 @@ class ColumnConfig extends Component {
         selectValue: temporarySelectValue,
         visibleColumnConfig: temporaryVisibleColumnConfig,
       });
+
     } else if (!temporarySelectValue) {
       for (const key in temporaryVisibleColumnConfig) {
         temporaryVisibleColumnConfig[key] = false;
@@ -143,7 +157,9 @@ class ColumnConfig extends Component {
    * @param {Object} event
    */
   handleChange = (event) => {
+
     const { visibleColumnConfig } = this.state;
+
     if (event.target.checked) {
       this.setState({
         visibleColumnConfig: {
@@ -151,6 +167,7 @@ class ColumnConfig extends Component {
           [event.target.name]: true,
         },
       });
+
     } else if (!event.target.checked) {
       this.setState({
         visibleColumnConfig: {
@@ -163,7 +180,9 @@ class ColumnConfig extends Component {
   };
 
   render() {
+
     const { selectValue } = this.state;
+
     return (
       <Modal
         isOpen={this.props.columnOptionIsOpen}

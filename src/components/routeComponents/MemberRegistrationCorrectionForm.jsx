@@ -49,9 +49,12 @@ import CorrectionsForm from '../CorrectionsForm';
  * @type {Class}
  */
 class MemberRegistrationCorrectionForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       student: {},
       oldStudentDate: {},
@@ -63,6 +66,7 @@ class MemberRegistrationCorrectionForm extends Component {
   }
 
   componentDidMount() {
+
     const { studentData } = this.props;
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -70,6 +74,7 @@ class MemberRegistrationCorrectionForm extends Component {
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
+
     if (!isEmpty(prePopulateOptInStudentData)) {
       this.setState({
         student: InitialStudentData(prePopulateOptInStudentData),
@@ -81,6 +86,7 @@ class MemberRegistrationCorrectionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     const { studentData } = nextProps;
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
@@ -88,6 +94,7 @@ class MemberRegistrationCorrectionForm extends Component {
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
+
     if (!isEmpty(prePopulateOptInStudentData)) {
       this.setState({
         student: InitialStudentData(prePopulateOptInStudentData),
@@ -102,7 +109,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-danger');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
@@ -115,10 +124,14 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   validate = (formData, errors) => {
+
     const { student } = this.state;
+
     if (student.optIn2019 === 'Y') {
       validation.forEach((valid) => {
+
         const error = validations[valid.validates](formData[valid.field]);
+
         if (!isEmpty(error)) {
           errors[valid.field].addError(error);
         }
@@ -134,14 +147,17 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   renderSuccessMessage = () => {
+
     const {
       isSubmitTriggered,
       isFormChanged,
       hasError,
     } = this.state;
     const { context, isStudentUpdated } = this.props;
+
     // if form data is update and valid and submitted successfully.
     if (isStudentUpdated) {
+
       return (
         <Popup>
           <h5>{infoUpdateSuccessMessage}</h5>
@@ -152,7 +168,9 @@ class MemberRegistrationCorrectionForm extends Component {
           />
         </Popup>
       );
+
     } else if (isSubmitTriggered && !isFormChanged && hasError) {
+
       // if form data is not update and valid.
       return (
         <Popup>
@@ -171,11 +189,13 @@ class MemberRegistrationCorrectionForm extends Component {
    * updateStudentData method will update student data by onClick of submit button
    */
   updateStudentData = () => {
+
     const {
       id,
       secretKey,
     } = this.props;
     const { student } = this.state;
+
     // Calls api to update student data
     this.props.updateStudentData({
       id,
@@ -189,9 +209,11 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} studentData
    */
   prePopulateCourse2019 = (studentData) => {
+
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
     const updatedData = updateClassAttended2019InStudentData(studentData);
+
     this.setState({
       student: updatedData,
     });
@@ -226,20 +248,26 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   handleSubmit = (event) => {
+
     const { student, oldStudentDate, hasError } = this.state;
+
     delete student.backButton;
     delete student.submitButton;
+
     event.preventDefault();
+
     if (student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
+
     } else if (!isEqual(oldStudentDate, student) && hasError) {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
+
     } else {
       this.setState({
         isFormChanged: false,
@@ -253,7 +281,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   submitStudentDataForOnlyOptInCase = (event) => {
+
     const { student } = this.state;
+
     event.preventDefault();
     if (!isEmpty(student.optIn2019)) {
       this.setState({
@@ -270,11 +300,14 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {Array} temError
    */
   transformErrors = (errors) => {
+
     const temError = [];
     const { studentData } = this.props;
+
     if (studentData.optIn2019 === 'N') {
       return [];
     }
+
     errors.forEach((error) => {
       if (studentData.optIn2019 !== 'N') {
         if (error.name === 'required' || error.name === 'enum') {
@@ -294,11 +327,13 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {*}
    */
   renderBackButton = () => {
+
     const {
       pageUser,
       context,
     } = this.props;
     const { ADMIN, STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+
     if (pageUser === ADMIN) {
       return (
         <LinkButton
@@ -306,6 +341,7 @@ class MemberRegistrationCorrectionForm extends Component {
           linkPath={context.previousLocation}
         />
       );
+
     } else if (pageUser === STUDENT_WITH_URL || pageUser === STUDENT) {
       return (
         <Button
@@ -315,6 +351,7 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
@@ -340,6 +377,7 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   render() {
+
     const {
       isFetch,
       studentData,
@@ -351,6 +389,7 @@ class MemberRegistrationCorrectionForm extends Component {
       onlyOptInForm,
       student,
     } = this.state;
+
     if (isFetch && studentData) {
       return (
         <CorrectionsForm
@@ -370,6 +409,7 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       );
     }
+
     return (
       <Popup>
         <h5>{invalidIdMessage}</h5>
