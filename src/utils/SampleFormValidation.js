@@ -130,7 +130,7 @@ export const addressValidation = (value) => {
   } else if (value.includes('"')) {
     message = DOUBLE_QUOTE_ERROR_MESSAGE;
   } else if (value.length < 15) {
-    message = FULL_ADDRESS_MESSAGE+INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
+    message = FULL_ADDRESS_MESSAGE + INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
   } else {
     message = '';
   }
@@ -201,16 +201,17 @@ export const validates = (formData, errors) => {
  * @return {Object} studentData
  */
 export const prePopulateOptIn = (studentData) => {
+  let updatedStudentData = studentData;
   if (studentData) {
     const {
       optIn2019,
     } = studentData;
-    studentData = {
+    updatedStudentData = {
       ...studentData,
       optIn2019: !optIn2019 ? 'Y' : optIn2019,
     };
   }
-  return studentData;
+  return updatedStudentData;
 };
 
 /**
