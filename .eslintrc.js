@@ -311,7 +311,7 @@ module.exports = {
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-render-return-value.md
     'react/no-render-return-value': 'error',
 
-    // require a shouldComponeSampleFormValidation.jsntUpdate method, or PureRenderMixin
+    // require a shouldComponentUpdate method, or PureRenderMixin
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-optimization.md
     'react/require-optimization': ['off', { allowDecorators: [] }],
 
