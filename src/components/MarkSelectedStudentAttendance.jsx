@@ -30,6 +30,7 @@ const customSelectedStudentsAttendanceModalStyles = {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -51,8 +52,10 @@ const customSelectedStudentsAttendanceModalStyles = {
  * @type {Class}
  */
 class MarkSelectedStudentAttendance extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       studentsId: [],
       selectedDay: '',
@@ -100,7 +103,9 @@ class MarkSelectedStudentAttendance extends Component {
    * for marking the attendance.
    */
   filterIdsOfStudents() {
+
     const Ids = this.props.selectedStudents.map(student => String(student.studentId));
+
     this.setState({
       studentsId: Ids,
     });
@@ -112,7 +117,9 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {string} className
    */
   renderMarkPresentButtonClassName() {
+
     const { selectedStudents } = this.props;
+
     if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
@@ -125,7 +132,9 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {string} className
    */
   renderMarkButtonClassName() {
+
     const { selectedDay } = this.state;
+
     if (isEmpty(selectedDay)) {
       return 'popup-buttons-disable';
     }
@@ -139,13 +148,16 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {*} message
    */
   renderMessage() {
+
     const { isAttendanceMarkSuccess, isAttendanceMarkFailed } = this.props;
+
     if (isAttendanceMarkSuccess) {
       return (
         <div className="success-block">
           <span>{MARK_ATTENDANCE_SUCCESS_MESSAGE}</span>
         </div>
       );
+
     } else if (!isAttendanceMarkSuccess && isAttendanceMarkFailed) {
       return (
         <div className="upload-message-wrapper">
@@ -189,9 +201,12 @@ class MarkSelectedStudentAttendance extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
+
     event.preventDefault();
+
     const { studentsId, selectedDay } = this.state;
     const { secretKey } = this.props;
+
     this.props.markSelectedStudentsAttendanceAction({ secretKey, selectedStudentsId: studentsId, day: selectedDay });
   }
 
@@ -200,7 +215,9 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsModal() {
+
     const { isMarkSelectedStudentsAttendanceModalOpen, studentsId, selectedDay } = this.state;
+
     if (isMarkSelectedStudentsAttendanceModalOpen) {
       return (
         <Modal

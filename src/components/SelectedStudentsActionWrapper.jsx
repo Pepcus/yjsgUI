@@ -20,8 +20,10 @@ import { BUS_COORDINATOR_ERROR_MESSAGE } from '../constants/messages';
  * @type {Class}
  */
 class SelectedStudentsActionWrapper extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       printOptionIsOpen: false,
       isBusCoordinatorsError: false,
@@ -45,8 +47,10 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {*} bus coordinator warning popup
    */
   renderCoordinatorUnavailableWarningPopup = () => {
+
     const { isBusCoordinatorsError } = this.state;
     const { isDataOfBusCoordinatorsFailed } = this.props;
+
     if (isDataOfBusCoordinatorsFailed && isBusCoordinatorsError) {
       return (
         <Popup>
@@ -84,7 +88,9 @@ class SelectedStudentsActionWrapper extends Component {
    * openPrintOption method open or close the print window.
    */
   openPrintOption() {
+
     const { printOptionIsOpen } = this.state;
+
     this.setState({ printOptionIsOpen: !printOptionIsOpen });
   }
 
@@ -94,7 +100,9 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {string} className
    */
   renderExportClassName() {
+
     const { selectedStudents } = this.props;
+
     if (isEmpty(selectedStudents)) {
       return 'disable-link';
     }
@@ -107,7 +115,9 @@ class SelectedStudentsActionWrapper extends Component {
    * @return {string} className
    */
   getPrintNowClassName() {
+
     const { selectedStudents } = this.props;
+
     if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
@@ -115,13 +125,17 @@ class SelectedStudentsActionWrapper extends Component {
   }
 
   render() {
+
     const { metaData, selectedStudents, isDataOfBusCoordinatorsFailed } = this.props;
     const { printOptionIsOpen } = this.state;
+
     const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
+
     const header = filterHeader.map(item =>
       ({ label: item.label, key: item.key, disable: item.disable }),
     );
+
     return (
       <div>
         <div className="id-card-wrapper print-media-none">

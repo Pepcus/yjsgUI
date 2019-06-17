@@ -1,5 +1,7 @@
-/*
-* this class laval component will converted into functional laval*/
+/**
+* this class level component will converted into functional level
+* */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -29,6 +31,7 @@ class Footer extends Component {
     }
     return ('footer print-media-none footer-none');
   };
+
   render() {
     return (
       <div className={this.getClassName()} >
@@ -37,6 +40,7 @@ class Footer extends Component {
       </div>
     );
   }
+
 }
 
 Footer.propTypes = {

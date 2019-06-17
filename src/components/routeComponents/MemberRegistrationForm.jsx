@@ -43,9 +43,12 @@ const JSONSchemaForm = Form;
  * @type {Class}
  */
 class MemberRegistrationForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       isSubmitTriggered: false,
       member: {},
@@ -58,13 +61,16 @@ class MemberRegistrationForm extends Component {
    * onClick of submit button.
    */
   handleSubmit = () => {
+
     const { notHasAnError, member } = this.state;
+
     if (notHasAnError) {
       this.props.createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
         notHasAnError: false,
       });
+
     } else {
       this.setState({}, () => {
         this.scrollToError();
@@ -77,7 +83,9 @@ class MemberRegistrationForm extends Component {
    * onclick of submit button
    */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-danger');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
@@ -89,9 +97,11 @@ class MemberRegistrationForm extends Component {
    * @return {Array} errors
    */
   transformErrors = errors => errors.map((error) => {
+
     if (error.name === 'required') {
       error.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
     }
+
     if (error.name === 'format' && error.params.format === 'email') {
       error.message = INVALID_EMAIL_MESSAGE;
     }
@@ -104,11 +114,13 @@ class MemberRegistrationForm extends Component {
    * @return {*} back button
    */
   renderBackButton = () => {
+
     const {
       userType,
       context,
     } = this.props;
     const { STUDENT, ADMIN } = USER_TYPES;
+
     if (userType === STUDENT) {
       return (
         <LinkButton
@@ -116,6 +128,7 @@ class MemberRegistrationForm extends Component {
           linkPath="/"
         />
       );
+
     } else if (userType === ADMIN) {
       return (
         <LinkButton
@@ -124,6 +137,7 @@ class MemberRegistrationForm extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
@@ -137,12 +151,15 @@ class MemberRegistrationForm extends Component {
    * @return {*} success message popup
    */
   renderSuccessMessage = () => {
+
     const { isSubmitTriggered } = this.state;
     const { isStudentCreated } = this.props;
+
     if (isStudentCreated && isSubmitTriggered) {
       const member = this.props.newStudent;
       // for pre-population on splash page
       this.props.setStudentCredentials(member.id, member.secretKey);
+
       return (
         <Popup>
           <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
@@ -179,7 +196,9 @@ class MemberRegistrationForm extends Component {
    */
   validate = (formData, errors) => {
     memberRegistration.validation.forEach((valid) => {
+
       const error = validations[valid.validates](formData[valid.field]);
+
       if (!isEmpty(error)) {
         errors[valid.field].addError(error);
       }

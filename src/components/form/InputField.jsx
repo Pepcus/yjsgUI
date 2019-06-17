@@ -58,6 +58,7 @@ class InputField extends Component {
         </div>
       );
     }
+
     return (
       <div className="inputWrapper">
         <div className="inputWrapperContainer">
@@ -78,8 +79,6 @@ class InputField extends Component {
     );
   }
 }
-
-export default InputField;
 
 InputField.propTypes = {
   disabled: PropTypes.bool,
@@ -107,3 +106,6 @@ InputField.defaultProps = {
   type: 'text',
   value: '',
 };
+
+export default InputField;
+

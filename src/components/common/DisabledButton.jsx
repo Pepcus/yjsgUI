@@ -21,6 +21,7 @@ const styles = {
  * @return {*}
  * @constructor
  */
+
 const DisabledButton = ({ onClick, buttonText }) => (
   <Button
     styles={styles}

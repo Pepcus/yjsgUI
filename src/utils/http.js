@@ -6,6 +6,7 @@ import 'whatwg-fetch';
  * @return {Promise} response
  */
 export const GET = ({ url, headers, responseType = null }) => {
+
   const config = {
     url,
     method: 'GET',
@@ -20,12 +21,16 @@ export const GET = ({ url, headers, responseType = null }) => {
     fetch(url, config).then(
       (response) => {
         if (config.responseType) {
+
           const clone = response.clone();
+
           if (config.responseType === 'arrayBuffer') {
             return clone.ok ? clone.arrayBuffer() : Promise.reject(clone.status);
+
           } else if (config.responseType === 'text') {
             return clone.ok ? clone.text() : Promise.reject(clone.status);
           }
+
         } else {
           resolve(response.json());
         }
@@ -52,6 +57,7 @@ export const POST = ({ url, body }) => {
     mode: 'cors',
     cache: 'default',
   };
+
   return new Promise((resolve, reject) => {
     fetch(url, config).then(
       (response) => {
@@ -76,6 +82,7 @@ export const PUT = ({ url, headers, body }) => {
     mode: 'cors',
     cache: 'default',
   };
+
   return new Promise((resolve, reject) => {
     fetch(url, config).then(
       (response) => {
@@ -88,6 +95,7 @@ export const PUT = ({ url, headers, body }) => {
 };
 
 export const PATCH = ({ url, headers, body }) => {
+
   const config = {
     method: 'PATCH',
     headers: headers || {
@@ -96,6 +104,7 @@ export const PATCH = ({ url, headers, body }) => {
     mode: 'cors',
     cache: 'default',
   };
+
   return new Promise((resolve, reject) => {
     fetch(url, config).then(
       (response) => {
@@ -115,10 +124,13 @@ export const PATCH = ({ url, headers, body }) => {
  */
 export const getParameterByName = (name, url) => {
   if (!url) url = window.location.href;
+
   name = name.replace(/[\[\]]/g, '\\$&');
   const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
   const results = regex.exec(url);
+
   if (!results) return null;
   if (!results[2]) return '';
+
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };

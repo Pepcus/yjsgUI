@@ -37,6 +37,7 @@ const LoginForm = ({ isAdmin,
   redirectToNewRegistrationPage,
   enableAdminLoginButtons,
 }) => {
+
   if (isAdmin) {
     return (
       <AdminLoginForm
@@ -48,8 +49,10 @@ const LoginForm = ({ isAdmin,
         setAdminLogin={setAdminLogin}
       />
     );
+
   } else if (isNewRegistration) {
     return <Switch><Redirect to="/studentRegister" /></Switch>;
+
   } else if (!isAdmin) {
     return (
       <div>
@@ -79,6 +82,7 @@ LoginForm.propTypes = {
   redirectToNewRegistrationPage: PropTypes.func,
   setAdminLogin: PropTypes.func,
 };
+
 LoginForm.defaultProps = {
   admin: {},
   adminScreenRedirection: () => {},
@@ -90,4 +94,5 @@ LoginForm.defaultProps = {
   redirectToNewRegistrationPage: () => {},
   setAdminLogin: () => {},
 };
+
 export default LoginForm;

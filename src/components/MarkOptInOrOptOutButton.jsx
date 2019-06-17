@@ -31,6 +31,7 @@ const customSelectedStudentsOptInOrOptOutStyles = {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -52,8 +53,10 @@ const customSelectedStudentsOptInOrOptOutStyles = {
  * @type {Class}
  */
 class MarkOptInOrOptOutButton extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       studentsId: [],
       selectedOptOption: '',
@@ -104,7 +107,9 @@ class MarkOptInOrOptOutButton extends Component {
    * for marking the optIn/optOut.
    */
   filterIdsOfStudents() {
+
     const { selectedStudents } = this.props;
+
     const Ids = selectedStudents.map(student => String(student.studentId));
     this.setState({
       studentsId: Ids,
@@ -117,7 +122,9 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {string} className
    */
   renderMarkOptInOrOutClassName() {
+
     const { selectedStudents } = this.props;
+
     if (isEmpty(selectedStudents)) {
       return 'disable-link-button-new';
     }
@@ -130,7 +137,9 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {string} className
    */
   renderSubmitButtonClassName() {
+
     const { selectedOptOption } = this.state;
+
     if (isEmpty(selectedOptOption)) {
       return 'popup-buttons-disable';
     }
@@ -144,13 +153,16 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {*} message
    */
   renderMessage() {
+
     const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed } = this.props;
+
     if (isMarkOptOutOrOptInSuccess) {
       return (
         <div className="success-block">
           <span>{OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE}</span>
         </div>
       );
+
     } else if (!isMarkOptOutOrOptInSuccess && isMarkOptOutOrOptInFailed) {
       return (
         <div className="upload-message-wrapper">
@@ -180,9 +192,12 @@ class MarkOptInOrOptOutButton extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
+
     event.preventDefault();
+
     const { studentsId, selectedOptOption } = this.state;
     const { secretKey } = this.props;
+
     this.props.markSelectedStudentsOptInOrOptOutAction({
       secretKey,
       selectedStudentsId: studentsId,
@@ -196,7 +211,9 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
+
     const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentsId } = this.state;
+
     if (isMarkSelectedStudentsOptInOrOptOutModalOpen) {
       return (
         <Modal

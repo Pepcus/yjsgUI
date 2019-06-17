@@ -52,6 +52,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @type {Class}
  */
 class SplashPagePrePopulated extends Component {
+
   constructor(props) {
     super(props);
 
@@ -80,7 +81,9 @@ class SplashPagePrePopulated extends Component {
   }
 
   componentDidMount() {
+
     const { studentId, secretKey } = this.props;
+
     this.setState({
       credentials: {
         studentId,
@@ -90,7 +93,9 @@ class SplashPagePrePopulated extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     const { studentId, secretKey } = nextProps;
+
     this.setState({
       credentials: {
         studentId,
@@ -148,8 +153,10 @@ class SplashPagePrePopulated extends Component {
    * @return {*}
    */
   adminScreenRedirection() {
+
     const { id, password, adminLoginState } = this.props;
     const { adminCredentialErrorMessage } = this.state;
+
     if (!adminLoginState) {
       if (adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
@@ -198,8 +205,11 @@ class SplashPagePrePopulated extends Component {
    * @param {Object} event
    */
   setAdminLogin(event) {
+
     const { admin } = this.state;
+
     event.preventDefault();
+
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
@@ -229,10 +239,10 @@ class SplashPagePrePopulated extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
     const { credentials, admin } = this.state;
     const updatedData = extend(cloneDeep(credentials),
       setRegistrationData(value, name));
-
     const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
@@ -288,7 +298,9 @@ class SplashPagePrePopulated extends Component {
    * @return {*} Admin login fields
    */
   renderAdminLoginFields() {
+
     const { admin } = this.state;
+
     return (
       <div>
         <form id="adminCredential">
@@ -334,12 +346,16 @@ class SplashPagePrePopulated extends Component {
    * @return {*}
    */
   renderLoginField() {
+
     const { isCorrection, isAdmin } = this.state;
+
     if (isCorrection) {
       return <Switch><Redirect to="/student-login" /></Switch>;
+
     } else if (isAdmin) {
       return this.renderAdminLoginFields();
     }
+
     return (
       <div>
         <Button
@@ -359,7 +375,9 @@ class SplashPagePrePopulated extends Component {
   }
 
   render() {
+
     const { tenant } = this.props;
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">

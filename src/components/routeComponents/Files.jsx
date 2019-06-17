@@ -34,9 +34,12 @@ import { fetchFile } from '../../sagas/assetFilesAPI';
  * @type {Class}
  */
 class Files extends Component {
+
   constructor(props) {
     super(props);
+
     this.widthRef = React.createRef();
+
     this.state = {
       showFileDetails: false,
       otherExtensionFileDetails: {},
@@ -50,9 +53,11 @@ class Files extends Component {
   }
 
   componentDidMount() {
+
     const { filesConfig } = this.props;
     this.props.fetchFilesConfigAction();
     const collections = window.location.hash.split('/files/');
+
     if (collections[1]) {
       if (filesConfig.files) {
         filesConfig.files.forEach((fileInfo, index) => {
@@ -61,8 +66,10 @@ class Files extends Component {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
+
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
+
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
         });
@@ -71,8 +78,10 @@ class Files extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (this.props.filesConfig !== nextProps.filesConfig) {
       const collections = window.location.hash.split('/files/');
+
       if (collections[1]) {
         nextProps.filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
@@ -80,8 +89,10 @@ class Files extends Component {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
+
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
+
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
         });
@@ -100,7 +111,9 @@ class Files extends Component {
    * @return {string} className
    */
   returnDisableEnable = (fileView, fileType) => {
+
     const { CSV, XLS, XLSX } = SUPPORTED_FILE_TYPES;
+
     if (CSV === fileType || XLS === fileType
       || XLSX === fileType) {
       return 'file-label-heading';
@@ -115,7 +128,9 @@ class Files extends Component {
    * @return {string} className
    */
   returnFlexClassName = (fileView, fileType) => {
+
     const { CSV, XLS, XLSX } = SUPPORTED_FILE_TYPES;
+
     if (CSV === fileType || XLS === fileType
       || XLSX === fileType) {
       return 'file-flex-wrapper';
@@ -132,6 +147,7 @@ class Files extends Component {
    * @param {Boolean} hasFileRoute
    */
   onClickViewFile = (file, index, href, fileView, hasFileRoute) => {
+
     this.setState({
       showFileDetails: true,
       currentFileDetails: file,
@@ -141,6 +157,7 @@ class Files extends Component {
       fileData: [],
       hasFileRoute,
     });
+
     if (!fileView) {
       this.setState({
         otherExtensionFileDetails: {
@@ -163,8 +180,10 @@ class Files extends Component {
    * @return {Object} null
    */
   fetchFileData = (file) => {
+
     const fileDetails = file;
     let fileData = [];
+
     try {
       fetchFile(fileDetails)
         .then((response) => {
@@ -211,8 +230,10 @@ class Files extends Component {
    * @return {String} className
    */
   returnFileListDisplayBlock = () => {
+
     const { width, showFileDetails, backPageButton } = this.state;
     const isMobile = width <= 600;
+
     if (showFileDetails) {
       if (isMobile) {
         if (backPageButton) {
@@ -230,8 +251,10 @@ class Files extends Component {
    * @return {String} className
    */
   returnTableWidthComponentClass = () => {
+
     const { width, showFileDetails, backPageButton } = this.state;
     const isMobile = width <= 600;
+
     if (showFileDetails) {
       if (isMobile) {
         if (backPageButton) {
@@ -249,8 +272,10 @@ class Files extends Component {
    * @return {*} file list react component
    */
   renderFileList = () => {
+
     const { hasFileRoute, activeFileId } = this.state;
     const { filesConfig } = this.props;
+
     if (hasFileRoute) {
       return null;
     }
@@ -304,7 +329,9 @@ class Files extends Component {
    * @return {*} back button react component
    */
   renderFileListViewButton = () => {
+
     const { hasFileRoute } = this.state;
+
     if (!hasFileRoute) {
       return (
         <div onClick={this.onClickBackButton} className="file-view-list-button">
@@ -321,6 +348,7 @@ class Files extends Component {
    * @return {*} paragraph of file description.
    */
   renderFileDescription = () => {
+
     const { currentFileDetails, width } = this.state;
     const isMobile = width <= 500;
     const fileDescription = currentFileDetails.description || '';
@@ -348,6 +376,7 @@ class Files extends Component {
    * @return {*} file data table
    */
   renderFileDetails = () => {
+
     const { width,
       showFileDetails,
       fileData,
@@ -357,9 +386,12 @@ class Files extends Component {
     } = this.state;
     const { filesConfig } = this.props;
     const isMobile = width <= 500;
+
     if (showFileDetails) {
       if (!isEmpty(fileData)) {
+
         if (isMobile) {
+
           return (
             <div
               className={this.returnTableWidthComponentClass()}
@@ -376,6 +408,7 @@ class Files extends Component {
             </div>
           );
         }
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
@@ -392,7 +425,9 @@ class Files extends Component {
             />
           </div>);
       } else if (!isEmpty(otherExtensionFileDetails)) {
+
         if (isMobile) {
+
           return (
             <div
               className={this.returnTableWidthComponentClass()}
@@ -420,6 +455,7 @@ class Files extends Component {
             </div>
           );
         }
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
@@ -445,7 +481,9 @@ class Files extends Component {
             </div>
           </div>
         );
+
       } else if (isMobile) {
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
@@ -461,6 +499,7 @@ class Files extends Component {
           </div>
         );
       }
+
       return (
         <div
           className={this.returnTableWidthComponentClass()}
@@ -475,9 +514,10 @@ class Files extends Component {
         </div>
       );
     }
-    if (
-      !isEmpty(filesConfig)
+
+    if (!isEmpty(filesConfig)
       && hasIn(filesConfig, 'files')) {
+
       return (
         <div className="file-component" style={hasFileRoute ? { margin: 'auto' } : null} ref={this.widthRef}>
           <div className="file-text-panel">
@@ -488,6 +528,7 @@ class Files extends Component {
         </div>
       );
     }
+
     return (
       <div className="no-files-available" ref={this.widthRef}>
         <div className="file-text-panel">

@@ -17,23 +17,30 @@ import { routes } from '../../config/appConfig.json';
  * @return {*}
  */
 class Routes extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       previousLocation: '',
     };
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.location.pathname !== this.props.location.pathname) {
+
       this.setState({
         previousLocation: this.props.location.pathname,
       });
     }
   }
+
   renderRoutes = Consumer => routes.map((route) => {
     const RouteComponent = RouteComponents[route.component];
+
     if (route.isActive) {
+
       return (
         <Route
           key={route.name}
@@ -48,8 +55,10 @@ class Routes extends Component {
       );
     } return null;
   });
+
   render() {
     const { Consumer } = Context;
+
     return (
       <div>
         <Context.Provider previousLocation={this.state.previousLocation}>
@@ -62,6 +71,7 @@ class Routes extends Component {
         </Context.Provider>
       </div>
     );
+
   }
 }
 

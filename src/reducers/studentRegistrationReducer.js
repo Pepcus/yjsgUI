@@ -17,6 +17,7 @@ const initialState = {
 };
 
 export const studentRegistrationReducer = (state = initialState, action) => {
+
   switch (action.type) {
 
     case 'CREATE_STUDENT':
@@ -25,6 +26,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: true,
         isCreated: false,
       };
+
     case 'FETCH_STUDENT':
       return {
         ...state,
@@ -67,6 +69,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: false,
         isUpdated: true,
       };
+
     case 'FETCH_STUDENT_SUCCESS':
       // store student data in sessionStorage
       // In case student get back on the student correction form
@@ -128,18 +131,21 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
+
     case 'SET_STUDENT_DATA':
       return {
         ...state,
         student: action.student,
         isFetched: true,
       };
+
     case 'UPDATE_STUDENT_BY_ADMIN':
       return {
         ...state,
         id: action.id,
         secretKey: action.secretKey,
       };
+
     case 'RESET_IS_UPDATE':
       return {
         ...state,
@@ -148,6 +154,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
         secretKey: '',
         student: '',
       };
+
     default: {
       return {
         ...state,
@@ -157,6 +164,7 @@ export const studentRegistrationReducer = (state = initialState, action) => {
 };
 
 export const studentSearchReducer = (state = {}, action) => {
+
   switch (action.type) {
 
     case 'FETCH_SEARCH_RESULTS_SUCCESS':
@@ -200,47 +208,56 @@ const allStudentsDataReducerInitialState = {
 };
 
 export const allStudentsDataReducer = (state = allStudentsDataReducerInitialState, action) => {
+
   switch (action.type) {
+
     case 'GET_ALL_STUDENTS':
       return {
         ...state,
         secretKey: action.secretKey,
         isLoading: true,
       };
+
     case 'GET_ALL_STUDENTS_RESULTS_SUCCESS':
       return {
         ...state,
         students: action.students,
         isLoading: false,
       };
+
     case 'GET_ALL_STUDENTS_RESULTS_FAILURE':
       return {
         ...state,
         students: [],
         isLoading: false,
       };
+
     case 'SET_REDIRECT_VALUE':
       return {
         ...state,
         redirect: action.redirect,
       };
+
     case 'SET_ADMIN_LOGIN_STATE':
       return {
         ...state,
         adminLoginState: action.adminLoginState,
       };
+
     case 'SET_VISIBLE_COLUMN_CONFIG_DATA':
       return {
         ...state,
         visibleColumnConfig: action.visibleColumnConfig,
         selectValue: action.selectValue,
       };
+
     case 'RESET_VISIBLE_COLUMN_CONFIG_DATA':
       return {
         ...state,
         visibleColumnConfig: allStudentsDataReducerInitialState.visibleColumnConfig,
         selectValue: allStudentsDataReducerInitialState.selectValue,
       };
+
     case 'UPLOAD_ATTENDANCE_FILE_SUCCESS':
       return {
         ...state,
@@ -250,6 +267,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failRecordIds: action.failRecordIds,
         idNotExistErrorMessage: action.idNotExist,
       };
+
     case 'UPLOAD_ATTENDANCE_FILE_FAILED':
       return {
         ...state,
@@ -259,6 +277,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failRecordIds: '',
         idNotExistErrorMessage: '',
       };
+
     case 'RESET_IS_SUCCESS':
       return {
         ...state,
@@ -267,6 +286,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failRecordIds: '',
         idNotExistErrorMessage: '',
       };
+
     case 'UPLOAD_OPT_IN_FILE_SUCCESS':
       return {
         ...state,
@@ -275,6 +295,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failOptIn: action.failRecordIds,
         unavailableIdErrorMessage: action.idNotExist,
       };
+
     case 'UPLOAD_OPT_IN_FILE_FAILED':
       return {
         ...state,
@@ -283,6 +304,7 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failOptIn: '',
         unavailableIdErrorMessage: '',
       };
+
     case 'RESET_IS_OPT_IN_SUCCESS':
       return {
         ...state,
@@ -291,83 +313,98 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
         failOptIn: '',
         unavailableIdErrorMessage: '',
       };
+
     case 'MARK_SELECTED_STUDENTS_ATTENDANCE_SUCCESS':
       return {
         ...state,
         isMarkAttendanceSuccess: true,
         isMarkAttendanceFailed: false,
       };
+
     case 'MARK_SELECTED_STUDENTS_ATTENDANCE_FAILED':
       return {
         ...state,
         isMarkAttendanceSuccess: false,
         isMarkAttendanceFailed: true,
       };
+
     case 'RESET_IS_MARK_ATTENDANCE_SUCCESS':
       return {
         ...state,
         isMarkAttendanceSuccess: false,
         isMarkAttendanceFailed: false,
       };
+
     case 'MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT_SUCCESS':
       return {
         ...state,
         isMarkOptInOrOptOutSuccess: true,
         isMarkOptInOrOptOutFailed: false,
       };
+
     case 'MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT_FAILED':
       return {
         ...state,
         isMarkOptInOrOptOutSuccess: false,
         isMarkOptInOrOptOutFailed: true,
       };
+
     case 'RESET_IS_MARK_OPT_IN_OR_OPT_OUT_SUCCESS':
       return {
         ...state,
         isMarkOptInOrOptOutSuccess: false,
         isMarkOptInOrOptOutFailed: false,
       };
+
     case 'UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS_SUCCESS':
       return {
         ...state,
         isUpdateIdCardStatusSuccess: true,
         isUpdateIdCardStatusFailed: false,
       };
+
     case 'UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS_FAILED':
       return {
         ...state,
         isUpdateIdCardStatusSuccess: false,
         isUpdateIdCardStatusFailed: true,
       };
+
     case 'RESET_IS_UPDATE_ID_CARD_STATUS_SUCCESS':
       return {
         ...state,
         isUpdateIdCardStatusSuccess: false,
         isUpdateIdCardStatusFailed: false,
       };
+
     case 'SET_HASH_LINK_FOR_STUDENT_CREDENTIAL':
       return {
         ...state,
         hashLink: action.hashLink,
       };
+
     case 'SET_HASH_LINK_FOR_NEW_REGISTRATION':
       return {
         ...state,
         userType: action.userType,
       };
+
     case 'PARENTS_REGISTRATION_RESULT_SUCCESS':
       return {
         ...state,
       };
+
     case 'PARENTS_REGISTRATION_RESULT_FAILED':
       return {
         ...state,
       };
+
     case 'SET_USER_TYPE':
       return {
         ...state,
         pageUser: action.pageUser,
       };
+
     default: {
       return {
         ...state,
@@ -379,13 +416,17 @@ export const allStudentsDataReducer = (state = allStudentsDataReducerInitialStat
 const initialStateOfLoader = {
   isLoading: false,
 };
+
 export const loaderReducer = (state = initialStateOfLoader, action) => {
+
   switch (action.type) {
+
     case 'SET_LOADING_STATE':
       return {
         ...state,
         isLoading: action.isLoading,
       };
+
     default: {
       return {
         ...state,

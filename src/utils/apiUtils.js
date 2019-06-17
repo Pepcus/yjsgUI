@@ -21,6 +21,7 @@
  * email: *}}
  */
 export const formatUpdateStudentDataPayload = (updatedStudent) => {
+
   const {
     address,
     age,

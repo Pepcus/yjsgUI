@@ -25,8 +25,11 @@ const AdminLoginForm = ({ isAdmin,
   adminScreenRedirection,
   disableAdminLoginButtons,
   setAdminLogin }) => {
+
   if (isAdmin) {
+
     const { adminId, adminPassword } = admin;
+
     return (
       <div>
         <form id="adminCredential">
@@ -77,6 +80,7 @@ AdminLoginForm.propTypes = {
   isAdmin: PropTypes.bool,
   setAdminLogin: PropTypes.func,
 };
+
 AdminLoginForm.defaultProps = {
   admin: {},
   adminScreenRedirection: () => {},
@@ -85,4 +89,5 @@ AdminLoginForm.defaultProps = {
   isAdmin: false,
   setAdminLogin: () => {},
 };
+
 export default AdminLoginForm;

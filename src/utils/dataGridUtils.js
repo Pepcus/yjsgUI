@@ -13,23 +13,30 @@ import {
  * @param {Object} widthRef
  */
 export const manageStudentTableWidth = (widthRef) => {
+
   if (widthRef.current) {
+
     const gridTableNode = widthRef.current.querySelector('.render-table');
     const gridTableFileNode = widthRef.current.querySelector('.file-component .render-table');
+
     if (gridTableNode) {
       if (window.innerWidth <= 768) {
         gridTableNode.style = 'display:grid !important';
       }
+
       const footer = widthRef.current.querySelector('.table-drawer__bottom');
       footer.style.width = `${gridTableNode.offsetWidth}px`;
       const fileFooterWidth = widthRef.current.querySelector('.file-component .table-drawer__bottom');
       const gridFooterNode = widthRef.current.querySelector('.table-footer-cell');
       const gridWrapperPagination = widthRef.current.querySelector('.table-drawer__bottom .wrapper-pagination-search>div:first-child');
+
       if (gridTableFileNode) {
+
         if (gridTableFileNode.offsetWidth >= 998) {
           fileFooterWidth.style.width = '100%';
         }
       }
+
       if (gridTableNode) {
         if (gridTableNode.offsetWidth <= 450) {
           if (gridWrapperPagination) {
@@ -38,9 +45,11 @@ export const manageStudentTableWidth = (widthRef) => {
             }
             gridWrapperPagination.classList.add('wrapper-pagination-column-small-width');
           }
+
           if (footer) {
             footer.classList.add('table-drawer-bottom-small-width');
           }
+
           if (gridFooterNode) {
             if (gridFooterNode.classList.contains('table-footer-cell-large-width')) {
               gridFooterNode.classList.remove('table-footer-cell-large-width');
@@ -48,6 +57,7 @@ export const manageStudentTableWidth = (widthRef) => {
             gridFooterNode.classList.add('table-footer-cell-small-width');
           }
         }
+
       } else {
         if (gridWrapperPagination) {
           if (gridWrapperPagination.classList.contains('wrapper-pagination-column-small-width')) {
@@ -55,12 +65,14 @@ export const manageStudentTableWidth = (widthRef) => {
             gridWrapperPagination.classList.remove('wrapper-pagination-column-small-width');
           }
         }
+
         if (gridFooterNode) {
           if (gridFooterNode.classList.contains('table-footer-cell-small-width')) {
             gridFooterNode.classList.add('table-footer-cell-large-width');
             gridFooterNode.classList.remove('table-footer-cell-small-width');
           }
         }
+
         if (footer) {
           if (footer.classList.contains('table-drawer-bottom-small-width')) {
             footer.classList.remove('table-drawer-bottom-small-width');
@@ -77,7 +89,9 @@ export const manageStudentTableWidth = (widthRef) => {
  * @return {Object} temporaryVisibleColumnConfig
  */
 export const getInitialVisibleColumnConfig = () => {
+
   const temporaryVisibleColumnConfig = {};
+
   gridMetaData.forEach((columnOption) => {
     temporaryVisibleColumnConfig[columnOption.key] = true;
   });
@@ -91,6 +105,7 @@ export const getInitialVisibleColumnConfig = () => {
  * @return {Array} results
  */
 export const chunkArray = (Array, chunkSize) => {
+
   const temporaryArray = cloneDeep(Array);
   const results = [];
 
@@ -116,9 +131,12 @@ export const setAppColor = (mode) => {
 export const getFormattedStudentId = (studentId) => {
   if (studentId.length === 1) {
     return String(`000${studentId}`);
+
   } else if (studentId.length === 2) {
     return String(`00${studentId}`);
+
   } else if (studentId.length === 3) {
     return String(`0${studentId}`);
+
   } return String(studentId);
 };

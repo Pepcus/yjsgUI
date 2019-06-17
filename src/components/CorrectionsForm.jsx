@@ -144,4 +144,5 @@ CorrectionsForm.defaultProps = {
   transformErrors: () => {},
   validate: () => {},
 };
+
 export default CorrectionsForm;

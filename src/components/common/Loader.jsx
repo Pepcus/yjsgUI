@@ -12,6 +12,7 @@ import CustomLoader from './CustomLoader';
  * @constructor
  */
 const Loader = ({ isLoading }) => {
+
   if (isLoading) {
     return (
       <div>
@@ -21,6 +22,7 @@ const Loader = ({ isLoading }) => {
   }
   return null;
 };
+
 const mapStateToProps = state => ({
   isLoading: getLoaderState(state),
 });
@@ -28,7 +30,9 @@ const mapStateToProps = state => ({
 Loader.propTypes = {
   isLoading: PropTypes.bool,
 };
+
 Loader.defaultProps = {
   isLoading: false,
 };
+
 export default connect(mapStateToProps)(Loader);

@@ -36,6 +36,7 @@ class TextAreaField extends Component {
   }
 
   render() {
+
     const {
       label,
       placeholder,
@@ -70,6 +71,7 @@ class TextAreaField extends Component {
         </div>
       );
     }
+
     return (
       <div className="inputWrapper">
         <div className="inputWrapperContainer">
@@ -125,6 +127,5 @@ TextAreaField.defaultProps = {
   type: 'text',
   value: '',
 };
-
 
 export default TextAreaField;

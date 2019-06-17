@@ -13,8 +13,10 @@ import Popup from '../common/Popup';
  * @type {Class}
  */
 class ParentsRegistration extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
       members: [0, 1, 2, 3, 4, 5, 6],
@@ -36,26 +38,31 @@ class ParentsRegistration extends Component {
     this._handleInputChangeMobile = this.handleInputChangeMobile.bind(this);
     this.renderCloseBrowserMessage = this.renderCloseBrowserMessage.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       isSubmitTriggered: false,
       isCloseBrowserPopMessage: false,
     });
   }
+
   handleInputChangeName(event) {
     this.setState({
       name: event.target.value,
       isError: false,
     });
   }
+
   /**
    * handleInputChangeMobile method set mobile number.
    * @param {Object} event
    */
   handleInputChangeMobile(event) {
+
     const { value } = event.target;
     // validation only for number with max length 10 only
     const validationForMobile = /^[0-9\b]+$/;
+
     if (((value === '') || validationForMobile.test(value)) && value !== 'e' && value.length <= 10) {
       this.setState({
         mobile: value,
@@ -63,6 +70,7 @@ class ParentsRegistration extends Component {
       });
     }
   }
+
   /**
    * handleSelectChange method set the number of member
    * that are selected from drop down list of member
@@ -74,20 +82,24 @@ class ParentsRegistration extends Component {
       isError: false,
     });
   }
+
   /**
    * onSubmitParentsData method will on onClick of submit button
    * @param {Object} event
    */
   onSubmitParentsData(event) {
+
     const { name, mobile, selectedCountOfMembers } = this.state;
     // to prevent form action default
     event.preventDefault();
+
     // name and mobile number are compulsory for from submission
     if (isEmpty(name) || isEmpty(mobile)) {
       this.setState({
         isSubmitTriggered: false,
         isError: true,
       });
+
     } else {
       // call action to submit form data
       this.props.parentsRegistrationAction({
@@ -100,12 +112,15 @@ class ParentsRegistration extends Component {
       });
     }
   }
+
   /**
    * addOptions method return number of member option in member drop down list.
    * @return {*} option
    */
   addOptions() {
+
     const { members } = this.state;
+
     return (members.map(
       optionCount => (
         <option
@@ -121,7 +136,9 @@ class ParentsRegistration extends Component {
    * @return {*}
    */
   renderCloseBrowserMessage() {
+
     const { isCloseBrowserPopMessage } = this.state;
+
     if (isCloseBrowserPopMessage) {
       return (
         <Popup>
@@ -131,6 +148,7 @@ class ParentsRegistration extends Component {
     }
     return null;
   }
+
   /**
    * closePopUp method call on onClick on close button in popup
    * And set all values of state initial.
@@ -147,8 +165,14 @@ class ParentsRegistration extends Component {
   }
 
   // FIXME: Reuse the component to render error message popup
+  /**
+   * renderErrorMessage render error message when required form field are not fill.
+   * @return {*} error message
+   */
   renderErrorMessage() {
+
     const { isError } = this.state;
+
     if (isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
@@ -159,9 +183,16 @@ class ParentsRegistration extends Component {
     }
     return null;
   }
+
   // FIXME: Reuse the component to render message popup
+  /**
+   * renderPopUp method render successfully registration popup
+   * @return {*} popup
+   */
   renderPopUp() {
+
     const { isSubmitTriggered } = this.state;
+
     if (isSubmitTriggered) {
       return (
         <div className="inputFieldContainer parent-register-message-wrapper">
@@ -179,7 +210,9 @@ class ParentsRegistration extends Component {
     }
     return null;
   }
+
   render() {
+
     const {
       isSubmitTriggered,
       isCloseBrowserPopMessage,
@@ -188,6 +221,7 @@ class ParentsRegistration extends Component {
       members,
       selectedCountOfMembers,
     } = this.state;
+
     if (!isSubmitTriggered && !isCloseBrowserPopMessage) {
       return (
         <div className="footer-none-wrapper">
@@ -265,6 +299,7 @@ class ParentsRegistration extends Component {
         </div>
       );
     }
+
     return (
       <div className="footer-none-wrapper">
         <div className="registrationFormContainer">
@@ -288,6 +323,7 @@ class ParentsRegistration extends Component {
     );
   }
 }
+
 ParentsRegistration.propTypes = {
   parentsRegistrationAction: PropTypes.func,
 };
@@ -295,6 +331,7 @@ ParentsRegistration.propTypes = {
 ParentsRegistration.defaultProps = {
   parentsRegistrationAction: () => {},
 };
+
 const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {

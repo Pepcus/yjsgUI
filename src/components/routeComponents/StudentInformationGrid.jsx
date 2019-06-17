@@ -57,9 +57,12 @@ import { FILE_DOWNLOAD_MESSAGE } from '../../constants/text';
  * @type {Class}
  */
 class StudentInformationGrid extends Component {
+
   constructor(props) {
     super(props);
+
     this.widthRef = React.createRef();
+
     this.state = {
       fileDownloadMessage: false,
       checkedIds: [],
@@ -98,8 +101,10 @@ class StudentInformationGrid extends Component {
   }
 
   componentWillMount() {
+
     const { redirect } = this.props;
     const { visibleColumnConfig } = this.state;
+
     if (!redirect) {
       this.redirectToAdminLogin();
     }
@@ -109,17 +114,23 @@ class StudentInformationGrid extends Component {
   }
 
   componentDidMount() {
+
     const { students, secretKey, redirect } = this.props;
+
     if (isEmpty(students)) {
       this.props.getAllStudentsAction({ secretKey });
+
     } else {
       this.setState({
         students: this.formatStudents(students),
         checkedIds: this.setAllStudentsAsUnchecked(students),
       });
+
       const idCheckStatusList = this.setAllStudentsAsUnchecked(students);
+
       this.getSelectedStudents(idCheckStatusList);
     }
+
     if (!redirect) {
       this.redirectToAdminLogin();
     }
@@ -127,25 +138,33 @@ class StudentInformationGrid extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     const { students } = this.props;
     const { refresh } = this.state;
+
     if (isEmpty(students)) {
       if (nextProps.students !== students) {
         this.setState({
           students: this.formatStudents(nextProps.students),
           checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
+
         const idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+
         this.getSelectedStudents(idCheckStatusList);
       }
+
     } else {
       this.setState({
         students: this.formatStudents(students),
         checkedIds: this.setAllStudentsAsUnchecked(students),
       });
+
       const idCheckStatusList = this.setAllStudentsAsUnchecked(students);
+
       this.getSelectedStudents(idCheckStatusList);
     }
+
     if (refresh) {
       if (nextProps.students !== students) {
         this.setState({
@@ -153,7 +172,9 @@ class StudentInformationGrid extends Component {
           refresh: false,
           checkedIds: this.setAllStudentsAsUnchecked(nextProps.students),
         });
+
         const idCheckStatusList = this.setAllStudentsAsUnchecked(nextProps.students);
+
         this.getSelectedStudents(idCheckStatusList);
       }
     }
@@ -178,7 +199,9 @@ class StudentInformationGrid extends Component {
    * @return {*}
    */
   renderFileDownloadMessagePopup = () => {
+
     const { fileDownloadMessage } = this.state;
+
     if (fileDownloadMessage) {
       return (
         <div className="download-message-popup">
@@ -208,7 +231,9 @@ class StudentInformationGrid extends Component {
    * by calling getAllStudentsAction
    */
   refreshStudentsGrid() {
+
     const { secretKey } = this.props;
+
     this.props.getAllStudentsAction({ secretKey });
     this.setState({
       refresh: true,
@@ -222,8 +247,10 @@ class StudentInformationGrid extends Component {
    * @param {Array} idCheckStatusList
    */
   getSelectedStudents(idCheckStatusList) {
+
     const { students } = this.props;
     const checkedStudents = [];
+
     idCheckStatusList.forEach((idCheckStatusObject) => {
       students.forEach((student) => {
         if (idCheckStatusObject.isChecked) {
@@ -260,12 +287,17 @@ class StudentInformationGrid extends Component {
    * @param {Object} selectedRow
    */
   getSelectedRow(selectedRow) {
+
     const { students, checkedIds } = this.state;
     let listOfIsCheckedStatusStudentIds = [];
+
     const studentsData = students.map((student) => {
+
       const { studentId } = student;
       let studentObject = { ...student, id: Number(studentId) };
+
       selectedRow.forEach((selectedRowStudent) => {
+
         if (String(selectedRowStudent.studentId) === String(studentId)) {
           studentObject = { ...student,
             id: Number(studentId),
@@ -280,7 +312,9 @@ class StudentInformationGrid extends Component {
       });
       return studentObject;
     });
+
     const idCheckStatusList = checkedIds.map((idCheckStatusObject) => {
+
       let finalIdCheckStatusObject = idCheckStatusObject;
       listOfIsCheckedStatusStudentIds.forEach((checkedUncheckedStudentIdObject) => {
         if (Number(idCheckStatusObject.id) === Number(checkedUncheckedStudentIdObject.id)) {
@@ -289,6 +323,7 @@ class StudentInformationGrid extends Component {
       });
       return finalIdCheckStatusObject;
     });
+
     this.getSelectedStudents(idCheckStatusList);
     this.setState({
       students: studentsData,
@@ -334,6 +369,7 @@ class StudentInformationGrid extends Component {
      * set the value of edit column on the basis of any column selected on not.
      */
     let count = 0;
+
     for (const key in values) {
       if (values[key]) {
         count += 1;
@@ -344,6 +380,7 @@ class StudentInformationGrid extends Component {
         values = { ...values, edit: false };
       }
     }
+
     this.setState({
       visibleColumnConfig: values,
       metaData: this.formatMetaData(values),
@@ -359,14 +396,18 @@ class StudentInformationGrid extends Component {
    * @return {Object} metaData
    */
   formatMetaData = (visibleColumnConfig) => {
+
     let metaData = [];
+
     for (const columnKey in visibleColumnConfig) {
+
       if (visibleColumnConfig[columnKey]) {
         if (columnKey === 'edit') {
           metaData = [{
             ...gridMetaData.find(metaDataObj => metaDataObj.key === columnKey),
             customComponent: this.EditButton,
           }, ...metaData];
+
         } else {
           metaData.push(gridMetaData.find(metaDataObj => metaDataObj.key === columnKey));
         }
@@ -384,9 +425,11 @@ class StudentInformationGrid extends Component {
    * @param {Object} rowData
    */
   handleEditClick(rowData) {
+
     const { studentData } = this.props;
     const { studentId } = rowData;
     const { ADMIN } = USER_TYPES;
+
     if (!isEmpty(rowData)) {
       this.props.fetchStudentData(String(studentId), adminPassword);
       this.props.setStudentDataAction(studentData);
@@ -404,7 +447,9 @@ class StudentInformationGrid extends Component {
    * @return {*}
    */
   redirectToStudentCorrection() {
+
     const { isStudentDataSet } = this.state;
+
     if (isStudentDataSet) {
       return (
         <div>
@@ -454,7 +499,9 @@ class StudentInformationGrid extends Component {
    * @return {*} ColumnConfig
    */
   renderColumnConfig() {
+
     const { columnOptionIsOpen, visibleColumnConfig, selectValue } = this.state;
+
     if (columnOptionIsOpen) {
       return (
         <ColumnConfig
@@ -494,7 +541,9 @@ class StudentInformationGrid extends Component {
    * @return {*}
    */
   renderDataGrid() {
+
     const { metaData, students } = this.state;
+
     if (isEmpty(metaData.headerConfig)) {
       return (
         <div>
@@ -506,6 +555,7 @@ class StudentInformationGrid extends Component {
           </div>
         </div>
       );
+
     } else if (isEmpty(students)) {
       return (
         <div>
@@ -518,6 +568,7 @@ class StudentInformationGrid extends Component {
         </div>
       );
     }
+
     return (
       <div className="print-media-none">
         <DataGrid
@@ -548,7 +599,9 @@ class StudentInformationGrid extends Component {
    * clearSelectedStudents method will clear all selected records".
    */
   clearSelectedStudents = () => {
+
     const { students } = this.props;
+
     this.setState({
       selectedStudents: [],
       students: this.formatStudents(students),
@@ -557,8 +610,10 @@ class StudentInformationGrid extends Component {
   };
 
   render() {
+
     const { adminLoginState, students } = this.props;
     const { metaData, checkedIds, selectedStudents } = this.state;
+
     if (!(adminLoginState)) {
     if (this.state.fileRedirection) {
       return <Redirect to="/files" />;
@@ -570,6 +625,7 @@ class StudentInformationGrid extends Component {
         </div>
       );
     }
+
     return (
       <div className="grid-scroll-page-wrapper">
         <div className="grid-scroll-wrapper" ref={this.widthRef}>
@@ -660,6 +716,7 @@ class StudentInformationGrid extends Component {
     );
   }
 }
+
 StudentInformationGrid.propTypes = {
   adminLoginState: PropTypes.bool,
   fetchStudentData: PropTypes.func,
@@ -712,6 +769,7 @@ const mapStateToProps = state => ({
   students: allStudentsData(state),
   visibleColumnConfig: getVisibleColumnConfig(state),
 });
+
 export default connect(mapStateToProps, {
   fetchStudentData,
   getAllStudentsAction,

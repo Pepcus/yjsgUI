@@ -27,6 +27,7 @@ const { development, production } = cssJSON;
  * AppContainer is the wrapper of application.
  */
 class AppContainer extends Component {
+
   componentDidMount() {
     this.props.loadBusCoordinatorsDataAction();
     this.props.loadAppDataAction();
@@ -35,6 +36,7 @@ class AppContainer extends Component {
       setAppColor(this.props.mode === 'production' ? production : development);
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAppLoaded) {
       setAppColor(nextProps.mode === 'production' ? production : development);
@@ -42,13 +44,17 @@ class AppContainer extends Component {
   }
 
   render() {
+
     if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
+
       return (
         <HashRouter>
           <Route path="/" component={Routes} />
         </HashRouter>
       );
+
     } else if (this.props.isAppLoadingFailed) {
+
       return (
         <div>
           <div className="empty-column-message">
