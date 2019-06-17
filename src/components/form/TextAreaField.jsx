@@ -105,8 +105,6 @@ TextAreaField.propTypes = {
   name: PropTypes.string,
   onInputChange: PropTypes.func,
   placeholder: PropTypes.string,
-  style: PropTypes.object,
-  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -123,8 +121,6 @@ TextAreaField.defaultProps = {
   name: '',
   onInputChange: () => {},
   placeholder: '',
-  style: {},
-  type: 'text',
   value: '',
 };
 
