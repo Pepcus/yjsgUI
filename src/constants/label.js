@@ -1,41 +1,43 @@
-export const ADDRESS_LABEL = 'पूरा पता';
+import { label } from '../config/constants.json';
 
-export const AGE_LABEL = 'उम्र';
+export const ADDRESS_LABEL = label.ADDRESS_LABEL || '';
 
-export const BUS_NUMBER_LABEL = 'Bus#';
+export const AGE_LABEL = label.AGE_LABEL || '';
 
-export const BUS_STOP_LABEL = 'बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)';
+export const BUS_NUMBER_LABEL = label.BUS_NUMBER_LABEL || '';
 
-export const CLASS_LABEL = 'Class';
+export const BUS_STOP_LABEL = label.BUS_STOP_LABEL || '';
 
-export const EDUCATION_LABEL = 'स्कूल शिक्षा';
+export const CLASS_LABEL = label.CLASS_LABEL || '';
 
-export const EMAIL_LABEL = 'ई-मेल';
+export const EDUCATION_LABEL = label.EDUCATION_LABEL || '';
 
-export const FATHER_OR_HUSBAND_NAME_LABEL = 'पिता / पति का नाम';
+export const EMAIL_LABEL = label.EMAIL_LABEL || '';
 
-export const GENDER_LABEL = 'लिंग';
+export const FATHER_OR_HUSBAND_NAME_LABEL = label.FATHER_OR_HUSBAND_NAME_LABEL || '';
 
-export const ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL = 'कृपया दिए गए ID\'s को  कार्ड प्रिंट के लिए चयन करें!';
+export const GENDER_LABEL = label.GENDER_LABEL || '';
 
-export const ID_LABEL = 'आई.डी.';
+export const ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL = label.ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL || '';
 
-export const IS_OPT_IN_OR_OPT_OUT_2019_LABEL = '2019 के शिविर की स्वीकृति ?';
+export const ID_LABEL = label.ID_LABEL || '';
 
-export const MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL = 'कृपिया चयनित छात्रो की उपस्तिथि दर्ज करे ';
+export const IS_OPT_IN_OR_OPT_OUT_2019_LABEL = label.IS_OPT_IN_OR_OPT_OUT_2019_LABEL || '';
 
-export const MOBILE_NUMBER_LABEL = 'मोबाइल नं ( WhatsApp / SMS के लिये )';
+export const MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL = label.MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL || '';
 
-export const MOTHER_MOBILE_NUMBER_LABEL = 'मोबाइल नं. ( माता का )';
+export const MOBILE_NUMBER_LABEL = label.MOBILE_NUMBER_LABEL || '';
 
-export const NAME_LABEL = 'नाम';
+export const MOTHER_MOBILE_NUMBER_LABEL = label.MOTHER_MOBILE_NUMBER_LABEL || '';
 
-export const OCCUPATION_LABEL = 'व्यवसाय (युवा वर्ग हेतु)';
+export const NAME_LABEL = label.NAME_LABEL || '';
 
-export const OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL = 'कृपया चयनित छात्रों की शिविर के लिए हाँ या ना दर्ज़ करें';
+export const OCCUPATION_LABEL = label.OCCUPATION_LABEL || '';
 
-export const PREVIOUS_YEAR_LEVEL_LABEL = 'पूर्व में किये गए धार्मिक अध्ययन का विवरण';
+export const OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL = label.OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL || '';
 
-export const ROOM_LABEL = 'Room';
+export const PREVIOUS_YEAR_LEVEL_LABEL = label.PREVIOUS_YEAR_LEVEL_LABEL || '';
 
-export const WHAT_YOU_WANT_TO_STUDY_LABEL = 'आप क्या अध्ययन करना चाहते हैं ?';
+export const ROOM_LABEL = label.ROOM_LABEL || '';
+
+export const WHAT_YOU_WANT_TO_STUDY_LABEL = label.WHAT_YOU_WANT_TO_STUDY_LABEL || '';

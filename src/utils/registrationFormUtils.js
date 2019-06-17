@@ -97,7 +97,7 @@ export const addressValidate = (value, name) => {
     errorMessageObject.message = DOUBLE_QUOTE_ERROR_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else if (value.length < 15) {
-    errorMessageObject.message = FULL_ADDRESS_MESSAGE+INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
+    errorMessageObject.message = FULL_ADDRESS_MESSAGE + INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else {
     errorMessageObject.message = '';
