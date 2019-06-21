@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
-import * as shortId from 'shortid';
 
 import {
   resetIsMarkOptInOrOptOutSuccessAction,
@@ -19,12 +18,13 @@ import {
 } from '../constants/label';
 import {
   OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE,
-  OPT_IN_OR_OPT_OUT_FAILED_MESSAGE,
+  OPT_IN_OR_OPT_OUT_FAILED_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
 import {
   YES_TEXT,
   NO_TEXT,
 } from '../constants/text';
+import Form from './Form';
 
 const customSelectedStudentsOptInOrOptOutStyles = {
   overlay: {
@@ -46,6 +46,77 @@ const customSelectedStudentsOptInOrOptOutStyles = {
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },
+};
+
+const formDetail = {
+  Schema: {
+    'title': OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL,
+    'type': 'object',
+    'properties': {
+      'studentsId': {
+        'title': 'Selected Students Id:',
+        'type': 'array',
+        'items': {
+          'type': 'string',
+        },
+      },
+      'selectedOptOption': {
+        'type': 'string',
+        'oneOf': [
+          {
+            'title': YES_TEXT,
+            'const': 'Y',
+          },
+          {
+            'title': NO_TEXT,
+            'const': 'N',
+          },
+        ],
+      },
+      'Close': {
+        'type': 'string',
+      },
+      'Submit': {
+        'type': 'string',
+      },
+    },
+    'required': ['studentsId', 'selectedOptOption'],
+  },
+  UISchema: {
+    'ui:order': ['studentsId',
+      'selectedOptOption',
+      '*',
+      'Close',
+      'Submit',
+    ],
+    'studentsId': {
+      'className': 'column-content-modal column-wrapper',
+      'ui:options': {
+        'addable': false,
+        'removable': false,
+      },
+      'items': {
+        'ui:disabled': true,
+      },
+    },
+    'selectedOptOption': {
+      'ui:options': {
+        'label': false,
+      },
+      'ui:widget': 'radio',
+    },
+    'Close': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Submit': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+  },
+  data: {},
 };
 
 /**
@@ -141,10 +212,19 @@ class MarkOptInOrOptOutButton extends Component {
     const { selectedOptOption } = this.state;
 
     if (isEmpty(selectedOptOption)) {
-      return 'popup-buttons-disable';
+      return 'btn-upload linkButton'; // 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
+
+
+  /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
 
   /**
    * renderMessage method render success message
@@ -181,9 +261,9 @@ class MarkOptInOrOptOutButton extends Component {
    * onClickRadioButton method set the value of optIn2019 onChange of radio button.
    * @param {Object} event
    */
-  onClickRadioButton(event) {
+  onClickRadioButton({ formData }) {
     this.setState({
-      selectedOptOption: { 'optIn2019': event.target.value },
+      selectedOptOption: { 'optIn2019': formData.selectedOptOption },
     });
   }
 
@@ -191,10 +271,7 @@ class MarkOptInOrOptOutButton extends Component {
    * onFormSubmit method call on submission of selected student optIn/optOut
    * @param {Object} event
    */
-  onFormSubmit(event) {
-
-    event.preventDefault();
-
+  onFormSubmit() {
     const { studentsId, selectedOptOption } = this.state;
     const { secretKey } = this.props;
 
@@ -211,8 +288,33 @@ class MarkOptInOrOptOutButton extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
+    const uiSchema = {
+      ...formDetail.UISchema,
+      Close: {
+        ...formDetail.UISchema.Close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeMarkSelectedStudentsOptInOrOptOutModal}
+          >Close
+          </button>
+        ),
+      },
+      Submit: {
+        ...formDetail.UISchema.Submit,
+        // 'classNames': this.renderSubmitButtonClassName(),
+        'ui:widget': () => (
+          <button
+            className={this.renderSubmitButtonClassName()}
+            type="submit"
+          >
+            Submit
+          </button>
 
-    const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentsId } = this.state;
+        ),
+      },
+    };
+    const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentsId, selectedOptOption } = this.state;
 
     if (isMarkSelectedStudentsOptInOrOptOutModalOpen) {
       return (
@@ -226,43 +328,22 @@ class MarkOptInOrOptOutButton extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <form onSubmit={this.onFormSubmit}>
-              <div className="column-modal">
-                <h1 className="column-modal-container">{OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL}</h1>
-              </div>
-              <div className="column-content-modal">
-                <div className="selected-student-heading">
-                  <span>Selected Students Id: </span>
-                  <div className="selected-student-wrapper-id">
-                    {
-                      studentsId.map(student =>
-                        <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
-                    }
-                  </div>
-                </div>
-                <div className="advance-input-radio advance-input-print-later">
-                  <div className="input-radio-container">
-                    <input type="radio" name="OptInOrOptOut" value="Y" onClick={this.onClickRadioButton} />
-                    <label htmlFor="Opt-In">{YES_TEXT}</label>
-                  </div>
-                  <div className="input-radio-container">
-                    <input type="radio" name="OptInOrOptOut" value="N" onClick={this.onClickRadioButton} />
-                    <label htmlFor="Opt-Out">{NO_TEXT}</label>
-                  </div>
-                </div>
-                {this.renderMessage()}
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeMarkSelectedStudentsOptInOrOptOutModal}
-                  >Close
-                  </button>
-                  <button className={this.renderSubmitButtonClassName()} type="submit">Submit</button>
-                </div>
-              </div>
-            </form>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              liveValidate
+              schema={formDetail.Schema}
+              uiSchema={uiSchema}
+              formData={
+                { studentsId,
+                  selectedOptOption: selectedOptOption.optIn2019,
+                }}
+              onChange={this.onClickRadioButton}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );

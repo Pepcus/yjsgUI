@@ -435,3 +435,9 @@ export const updateClassAttended2019InStudentData = (studentData) => {
 
   return studentData;
 };
+
+export const getFinalMemberData = ({ studentData }) => {
+  // get student data from session if present
+  const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+  return !isEmpty(studentData) ? studentData : studentDataFromSession;
+};

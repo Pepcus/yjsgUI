@@ -11,6 +11,7 @@ import {
   columnsList,
 } from '../config/appConfig.json';
 import { chunkArray } from '../utils/dataGridUtils';
+import Form from './Form';
 
 const customColumnOptionStyles = {
   overlay: {
@@ -32,6 +33,59 @@ const customColumnOptionStyles = {
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },
+};
+
+const formDetail = {
+  Schema: {
+    'title': PLEASE_SELECT_COLUMNS_TEXT,
+    'type': 'object',
+    'properties': {
+      'selectValue': {
+        'type': 'boolean',
+        'title': 'Select All',
+        'default': true,
+      },
+      'visibleColumnConfig': {
+        'type': 'string',
+      },
+      'Close': {
+        'type': 'string',
+      },
+      'Save': {
+        'type': 'string',
+      },
+    },
+  },
+  UISchema: {
+    'ui:order': ['selectValue',
+      'visibleColumnConfig',
+      '*',
+      'Close',
+      'Save',
+    ],
+    'selectValue': {
+      'ui:widget': 'checkbox',
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'visibleColumnConfig': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Close': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Save': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+  },
+  data: {},
 };
 
 /**
@@ -125,29 +179,31 @@ class ColumnConfig extends Component {
    * setCheckValue method set value of selectValue(select all)(true or false) and on the basis
    * of selectValue value set the value of visibleColumnConfig(all column value)
    */
-  setCheckValue() {
-
-    const { selectValue } = this.state;
+  setCheckValue({ formData }) {
     const { visibleColumnConfig } = this.props;
-    const temporarySelectValue = selectValue !== true;
     const temporaryVisibleColumnConfig = cloneDeep(visibleColumnConfig);
+    if (formData.selectValue !== this.state.selectValue) {
+      if (formData.selectValue) {
+        for (const key in temporaryVisibleColumnConfig) {
+          temporaryVisibleColumnConfig[key] = true;
+        }
+        this.setState({
+          selectValue: formData.selectValue,
+          visibleColumnConfig: temporaryVisibleColumnConfig,
+        });
 
-    if (temporarySelectValue) {
-      for (const key in temporaryVisibleColumnConfig) {
-        temporaryVisibleColumnConfig[key] = true;
+      } else if (!formData.selectValue) {
+        for (const key in temporaryVisibleColumnConfig) {
+          temporaryVisibleColumnConfig[key] = false;
+        }
+        this.setState({
+          selectValue: formData.selectValue,
+          visibleColumnConfig: temporaryVisibleColumnConfig,
+        });
       }
+    } else {
       this.setState({
-        selectValue: temporarySelectValue,
-        visibleColumnConfig: temporaryVisibleColumnConfig,
-      });
-
-    } else if (!temporarySelectValue) {
-      for (const key in temporaryVisibleColumnConfig) {
-        temporaryVisibleColumnConfig[key] = false;
-      }
-      this.setState({
-        selectValue: temporarySelectValue,
-        visibleColumnConfig: temporaryVisibleColumnConfig,
+        visibleColumnConfig: formData.visibleColumnConfig,
       });
     }
   }
@@ -157,7 +213,6 @@ class ColumnConfig extends Component {
    * @param {Object} event
    */
   handleChange = (event) => {
-
     const { visibleColumnConfig } = this.state;
 
     if (event.target.checked) {
@@ -180,8 +235,39 @@ class ColumnConfig extends Component {
   };
 
   render() {
-
-    const { selectValue } = this.state;
+    const uiSchema = {
+      ...formDetail.UISchema,
+      visibleColumnConfig: {
+        ...formDetail.UISchema.visibleColumnConfig,
+        'ui:widget': () => (
+          this.renderColumnOptions()
+        ),
+      },
+      Close: {
+        ...formDetail.UISchema.Close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.props.closeColumnOption}
+          >
+            Close
+          </button>
+        ),
+      },
+      Save: {
+        ...formDetail.UISchema.Save,
+        // 'classNames': this.renderSubmitButtonClassName(),
+        'ui:widget': () => (
+          <button
+            className="button-modal button-save"
+            onClick={this.setValuesOfVisibleColumnConfig}
+          >
+            Save
+          </button>
+        ),
+      },
+    };
+    const { selectValue, visibleColumnConfig } = this.state;
 
     return (
       <Modal
@@ -193,7 +279,18 @@ class ColumnConfig extends Component {
         className="custom-modal"
         ariaHideApp={false}
       >
-        <div>
+        <div className="column-group-wrapper">
+          <Form
+            showErrorList={false}
+            noHtml5Validate
+            liveValidate
+            schema={formDetail.Schema}
+            uiSchema={uiSchema}
+            onChange={this.setCheckValue}
+            formData={{ selectValue, visibleColumnConfig }}
+          />
+        </div>
+        {/* <div>
           <div className="column-modal">
             <h2 className="column-modal-container">{PLEASE_SELECT_COLUMNS_TEXT}</h2>
           </div>
@@ -214,7 +311,7 @@ class ColumnConfig extends Component {
               </div>
             </div>
           </form>
-        </div>
+        </div>*/}
       </Modal>
     );
   }

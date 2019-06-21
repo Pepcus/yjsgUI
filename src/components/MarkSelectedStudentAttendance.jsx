@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
 import {
+  ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL,
   MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL,
 } from '../constants/label';
 import {
   MARK_ATTENDANCE_SUCCESS_MESSAGE,
-  MARK_ATTENDANCE_FAILED_MESSAGE,
+  MARK_ATTENDANCE_FAILED_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
 import {
   days,
@@ -24,6 +25,7 @@ import {
   isMarkAttendanceSuccess,
   isMarkAttendanceFailed,
 } from '../reducers/studentRegistrationReducer';
+import Form from './Form';
 
 const customSelectedStudentsAttendanceModalStyles = {
   overlay: {
@@ -45,6 +47,86 @@ const customSelectedStudentsAttendanceModalStyles = {
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },
+};
+
+const formDetail = {
+  Schema: {
+    'title': MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL,
+    'type': 'object',
+    'properties': {
+      'studentsId': {
+        'title': 'Selected Students Id:',
+        'type': 'array',
+        'items': {
+          'type': 'string',
+        },
+      },
+      'selectedDay': {
+        'type': 'string',
+        'enum': [
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+        ],
+        'enumNames': [
+          'Day 1',
+          'Day 2',
+          'Day 3',
+          'Day 4',
+          'Day 5',
+          'Day 6',
+          'Day 7',
+          'Day 8',
+        ],
+      },
+      'Close': {
+        'type': 'string',
+      },
+      'Submit': {
+        'type': 'string',
+      },
+    },
+    'required': ['studentsId', 'selectedDay'],
+  },
+  UISchema: {
+    'ui:order': ['studentsId',
+      'selectedDay',
+      '*',
+      'Close',
+      'Submit',
+    ],
+    'studentsId': {
+      'className': 'column-content-modal column-wrapper',
+      'ui:options': {
+        'addable': false,
+        'removable': false,
+      },
+      'items': {
+        'ui:disabled': true,
+      },
+    },
+    'selectedDay': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Close': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Submit': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+  },
+  data: {},
 };
 
 /**
@@ -138,10 +220,18 @@ class MarkSelectedStudentAttendance extends Component {
     const { selectedDay } = this.state;
 
     if (isEmpty(selectedDay)) {
-      return 'popup-buttons-disable';
+      return 'btn-upload linkButton'; // 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
+
+  /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
 
   /**
    * renderMessage method render success message
@@ -192,20 +282,16 @@ class MarkSelectedStudentAttendance extends Component {
    * handleSelectChange method set the value of selected day in selectedDay.
    * @param {Object} event
    */
-  handleSelectChange(event) {
+  handleSelectChange({ formData }) {
     this.setState({
-      selectedDay: { 'day': event.target.value },
+      selectedDay: { 'day': formData.selectedDay },
     });
   }
 
   /**
    * onFormSubmit method call on submission of selected student attendance
-   * @param {Object} event
    */
-  onFormSubmit(event) {
-
-    event.preventDefault();
-
+  onFormSubmit() {
     const { studentsId, selectedDay } = this.state;
     const { secretKey } = this.props;
 
@@ -217,7 +303,31 @@ class MarkSelectedStudentAttendance extends Component {
    * @return {*} modal
    */
   renderMarkSelectedStudentsModal() {
-
+    const uiSchema = {
+      ...formDetail.UISchema,
+      Close: {
+        ...formDetail.UISchema.Close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeMarkSelectedStudentsAttendanceModal}
+          >Close
+          </button>
+        ),
+      },
+      Submit: {
+        ...formDetail.UISchema.Submit,
+        // 'classNames': this.renderSubmitButtonClassName(),
+        'ui:widget': () => (
+          <button
+            className={this.renderMarkButtonClassName()}
+            type="submit"
+          >
+            Submit
+          </button>
+        ),
+      },
+    };
     const { isMarkSelectedStudentsAttendanceModalOpen, studentsId, selectedDay } = this.state;
 
     if (isMarkSelectedStudentsAttendanceModalOpen) {
@@ -232,40 +342,22 @@ class MarkSelectedStudentAttendance extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <form onSubmit={this.onFormSubmit}>
-              <div className="column-modal">
-                <h1 className="column-modal-container">{MARK_SELECTED_STUDENTS_ATTENDANCE_LABEL} </h1>
-              </div>
-              <div className="column-content-modal column-wrapper">
-                <div className="selected-student-heading">
-                  <span>Selected Students Id:</span>
-                  <div className="selected-student-wrapper-id">
-                    {
-                      studentsId.map(student =>
-                        <span key={shortId.generate()} className="selected-students-Id">{student}</span>)
-                    }
-                  </div>
-                </div>
-                <div className="column-content-student-wrapper">
-                  <span className="column-content-students">Select Day:</span>
-                  <select onChange={this.handleSelectChange} value={selectedDay.day} className="selected-day-list">
-                    <option selected hidden disabled="disabled" value="" />
-                    {this.renderOptions()}
-                  </select>
-                </div>
-                {this.renderMessage()}
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeMarkSelectedStudentsAttendanceModal}
-                  >Close
-                  </button>
-                  <button className={this.renderMarkButtonClassName()} type="submit">Submit</button>
-                </div>
-              </div>
-            </form>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              liveValidate
+              schema={formDetail.Schema}
+              uiSchema={uiSchema}
+              formData={
+                { studentsId,
+                  selectedDay: selectedDay.day,
+                }}
+              onChange={this.handleSelectChange}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );

@@ -16,20 +16,23 @@ import Button from './common/Button';
  * LoginForm render login form
  * @param {Boolean} isAdmin
  * @param {Object} admin
- * @param {Function} handleInputChange
  * @param {Function} adminScreenRedirection
  * @param {Function} disableAdminLoginButtons
  * @param {Function} setAdminLogin
  * @param {Boolean} isNewRegistration
  * @param {Function} redirectToNewRegistrationPage
  * @param {Function} enableAdminLoginButtons
+ * @param {Function} onChange
+ * @param {Function} transformErrors
  * @type {Function}
  * @return {*} admin login form
  * @constructor
  */
-const LoginForm = ({ isAdmin,
+const LoginForm = ({
+  onChange,
+  transformErrors,
+  isAdmin,
   admin,
-  handleInputChange,
   adminScreenRedirection,
   disableAdminLoginButtons,
   setAdminLogin,
@@ -41,9 +44,10 @@ const LoginForm = ({ isAdmin,
   if (isAdmin) {
     return (
       <AdminLoginForm
+        onChange={onChange}
+        transformErrors={transformErrors}
         isAdmin={isAdmin}
         admin={admin}
-        handleInputChange={handleInputChange}
         adminScreenRedirection={adminScreenRedirection}
         disableAdminLoginButtons={disableAdminLoginButtons}
         setAdminLogin={setAdminLogin}
@@ -72,11 +76,12 @@ const LoginForm = ({ isAdmin,
 };
 
 LoginForm.propTypes = {
+  onChange: PropTypes.func,
+  transformErrors: PropTypes.func,
   admin: PropTypes.object,
   adminScreenRedirection: PropTypes.func,
   disableAdminLoginButtons: PropTypes.func,
   enableAdminLoginButtons: PropTypes.func,
-  handleInputChange: PropTypes.func,
   isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
   redirectToNewRegistrationPage: PropTypes.func,
@@ -84,11 +89,12 @@ LoginForm.propTypes = {
 };
 
 LoginForm.defaultProps = {
+  onChange: () => {},
+  transformErrors: () => {},
   admin: {},
   adminScreenRedirection: () => {},
   disableAdminLoginButtons: () => {},
   enableAdminLoginButtons: () => {},
-  handleInputChange: () => {},
   isAdmin: false,
   isNewRegistration: false,
   redirectToNewRegistrationPage: () => {},

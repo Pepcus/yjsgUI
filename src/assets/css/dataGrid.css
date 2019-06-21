@@ -17,8 +17,7 @@ html, body {
 .logoutLinkContainer {
     display: flex;
 }
-
-.rjsf {
+.member-registration-form .rjsf {
     padding: 15px 17px;
     margin: 70px auto;
     box-shadow: 0 2px 4px 0 #eeecec;
@@ -28,6 +27,21 @@ html, body {
     max-height: 100%;
     overflow-y: auto;
     max-width: 1170px;
+}
+.member-registration-correction-form .rjsf {
+    padding: 15px 17px;
+    margin: 70px auto;
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.student-already-register-form .rjsf {
+    background-color: white;
+    box-shadow: none;
 }
 .field-radio-group {
     margin-top: 20px;

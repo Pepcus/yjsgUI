@@ -40,7 +40,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 import AdvanceSearch from '../AdvanceSearch';
 import UploadStudentsAttendanceFile from '../UploadStudentsAttendanceFile';
-// import UploadOptInFile from '../UploadOptInFile';
+/*import UploadOptInFile from '../UploadOptInFile';*/
 import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
@@ -653,7 +653,7 @@ class StudentInformationGrid extends Component {
                   checkedIds={checkedIds}
                 />
                 <div className="column-option display-mobile-none">
-                  {/* <UploadOptInFile />*/}
+                  {/*<UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
                     <Link to="/files" className="column-option-container text-decoration-none">
                       <i className="fa fa-file-text card-icon" />Files

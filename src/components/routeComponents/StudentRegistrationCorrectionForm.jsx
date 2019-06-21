@@ -40,8 +40,8 @@ import {
   CLASS_LABEL,
   ROOM_LABEL,
 } from '../../constants/label';
-import InputField from '../form/InputField';
-import TextAreaField from '../form/TextAreaField';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
   updateStudentData,
@@ -62,7 +62,7 @@ import {
   getUserSecretKey,
   getPageUserType,
 } from '../../reducers/studentRegistrationReducer';
-import SelectListInputField from '../form/SelectListInputField';
+import SelectListInputField from '../formComponents/SelectListInputField';
 import Button from '../common/Button';
 import {
   CLICK_HERE_TEXT,

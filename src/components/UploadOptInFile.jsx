@@ -16,11 +16,12 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import {
   OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
-  OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
+  OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
 import {
   UPLOAD_FILE_TEXT,
 } from '../constants/text';
+import Form from './Form';
 
 const customUploadOptInFileModalStyles = {
   overlay: {
@@ -44,6 +45,49 @@ const customUploadOptInFileModalStyles = {
   },
 };
 
+const formDetail = {
+  Schema: {
+    'title': UPLOAD_FILE_TEXT,
+    'type': 'object',
+    'properties': {
+      'optInFile': {
+        'type': 'string',
+      },
+      'Close': {
+        'type': 'string',
+      },
+      'Submit': {
+        'type': 'string',
+      },
+    },
+    'required': ['optInFile'],
+  },
+  UISchema: {
+    'ui:order': ['optInFile',
+      '*',
+      'Close',
+      'Submit',
+    ],
+    'optInFile': {
+      'ui:options': {
+        'label': false,
+      },
+      'ui:widget': 'file',
+    },
+    'Close': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+    'Submit': {
+      'ui:options': {
+        'label': false,
+      },
+    },
+  },
+  data: {},
+};
+
 /**
  * UploadOptInFile render upload optIn file modal
  * @type {Class}
@@ -54,7 +98,7 @@ class UploadOptInFile extends Component {
     super(props);
 
     this.state = {
-      optInFile: null,
+      optInFile: undefined,
       isUploadOptInFileModalOpen: false,
       isFormSubmitted: false,
     };
@@ -100,7 +144,7 @@ class UploadOptInFile extends Component {
     const { optInFile } = this.state;
 
     if (!optInFile) {
-      return 'popup-buttons-disable';
+      return 'btn-upload linkButton'; // 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
@@ -108,13 +152,9 @@ class UploadOptInFile extends Component {
   /**
    * onFormSubmit method set isFormSubmitted to true
    * and call fileUpload method
-   * @param {Object} event
    */
-  onFormSubmit(event) {
-
+  onFormSubmit() {
     const { optInFile } = this.state;
-
-    event.preventDefault();
 
     this.fileUpload(optInFile);
     this.setState({
@@ -180,6 +220,14 @@ class UploadOptInFile extends Component {
   }
 
   /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
    * renderMessage method render success or failure message of upload optIn file
    * @return {*} message
    */
@@ -219,8 +267,44 @@ class UploadOptInFile extends Component {
    * @return {*} modal
    */
   renderUploadOptInModal() {
+    const uiSchema = {
+      ...formDetail.UISchema,
+      optInFile: {
+        ...formDetail.UISchema.optInFile,
+        'ui:widget': () => (
+          <input
+            type="file"
+            onChange={this.onChange}
+            className="choose-file-wrapper"
+          />
+        ),
+      },
+      Close: {
+        ...formDetail.UISchema.Close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeUploadOptInFileModal}
+          >Close
+          </button>
+        ),
+      },
+      Submit: {
+        ...formDetail.UISchema.Submit,
+        'ui:widget': () => (
+          <button
+            type="submit"
+            className={this.renderUploadButtonClassName()}
+            // disabled={this.state.isFormSubmitted}
+          >
+            <i className="fa fa-file-text card-icon" />
+            Upload
+          </button>
 
-    const { isUploadOptInFileModalOpen, isFormSubmitted } = this.state;
+        ),
+      },
+    };
+    const { isUploadOptInFileModalOpen, optInFile } = this.state;
 
     if (isUploadOptInFileModalOpen) {
       return (
@@ -234,34 +318,20 @@ class UploadOptInFile extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <div className="column-modal">
-              <h1 className="column-modal-container">{UPLOAD_FILE_TEXT}</h1>
-            </div>
-            <form onSubmit={this.onFormSubmit} className="upload-form-wrapper">
-              <div>
-                <div className="column-content-modal">
-                  <input type="file" onChange={this.onChange} className="choose-file-wrapper" />
-                  {this.renderMessage()}
-                </div>
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeUploadOptInFileModal}
-                  >Close
-                  </button>
-                  <button
-                    type="submit"
-                    className={this.renderUploadButtonClassName()}
-                    disabled={isFormSubmitted}
-                  >
-                    <i className="fa fa-file-text card-icon" />
-                    Upload
-                  </button>
-                </div>
-              </div>
-            </form>
+            <Form
+              showErrorList={false}
+              noHtml5Validate
+              liveValidate
+              schema={formDetail.Schema}
+              uiSchema={uiSchema}
+              formData={{
+                optInFile,
+                }}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );

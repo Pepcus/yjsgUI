@@ -36,8 +36,8 @@ import {
   YOUR_SECRET_CODE_TEXT,
   IS_THERE_TEXT,
 } from '../../constants/text';
-import InputField from '../form/InputField';
-import TextAreaField from '../form/TextAreaField';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
   createStudentData,
@@ -49,7 +49,7 @@ import {
   setRegistrationData,
   validateInput,
 } from '../../utils/registrationFormUtils';
-import SelectListInputField from '../form/SelectListInputField';
+import SelectListInputField from '../formComponents/SelectListInputField';
 import {
   getNewStudent,
   isCreated,
