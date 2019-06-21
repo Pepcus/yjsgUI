@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Form from 'react-jsonschema-form';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
@@ -18,7 +17,6 @@ import {
 import {
   ID_CARD_SUGGESTION_MESSAGE,
   ID_NOTE_MESSAGE,
-  INVALID_EMAIL_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
   YJSG_REGISTRATION_SUCCESS_MESSAGE,
 } from '../../constants/messages';
@@ -35,8 +33,8 @@ import {
 } from '../../constants/text';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
+import Form from '../Form';
 
-const JSONSchemaForm = Form;
 
 /**
  * MemberRegistrationForm render member registration form.
@@ -96,18 +94,10 @@ class MemberRegistrationForm extends Component {
    * @param {Array} errors
    * @return {Array} errors
    */
-  transformErrors = errors => errors.map((error) => {
-
-    if (error.name === 'required') {
-      error.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
-    }
-
-    if (error.name === 'format' && error.params.format === 'email') {
-      error.message = INVALID_EMAIL_MESSAGE;
-    }
-    return error;
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+    'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
   });
-
 
   /**
    * renderBackButton method render back button conditionally into form
@@ -190,12 +180,12 @@ class MemberRegistrationForm extends Component {
 
   /**
    * validate method check the validation for individual form fields
-   * @param {Object} formData
-   * @param {Object} errors
+   //* @param {Object} formData
+   //* @param {Object} errors
    * @return {Object} errors
    */
-  validate = (formData, errors) => {
-    memberRegistration.validation.forEach((valid) => {
+  validate = () => {
+    /* memberRegistration.validation.forEach((valid) => {
 
       const error = validations[valid.validates](formData[valid.field]);
 
@@ -203,13 +193,14 @@ class MemberRegistrationForm extends Component {
         errors[valid.field].addError(error);
       }
     });
-    return errors;
+    return errors;*/
+    return memberRegistration.validation;
   };
 
   render() {
     return (
-      <div ref={this.formRef}>
-        <JSONSchemaForm
+      <div ref={this.formRef} className="member-registration-form">
+        <Form
           showErrorList={false}
           noHtml5Validate
           validate={this.validate}
@@ -233,7 +224,7 @@ class MemberRegistrationForm extends Component {
               onClick={this.handleSubmit}
             />
           </div>
-        </JSONSchemaForm>
+        </Form>
         {this.renderSuccessMessage()}
       </div>
     );

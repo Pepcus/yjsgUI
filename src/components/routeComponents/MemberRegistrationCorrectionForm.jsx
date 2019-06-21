@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import {
   formSubmitBtnText,
   goBackBtnText,
-  infoUpdateSuccessMessage,
   invalidIdMessage,
-  noInfoChangeMessage,
   USER_TYPES,
 } from '../../constants/yjsg';
 import {
@@ -19,7 +17,6 @@ import {
   updateStudentData,
 } from '../../actions/studentRegistrationActions';
 import {
-  INVALID_EMAIL_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../../constants/messages';
 import {
@@ -34,19 +31,23 @@ import {
 import Popup from '../common/Popup';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import { updateClassAttended2019InStudentData } from '../../utils/registrationFormUtils';
+import {
+  getFinalMemberData,
+  updateClassAttended2019InStudentData,
+} from '../../utils/registrationFormUtils';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 import { validation } from '../../config/memberRegisrationCurrectionFormShema.json';
-import validations from '../../utils/validation';
 import {
   InitialStudentData,
   prePopulateOptIn,
 } from '../../utils/SampleFormValidation';
 import CorrectionsForm from '../CorrectionsForm';
+import FormUpdateSuccessMessage from '../FormUpdateSuccessMessage';
 
 /**
  * MemberRegistrationCorrectionForm render member registration correction form.
  * @type {Class}
+ * @return {*} Correction form
  */
 class MemberRegistrationCorrectionForm extends Component {
 
@@ -68,11 +69,9 @@ class MemberRegistrationCorrectionForm extends Component {
   componentDidMount() {
 
     const { studentData } = this.props;
-    // get student data from session if present
-    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
-    const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
+    const finalStudentData = getFinalMemberData({ studentData });
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
 
     if (!isEmpty(prePopulateOptInStudentData)) {
@@ -89,10 +88,9 @@ class MemberRegistrationCorrectionForm extends Component {
 
     const { studentData } = nextProps;
     // get student data from session if present
-    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
-    const finalStudentData = !isEmpty(studentData) ? studentData : studentDataFromSession;
+    const finalStudentData = getFinalMemberData({ studentData });
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
 
     if (!isEmpty(prePopulateOptInStudentData)) {
@@ -123,12 +121,11 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} errors
    * @return {*}
    */
-  validate = (formData, errors) => {
-
+  validate = () => {
     const { student } = this.state;
 
     if (student.optIn2019 === 'Y') {
-      validation.forEach((valid) => {
+      /* validation.forEach((valid) => {
 
         const error = validations[valid.validates](formData[valid.field]);
 
@@ -136,54 +133,12 @@ class MemberRegistrationCorrectionForm extends Component {
           errors[valid.field].addError(error);
         }
       });
-      return errors;
+      return errors;*/
+      return validation;
     }
     return {};
+
   };
-
-  /**
-   * renderSuccessMessage render success message when form updated and submit successfully.
-   * Otherwise render not success message
-   * @return {*}
-   */
-  renderSuccessMessage = () => {
-
-    const {
-      isSubmitTriggered,
-      isFormChanged,
-      hasError,
-    } = this.state;
-    const { context, isStudentUpdated } = this.props;
-
-    // if form data is update and valid and submitted successfully.
-    if (isStudentUpdated) {
-
-      return (
-        <Popup>
-          <h5>{infoUpdateSuccessMessage}</h5>
-          <LinkButton
-            buttonText={goBackBtnText}
-            linkPath={context.previousLocation}
-            onClick={() => { this.props.isUpdatedResetAction(); }}
-          />
-        </Popup>
-      );
-
-    } else if (isSubmitTriggered && !isFormChanged && hasError) {
-
-      // if form data is not update and valid.
-      return (
-        <Popup>
-          <h5>{noInfoChangeMessage}</h5>
-          <LinkButton
-            buttonText={goBackBtnText}
-            linkPath={context.previousLocation}
-          />
-        </Popup>
-      );
-    } return null;
-  };
-
 
   /**
    * updateStudentData method will update student data by onClick of submit button
@@ -209,7 +164,6 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} studentData
    */
   prePopulateCourse2019 = (studentData) => {
-
     // const lastCourse = nextProps.studentData.classAttended2018;
     // const level = checkLevelValue(lastCourse);
     const updatedData = updateClassAttended2019InStudentData(studentData);
@@ -248,7 +202,6 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} event
    */
   handleSubmit = (event) => {
-
     const { student, oldStudentDate, hasError } = this.state;
 
     delete student.backButton;
@@ -299,27 +252,19 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Array} errors
    * @return {Array} temError
    */
-  transformErrors = (errors) => {
-
-    const temError = [];
-    const { studentData } = this.props;
-
-    if (studentData.optIn2019 === 'N') {
-      return [];
+  transformErrors = () => {
+    const { student } = this.state;
+    let transFormErrorObject = {};
+    if (student.optIn2019 === 'N') {
+      transFormErrorObject = {};
     }
-
-    errors.forEach((error) => {
-      if (studentData.optIn2019 !== 'N') {
-        if (error.name === 'required' || error.name === 'enum') {
-          temError.push({ ...error, message: THIS_INFORMATION_IS_COMPULSORY_MESSAGE });
-        } else if (error.name === 'format' && error.params.format === 'email') {
-          temError.push({ ...error, message: INVALID_EMAIL_MESSAGE });
-        } else if (error.name !== 'type') {
-          temError.push(error);
-        }
-      }
-    });
-    return temError;
+    if (student.optIn2019 !== 'N') {
+      transFormErrorObject = {
+        'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+        'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+      };
+    }
+    return transFormErrorObject;
   };
 
   /**
@@ -360,56 +305,8 @@ class MemberRegistrationCorrectionForm extends Component {
     );
   };
 
-  /**
-   * onChange method handle onChange of form
-   * @param {Object} event
-   */
-  onChange = (event) => {
-    this.setState({
-      student: {
-        ...this.state.student,
-        ...event.formData,
-      },
-      isFormChanged: true,
-      isSubmitTriggered: false,
-      hasError: isEmpty(event.errors),
-    });
-  };
-
-  render() {
-
-    const {
-      isFetch,
-      studentData,
-      context,
-      pageUser,
-      tenant,
-    } = this.props;
-    const {
-      onlyOptInForm,
-      student,
-    } = this.state;
-
-    if (isFetch && studentData) {
-      return (
-        <CorrectionsForm
-          pageUser={pageUser}
-          tenant={tenant}
-          onlyOptInForm={onlyOptInForm}
-          renderSuccessMessage={this.renderSuccessMessage}
-          validate={this.validate}
-          student={student}
-          onChange={this.onChange}
-          transformErrors={this.transformErrors}
-          submitStudentDataForOnlyOptInCase={this.submitStudentDataForOnlyOptInCase}
-          changeIsOnlyOptIn={this.changeIsOnlyOptIn}
-          renderBackButton={this.renderBackButton}
-          formRef={this.formRef}
-          renderSubmitButtons={this.renderSubmitButtons}
-        />
-      );
-    }
-
+  renderNoDataPopUp = () => {
+    const { context } = this.props;
     return (
       <Popup>
         <h5>{invalidIdMessage}</h5>
@@ -419,6 +316,70 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       </Popup>
     );
+  };
+
+  /**
+   * onChange method handle onChange of form
+   * @param {Object} event
+   */
+  onChange = ({ formData, errors }) => {
+    this.setState({
+      student: {
+        ...this.state.student,
+        ...formData,
+      },
+      isFormChanged: true,
+      isSubmitTriggered: false,
+      hasError: isEmpty(errors),
+    });
+  };
+
+  render() {
+
+    const {
+      isFetch,
+      studentData,
+      pageUser,
+      tenant,
+      context,
+      isStudentUpdated,
+    } = this.props;
+
+    const {
+      onlyOptInForm,
+      student,
+      isSubmitTriggered,
+      isFormChanged,
+      hasError,
+    } = this.state;
+
+    if (isFetch && studentData) {
+      return (
+        <CorrectionsForm
+          pageUser={pageUser}
+          tenant={tenant}
+          onlyOptInForm={onlyOptInForm}
+          validate={this.validate}
+          student={student}
+          onChange={this.onChange}
+          transformErrors={this.transformErrors}
+          submitStudentDataForOnlyOptInCase={this.submitStudentDataForOnlyOptInCase}
+          changeIsOnlyOptIn={this.changeIsOnlyOptIn}
+          renderBackButton={this.renderBackButton}
+          formRef={this.formRef}
+          renderSubmitButtons={this.renderSubmitButtons}
+        >
+          <FormUpdateSuccessMessage
+            isSubmitTriggered={isSubmitTriggered}
+            isFormChanged={isFormChanged}
+            hasError={hasError}
+            context={context}
+            isStudentUpdated={isStudentUpdated}
+          />
+        </CorrectionsForm>
+      );
+    }
+    return this.renderNoDataPopUp();
   }
 }
 

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cloneDeep from 'lodash/cloneDeep';
-import extend from 'lodash/extend';
 import {
   Redirect,
   Switch,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 import {
   fetchStudentData,
@@ -30,13 +29,15 @@ import {
   adminPassword,
   eventDate,
   eventVenue,
-  invalidAdminMsg,
   USER_TYPES,
 } from '../../constants/yjsg';
-import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
 import LoginForm from '../LoginForm';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import {
+  GIVEN_INFORMATION_WRONG_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+} from '../../constants/messages';
 
 /**
  *SplashPage render home page of admin
@@ -51,12 +52,10 @@ class SplashPage extends Component {
       // this may be use in future
       // isCorrection: false,
       isAdmin: false,
-      credentials: {},
       admin: {},
       isURLParams: false,
-      adminLoginState: false,
+      hasError: true,
       adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage: false,
       isNewRegistration: false,
       redirectToRoute: '',
     };
@@ -64,15 +63,9 @@ class SplashPage extends Component {
     // FIXME: Use arrow functions to avoid binding.
     this._enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
     this._disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
-    this._handleInputChange = this.handleInputChange.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
     this._adminScreenRedirection = this.adminScreenRedirection.bind(this);
     this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
-    // this may be use in future.
-    // this._enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
-    // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
-    // this._fetchStudentById = this.fetchStudentById.bind(this);
-    // this._disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
   }
 
   /**
@@ -93,6 +86,23 @@ class SplashPage extends Component {
       this.fetchStudentByURLParams(id, secretCode);
     }
   }
+
+  onChange = ({ formData, errors }) => {
+    this.setState({
+      admin: formData,
+      hasError: isEmpty(errors),
+      adminCredentialErrorMessage: false,
+    });
+  };
+
+  /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+    'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
 
   /**
    * setRedirectToRoute set the path to which redirect
@@ -120,18 +130,6 @@ class SplashPage extends Component {
   }
 
   /**
-   * enableStudentInfoCorrectionButtons method enable the student information
-   * corrections button by onClick of already register button.
-   * It set the value of isCorrection to true.
-   */
-  // this may be use in future
-  /* enableStudentInfoCorrectionButtons() {
-    this.setState({
-      isCorrection: true,
-    });
-  }*/
-
-  /**
    * enableAdminLoginButtons method enable the admin login
    * button by onClick of admin login button.
    * It set the value of isAdmin to true.
@@ -154,23 +152,10 @@ class SplashPage extends Component {
   }
 
   /**
-   * disableStudentInfoCorrectionButtons method disable the the student information
-   * corrections button by onClick of go back button.
-   * It set the value of isCorrection to false.
-   */
-  // this may be use in future.
-  /* disableStudentInfoCorrectionButtons() {
-    this.setState({
-      isCorrection: false,
-    });
-  }*/
-
-  /**
    * adminScreenRedirection method redirect to admin page on some condition.
    * @return {*} message
    */
   adminScreenRedirection() {
-
     // IF admin initial login.
     const { redirectToRoute, adminCredentialErrorMessage } = this.state;
     const { id, password, adminLoginState } = this.props;
@@ -183,7 +168,9 @@ class SplashPage extends Component {
           return (
             // FIXME: Create a reusable component for error message popup.
             <div className="errorPopupContainer">
-              <h5>{invalidAdminMsg}</h5>
+              <h5>
+                {GIVEN_INFORMATION_WRONG_MESSAGE}
+              </h5>
             </div>
           );
         }
@@ -211,134 +198,26 @@ class SplashPage extends Component {
   }
 
   /**
-   * checkRegisteredStudentCredential method verify the student credential
-   * if student credential is not valid give the error message
-   * else redirect to student correction form
-   * @return {ReactComponent}
-   */
-  // this may be use in future
-  /* checkRegisteredStudentCredential() {
-    if (this.state.registeredStudentCredentialErrorMessage) {
-     if ((!this.props.studentData || !this.props.isStudentFetched) && !this.props.isLoading) {
-        return (
-            <div className = "errorPopupContainer">
-              <h5 className = "error-message">{invalidIdMessage}</h5>
-          </div>
-        );
-      } else if (this.props.studentData && this.props.isStudentFetched) {
-        return (
-          <div>
-            <Redirect to={'/studentCorrection'}/>
-          </div>
-        )
-      }
-    }
-      return null;
-  }*/
-
-  /**
    * setAdminLogin method set the admin login credential
    * @param {Object} event
    */
   setAdminLogin(event) {
-
     const { admin } = this.state;
 
     event.preventDefault();
-
-    this.setState({
-      adminLoginState: true,
-      adminCredentialErrorMessage: true,
-    });
-    this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
+    if (this.state.hasError) {
+      this.setState({
+        adminCredentialErrorMessage: true,
+      });
+      this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
+    }
   }
-
-  /**
-   * fetchStudentById method fetch the student data while student login through URL.
-   */
-  // This may be use in future.
-  /* fetchStudentById () {
-    this.props.setStudentCredentials(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-    this.setState({
-      registeredStudentCredentialErrorMessage: true,
-    });
-  };*/
-
-  /**
-   * handleInputChange method set the admin credential in state
-   * and all in format value and name in key value format through
-   * setRegistrationData functional component.
-   * @param {String} value
-   * @param {String} name
-   */
-  handleInputChange(value, name) {
-
-    const { credentials, admin } = this.state;
-    const updatedData = extend(cloneDeep(credentials),
-      setRegistrationData(value, name));
-    const adminData = extend(cloneDeep(admin),
-      setRegistrationData(value, name));
-
-    this.setState({
-      credentials: updatedData,
-      admin: adminData,
-      adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage: false,
-    });
-  }
-
-  /**
-   * renderRegistrationCorrectionFields method return student credential fields
-   * @return {ReactComponent}
-   */
-  // This may be use in future
-  /* renderRegistrationCorrectionFields() {
-    return (
-      <div>
-        <div className = "form-input-wrapper">
-            <InputField
-                type={'number'}
-                name={'studentId'}
-                label={ID_NUMBER_TEXT}
-                placeholder={ENTER_ID_NUMBER_MESSAGE}
-                onInputChange={this._handleInputChange}
-                value={this.state.credentials.studentId}
-            />
-            <InputField
-                type={'text'}
-                name={'secretKey'}
-                label={SECRET_CODE_TEXT}
-                placeholder={ENTER_SECRET_CODE_MESSAGE}
-                onInputChange={this._handleInputChange}
-                value={this.state.credentials.secretKey}
-            />
-            {this.checkRegisteredStudentCredential()}
-        </div>
-          <div className = "button-wrapper">
-              <Button
-                  type="button"
-                  buttonText={goBackBtnText}
-                  onClick={this._disableStudentInfoCorrectionButtons}
-              />
-              <Button
-                type="button"
-                buttonText={viewEditInfoBtnText}
-                onClick={this._fetchStudentById}
-            />
-          </div>
-      </div>
-    )
-  }*/
 
   /**
    * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
    * of new registration button.
    */
   redirectToNewRegistrationPage() {
-
     const { ADMIN } = USER_TYPES;
 
     this.setState({
@@ -374,9 +253,10 @@ class SplashPage extends Component {
             </div>
             <div className="landing-page-button-container">
               <LoginForm
+                onChange={this.onChange}
+                transformErrors={this.transformErrors}
                 isAdmin={isAdmin}
                 admin={admin}
-                handleInputChange={this._handleInputChange}
                 adminScreenRedirection={this._adminScreenRedirection}
                 disableAdminLoginButtons={this._disableAdminLoginButtons}
                 setAdminLogin={this._setAdminLogin}

@@ -19,11 +19,13 @@
                 },
                 "name": {
                   "title": "नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "fatherName": {
                   "title": "पिता / पति का नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "gender": {
                   "title": "लिंग",
@@ -33,11 +35,13 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "ageValidation"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "mobileValidation"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -49,7 +53,8 @@
                 },
                 "email": {
                   "title": "ई-मेल",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "optionalEmailValidation"
                 },
                 "classAttended2018": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
@@ -81,7 +86,8 @@
                 },
                 "address": {
                   "title": "पूरा पता",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "addressValidation"
                 }
               },
               "required": [
@@ -342,11 +348,13 @@
                  },
                  "name": {
                    "title": "नाम",
-                   "type": "string"
+                   "type": "string",
+                   "validator": "nameValidation"
                  },
                  "fatherName": {
                    "title": "पिता / पति का नाम",
-                   "type": "string"
+                   "type": "string",
+                   "validator": "nameValidation"
                  },
                  "gender": {
                    "title": "लिंग",
@@ -362,11 +370,13 @@
                  },
                  "age": {
                    "title": "उम्र",
-                   "type": "number"
+                   "type": "number",
+                   "validator": "ageValidation"
                  },
                  "mobile": {
                    "title": "मोबाइल नं",
-                   "type": "number"
+                   "type": "number",
+                   "validator": "mobileValidation"
                  },
                  "occupation": {
                    "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -378,7 +388,8 @@
                  },
                  "email": {
                    "title": "ई-मेल",
-                   "type": "string"
+                   "type": "string",
+                   "validator": "optionalEmailValidation"
                  },
                  "classAttended2018": {
                    "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
@@ -486,7 +497,8 @@
                  },
                  "address": {
                    "title": "पूरा पता",
-                   "type": "string"
+                   "type": "string",
+                   "validator": "addressValidation"
                  },
                  "remark": {
                    "title": "Remark",
@@ -832,11 +844,13 @@
                 },
                 "name": {
                   "title": "नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "fatherName": {
                   "title": "पिता / पति का नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "gender": {
                   "title": "लिंग",
@@ -846,11 +860,13 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "ageValidation"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "mobileValidation"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -862,7 +878,8 @@
                 },
                 "email": {
                   "title": "ई-मेल",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "optionalEmailValidation"
                 },
                 "busStop": {
                   "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
@@ -996,7 +1013,8 @@
                 },
                 "address": {
                   "title": "पूरा पता",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "addressValidation"
                 }
               },
               "required": [
@@ -1355,11 +1373,13 @@
                 },
                 "name": {
                   "title": "नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "fatherName": {
                   "title": "पिता / पति का नाम",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "nameValidation"
                 },
                 "gender": {
                   "title": "लिंग",
@@ -1369,11 +1389,13 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "ageValidation"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number"
+                  "type": "number",
+                  "validator": "mobileValidation"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -1385,7 +1407,8 @@
                 },
                 "email": {
                   "title": "ई-मेल",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "optionalEmailValidation"
                 },
                 "busStop": {
                   "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
@@ -1659,7 +1682,8 @@
                 },
                 "address": {
                   "title": "पूरा पता",
-                  "type": "string"
+                  "type": "string",
+                  "validator": "addressValidation"
                 },
                 "remark": {
                   "title": "Remark",

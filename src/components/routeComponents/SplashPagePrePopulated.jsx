@@ -11,7 +11,7 @@ import {
 
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import InputField from '../form/InputField';
+import InputField from '../formComponents/InputField';
 import {
   fetchStudentData,
   setAdminCredentialsAction,

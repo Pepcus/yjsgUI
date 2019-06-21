@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from 'react-jsonschema-form';
+// import Form from 'react-jsonschema-form';
 import PropTypes from 'prop-types';
 
 import { getFormData } from '../utils/formDataUtils';
@@ -12,8 +12,9 @@ import {
   CLICK_HERE_TEXT,
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from '../constants/text';
+import Form from './Form';
 
-const JSONSchemaForm = Form;
+// const JSONSchemaForm = Form;
 
 /**
  * CorrectionsForm is functional component which render the correction form according to user type
@@ -22,7 +23,6 @@ const JSONSchemaForm = Form;
 const CorrectionsForm = ({ pageUser,
   tenant,
   onlyOptInForm,
-  renderSuccessMessage,
   validate,
   student,
   onChange,
@@ -31,7 +31,8 @@ const CorrectionsForm = ({ pageUser,
   changeIsOnlyOptIn,
   renderBackButton,
   renderSubmitButtons,
-  formRef }) => {
+  formRef,
+  children }) => {
   const formDetails = getFormData({
     pageUser,
     onlyOptInForm,
@@ -82,16 +83,17 @@ const CorrectionsForm = ({ pageUser,
 
   if (formDetails) {
     return (
-      <div className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
-      && onlyOptInForm ? 'form-container' : 'default-form-container'}
+      <div
+        className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
+      && onlyOptInForm ? 'form-container member-registration-correction-form' : 'default-form-container member-registration-correction-form'}
       >
         <div
           className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
           && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >
-          {renderSuccessMessage()}
-          <JSONSchemaForm
+          { children }
+          <Form
             showErrorList={false}
             noHtml5Validate
             validate={validate}
@@ -104,7 +106,7 @@ const CorrectionsForm = ({ pageUser,
           >
             { getBackButton() }
             { getLink() }
-          </JSONSchemaForm>
+          </Form>
         </div>
       </div>
     );
@@ -121,12 +123,12 @@ CorrectionsForm.propTypes = {
   pageUser: PropTypes.string,
   renderBackButton: PropTypes.func,
   renderSubmitButtons: PropTypes.func,
-  renderSuccessMessage: PropTypes.func,
   student: PropTypes.object,
   submitStudentDataForOnlyOptInCase: PropTypes.func,
   tenant: PropTypes.string,
   transformErrors: PropTypes.func,
   validate: PropTypes.func,
+  children: PropTypes.node,
 };
 
 CorrectionsForm.defaultProps = {
@@ -137,12 +139,12 @@ CorrectionsForm.defaultProps = {
   pageUser: PropTypes.string,
   renderBackButton: () => {},
   renderSubmitButtons: () => {},
-  renderSuccessMessage: () => {},
   student: {},
   submitStudentDataForOnlyOptInCase: () => {},
   tenant: PropTypes.string,
   transformErrors: () => {},
   validate: () => {},
+  children: null,
 };
 
 export default CorrectionsForm;
