@@ -65,6 +65,7 @@ const formDetail = {
     ],
     'selectValue': {
       'ui:widget': 'checkbox',
+      'classNames': 'label',
       'ui:options': {
         'label': false,
       },
@@ -290,28 +291,6 @@ class ColumnConfig extends Component {
             formData={{ selectValue, visibleColumnConfig }}
           />
         </div>
-        {/* <div>
-          <div className="column-modal">
-            <h2 className="column-modal-container">{PLEASE_SELECT_COLUMNS_TEXT}</h2>
-          </div>
-          <form>
-            <div className="column-group-wrapper">
-              <div className="select-button-wrapper">
-                <label className="label">
-                  <input type="checkbox" onChange={() => this.setCheckValue()} checked={selectValue ? 'checked' : ''} />
-                  <span className="select-none-wrapper">Select All</span>
-                </label>
-              </div>
-              {this.renderColumnOptions()}
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button className="button-modal button-close" onClick={this.props.closeColumnOption}>Close</button>
-                  <button className="button-modal button-save" onClick={this.setValuesOfVisibleColumnConfig}>Save</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>*/}
       </Modal>
     );
   }
