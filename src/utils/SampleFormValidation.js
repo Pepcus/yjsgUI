@@ -2,7 +2,7 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { defaultStudentData } from '../config/memberRegistrationCorrectionFormSchema.json';
+import { defaultStudentDataFormat } from '../config/memberRegistrationCorrectionFormSchema.json';
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,
@@ -278,21 +278,24 @@ export const prePopulateOptIn = (studentData) => {
  * @constructor formattedStudentData
  */
 export const InitialStudentData = (studentData) => {
-
   let formattedStudentData = cloneDeep(studentData);
-  defaultStudentData.forEach((obj) => {
-    if (formattedStudentData[obj.formField] === null) {
-      const property = [obj.formField];
-      delete formattedStudentData[property];
-    } else if (obj.dataType === 'string') {
-      formattedStudentData = {
-        ...formattedStudentData,
-        [obj.formField]: String(formattedStudentData[obj.formField]) };
 
-    } else if (obj.dataType === 'number') {
+  defaultStudentDataFormat.forEach((fieldObject) => {
+
+    if (formattedStudentData[fieldObject.formField] === null) {
+      const property = [fieldObject.formField];
+
+      delete formattedStudentData[property];
+
+    } else if (fieldObject.dataType === 'string') {
       formattedStudentData = {
         ...formattedStudentData,
-        [obj.formField]: Number(formattedStudentData[obj.formField]) };
+        [fieldObject.formField]: String(formattedStudentData[fieldObject.formField]) };
+
+    } else if (fieldObject.dataType === 'number') {
+      formattedStudentData = {
+        ...formattedStudentData,
+        [fieldObject.formField]: Number(formattedStudentData[fieldObject.formField]) };
     }
   });
 
