@@ -4,11 +4,12 @@ import {
   indoreAdmin,
   indoreStudent,
   onlyOptIn,
-} from '../config/memberRegisrationCurrectionFormShema.json';
+} from '../config/memberRegistrationCorrectionFormSchema.json';
 import {
   TENANT,
   USER_TYPES,
 } from '../constants/yjsg';
+import {isPageUserStudent} from "./registrationFormUtils";
 
 /**
  * getFormData method return the form data for json form schema
@@ -35,7 +36,7 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
 
-  if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT) && onlyOptInForm) {
+  if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
     schema = onlyOptIn.Schema;
     uiSchema = onlyOptIn.UISchema;
     formData = {

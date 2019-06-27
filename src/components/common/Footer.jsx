@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  yjsgFooterText,
-  yjsgFooterContactInfo,
+  footerText,
+  footerContactInfo,
 } from '../../constants/yjsg';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
@@ -17,7 +17,6 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * Footer component is common footer for all route.
  * It will be render in bottom of all page.
  * @type {Class}
- * @return {*} Footer Information
  */
 class Footer extends Component {
 
@@ -35,7 +34,7 @@ class Footer extends Component {
   render() {
     return (
       <div className={this.getClassName()} >
-        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo[this.props.tenant]}</span>
+        <p className="footer-text">{footerText} <span className="contact-no-footer">{footerContactInfo[this.props.tenant]}</span>
         </p>
       </div>
     );

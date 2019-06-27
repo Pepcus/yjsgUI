@@ -269,7 +269,7 @@ class Files extends Component {
 
   /**
    * renderFileList method render file list
-   * @return {*} file list react component
+   * @return {HTML} file list react component
    */
   renderFileList = () => {
 
@@ -326,7 +326,7 @@ class Files extends Component {
 
   /**
    * renderFileListViewButton render conditional file view button
-   * @return {*} back button react component
+   * @return {HTML} back button react component
    */
   renderFileListViewButton = () => {
 
@@ -345,7 +345,7 @@ class Files extends Component {
 
   /**
    * renderFileDescription method render file description at the top of the table of file data
-   * @return {*} paragraph of file description.
+   * @return {HTML} paragraph of file description.
    */
   renderFileDescription = () => {
 
@@ -373,7 +373,7 @@ class Files extends Component {
 
   /**
    * renderFileDetails method render table of file data
-   * @return {*} file data table
+   * @return {HTML} file data table
    */
   renderFileDetails = () => {
 
@@ -542,7 +542,7 @@ class Files extends Component {
 
   /**
    * renderBackButton render back button for redirect to previous location.
-   * @return {*} back button
+   * @return {HTML} back button
    */
   renderBackButton = () => {
     const { hasFileRoute } = this.state;

@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
@@ -62,9 +62,9 @@ class SplashPage extends Component {
 
     // FIXME: Use arrow functions to avoid binding.
     this._enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this._disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
+    this.handleDisableAdminLoginButtons = this.handleDisableAdminLoginButtons.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
-    this._adminScreenRedirection = this.adminScreenRedirection.bind(this);
+    this.handleAdminScreenRedirection = this.handleAdminScreenRedirection.bind(this);
     this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
 
@@ -122,8 +122,8 @@ class SplashPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+    this.props.setStudentCredentialsAction(id, secretCode);
+    this.props.fetchStudentDataAction(id, secretCode);
     this.setState({
       isURLParams: true,
     });
@@ -141,21 +141,22 @@ class SplashPage extends Component {
   }
 
   /**
-   * disableAdminLoginButtons method disable the admin login
+   * handleDisableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
-  disableAdminLoginButtons() {
+  handleDisableAdminLoginButtons() {
     this.setState({
       isAdmin: false,
     });
   }
 
   /**
-   * adminScreenRedirection method redirect to admin page on some condition.
-   * @return {*} message
+   * handleAdminScreenRedirection method redirect to admin page on some condition.
+   *
+   * @return {HTML}
    */
-  adminScreenRedirection() {
+  handleAdminScreenRedirection() {
     // IF admin initial login.
     const { redirectToRoute, adminCredentialErrorMessage } = this.state;
     const { id, password, adminLoginState } = this.props;
@@ -257,8 +258,8 @@ class SplashPage extends Component {
                 transformErrors={this.transformErrors}
                 isAdmin={isAdmin}
                 admin={admin}
-                adminScreenRedirection={this._adminScreenRedirection}
-                disableAdminLoginButtons={this._disableAdminLoginButtons}
+                handleAdminScreenRedirection={this.handleAdminScreenRedirection}
+                handleDisableAdminLoginButtons={this.handleDisableAdminLoginButtons}
                 setAdminLogin={this._setAdminLogin}
                 isNewRegistration={isNewRegistration}
                 redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
@@ -274,25 +275,25 @@ class SplashPage extends Component {
 
 SplashPage.propTypes = {
   adminLoginState: PropTypes.bool,
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
   setAdminCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
   setHashLinkForNewRegistrationAction: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
   adminLoginState: false,
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   id: '',
   password: '',
   setAdminCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   tenant: '',
 };
 
@@ -308,10 +309,10 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getApplicationTenant,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 })(SplashPage);

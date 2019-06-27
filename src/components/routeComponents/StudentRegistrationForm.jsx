@@ -27,7 +27,7 @@ import {
   WHAT_YOU_WANT_TO_STUDY_LABEL,
 } from '../../constants/label';
 import {
-  YJSG_REGISTRATION_SUCCESS_MESSAGE,
+  REGISTRATION_SUCCESS_MESSAGE,
   ID_NOTE_MESSAGE,
   ID_CARD_SUGGESTION_MESSAGE,
 } from '../../constants/messages';
@@ -40,8 +40,8 @@ import InputField from '../form/InputField';
 import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
+  setStudentCredentialsAction,
 } from '../../actions/studentRegistrationActions';
 import {
   isDataCorrect,
@@ -62,6 +62,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * StudentRegistrationForm render student registration form
  * @type {Class}
+ * @return {HTML} registration form
  */
 class StudentRegistrationForm extends Component {
 
@@ -81,6 +82,7 @@ class StudentRegistrationForm extends Component {
         address: '',
         busStop: '',
         classAttended2019: '',
+        classAttended2018: '',
         optIn2019: 'Y',
       },
       isSubmitTriggered: false,
@@ -109,6 +111,7 @@ class StudentRegistrationForm extends Component {
     // Since the below fields are optional. we are setting them blank explicitly
     this._verifyStudentFormData({ email: '', optIn2019: 'Y' });
   }
+
   /**
    * verifyStudentFormData method verify the student data.
    * according to student data it set the error message object.
@@ -125,6 +128,7 @@ class StudentRegistrationForm extends Component {
       errorMessage: errorMessageObject,
     });
   }
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
@@ -139,6 +143,9 @@ class StudentRegistrationForm extends Component {
     return isValidUserInfo({ errorMessageObject: errorMessage, tenant });
   }
 
+  /**
+   * scrollToError method scroll to first form file which is in valid in mobile view only.
+   */
   scrollToError = () => {
 
     const errorNode = this.formRef.current.querySelector('.has-error');
@@ -165,7 +172,7 @@ class StudentRegistrationForm extends Component {
     // according to error message it will get boolean value
     if (this.isValidData()) {
       // This action call api
-      this.props.createStudentData(student);
+      this.props.createStudentDataAction(student);
       this.setState({
         isSubmitTriggered: true,
       });
@@ -175,6 +182,7 @@ class StudentRegistrationForm extends Component {
       }, () => { this.scrollToError(); });
     }
   }
+
   /**
    * handleInputChange method set the value and name of input field
    * of student registration form.
@@ -204,6 +212,10 @@ class StudentRegistrationForm extends Component {
     });
   }
 
+  /**
+   * renderSuccessMessage method render success message popup when form submitted successfully
+   * @return {HTML} success message popup
+   */
   renderSuccessMessage() {
 
     const { isSubmitTriggered } = this.state;
@@ -211,10 +223,10 @@ class StudentRegistrationForm extends Component {
 
     if (isStudentCreated && isSubmitTriggered) {
       // for pre-population on splash page
-      this.props.setStudentCredentials(newStudent.id, newStudent.secretKey);
+      this.props.setStudentCredentialsAction(newStudent.id, newStudent.secretKey);
       return (
         <Popup>
-          <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
+          <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
           <p>{YOUR_ID_TEXT}<strong>{newStudent.id}</strong>{IS_THERE_TEXT}</p>
           <p>{YOUR_SECRET_CODE_TEXT}<strong>{newStudent.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
@@ -225,6 +237,11 @@ class StudentRegistrationForm extends Component {
     }
     return null;
   }
+
+  /**
+   * renderBusStopOptions method render bus stop form field conditionally
+   * @return {HTML} bus stop form field
+   */
   renderBusStopOptions = () => {
 
     const { student, errorMessage } = this.state;
@@ -246,9 +263,10 @@ class StudentRegistrationForm extends Component {
       );
     } return null;
   };
+
   /**
    * renderBackButton method return link button according to user type
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderBackButton() {
 
@@ -279,6 +297,7 @@ class StudentRegistrationForm extends Component {
       />
     );
   }
+
   render() {
 
     const { student, errorMessage } = this.state;
@@ -411,20 +430,20 @@ class StudentRegistrationForm extends Component {
 
 StudentRegistrationForm.propTypes = {
   context: PropTypes.object,
-  createStudentData: PropTypes.func,
+  createStudentDataAction: PropTypes.func,
   isStudentCreated: PropTypes.bool,
   newStudent: PropTypes.object,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   tenant: PropTypes.string,
   userType: PropTypes.string,
 };
 
 StudentRegistrationForm.defaultProps = {
   context: {},
-  createStudentData: () => {},
+  createStudentDataAction: () => {},
   isStudentCreated: false,
   newStudent: {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   tenant: '',
   userType: '',
 };
@@ -437,8 +456,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  createStudentData,
+  createStudentDataAction,
   getApplicationTenant,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 })(StudentRegistrationForm);
 

@@ -19,14 +19,13 @@ import {
 import {
   ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE,
   ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import {
-  UPLOAD_FILE_TEXT,
-} from '../constants/text';
 import {
   days,
 } from '../constants/yjsg';
-
+import Form from './Form';
+import { UploadStudentsAttendanceFileJsonSchema } from '../config/fromJsonSchema.json';
 
 const customUploadStudentsAttendanceFileModalStyles = {
   overlay: {
@@ -60,9 +59,8 @@ class UploadStudentsAttendanceFile extends Component {
     super(props);
 
     this.state = {
-      attendanceFile: null,
+      formFieldData: {},
       isUploadStudentsAttendanceFileModal: false,
-      selectedDay: '',
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -94,20 +92,15 @@ class UploadStudentsAttendanceFile extends Component {
     this.setState({ isUploadStudentsAttendanceFileModal: false });
     this.props.resetIsSuccessAction();
     this.setState({
-      attendanceFile: null,
-      selectedDay: '',
+      formFieldData: {},
     });
   }
 
   /**
    *onFormSubmit method call fileUpload method to upload attendance file
-   * @param {Object} event
    */
-  onFormSubmit(event) {
-
-    const { attendanceFile } = this.state;
-
-    event.preventDefault();
+  onFormSubmit() {
+    const { attendanceFile } = this.state.formFieldData;
 
     this.fileUpload(attendanceFile);
   }
@@ -118,7 +111,8 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Object} event
    */
   onChange(event) {
-    this.setState({ attendanceFile: event.target.files[0] });
+    this.setState(
+      { formFieldData: { ...this.state.formFieldData, attendanceFile: event.target.files[0] } });
   }
 
   /**
@@ -128,14 +122,14 @@ class UploadStudentsAttendanceFile extends Component {
   fileUpload(attendanceFile) {
 
     const { secretKey } = this.props;
-    const { selectedDay } = this.state;
+    const { selectedDay } = this.state.formFieldData;
 
     this.props.uploadStudentsAttendanceFileAction({ secretKey, attendanceFile, day: selectedDay });
   }
 
   /**
    * renderFailRecordIds method method render failed records Ids
-   * @return {*} failed records
+   * @return {HTML} failed records
    */
   renderFailRecordIds() {
 
@@ -153,7 +147,7 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderIdNotExistMessage method render Id not exist message
-   * @return {*} not exist Id's
+   * @return {HTML} not exist Id's
    */
   renderIdNotExistMessage() {
 
@@ -174,17 +168,25 @@ class UploadStudentsAttendanceFile extends Component {
    */
   renderUploadButtonClassName() {
 
-    const { attendanceFile, selectedDay } = this.state;
+    const { attendanceFile, selectedDay } = this.state.formFieldData;
 
     if (!attendanceFile || isEmpty(selectedDay)) {
-      return 'popup-buttons-disable';
+      return 'btn-upload linkButton';// 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
 
   /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
    * renderMessage method render success or failure message of upload attendance
-   * @return {*} message
+   * @return {HTML} message
    */
   renderMessage() {
 
@@ -216,7 +218,7 @@ class UploadStudentsAttendanceFile extends Component {
   /**
    * addOptions method return options of drop down list
    * of days
-   * @return {*} options of day in drop down list
+   * @return {HTML} options of day in drop down list
    */
   renderOptions() {
     return days.map(
@@ -231,19 +233,55 @@ class UploadStudentsAttendanceFile extends Component {
    * handleSelectChange method set the value of selected day in selectedDay.
    * @param {Object} event
    */
-  handleSelectChange(event) {
+  handleSelectChange({ formData }) {
     this.setState({
-      selectedDay: event.target.value,
+      formFieldData: { ...this.state.formFieldData, selectedDay: formData.selectedDay, },
     });
   }
 
   /**
    * renderUploadStudentsAttendanceOption method render upload student attendance file modal
-   * @return {*} modal
+   * @return {HTML} modal
    */
   renderUploadStudentsAttendanceOption() {
+    const uiSchema = {
+      ...UploadStudentsAttendanceFileJsonSchema.UISchema,
+      attendanceFile: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.attendanceFile,
+        'ui:widget': () => (
+          <input
+            type="file"
+            onChange={this.onChange}
+            className="choose-file-wrapper"
+          />
+        ),
+      },
+      close: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeUploadStudentsAttendanceFileOption}
+          >Close
+          </button>
+        ),
+      },
+      submit: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.submit,
+        'ui:widget': () => (
+          <button
+            type="submit"
+            className={this.renderUploadButtonClassName()}
+          >
+            <i className="fa fa-file-text card-icon" />
+            Upload
+          </button>
 
-    const { isUploadStudentsAttendanceFileModal, selectedDay } = this.state;
+        ),
+      },
+    };
+    const { isUploadStudentsAttendanceFileModal } = this.state;
+    const { selectedDay, attendanceFile } = this.state.formFieldData;
 
     if (isUploadStudentsAttendanceFileModal) {
       return (
@@ -257,38 +295,18 @@ class UploadStudentsAttendanceFile extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <div className="column-modal">
-              <h1 className="column-modal-container">{UPLOAD_FILE_TEXT}</h1>
-            </div>
-            <form onSubmit={this.onFormSubmit} className="upload-form-wrapper">
-              <div>
-                <div className="column-content-modal">
-                  <input type="file" onChange={this.onChange} className="choose-file-wrapper" />
-                  <div className="column-content-student-wrapper">
-                    <span className="column-content-students">Select Day:</span>
-                    <select onChange={this.handleSelectChange} value={selectedDay} className="selected-day-list">
-                      <option hidden disabled="disabled" value="" />
-                      {this.renderOptions()}
-                    </select>
-                  </div>
-                  {this.renderMessage()}
-                </div>
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeUploadStudentsAttendanceFileOption}
-                  >Close
-                  </button>
-                  <button type="submit" className={this.renderUploadButtonClassName()}>
-                    <i className="fa fa-file-text card-icon" />
-                    Upload
-                  </button>
-                </div>
-              </div>
-            </form>
-
+            <Form
+              showErrorList={false}
+              liveValidate
+              schema={UploadStudentsAttendanceFileJsonSchema.Schema}
+              uiSchema={uiSchema}
+              formData={{ attendanceFile, selectedDay }}
+              onChange={this.handleSelectChange}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );

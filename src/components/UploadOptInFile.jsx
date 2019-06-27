@@ -16,12 +16,11 @@ import {
 } from '../reducers/studentRegistrationReducer';
 import {
   OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
-  OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import {
-  UPLOAD_FILE_TEXT,
-} from '../constants/text';
 import Form from './Form';
+import { UploadOptInFileJsonSchema } from '../config/fromJsonSchema.json';
 
 const customUploadOptInFileModalStyles = {
   overlay: {
@@ -45,49 +44,6 @@ const customUploadOptInFileModalStyles = {
   },
 };
 
-const formDetail = {
-  Schema: {
-    'title': UPLOAD_FILE_TEXT,
-    'type': 'object',
-    'properties': {
-      'optInFile': {
-        'type': 'string',
-      },
-      'Close': {
-        'type': 'string',
-      },
-      'Submit': {
-        'type': 'string',
-      },
-    },
-    'required': ['optInFile'],
-  },
-  UISchema: {
-    'ui:order': ['optInFile',
-      '*',
-      'Close',
-      'Submit',
-    ],
-    'optInFile': {
-      'ui:options': {
-        'label': false,
-      },
-      'ui:widget': 'file',
-    },
-    'Close': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'Submit': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-  },
-  data: {},
-};
-
 /**
  * UploadOptInFile render upload optIn file modal
  * @type {Class}
@@ -98,7 +54,7 @@ class UploadOptInFile extends Component {
     super(props);
 
     this.state = {
-      optInFile: undefined,
+      formFieldDate: {},
       isUploadOptInFileModalOpen: false,
       isFormSubmitted: false,
     };
@@ -130,7 +86,7 @@ class UploadOptInFile extends Component {
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
     this.setState({
-      optInFile: null,
+      formFieldDate: {},
       isFormSubmitted: false,
     });
   }
@@ -141,7 +97,7 @@ class UploadOptInFile extends Component {
    */
   renderUploadButtonClassName() {
 
-    const { optInFile } = this.state;
+    const { optInFile } = this.state.formFieldDate;
 
     if (!optInFile) {
       return 'btn-upload linkButton'; // 'popup-buttons-disable';
@@ -154,7 +110,7 @@ class UploadOptInFile extends Component {
    * and call fileUpload method
    */
   onFormSubmit() {
-    const { optInFile } = this.state;
+    const { optInFile } = this.state.formFieldDate;
 
     this.fileUpload(optInFile);
     this.setState({
@@ -168,7 +124,12 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onChange(event) {
-    this.setState({ optInFile: event.target.files[0] });
+    this.setState({
+      formFieldDate: {
+        ...this.state.formFieldDate,
+        optInFile: event.target.files[0],
+      },
+    });
   }
 
   /**
@@ -184,7 +145,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderFailOptIn method render failed records Ids
-   * @return {*} failed records
+   * @return {HTML} failed records
    */
   renderFailOptIn() {
 
@@ -203,7 +164,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderIdNotPresentMessage method render unavailable Id error message
-   * @return {*} not present Id's
+   * @return {HTML} not present Id's
    */
   renderIdNotPresentMessage() {
 
@@ -229,7 +190,7 @@ class UploadOptInFile extends Component {
 
   /**
    * renderMessage method render success or failure message of upload optIn file
-   * @return {*} message
+   * @return {HTML} message
    */
   renderMessage() {
 
@@ -264,13 +225,13 @@ class UploadOptInFile extends Component {
 
   /**
    * renderUploadOptInModal method render upload optIn modal
-   * @return {*} modal
+   * @return {HTML} modal
    */
   renderUploadOptInModal() {
     const uiSchema = {
-      ...formDetail.UISchema,
+      ...UploadOptInFileJsonSchema.UISchema,
       optInFile: {
-        ...formDetail.UISchema.optInFile,
+        ...UploadOptInFileJsonSchema.UISchema.optInFile,
         'ui:widget': () => (
           <input
             type="file"
@@ -279,8 +240,8 @@ class UploadOptInFile extends Component {
           />
         ),
       },
-      Close: {
-        ...formDetail.UISchema.Close,
+      close: {
+        ...UploadOptInFileJsonSchema.UISchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -289,8 +250,8 @@ class UploadOptInFile extends Component {
           </button>
         ),
       },
-      Submit: {
-        ...formDetail.UISchema.Submit,
+      submit: {
+        ...UploadOptInFileJsonSchema.UISchema.submit,
         'ui:widget': () => (
           <button
             type="submit"
@@ -304,7 +265,8 @@ class UploadOptInFile extends Component {
         ),
       },
     };
-    const { isUploadOptInFileModalOpen, optInFile } = this.state;
+    const { isUploadOptInFileModalOpen } = this.state;
+    const { optInFile } = this.state.formFieldDate;
 
     if (isUploadOptInFileModalOpen) {
       return (
@@ -320,13 +282,10 @@ class UploadOptInFile extends Component {
           <div className="column-group-wrapper">
             <Form
               showErrorList={false}
-              noHtml5Validate
               liveValidate
-              schema={formDetail.Schema}
+              schema={UploadOptInFileJsonSchema.Schema}
               uiSchema={uiSchema}
-              formData={{
-                optInFile,
-                }}
+              formData={{ optInFile }}
               transformErrors={this.transformErrors}
               onSubmit={this.onFormSubmit}
             >

@@ -7,7 +7,7 @@ export const checkValidUserInfo = errorMessageObject => ({
  * @param {Object} student
  * @return {{student: Object, type: string}}
  */
-export const createStudentData = student => ({
+export const createStudentDataAction = student => ({
   type: 'CREATE_STUDENT',
   student,
 });
@@ -18,7 +18,7 @@ export const createStudentData = student => ({
  * @param {String} secretKey
  * @return {{secretKey: String, id: String, type: string}}
  */
-export const setStudentCredentials = (id, secretKey) => ({
+export const setStudentCredentialsAction = (id, secretKey) => ({
   type: 'SET_STUDENT_CREDENTIALS',
   id,
   secretKey,
@@ -50,7 +50,7 @@ export const createStudentFailedAction = message => ({
  * @param {String} secretKey
  * @return {{secretKey: *, id: *, type: string}}
  */
-export const fetchStudentData = (id, secretKey) => ({
+export const fetchStudentDataAction = (id, secretKey) => ({
   type: 'FETCH_STUDENT',
   id,
   secretKey,
@@ -82,7 +82,7 @@ export const fetchStudentFailedAction = message => ({
  * @param {Object} updatedStudent
  * @return {{updatedStudent: {Object}, secretKey: {String}, id: {String}, type: string}}
  */
-export const updateStudentData = ({ id, secretKey, student }) => ({
+export const updateStudentDataAction = ({ id, secretKey, student }) => ({
   type: 'UPDATE_STUDENT',
   id,
   secretKey,

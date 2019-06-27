@@ -115,7 +115,7 @@ class ParentsRegistration extends Component {
 
   /**
    * addOptions method return number of member option in member drop down list.
-   * @return {*} option
+   * @return {HTML} option
    */
   addOptions() {
 
@@ -133,7 +133,7 @@ class ParentsRegistration extends Component {
 
   /**
    * render close browser message
-   * @return {*}
+   * @return {HTML}
    */
   renderCloseBrowserMessage() {
 
@@ -167,7 +167,7 @@ class ParentsRegistration extends Component {
   // FIXME: Reuse the component to render error message popup
   /**
    * renderErrorMessage render error message when required form field are not fill.
-   * @return {*} error message
+   * @return {HTML} error message
    */
   renderErrorMessage() {
 
@@ -187,7 +187,7 @@ class ParentsRegistration extends Component {
   // FIXME: Reuse the component to render message popup
   /**
    * renderPopUp method render successfully registration popup
-   * @return {*} popup
+   * @return {HTML} popup
    */
   renderPopUp() {
 

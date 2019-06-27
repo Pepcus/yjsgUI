@@ -13,9 +13,9 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import InputField from '../formComponents/InputField';
 import {
-  fetchStudentData,
+  fetchStudentDataAction,
   setAdminCredentialsAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   setAdminLoginStateAction,
 } from '../../actions/studentRegistrationActions';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
@@ -71,10 +71,10 @@ class SplashPagePrePopulated extends Component {
     this.enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
     this.disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
     this.enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this.disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
+    this.handleDisableAdminLoginButtons = this.handleDisableAdminLoginButtons.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
-    this.adminScreenRedirection = this.adminScreenRedirection.bind(this);
+    this.handleAdminScreenRedirection = this.handleAdminScreenRedirection.bind(this);
     // This may be use in future.
     // this._fetchStudentById = this.fetchStudentById.bind(this);
     // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
@@ -127,11 +127,11 @@ class SplashPagePrePopulated extends Component {
   }
 
   /**
-   * disableAdminLoginButtons method disable the admin login
+   * handleDisableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
-  disableAdminLoginButtons() {
+  handleDisableAdminLoginButtons() {
     this.setState({
       isAdmin: false,
     });
@@ -149,10 +149,10 @@ class SplashPagePrePopulated extends Component {
   }
 
   /**
-   * adminScreenRedirection method redirect to admin page on some condition.
-   * @return {*}
+   * handleAdminScreenRedirection method redirect to admin page on some condition.
+   * @return {HTML}
    */
-  adminScreenRedirection() {
+  handleAdminScreenRedirection() {
 
     const { id, password, adminLoginState } = this.props;
     const { adminCredentialErrorMessage } = this.state;
@@ -180,7 +180,7 @@ class SplashPagePrePopulated extends Component {
    * checkRegisteredStudentCredential method verify the student credential
    * if student credential is not valid give the error message
    * else redirect to student correction form
-   * @return {*}
+   * @return {HTML}
    */
   // this may be use in future
   /* checkRegisteredStudentCredential() {
@@ -222,9 +222,9 @@ class SplashPagePrePopulated extends Component {
    */
   // This may be use in future.
   /* fetchStudentById () {
-    this.props.setStudentCredentials(this.state.credentials.studentId,
+    this.props.setStudentCredentialsAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
+    this.props.fetchStudentDataAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.setState({
       registeredStudentCredentialErrorMessage: true,
@@ -256,7 +256,7 @@ class SplashPagePrePopulated extends Component {
 
   /**
    * renderRegistrationCorrectionFields method return student credential fields
-   * @return {*}
+   * @return {HTML}
    */
   // This may be use in future
   /* renderRegistrationCorrectionFields() {
@@ -295,7 +295,7 @@ class SplashPagePrePopulated extends Component {
 
   /**
    * renderAdminLoginFields method render admin login fields
-   * @return {*} Admin login fields
+   * @return {HTML} Admin login fields
    */
   renderAdminLoginFields() {
 
@@ -320,12 +320,12 @@ class SplashPagePrePopulated extends Component {
             onInputChange={this._handleInputChange}
             value={admin.adminPassword}
           />
-          {this.adminScreenRedirection()}
+          {this.handleAdminScreenRedirection()}
           <div className="button-wrapper">
             <Button
               type="button"
               buttonText={goBackBtnText}
-              onClick={this._disableAdminLoginButtons}
+              onClick={this.handleDisableAdminLoginButtons}
             />
             <Button
               type="submit"
@@ -343,7 +343,7 @@ class SplashPagePrePopulated extends Component {
    * renderLoginField method redirect to "/student-login" or
    * render admin login field or admin home page buttons
    * according to condition.
-   * @return {*}
+   * @return {HTML}
    */
   renderLoginField() {
 
@@ -401,26 +401,26 @@ class SplashPagePrePopulated extends Component {
 
 SplashPagePrePopulated.propTypes = {
   adminLoginState: PropTypes.bool,
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
   secretKey: PropTypes.string,
   setAdminCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   studentId: PropTypes.string,
   tenant: PropTypes.string,
 };
 
 SplashPagePrePopulated.defaultProps = {
   adminLoginState: false,
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   id: '',
   password: '',
   secretKey: '',
   setAdminCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   studentId: '',
   tenant: '',
 };
@@ -439,9 +439,9 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getApplicationTenant,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 })(SplashPagePrePopulated);

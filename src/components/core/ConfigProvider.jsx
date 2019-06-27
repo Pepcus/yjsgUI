@@ -6,7 +6,7 @@ const Context = createContext();
 /**
  * Provider will be exported wrapped in ConfigProvider component.
  * @type {Class}
- * @return {*}
+ * @return {HTML}
  */
 const Provider = ({ previousLocation, children }) => (
   <Context.Provider

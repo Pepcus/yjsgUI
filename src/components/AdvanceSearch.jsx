@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import Fuse from 'fuse.js';
 import isEmpty from 'lodash/isEmpty';
 import uniqWith from 'lodash/uniqWith';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
+
+import { THRESHOLD_VALUE } from '../constants/yjsg';
+
+const {
+  DEEP_SEARCH,
+  NORMAL_SEARCH,
+} = THRESHOLD_VALUE;
 
 /**
  * AdvanceSearch component render common search react component
@@ -15,7 +23,7 @@ class AdvanceSearch extends Component {
     super(props);
 
     this.state = {
-      thresholdValue: '0.0',
+      thresholdValue: NORMAL_SEARCH,
       inputValue: '',
       isMultipleIdSearchCheck: false,
       isDeepSearchCheck: false,
@@ -62,7 +70,7 @@ class AdvanceSearch extends Component {
 
     if (isEmpty(event.target.value)) {
       const studentsData = students.map((student) => {
-        let finalStudentObject = student;
+        let finalStudentObject = cloneDeep(student);
         checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
             finalStudentObject = {
@@ -101,13 +109,13 @@ class AdvanceSearch extends Component {
     // assign default thresholdValue to 0.0
     // And set isMultipleIdSearchCheck to false.
     this.setState({
-      thresholdValue: '0.0',
+      thresholdValue: NORMAL_SEARCH,
       isMultipleIdSearchCheck: false,
       isDeepSearchCheck: false,
     });
 
     const studentsData = students.map((student) => {
-      let finalStudentObject = student;
+      let finalStudentObject = cloneDeep(student);
       checkedIds.forEach((checkedUncheckedIdObject) => {
         if (String(student.id) === String(checkedUncheckedIdObject.id)) {
           finalStudentObject = {
@@ -133,14 +141,14 @@ class AdvanceSearch extends Component {
   onChangeDeepSearchCheckBox(event) {
     if (event.target.checked) {
       this.setState({
-        thresholdValue: event.target.value,
+        thresholdValue: DEEP_SEARCH,
         isDeepSearchCheck: true,
         isMultipleIdSearchCheck: false,
       });
 
     } else {
       this.setState({
-        thresholdValue: '0.0',
+        thresholdValue: NORMAL_SEARCH,
         isDeepSearchCheck: false,
       });
     }
@@ -155,7 +163,7 @@ class AdvanceSearch extends Component {
   onChangeMultipleIdSearchCheckBox(event) {
     if (event.target.checked) {
       this.setState({
-        thresholdValue: '0.0',
+        thresholdValue: NORMAL_SEARCH,
         isDeepSearchCheck: false,
         isMultipleIdSearchCheck: true,
       });
@@ -169,7 +177,7 @@ class AdvanceSearch extends Component {
 
   /**
    * clearButton method return clear button when inputValue is not empty.
-   * @return {*} clear button
+   * @return {HTML} clear button
    */
   clearButton() {
 
@@ -199,11 +207,11 @@ class AdvanceSearch extends Component {
     // isMultipleIdSearchCheck is uncheck it do the search result according to search string
     // type of search (thresholdValue)
     if (!isMultipleIdSearchCheck) {
-      const foundKeys = metaData.headerConfig.map(object => object.key,
+      const foundKeys = metaData.headerConfig.map(headerConfigObj => headerConfigObj.key,
       );
       const options = {
         shouldSort: true,
-        threshold: Number(thresholdValue),
+        threshold: thresholdValue,
         location: 0,
         distance: 100,
         maxPatternLength: 32,
@@ -217,7 +225,7 @@ class AdvanceSearch extends Component {
         const result = fuse.search(inputValue);
 
         const studentsData = result.map((student) => {
-          let finalStudentObject = student;
+          let finalStudentObject = cloneDeep(student);
           checkedIds.forEach((checkedUncheckedIdObject) => {
             if (String(student.id) === String(checkedUncheckedIdObject.id)) {
               finalStudentObject = {
@@ -247,7 +255,7 @@ class AdvanceSearch extends Component {
       const uniqSearchResult = uniqWith(searchResult, isEqual);
 
       const studentsData = uniqSearchResult.map((student) => {
-        let finalStudentObject = student;
+        let finalStudentObject = cloneDeep(student);
         checkedIds.forEach((checkedUncheckedIdObject) => {
           if (String(student.id) === String(checkedUncheckedIdObject.id)) {
             finalStudentObject = {
@@ -265,7 +273,6 @@ class AdvanceSearch extends Component {
   }
 
   render() {
-
     const { inputValue, isDeepSearchCheck, isMultipleIdSearchCheck } = this.state;
 
     return (
@@ -303,7 +310,6 @@ class AdvanceSearch extends Component {
                 type="checkbox"
                 name="thresholdValue"
                 className="checkbox-input"
-                value="0.6"
                 onChange={this.onChangeDeepSearchCheckBox}
                 checked={isDeepSearchCheck}
               />

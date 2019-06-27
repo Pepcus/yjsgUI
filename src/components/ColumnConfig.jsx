@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
 import {
-  PLEASE_SELECT_COLUMNS_TEXT,
-} from '../constants/text';
-import {
   columnsList,
 } from '../config/appConfig.json';
-import { chunkArray } from '../utils/dataGridUtils';
+import {
+  chunkArray,
+  getChangedVisibleColumnConfig,
+} from '../utils/dataGridUtils';
 import Form from './Form';
+import { ColumnConfigJsonSchema } from '../config/fromJsonSchema.json';
 
 const customColumnOptionStyles = {
   overlay: {
@@ -33,60 +34,6 @@ const customColumnOptionStyles = {
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },
-};
-
-const formDetail = {
-  Schema: {
-    'title': PLEASE_SELECT_COLUMNS_TEXT,
-    'type': 'object',
-    'properties': {
-      'selectValue': {
-        'type': 'boolean',
-        'title': 'Select All',
-        'default': true,
-      },
-      'visibleColumnConfig': {
-        'type': 'string',
-      },
-      'Close': {
-        'type': 'string',
-      },
-      'Save': {
-        'type': 'string',
-      },
-    },
-  },
-  UISchema: {
-    'ui:order': ['selectValue',
-      'visibleColumnConfig',
-      '*',
-      'Close',
-      'Save',
-    ],
-    'selectValue': {
-      'ui:widget': 'checkbox',
-      'classNames': 'label',
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'visibleColumnConfig': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'Close': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'Save': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-  },
-  data: {},
 };
 
 /**
@@ -121,7 +68,7 @@ class ColumnConfig extends Component {
 
   /**
    * renderColumns method render the column options in column config.
-   * @return {*}
+   * @return {HTML}
    */
   renderColumnOptions = () => {
 
@@ -183,23 +130,18 @@ class ColumnConfig extends Component {
   setCheckValue({ formData }) {
     const { visibleColumnConfig } = this.props;
     const temporaryVisibleColumnConfig = cloneDeep(visibleColumnConfig);
-    if (formData.selectValue !== this.state.selectValue) {
-      if (formData.selectValue) {
-        for (const key in temporaryVisibleColumnConfig) {
-          temporaryVisibleColumnConfig[key] = true;
-        }
+    const { selectValue } = formData;
+    if (selectValue !== this.state.selectValue) {
+      if (selectValue) {
         this.setState({
-          selectValue: formData.selectValue,
-          visibleColumnConfig: temporaryVisibleColumnConfig,
+          selectValue,
+          visibleColumnConfig: getChangedVisibleColumnConfig({ selectValue, temporaryVisibleColumnConfig }),
         });
 
-      } else if (!formData.selectValue) {
-        for (const key in temporaryVisibleColumnConfig) {
-          temporaryVisibleColumnConfig[key] = false;
-        }
+      } else if (!selectValue) {
         this.setState({
-          selectValue: formData.selectValue,
-          visibleColumnConfig: temporaryVisibleColumnConfig,
+          selectValue,
+          visibleColumnConfig: getChangedVisibleColumnConfig({ selectValue, temporaryVisibleColumnConfig }),
         });
       }
     } else {
@@ -237,15 +179,15 @@ class ColumnConfig extends Component {
 
   render() {
     const uiSchema = {
-      ...formDetail.UISchema,
+      ...ColumnConfigJsonSchema.UISchema,
       visibleColumnConfig: {
-        ...formDetail.UISchema.visibleColumnConfig,
+        ...ColumnConfigJsonSchema.UISchema.visibleColumnConfig,
         'ui:widget': () => (
           this.renderColumnOptions()
         ),
       },
-      Close: {
-        ...formDetail.UISchema.Close,
+      close: {
+        ...ColumnConfigJsonSchema.UISchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -255,9 +197,9 @@ class ColumnConfig extends Component {
           </button>
         ),
       },
-      Save: {
-        ...formDetail.UISchema.Save,
-        // 'classNames': this.renderSubmitButtonClassName(),
+      save: {
+        ...ColumnConfigJsonSchema.UISchema.save,
+        // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
             className="button-modal button-save"
@@ -283,9 +225,8 @@ class ColumnConfig extends Component {
         <div className="column-group-wrapper">
           <Form
             showErrorList={false}
-            noHtml5Validate
             liveValidate
-            schema={formDetail.Schema}
+            schema={ColumnConfigJsonSchema.Schema}
             uiSchema={uiSchema}
             onChange={this.setCheckValue}
             formData={{ selectValue, visibleColumnConfig }}

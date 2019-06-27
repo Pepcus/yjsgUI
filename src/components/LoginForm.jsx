@@ -16,8 +16,8 @@ import Button from './common/Button';
  * LoginForm render login form
  * @param {Boolean} isAdmin
  * @param {Object} admin
- * @param {Function} adminScreenRedirection
- * @param {Function} disableAdminLoginButtons
+ * @param {Function} handleAdminScreenRedirection
+ * @param {Function} handleDisableAdminLoginButtons
  * @param {Function} setAdminLogin
  * @param {Boolean} isNewRegistration
  * @param {Function} redirectToNewRegistrationPage
@@ -25,7 +25,7 @@ import Button from './common/Button';
  * @param {Function} onChange
  * @param {Function} transformErrors
  * @type {Function}
- * @return {*} admin login form
+ * @return {HTML} admin login form
  * @constructor
  */
 const LoginForm = ({
@@ -33,8 +33,8 @@ const LoginForm = ({
   transformErrors,
   isAdmin,
   admin,
-  adminScreenRedirection,
-  disableAdminLoginButtons,
+  handleAdminScreenRedirection,
+  handleDisableAdminLoginButtons,
   setAdminLogin,
   isNewRegistration,
   redirectToNewRegistrationPage,
@@ -48,8 +48,8 @@ const LoginForm = ({
         transformErrors={transformErrors}
         isAdmin={isAdmin}
         admin={admin}
-        adminScreenRedirection={adminScreenRedirection}
-        disableAdminLoginButtons={disableAdminLoginButtons}
+        handleAdminScreenRedirection={handleAdminScreenRedirection}
+        handleDisableAdminLoginButtons={handleDisableAdminLoginButtons}
         setAdminLogin={setAdminLogin}
       />
     );
@@ -79,8 +79,8 @@ LoginForm.propTypes = {
   onChange: PropTypes.func,
   transformErrors: PropTypes.func,
   admin: PropTypes.object,
-  adminScreenRedirection: PropTypes.func,
-  disableAdminLoginButtons: PropTypes.func,
+  handleAdminScreenRedirection: PropTypes.func,
+  handleDisableAdminLoginButtons: PropTypes.func,
   enableAdminLoginButtons: PropTypes.func,
   isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
@@ -92,8 +92,8 @@ LoginForm.defaultProps = {
   onChange: () => {},
   transformErrors: () => {},
   admin: {},
-  adminScreenRedirection: () => {},
-  disableAdminLoginButtons: () => {},
+  handleAdminScreenRedirection: () => {},
+  handleDisableAdminLoginButtons: () => {},
   enableAdminLoginButtons: () => {},
   isAdmin: false,
   isNewRegistration: false,

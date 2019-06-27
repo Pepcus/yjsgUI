@@ -1,24 +1,21 @@
 import React from 'react';
-// import Form from 'react-jsonschema-form';
 import PropTypes from 'prop-types';
 
 import { getFormData } from '../utils/formDataUtils';
 import {
   formSubmitBtnText,
-  USER_TYPES,
 } from '../constants/yjsg';
 import Button from './common/Button';
 import {
   CLICK_HERE_TEXT,
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from '../constants/text';
+import { isPageUserStudent } from '../utils/registrationFormUtils';
 import Form from './Form';
-
-// const JSONSchemaForm = Form;
 
 /**
  * CorrectionsForm is functional component which render the correction form according to user type
- * @return {*} correction form
+ * @return {HTML} correction form
  */
 const CorrectionsForm = ({ pageUser,
   tenant,
@@ -33,6 +30,7 @@ const CorrectionsForm = ({ pageUser,
   renderSubmitButtons,
   formRef,
   children }) => {
+
   const formDetails = getFormData({
     pageUser,
     onlyOptInForm,
@@ -42,21 +40,17 @@ const CorrectionsForm = ({ pageUser,
     renderSubmitButtons,
   });
 
-  const { STUDENT_WITH_URL, STUDENT } = USER_TYPES;
-
   /**
    * getBackButton render back button conditionally
-   * @return {*} back button
+   * @return {HTML} back button
    */
   const getBackButton = () => {
-    if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
-      && onlyOptInForm) {
+    if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
       return (
         <div>
           <Button
             buttonText={formSubmitBtnText}
             type="submit"
-            formName=""
             value="Submit"
             onClick={submitStudentDataForOnlyOptInCase}
           />
@@ -66,36 +60,41 @@ const CorrectionsForm = ({ pageUser,
   };
 
   /**
+   * callBack for changeIsOnlyOptIn
+   */
+  const onlyOptInChanged = () => {
+    changeIsOnlyOptIn(false);
+  };
+
+  /**
    * getLink method render link of update other information conditionally
-   * @return {*} update other information link
+   * @return {HTML} update other information link
    */
   const getLink = () => {
-    if ((pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
-      && onlyOptInForm) {
+    if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
       return (
         <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
-          <a className="student-portal-link" onClick={() => { changeIsOnlyOptIn(false); }}>{CLICK_HERE_TEXT}
+          <a className="student-portal-link" onClick={onlyOptInChanged}>{CLICK_HERE_TEXT}
           </a>
         </span>
       );
-    } return null;
+    }
+    return null;
   };
 
   if (formDetails) {
     return (
       <div
-        className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
+        className={isPageUserStudent({ pageUser })
       && onlyOptInForm ? 'form-container member-registration-correction-form' : 'default-form-container member-registration-correction-form'}
       >
         <div
-          className={(pageUser === STUDENT_WITH_URL || pageUser === STUDENT)
-          && onlyOptInForm ? 'form-wrapper' : ''}
+          className={isPageUserStudent({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >
           { children }
           <Form
             showErrorList={false}
-            noHtml5Validate
             validate={validate}
             liveValidate
             schema={formDetails.schema}
@@ -117,6 +116,7 @@ const CorrectionsForm = ({ pageUser,
 
 CorrectionsForm.propTypes = {
   changeIsOnlyOptIn: PropTypes.func,
+  children: PropTypes.node,
   formRef: PropTypes.object,
   onChange: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
@@ -128,11 +128,11 @@ CorrectionsForm.propTypes = {
   tenant: PropTypes.string,
   transformErrors: PropTypes.func,
   validate: PropTypes.func,
-  children: PropTypes.node,
 };
 
 CorrectionsForm.defaultProps = {
   changeIsOnlyOptIn: () => {},
+  children: null,
   formRef: {},
   onChange: () => {},
   onlyOptInForm: false,
@@ -144,7 +144,6 @@ CorrectionsForm.defaultProps = {
   tenant: PropTypes.string,
   transformErrors: () => {},
   validate: () => {},
-  children: null,
 };
 
 export default CorrectionsForm;

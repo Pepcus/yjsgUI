@@ -19,7 +19,7 @@ export const fetchFileConfigSuccessAction = config => ({
 /**
  * fetchFileConfigFailedAction action will call when fetchFilesConfigAction is fail.
  * @param {String} errorMessage
- * @return {{errorMessage: *, type: string}}
+ * @return {{errorMessage: string, type: string}}
  */
 export const fetchFileConfigFailedAction = errorMessage => ({
   type: 'FETCH_FILES_CONFIG_FAILED_ACTION',
@@ -45,7 +45,7 @@ export const loadBusCoordinatorsDataAction = () => ({
 /**
  * loadBusCoordinatorsDataSuccessAction action will call when loadBusCoordinatorsDataAction is success.
  * @param {Object} busCoordinators
- * @return {{busCoordinators: *, type: string}}
+ * @return {{busCoordinators: Object, type: string}}
  */
 export const loadBusCoordinatorsDataSuccessAction = busCoordinators => ({
   type: 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION',
@@ -55,7 +55,7 @@ export const loadBusCoordinatorsDataSuccessAction = busCoordinators => ({
 /**
  * loadBusCoordinatorsDataFailedAction action will call when loadBusCoordinatorsDataAction is fail.
  * @param {String} errorMessage
- * @return {{errorMessage: *, type: string}}
+ * @return {{errorMessage: String, type: string}}
  */
 export const loadBusCoordinatorsDataFailedAction = errorMessage => ({
   type: 'LOAD_BUS_COORDINATORS_DATA_FAILED_ACTION',
@@ -65,7 +65,7 @@ export const loadBusCoordinatorsDataFailedAction = errorMessage => ({
 /**
  * loadedAppDataSuccessAction action will call when loadAppDataAction is success.
  * @param {Object} modeVariable
- * @return {{modeVariable: *, type: string}}
+ * @return {{modeVariable: Object, type: string}}
  */
 export const loadedAppDataSuccessAction = modeVariable => ({
   type: 'LOADED_APP_DATA_SUCCESS_ACTION',
@@ -74,8 +74,8 @@ export const loadedAppDataSuccessAction = modeVariable => ({
 
 /**
  * loadAppDataFailedAction action will call when loadAppDataAction is fail.
- * @param {Object} errorMessage
- * @return {{errorMessage: *, type: string}}
+ * @param {String} errorMessage
+ * @return {{errorMessage: String, type: string}}
  */
 export const loadAppDataFailedAction = errorMessage => ({
   type: 'LOAD_APP_DATA_FAILED_ACTION',

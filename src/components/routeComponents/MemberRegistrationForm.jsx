@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import validations from '../../utils/validation';
 import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 import {
   formSubmitBtnText,
@@ -11,14 +10,14 @@ import {
   USER_TYPES,
 } from '../../constants/yjsg';
 import {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
+  setStudentCredentialsAction,
 } from '../../actions/studentRegistrationActions';
 import {
   ID_CARD_SUGGESTION_MESSAGE,
   ID_NOTE_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-  YJSG_REGISTRATION_SUCCESS_MESSAGE,
+  REGISTRATION_SUCCESS_MESSAGE,
 } from '../../constants/messages';
 import {
   getNewStudent,
@@ -63,7 +62,7 @@ class MemberRegistrationForm extends Component {
     const { notHasAnError, member } = this.state;
 
     if (notHasAnError) {
-      this.props.createStudentData(member);
+      this.props.createStudentDataAction(member);
       this.setState({
         isSubmitTriggered: true,
         notHasAnError: false,
@@ -101,7 +100,7 @@ class MemberRegistrationForm extends Component {
 
   /**
    * renderBackButton method render back button conditionally into form
-   * @return {*} back button
+   * @return {HTML} back button
    */
   renderBackButton = () => {
 
@@ -138,7 +137,7 @@ class MemberRegistrationForm extends Component {
 
   /**
    * renderSuccessMessage method render success message popup when form submitted successfully
-   * @return {*} success message popup
+   * @return {HTML} success message popup
    */
   renderSuccessMessage = () => {
 
@@ -148,11 +147,11 @@ class MemberRegistrationForm extends Component {
     if (isStudentCreated && isSubmitTriggered) {
       const member = this.props.newStudent;
       // for pre-population on splash page
-      this.props.setStudentCredentials(member.id, member.secretKey);
+      this.props.setStudentCredentialsAction(member.id, member.secretKey);
 
       return (
         <Popup>
-          <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
+          <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
           <p>{YOUR_ID_TEXT}<strong>{member.id}</strong>{IS_THERE_TEXT}</p>
           <p>{YOUR_SECRET_CODE_TEXT}<strong>{member.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
@@ -185,15 +184,6 @@ class MemberRegistrationForm extends Component {
    * @return {Object} errors
    */
   validate = () => {
-    /* memberRegistration.validation.forEach((valid) => {
-
-      const error = validations[valid.validates](formData[valid.field]);
-
-      if (!isEmpty(error)) {
-        errors[valid.field].addError(error);
-      }
-    });
-    return errors;*/
     return memberRegistration.validation;
   };
 
@@ -202,15 +192,11 @@ class MemberRegistrationForm extends Component {
       <div ref={this.formRef} className="member-registration-form">
         <Form
           showErrorList={false}
-          noHtml5Validate
           validate={this.validate}
           liveValidate
           schema={memberRegistration.schema}
           uiSchema={memberRegistration.UISchema}
-          formData={{
-            ...memberRegistration.Data,
-            ...this.state.member,
-          }}
+          formData={{ ...memberRegistration.Data, ...this.state.member }}
           onChange={this.onChange}
           transformErrors={this.transformErrors}
         >
@@ -233,19 +219,19 @@ class MemberRegistrationForm extends Component {
 
 MemberRegistrationForm.propTypes = {
   context: PropTypes.object,
-  createStudentData: PropTypes.func,
+  createStudentDataAction: PropTypes.func,
   isStudentCreated: PropTypes.bool,
   newStudent: PropTypes.object,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   userType: PropTypes.string,
 };
 
 MemberRegistrationForm.defaultProps = {
   context: {},
-  createStudentData: () => {},
+  createStudentDataAction: () => {},
   isStudentCreated: false,
   newStudent: {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   userType: '',
 };
 
@@ -256,6 +242,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
+  setStudentCredentialsAction,
 })(MemberRegistrationForm);

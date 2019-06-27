@@ -1,8 +1,9 @@
-import 'whatwg-fetch';
+/* eslint-disable no-useless-escape */
 /**
- *
+ * GET method use for get API call type
  * @param {String} url
- * @param secretKey
+ * @param {Object} headers
+ * @param {String} responseType
  * @return {Promise} response
  */
 export const GET = ({ url, headers, responseType = null }) => {
@@ -45,6 +46,13 @@ export const GET = ({ url, headers, responseType = null }) => {
 };
 
 
+/**
+ * POST method use for post API call type
+ * @param {String} url
+ * @param {Object} body
+ * @return {Promise<any>}
+ * @constructor
+ */
 export const POST = ({ url, body }) => {
 
   const config = {
@@ -69,7 +77,14 @@ export const POST = ({ url, body }) => {
   });
 };
 
-
+/**
+ * PUT method use for post API call type
+ * @param {String} url
+ * @param {Object} headers
+ * @param {Object} body
+ * @return {Promise<any>}
+ * @constructor
+ */
 export const PUT = ({ url, headers, body }) => {
 
   const config = {
@@ -94,6 +109,14 @@ export const PUT = ({ url, headers, body }) => {
   });
 };
 
+/**
+ * POST method use for post API call type
+ * @param {String} url
+ * @param {Object} headers
+ * @param {Object} body
+ * @return {Promise<any>}
+ * @constructor
+ */
 export const PATCH = ({ url, headers, body }) => {
 
   const config = {

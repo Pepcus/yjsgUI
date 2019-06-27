@@ -18,8 +18,6 @@ const styles = {
  * render disable button
  * @param {Function} onClick
  * @param {String} buttonText
- * @return {*}
- * @constructor
  */
 
 const DisabledButton = ({ onClick, buttonText }) => (

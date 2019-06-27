@@ -6,11 +6,11 @@ import upperFirst from 'lodash/upperFirst';
 import * as shortId from 'shortid';
 import Barcode from 'react-barcode';
 import {
-  YJSG_ID_CARD_SMALL_HEADING,
-  YJSG_ID_CARD_MAIN_HEADING,
+  ID_CARD_SMALL_HEADING,
+  ID_CARD_MAIN_HEADING,
 } from '../constants/text';
 
-import { getFormattedStudentId } from '../utils/dataGridUtils';
+import {convertFirstCharacterInUpperCase, getFormattedStudentId} from '../utils/dataGridUtils';
 import { getBusCoordinators } from '../reducers/assetFilesReducer';
 
 /**
@@ -31,7 +31,7 @@ class StudentIdCardModal extends Component {
    * @param {String} busNumber
    * @param {String} value
    * @param {string} label
-   * @return {*} bus coordinator information
+   * @return {HTML} bus coordinator information
    */
   getCoordinatorInformation = ({ busNumber, value, label }) => {
 
@@ -68,30 +68,17 @@ class StudentIdCardModal extends Component {
   /**
    * renderStudentIdCards method render students Id cards
    * @param {Array} students
-   * @return {*} student Id cards
+   * @return {HTML} student Id cards
    */
   renderStudentIdCards(students) {
 
     const studentsIdCards = students.map((student) => {
-      const name = student.name ? student.name.split(' ') : [student.name];
+
       const studentId = getFormattedStudentId(student.studentId);
-
-      name.forEach((character, index) => {
-        name[index] = character ? upperFirst(`${name[index].toLocaleLowerCase()} `) : '';
-      });
-
-      const fatherName = student.fatherName ? student.fatherName.split(' ') : [student.fatherName];
-
-      fatherName.forEach((character, index) => {
-        fatherName[index] = character ? upperFirst(`${fatherName[index].toLocaleLowerCase()} `) : '';
-      });
-
+      const name = convertFirstCharacterInUpperCase({ sentence: student.name });
+      const fatherName = convertFirstCharacterInUpperCase({ sentence: student.fatherName });
       const addressString = student.address ? student.address.replace(/,/g, ', ') : student.address;
-      const address = addressString ? addressString.split(' ') : [addressString];
-
-      address.forEach((character, index) => {
-        address[index] = character ? upperFirst(`${address[index].toLocaleLowerCase()} `) : '';
-      });
+      const address = convertFirstCharacterInUpperCase({ sentence: addressString });
 
       return (
         <div key={shortId.generate()} className="student-id-cards">
@@ -101,10 +88,10 @@ class StudentIdCardModal extends Component {
                 <img src="../../LOGO.png" alt="yjsg-logo" />
               </div>
               <div className="student-small-heading">
-                <p>{ YJSG_ID_CARD_SMALL_HEADING }</p>
+                <p>{ ID_CARD_SMALL_HEADING }</p>
               </div>
               <div className="student-heading-block">
-                <h2 className="student-id-cards-header">{ YJSG_ID_CARD_MAIN_HEADING }</h2>
+                <h2 className="student-id-cards-header">{ ID_CARD_MAIN_HEADING }</h2>
               </div>
             </div>
           </div>
@@ -159,16 +146,14 @@ class StudentIdCardModal extends Component {
           </div>
           <div className="student-id-cards-footer">
             {
-              this.getCoordinatorInformation(
-              {
+              this.getCoordinatorInformation({
                 busNumber: student.busNumber,
                 value: 'coordinatorName',
                 label: 'Coordinator name',
               })
             }
             {
-              this.getCoordinatorInformation(
-              {
+              this.getCoordinatorInformation({
                 busNumber: student.busNumber,
                 value: 'contactNumber',
                 label: 'Coordinator contact',

@@ -7,8 +7,8 @@ import {
 import PropTypes from 'prop-types';
 
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
@@ -68,8 +68,8 @@ class StudentPage extends Component {
 
     const { STUDENT_WITH_URL } = USER_TYPES;
 
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+    this.props.setStudentCredentialsAction(id, secretCode);
+    this.props.fetchStudentDataAction(id, secretCode);
     this.props.setUserTypeAction(STUDENT_WITH_URL);
     this.setState({
       isURLParams: true,
@@ -108,7 +108,7 @@ class StudentPage extends Component {
 
   /**
    * renderAlreadyRegisteredButton render already register button conditionally
-   * @return {*}
+   * @return {HTML}
    */
   renderAlreadyRegisteredButton = () => {
     if (this.props.isAlreadyRegisteredButtonEnabled) {
@@ -124,7 +124,7 @@ class StudentPage extends Component {
   /**
    * renderStudentLoginButtons method return the react component in that
    * there are two buttons one is already register and anther is new registration.
-   * @return {*}
+   * @return {HTML}
    */
   renderStudentLoginButtons() {
     return (
@@ -175,21 +175,21 @@ class StudentPage extends Component {
 }
 
 StudentPage.propTypes = {
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setHashLinkForStudentCredentialAction: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 StudentPage.defaultProps = {
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   isAlreadyRegisteredButtonEnabled: false,
   setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   setUserTypeAction: () => {},
   tenant: '',
 };
@@ -201,11 +201,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getApplicationTenant,
   isRegisterCorrectionEnabled,
   setHashLinkForNewRegistrationAction,
   setHashLinkForStudentCredentialAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   setUserTypeAction,
 })(StudentPage);

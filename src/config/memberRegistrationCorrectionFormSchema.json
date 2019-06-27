@@ -314,17 +314,17 @@
       "marks2018": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2017": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2016": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       }
     },
     "Data": {}
@@ -798,17 +798,17 @@
        "marks2018": {
          "ui:placeholder": "N.A.",
          "ui:disabled": true,
-         "classNames": "marks-style"
+         "classNames": "not-editable-field-style"
        },
        "marks2017": {
          "ui:placeholder": "N.A.",
          "ui:disabled": true,
-         "classNames": "marks-style"
+         "classNames": "not-editable-field-style"
        },
        "marks2016": {
          "ui:placeholder": "N.A.",
          "ui:disabled": true,
-         "classNames": "marks-style"
+         "classNames": "not-editable-field-style"
        },
        "busNumber": {
          "ui:placeholder": "कृपया एक चुनिए . . ."
@@ -1339,17 +1339,17 @@
       "marks2018": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2017": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2016": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       }
     },
     "Data": {}
@@ -2154,17 +2154,17 @@
       "marks2018": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2017": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "marks2016": {
         "ui:placeholder": "N.A.",
         "ui:disabled": true,
-        "classNames": "marks-style"
+        "classNames": "not-editable-field-style"
       },
       "busNumber": {
         "classNames": "field-style",
@@ -2245,87 +2245,87 @@
   ],
   "defaultStudentData": [
     {
-      "formFiled": "optIn2019",
+      "formField": "optIn2019",
       "dataType": "string"
     },
     {
-      "formFiled": "id",
+      "formField": "id",
       "dataType": "number"
     },
     {
-      "formFiled": "name",
+      "formField": "name",
       "dataType": "string"
     },
     {
-      "formFiled": "fatherName",
+      "formField": "fatherName",
       "dataType": "string"
     },
     {
-      "formFiled": "gender",
+      "formField": "gender",
       "dataType": "string"
     },
     {
-      "formFiled": "age",
+      "formField": "age",
       "dataType": "number"
     },
     {
-      "formFiled": "mobile",
+      "formField": "mobile",
       "dataType": "number"
     },
     {
-      "formFiled": "occupation",
+      "formField": "occupation",
       "dataType": "string"
     },
     {
-      "formFiled": "education",
+      "formField": "education",
       "dataType": "string"
     },
     {
-      "formFiled": "email",
+      "formField": "email",
       "dataType": "string"
     },
     {
-      "formFiled": "busStop",
+      "formField": "busStop",
       "dataType": "string"
     },
     {
-      "formFiled": "classAttended2018",
+      "formField": "classAttended2018",
       "dataType": "string"
     },
     {
-      "formFiled": "classAttended2019",
+      "formField": "classAttended2019",
       "dataType": "string"
     },
     {
-      "formFiled": "marks2019",
+      "formField": "marks2019",
       "dataType": "string"
     },
     {
-      "formFiled": "marks2018",
+      "formField": "marks2018",
       "dataType": "string"
     },
     {
-      "formFiled": "marks2017",
+      "formField": "marks2017",
       "dataType": "string"
     },
     {
-      "formFiled": "marks2016",
+      "formField": "marks2016",
       "dataType": "string"
     },
     {
-      "formFiled": "busNumber",
+      "formField": "busNumber",
       "dataType": "string"
     },
     {
-      "formFiled": "classRoomNo2019",
+      "formField": "classRoomNo2019",
       "dataType": "string"
     },
     {
-      "formFiled": "address",
+      "formField": "address",
       "dataType": "string"
     },
     {
-      "formFiled": "remark",
+      "formField": "remark",
       "dataType": "string"
     }
   ]

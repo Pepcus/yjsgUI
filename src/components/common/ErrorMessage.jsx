@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 /**
  * render error message
  * @param {string} message
- * @return {*}
- * @constructor
  */
 
 const ErrorMessage = ({ message }) => (
