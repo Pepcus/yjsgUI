@@ -1,7 +1,8 @@
+/* eslint-disable no-useless-escape */
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { defaultStudentData } from '../config/memberRegisrationCurrectionFormShema.json';
+import { defaultStudentData } from '../config/memberRegistrationCorrectionFormSchema.json';
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,
@@ -280,22 +281,38 @@ export const InitialStudentData = (studentData) => {
 
   let formattedStudentData = cloneDeep(studentData);
   defaultStudentData.forEach((obj) => {
-    if (!formattedStudentData[obj.formFiled]) {
-      formattedStudentData = {
-        ...formattedStudentData,
-        [obj.formFiled]: undefined };
-
+    if (formattedStudentData[obj.formField] === null) {
+      const property = [obj.formField];
+      delete formattedStudentData[property];
     } else if (obj.dataType === 'string') {
       formattedStudentData = {
         ...formattedStudentData,
-        [obj.formFiled]: String(formattedStudentData[obj.formFiled]) };
+        [obj.formField]: String(formattedStudentData[obj.formField]) };
 
     } else if (obj.dataType === 'number') {
       formattedStudentData = {
         ...formattedStudentData,
-        [obj.formFiled]: Number(formattedStudentData[obj.formFiled]) };
+        [obj.formField]: Number(formattedStudentData[obj.formField]) };
     }
   });
 
   return formattedStudentData;
+};
+
+/**
+ * compare two objects
+ * @param {Object} object1
+ * @param {Object} object2
+ * @return {boolean}
+ */
+export const isObjectsEqual = ({ object1, object2 }) => {
+  const finalKeys = _.uniq([...Object.keys(object1), ...Object.keys(object2)]);
+  let isEqualObject = true;
+
+  for (const key in finalKeys) {
+    if (object1[finalKeys[key]] !== object2[finalKeys[key]]) {
+      isEqualObject = false;
+    }
+  }
+  return isEqualObject;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import isEmpty from 'lodash/isEmpty';
 import extend from 'lodash/extend';
 import cloneDeep from 'lodash/cloneDeep';
@@ -15,7 +16,15 @@ import {
   SINGLE_QUOTE_ERROR_MESSAGE,
   DOUBLE_QUOTE_ERROR_MESSAGE, ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
 } from '../constants/messages';
-import { TENANT } from '../constants/yjsg';
+import {
+  TENANT,
+  USER_TYPES,
+} from '../constants/yjsg';
+
+const {
+  STUDENT_WITH_URL,
+  STUDENT,
+} = USER_TYPES;
 
 /**
  * setRegistrationData method set form field data in key value pair format
@@ -441,3 +450,5 @@ export const getFinalMemberData = ({ studentData }) => {
   const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
   return !isEmpty(studentData) ? studentData : studentDataFromSession;
 };
+
+export const isPageUserStudent = ({ pageUser }) => pageUser === STUDENT_WITH_URL || pageUser === STUDENT;

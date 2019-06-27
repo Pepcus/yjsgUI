@@ -27,7 +27,7 @@ const FormUpdateSuccessMessage = ({
         <LinkButton
           buttonText={goBackBtnText}
           linkPath={context.previousLocation}
-          onClick={() => { isUpdatedReset(); }}
+          onClick={isUpdatedReset}
         />
       </Popup>
     );

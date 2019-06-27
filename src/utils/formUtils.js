@@ -1,0 +1,54 @@
+import isEmpty from 'lodash/isEmpty';
+
+import validations from '../utils/validation';
+
+/**
+ * getTransformErrors return transformErrors function
+ * @param {Array} errors
+ * @param {Function} transformErrors
+ * @return {Array} errors
+ */
+
+export const getTransformedErrors = ({ errors, transformErrors }) => {
+  const transformErrorObject = transformErrors();
+  const transformedErrors = [];
+
+  if (!isEmpty(transformErrorObject)) {
+    errors.forEach((error) => {
+      if (transformErrorObject[error.name]) {
+        transformedErrors.push({ ...error, message: transformErrorObject[error.name] });
+      } else if (error.name !== 'type') {
+        transformedErrors.push(error);
+      }
+    });
+    return transformedErrors;
+  }
+  return errors;
+};
+
+/**
+ * handle form data validation
+ * @param {Object} formData
+ * @param {Object} errors
+ * @param {Function} validate
+ * @param {Object} validations
+ * @return {Object} errors
+ */
+export const verifyFormDataValidations = ({ formData, errors, validate }) => {
+  const validation = validate;
+  if (!isEmpty(validation) && formData) {
+    validation.forEach((valid) => {
+
+      const {
+        validates,
+        field,
+      } = valid;
+      const error = validations[validates](formData[field]);
+
+      if (!isEmpty(error)) {
+        errors[field].addError(error);
+      }
+    });
+  }
+  return errors;
+};

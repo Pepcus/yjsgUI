@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-jsonschema-form';
-import isEmpty from 'lodash/isEmpty';
 
-import validations from '../../utils/validation';
+import {
+  getTransformedErrors,
+  verifyFormDataValidations,
+} from '../../utils/formUtils';
 
 const JSONSchemaForm = Form;
 
 /**
  * FormContainer render JSON form schema
- * @return {*} Form
+ * @return {HTML} Form
  */
 class FormContainer extends Component {
 
   /**
    * getFormSchema return form schema
-   * @param {Object} schema
    * @return {Object} schema
    */
   getFormSchema = () => {
@@ -25,7 +26,6 @@ class FormContainer extends Component {
 
   /**
    * getFormUISchema return uiSchema
-   * @param {Object} uiSchema
    * @return {Object} uiSchema
    */
   getFormUISchema = () => {
@@ -35,7 +35,6 @@ class FormContainer extends Component {
 
   /**
    * getFormData return formData
-   * @param {Object} formData
    * @return {Object} formData
    */
   getFormData = () => {
@@ -45,7 +44,6 @@ class FormContainer extends Component {
 
   /**
    * getOnChange return onChange function
-   * @param {Function} onChange
    * @return {Function} onChange
    */
   getOnChange = () => {
@@ -54,60 +52,48 @@ class FormContainer extends Component {
   };
 
   /**
-   * transformErrors return transformErrors function
-   * @param {Object} errors
-   * @return {Function} transformErrors
+   * getTransformErrors return transformErrors function
+   * @param {Array} errors
+   * @return {Array} errors
    */
   getTransformErrors = (errors) => {
     const { transformErrors } = this.props;
-    const transformErrorObject = transformErrors();
-    const temError = [];
-
-    if (!isEmpty(transformErrorObject)) {
-      errors.forEach((error) => {
-        if (transformErrorObject[error.name]) {
-          temError.push({ ...error, message: transformErrorObject[error.name] });
-        } else if (error.name !== 'type') {
-          temError.push(error);
-        }
-      });
-      return temError;
-    }
-    return errors;
+    return getTransformedErrors({ errors, transformErrors });
   };
 
+  /**
+   * handle the form submission
+   * @return {Function} onSubmit
+   */
   onSubmit = () => {
     const { onSubmit } = this.props;
     if (onSubmit) {
       return onSubmit;
-    } return null;
-  };
-  getValidate = (formData, errors) => {
-    const validation = this.props.validate();
-    if (!isEmpty(validation) && formData) {
-      validation.forEach((valid) => {
-
-        const error = validations[valid.validates](formData[valid.field]);
-
-        if (!isEmpty(error)) {
-          errors[valid.field].addError(error);
-        }
-      });
     }
-    return errors;
+    return null;
+  };
+
+  /**
+   * handle form data validation
+   * @param {Object} formData
+   * @param {Object} errors
+   * @return {Object} errors
+   */
+  handleFormDataValidations = (formData, errors) => {
+    const validation = this.props.validate();
+    return verifyFormDataValidations({ formData, errors, validate: validation });
   };
 
   render() {
-
     const {
       children,
     } = this.props;
 
     return (
       <JSONSchemaForm
-        showErrorList={false}
-        noHtml5Validate
-        validate={this.getValidate}
+        showErrorList={this.props.showErrorList}
+        validate={this.handleFormDataValidations}
+        noHtml5Validate={this.props.noHtml5Validate}
         liveValidate
         schema={this.getFormSchema()}
         uiSchema={this.getFormUISchema()}
@@ -125,8 +111,10 @@ class FormContainer extends Component {
 FormContainer.propTypes = {
   children: PropTypes.node,
   formData: PropTypes.object,
+  noHtml5Validate: PropTypes.bool,
   onChange: PropTypes.func,
   schema: PropTypes.object,
+  showErrorList: PropTypes.bool,
   transformErrors: PropTypes.func,
   uiSchema: PropTypes.object,
   validate: PropTypes.func,
@@ -136,8 +124,10 @@ FormContainer.propTypes = {
 FormContainer.defaultProps = {
   children: null,
   formData: {},
+  noHtml5Validate: true,
   onChange: () => {},
   schema: {},
+  showErrorList: true,
   transformErrors: () => {},
   uiSchema: {},
   validate: () => {},

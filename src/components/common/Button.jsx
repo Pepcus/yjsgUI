@@ -11,8 +11,7 @@ import ButtonContainer from './ButtonContainer';
  * @param {String} type
  * @param {String} formName
  * @param {Object} styles
- * @return {*}
- * @constructor
+ * @return {HTML}
  */
 const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
   <ButtonContainer>

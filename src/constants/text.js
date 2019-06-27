@@ -24,9 +24,9 @@ export const UPLOAD_FILE_TEXT = text.UPLOAD_FILE_TEXT || '';
 
 export const YES_TEXT = text.YES_TEXT || '';
 
-export const YJSG_ID_CARD_MAIN_HEADING = text.YJSG_ID_CARD_MAIN_HEADING || '';
+export const ID_CARD_MAIN_HEADING = text.ID_CARD_MAIN_HEADING || '';
 
-export const YJSG_ID_CARD_SMALL_HEADING = text.YJSG_ID_CARD_SMALL_HEADING || '';
+export const ID_CARD_SMALL_HEADING = text.ID_CARD_SMALL_HEADING || '';
 
 export const YOUR_ID_TEXT = text.YOUR_ID_TEXT || '';
 

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * render radio button with custom properties.
  * @param {Object} props
- * @return {*}
- * @constructor
+ * @return {HTML}
  */
 const Radios = (props) => {
 

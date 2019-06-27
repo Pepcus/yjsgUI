@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setUserTypeAction,
 } from '../../actions/studentRegistrationActions';
 import {
@@ -35,68 +35,18 @@ import {
   USER_TYPES,
 } from '../../constants/yjsg';
 import {
-  ENTER_ID_NUMBER_MESSAGE,
-  ENTER_SECRET_CODE_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../../constants/messages';
-import {
-  ID_NUMBER_TEXT,
-  SECRET_CODE_TEXT,
-} from '../../constants/text';
 import { getParameterByName } from '../../utils/http';
 import Form from '../Form';
+import { StudentCredentialPageJsonSchema } from '../../config/fromJsonSchema.json';
 
 // FixMe:This component is unnecessary.
 //  Please use splash page to show pre-populated data and remove this component
 
-const formDetail = {
-  Schema: {
-    'type': 'object',
-    'properties': {
-      'studentId': {
-        'title': ID_NUMBER_TEXT,
-        'type': 'number',
-      },
-      'secretKey': {
-        'title': SECRET_CODE_TEXT,
-        'type': 'string',
-      },
-      'backButton': {
-        'type': 'string',
-      },
-      'viewEditButton': {
-        'type': 'string',
-      },
-    },
-    'required': ['studentId', 'secretKey'],
-  },
-  UISchema: {
-    'studentId': {
-      'ui:placeholder': ENTER_ID_NUMBER_MESSAGE,
-    },
-    'secretKey': {
-      'ui:placeholder': ENTER_SECRET_CODE_MESSAGE,
-      'ui:widget': 'textarea',
-    },
-    'backButton': {
-      'classNames': 'button-style',
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'viewEditButton': {
-      'classNames': 'button-style',
-      'ui:options': {
-        'label': false,
-      },
-    },
-  },
-  data: {},
-};
-
 /**
  * StudentCredentialPage is render student credential form
  * @type {Class}
- * @return {*} member login form
  */
 class StudentCredentialPage extends Component {
 
@@ -142,7 +92,7 @@ class StudentCredentialPage extends Component {
 
   /**
    * renderViewEditButton render button of view or edit information of member Button
-   * @return {*} button
+   * @return {HTML} button
    */
   renderViewEditButton = () => (
     <Button
@@ -187,8 +137,8 @@ class StudentCredentialPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+    this.props.setStudentCredentialsAction(id, secretCode);
+    this.props.fetchStudentDataAction(id, secretCode);
     this.setState({
       isURLParams: true,
     });
@@ -206,9 +156,9 @@ class StudentCredentialPage extends Component {
 
     event.preventDefault();
     if (this.state.hasError) {
-      this.props.setStudentCredentials(credentials.studentId,
+      this.props.setStudentCredentialsAction(credentials.studentId,
         credentials.secretKey);
-      this.props.fetchStudentData(credentials.studentId,
+      this.props.fetchStudentDataAction(credentials.studentId,
         credentials.secretKey);
       this.props.setUserTypeAction(STUDENT);
       this.setState({
@@ -221,7 +171,7 @@ class StudentCredentialPage extends Component {
 
   /**
    * renderBackButton method return back button according to user type.
-   * @return {*}
+   * @return {HTML}
    */
   renderBackButton() {
     const { hashLink, context } = this.props;
@@ -254,19 +204,19 @@ class StudentCredentialPage extends Component {
 
   /**
    * renderRegistrationCorrectionFields method return student login form
-   * @return {*}
+   * @return {HTML}
    */
   renderRegistrationCorrectionFields() {
     const uiSchema = {
-      ...formDetail.UISchema,
+      ...StudentCredentialPageJsonSchema.UISchema,
       backButton: {
-        ...formDetail.UISchema.backButton,
+        ...StudentCredentialPageJsonSchema.UISchema.backButton,
         'ui:widget': () => (
           this.renderBackButton()
         ),
       },
       viewEditButton: {
-        ...formDetail.UISchema.viewEditButton,
+        ...StudentCredentialPageJsonSchema.UISchema.viewEditButton,
         'ui:widget': () => (
           this.renderViewEditButton()
         ),
@@ -277,9 +227,8 @@ class StudentCredentialPage extends Component {
       <div className="student-already-register-form">
         <Form
           showErrorList={false}
-          noHtml5Validate
           liveValidate
-          schema={formDetail.Schema}
+          schema={StudentCredentialPageJsonSchema.Schema}
           uiSchema={uiSchema}
           formData={credentials}
           onChange={this.onChange}
@@ -324,12 +273,12 @@ class StudentCredentialPage extends Component {
 
 StudentCredentialPage.propTypes = {
   context: PropTypes.object,
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   hashLink: PropTypes.string,
   isStudentFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
   secretKey: PropTypes.string,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -338,12 +287,12 @@ StudentCredentialPage.propTypes = {
 
 StudentCredentialPage.defaultProps = {
   context: {},
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   hashLink: '',
   isStudentFetched: false,
   isLoading: false,
   secretKey: '',
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   setUserTypeAction: () => {},
   studentData: '',
   studentId: '',
@@ -364,8 +313,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getApplicationTenant,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   setUserTypeAction,
 })(StudentCredentialPage);

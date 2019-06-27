@@ -14,17 +14,12 @@ import {
   isMarkOptInOrOptOutFailed,
 } from '../reducers/studentRegistrationReducer';
 import {
-  OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-} from '../constants/label';
-import {
   OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE,
-  OPT_IN_OR_OPT_OUT_FAILED_MESSAGE, THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  OPT_IN_OR_OPT_OUT_FAILED_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import {
-  YES_TEXT,
-  NO_TEXT,
-} from '../constants/text';
 import Form from './Form';
+import { MarkOptInOrOptOutButtonJsonSchema } from '../config/fromJsonSchema.json';
 
 const customSelectedStudentsOptInOrOptOutStyles = {
   overlay: {
@@ -48,77 +43,6 @@ const customSelectedStudentsOptInOrOptOutStyles = {
   },
 };
 
-const formDetail = {
-  Schema: {
-    'title': OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-    'type': 'object',
-    'properties': {
-      'studentsId': {
-        'title': 'Selected Students Id:',
-        'type': 'array',
-        'items': {
-          'type': 'string',
-        },
-      },
-      'selectedOptOption': {
-        'type': 'string',
-        'oneOf': [
-          {
-            'title': YES_TEXT,
-            'const': 'Y',
-          },
-          {
-            'title': NO_TEXT,
-            'const': 'N',
-          },
-        ],
-      },
-      'Close': {
-        'type': 'string',
-      },
-      'Submit': {
-        'type': 'string',
-      },
-    },
-    'required': ['studentsId', 'selectedOptOption'],
-  },
-  UISchema: {
-    'ui:order': ['studentsId',
-      'selectedOptOption',
-      '*',
-      'Close',
-      'Submit',
-    ],
-    'studentsId': {
-      'className': 'column-content-modal column-wrapper',
-      'ui:options': {
-        'addable': false,
-        'removable': false,
-      },
-      'items': {
-        'ui:disabled': true,
-      },
-    },
-    'selectedOptOption': {
-      'ui:options': {
-        'label': false,
-      },
-      'ui:widget': 'radio',
-    },
-    'Close': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'Submit': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-  },
-  data: {},
-};
-
 /**
  *  MarkOptInOrOptOutButton component render mark selected student optIn or optOut modal
  * @type {Class}
@@ -129,7 +53,7 @@ class MarkOptInOrOptOutButton extends Component {
     super(props);
 
     this.state = {
-      studentsId: [],
+      studentIds: [],
       selectedOptOption: '',
       isMarkSelectedStudentsOptInOrOptOutModalOpen: false,
     };
@@ -141,7 +65,7 @@ class MarkOptInOrOptOutButton extends Component {
     this.renderMessage = this.renderMessage.bind(this);
     this.filterIdsOfStudents = this.filterIdsOfStudents.bind(this);
     this.renderMarkOptInOrOutClassName = this.renderMarkOptInOrOutClassName.bind(this);
-    this.renderSubmitButtonClassName = this.renderSubmitButtonClassName.bind(this);
+    this.getSubmitButtonClassName = this.getSubmitButtonClassName.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
@@ -181,9 +105,9 @@ class MarkOptInOrOptOutButton extends Component {
 
     const { selectedStudents } = this.props;
 
-    const Ids = selectedStudents.map(student => String(student.studentId));
+    const selectedStudentIds = selectedStudents.map(student => String(student.studentId));
     this.setState({
-      studentsId: Ids,
+      studentIds: selectedStudentIds,
     });
   }
 
@@ -203,11 +127,11 @@ class MarkOptInOrOptOutButton extends Component {
   }
 
   /**
-   * renderSubmitButtonClassName method return className
+   * getSubmitButtonClassName method return className
    * of submit button as per students optIn/optOut mark or not.
    * @return {string} className
    */
-  renderSubmitButtonClassName() {
+  getSubmitButtonClassName() {
 
     const { selectedOptOption } = this.state;
 
@@ -230,7 +154,7 @@ class MarkOptInOrOptOutButton extends Component {
    * renderMessage method render success message
    * as per selected students optIn/optOut marked successfully.
    * otherwise render failed message
-   * @return {*} message
+   * @return {HTML} message
    */
   renderMessage() {
 
@@ -272,12 +196,12 @@ class MarkOptInOrOptOutButton extends Component {
    * @param {Object} event
    */
   onFormSubmit() {
-    const { studentsId, selectedOptOption } = this.state;
+    const { studentIds, selectedOptOption } = this.state;
     const { secretKey } = this.props;
 
     this.props.markSelectedStudentsOptInOrOptOutAction({
       secretKey,
-      selectedStudentsId: studentsId,
+      selectedStudentsId: studentIds,
       opt: selectedOptOption,
     });
   }
@@ -285,13 +209,13 @@ class MarkOptInOrOptOutButton extends Component {
   /**
    * renderMarkSelectedStudentsOptInOrOptOutModal method render
    * mark selected students optIn/optOut modal
-   * @return {*} modal
+   * @return {HTML} modal
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
     const uiSchema = {
-      ...formDetail.UISchema,
-      Close: {
-        ...formDetail.UISchema.Close,
+      ...MarkOptInOrOptOutButtonJsonSchema.UISchema,
+      close: {
+        ...MarkOptInOrOptOutButtonJsonSchema.UISchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -300,12 +224,12 @@ class MarkOptInOrOptOutButton extends Component {
           </button>
         ),
       },
-      Submit: {
-        ...formDetail.UISchema.Submit,
-        // 'classNames': this.renderSubmitButtonClassName(),
+      submit: {
+        ...MarkOptInOrOptOutButtonJsonSchema.UISchema.submit,
+        // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
-            className={this.renderSubmitButtonClassName()}
+            className={this.getSubmitButtonClassName()}
             type="submit"
           >
             Submit
@@ -314,7 +238,7 @@ class MarkOptInOrOptOutButton extends Component {
         ),
       },
     };
-    const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentsId, selectedOptOption } = this.state;
+    const { isMarkSelectedStudentsOptInOrOptOutModalOpen, studentIds, selectedOptOption } = this.state;
 
     if (isMarkSelectedStudentsOptInOrOptOutModalOpen) {
       return (
@@ -330,14 +254,10 @@ class MarkOptInOrOptOutButton extends Component {
           <div className="column-group-wrapper">
             <Form
               showErrorList={false}
-              noHtml5Validate
               liveValidate
-              schema={formDetail.Schema}
+              schema={MarkOptInOrOptOutButtonJsonSchema.Schema}
               uiSchema={uiSchema}
-              formData={
-                { studentsId,
-                  selectedOptOption: selectedOptOption.optIn2019,
-                }}
+              formData={{ studentIds, selectedOptOption: selectedOptOption.optIn2019 }}
               onChange={this.onClickRadioButton}
               transformErrors={this.transformErrors}
               onSubmit={this.onFormSubmit}

@@ -35,12 +35,12 @@ import {
   setVisibleColumnConfigAction,
   resetVisibleColumnConfigAction,
   resetIsSuccessAction,
-  fetchStudentData,
+  fetchStudentDataAction,
   setUserTypeAction,
 } from '../../actions/studentRegistrationActions';
 import AdvanceSearch from '../AdvanceSearch';
 import UploadStudentsAttendanceFile from '../UploadStudentsAttendanceFile';
-/*import UploadOptInFile from '../UploadOptInFile';*/
+import UploadOptInFile from '../UploadOptInFile';
 import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
@@ -133,7 +133,6 @@ class StudentInformationGrid extends Component {
     if (!redirect) {
       this.redirectToAdminLogin();
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -194,8 +193,15 @@ class StudentInformationGrid extends Component {
   };
 
   /**
+   * call back for onClickAllExport
+   */
+  onClickFileDownloadOkButton = () => {
+    this.onClickAllExport(false);
+  };
+
+  /**
    * renderFileDownloadMessagePopup method render the all export csv popup message
-   * @return {*}
+   * @return {HTML}
    */
   renderFileDownloadMessagePopup = () => {
 
@@ -207,7 +213,7 @@ class StudentInformationGrid extends Component {
           <div className="download-message-popup-container">
             <h5 className="message">{FILE_DOWNLOAD_MESSAGE}</h5>
             <div className="message-button-container">
-              <button className="ok-button" onClick={() => { this.onClickAllExport(false); }}>OK</button>
+              <button className="ok-button" onClick={this.onClickFileDownloadOkButton}>OK</button>
             </div>
           </div>
         </div>
@@ -430,7 +436,7 @@ class StudentInformationGrid extends Component {
     const { ADMIN } = USER_TYPES;
 
     if (!isEmpty(rowData)) {
-      this.props.fetchStudentData(String(studentId), adminPassword);
+      this.props.fetchStudentDataAction(String(studentId), adminPassword);
       this.props.setStudentDataAction(studentData);
       this.props.updateStudentByAdminAction(String(studentId), adminPassword);
       this.props.setUserTypeAction(ADMIN);
@@ -443,7 +449,7 @@ class StudentInformationGrid extends Component {
   /**
    * redirectToStudentCorrection method redirect to "/studentCorrection"
    * when isStudentDataSet value is true(fetch student success)
-   * @return {*}
+   * @return {HTML}
    */
   redirectToStudentCorrection() {
 
@@ -464,7 +470,7 @@ class StudentInformationGrid extends Component {
    * And onClick of this button handleEditClick method will call and pass the
    * rowData object(data of that particular row) as a parameter to handleEditClick method
    * @param {Object} rowData,
-   * @return {*} component,
+   * @return {HTML} component,
    */
   EditButton = ({ rowData }) => (
     <div>
@@ -495,7 +501,7 @@ class StudentInformationGrid extends Component {
 
   /**
    * renderColumnConfig method the ColumnConfig react component in render method
-   * @return {*} ColumnConfig
+   * @return {HTML} ColumnConfig
    */
   renderColumnConfig() {
 
@@ -537,7 +543,7 @@ class StudentInformationGrid extends Component {
    * "यहाँ जानकारी उपलब्ध नहीं है।" message instead
    * of DataGrid OR when data is present and headerConfig is empty(column not present)
    * than it will render "आपने शून्य स्तंभों को चुना है इसलिए वहाँ जानकारी उपलब्ध नहीं है।" message.
-   * @return {*}
+   * @return {HTML}
    */
   renderDataGrid() {
 
@@ -653,7 +659,7 @@ class StudentInformationGrid extends Component {
                   checkedIds={checkedIds}
                 />
                 <div className="column-option display-mobile-none">
-                  {/*<UploadOptInFile />*/}
+                  <UploadOptInFile />
                   <div className="column-option-configure display-inline">
                     <Link to="/files" className="column-option-container text-decoration-none">
                       <i className="fa fa-file-text card-icon" />Files
@@ -706,7 +712,7 @@ class StudentInformationGrid extends Component {
 
 StudentInformationGrid.propTypes = {
   adminLoginState: PropTypes.bool,
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   getAllStudentsAction: PropTypes.func,
   redirect: PropTypes.bool,
   resetAdminCredentialsAction: PropTypes.func,
@@ -729,7 +735,7 @@ StudentInformationGrid.propTypes = {
 
 StudentInformationGrid.defaultProps = {
   adminLoginState: false,
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   getAllStudentsAction: () => {},
   redirect: false,
   resetAdminCredentialsAction: () => {},
@@ -758,7 +764,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getAllStudentsAction,
   resetAdminCredentialsAction,
   resetIsSuccessAction,

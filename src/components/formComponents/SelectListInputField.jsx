@@ -34,7 +34,7 @@ class SelectListInputField extends Component {
   /**
    * populateValue method return conditional value into option
    * @param {String} value
-   * @return {*}
+   * @return {String}
    */
   populateValue(value) {
     if (!value) {

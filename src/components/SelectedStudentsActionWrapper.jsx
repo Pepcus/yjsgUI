@@ -25,11 +25,9 @@ class SelectedStudentsActionWrapper extends Component {
     super(props);
 
     this.state = {
-      printOptionIsOpen: false,
-      isBusCoordinatorsError: false,
+      hasBusCoordinatorsError: false,
     };
 
-    this.openPrintOption = this.openPrintOption.bind(this);
     this.printCards = this.printCards.bind(this);
   }
 
@@ -44,14 +42,14 @@ class SelectedStudentsActionWrapper extends Component {
 
   /**
    * renderCoordinatorUnavailableWarningPopup render bus coordinator error popup
-   * @return {*} bus coordinator warning popup
+   * @return {HTML} bus coordinator warning popup
    */
   renderCoordinatorUnavailableWarningPopup = () => {
 
-    const { isBusCoordinatorsError } = this.state;
-    const { isDataOfBusCoordinatorsFailed } = this.props;
+    const { hasBusCoordinatorsError } = this.state;
+    const { isCoordinatorsFailed } = this.props;
 
-    if (isDataOfBusCoordinatorsFailed && isBusCoordinatorsError) {
+    if (isCoordinatorsFailed && hasBusCoordinatorsError) {
       return (
         <Popup>
           <h5>{ BUS_COORDINATOR_ERROR_MESSAGE }</h5>
@@ -59,7 +57,7 @@ class SelectedStudentsActionWrapper extends Component {
             <Button
               type="button"
               buttonText="No"
-              onClick={() => { this.onClickPrintCancel(false); }}
+              onClick={this.onClickPrintNotCanceled}
             />
             <Button
               type="button"
@@ -75,25 +73,28 @@ class SelectedStudentsActionWrapper extends Component {
   };
 
   /**
-   * onClickPrintCancel set the boolean value of isBusCoordinatorsError
+   * onClickPrintCancel set the boolean value of hasBusCoordinatorsError
    * @param {Boolean}value
    */
   onClickPrintCancel = (value) => {
     this.setState({
-      isBusCoordinatorsError: value,
+      hasBusCoordinatorsError: value,
     });
   };
 
   /**
-   * openPrintOption method open or close the print window.
+   * callBack for onClickPrintCancel to set hasBusCoordinatorsError true
    */
-  openPrintOption() {
+  onClickPrintCanceled = () => {
+    this.onClickPrintCancel(true);
+  };
 
-    const { printOptionIsOpen } = this.state;
-
-    this.setState({ printOptionIsOpen: !printOptionIsOpen });
-  }
-
+  /**
+   * callBack for onClickPrintCancel to set hasBusCoordinatorsError false
+   */
+  onClickPrintNotCanceled = () => {
+    this.onClickPrintCancel(false);
+  };
   /**
    * renderExportClassName method return the className
    * Export button as per students selected or not.
@@ -126,11 +127,9 @@ class SelectedStudentsActionWrapper extends Component {
 
   render() {
 
-    const { metaData, selectedStudents, isDataOfBusCoordinatorsFailed } = this.props;
-    const { printOptionIsOpen } = this.state;
-
-    const filterHeader = metaData.headerConfig.filter(obj =>
-      obj.excludeFromExport !== true);
+    const { metaData, selectedStudents, isCoordinatorsFailed } = this.props;
+    const filterHeader = metaData.headerConfig.filter(headerConfigObject =>
+      headerConfigObject.excludeFromExport !== true);
 
     const header = filterHeader.map(item =>
       ({ label: item.label, key: item.key, disable: item.disable }),
@@ -155,8 +154,8 @@ class SelectedStudentsActionWrapper extends Component {
                 className={this.getPrintNowClassName()}
                 onClick={
                   () => {
-                    isDataOfBusCoordinatorsFailed
-                      ? this.onClickPrintCancel(true) : window.print();
+                    isCoordinatorsFailed
+                      ? this.onClickPrintCanceled() : window.print();
                   }}
               >
                 <i className="fa fa-print card-icon" />Print Now
@@ -177,7 +176,6 @@ class SelectedStudentsActionWrapper extends Component {
           </div>
         </div>
         <StudentIdCardModal
-          printOptionIsOpen={printOptionIsOpen}
           selectedStudents={selectedStudents}
         />
       </div>
@@ -187,20 +185,20 @@ class SelectedStudentsActionWrapper extends Component {
 
 SelectedStudentsActionWrapper.propTypes = {
   clearSelectedStudents: PropTypes.func,
-  isDataOfBusCoordinatorsFailed: PropTypes.bool,
+  isCoordinatorsFailed: PropTypes.bool,
   metaData: PropTypes.object,
   selectedStudents: PropTypes.array,
 };
 
 SelectedStudentsActionWrapper.defaultProps = {
   clearSelectedStudents: () => {},
-  isDataOfBusCoordinatorsFailed: false,
+  isCoordinatorsFailed: false,
   metaData: {},
   selectedStudents: [],
 };
 
 const mapStateToProps = state => ({
-  isDataOfBusCoordinatorsFailed: isBusCoordinatorsDataFailed(state),
+  isCoordinatorsFailed: isBusCoordinatorsDataFailed(state),
 });
 
 export default connect(mapStateToProps, {})(SelectedStudentsActionWrapper);

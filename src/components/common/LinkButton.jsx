@@ -9,7 +9,6 @@ import ButtonContainer from './ButtonContainer';
  * @param {String} linkPath
  * @param {Function} onClick
  * @param {String} buttonText
- * @return {*}
  * @constructor
  */
 const LinkButton = ({ linkPath, onClick, buttonText }) => (

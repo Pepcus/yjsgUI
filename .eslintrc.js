@@ -78,7 +78,6 @@ module.exports = {
 
   rules: {
 
-
     // Turned off as it seemed to catch a lot of false positives.
     'security/detect-object-injection': 'off',
 

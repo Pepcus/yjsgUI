@@ -25,7 +25,7 @@ class TextAreaField extends Component {
 
   /**
    * populateValue method populate value of text area input field
-   * @return {*}
+   * @return {String}
    */
   populateValue() {
     const { value } = this.props;

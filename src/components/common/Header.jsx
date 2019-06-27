@@ -27,7 +27,6 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
  * @type {Function}
- * @return {*}
  * @constructor
  */
 const Header = ({
@@ -59,7 +58,6 @@ const Header = ({
   /**
    * RenderBackButton method render back button in header
    * @param {Object} headerObject
-   * @return {*}
    * @constructor
    */
   const renderBackButton = (headerObject) => {
@@ -80,7 +78,6 @@ const Header = ({
   /**
    * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
-   * @return {*}
    * @constructor
    */
   const renderLogOutButton = (headerObject) => {
@@ -102,7 +99,6 @@ const Header = ({
   /**
    * RenderHeaderName method render header name in header
     * @param {Object} headerObject
-   * @return {*}
    * @constructor
    */
   const renderHeaderName = headerObject => (
@@ -117,8 +113,7 @@ const Header = ({
   /**
    * RenderButton method render buttons with their button wrapper in header.
    * @param {Object} headerObject
-   * @return {*}
-   * @constructor
+   * @return {HTML}
    */
   const renderButton = (headerObject) => {
     if (headerObject.hasButtons) {
@@ -136,8 +131,7 @@ const Header = ({
   /**
    * renderLogo method render logo in header
    * @param {Object} headerObject
-   * @return {*}
-   * @constructor
+   * @return {HTML}
    */
   const renderLogo = (headerObject) => {
     if (headerObject.logo) {

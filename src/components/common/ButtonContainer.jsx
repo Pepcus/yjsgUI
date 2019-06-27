@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * It button wrapper
  * @param {Object} props
- * @return {*}
- * @constructor
+ * @return {HTML}
  */
 const ButtonContainer = props => (
   <div style={props.style} className="button-container">

@@ -46,17 +46,17 @@ html, body {
 .field-radio-group {
     margin-top: 20px;
 }
-.marks-style .form-control{
+.not-editable-field-style .form-control{
     border: none;
     background: none;
-    width: auto;
+    width: 50%;
     padding: 0;
 }
 .default-form-container {
     height: 100%;
 }
-.marks-style .control-label{
-    width: auto;;
+.not-editable-field-style .control-label{
+    width: 50%;
 }
 
 .field-style {
@@ -64,8 +64,8 @@ html, body {
     width: 33.33%;
 }
 
-.marks-style {
-    display: inline-block;
+.not-editable-field-style {
+    display: inline-flex;
     width: 33.33%;
     align-items: center;
     background: #efefef;
@@ -2565,7 +2565,7 @@ body,
     .form-group {
         margin-top: 7px;
     }
-    .marks-style {
+    .not-editable-field-style {
         width: 100%;
         max-width: 100%;
     }

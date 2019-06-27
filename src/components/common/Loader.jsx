@@ -8,7 +8,6 @@ import CustomLoader from './CustomLoader';
  * Loader render loader
  * @param {boolean} isLoading
  * @type {Function}
- * @return {*}
  * @constructor
  */
 const Loader = ({ isLoading }) => {

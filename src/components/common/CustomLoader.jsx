@@ -6,8 +6,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * CustomLoader will render loader.
  * @param {Object} props
- * @return {*}
- * @constructor
+ * @return {HTML}
  */
 const CustomLoader = (props) => {
   const styles = {

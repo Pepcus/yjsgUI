@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  * GET method use for get API call type
  * @param {String} url

@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
-import * as shortId from 'shortid';
 
 import {
   resetIsUpdateIdCardStatusSuccessAction,
@@ -14,18 +13,15 @@ import {
   isUpdateIdCardStatusSuccess,
   isUpdateIdCardStatusFailed,
 } from '../reducers/studentRegistrationReducer';
-import {
-  ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-} from '../constants/label';
+
 import {
   UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE,
   UPDATED_ID_CARD_STATUS_FAILED_MESSAGE,
-  ENTER_ID_NUMBER_MESSAGE,
-  ENTER_SECRET_CODE_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import { ID_NUMBER_TEXT, SECRET_CODE_TEXT } from '../constants/text';
 import Form from './Form';
+import { UpdateIdCardStatusSelectedStudentsJsonSchema } from '../config/fromJsonSchema.json';
+import { extractStudentIds } from '../utils/dataGridUtils';
 
 const customUpdateIdCardStatusSelectedStudentsModalStyles = {
   overlay: {
@@ -49,76 +45,9 @@ const customUpdateIdCardStatusSelectedStudentsModalStyles = {
   },
 };
 
-const formDetail = {
-  Schema: {
-    'title': ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL,
-    'type': 'object',
-    'properties': {
-      'studentsId': {
-        'title': 'Selected Students Id:',
-        'type': 'array',
-        'items': {
-          'type': 'string',
-        },
-      },
-      'selectedCardOption': {
-        'type': 'string',
-        'oneOf': [
-          {
-            'title': 'Reprint',
-            'const': 'Y',
-          },
-          {
-            'title': 'Not Print',
-            'const': 'N',
-          },
-        ],
-      },
-      'Close': {
-        'type': 'string',
-      },
-      'Submit': {
-        'type': 'string',
-      },
-    },
-    'required': ['studentsId', 'selectedCardOption'],
-  },
-  UISchema: {
-    'ui:order': ['studentsId',
-      'selectedCardOption',
-      '*',
-      'Close',
-      'Submit',
-    ],
-    'studentsId': {
-      'className': 'column-content-modal column-wrapper',
-      'ui:options': {
-        'addable': false,
-        'removable': false,
-      },
-      'items': {
-        'ui:disabled': true,
-      },
-    },
-    'selectedCardOption': {
-      'ui:options': {
-        'label': false,
-      },
-      'ui:widget': 'radio',
-    },
-    'Close': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-    'Submit': {
-      'ui:options': {
-        'label': false,
-      },
-    },
-  },
-  data: {},
-};
+/**
+ * TODO: Rename this component in future.
+ */
 /**
  * UpdateIdCardStatusSelectedStudents render modal of update Id cards of selected students.
  * @type {Class}
@@ -129,9 +58,9 @@ class UpdateIdCardStatusSelectedStudents extends Component {
     super(props);
 
     this.state = {
-      studentsId: [],
+      studentIds: [],
       selectedCardOption: '',
-      isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
+      isUpdateOptInModalOpen: false,
     };
 
     this.openUpdateIdCardStatusSelectedStudentsModal = this.openUpdateIdCardStatusSelectedStudentsModal.bind(this);
@@ -139,60 +68,47 @@ class UpdateIdCardStatusSelectedStudents extends Component {
     this.onClickRadioButton = this.onClickRadioButton.bind(this);
     this.renderUpdateIdCardStatusSelectedStudentsModal = this.renderUpdateIdCardStatusSelectedStudentsModal.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
-    this.filterIdsOfStudents = this.filterIdsOfStudents.bind(this);
     this.renderIdCardStatusButtonClassName = this.renderIdCardStatusButtonClassName.bind(this);
-    this.renderSubmitButtonClassName = this.renderSubmitButtonClassName.bind(this);
+    this.getSubmitButtonClassName = this.getSubmitButtonClassName.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   /**
    * openUpdateIdCardStatusSelectedStudentsModal method set
-   * isUpdateSelectedStudentsOptInOrOptOutModalOpen to true
+   * isUpdateOptInModalOpen to true
    */
   openUpdateIdCardStatusSelectedStudentsModal() {
+    const { selectedStudents } = this.props;
     this.setState({
-      isUpdateSelectedStudentsOptInOrOptOutModalOpen: true,
+      isUpdateOptInModalOpen: true,
+      studentIds: extractStudentIds({ selectedStudents }),
     });
-    this.filterIdsOfStudents();
   }
 
   /**
    * closeUpdateIdCardStatusSelectedStudentsModal method set
-   * isUpdateSelectedStudentsOptInOrOptOutModalOpen to false
+   * isUpdateOptInModalOpen to false
    * and selectedCardOption to empty string
    */
   closeUpdateIdCardStatusSelectedStudentsModal() {
     this.setState({
-      isUpdateSelectedStudentsOptInOrOptOutModalOpen: false,
+      isUpdateOptInModalOpen: false,
       selectedCardOption: '',
     });
     this.props.resetIsUpdateIdCardStatusSuccessAction();
   }
 
   /**
-   * renderSubmitButtonClassName return class name of submit button
+   * getSubmitButtonClassName return class name of submit button
    * @return {string} class name
    */
-  renderSubmitButtonClassName() {
+  getSubmitButtonClassName() {
 
     const { selectedCardOption } = this.state;
     if (isEmpty(selectedCardOption)) {
       return 'display-inline linkButton btn-upload'; // 'popup-buttons-disable';
     }
     return 'display-inline linkButton btn-upload';
-  }
-
-  /**
-   * filterIdsOfStudents method set the selected students Id into studentId Array
-   */
-  filterIdsOfStudents() {
-
-    const { selectedStudents } = this.props;
-    const Ids = selectedStudents.map(student => String(student.studentId));
-
-    this.setState({
-      studentsId: Ids,
-    });
   }
 
   /**
@@ -212,7 +128,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   /**
    * renderMessage method render the success or failed
    * message of update students Id card status
-   * @return {*} message
+   * @return {HTML} message
    */
   renderMessage() {
 
@@ -263,11 +179,11 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    */
   onFormSubmit() {
     const { secretKey } = this.props;
-    const { studentsId, selectedCardOption } = this.state;
+    const { studentIds, selectedCardOption } = this.state;
 
     this.props.updateIdCardStatusSelectedStudentsAction({
       secretKey,
-      selectedStudentsId: studentsId,
+      selectedStudentsId: studentIds,
       IdCardStatus: selectedCardOption,
     });
   }
@@ -275,13 +191,13 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   /**
    * renderUpdateIdCardStatusSelectedStudentsModal method render
    * the modal of update Id card status of selected students.
-   * @return {*} modal
+   * @return {HTML} modal
    */
   renderUpdateIdCardStatusSelectedStudentsModal() {
     const uiSchema = {
-      ...formDetail.UISchema,
-      Close: {
-        ...formDetail.UISchema.Close,
+      ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema,
+      close: {
+        ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -290,12 +206,12 @@ class UpdateIdCardStatusSelectedStudents extends Component {
           </button>
         ),
       },
-      Submit: {
-        ...formDetail.UISchema.Submit,
-        // 'classNames': this.renderSubmitButtonClassName(),
+      submit: {
+        ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema.submit,
+        // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
-            className={this.renderSubmitButtonClassName()}
+            className={this.getSubmitButtonClassName()}
             type="submit"
           >
             Submit
@@ -303,12 +219,12 @@ class UpdateIdCardStatusSelectedStudents extends Component {
         ),
       },
     };
-    const { isUpdateSelectedStudentsOptInOrOptOutModalOpen, studentsId, selectedCardOption } = this.state;
+    const { isUpdateOptInModalOpen, studentIds, selectedCardOption } = this.state;
 
-    if (isUpdateSelectedStudentsOptInOrOptOutModalOpen) {
+    if (isUpdateOptInModalOpen) {
       return (
         <Modal
-          isOpen={isUpdateSelectedStudentsOptInOrOptOutModalOpen}
+          isOpen={isUpdateOptInModalOpen}
           onRequestClose={this.closeUpdateIdCardStatusSelectedStudentsModal}
           style={customUpdateIdCardStatusSelectedStudentsModalStyles}
           contentLabel="Column Options"
@@ -319,14 +235,10 @@ class UpdateIdCardStatusSelectedStudents extends Component {
           <div className="column-group-wrapper">
             <Form
               showErrorList={false}
-              noHtml5Validate
               liveValidate
-              schema={formDetail.Schema}
+              schema={UpdateIdCardStatusSelectedStudentsJsonSchema.Schema}
               uiSchema={uiSchema}
-              formData={
-                { studentsId,
-                  selectedCardOption: selectedCardOption.printStatus,
-                }}
+              formData={{ studentIds, selectedCardOption: selectedCardOption.printStatus }}
               onChange={this.onClickRadioButton}
               transformErrors={this.transformErrors}
               onSubmit={this.onFormSubmit}

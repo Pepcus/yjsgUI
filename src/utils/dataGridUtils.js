@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import upperFirst from 'lodash/upperFirst';
 
 import {
   gridMetaData,
@@ -117,6 +118,7 @@ export const chunkArray = (Array, chunkSize) => {
 
 export const setAppColor = (mode) => {
   for (const key in mode) {
+    // eslint-disable-next-line no-prototype-builtins
     if (mode.hasOwnProperty(key)) {
       document.documentElement.style.setProperty(key, mode[key]);
     }
@@ -139,4 +141,38 @@ export const getFormattedStudentId = (studentId) => {
     return String(`0${studentId}`);
 
   } return String(studentId);
+};
+
+export const getChangedVisibleColumnConfig = ({ selectValue, temporaryVisibleColumnConfig }) => {
+  if (selectValue) {
+    for (const key in temporaryVisibleColumnConfig) {
+      temporaryVisibleColumnConfig[key] = true;
+    }
+  } else if (!selectValue) {
+    for (const key in temporaryVisibleColumnConfig) {
+      temporaryVisibleColumnConfig[key] = false;
+    }
+  }
+  return temporaryVisibleColumnConfig;
+};
+
+/**
+ * extractStudentIds method set the selected students Id into studentId Array
+ * @param {Array} selectedStudents
+ * @return {*}
+ */
+export const extractStudentIds = ({ selectedStudents }) => selectedStudents.map(student => String(student.studentId));
+
+/**
+ * convert first character into upper case of all word for sentence
+ * @param {String} sentence
+ * @return {Array} words
+ */
+export const convertFirstCharacterInUpperCase = ({ sentence }) => {
+  const words = sentence ? sentence.split(' ') : [sentence];
+
+  words.forEach((character, index) => {
+    words[index] = character ? upperFirst(`${words[index].toLocaleLowerCase()} `) : '';
+  });
+  return words;
 };

@@ -532,11 +532,16 @@ export const yesOrNo = [
   },
 ];
 
-export const yjsgFooterContactInfo = {
+export const footerContactInfo = {
   INDORE: ' 74470-56789',
   BHOPAL: ' अनुभव जैन, मो. 9179834281, 9303131737',
 };
 
-export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
+export const footerText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
 
-export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)';
+export const headerTitle = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)';
+
+export const THRESHOLD_VALUE = {
+  DEEP_SEARCH: 0.6,
+  NORMAL_SEARCH: 0.0,
+};

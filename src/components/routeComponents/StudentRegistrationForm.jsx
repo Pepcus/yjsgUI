@@ -27,7 +27,7 @@ import {
   WHAT_YOU_WANT_TO_STUDY_LABEL,
 } from '../../constants/label';
 import {
-  YJSG_REGISTRATION_SUCCESS_MESSAGE,
+  REGISTRATION_SUCCESS_MESSAGE,
   ID_NOTE_MESSAGE,
   ID_CARD_SUGGESTION_MESSAGE,
 } from '../../constants/messages';
@@ -40,8 +40,8 @@ import InputField from '../formComponents/InputField';
 import TextAreaField from '../formComponents/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
+  setStudentCredentialsAction,
 } from '../../actions/studentRegistrationActions';
 import {
   isDataCorrect,
@@ -62,7 +62,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * StudentRegistrationForm render student registration form
  * @type {Class}
- * @return {*} registration form
+ * @return {HTML} registration form
  */
 class StudentRegistrationForm extends Component {
 
@@ -172,7 +172,7 @@ class StudentRegistrationForm extends Component {
     // according to error message it will get boolean value
     if (this.isValidData()) {
       // This action call api
-      this.props.createStudentData(student);
+      this.props.createStudentDataAction(student);
       this.setState({
         isSubmitTriggered: true,
       });
@@ -214,7 +214,7 @@ class StudentRegistrationForm extends Component {
 
   /**
    * renderSuccessMessage method render success message popup when form submitted successfully
-   * @return {*} success message popup
+   * @return {HTML} success message popup
    */
   renderSuccessMessage() {
 
@@ -223,10 +223,10 @@ class StudentRegistrationForm extends Component {
 
     if (isStudentCreated && isSubmitTriggered) {
       // for pre-population on splash page
-      this.props.setStudentCredentials(newStudent.id, newStudent.secretKey);
+      this.props.setStudentCredentialsAction(newStudent.id, newStudent.secretKey);
       return (
         <Popup>
-          <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
+          <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
           <p>{YOUR_ID_TEXT}<strong>{newStudent.id}</strong>{IS_THERE_TEXT}</p>
           <p>{YOUR_SECRET_CODE_TEXT}<strong>{newStudent.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
@@ -240,7 +240,7 @@ class StudentRegistrationForm extends Component {
 
   /**
    * renderBusStopOptions method render bus stop form field conditionally
-   * @return {*} bus stop form field
+   * @return {HTML} bus stop form field
    */
   renderBusStopOptions = () => {
 
@@ -266,7 +266,7 @@ class StudentRegistrationForm extends Component {
 
   /**
    * renderBackButton method return link button according to user type
-   * @return {*}
+   * @return {HTML}
    */
   renderBackButton() {
 
@@ -429,20 +429,20 @@ class StudentRegistrationForm extends Component {
 
 StudentRegistrationForm.propTypes = {
   context: PropTypes.object,
-  createStudentData: PropTypes.func,
+  createStudentDataAction: PropTypes.func,
   isStudentCreated: PropTypes.bool,
   newStudent: PropTypes.object,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   tenant: PropTypes.string,
   userType: PropTypes.string,
 };
 
 StudentRegistrationForm.defaultProps = {
   context: {},
-  createStudentData: () => {},
+  createStudentDataAction: () => {},
   isStudentCreated: false,
   newStudent: {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   tenant: '',
   userType: '',
 };
@@ -455,8 +455,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  createStudentData,
+  createStudentDataAction,
   getApplicationTenant,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 })(StudentRegistrationForm);
 

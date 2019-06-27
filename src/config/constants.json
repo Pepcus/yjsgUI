@@ -14,8 +14,8 @@
     "IS_THERE_TEXT": " है |",
     "ERROR_MESSAGE_OF_LOAD_APP_DATA": "Error occurred to load application data.",
     "FILE_DOWNLOAD_MESSAGE": "File downloading started...",
-    "YJSG_ID_CARD_SMALL_HEADING": "जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019",
-    "YJSG_ID_CARD_MAIN_HEADING": "Young Jain Study Group (YJSG)"
+    "ID_CARD_SMALL_HEADING": "जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019",
+    "ID_CARD_MAIN_HEADING": "Young Jain Study Group (YJSG)"
   },
 
   "label": {
@@ -73,7 +73,7 @@
     "THIS_INFORMATION_IS_COMPULSORY_MESSAGE": "यह जानकारी अनिवार्य है",
     "UPDATED_ID_CARD_STATUS_FAILED_MESSAGE": "कार्ड प्रिंट का चयन दर्ज करने में असफल रहे |",
     "UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE": "कार्ड प्रिंट का चयन सफलतापूर्वक दर्ज किया गया |",
-    "YJSG_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन जैन बाल एवं युवा शिविर के लिए हो चूका है |",
+    "REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन जैन बाल एवं युवा शिविर के लिए हो चूका है |",
     "GIVEN_INFORMATION_WRONG_MESSAGE": "दी गई जानकारी गलत है |"
   }
 }

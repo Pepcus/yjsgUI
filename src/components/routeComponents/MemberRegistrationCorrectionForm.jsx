@@ -11,10 +11,8 @@ import {
   USER_TYPES,
 } from '../../constants/yjsg';
 import {
-  createStudentData,
   isUpdatedResetAction,
-  setStudentCredentials,
-  updateStudentData,
+  updateStudentDataAction,
 } from '../../actions/studentRegistrationActions';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -33,12 +31,13 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import {
   getFinalMemberData,
+  isPageUserStudent,
   updateClassAttended2019InStudentData,
 } from '../../utils/registrationFormUtils';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
-import { validation } from '../../config/memberRegisrationCurrectionFormShema.json';
+import { validation } from '../../config/memberRegistrationCorrectionFormSchema.json';
 import {
-  InitialStudentData,
+  InitialStudentData, isObjectsEqual,
   prePopulateOptIn,
 } from '../../utils/SampleFormValidation';
 import CorrectionsForm from '../CorrectionsForm';
@@ -47,7 +46,7 @@ import FormUpdateSuccessMessage from '../FormUpdateSuccessMessage';
 /**
  * MemberRegistrationCorrectionForm render member registration correction form.
  * @type {Class}
- * @return {*} Correction form
+ * @return {HTML} Correction form
  */
 class MemberRegistrationCorrectionForm extends Component {
 
@@ -117,23 +116,11 @@ class MemberRegistrationCorrectionForm extends Component {
 
   /**
    * validate method check validation for only optIn is 'Y' form field and return conditional error for form field
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {*}
+   * @return {}
    */
   validate = () => {
     const { student } = this.state;
-
     if (student.optIn2019 === 'Y') {
-      /* validation.forEach((valid) => {
-
-        const error = validations[valid.validates](formData[valid.field]);
-
-        if (!isEmpty(error)) {
-          errors[valid.field].addError(error);
-        }
-      });
-      return errors;*/
       return validation;
     }
     return {};
@@ -152,7 +139,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const { student } = this.state;
 
     // Calls api to update student data
-    this.props.updateStudentData({
+    this.props.updateStudentDataAction({
       id,
       secretKey,
       student,
@@ -184,8 +171,14 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   /**
+   * callBack for changeIsOnlyOptIn
+   */
+  onlyOptInChanged = () => {
+    this.changeIsOnlyOptIn(true);
+  };
+  /**
    * renderSubmitButtons method render submit button
-   * @return {*} submit button
+   * @return {HTML} submit button
    */
   renderSubmitButtons = () => (
     <Button
@@ -203,19 +196,16 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   handleSubmit = (event) => {
     const { student, oldStudentDate, hasError } = this.state;
-
     delete student.backButton;
     delete student.submitButton;
-
     event.preventDefault();
-
     if (student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
 
-    } else if (!isEqual(oldStudentDate, student) && hasError) {
+    } else if (!isObjectsEqual({ object1: oldStudentDate, object2: student }) && hasError) {
       this.setState({
         isSubmitTriggered: true,
       });
@@ -249,7 +239,6 @@ class MemberRegistrationCorrectionForm extends Component {
   /**
    * transformErrors method transform error of form field conditionally
    * optIn value should not be 'N'
-   * @param {Array} errors
    * @return {Array} temError
    */
   transformErrors = () => {
@@ -269,7 +258,7 @@ class MemberRegistrationCorrectionForm extends Component {
 
   /**
    * renderBackButton render back button conditionally for redirect to previous location .
-   * @return {*}
+   * @return {HTML}
    */
   renderBackButton = () => {
 
@@ -277,7 +266,7 @@ class MemberRegistrationCorrectionForm extends Component {
       pageUser,
       context,
     } = this.props;
-    const { ADMIN, STUDENT_WITH_URL, STUDENT } = USER_TYPES;
+    const { ADMIN } = USER_TYPES;
 
     if (pageUser === ADMIN) {
       return (
@@ -287,12 +276,12 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (pageUser === STUDENT_WITH_URL || pageUser === STUDENT) {
+    } else if (isPageUserStudent({ pageUser })) {
       return (
         <Button
           type="button"
           buttonText={goBackBtnText}
-          onClick={() => { this.changeIsOnlyOptIn(true); }}
+          onClick={this.onlyOptInChanged}
         />
       );
     }
@@ -393,7 +382,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   secretKey: PropTypes.string,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tenant: PropTypes.string,
-  updateStudentData: PropTypes.func,
+  updateStudentDataAction: PropTypes.func,
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
@@ -406,7 +395,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   secretKey: '',
   studentData: {},
   tenant: '',
-  updateStudentData: () => {},
+  updateStudentDataAction: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -421,8 +410,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  createStudentData,
   isUpdatedResetAction,
-  setStudentCredentials,
-  updateStudentData,
+  updateStudentDataAction,
 })(MemberRegistrationCorrectionForm);
