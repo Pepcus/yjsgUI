@@ -2243,7 +2243,7 @@
       "validates": "addressValidation"
     }
   ],
-  "defaultStudentData": [
+  "defaultStudentDataFormat": [
     {
       "formField": "optIn2019",
       "dataType": "string"

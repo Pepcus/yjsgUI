@@ -151,8 +151,6 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Object} studentData
    */
   prePopulateCourse2019 = (studentData) => {
-    // const lastCourse = nextProps.studentData.classAttended2018;
-    // const level = checkLevelValue(lastCourse);
     const updatedData = updateClassAttended2019InStudentData(studentData);
 
     this.setState({
