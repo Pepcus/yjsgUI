@@ -2,7 +2,7 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { defaultStudentDataFormat } from '../config/memberRegistrationCorrectionFormSchema.json';
+
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,
@@ -274,13 +274,13 @@ export const prePopulateOptIn = (studentData) => {
 /**
  * InitialStudentData method format the form data into corresponding data type
  * @param {Object} studentData
+ * @param {Object} fileData
  * @return {Object}
  * @constructor formattedStudentData
  */
-export const InitialStudentData = (studentData) => {
+export const InitialStudentData = ({ studentData, fileData }) => {
   let formattedStudentData = cloneDeep(studentData);
-
-  defaultStudentDataFormat.forEach((fieldObject) => {
+  fileData.defaultStudentDataFormat.forEach((fieldObject) => {
 
     if (formattedStudentData[fieldObject.formField] === null) {
       const property = [fieldObject.formField];

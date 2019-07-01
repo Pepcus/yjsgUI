@@ -184,14 +184,14 @@ class SelectedStudentsActionWrapper extends Component {
 }
 
 SelectedStudentsActionWrapper.propTypes = {
-  clearSelectedStudents: PropTypes.func,
+  // clearSelectedStudents: PropTypes.func,
   isCoordinatorsFailed: PropTypes.bool,
   metaData: PropTypes.object,
   selectedStudents: PropTypes.array,
 };
 
 SelectedStudentsActionWrapper.defaultProps = {
-  clearSelectedStudents: () => {},
+  // clearSelectedStudents: () => {},
   isCoordinatorsFailed: false,
   metaData: {},
   selectedStudents: [],

@@ -1,11 +1,4 @@
 import {
-  defaultAdmin,
-  defaultStudent,
-  indoreAdmin,
-  indoreStudent,
-  onlyOptIn,
-} from '../config/memberRegistrationCorrectionFormSchema.json';
-import {
   TENANT,
   USER_TYPES,
 } from '../constants/yjsg';
@@ -19,6 +12,7 @@ import { isPageUserStudent } from './registrationFormUtils';
  * @param {Object} student
  * @param {Function} renderBackButton
  * @param {Function} renderSubmitButtons
+ * @param {Object} fileData
  * @return {{schema: Object, uiSchema: Object , formData: Object}}
  */
 export const getFormData = ({
@@ -28,109 +22,109 @@ export const getFormData = ({
   student,
   renderBackButton,
   renderSubmitButtons,
+  fileData,
 }) => {
-
-  const { STUDENT_WITH_URL, STUDENT, ADMIN } = USER_TYPES;
+  const { ADMIN } = USER_TYPES;
   const { INDORE } = TENANT;
   let schema = {};
   let uiSchema = {};
   let formData = {};
 
   if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
-    schema = onlyOptIn.Schema;
-    uiSchema = onlyOptIn.UISchema;
+    schema = fileData.Schema;
+    uiSchema = fileData.UISchema;
     formData = {
-      ...onlyOptIn.Data,
+      ...fileData.Data,
       ...student,
     };
 
   } else if (tenant === INDORE) {
     if (pageUser === ADMIN) {
-      schema = indoreAdmin.Schema;
+      schema = fileData.Schema;
       uiSchema = {
-        ...indoreAdmin.UISchema,
+        ...fileData.UISchema,
         backButton: {
-          ...indoreAdmin.UISchema.backButton,
+          ...fileData.UISchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...indoreAdmin.UISchema.submitButton,
+          ...fileData.UISchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...indoreAdmin.Data,
+        ...fileData.Data,
         ...student,
       };
 
-    } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
-      schema = indoreStudent.Schema;
+    } else if (isPageUserStudent({ pageUser })) {
+      schema = fileData.Schema;
       uiSchema = {
-        ...indoreStudent.UISchema,
+        ...fileData.UISchema,
         backButton: {
-          ...indoreStudent.UISchema.backButton,
+          ...fileData.UISchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...indoreStudent.UISchema.submitButton,
+          ...fileData.UISchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...indoreStudent.Data,
+        ...fileData.Data,
         ...student,
       };
     }
 
   } else if (pageUser === ADMIN) {
-    schema = defaultAdmin.Schema;
+    schema = fileData.Schema;
     uiSchema = {
-      ...defaultAdmin.UISchema,
+      ...fileData.UISchema,
       backButton: {
-        ...defaultAdmin.UISchema.backButton,
+        ...fileData.UISchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...defaultAdmin.UISchema.submitButton,
+        ...fileData.UISchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...defaultAdmin.Data,
+      ...fileData.Data,
       ...student,
     };
 
-  } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
-    schema = defaultStudent.Schema;
+  } else if (isPageUserStudent({ pageUser })) {
+    schema = fileData.Schema;
     uiSchema = {
-      ...defaultStudent.UISchema,
+      ...fileData.UISchema,
       backButton: {
-        ...defaultStudent.UISchema.backButton,
+        ...fileData.UISchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...defaultStudent.UISchema.submitButton,
+        ...fileData.UISchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...defaultStudent.Data,
+      ...fileData.Data,
       ...student,
     };
 

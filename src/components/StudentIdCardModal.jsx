@@ -9,7 +9,9 @@ import {
   ID_CARD_SMALL_HEADING,
   ID_CARD_MAIN_HEADING,
 } from '../constants/text';
-import { convertFirstCharacterInUpperCase,
+
+import {
+  convertFirstCharacterInUpperCase,
   getFormattedStudentId,
 } from '../utils/dataGridUtils';
 import { getBusCoordinators } from '../reducers/assetFilesReducer';

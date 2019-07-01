@@ -6,8 +6,7 @@
  * @param {String} responseType
  * @return {Promise} response
  */
-export const GET = ({ url, headers, responseType = null }) => {
-
+export const GET = ({ url, headers, responseType }) => {
   const config = {
     url,
     method: 'GET',

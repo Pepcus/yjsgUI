@@ -1,0 +1,607 @@
+{
+  "Schema" : {
+    "type": "object",
+    "dependencies": {
+      "optIn2019": {
+        "oneOf": [
+          {
+            "properties": {
+              "optIn2019": {
+                "enum": [
+                  "Y"
+                ]
+              },
+              "id": {
+                "title": "आई.डी.",
+                "type": "number"
+              },
+              "name": {
+                "title": "नाम",
+                "type": "string",
+                "validator": "nameValidation"
+              },
+              "fatherName": {
+                "title": "पिता / पति का नाम",
+                "type": "string",
+                "validator": "nameValidation"
+              },
+              "gender": {
+                "title": "लिंग",
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female"
+                ],
+                "enumNames": [
+                  "पुरुष",
+                  "स्त्री"
+                ]
+              },
+              "age": {
+                "title": "उम्र",
+                "type": "number",
+                "validator": "ageValidation"
+              },
+              "mobile": {
+                "title": "मोबाइल नं",
+                "type": "number",
+                "validator": "mobileValidation"
+              },
+              "occupation": {
+                "title": "व्यवसाय (युवा वर्ग हेतु)",
+                "type": "string"
+              },
+              "education": {
+                "title": "स्कूल शिक्षा",
+                "type": "string"
+              },
+              "email": {
+                "title": "ई-मेल",
+                "type": "string",
+                "validator": "optionalEmailValidation"
+              },
+              "classAttended2018": {
+                "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
+                "type": "string"
+              },
+              "classAttended2019": {
+                "title": "Class",
+                "type": "string",
+                "enum": [
+                  "Level 1",
+                  "Level 2",
+                  "Level 3",
+                  "Level 4",
+                  "Level 5",
+                  "Level 6",
+                  "Level 7",
+                  "Level 8"
+                ],
+                "enumNames": [
+                  "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
+                  "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
+                  "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
+                  "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
+                  "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
+                  "Level 6 :  छहढाला-ढाल 1-2",
+                  "Level 7 : छहढाला-ढाल 3",
+                  "Level 8 : छहढाला-ढाल 4-5"
+                ]
+              },
+              "marks2019": {
+                "title": "Marks 2019",
+                "type": "string"
+              },
+              "classRoomNo2019": {
+                "title": "Room",
+                "type": [
+                  "string"
+                ],
+                "enum": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ],
+                "enumNames": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ]
+              },
+              "address": {
+                "title": "पूरा पता",
+                "type": "string",
+                "validator": "addressValidation"
+              },
+              "remark": {
+                "title": "Remark",
+                "type": "string"
+              },
+              "required": [
+                "id",
+                "name",
+                "fatherName",
+                "gender",
+                "age",
+                "mobile",
+                "address"
+              ]
+            }
+          },
+          {
+            "properties": {
+              "optIn2019": {
+                "enum": [
+                  "N"
+                ]
+              },
+              "id": {
+                "title": "आई.डी.",
+                "type": "number"
+              },
+              "name": {
+                "title": "नाम",
+                "type": "string"
+              },
+              "fatherName": {
+                "title": "पिता / पति का नाम",
+                "type": "string"
+              },
+              "gender": {
+                "title": "लिंग",
+                "type": "string",
+                "enum": ["Male", "Female"],
+                "enumNames": ["पुरुष", "स्त्री"]
+              },
+              "age": {
+                "title": "उम्र",
+                "type": "number"
+              },
+              "mobile": {
+                "title": "मोबाइल नं",
+                "type": "number"
+              },
+              "occupation": {
+                "title": "व्यवसाय (युवा वर्ग हेतु)",
+                "type": "string"
+              },
+              "education": {
+                "title": "स्कूल शिक्षा",
+                "type": "string"
+              },
+              "email": {
+                "title": "ई-मेल",
+                "type": "string"
+              },
+              "classAttended2018": {
+                "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
+                "type": "string"
+              },
+              "classAttended2019": {
+                "title": "Class",
+                "type": "string",
+                "enum": [
+                  "Level 1",
+                  "Level 2",
+                  "Level 3",
+                  "Level 4",
+                  "Level 5",
+                  "Level 6",
+                  "Level 7",
+                  "Level 8"
+                ],
+                "enumNames": [
+                  "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
+                  "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
+                  "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
+                  "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
+                  "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
+                  "Level 6 :  छहढाला-ढाल 1-2",
+                  "Level 7 : छहढाला-ढाल 3",
+                  "Level 8 : छहढाला-ढाल 4-5"
+                ]
+              },
+              "marks2019": {
+                "title": "Marks 2019",
+                "type": "string"
+              },
+              "classRoomNo2019": {
+                "title": "Room",
+                "type": ["string"],
+                "enum": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ],
+                "enumNames": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ]
+              },
+              "address": {
+                "title": "पूरा पता",
+                "type": "string"
+              },
+              "remark": {
+                "title": "Remark",
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "properties": {
+      "optIn2019": {
+        "title": "2019 के शिविर की स्वीकृति ?",
+        "type": "string",
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "enumNames": [
+          "हाँ",
+          "नहीं"
+        ],
+        "default": "Y"
+      },
+      "backButton": {
+        "type": "string"
+      },
+      "submitButton": {
+        "type": "string"
+      },
+      "marks2018": {
+        "title": "Marks 2018:",
+        "type": "string"
+      },
+      "marks2017": {
+        "title": "Marks 2017:",
+        "type": "string"
+      },
+      "marks2016": {
+        "title": "Marks 2016:",
+        "type": "string"
+      }
+    }
+  },
+  "UISchema" : {
+    "ui:order": [
+      "optIn2019",
+      "id",
+      "name",
+      "fatherName",
+      "gender",
+      "age",
+      "mobile",
+      "occupation",
+      "education",
+      "email",
+      "classAttended2018",
+      "classAttended2019",
+      "marks2019",
+      "classRoomNo2019",
+      "address",
+      "remark",
+      "backButton",
+      "submitButton",
+      "marks2018",
+      "marks2017",
+      "marks2016"
+    ],
+    "optIn2019": {
+      "classNames": "field-style"
+    },
+    "name": {
+      "classNames": "field-style"
+    },
+    "fatherName": {
+      "classNames": "field-style"
+    },
+    "mobile": {
+      "classNames": "field-style"
+    },
+    "occupation": {
+      "classNames": "field-style"
+    },
+    "education": {
+      "classNames": "field-style"
+    },
+    "email": {
+      "classNames": "field-style"
+    },
+    "classAttended2018": {
+      "classNames": "field-style"
+    },
+    "marks2019": {
+      "classNames": "field-style"
+    },
+    "backButton": {
+      "classNames": "button-style",
+      "ui:options": {
+        "label": false
+      }
+    },
+    "submitButton": {
+      "classNames": "button-style",
+      "ui:options": {
+        "label": false
+      }
+    },
+    "address": {
+      "ui:widget": "textarea",
+      "classNames": "field-style"
+    },
+    "busStop": {
+      "ui:placeholder": "कृपया एक चुनिए . . ."
+    },
+    "age": {
+      "classNames": "field-style",
+      "ui:widget": "updown"
+    },
+    "gender": {
+      "classNames": "field-style",
+      "ui:placeholder": "कृपया एक चुनिए . . ."
+    },
+    "classAttended2019": {
+      "classNames": "field-style",
+      "ui:placeholder": "कृपया एक चुनिए . . ."
+    },
+    "id": {
+      "ui:disabled": true,
+      "classNames": "field-style"
+    },
+    "marks2018": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "classNames": "not-editable-field-style"
+    },
+    "marks2017": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "classNames": "not-editable-field-style"
+    },
+    "marks2016": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "classNames": "not-editable-field-style"
+    },
+    "busNumber": {
+      "ui:placeholder": "कृपया एक चुनिए . . ."
+    },
+    "classRoomNo2019": {
+      "classNames": "field-style",
+      "ui:placeholder": "कृपया एक चुनिए . . ."
+    },
+    "remark": {
+      "classNames": "field-style",
+      "ui:widget": "textarea"
+    }
+  },
+  "Data": {},
+  "validation": [
+    {
+      "field": "name",
+      "validates": "nameValidation"
+    },
+    {
+      "field": "fatherName",
+      "validates": "nameValidation"
+    },
+    {
+      "field": "mobile",
+      "validates": "mobileValidation"
+    },
+    {
+      "field": "age",
+      "validates": "ageValidation"
+    },
+    {
+      "field": "email",
+      "validates": "optionalEmailValidation"
+    },
+    {
+      "field": "address",
+      "validates": "addressValidation"
+    }
+  ],
+  "defaultStudentDataFormat": [
+    {
+      "formField": "optIn2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "id",
+      "dataType": "number"
+    },
+    {
+      "formField": "name",
+      "dataType": "string"
+    },
+    {
+      "formField": "fatherName",
+      "dataType": "string"
+    },
+    {
+      "formField": "gender",
+      "dataType": "string"
+    },
+    {
+      "formField": "age",
+      "dataType": "number"
+    },
+    {
+      "formField": "mobile",
+      "dataType": "number"
+    },
+    {
+      "formField": "occupation",
+      "dataType": "string"
+    },
+    {
+      "formField": "education",
+      "dataType": "string"
+    },
+    {
+      "formField": "email",
+      "dataType": "string"
+    },
+    {
+      "formField": "busStop",
+      "dataType": "string"
+    },
+    {
+      "formField": "classAttended2018",
+      "dataType": "string"
+    },
+    {
+      "formField": "classAttended2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2018",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2017",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2016",
+      "dataType": "string"
+    },
+    {
+      "formField": "busNumber",
+      "dataType": "string"
+    },
+    {
+      "formField": "classRoomNo2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "address",
+      "dataType": "string"
+    },
+    {
+      "formField": "remark",
+      "dataType": "string"
+    }
+  ]
+}

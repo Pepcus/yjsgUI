@@ -29,7 +29,8 @@ const CorrectionsForm = ({ pageUser,
   renderBackButton,
   renderSubmitButtons,
   formRef,
-  children }) => {
+  children,
+  fileData }) => {
 
   const formDetails = getFormData({
     pageUser,
@@ -38,6 +39,7 @@ const CorrectionsForm = ({ pageUser,
     student,
     renderBackButton,
     renderSubmitButtons,
+    fileData,
   });
 
   /**
@@ -117,6 +119,7 @@ const CorrectionsForm = ({ pageUser,
 CorrectionsForm.propTypes = {
   changeIsOnlyOptIn: PropTypes.func,
   children: PropTypes.node,
+  fileData: PropTypes.object,
   formRef: PropTypes.object,
   onChange: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
@@ -133,6 +136,7 @@ CorrectionsForm.propTypes = {
 CorrectionsForm.defaultProps = {
   changeIsOnlyOptIn: () => {},
   children: null,
+  fileData: {},
   formRef: {},
   onChange: () => {},
   onlyOptInForm: false,

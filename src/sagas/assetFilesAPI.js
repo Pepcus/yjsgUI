@@ -26,6 +26,16 @@ export const fetchFile = (fileDetails) => {
 };
 
 /**
+ * fetchJsonSchemaFile method fetch file data
+ * @param {Object} fileDetails
+ * @return {Promise}
+ */
+export const fetchJsonSchemaFile = ({ tenant, file }) => (
+  GET({
+    url: `src/config/tenant/${tenant}/${file}.json`,
+  }));
+
+/**
  * fetchFileConfig fetch filesConfig json file
  * @return {Promise}
  */
