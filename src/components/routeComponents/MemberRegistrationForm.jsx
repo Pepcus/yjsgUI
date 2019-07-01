@@ -32,7 +32,7 @@ import {
 } from '../../constants/text';
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import Form from '../Form';
+import Form from '../form';
 
 
 /**

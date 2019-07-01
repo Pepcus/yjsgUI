@@ -19,7 +19,7 @@ import {
   UPDATED_ID_CARD_STATUS_FAILED_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import Form from './Form';
+import Form from './form';
 import { UpdateIdCardStatusSelectedStudentsJsonSchema } from '../config/fromJsonSchema.json';
 import { extractStudentIds } from '../utils/dataGridUtils';
 

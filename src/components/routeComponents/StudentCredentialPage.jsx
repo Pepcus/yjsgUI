@@ -38,7 +38,7 @@ import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../../constants/messages';
 import { getParameterByName } from '../../utils/http';
-import Form from '../Form';
+import Form from '../form';
 import { StudentCredentialPageJsonSchema } from '../../config/fromJsonSchema.json';
 
 // FixMe:This component is unnecessary.

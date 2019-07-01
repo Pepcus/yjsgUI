@@ -11,7 +11,7 @@ import {
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from '../constants/text';
 import { isPageUserStudent } from '../utils/registrationFormUtils';
-import Form from './Form';
+import Form from './form';
 
 /**
  * CorrectionsForm is functional component which render the correction form according to user type

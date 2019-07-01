@@ -22,7 +22,7 @@ import {
   isMarkAttendanceSuccess,
   isMarkAttendanceFailed,
 } from '../reducers/studentRegistrationReducer';
-import Form from './Form';
+import Form from './form';
 import { MarkSelectedStudentAttendanceJsonSchema } from '../config/fromJsonSchema.json';
 
 const customSelectedStudentsAttendanceModalStyles = {

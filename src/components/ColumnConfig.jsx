@@ -11,7 +11,7 @@ import {
   chunkArray,
   getChangedVisibleColumnConfig,
 } from '../utils/dataGridUtils';
-import Form from './Form';
+import Form from './form';
 import { ColumnConfigJsonSchema } from '../config/fromJsonSchema.json';
 
 const customColumnOptionStyles = {

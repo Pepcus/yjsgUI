@@ -6,7 +6,7 @@ import {
   goBackBtnText,
 } from '../constants/yjsg';
 import Button from './common/Button';
-import Form from './Form';
+import Form from './form';
 import { AdminLoginFormJsonSchema } from '../config/fromJsonSchema.json';
 
 /**

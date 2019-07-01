@@ -24,7 +24,7 @@ import {
 import {
   days,
 } from '../constants/yjsg';
-import Form from './Form';
+import Form from './form';
 import { UploadStudentsAttendanceFileJsonSchema } from '../config/fromJsonSchema.json';
 
 const customUploadStudentsAttendanceFileModalStyles = {
