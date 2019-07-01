@@ -1,49 +1,62 @@
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import AdminLoginForm from './AdminLoginForm';
-import { adminLoginBtnText, newRegistrationBtnText } from '../constants/yjsg';
+import {
+  adminLoginBtnText,
+  newRegistrationBtnText,
+} from '../constants/yjsg';
 import Button from './common/Button';
 
 /**
  * LoginForm render login form
  * @param {Boolean} isAdmin
  * @param {Object} admin
- * @param {Function} handleInputChange
- * @param {Function} adminScreenRedirection
- * @param {Function} disableAdminLoginButtons
+ * @param {Function} handleAdminScreenRedirection
+ * @param {Function} handleDisableAdminLoginButtons
  * @param {Function} setAdminLogin
  * @param {Boolean} isNewRegistration
  * @param {Function} redirectToNewRegistrationPage
  * @param {Function} enableAdminLoginButtons
+ * @param {Function} onChange
+ * @param {Function} transformErrors
  * @type {Function}
- * @return {ReactComponent}
+ * @return {HTML} admin login form
  * @constructor
  */
-const LoginForm = ({ isAdmin,
+const LoginForm = ({
+  onChange,
+  transformErrors,
+  isAdmin,
   admin,
-  handleInputChange,
-  adminScreenRedirection,
-  disableAdminLoginButtons,
+  handleAdminScreenRedirection,
+  handleDisableAdminLoginButtons,
   setAdminLogin,
   isNewRegistration,
   redirectToNewRegistrationPage,
   enableAdminLoginButtons,
 }) => {
+
   if (isAdmin) {
     return (
       <AdminLoginForm
+        onChange={onChange}
+        transformErrors={transformErrors}
         isAdmin={isAdmin}
         admin={admin}
-        handleInputChange={handleInputChange}
-        adminScreenRedirection={adminScreenRedirection}
-        disableAdminLoginButtons={disableAdminLoginButtons}
+        handleAdminScreenRedirection={handleAdminScreenRedirection}
+        handleDisableAdminLoginButtons={handleDisableAdminLoginButtons}
         setAdminLogin={setAdminLogin}
       />
     );
+
   } else if (isNewRegistration) {
     return <Switch><Redirect to="/studentRegister" /></Switch>;
+
   } else if (!isAdmin) {
     return (
       <div>
@@ -62,26 +75,30 @@ const LoginForm = ({ isAdmin,
   } return null;
 };
 
-LoginForm.propsType = {
-  isAdmin: PropTypes.bool,
+LoginForm.propTypes = {
+  onChange: PropTypes.func,
+  transformErrors: PropTypes.func,
   admin: PropTypes.object,
-  handleInputChange: PropTypes.func,
-  adminScreenRedirection: PropTypes.func,
-  disableAdminLoginButtons: PropTypes.func,
-  setAdminLogin: PropTypes.func,
+  handleAdminScreenRedirection: PropTypes.func,
+  handleDisableAdminLoginButtons: PropTypes.func,
+  enableAdminLoginButtons: PropTypes.func,
+  isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
   redirectToNewRegistrationPage: PropTypes.func,
-  enableAdminLoginButtons: PropTypes.func,
+  setAdminLogin: PropTypes.func,
 };
+
 LoginForm.defaultProps = {
-  isAdmin: false,
+  onChange: () => {},
+  transformErrors: () => {},
   admin: {},
-  handleInputChange: () => {},
-  adminScreenRedirection: () => {},
-  disableAdminLoginButtons: () => {},
-  setAdminLogin: () => {},
+  handleAdminScreenRedirection: () => {},
+  handleDisableAdminLoginButtons: () => {},
+  enableAdminLoginButtons: () => {},
+  isAdmin: false,
   isNewRegistration: false,
   redirectToNewRegistrationPage: () => {},
-  enableAdminLoginButtons: () => {},
+  setAdminLogin: () => {},
 };
+
 export default LoginForm;

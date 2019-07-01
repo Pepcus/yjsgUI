@@ -30,7 +30,6 @@ import {
   GENDER_LABEL,
   AGE_LABEL,
   MOBILE_NUMBER_LABEL,
-  MOTHER_MOBILE_NUMBER_LABEL,
   OCCUPATION_LABEL,
   EDUCATION_LABEL,
   EMAIL_LABEL,
@@ -41,16 +40,19 @@ import {
   CLASS_LABEL,
   ROOM_LABEL,
 } from '../../constants/label';
-import InputField from '../form/InputField';
-import TextAreaField from '../form/TextAreaField';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
 import LinkButton from '../common/LinkButton';
-import { updateStudentData, isUpdatedResetAction } from '../../actions/studentRegistrationActions';
+import {
+  updateStudentDataAction,
+  isUpdatedResetAction,
+} from '../../actions/studentRegistrationActions';
 import {
   updateClassAttended2019InStudentData,
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
-  validateInput,
+  validateInput, isPageUserStudent,
 } from '../../utils/registrationFormUtils';
 import {
   getStudent,
@@ -60,9 +62,13 @@ import {
   getUserSecretKey,
   getPageUserType,
 } from '../../reducers/studentRegistrationReducer';
-import SelectListInputField from '../form/SelectListInputField';
+import SelectListInputField from '../formComponents/SelectListInputField';
 import Button from '../common/Button';
-import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../constants/text';
+import {
+  CLICK_HERE_TEXT,
+  NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT,
+  YES_TEXT,
+} from '../../constants/text';
 import Popup from '../common/Popup';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
@@ -70,11 +76,15 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * The StudentRegistrationCorrectionForm component render student correction form.
  * @type {class}
+ * @return {HTML} registration correction form
  */
 class StudentRegistrationCorrectionForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       student: {
         name: '',
@@ -109,6 +119,7 @@ class StudentRegistrationCorrectionForm extends Component {
         optIn2019: {},
       },
     };
+
     // FIXME: Use arrow functions to avoid binding.
     this.onSubmitStudentData = this.onSubmitStudentData.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
@@ -117,40 +128,58 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   componentDidMount() {
+
+    const { studentData } = this.props;
+    const { student } = this.state;
     // get student data from session if present
     const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
-    const studentData = !isEmpty(this.props.studentData)
-      ? this.props.studentData : studentDataFromSession;
-    if (!isEmpty(studentData)) {
+    const finalStudentData = !isEmpty(studentData)
+      ? studentData : studentDataFromSession;
+
+    if (!isEmpty(finalStudentData)) {
       this.setState({
-        student: { ...this.state.student, ...studentData },
+        student: { ...student, ...finalStudentData },
         isSubmitTriggered: false,
       });
-      this.prePopulateCourse2019(studentData);
-      this.verifyStudentFormData({ email: '' });
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    // get student data from session if present
-    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
-    // If student data is not present in props then it will get from session store
-    // for maintain the student credential in case student get back to student correction form
-    const studentData = !isEmpty(nextProps.studentData)
-      ? nextProps.studentData : studentDataFromSession;
-    if (!isEmpty(studentData)) {
-      this.setState({
-        student: { ...this.state.student, ...studentData },
-        isSubmitTriggered: false,
-      });
-      this.prePopulateCourse2019(studentData);
+      this.prePopulateCourse2019(finalStudentData);
       this.verifyStudentFormData({ email: '' });
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    const { studentData } = nextProps;
+    const { student } = this.state;
+    // get student data from session if present
+    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+    // If student data is not present in props then it will get from session store
+    // for maintain the student credential in case student get back to student correction form
+    const finalStudentData = !isEmpty(studentData)
+      ? studentData : studentDataFromSession;
+
+    if (!isEmpty(finalStudentData)) {
+      this.setState({
+        student: { ...student, ...finalStudentData },
+        isSubmitTriggered: false,
+      });
+      this.prePopulateCourse2019(finalStudentData);
+      this.verifyStudentFormData({ email: '' });
+    }
+  }
+
+  /**
+   * renderBusStopOptions method render bus stop form field conditionally
+   * @return {HTML} bus stop form field
+   */
   renderBusStopOptions = () => {
-    if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'N') {
+
+    const { student, errorMessage } = this.state;
+    const { tenant } = this.props;
+    const { INDORE } = TENANT;
+
+    if (tenant === INDORE && student.optIn2019 === 'N') {
       return (
         <SelectListInputField
           type="text"
@@ -158,10 +187,11 @@ class StudentRegistrationCorrectionForm extends Component {
           name="busStop"
           options={busStops}
           onInputChange={this._handleInputChange}
-          value={this.state.student.busStop}
+          value={student.busStop}
         />
       );
-    } else if (this.props.tenant === TENANT.INDORE && this.state.student.optIn2019 === 'Y') {
+
+    } else if (tenant === INDORE && student.optIn2019 === 'Y') {
       return (
         <SelectListInputField
           type="text"
@@ -169,82 +199,129 @@ class StudentRegistrationCorrectionForm extends Component {
           name="busStop"
           options={busStops}
           onInputChange={this._handleInputChange}
-          value={this.state.student.busStop}
+          value={student.busStop}
           isRequired
-          errorMessage={this.state.errorMessage.busStop.message}
+          errorMessage={errorMessage.busStop.message}
         />
       );
     } return null;
   };
-     renderBusNumberOption = () => {
-       if (this.props.tenant === TENANT.INDORE && this.props.pageUser === USER_TYPES.ADMIN) {
-         return (
-           <SelectListInputField
-             name="busNumber"
-             label={BUS_NUMBER_LABEL}
-             options={busNumber}
-             onInputChange={this._handleInputChange}
-             value={this.state.student.busNumber}
-           />
-         );
-       } return null;
-     };
+
+  /**
+   * renderBusNumberOption method render bus number form field conditionally
+   * @return {HTML} bus number field
+   */
+  renderBusNumberOption = () => {
+
+    const { student } = this.state;
+    const { tenant, pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+    const { INDORE } = TENANT;
+
+    if (tenant === INDORE && pageUser === ADMIN) {
+      return (
+        <SelectListInputField
+          name="busNumber"
+          label={BUS_NUMBER_LABEL}
+          options={busNumber}
+          onInputChange={this._handleInputChange}
+          value={student.busNumber}
+        />
+      );
+    } return null;
+  };
+
+  /**
+   * renderMark2019Field method render current year mark form field conditionally
+   * @return {HTML} mark field
+   */
   renderMark2019Field = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { student } = this.state;
+    const { pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <InputField
           type="text"
           label="Marks 2019"
           name="marks2019"
           onInputChange={this._handleInputChange}
-          value={this.state.student.marks2019}
+          value={student.marks2019}
         />
       );
     } return null;
   } ;
+
+  /**
+   * renderClassRoom2019Field method render current year class room form field conditionally
+   * @return {HTML} current year class room field
+   */
   renderClassRoom2019Field = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { student } = this.state;
+    const { pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <SelectListInputField
           name="classRoomNo2019"
           label={ROOM_LABEL}
           options={classRoomNumber}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classRoomNo2019}
+          value={student.classRoomNo2019}
           style={{ fontFamily: 'sans-serif' }}
           optionsStyle={{ fontFamily: 'Poppins' }}
         />
       );
     } return null;
   };
+
+  /**
+   * renderRemarkField method remark form field only in admin case
+   * @return {HTML} remark form field
+   */
   renderRemarkField = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { student } = this.state;
+    const { pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <TextAreaField
           label="Remark"
           name="remark"
           onInputChange={this._handleInputChange}
-          value={this.state.student.remark}
+          value={student.remark}
           isRequired={false}
         />
       );
     } return null;
   };
+
   /**
    * submitStudentDataForOnlyOptInCase method will call
    * in case when student only edit optIn2019 and submit it.
    * @param {Object} e
    */
   submitStudentDataForOnlyOptInCase = (e) => {
-    this.verifyStudentFormData(this.state.student);
+
+    const { student } = this.state;
+
+    this.verifyStudentFormData(student);
     e.preventDefault();
-    if (!isEmpty(this.state.student.optIn2019)) {
+
+    if (!isEmpty(student.optIn2019)) {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
     }
   };
+
   /**
    * changeIsOnlyOptIn2019 method maintained flag value of onlyOptIn2019
    * as per form contends show to user.
@@ -255,194 +332,244 @@ class StudentRegistrationCorrectionForm extends Component {
       onlyOptIn2019: value,
     });
   };
+
+  /**
+   * handle onClick of edit other information click
+   */
+  setOnlyOptIn2019ToFalse = () => {
+    this.changeIsOnlyOptIn2019(false);
+  };
+
+  /**
+   * handle onClick of edit other information click
+   */
+  setOnlyOptIn2019ToTrue = () => {
+    this.changeIsOnlyOptIn2019(true);
+  };
+
   /**
    * renderOnlyOptIn2019 method render react component with OptIn2019,
    * submit button and edit all information form link.
-   * @return {*}
+   * @return {HTML}
    */
-  renderOnlyOptIn2019 = () => (
-    <div className="registrationFormContainer correction-form-container">
-      {this.renderSuccessMessage()}
-      <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
-        <div className="inputFieldContainer input-field-container">
-          <label className="name-label">{NAME_LABEL}: </label>
-          <span className="student-correction-name-text">{this.state.student.name}</span>
-          <div className="inputWrapper input-wrapper-correction-url">
-            <div className="has-error inputWrapperContainer errorInputField">
-              <div className="inputLabel">
-                <label>{IS_OPT_IN_OR_OPT_OUT_2019_LABEL} * </label>
-                <div className="advance-input-radio advance-input-print-later">
-                  <div className="input-radio-container">
-                    <input
-                      type="radio"
-                      name="OptInOrOptOut"
-                      value="Y"
-                      onChange={this.onClickRadioButton}
-                      checked={this.state.student.optIn2019 === 'Y'}
-                    />
-                    <label htmlFor="Opt-In">{YES_TEXT}</label>
+  renderOnlyOptIn2019 = () => {
+
+    const { student, errorMessage } = this.state;
+
+    return (
+      <div className="registrationFormContainer correction-form-container">
+        {this.renderSuccessMessage()}
+        <form id="studentCorrectionForm" className="inputFieldContainerWrapper correction-form-input-wrapper">
+          <div className="inputFieldContainer input-field-container">
+            <label className="name-label">{NAME_LABEL}: </label>
+            <span className="student-correction-name-text">{student.name}</span>
+            <div className="inputWrapper input-wrapper-correction-url">
+              <div className="has-error inputWrapperContainer errorInputField">
+                <div className="inputLabel">
+                  <label>{IS_OPT_IN_OR_OPT_OUT_2019_LABEL} * </label>
+                  <div className="advance-input-radio advance-input-print-later">
+                    <div className="input-radio-container">
+                      <input
+                        type="radio"
+                        name="OptInOrOptOut"
+                        value="Y"
+                        onChange={this.onClickRadioButton}
+                        checked={student.optIn2019 === 'Y'}
+                      />
+                      <label htmlFor="Opt-In">{YES_TEXT}</label>
+                    </div>
+                    <div className="input-radio-container">
+                      <input
+                        type="radio"
+                        name="OptInOrOptOut"
+                        value="N"
+                        onChange={this.onClickRadioButton}
+                        checked={student.optIn2019 === 'N'}
+                      />
+                      <label htmlFor="Opt-Out">{NO_TEXT}</label>
+                    </div>
                   </div>
-                  <div className="input-radio-container">
-                    <input
-                      type="radio"
-                      name="OptInOrOptOut"
-                      value="N"
-                      onChange={this.onClickRadioButton}
-                      checked={this.state.student.optIn2019 === 'N'}
-                    />
-                    <label htmlFor="Opt-Out">{NO_TEXT}</label>
-                  </div>
+                  <ErrorMessage message={errorMessage.optIn2019.message} />
                 </div>
-                <ErrorMessage message={this.state.errorMessage.optIn2019.message} />
               </div>
             </div>
-          </div>
-          <div className="registrationFormButtonContainer student-correction-button-container">
-            <div className="button-wrapper student-correction-button-wrapper">
-              <div className="button-container button-container-correction">
-                <Button
-                  buttonText={formSubmitBtnText}
-                  type="submit"
-                  formName="studentRegistrationForm"
-                  value="Submit"
-                  onClick={this.submitStudentDataForOnlyOptInCase}
-                />
+            <div className="registrationFormButtonContainer student-correction-button-container">
+              <div className="button-wrapper student-correction-button-wrapper">
+                <div className="button-container button-container-correction">
+                  <Button
+                    buttonText={formSubmitBtnText}
+                    type="submit"
+                    formName="studentRegistrationForm"
+                    value="Submit"
+                    onClick={this.submitStudentDataForOnlyOptInCase}
+                  />
+                </div>
               </div>
             </div>
+            <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
+              <a className="student-portal-link" onClick={this.setOnlyOptIn2019ToFalse}>
+                {CLICK_HERE_TEXT}
+              </a>
+            </span>
           </div>
-          <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
-            <a className="student-portal-link" onClick={() => { this.changeIsOnlyOptIn2019(false); }}>{CLICK_HERE_TEXT}
-            </a>
-          </span>
-        </div>
-      </form>
-    </div>
-  );
+        </form>
+      </div>
+    );
+  };
+
   /**
    * verifyStudentFormData check the student form data is valid or not.
    * @param {Object} studentData
    */
   verifyStudentFormData(studentData) {
-    const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
-      isDataCorrect(studentData, this.props.tenant));
+
+    const { errorMessage } = this.state;
+    const { tenant } = this.props;
+    const errorMessageObject = extend(cloneDeep(errorMessage),
+      isDataCorrect(studentData, tenant));
+
     this.setState({
       errorMessage: errorMessageObject,
     });
   }
+
   /**
    * renderOptInField optIn field as per user condition.
-   * @return {ReactComponent}
+   * @return {HTML} optIn form field
    */
   renderOptInField = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { student, errorMessage } = this.state;
+    const { pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <SelectListInputField
           name="optIn2019"
           label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
           options={optIn2019Options}
           onInputChange={this._handleInputChange}
-          value={this.state.student.optIn2019}
+          value={student.optIn2019}
         />
       );
     }
+
     return (
       <SelectListInputField
         name="optIn2019"
         label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
         options={optIn2019Options}
         onInputChange={this._handleInputChange}
-        value={this.state.student.optIn2019}
+        value={student.optIn2019}
         isRequired
-        errorMessage={this.state.errorMessage.optIn2019.message}
+        errorMessage={errorMessage.optIn2019.message}
       />
     );
   };
+
   /**
    * renderLevelField render Level field according to user type.
-   * @return {Reactcomponent}
+   * @return {HTML}
    */
   renderLevelField = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { student, errorMessage } = this.state;
+    const { pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
           label={CLASS_LABEL}
           options={studiesArray}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2019}
+          value={student.classAttended2019}
         />
       );
-    } else if (this.state.student.optIn2019 === 'Y' && this.props.pageUser !== USER_TYPES.ADMIN) {
+
+    } else if (student.optIn2019 === 'Y' && pageUser !== ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
           label={WHAT_YOU_WANT_TO_STUDY_LABEL}
           options={studiesArray}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2019}
-          errorMessage={this.state.errorMessage.classAttended2019.message}
+          value={student.classAttended2019}
+          errorMessage={errorMessage.classAttended2019.message}
           isRequired
         />
       );
-    } else if (this.state.student.optIn2019 === 'N' && this.props.pageUser !== USER_TYPES.ADMIN) {
+
+    } else if (student.optIn2019 === 'N' && pageUser !== ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
           label={WHAT_YOU_WANT_TO_STUDY_LABEL}
           options={studiesArray}
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2019}
+          value={student.classAttended2019}
         />
       );
     }
+
     return (
       <SelectListInputField
         name="classAttended2019"
         label={WHAT_YOU_WANT_TO_STUDY_LABEL}
         options={studiesArray}
         onInputChange={this._handleInputChange}
-        value={this.state.student.classAttended2019}
-        errorMessage={this.state.errorMessage.classAttended2019.message}
+        value={student.classAttended2019}
+        errorMessage={errorMessage.classAttended2019.message}
         isRequired
       />
     );
   };
+
   /**
    * renderBackButton method render back button according to user type
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderBackButton = () => {
-    if (this.props.pageUser === USER_TYPES.ADMIN) {
+
+    const { pageUser, context } = this.props;
+    const { ADMIN } = USER_TYPES;
+
+    if (pageUser === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath={this.props.context.previousLocation}
+          linkPath={context.previousLocation}
         />
       );
-    } else if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL) {
+
+    } else if (isPageUserStudent({ pageUser })) {
       return (
         <Button
           type="button"
           buttonText={goBackBtnText}
-          onClick={() => { this.changeIsOnlyOptIn2019(true); }}
+          onClick={this.setOnlyOptIn2019ToTrue}
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
   };
+
   /**
    * prePopulateCourse2019 method will use for pre populate the information of fetch student.
    * @param {Object} studentData
    */
   prePopulateCourse2019(studentData) {
-    // const lastCourse = nextProps.studentData.classAttended2018;
-    // const level = checkLevelValue(lastCourse);
+
     const updatedData = updateClassAttended2019InStudentData(studentData);
+
     this.setState({
       student: updatedData,
     });
@@ -460,6 +587,7 @@ class StudentRegistrationCorrectionForm extends Component {
     }
     return marks;
   };
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
@@ -467,47 +595,70 @@ class StudentRegistrationCorrectionForm extends Component {
    * @return {boolean}
    */
   isValidData() {
-    return isValidUserInfo({ errorMessageObject: this.state.errorMessage, user: this.props.pageUser, tenant: this.props.tenant });
+
+    const { errorMessage } = this.state;
+    const { pageUser, tenant } = this.props;
+
+    return isValidUserInfo({
+      errorMessageObject: errorMessage,
+      user: pageUser,
+      tenant,
+    });
   }
+
   /**
    * updateStudentData method update the particular student data.
    */
   updateStudentData() {
+
     const { id, secretKey } = this.props;
     const { student } = this.state;
+
     // Calls api to update student data
-    this.props.updateStudentData({ id,
+    this.props.updateStudentDataAction({ id,
       secretKey,
       student });
   }
+
   /**
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-error');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
   };
+
   /**
    * onSubmitStudentData method will call when click on form submit button
    * It submit the updated student data
    * @param {Object} e
    */
   onSubmitStudentData(e) {
+
+    const { student } = this.state;
+    const { studentData } = this.props;
+
     e.preventDefault();
-    if (this.state.student.optIn2019 === 'N') {
+
+    if (student.optIn2019 === 'N') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
+
     } else {
-      this.verifyStudentFormData(this.state.student);
-      if (!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
+      this.verifyStudentFormData(student);
+
+      if (!isEqual(studentData, student) && this.isValidData()) {
         this.setState({
           isSubmitTriggered: true,
         });
         this.updateStudentData();
+
       } else {
         this.setState({
           isFormChanged: false,
@@ -516,6 +667,7 @@ class StudentRegistrationCorrectionForm extends Component {
       }
     }
   }
+
   /**
    * onClickRadioButton method call onchange of optIn or optOut radio button
    * @param {Object} event
@@ -523,6 +675,7 @@ class StudentRegistrationCorrectionForm extends Component {
   onClickRadioButton = (event) => {
     this.handleInputChange(event.target.value, 'optIn2019');
   };
+
   /**
    * handleInputChange method set the form fields data in state
    * and all in format value and name in key value format through
@@ -531,11 +684,15 @@ class StudentRegistrationCorrectionForm extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.student),
+
+    const { student, errorMessage } = this.state;
+    const { tenant } = this.props;
+    const updatedData = extend(cloneDeep(student),
       setRegistrationData(value, name));
     const errorMessageObject = {};
-    errorMessageObject[name] = validateInput({ value, name, tenant: this.props.tenant });
-    const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
+    errorMessageObject[name] = validateInput({ value, name, tenant });
+    const updatedErrorState = extend(cloneDeep(errorMessage), errorMessageObject);
+
     this.setState({
       student: updatedData,
       errorMessage: updatedErrorState,
@@ -544,55 +701,67 @@ class StudentRegistrationCorrectionForm extends Component {
     });
     this.verifyStudentFormData(updatedData);
   }
+
   /**
    * renderSuccessMessage render the success message if form data is validate
-   * @return {ReactComponent}
+   * @return {HTML} message popup
    */
   renderSuccessMessage() {
+
+    const { isSubmitTriggered, isFormChanged } = this.state;
+    const { context, isStudentUpdated } = this.props;
+
     // if form data is update and valid and submitted successfully.
-    if (this.props.isUpdated) {
+    if (isStudentUpdated) {
       return (
         <Popup>
           <h5>{infoUpdateSuccessMessage}</h5>
           <LinkButton
             buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
-            onClick={() => { this.props.isUpdatedResetAction(); }}
+            linkPath={context.previousLocation}
+            onClick={this.props.isUpdatedResetAction}
           />
         </Popup>
       );
-    } else if (this.state.isSubmitTriggered && !this.state.isFormChanged && this.isValidData()) {
+
+    } else if (isSubmitTriggered && !isFormChanged && this.isValidData()) {
       // if form data is not update and valid.
       return (
         <Popup>
           <h5>{noInfoChangeMessage}</h5>
           <LinkButton
             buttonText={goBackBtnText}
-            linkPath={this.props.context.previousLocation}
+            linkPath={context.previousLocation}
           />
         </Popup>
       );
     } return null;
   }
+
   /**
    * renderClassAttended2018 method previous year level from field
-   * @return{ReactComponent}
+   * @return{HTML}
    */
   renderClassAttended2018() {
+
+    const { student } = this.state;
+    const { studentData } = this.props;
+
     // if it contained value
-    if (this.props.studentData.classAttended2018) {
+    if (studentData.classAttended2018) {
       return (
         <InputField
           type="text"
           label={PREVIOUS_YEAR_LEVEL_LABEL}
           name="classAttended2018"
           onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2018}
+          value={student.classAttended2018}
           isRequired={false}
           disabled
         />
       );
     }
+
     // if it is empty
     return (
       <InputField
@@ -600,18 +769,22 @@ class StudentRegistrationCorrectionForm extends Component {
         label={PREVIOUS_YEAR_LEVEL_LABEL}
         name="classAttended2018"
         onInputChange={this._handleInputChange}
-        value={this.state.student.classAttended2018}
+        value={student.classAttended2018}
         isRequired={false}
       />
     );
   }
+
   // FIXME: Create a separate component to render no-validation input
   /**
    * renderNoValidationFields method render form field without validation if opt-in
    * is 'N'
-   * @return {ReactComponent} Form
+   * @return {HTML} Form
    */
   renderNoValidationFields() {
+
+    const { student } = this.state;
+
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
@@ -623,14 +796,14 @@ class StudentRegistrationCorrectionForm extends Component {
                 label={IS_OPT_IN_OR_OPT_OUT_2019_LABEL}
                 options={optIn2019Options}
                 onInputChange={this._handleInputChange}
-                value={this.state.student.optIn2019}
+                value={student.optIn2019}
               />
               <InputField
                 type="number"
                 label={ID_LABEL}
                 name="id"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.id}
+                value={student.id}
                 disabled
               />
               <InputField
@@ -638,56 +811,56 @@ class StudentRegistrationCorrectionForm extends Component {
                 label={NAME_LABEL}
                 name="name"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.name}
+                value={student.name}
               />
               <InputField
                 type="text"
                 label={FATHER_OR_HUSBAND_NAME_LABEL}
                 name="fatherName"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.fatherName}
+                value={student.fatherName}
               />
               <SelectListInputField
                 name="gender"
                 label={GENDER_LABEL}
                 options={gender}
                 onInputChange={this._handleInputChange}
-                value={this.state.student.gender}
+                value={student.gender}
               />
               <InputField
                 type="number"
                 label={AGE_LABEL}
                 name="age"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.age}
+                value={student.age}
               />
               <InputField
                 type="number"
                 label={MOBILE_NUMBER_LABEL}
                 name="mobile"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.mobile}
+                value={student.mobile}
               />
               <InputField
                 type="text"
                 label={OCCUPATION_LABEL}
                 name="occupation"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.occupation}
+                value={student.occupation}
               />
               <InputField
                 type="text"
                 label={EDUCATION_LABEL}
                 name="education"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.education}
+                value={student.education}
               />
               <InputField
                 type="email"
                 label={EMAIL_LABEL}
                 name="email"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.email}
+                value={student.email}
               />
               {this.renderBusStopOptions()}
               {this.renderClassAttended2018()}
@@ -699,7 +872,7 @@ class StudentRegistrationCorrectionForm extends Component {
                 label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.address}
+                value={student.address}
               />
               {this.renderRemarkField()}
               <div className="student-form-marks-container student-form-marks-desktop-none">
@@ -707,15 +880,15 @@ class StudentRegistrationCorrectionForm extends Component {
                   <div className="student-form-marks-content">
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2018:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2018)}</label>
                     </div>
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2017:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2017)}</label>
                     </div>
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2016:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2016)}</label>
                     </div>
                   </div>
                 </div>
@@ -740,15 +913,15 @@ class StudentRegistrationCorrectionForm extends Component {
                 <div className="student-form-marks-content">
                   <div className="inputWrapper">
                     <label className="marks-input-label">Marks 2018:</label>
-                    <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                    <label className="marks-label-text">{this.getMarks(student.marks2018)}</label>
                   </div>
                   <div className="inputWrapper">
                     <label className="marks-input-label">Marks 2017:</label>
-                    <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                    <label className="marks-label-text">{this.getMarks(student.marks2017)}</label>
                   </div>
                   <div className="inputWrapper">
                     <label className="marks-input-label">Marks 2016:</label>
-                    <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                    <label className="marks-label-text">{this.getMarks(student.marks2016)}</label>
                   </div>
                 </div>
               </div>
@@ -758,13 +931,19 @@ class StudentRegistrationCorrectionForm extends Component {
       </div>
     );
   }
+
   render() {
-    if (this.props.pageUser === USER_TYPES.STUDENT_WITH_URL
-      && this.state.onlyOptIn2019 && this.props.studentData && this.props.isFetched) {
+
+    const { student, errorMessage, onlyOptIn2019 } = this.state;
+    const { pageUser, studentData, context, isStudentFetched } = this.props;
+
+    if (isPageUserStudent({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
-    } else if (this.props.isFetched && this.state.student.optIn2019 === 'N') {
+
+    } else if (isStudentFetched && student.optIn2019 === 'N') {
       return this.renderNoValidationFields();
-    } else if (this.props.studentData && this.props.isFetched) {
+
+    } else if (studentData && isStudentFetched) {
       // when student is going to attend the session
       return (
         <div className="registrationFormContainer">
@@ -779,7 +958,7 @@ class StudentRegistrationCorrectionForm extends Component {
                   label={ID_LABEL}
                   name="id"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.id}
+                  value={student.id}
                   isRequired
                   disabled
                 />
@@ -788,52 +967,52 @@ class StudentRegistrationCorrectionForm extends Component {
                   label={NAME_LABEL}
                   name="name"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.name}
+                  value={student.name}
                   isRequired
-                  errorMessage={this.state.errorMessage.name.message}
+                  errorMessage={errorMessage.name.message}
                 />
                 <InputField
                   type="text"
                   label={FATHER_OR_HUSBAND_NAME_LABEL}
                   name="fatherName"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.fatherName}
+                  value={student.fatherName}
                   isRequired
-                  errorMessage={this.state.errorMessage.fatherName.message}
+                  errorMessage={errorMessage.fatherName.message}
                 />
                 <SelectListInputField
                   name="gender"
                   label={GENDER_LABEL}
                   options={gender}
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.gender}
+                  value={student.gender}
                   isRequired
-                  errorMessage={this.state.errorMessage.gender.message}
+                  errorMessage={errorMessage.gender.message}
                 />
                 <InputField
                   type="number"
                   label={AGE_LABEL}
                   name="age"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.age}
+                  value={student.age}
                   isRequired
-                  errorMessage={this.state.errorMessage.age.message}
+                  errorMessage={errorMessage.age.message}
                 />
                 <InputField
                   type="number"
                   label={MOBILE_NUMBER_LABEL}
                   name="mobile"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.mobile}
+                  value={student.mobile}
                   isRequired
-                  errorMessage={this.state.errorMessage.mobile.message}
+                  errorMessage={errorMessage.mobile.message}
                 />
                 <InputField
                   type="text"
                   label={OCCUPATION_LABEL}
                   name="occupation"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.occupation}
+                  value={student.occupation}
                   isRequired={false}
                 />
                 <InputField
@@ -841,7 +1020,7 @@ class StudentRegistrationCorrectionForm extends Component {
                   label={EDUCATION_LABEL}
                   name="education"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.education}
+                  value={student.education}
                   isRequired={false}
                 />
                 <InputField
@@ -849,9 +1028,9 @@ class StudentRegistrationCorrectionForm extends Component {
                   label={EMAIL_LABEL}
                   name="email"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.email}
+                  value={student.email}
                   isRequired={false}
-                  errorMessage={this.state.errorMessage.email.message}
+                  errorMessage={errorMessage.email.message}
                 />
                 {this.renderBusStopOptions()}
                 {this.renderClassAttended2018()}
@@ -863,9 +1042,9 @@ class StudentRegistrationCorrectionForm extends Component {
                   label={ADDRESS_LABEL}
                   name="address"
                   onInputChange={this._handleInputChange}
-                  value={this.state.student.address}
+                  value={student.address}
                   isRequired
-                  errorMessage={this.state.errorMessage.address.message}
+                  errorMessage={errorMessage.address.message}
                 />
                 {this.renderRemarkField()}
                 <div className="student-form-marks-container student-form-marks-desktop-none">
@@ -873,15 +1052,15 @@ class StudentRegistrationCorrectionForm extends Component {
                     <div className="student-form-marks-content">
                       <div className="inputWrapper">
                         <label className="marks-input-label">Marks 2018:</label>
-                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                        <label className="marks-label-text">{this.getMarks(student.marks2018)}</label>
                       </div>
                       <div className="inputWrapper">
                         <label className="marks-input-label">Marks 2017:</label>
-                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                        <label className="marks-label-text">{this.getMarks(student.marks2017)}</label>
                       </div>
                       <div className="inputWrapper">
                         <label className="marks-input-label">Marks 2016:</label>
-                        <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                        <label className="marks-label-text">{this.getMarks(student.marks2016)}</label>
                       </div>
                     </div>
                   </div>
@@ -904,15 +1083,15 @@ class StudentRegistrationCorrectionForm extends Component {
                   <div className="student-form-marks-content">
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2018:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2018)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2018)}</label>
                     </div>
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2017:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2017)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2017)}</label>
                     </div>
                     <div className="inputWrapper">
                       <label className="marks-input-label">Marks 2016:</label>
-                      <label className="marks-label-text">{this.getMarks(this.state.student.marks2016)}</label>
+                      <label className="marks-label-text">{this.getMarks(student.marks2016)}</label>
                     </div>
                   </div>
                 </div>
@@ -922,52 +1101,57 @@ class StudentRegistrationCorrectionForm extends Component {
         </div>
       );
     }
+
     return (
       <Popup>
         <h5>{invalidIdMessage}</h5>
         <LinkButton
           buttonText={goBackBtnText}
-          linkPath={this.props.context.previousLocation}
+          linkPath={context.previousLocation}
         />
       </Popup>
     );
   }
 }
+
 StudentRegistrationCorrectionForm.propTypes = {
-  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  isUpdated: PropTypes.bool,
-  isFetched: PropTypes.bool,
-  updateStudentData: PropTypes.func,
-  id: PropTypes.string,
-  secretKey: PropTypes.string,
   context: PropTypes.object,
-  pageUser: PropTypes.string,
+  id: PropTypes.string,
+  isStudentFetched: PropTypes.bool,
+  isStudentUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
+  pageUser: PropTypes.string,
+  secretKey: PropTypes.string,
+  studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tenant: PropTypes.string,
+  updateStudentDataAction: PropTypes.func,
 };
+
 StudentRegistrationCorrectionForm.defaultProps = {
-  studentData: {},
-  isUpdated: false,
-  isFetched: false,
-  updateStudentData: () => {},
-  id: '',
-  secretKey: '',
   context: {},
-  pageUser: '',
+  id: '',
+  isStudentFetched: false,
+  isStudentUpdated: false,
   isUpdatedResetAction: () => {},
+  pageUser: '',
+  secretKey: '',
+  studentData: {},
   tenant: '',
+  updateStudentDataAction: () => {},
 };
+
 const mapStateToProps = state => ({
-  studentData: getStudent(state),
-  isUpdated: isUpdated(state),
-  isFetched: isFetched(state),
   id: getUserId(state),
-  secretKey: getUserSecretKey(state),
+  isStudentFetched: isFetched(state),
+  isStudentUpdated: isUpdated(state),
   pageUser: getPageUserType(state),
+  secretKey: getUserSecretKey(state),
+  studentData: getStudent(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
-  updateStudentData,
-  isUpdatedResetAction,
   getApplicationTenant,
+  isUpdatedResetAction,
+  updateStudentDataAction,
 })(StudentRegistrationCorrectionForm);

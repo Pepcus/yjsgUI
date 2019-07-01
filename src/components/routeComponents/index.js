@@ -8,6 +8,8 @@ import StudentCredentialPage from './StudentCredentialPage';
 import StudentPage from './StudentPage';
 import ParentsRegistration from './ParentsRegistrationForm';
 import Files from './Files';
+import MemberRegistrationForm from './MemberRegistrationForm';
+import MemberRegistrationCorrectionForm from './MemberRegistrationCorrectionForm';
 
 export default {
   StudentPage,
@@ -20,4 +22,6 @@ export default {
   StudentCredentialPage,
   ParentsRegistration,
   Files,
+  MemberRegistrationForm,
+  MemberRegistrationCorrectionForm,
 };

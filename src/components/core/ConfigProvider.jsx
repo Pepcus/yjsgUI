@@ -6,7 +6,7 @@ const Context = createContext();
 /**
  * Provider will be exported wrapped in ConfigProvider component.
  * @type {Class}
- * @return {ReactComponent}
+ * @return {HTML}
  */
 const Provider = ({ previousLocation, children }) => (
   <Context.Provider
@@ -19,15 +19,16 @@ const Provider = ({ previousLocation, children }) => (
 );
 
 Provider.propTypes = {
-  previousLocation: PropTypes.string,
   children: PropTypes.node.isRequired,
+  previousLocation: PropTypes.string,
 };
 
 Provider.dedaultProps = {
   previousLocation: '',
 };
+
 // I make this default since it will probably be exported most often.
 export default {
-  Provider,
   Consumer: Context.Consumer,
+  Provider,
 };

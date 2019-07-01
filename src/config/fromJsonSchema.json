@@ -1,0 +1,468 @@
+{
+  "StudentCredentialPageJsonSchema": {
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "studentId": {
+          "title": "आई.डी. नं.",
+          "type": "number"
+        },
+        "secretKey": {
+          "title": "सीक्रेट कोड",
+          "type": "string"
+        },
+        "backButton": {
+          "type": "string"
+        },
+        "viewEditButton": {
+          "type": "string"
+        }
+      },
+      "required": ["studentId", "secretKey"]
+    },
+    "UISchema": {
+      "studentId": {
+        "ui:placeholder": "अपना आई.डी. नं. दर्ज करें"
+      },
+      "secretKey": {
+        "ui:placeholder": "अपना सीक्रेट कोड दर्ज करें"
+      },
+      "backButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "viewEditButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "ColumnConfigJsonSchema": {
+    "Schema": {
+      "title": "कृपया स्तंभों का चयन करे",
+      "type": "object",
+      "properties": {
+        "selectValue": {
+          "type": "boolean",
+          "title": "Select All",
+          "default": true
+        },
+        "visibleColumnConfig": {
+          "type": "string"
+        },
+        "close": {
+          "type": "string"
+        },
+        "save": {
+          "type": "string"
+        }
+      }
+    },
+    "UISchema": {
+      "ui:order": ["selectValue",
+        "visibleColumnConfig",
+        "close",
+        "save"
+      ],
+      "selectValue": {
+        "ui:widget": "checkbox",
+        "classNames": "label",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "visibleColumnConfig": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "save": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "UpdateIdCardStatusSelectedStudentsJsonSchema": {
+    "Schema": {
+      "title": "कृपया दिए गए ID's को  कार्ड प्रिंट के लिए चयन करें!",
+      "type": "object",
+      "properties": {
+        "studentIds": {
+          "title": "Selected Students Id:",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectedCardOption": {
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "Reprint",
+              "const": "Y"
+            },
+            {
+              "title": "Not Print",
+              "const": "N"
+            }
+          ]
+        },
+        "close": {
+          "type": "string"
+        },
+        "submit": {
+          "type": "string"
+        }
+      },
+      "required": ["studentIds", "selectedCardOption"]
+    },
+    "UISchema": {
+      "ui:order": ["studentIds",
+        "selectedCardOption",
+        "close",
+        "submit"
+      ],
+      "studentIds": {
+        "className": "column-content-modal column-wrapper",
+        "ui:options": {
+          "addable": false,
+          "removable": false
+        },
+        "items": {
+          "ui:disabled": true
+        }
+      },
+      "selectedCardOption": {
+        "ui:options": {
+          "label": false
+        },
+        "ui:widget": "radio"
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submit": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "MarkSelectedStudentAttendanceJsonSchema": {
+    "Schema": {
+      "title": "कृपिया चयनित छात्रो की उपस्तिथि दर्ज करे ",
+      "type": "object",
+      "properties": {
+        "studentIds": {
+          "title": "Selected Students Id:",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectedDay": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "enumNames": [
+            "Day 1",
+            "Day 2",
+            "Day 3",
+            "Day 4",
+            "Day 5",
+            "Day 6",
+            "Day 7",
+            "Day 8"
+          ]
+        },
+        "close": {
+          "type": "string"
+        },
+        "submit": {
+          "type": "string"
+        }
+      },
+      "required": ["studentIds", "selectedDay"]
+    },
+    "UISchema": {
+      "ui:order": ["studentIds",
+        "selectedDay",
+        "close",
+        "submit"
+      ],
+      "studentIds": {
+        "className": "column-content-modal column-wrapper",
+        "ui:options": {
+          "addable": false,
+          "removable": false
+        },
+        "items": {
+          "ui:disabled": true
+        }
+      },
+      "selectedDay": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submit": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "UploadOptInFileJsonSchema": {
+    "Schema": {
+      "title": "कृपिया फाइल को अपलोड करे",
+      "type": "object",
+      "properties": {
+        "optInFile": {
+          "type": ["string"]
+        },
+        "close": {
+          "type": "string"
+        },
+        "submit": {
+          "type": "string"
+        }
+      },
+      "required": ["optInFile"]
+    },
+    "UISchema": {
+      "ui:order": ["optInFile",
+        "close",
+        "submit"
+      ],
+      "optInFile": {
+        "ui:options": {
+          "label": false
+        },
+        "ui:widget": "file"
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submit": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "UploadStudentsAttendanceFileJsonSchema": {
+    "Schema": {
+      "title": "कृपिया फाइल को अपलोड करे",
+      "type": "object",
+      "properties": {
+        "attendanceFile": {
+          "type": "string"
+        },
+        "selectedDay": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "enumNames": [
+            "Day 1",
+            "Day 2",
+            "Day 3",
+            "Day 4",
+            "Day 5",
+            "Day 6",
+            "Day 7",
+            "Day 8"
+          ]
+        },
+        "close": {
+          "type": "string"
+        },
+        "submit": {
+          "type": "string"
+        }
+      },
+      "required": ["attendanceFile", "selectedDay"]
+    },
+    "UISchema": {
+      "ui:order": ["attendanceFile",
+        "selectedDay",
+        "close",
+        "submit"
+      ],
+      "attendanceFile": {
+        "ui:options": {
+          "label": false
+        },
+        "ui:widget": "file"
+      },
+      "selectedDay": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submit": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "AdminLoginFormJsonSchema": {
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "adminId": {
+          "title": "Admin ID",
+          "type": "string"
+        },
+        "adminPassword": {
+          "title": "Admin Password",
+          "type": "string"
+        },
+        "backButton": {
+          "type": "string"
+        },
+        "submitButton": {
+          "type": "string"
+        }
+      },
+      "required": ["adminId", "adminPassword"]
+    },
+    "UISchema": {
+      "adminId": {
+        "ui:placeholder": "Enter Admin ID"
+      },
+      "adminPassword": {
+        "ui:placeholder": "Enter Admin Password",
+        "ui:widget": "password"
+      },
+      "backButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submitButton": {
+        "classNames": "button-style",
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  },
+  "MarkOptInOrOptOutButtonJsonSchema": {
+    "Schema": {
+      "title": "कृपया चयनित छात्रों की शिविर के लिए हाँ या ना दर्ज़ करें",
+      "type": "object",
+      "properties": {
+        "studentIds": {
+          "title": "Selected Students Id:",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectedOptOption": {
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "हाँ",
+              "const": "Y"
+            },
+            {
+              "title": "ना",
+              "const": "N"
+            }
+          ]
+        },
+        "close": {
+          "type": "string"
+        },
+        "submit": {
+          "type": "string"
+        }
+      },
+      "required": ["studentIds", "selectedOptOption"]
+    },
+    "UISchema": {
+      "ui:order": ["studentIds",
+        "selectedOptOption",
+        "close",
+        "submit"
+      ],
+      "studentIds": {
+        "className": "column-content-modal column-wrapper",
+        "ui:options": {
+          "addable": false,
+          "removable": false
+        },
+        "items": {
+          "ui:disabled": true
+        }
+      },
+      "selectedOptOption": {
+        "ui:options": {
+          "label": false
+        },
+        "ui:widget": "radio"
+      },
+      "close": {
+        "ui:options": {
+          "label": false
+        }
+      },
+      "submit": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    },
+    "data": {}
+  }
+}

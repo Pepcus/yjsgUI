@@ -11,6 +11,7 @@ const initialState = {
 };
 
 export const assetFilesReducer = (state = initialState, action) => {
+
   switch (action.type) {
 
     case 'FETCH_FILES_CONFIG_SUCCESS_ACTION':
@@ -19,6 +20,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         isLoading: false,
         filesConfig: action.config,
       };
+
     case 'FETCH_FILES_CONFIG_FAILED_ACTION':
       return {
         ...state,
@@ -26,17 +28,20 @@ export const assetFilesReducer = (state = initialState, action) => {
         errorMessage: action.errorMessage,
         filesConfig: {},
       };
+
     case 'FETCH_FILES_CONFIG_ACTION':
       return {
         ...state,
         isLoading: true,
       };
+
     case 'LOAD_APP_DATA_ACTION':
       return {
         ...state,
         isAppLoaded: false,
         isAppLoadingFailed: false,
       };
+
     case 'LOADED_APP_DATA_SUCCESS_ACTION':
       return {
         ...state,
@@ -47,6 +52,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         isAppLoadingFailed: false,
         isRegisterCorrectionEnabled: action.modeVariable.isRegisterCorrectionEnabled,
       };
+
     case 'LOAD_APP_DATA_FAILED_ACTION':
       return {
         ...state,
@@ -58,11 +64,13 @@ export const assetFilesReducer = (state = initialState, action) => {
         isAppLoadingFailed: true,
         isRegisterCorrectionEnabled: false,
       };
+
     case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
       return {
         ...state,
         isBusCoordinatorsDataFailed: false,
       };
+
     case 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION':
       return {
         ...state,
@@ -70,6 +78,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         busCoordinators: action.busCoordinators,
         isBusCoordinatorsDataFailed: false,
       };
+
     case 'LOAD_BUS_COORDINATORS_DATA_FAILED_ACTION':
       return {
         ...state,
@@ -78,6 +87,7 @@ export const assetFilesReducer = (state = initialState, action) => {
         busCoordinators: {},
         isBusCoordinatorsDataFailed: true,
       };
+
     default: {
       return {
         ...state,

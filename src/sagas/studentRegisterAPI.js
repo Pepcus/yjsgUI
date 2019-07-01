@@ -1,4 +1,9 @@
-import { PUT, POST, GET, PATCH } from '../utils/http';
+import {
+  PUT,
+  POST,
+  GET,
+  PATCH,
+} from '../utils/http';
 import {
   formatUpdateStudentDataPayload,
   formatCreateStudentDataPayload,
@@ -14,6 +19,7 @@ export const updateStudent = ({ id, secretKey, student }) =>
     },
     body: formatUpdateStudentDataPayload(student),
   });
+
 export const createStudent = student =>
   POST({
     url: '/v1/students',
@@ -51,9 +57,12 @@ export const getAllStudentsAPI = secretKey =>
   });
 
 export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
+
   const file = new FormData();
+
   file.append('file', attendanceFile);
   file.append('day', day);
+
   return (
     PATCH({
       url: 'v1/students/bulk-attendance',
@@ -65,8 +74,11 @@ export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
 };
 
 export const uploadOptInAPI = (secretKey, optInFile) => {
+
   const file = new FormData();
+
   file.append('file', optInFile);
+
   return (
     PATCH({
       url: 'v1/students/bulk-optin',

@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * It button wrapper
+ * @param {Object} props
+ * @return {HTML}
+ */
 const ButtonContainer = props => (
   <div style={props.style} className="button-container">
     {props.children}
@@ -8,13 +13,13 @@ const ButtonContainer = props => (
 );
 
 ButtonContainer.propTypes = {
-  style: PropTypes.object,
   children: PropTypes.node,
+  style: PropTypes.object,
 };
 
 ButtonContainer.defaultProps = {
-  style: {},
   children: null,
+  style: {},
 };
 
 export default ButtonContainer;

@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
+/**
+ * render button with costume property
+ * @param {Function} onClick
+ * @param {Boolean} disabled
+ * @param {String} buttonText
+ * @param {String} type
+ * @param {String} formName
+ * @param {Object} styles
+ * @return {HTML}
+ */
 const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
   <ButtonContainer>
     <button
@@ -19,21 +29,21 @@ const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
 );
 
 Button.propTypes = {
-  disabled: PropTypes.bool,
   buttonText: PropTypes.string,
-  onClick: PropTypes.func,
-  type: PropTypes.string,
+  disabled: PropTypes.bool,
   formName: PropTypes.string,
+  onClick: PropTypes.func,
   styles: PropTypes.object,
+  type: PropTypes.string,
 };
 
 Button.defaultProps = {
-  disabled: false,
   buttonText: '',
-  onClick: () => {},
-  type: 'button',
+  disabled: false,
   formName: '',
+  onClick: () => {},
   styles: {},
+  type: 'button',
 };
 
 export default Button;

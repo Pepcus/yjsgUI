@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
 import PropTypes from 'prop-types';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import InputField from '../form/InputField';
+import InputField from '../formComponents/InputField';
 import {
-  fetchStudentData,
+  fetchStudentDataAction,
   setAdminCredentialsAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   setAdminLoginStateAction,
 } from '../../actions/studentRegistrationActions';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
@@ -49,6 +52,7 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @type {Class}
  */
 class SplashPagePrePopulated extends Component {
+
   constructor(props) {
     super(props);
 
@@ -67,29 +71,35 @@ class SplashPagePrePopulated extends Component {
     this.enableStudentInfoCorrectionButtons = this.enableStudentInfoCorrectionButtons.bind(this);
     this.disableStudentInfoCorrectionButtons = this.disableStudentInfoCorrectionButtons.bind(this);
     this.enableAdminLoginButtons = this.enableAdminLoginButtons.bind(this);
-    this.disableAdminLoginButtons = this.disableAdminLoginButtons.bind(this);
+    this.handleDisableAdminLoginButtons = this.handleDisableAdminLoginButtons.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
     this._setAdminLogin = this.setAdminLogin.bind(this);
-    this.adminScreenRedirection = this.adminScreenRedirection.bind(this);
+    this.handleAdminScreenRedirection = this.handleAdminScreenRedirection.bind(this);
     // This may be use in future.
     // this._fetchStudentById = this.fetchStudentById.bind(this);
     // this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
   }
 
   componentDidMount() {
+
+    const { studentId, secretKey } = this.props;
+
     this.setState({
       credentials: {
-        studentId: this.props.studentId,
-        secretKey: this.props.secretKey,
+        studentId,
+        secretKey,
       },
     });
   }
 
   componentWillReceiveProps(nextProps) {
+
+    const { studentId, secretKey } = nextProps;
+
     this.setState({
       credentials: {
-        studentId: nextProps.studentId,
-        secretKey: nextProps.secretKey,
+        studentId,
+        secretKey,
       },
     });
   }
@@ -117,11 +127,11 @@ class SplashPagePrePopulated extends Component {
   }
 
   /**
-   * disableAdminLoginButtons method disable the admin login
+   * handleDisableAdminLoginButtons method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
-  disableAdminLoginButtons() {
+  handleDisableAdminLoginButtons() {
     this.setState({
       isAdmin: false,
     });
@@ -139,16 +149,16 @@ class SplashPagePrePopulated extends Component {
   }
 
   /**
-   * adminScreenRedirection method redirect to admin page on some condition.
-   * @return {ReactComponent}
+   * handleAdminScreenRedirection method redirect to admin page on some condition.
+   * @return {HTML}
    */
-  adminScreenRedirection() {
-    if (!this.props.adminLoginState) {
-      const {
-        id,
-        password,
-      } = this.props;
-      if (this.state.adminCredentialErrorMessage) {
+  handleAdminScreenRedirection() {
+
+    const { id, password, adminLoginState } = this.props;
+    const { adminCredentialErrorMessage } = this.state;
+
+    if (!adminLoginState) {
+      if (adminCredentialErrorMessage) {
         if (id !== adminId || password !== adminPassword) {
           return (
             <div className="errorPopupContainer">
@@ -170,16 +180,16 @@ class SplashPagePrePopulated extends Component {
    * checkRegisteredStudentCredential method verify the student credential
    * if student credential is not valid give the error message
    * else redirect to student correction form
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   // this may be use in future
   /* checkRegisteredStudentCredential() {
     if (this.state.registeredStudentCredentialErrorMessage) {
-      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
+      if ((!this.props.studentData || !this.props.isStudentFetched) && !this.props.isLoading) {
         return (<div>
           <h5>{invalidIdMessage}</h5>
         </div>);
-      } else if (this.props.studentData && this.props.isFetched) {
+      } else if (this.props.studentData && this.props.isStudentFetched) {
         return (
           <div>
             <Redirect to={'/studentCorrection'}/>
@@ -195,12 +205,16 @@ class SplashPagePrePopulated extends Component {
    * @param {Object} event
    */
   setAdminLogin(event) {
+
+    const { admin } = this.state;
+
     event.preventDefault();
+
     this.setState({
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
-    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
   }
 
   /**
@@ -208,9 +222,9 @@ class SplashPagePrePopulated extends Component {
    */
   // This may be use in future.
   /* fetchStudentById () {
-    this.props.setStudentCredentials(this.state.credentials.studentId,
+    this.props.setStudentCredentialsAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
+    this.props.fetchStudentDataAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.setState({
       registeredStudentCredentialErrorMessage: true,
@@ -225,10 +239,11 @@ class SplashPagePrePopulated extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.credentials),
-      setRegistrationData(value, name));
 
-    const adminData = extend(cloneDeep(this.state.admin),
+    const { credentials, admin } = this.state;
+    const updatedData = extend(cloneDeep(credentials),
+      setRegistrationData(value, name));
+    const adminData = extend(cloneDeep(admin),
       setRegistrationData(value, name));
 
     this.setState({
@@ -241,7 +256,7 @@ class SplashPagePrePopulated extends Component {
 
   /**
    * renderRegistrationCorrectionFields method return student credential fields
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   // This may be use in future
   /* renderRegistrationCorrectionFields() {
@@ -278,7 +293,14 @@ class SplashPagePrePopulated extends Component {
     )
   }*/
 
+  /**
+   * renderAdminLoginFields method render admin login fields
+   * @return {HTML} Admin login fields
+   */
   renderAdminLoginFields() {
+
+    const { admin } = this.state;
+
     return (
       <div>
         <form id="adminCredential">
@@ -288,7 +310,7 @@ class SplashPagePrePopulated extends Component {
             label="Admin ID"
             placeholder="Enter Admin ID"
             onInputChange={this._handleInputChange}
-            value={this.state.admin.adminId}
+            value={admin.adminId}
           />
           <InputField
             type="password"
@@ -296,14 +318,14 @@ class SplashPagePrePopulated extends Component {
             label="Admin Password"
             placeholder="Enter Admin Password"
             onInputChange={this._handleInputChange}
-            value={this.state.admin.adminPassword}
+            value={admin.adminPassword}
           />
-          {this.adminScreenRedirection()}
+          {this.handleAdminScreenRedirection()}
           <div className="button-wrapper">
             <Button
               type="button"
               buttonText={goBackBtnText}
-              onClick={this._disableAdminLoginButtons}
+              onClick={this.handleDisableAdminLoginButtons}
             />
             <Button
               type="submit"
@@ -321,12 +343,16 @@ class SplashPagePrePopulated extends Component {
    * renderLoginField method redirect to "/student-login" or
    * render admin login field or admin home page buttons
    * according to condition.
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderLoginField() {
-    if (this.state.isCorrection) {
+
+    const { isCorrection, isAdmin } = this.state;
+
+    if (isCorrection) {
       return <Switch><Redirect to="/student-login" /></Switch>;
-    } else if (this.state.isAdmin) {
+
+    } else if (isAdmin) {
       return this.renderAdminLoginFields();
     }
 
@@ -346,17 +372,19 @@ class SplashPagePrePopulated extends Component {
         />
       </div>
     );
-
   }
 
   render() {
+
+    const { tenant } = this.props;
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -372,28 +400,28 @@ class SplashPagePrePopulated extends Component {
 }
 
 SplashPagePrePopulated.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setAdminCredentialsAction: PropTypes.func,
-  studentId: PropTypes.string,
-  secretKey: PropTypes.string,
   adminLoginState: PropTypes.bool,
+  fetchStudentDataAction: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
+  secretKey: PropTypes.string,
+  setAdminCredentialsAction: PropTypes.func,
+  setAdminLoginStateAction: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
+  studentId: PropTypes.string,
   tenant: PropTypes.string,
 };
 
 SplashPagePrePopulated.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
-  setAdminLoginStateAction: () => {},
-  setAdminCredentialsAction: () => {},
-  studentId: '',
-  secretKey: '',
   adminLoginState: false,
+  fetchStudentDataAction: () => {},
   id: '',
   password: '',
+  secretKey: '',
+  setAdminCredentialsAction: () => {},
+  setAdminLoginStateAction: () => {},
+  setStudentCredentialsAction: () => {},
+  studentId: '',
   tenant: '',
 };
 
@@ -406,14 +434,14 @@ const mapStateToProps = state => ({
   searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
-  isFetched: isFetched(state),
+  isStudentFetched: isFetched(state),
   tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  getApplicationTenant,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
-  getApplicationTenant,
+  setStudentCredentialsAction,
 })(SplashPagePrePopulated);

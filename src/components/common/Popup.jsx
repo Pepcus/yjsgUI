@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
  * Popup render popup
  * @param {Node} children
  * @type {Function}
- * @return {ReactComponent}
- * @constructor
+ * @return {HTML}
  */
 const Popup = ({ children }) => (
   <div className="popup">
@@ -16,9 +15,10 @@ const Popup = ({ children }) => (
   </div>
 );
 
-Popup.propstype = {
+Popup.propTypes = {
   children: PropTypes.node,
 };
+
 Popup.defaultProps = {
   children: '',
 };

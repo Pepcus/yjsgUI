@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cloneDeep from 'lodash/cloneDeep';
-import extend from 'lodash/extend';
-import { Redirect, Switch } from 'react-router-dom';
+import isEmpty from 'lodash/isEmpty';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
-import InputField from '../form/InputField';
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setUserTypeAction,
 } from '../../actions/studentRegistrationActions';
 import {
@@ -31,53 +32,50 @@ import {
   eventVenue,
   goBackBtnText,
   viewEditInfoBtnText,
-  invalidIdMessage,
   USER_TYPES,
 } from '../../constants/yjsg';
 import {
-  ENTER_ID_NUMBER_MESSAGE,
-  ENTER_SECRET_CODE_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../../constants/messages';
-import {
-  ID_NUMBER_TEXT,
-  SECRET_CODE_TEXT,
-} from '../../constants/text';
-import { setRegistrationData } from '../../utils/registrationFormUtils';
 import { getParameterByName } from '../../utils/http';
+import Form from '../form';
+import { StudentCredentialPageJsonSchema } from '../../config/fromJsonSchema.json';
 
 // FixMe:This component is unnecessary.
 //  Please use splash page to show pre-populated data and remove this component
+
 /**
  * StudentCredentialPage is render student credential form
  * @type {Class}
  */
 class StudentCredentialPage extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
       credentials: {},
-      admin: {},
       isURLParams: false,
-      adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage: false,
+      hasError: true,
+      isSubmitTrigger: false,
+      redirectToStudentCorrectionLogin: false,
     };
 
-    this._handleInputChange = this.handleInputChange.bind(this);
     this._fetchStudentById = this.fetchStudentById.bind(this);
-    this.checkRegisteredStudentCredential = this.checkRegisteredStudentCredential.bind(this);
     this.renderBackButton = this.renderBackButton.bind(this);
   }
 
   componentWillMount() {
+    const { context, studentId, secretKey } = this.props;
+
     // If admin redirect to student credential page in that case
     // pre populate the id and secretKey of previous login student
-    if (this.props.context.previousLocation === '/admin') {
+    if (context.previousLocation === '/admin') {
       this.setState({
-        credentials: { studentId: this.props.studentId, secretKey: this.props.secretKey },
-      });
-    // else student credential fields are empty
-    } else if (this.props.context.previousLocation === '/') {
+        credentials: { studentId, secretKey },
+      });// else student credential fields are empty
+
+    } else if (context.previousLocation === '/') {
       this.setState({
         credentials: {},
       });
@@ -86,10 +84,51 @@ class StudentCredentialPage extends Component {
     // then get the id and secretKey form URL and fetch the student data
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
+
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
   }
+
+  /**
+   * renderViewEditButton render button of view or edit information of member Button
+   * @return {HTML} button
+   */
+  renderViewEditButton = () => (
+    <Button
+      buttonText={viewEditInfoBtnText}
+      type="submit"
+      value="Submit"
+      disabled={this.state.isSubmitTrigger}
+      formName="studentCredential"
+      onClick={this._fetchStudentById}
+    />
+  );
+
+  /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+    'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
+   * onChange method handle onChange of student login form
+   * @param {Object} formData
+   * @param {Object} errors
+   */
+  onChange = ({ formData, errors }) => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        ...formData,
+      },
+      hasError: isEmpty(errors),
+      isSubmitTrigger: false,
+    });
+  };
 
   /**
    * fetchStudentByURLParams method fetch
@@ -98,36 +137,11 @@ class StudentCredentialPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+    this.props.setStudentCredentialsAction(id, secretCode);
+    this.props.fetchStudentDataAction(id, secretCode);
     this.setState({
       isURLParams: true,
     });
-  }
-
-  /**
-   * checkRegisteredStudentCredential method check the credential
-   * of which is already registered.
-   * @return {ReactComponent}
-   */
-  checkRegisteredStudentCredential() {
-    if (this.state.registeredStudentCredentialErrorMessage) {
-      if ((!this.props.studentData || !this.props.isFetched) && !this.props.isLoading) {
-        return (
-          <div className="errorPopupContainer">
-            <h5 className="error-message">{invalidIdMessage}</h5>
-          </div>
-        );
-      } else if (this.props.studentData && this.props.isFetched) {
-        this.props.setUserTypeAction(USER_TYPES.STUDENT);
-        return (
-          <div>
-            <Redirect to="/studentCorrection" />
-          </div>
-        );
-      }
-    }
-    return null;
   }
 
   /**
@@ -136,57 +150,42 @@ class StudentCredentialPage extends Component {
    * @param {Object} event
    */
   fetchStudentById(event) {
+
+    const { credentials } = this.state;
+    const { STUDENT } = USER_TYPES;
+
     event.preventDefault();
-    this.props.setStudentCredentials(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
+    if (this.state.hasError) {
+      this.props.setStudentCredentialsAction(credentials.studentId,
+        credentials.secretKey);
+      this.props.fetchStudentDataAction(credentials.studentId,
+        credentials.secretKey);
+      this.props.setUserTypeAction(STUDENT);
+      this.setState({
+        redirectToStudentCorrectionLogin: true,
+        isSubmitTrigger: true,
+      });
+    }
 
-    // this.setState({
-    //   registeredStudentCredentialErrorMessage: true,
-    // });
-
-    this.props.setUserTypeAction(USER_TYPES.STUDENT_WITH_URL);
-    this.setState({
-      redirectToStudentCorrectionByUrl: true,
-    });
-  }
-
-  /**
-   * handleInputChange method set the student credential in state
-   * and all in format value and name in key value format through
-   * setRegistrationData functional component.
-   * @param {String} value
-   * @param {String} name
-   */
-  handleInputChange(value, name) {
-    const updatedData = extend(cloneDeep(this.state.credentials),
-      setRegistrationData(value, name));
-
-    const adminData = extend(cloneDeep(this.state.admin),
-      setRegistrationData(value, name));
-
-    this.setState({
-      credentials: updatedData,
-      admin: adminData,
-      adminCredentialErrorMessage: false,
-      registeredStudentCredentialErrorMessage: false,
-    });
   }
 
   /**
    * renderBackButton method return back button according to user type.
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderBackButton() {
-    if (this.props.hashLink === USER_TYPES.ADMIN) {
+    const { hashLink, context } = this.props;
+    const { ADMIN, STUDENT } = USER_TYPES;
+
+    if (hashLink === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath="/admin"
         />
       );
-    } else if (this.props.hashLink === USER_TYPES.STUDENT) {
+
+    } else if (hashLink === STUDENT) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -194,70 +193,69 @@ class StudentCredentialPage extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
   }
 
   /**
-   * renderRegistrationCorrectionFields method return student login fields
-   * @return {ReactComponent}
+   * renderRegistrationCorrectionFields method return student login form
+   * @return {HTML}
    */
   renderRegistrationCorrectionFields() {
+    const uiSchema = {
+      ...StudentCredentialPageJsonSchema.UISchema,
+      backButton: {
+        ...StudentCredentialPageJsonSchema.UISchema.backButton,
+        'ui:widget': () => (
+          this.renderBackButton()
+        ),
+      },
+      viewEditButton: {
+        ...StudentCredentialPageJsonSchema.UISchema.viewEditButton,
+        'ui:widget': () => (
+          this.renderViewEditButton()
+        ),
+      },
+    };
+    const { credentials } = this.state;
     return (
       <div className="student-already-register-form">
-        <form id="studentCredential">
-          <div className="form-input-wrapper ">
-            <InputField
-              type="number"
-              name="studentId"
-              label={ID_NUMBER_TEXT}
-              placeholder={ENTER_ID_NUMBER_MESSAGE}
-              onInputChange={this._handleInputChange}
-              value={this.state.credentials.studentId}
-            />
-            <InputField
-              type="text"
-              name="secretKey"
-              label={SECRET_CODE_TEXT}
-              placeholder={ENTER_SECRET_CODE_MESSAGE}
-              onInputChange={this._handleInputChange}
-              value={this.state.credentials.secretKey}
-            />
-            {this.checkRegisteredStudentCredential()}
-          </div>
-          <div className="button-wrapper">
-            {this.renderBackButton()}
-            <div className="button-container">
-              <Button
-                buttonText={viewEditInfoBtnText}
-                type="submit"
-                value="Submit"
-                formName="studentCredential"
-                onClick={this._fetchStudentById}
-              />
-            </div>
-          </div>
-        </form>
+        <Form
+          showErrorList={false}
+          liveValidate
+          schema={StudentCredentialPageJsonSchema.Schema}
+          uiSchema={uiSchema}
+          formData={credentials}
+          onChange={this.onChange}
+          transformErrors={this.transformErrors}
+        />
       </div>
     );
   }
+
   render() {
-    if (this.state.isURLParams) {
+    const { isURLParams, redirectToStudentCorrectionLogin } = this.state;
+    const { tenant } = this.props;
+
+    if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
-    } else if (this.state.redirectToStudentCorrectionByUrl) {
+
+    } else if (redirectToStudentCorrectionLogin && this.state.hasError) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
     }
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -274,43 +272,49 @@ class StudentCredentialPage extends Component {
 }
 
 StudentCredentialPage.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
   context: PropTypes.object,
-  isFetched: PropTypes.bool,
+  fetchStudentDataAction: PropTypes.func,
+  hashLink: PropTypes.string,
+  isStudentFetched: PropTypes.bool,
   isLoading: PropTypes.bool,
+  secretKey: PropTypes.string,
+  setStudentCredentialsAction: PropTypes.func,
+  setUserTypeAction: PropTypes.func,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  secretKey: PropTypes.string,
-  hashLink: PropTypes.string,
+  tenant: PropTypes.string,
 };
 
 StudentCredentialPage.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
-  studentData: '',
   context: {},
-  isFetched: false,
-  isLoading: false,
-  studentId: '',
-  secretKey: '',
+  fetchStudentDataAction: () => {},
   hashLink: '',
+  isStudentFetched: false,
+  isLoading: false,
+  secretKey: '',
+  setStudentCredentialsAction: () => {},
+  setUserTypeAction: () => {},
+  studentData: '',
+  studentId: '',
+  tenant: '',
 };
+
 const mapStateToProps = state => ({
-  studentId: getUserId(state),
-  id: getAdminId(state),
-  secretKey: getUserSecretKey(state),
-  password: getAdminPassword(state),
-  isLoading: isLoading(state),
-  searchResults: getSearchResults(state),
-  studentData: getStudent(state),
-  isFetched: isFetched(state),
   hashLink: getHash(state),
+  id: getAdminId(state),
+  isStudentFetched: isFetched(state),
+  isLoading: isLoading(state),
+  password: getAdminPassword(state),
+  searchResults: getSearchResults(state),
+  secretKey: getUserSecretKey(state),
+  studentData: getStudent(state),
+  studentId: getUserId(state),
   tenant: getApplicationTenant(state),
 });
+
 export default connect(mapStateToProps, {
-  fetchStudentData,
-  setStudentCredentials,
-  setUserTypeAction,
+  fetchStudentDataAction,
   getApplicationTenant,
+  setStudentCredentialsAction,
+  setUserTypeAction,
 })(StudentCredentialPage);

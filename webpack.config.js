@@ -1,5 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
+
 
 module.exports = {
   watch: true,
@@ -25,9 +27,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.css$/,

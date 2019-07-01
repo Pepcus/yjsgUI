@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import {
+  HashRouter,
+  Route,
+} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 
 import Routes from './Routes';
-import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
-import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
+import {
+  loadAppDataAction,
+  loadBusCoordinatorsDataAction,
+} from '../../actions/assetFilesActions';
+import {
+  getApplicationMode,
+  isAppLoaded,
+  getIsAppLoadedError,
+} from '../../reducers/assetFilesReducer';
 import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
@@ -17,6 +27,7 @@ const { development, production } = cssJSON;
  * AppContainer is the wrapper of application.
  */
 class AppContainer extends Component {
+
   componentDidMount() {
     this.props.loadBusCoordinatorsDataAction();
     this.props.loadAppDataAction();
@@ -25,6 +36,7 @@ class AppContainer extends Component {
       setAppColor(this.props.mode === 'production' ? production : development);
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAppLoaded) {
       setAppColor(nextProps.mode === 'production' ? production : development);
@@ -32,13 +44,17 @@ class AppContainer extends Component {
   }
 
   render() {
+
     if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
+
       return (
         <HashRouter>
           <Route path="/" component={Routes} />
         </HashRouter>
       );
+
     } else if (this.props.isAppLoadingFailed) {
+
       return (
         <div>
           <div className="empty-column-message">
@@ -55,26 +71,26 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  loadAppDataAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func.isRequired,
-  loadBusCoordinatorsDataAction: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
+  loadAppDataAction: PropTypes.func,
+  loadBusCoordinatorsDataAction: PropTypes.func,
   mode: PropTypes.string,
+  setLoadingStateAction: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
-  loadAppDataAction: () => {},
-  loadBusCoordinatorsDataAction: () => {},
   isAppLoaded: false,
   isAppLoadingFailed: false,
+  loadAppDataAction: () => {},
+  loadBusCoordinatorsDataAction: () => {},
   mode: '',
 };
 
 const mapStateToProps = state => ({
-  mode: getApplicationMode(state),
   isAppLoaded: isAppLoaded(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
+  mode: getApplicationMode(state),
 });
 
 export default connect(mapStateToProps, {

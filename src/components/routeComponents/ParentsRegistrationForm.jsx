@@ -13,8 +13,10 @@ import Popup from '../common/Popup';
  * @type {Class}
  */
 class ParentsRegistration extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
       members: [0, 1, 2, 3, 4, 5, 6],
@@ -36,32 +38,39 @@ class ParentsRegistration extends Component {
     this._handleInputChangeMobile = this.handleInputChangeMobile.bind(this);
     this.renderCloseBrowserMessage = this.renderCloseBrowserMessage.bind(this);
   }
+
   componentDidMount() {
     this.setState({
       isSubmitTriggered: false,
       isCloseBrowserPopMessage: false,
     });
   }
+
   handleInputChangeName(event) {
     this.setState({
       name: event.target.value,
       isError: false,
     });
   }
+
   /**
    * handleInputChangeMobile method set mobile number.
    * @param {Object} event
    */
   handleInputChangeMobile(event) {
+
+    const { value } = event.target;
     // validation only for number with max length 10 only
     const validationForMobile = /^[0-9\b]+$/;
-    if (((event.target.value === '') || validationForMobile.test(event.target.value)) && event.target.value !== 'e' && event.target.value.length <= 10) {
+
+    if (((value === '') || validationForMobile.test(value)) && value !== 'e' && value.length <= 10) {
       this.setState({
-        mobile: event.target.value,
+        mobile: value,
         isError: false,
       });
     }
   }
+
   /**
    * handleSelectChange method set the number of member
    * that are selected from drop down list of member
@@ -73,37 +82,46 @@ class ParentsRegistration extends Component {
       isError: false,
     });
   }
+
   /**
    * onSubmitParentsData method will on onClick of submit button
    * @param {Object} event
    */
   onSubmitParentsData(event) {
+
+    const { name, mobile, selectedCountOfMembers } = this.state;
     // to prevent form action default
     event.preventDefault();
+
     // name and mobile number are compulsory for from submission
-    if (isEmpty(this.state.name) || isEmpty(this.state.mobile)) {
+    if (isEmpty(name) || isEmpty(mobile)) {
       this.setState({
         isSubmitTriggered: false,
         isError: true,
       });
+
     } else {
       // call action to submit form data
-      const name = String(this.state.name);
-      const members = Number(this.state.selectedCountOfMembers);
-      const phoneNumber = this.state.mobile;
-      this.props.parentsRegistrationAction({ name, members, phoneNumber });
+      this.props.parentsRegistrationAction({
+        name: String(name),
+        members: Number(selectedCountOfMembers),
+        phoneNumber: mobile });
       this.setState({
         isSubmitTriggered: true,
         isError: false,
       });
     }
   }
+
   /**
    * addOptions method return number of member option in member drop down list.
-   * @return {ReactComponent}
+   * @return {HTML} option
    */
   addOptions() {
-    return (this.state.members.map(
+
+    const { members } = this.state;
+
+    return (members.map(
       optionCount => (
         <option
           key={optionCount}
@@ -115,17 +133,22 @@ class ParentsRegistration extends Component {
 
   /**
    * render close browser message
-   * @return {*}
+   * @return {HTML}
    */
   renderCloseBrowserMessage() {
-    if (this.state.isCloseBrowserPopMessage) {
+
+    const { isCloseBrowserPopMessage } = this.state;
+
+    if (isCloseBrowserPopMessage) {
       return (
         <Popup>
           <h5>Please close your browser manually.</h5>
         </Popup>
       );
     }
+    return null;
   }
+
   /**
    * closePopUp method call on onClick on close button in popup
    * And set all values of state initial.
@@ -142,8 +165,15 @@ class ParentsRegistration extends Component {
   }
 
   // FIXME: Reuse the component to render error message popup
+  /**
+   * renderErrorMessage render error message when required form field are not fill.
+   * @return {HTML} error message
+   */
   renderErrorMessage() {
-    if (this.state.isError) {
+
+    const { isError } = this.state;
+
+    if (isError) {
       return (
         <div className="errorPopupContainer error-popup-padding">
           <span className="error-message">
@@ -153,9 +183,17 @@ class ParentsRegistration extends Component {
     }
     return null;
   }
+
   // FIXME: Reuse the component to render message popup
+  /**
+   * renderPopUp method render successfully registration popup
+   * @return {HTML} popup
+   */
   renderPopUp() {
-    if (this.state.isSubmitTriggered) {
+
+    const { isSubmitTriggered } = this.state;
+
+    if (isSubmitTriggered) {
       return (
         <div className="inputFieldContainer parent-register-message-wrapper">
           <div>
@@ -172,8 +210,19 @@ class ParentsRegistration extends Component {
     }
     return null;
   }
+
   render() {
-    if (!this.state.isSubmitTriggered && !this.state.isCloseBrowserPopMessage) {
+
+    const {
+      isSubmitTriggered,
+      isCloseBrowserPopMessage,
+      name,
+      mobile,
+      members,
+      selectedCountOfMembers,
+    } = this.state;
+
+    if (!isSubmitTriggered && !isCloseBrowserPopMessage) {
       return (
         <div className="footer-none-wrapper">
           <div className="registrationFormContainer parent-register-container">
@@ -189,7 +238,7 @@ class ParentsRegistration extends Component {
                     type="text"
                     name="name"
                     className="parent-input-text"
-                    value={this.state.name}
+                    value={name}
                     onChange={this._handleInputChangeName}
                     required
                   />
@@ -200,7 +249,7 @@ class ParentsRegistration extends Component {
                     type="number"
                     name="mobile"
                     className="parent-input-text"
-                    value={this.state.mobile}
+                    value={mobile}
                     onChange={this._handleInputChangeMobile}
                     required
                   />
@@ -208,7 +257,7 @@ class ParentsRegistration extends Component {
                 <span className="column-content-students">आपके अलावा साथ आने वालो की संख्या : </span>
                 <select
                   onChange={this._handleSelectChange}
-                  value={this.state.members[this.state.selectedCountOfMembers]}
+                  value={members[selectedCountOfMembers]}
                   className="selected-day-list"
                 >
                   {this._addOptions()}
@@ -227,16 +276,16 @@ class ParentsRegistration extends Component {
                 </div>
                 <div className="register-form-content-wrapper">
                   <div className="form-content-title">
-                    <span className="form-title-small">{'दिनांक :'}</span>
+                    <span className="form-title-small">दिनांक :</span>
                     <span className="form-title-text"> {'रविवार १७ फरवरी'}</span>
                   </div>
                   <div className="form-content-title">
-                    <span className="form-title-small">{'समय :'}</span>
-                    <span className="form-title-text">{'प्रातः ९ से १ बजे'}</span>
+                    <span className="form-title-small">समय :</span>
+                    <span className="form-title-text">प्रातः ९ से १ बजे</span>
                   </div>
                   <div className="form-content-title form-content-flex">
-                    <span className="form-title-small">{'स्थान : '}</span>
-                    <span className="form-content-flex-content form-title-text">{'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर'}</span>
+                    <span className="form-title-small">स्थान : </span>
+                    <span className="form-content-flex-content form-title-text">श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर</span>
                   </div>
                 </div>
               </div>
@@ -250,6 +299,7 @@ class ParentsRegistration extends Component {
         </div>
       );
     }
+
     return (
       <div className="footer-none-wrapper">
         <div className="registrationFormContainer">
@@ -273,13 +323,15 @@ class ParentsRegistration extends Component {
     );
   }
 }
-ParentsRegistration.propsType = {
+
+ParentsRegistration.propTypes = {
   parentsRegistrationAction: PropTypes.func,
 };
 
 ParentsRegistration.defaultProps = {
   parentsRegistrationAction: () => {},
 };
+
 const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {

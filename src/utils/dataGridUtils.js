@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import upperFirst from 'lodash/upperFirst';
 
 import {
   gridMetaData,
@@ -6,28 +7,37 @@ import {
 
 /**
  * manageStudentTableWidth method is called when we have to manage table width in grid page.
- * It finds a table class and take dynamic width of it and assigned to footer class after that whole table width managed accordingly.
- * Also gives styling according to the table's width and also will add or remove class according to browser window width.
+ * It finds a table class and take dynamic width of it and assigned to footer class after that
+ * whole table width managed accordingly.
+ * Also gives styling according to the table's width and also will
+ * add or remove class according to browser window width.
  * @param {Object} widthRef
  */
 export const manageStudentTableWidth = (widthRef) => {
+
   if (widthRef.current) {
+
     const gridTableNode = widthRef.current.querySelector('.render-table');
     const gridTableFileNode = widthRef.current.querySelector('.file-component .render-table');
+
     if (gridTableNode) {
       if (window.innerWidth <= 768) {
         gridTableNode.style = 'display:grid !important';
       }
+
       const footer = widthRef.current.querySelector('.table-drawer__bottom');
       footer.style.width = `${gridTableNode.offsetWidth}px`;
       const fileFooterWidth = widthRef.current.querySelector('.file-component .table-drawer__bottom');
       const gridFooterNode = widthRef.current.querySelector('.table-footer-cell');
       const gridWrapperPagination = widthRef.current.querySelector('.table-drawer__bottom .wrapper-pagination-search>div:first-child');
+
       if (gridTableFileNode) {
+
         if (gridTableFileNode.offsetWidth >= 998) {
           fileFooterWidth.style.width = '100%';
         }
       }
+
       if (gridTableNode) {
         if (gridTableNode.offsetWidth <= 450) {
           if (gridWrapperPagination) {
@@ -36,9 +46,11 @@ export const manageStudentTableWidth = (widthRef) => {
             }
             gridWrapperPagination.classList.add('wrapper-pagination-column-small-width');
           }
+
           if (footer) {
             footer.classList.add('table-drawer-bottom-small-width');
           }
+
           if (gridFooterNode) {
             if (gridFooterNode.classList.contains('table-footer-cell-large-width')) {
               gridFooterNode.classList.remove('table-footer-cell-large-width');
@@ -46,6 +58,7 @@ export const manageStudentTableWidth = (widthRef) => {
             gridFooterNode.classList.add('table-footer-cell-small-width');
           }
         }
+
       } else {
         if (gridWrapperPagination) {
           if (gridWrapperPagination.classList.contains('wrapper-pagination-column-small-width')) {
@@ -53,12 +66,14 @@ export const manageStudentTableWidth = (widthRef) => {
             gridWrapperPagination.classList.remove('wrapper-pagination-column-small-width');
           }
         }
+
         if (gridFooterNode) {
           if (gridFooterNode.classList.contains('table-footer-cell-small-width')) {
             gridFooterNode.classList.add('table-footer-cell-large-width');
             gridFooterNode.classList.remove('table-footer-cell-small-width');
           }
         }
+
         if (footer) {
           if (footer.classList.contains('table-drawer-bottom-small-width')) {
             footer.classList.remove('table-drawer-bottom-small-width');
@@ -68,18 +83,22 @@ export const manageStudentTableWidth = (widthRef) => {
     }
   }
 };
+
 /**
  * getInitialVisibleColumnConfig method set initially all column
  * visible that is set true value of all column
  * @return {Object} temporaryVisibleColumnConfig
  */
 export const getInitialVisibleColumnConfig = () => {
+
   const temporaryVisibleColumnConfig = {};
+
   gridMetaData.forEach((columnOption) => {
     temporaryVisibleColumnConfig[columnOption.key] = true;
   });
   return temporaryVisibleColumnConfig;
 };
+
 /**
  * chunkArray divide array into chunk of array
  * @param {Array} Array
@@ -87,6 +106,7 @@ export const getInitialVisibleColumnConfig = () => {
  * @return {Array} results
  */
 export const chunkArray = (Array, chunkSize) => {
+
   const temporaryArray = cloneDeep(Array);
   const results = [];
 
@@ -98,11 +118,13 @@ export const chunkArray = (Array, chunkSize) => {
 
 export const setAppColor = (mode) => {
   for (const key in mode) {
+    // eslint-disable-next-line no-prototype-builtins
     if (mode.hasOwnProperty(key)) {
       document.documentElement.style.setProperty(key, mode[key]);
     }
   }
 };
+
 /**
  * getFormattedStudentId method convert the studentID into four digit studentID.
  * @param {Number} studentId
@@ -111,9 +133,46 @@ export const setAppColor = (mode) => {
 export const getFormattedStudentId = (studentId) => {
   if (studentId.length === 1) {
     return String(`000${studentId}`);
+
   } else if (studentId.length === 2) {
     return String(`00${studentId}`);
+
   } else if (studentId.length === 3) {
     return String(`0${studentId}`);
+
   } return String(studentId);
+};
+
+export const getChangedVisibleColumnConfig = ({ selectValue, temporaryVisibleColumnConfig }) => {
+  if (selectValue) {
+    for (const key in temporaryVisibleColumnConfig) {
+      temporaryVisibleColumnConfig[key] = true;
+    }
+  } else if (!selectValue) {
+    for (const key in temporaryVisibleColumnConfig) {
+      temporaryVisibleColumnConfig[key] = false;
+    }
+  }
+  return temporaryVisibleColumnConfig;
+};
+
+/**
+ * extractStudentIds method set the selected students Id into studentId Array
+ * @param {Array} selectedStudents
+ * @return {*}
+ */
+export const extractStudentIds = ({ selectedStudents }) => selectedStudents.map(student => String(student.studentId));
+
+/**
+ * convert first character into upper case of all word for sentence
+ * @param {String} sentence
+ * @return {Array} words
+ */
+export const convertFirstCharacterInUpperCase = ({ sentence }) => {
+  const words = sentence ? sentence.split(' ') : [sentence];
+
+  words.forEach((character, index) => {
+    words[index] = character ? upperFirst(`${words[index].toLocaleLowerCase()} `) : '';
+  });
+  return words;
 };

@@ -17,6 +17,125 @@ html, body {
 .logoutLinkContainer {
     display: flex;
 }
+.member-registration-form .rjsf {
+    padding: 15px 17px;
+    margin: 70px auto;
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.member-registration-correction-form .rjsf {
+    padding: 15px 17px;
+    margin: 70px auto;
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.student-already-register-form .rjsf {
+    background-color: white;
+    box-shadow: none;
+}
+.field-radio-group {
+    margin-top: 20px;
+}
+.not-editable-field-style .form-control{
+    border: none;
+    background: none;
+    width: 50%;
+    padding: 0;
+}
+.default-form-container {
+    height: 100%;
+}
+.not-editable-field-style .control-label{
+    width: 50%;
+}
+
+.field-style {
+    display: inline-grid;
+    width: 33.33%;
+}
+
+.not-editable-field-style {
+    display: inline-flex;
+    width: 33.33%;
+    align-items: center;
+    background: #efefef;
+    border-top: 2px solid #e8e8e8
+}
+
+.button-style {
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-info {
+    display: none;
+}
+
+.register-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    padding: 12px 20px 5px;
+}
+
+.text-danger {
+    font-size: 11px;
+    color: red;
+    margin: 2px;
+}
+
+.control-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #4c4c4c;
+    font-size: 14px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+
+.form-container {
+    background-color: #fff;
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-control {
+    width: 100%;
+    max-width: 330px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    height: auto;
+}
+
+.form-control:focus {
+    background: #f9f9f9;
+    outline-color: var(--orange-hover-color);
+}
 
 .logoutButtonContainer {
     z-index: 2;
@@ -662,6 +781,7 @@ html, body {
     animation-duration: 0.5s;
     transition: 0.4s ease-in-out;
 }
+
 
 @keyframes sort-order {
     0% {
@@ -2432,7 +2552,40 @@ body,
 .file-extension-download-btn {
     margin-top: 15px;
 }
+
+@media (max-width: 640px){
+    .register-button-wrapper {
+        display: block;
+        width: 100%;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .form-group {
+        margin-top: 7px;
+    }
+    .not-editable-field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .button-style {
+        display: block;
+        width: 100%;
+    }
+    .rjsf {
+        padding: 5px 4px;
+        margin: 0;
+    }
+}
+
 @media (max-width: 1024px) {
+    .rjsf {
+        margin: 50px auto;
+    }
+    .form-group {
+      margin-top: 15px;
+    }
     .input-radio {
         padding: 20px 18px;
     }
@@ -2772,8 +2925,33 @@ body,
     }
 
 }
-
+@media (max-width: 990px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 768px) {
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-wrapper {
+        display: block;
+    }
+    .rjsf {
+        box-shadow: none;
+        margin: 0px auto;
+    }
+    .form-group {
+        margin-top: 15px;
+    }
     .custom-modal {
         width: 70% !important;
     }
@@ -2925,10 +3103,17 @@ body,
         color: #0000EE;
         text-decoration: underline;
     }
+    .field-style {
+        display: inline-grid;
+        width: 50%;
+    }
 
 }
 
 @media (max-width: 736px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
     .landing-page-block {
         height: auto;
     }
@@ -3439,9 +3624,38 @@ body,
     .file-text-format-wrapper {
         max-width:95%;
     }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
 }
-
+@media (max-width: 640px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 480px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .rjsf {
+        box-shadow: none;
+    }
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .search-input-bar {
         margin-top: 10px;
     }
@@ -3561,6 +3775,13 @@ body,
 }
 
 @media (max-width: 360px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
     .landing-page-logo {
         max-width: 120px;
     }
@@ -3596,6 +3817,16 @@ body,
 }
 
 @media (max-width: 320px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .form-group {
+        padding: 8px 8px 8px;
+    }
     .custom-modal {
         width: 90% !important;
     }

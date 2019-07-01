@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import * as shortId from 'shortid';
 
-import { uploadStudentsAttendanceFileAction, resetIsSuccessAction } from '../actions/studentRegistrationActions';
+import {
+  uploadStudentsAttendanceFileAction,
+  resetIsSuccessAction,
+} from '../actions/studentRegistrationActions';
 import {
   getSecretKey,
   getSuccess,
@@ -16,20 +19,20 @@ import {
 import {
   ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE,
   ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import {
-  UPLOAD_FILE_TEXT,
-} from '../constants/text';
 import {
   days,
 } from '../constants/yjsg';
-
+import Form from './form';
+import { UploadStudentsAttendanceFileJsonSchema } from '../config/fromJsonSchema.json';
 
 const customUploadStudentsAttendanceFileModalStyles = {
   overlay: {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -54,11 +57,12 @@ class UploadStudentsAttendanceFile extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      attendanceFile: null,
+      formFieldData: {},
       isUploadStudentsAttendanceFileModal: false,
-      selectedDay: '',
     };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
@@ -88,18 +92,17 @@ class UploadStudentsAttendanceFile extends Component {
     this.setState({ isUploadStudentsAttendanceFileModal: false });
     this.props.resetIsSuccessAction();
     this.setState({
-      attendanceFile: null,
-      selectedDay: '',
+      formFieldData: {},
     });
   }
 
   /**
    *onFormSubmit method call fileUpload method to upload attendance file
-   * @param {Object} event
    */
-  onFormSubmit(event) {
-    event.preventDefault();
-    this.fileUpload(this.state.attendanceFile);
+  onFormSubmit() {
+    const { attendanceFile } = this.state.formFieldData;
+
+    this.fileUpload(attendanceFile);
   }
 
   /**
@@ -108,7 +111,8 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Object} event
    */
   onChange(event) {
-    this.setState({ attendanceFile: event.target.files[0] });
+    this.setState(
+      { formFieldData: { ...this.state.formFieldData, attendanceFile: event.target.files[0] } });
   }
 
   /**
@@ -116,21 +120,26 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Array} attendanceFile
    */
   fileUpload(attendanceFile) {
+
     const { secretKey } = this.props;
-    const day = this.state.selectedDay;
-    this.props.uploadStudentsAttendanceFileAction({ secretKey, attendanceFile, day });
+    const { selectedDay } = this.state.formFieldData;
+
+    this.props.uploadStudentsAttendanceFileAction({ secretKey, attendanceFile, day: selectedDay });
   }
 
   /**
    * renderFailRecordIds method method render failed records Ids
-   * @return {ReactComponent}
+   * @return {HTML} failed records
    */
   renderFailRecordIds() {
-    if (this.props.failRecordIds) {
+
+    const { failRecordIds } = this.props;
+
+    if (failRecordIds) {
       return (
         <div className="failure-block">
         Failed Records are:
-          <div className="failure-block-records">{this.props.failRecordIds}</div>
+          <div className="failure-block-records">{failRecordIds}</div>
         </div>);
     }
     return null;
@@ -138,13 +147,16 @@ class UploadStudentsAttendanceFile extends Component {
 
   /**
    * renderIdNotExistMessage method render Id not exist message
-   * @return {ReactComponent}
+   * @return {HTML} not exist Id's
    */
   renderIdNotExistMessage() {
-    if (this.props.idNotExistErrorMessage) {
+
+    const { errorMessageOfIdNotExist } = this.props;
+
+    if (errorMessageOfIdNotExist) {
       return (
         <div className="failure-block">
-          <div className="failure-block-records">{this.props.idNotExistErrorMessage}</div>
+          <div className="failure-block-records">{errorMessageOfIdNotExist}</div>
         </div>);
     }
     return null;
@@ -155,18 +167,32 @@ class UploadStudentsAttendanceFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
-    if (!this.state.attendanceFile || isEmpty(this.state.selectedDay)) {
-      return 'popup-buttons-disable';
+
+    const { attendanceFile, selectedDay } = this.state.formFieldData;
+
+    if (!attendanceFile || isEmpty(selectedDay)) {
+      return 'btn-upload linkButton';// 'popup-buttons-disable';
     }
     return 'btn-upload linkButton';
   }
 
   /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
    * renderMessage method render success or failure message of upload attendance
-   * @return {ReactComponent}
+   * @return {HTML} message
    */
   renderMessage() {
-    if (this.props.isUploadAttendanceSuccess) {
+
+    const { isAttendanceUploadFailed, isUploadAttendanceSuccess } = this.props;
+
+    if (isUploadAttendanceSuccess) {
       return (
         <div className="upload-message-wrapper">
           <div className="success-block">
@@ -176,7 +202,8 @@ class UploadStudentsAttendanceFile extends Component {
           {this.renderIdNotExistMessage()}
         </div>
       );
-    } else if (!this.props.isUploadAttendanceSuccess && this.props.isUploadAttendanceFailed) {
+
+    } else if (!isUploadAttendanceSuccess && isAttendanceUploadFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -187,10 +214,11 @@ class UploadStudentsAttendanceFile extends Component {
     }
     return null;
   }
+
   /**
    * addOptions method return options of drop down list
    * of days
-   * @return {ReactComponent}
+   * @return {HTML} options of day in drop down list
    */
   renderOptions() {
     return days.map(
@@ -200,25 +228,65 @@ class UploadStudentsAttendanceFile extends Component {
         </option>
       ));
   }
+
   /**
    * handleSelectChange method set the value of selected day in selectedDay.
    * @param {Object} event
    */
-  handleSelectChange(event) {
+  handleSelectChange({ formData }) {
     this.setState({
-      selectedDay: event.target.value,
+      formFieldData: { ...this.state.formFieldData, selectedDay: formData.selectedDay },
     });
   }
 
   /**
    * renderUploadStudentsAttendanceOption method render upload student attendance file modal
-   * @return {ReactComponent}
+   * @return {HTML} modal
    */
   renderUploadStudentsAttendanceOption() {
-    if (this.state.isUploadStudentsAttendanceFileModal) {
+    const uiSchema = {
+      ...UploadStudentsAttendanceFileJsonSchema.UISchema,
+      attendanceFile: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.attendanceFile,
+        'ui:widget': () => (
+          <input
+            type="file"
+            onChange={this.onChange}
+            className="choose-file-wrapper"
+          />
+        ),
+      },
+      close: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeUploadStudentsAttendanceFileOption}
+          >Close
+          </button>
+        ),
+      },
+      submit: {
+        ...UploadStudentsAttendanceFileJsonSchema.UISchema.submit,
+        'ui:widget': () => (
+          <button
+            type="submit"
+            className={this.renderUploadButtonClassName()}
+          >
+            <i className="fa fa-file-text card-icon" />
+            Upload
+          </button>
+
+        ),
+      },
+    };
+    const { isUploadStudentsAttendanceFileModal } = this.state;
+    const { selectedDay, attendanceFile } = this.state.formFieldData;
+
+    if (isUploadStudentsAttendanceFileModal) {
       return (
         <Modal
-          isOpen={this.state.isUploadStudentsAttendanceFileModal}
+          isOpen={isUploadStudentsAttendanceFileModal}
           onRequestClose={this.closeUploadStudentsAttendanceFileOption}
           style={customUploadStudentsAttendanceFileModalStyles}
           contentLabel="Column Options"
@@ -227,38 +295,18 @@ class UploadStudentsAttendanceFile extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <div className="column-modal">
-              <h1 className="column-modal-container">{UPLOAD_FILE_TEXT}</h1>
-            </div>
-            <form onSubmit={this.onFormSubmit} className="upload-form-wrapper">
-              <div>
-                <div className="column-content-modal">
-                  <input type="file" onChange={this.onChange} className="choose-file-wrapper" />
-                  <div className="column-content-student-wrapper">
-                    <span className="column-content-students">Select Day:</span>
-                    <select onChange={this.handleSelectChange} value={this.state.selectedDay} className="selected-day-list">
-                      <option hidden disabled="disabled" value="" />
-                      {this.renderOptions()}
-                    </select>
-                  </div>
-                  {this.renderMessage()}
-                </div>
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeUploadStudentsAttendanceFileOption}
-                  >Close
-                  </button>
-                  <button type="submit" className={this.renderUploadButtonClassName()}>
-                    <i className="fa fa-file-text card-icon" />
-                    Upload
-                  </button>
-                </div>
-              </div>
-            </form>
-
+            <Form
+              showErrorList={false}
+              liveValidate
+              schema={UploadStudentsAttendanceFileJsonSchema.Schema}
+              uiSchema={uiSchema}
+              formData={{ attendanceFile, selectedDay }}
+              onChange={this.handleSelectChange}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );
@@ -269,7 +317,11 @@ class UploadStudentsAttendanceFile extends Component {
   render() {
     return (
       <div className="display-inline mar-right-10">
-        <button className="column-option-container" title="Upload Attendance" onClick={this.openUploadStudentsAttendanceFileOption}>
+        <button
+          className="column-option-container"
+          title="Upload Attendance"
+          onClick={this.openUploadStudentsAttendanceFileOption}
+        >
           <i className="fa fa-upload card-icon" />
         Upload Attendance
         </button>
@@ -280,34 +332,35 @@ class UploadStudentsAttendanceFile extends Component {
 }
 
 UploadStudentsAttendanceFile.propTypes = {
-  resetIsSuccessAction: PropTypes.func,
-  uploadStudentsAttendanceFileAction: PropTypes.func,
-  secretKey: PropTypes.string,
   failRecordIds: PropTypes.string,
-  idNotExistErrorMessage: PropTypes.string,
+  errorMessageOfIdNotExist: PropTypes.string,
+  isAttendanceUploadFailed: PropTypes.bool,
   isUploadAttendanceSuccess: PropTypes.bool,
-  isUploadAttendanceFailed: PropTypes.bool,
+  resetIsSuccessAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  uploadStudentsAttendanceFileAction: PropTypes.func,
 };
 
 UploadStudentsAttendanceFile.defaultProps = {
-  resetIsSuccessAction: () => {},
-  uploadStudentsAttendanceFileAction: () => {},
-  secretKey: '',
   failRecordIds: '',
-  idNotExistErrorMessage: '',
+  errorMessageOfIdNotExist: '',
+  isAttendanceUploadFailed: false,
   isUploadAttendanceSuccess: false,
-  isUploadAttendanceFailed: false,
+  resetIsSuccessAction: () => {},
+  secretKey: '',
+  uploadStudentsAttendanceFileAction: () => {},
 };
+
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
-  isUploadAttendanceSuccess: getSuccess(state),
-  isUploadAttendanceFailed: isUploadAttendanceFailed(state),
   failRecordIds: getFailRecordIds(state),
-  idNotExistErrorMessage: idNotExistErrorMessage(state),
+  errorMessageOfIdNotExist: idNotExistErrorMessage(state),
+  isAttendanceUploadFailed: isUploadAttendanceFailed(state),
+  isUploadAttendanceSuccess: getSuccess(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
-  uploadStudentsAttendanceFileAction,
   resetIsSuccessAction,
+  uploadStudentsAttendanceFileAction,
 })(UploadStudentsAttendanceFile);
 
