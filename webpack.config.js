@@ -3,6 +3,7 @@ var path = require('path');
 
 module.exports = {
   watch: true,
+  mode: 'development',
   entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, './build'),
@@ -19,6 +20,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+    alias: {
+      theme: path.resolve(__dirname, 'src/themes/default.json')
+    }
   },
   module: {
     rules: [
