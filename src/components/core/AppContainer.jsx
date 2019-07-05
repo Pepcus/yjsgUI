@@ -1,33 +1,61 @@
-import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
+import cssVars from 'css-vars-ponyfill';
+import { HashRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import Routes from './Routes';
 import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
 import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
-import { setAppColor } from '../../utils/dataGridUtils';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
-import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
+import {
+  setLoadingStateAction,
+} from '../../actions/studentRegistrationActions';
 
-const { development, production } = cssJSON;
 
 /**
  * AppContainer is the wrapper of application.
  */
 class AppContainer extends Component {
   componentDidMount() {
-    this.props.loadBusCoordinatorsDataAction();
-    this.props.loadAppDataAction();
-    this.props.setLoadingStateAction(false);
+    const {
+      loadBusCoordinatorsData,
+      loadAppData,
+      mode,
+      setLoadingState,
+    } = this.props;
+
+    loadBusCoordinatorsData();
+    loadAppData();
+    setLoadingState(false);
+    /**
+     * CSS variable doesn't support in IE for that we use 'css-vars-ponyfill'.
+     * reference:- https://jhildenbiddle.github.io/css-vars-ponyfill/#/
+     */
     if (this.props.isAppLoaded) {
-      setAppColor(this.props.mode === 'production' ? production : development);
+      cssVars({
+        // Only styles from CodePen's CSS panel
+        include: 'style:not([data-ignore])',
+        // Treat all browsers as legacy
+        variables: {
+          ...cssJSON[mode],
+        },
+        onlyLegacy: true,
+      });
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAppLoaded) {
-      setAppColor(nextProps.mode === 'production' ? production : development);
+      cssVars({
+        // Only styles from CodePen's CSS panel
+        include: 'style:not([data-ignore])',
+        // Treat all browsers as legacy
+        variables: {
+          ...cssJSON[nextProps.mode],
+        },
+        onlyLegacy: true,
+      });
     }
   }
 
@@ -55,17 +83,17 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  loadAppDataAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func.isRequired,
-  loadBusCoordinatorsDataAction: PropTypes.func,
+  loadAppData: PropTypes.func,
+  setLoadingState: PropTypes.func.isRequired,
+  loadBusCoordinatorsData: PropTypes.func,
   isAppLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
   mode: PropTypes.string,
 };
 
 AppContainer.defaultProps = {
-  loadAppDataAction: () => {},
-  loadBusCoordinatorsDataAction: () => {},
+  loadAppData: () => {},
+  loadBusCoordinatorsData: () => {},
   isAppLoaded: false,
   isAppLoadingFailed: false,
   mode: '',
@@ -77,9 +105,14 @@ const mapStateToProps = state => ({
   isAppLoadingFailed: getIsAppLoadedError(state),
 });
 
-export default connect(mapStateToProps, {
-  loadAppDataAction,
-  loadBusCoordinatorsDataAction,
-  setLoadingStateAction,
-})(AppContainer);
+const mapDispatchToProps = dispatch => ({
+  loadAppData: () => dispatch(loadAppDataAction()),
+  loadBusCoordinatorsData: () => dispatch(loadBusCoordinatorsDataAction()),
+  setLoadingState: () => dispatch(setLoadingStateAction()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AppContainer);
 

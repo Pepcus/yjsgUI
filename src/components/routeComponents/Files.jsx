@@ -282,7 +282,7 @@ class Files extends Component {
     const style = {
       textAlign: 'center',
       fontSize: '20px',
-      color: 'var(--orange-color)',
+      color: 'var(--theme-color)',
     };
 
     if (isMobile) {

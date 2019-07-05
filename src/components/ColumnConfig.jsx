@@ -27,8 +27,8 @@ const customColumnOptionStyles = {
     boxShadow: 'rgb(99, 99, 99) 0px 2.3px 3px 0px',
     padding: '0px !important',
     marginRight: '-50%',
-    maxWidth: '100%',
     minWidth: '50%',
+    maxWidth: '100%',
     outline: 'none',
     transform: 'translate(-50%, -50%)',
   },
@@ -180,7 +180,7 @@ class ColumnConfig extends Component {
               <div className="modal-save-container">
                 <div className="save-button-wrapper">
                   <button className="button-modal button-close" onClick={this.props.closeColumnOption}>Close</button>
-                  <button className="button-modal button-save" onClick={this.setValuesOfVisibleColumnConfig}>Save</button>
+                  <button className="button-modal button-save btn-upload linkButton" onClick={this.setValuesOfVisibleColumnConfig}>Save</button>
                 </div>
               </div>
             </div>

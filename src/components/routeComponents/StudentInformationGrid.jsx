@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import '../../assets/css/card-print.css';
 
+import { getApplicationMode } from '../../reducers/assetFilesReducer';
 import ColumnConfig from '../ColumnConfig';
 import { gridMetaData, gridHeaderData, getStyles } from '../../constants/gridData';
 import {
@@ -59,12 +60,13 @@ class StudentInformationGrid extends Component {
       selectedStudents: [],
       selectValue: this.props.selectValue,
       students: [],
-      metaData: gridHeaderData(),
+      metaData: gridHeaderData({ mode: this.props.mode }),
       columnOptionIsOpen: false,
       isStudentDataSet: false,
       advanceFilterIsOpen: false,
       visibleColumnConfig: this.props.visibleColumnConfig,
       refresh: false,
+      fileRedirection: false,
     };
 
     // FIXME: Use arrow functions to avoid binding.
@@ -497,6 +499,12 @@ class StudentInformationGrid extends Component {
   redirectToAdminLogin() {
     return <Redirect to="/adminPanel" />;
   }
+
+  redirectToFile = () => {
+    this.setState({
+      fileRedirection: true,
+    });
+  };
   /**
    * clearSelectedStudents method will clear all selected records".
    */
@@ -509,6 +517,9 @@ class StudentInformationGrid extends Component {
   };
 
   render() {
+    if (this.state.fileRedirection) {
+      return <Redirect to="/files" />;
+    }
     if (!(this.props.adminLoginState)) {
       return (
         <div>
@@ -553,11 +564,14 @@ class StudentInformationGrid extends Component {
                   checkedIds={this.state.checkedIds}
                 />
                 <div className="column-option display-mobile-none">
+                  {/**
+                   TODO: This will be use in future scope.
+                   */}
                   {/* <UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
-                    <Link to="/files" className="column-option-container text-decoration-none">
+                    <button className="column-option-container" onClick={this.redirectToFile}>
                       <i className="fa fa-file-text card-icon" />Files
-                    </Link>
+                    </button>
                   </div>
                   <UploadStudentsAttendanceFile />
                   <div className="column-option-configure display-inline">
@@ -624,6 +638,7 @@ StudentInformationGrid.propTypes = {
     PropTypes.object,
   ]),
   setUserTypeAction: PropTypes.func,
+  mode: PropTypes.string,
 };
 
 StudentInformationGrid.defaultProps = {
@@ -644,6 +659,7 @@ StudentInformationGrid.defaultProps = {
   fetchStudentData: () => {},
   studentData: {},
   setUserTypeAction: () => {},
+  mode: '',
 };
 
 const mapStateToProps = state => ({
@@ -654,6 +670,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   secretKey: getSecretKey(state),
   studentData: getStudent(state),
+  mode: getApplicationMode(state),
 });
 export default connect(mapStateToProps, {
   fetchStudentData,

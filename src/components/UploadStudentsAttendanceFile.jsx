@@ -84,7 +84,8 @@ class UploadStudentsAttendanceFile extends Component {
    * closeUploadStudentsAttendanceFileOption method set isUploadStudentsAttendanceFileModal to false
    * and reset isSuccess by calling resetIsSuccessAction action
    */
-  closeUploadStudentsAttendanceFileOption() {
+  closeUploadStudentsAttendanceFileOption(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({ isUploadStudentsAttendanceFileModal: false });
     this.props.resetIsSuccessAction();
     this.setState({
@@ -98,7 +99,7 @@ class UploadStudentsAttendanceFile extends Component {
    * @param {Object} event
    */
   onFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.fileUpload(this.state.attendanceFile);
   }
 
