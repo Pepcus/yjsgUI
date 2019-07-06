@@ -89,8 +89,10 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    * closeUpdateIdCardStatusSelectedStudentsModal method set
    * isUpdateOptInModalOpen to false
    * and selectedCardOption to empty string
+   * @param {Object} event
    */
-  closeUpdateIdCardStatusSelectedStudentsModal() {
+  closeUpdateIdCardStatusSelectedStudentsModal(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({
       isUpdateOptInModalOpen: false,
       selectedCardOption: '',
@@ -107,21 +109,9 @@ class UpdateIdCardStatusSelectedStudents extends Component {
     const { selectedCardOption } = this.state;
 
     if (isEmpty(selectedCardOption)) {
-      return 'popup-buttons-disable';
+      return 'display-inline linkButton btn-upload'; // 'popup-buttons-disable';
     }
     return 'display-inline linkButton btn-upload';
-  }
-
-  /**
-   * filterIdsOfStudents method set the selected students Id into studentId Array
-   */
-  filterIdsOfStudents() {
-    const { selectedStudents } = this.props;
-    const Ids = selectedStudents.map(student => String(student.studentId));
-
-    this.setState({
-      studentsId: Ids,
-    });
   }
 
   /**
@@ -166,6 +156,14 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   }
 
   /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
    * onClickRadioButton method set the object with printStatus property value to selectedCardOption
    * @param {Object} event
    */
@@ -178,8 +176,10 @@ class UpdateIdCardStatusSelectedStudents extends Component {
   /**
    * onFormSubmit method mark the selected students Id card status by
    * calling updateIdCardStatusSelectedStudentsAction action
+   * @param {Object} event
    */
-  onFormSubmit() {
+  onFormSubmit(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     const { secretKey } = this.props;
     const { studentIds, selectedCardOption } = this.state;
 

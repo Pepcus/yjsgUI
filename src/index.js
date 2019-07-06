@@ -10,8 +10,6 @@ import './assets/css/loader.css';
 import AppContainer from './components/core/AppContainer';
 import store from './store/store';
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer />

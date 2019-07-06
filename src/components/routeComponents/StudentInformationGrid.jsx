@@ -40,7 +40,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 import AdvanceSearch from '../AdvanceSearch';
 import UploadStudentsAttendanceFile from '../UploadStudentsAttendanceFile';
-/*import UploadOptInFile from '../UploadOptInFile';*/
+/* import UploadOptInFile from '../UploadOptInFile';*/
 import SelectedStudentsActionWrapper from '../SelectedStudentsActionWrapper';
 import {
   adminPassword,
@@ -220,7 +220,8 @@ class StudentInformationGrid extends Component {
           </div>
         </div>
       );
-    } return null;
+    }
+    return null;
   };
 
   /**
@@ -306,7 +307,8 @@ class StudentInformationGrid extends Component {
       selectedRow.forEach((selectedRowStudent) => {
 
         if (String(selectedRowStudent.studentId) === String(studentId)) {
-          studentObject = { ...student,
+          studentObject = {
+            ...student,
             id: Number(studentId),
             studentId: String(studentId),
             isChecked: selectedRowStudent.isChecked,
@@ -350,14 +352,17 @@ class StudentInformationGrid extends Component {
   /**
    * closeColumnOption method call when onClick of close button of columnConfig modal
    * It set the false value of columnOptionIsOpen.
+   * @param {Object} event
    */
-  closeColumnOption() {
+  closeColumnOption(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({ columnOptionIsOpen: false });
   }
 
   /**
    * Todo: This feature will be implemented in future scope.
    */
+
   /* openAdvanceFilter() {
     this.setState({ advanceFilterIsOpen: true });
   }
@@ -477,12 +482,24 @@ class StudentInformationGrid extends Component {
   EditButton = ({ rowData }) => (
     <div>
       <div className="btn-block display-mobile-none">
-        <button onClick={() => { this.handleEditClick(rowData); }} title="Edit" className="btn-grid">
+        <button
+          onClick={() => {
+          this.handleEditClick(rowData);
+        }}
+          title="Edit"
+          className="btn-grid"
+        >
           <i className="fa fa-edit" />
         </button>
       </div>
       <div className="btn-block display-logout-desktop">
-        <button onClick={() => { this.handleEditClick(rowData); }} title="Edit" className="btn-grid">
+        <button
+          onClick={() => {
+          this.handleEditClick(rowData);
+        }}
+          title="Edit"
+          className="btn-grid"
+        >
           <i className="fa fa-edit" />
         </button>
       </div>
@@ -590,9 +607,9 @@ class StudentInformationGrid extends Component {
   }
 
   /**
-  * redirectToAdminLogin method will redirect to "/adminPanel".
-  * @return {String}
-  */
+   * redirectToAdminLogin method will redirect to "/adminPanel".
+   * @return {String}
+   */
   redirectToAdminLogin() {
     return <Redirect to="/adminPanel" />;
   }
@@ -619,13 +636,12 @@ class StudentInformationGrid extends Component {
   render() {
 
     const { adminLoginState, students } = this.props;
-    const { metaData, checkedIds, selectedStudents } = this.state;
+    const { metaData, checkedIds, selectedStudents, fileRedirection } = this.state;
 
-    if (!(adminLoginState)) {
-    if (this.state.fileRedirection) {
+    if (fileRedirection) {
       return <Redirect to="/files" />;
     }
-    if (!(this.props.adminLoginState)) {
+    if (!(adminLoginState)) {
       return (
         <div>
           <Redirect to="/admin" />
@@ -636,7 +652,7 @@ class StudentInformationGrid extends Component {
     return (
       <div className="grid-scroll-page-wrapper">
         <div className="grid-scroll-wrapper" ref={this.widthRef}>
-          <div className="print-media-none" >
+          <div className="print-media-none">
             <div className="logoutButtonContainer display-logout-desktop">
               <div className="logoutLinkContainer">
                 <Link to="/admin" className="grid-small-button">
@@ -653,7 +669,11 @@ class StudentInformationGrid extends Component {
                   <i className="fa fa-power-off" />
                 </Link>
                 <div className=" display-inline">
-                  <button className="grid-small-button" title="Refresh Students Information" onClick={this.refreshStudentsGrid}>
+                  <button
+                    className="grid-small-button"
+                    title="Refresh Students Information"
+                    onClick={this.refreshStudentsGrid}
+                  >
                     <i className="fa fa-refresh" />
                   </button>
                 </div>
@@ -671,8 +691,8 @@ class StudentInformationGrid extends Component {
                 />
                 <div className="column-option display-mobile-none">
                   {/**
-                   TODO: This will be use in future scope.
-                   */}
+                     TODO: This will be use in future scope.
+                     */}
                   {/* <UploadOptInFile />*/}
                   <div className="column-option-configure display-inline">
                     <button className="column-option-container" onClick={this.redirectToFile}>
@@ -687,15 +707,19 @@ class StudentInformationGrid extends Component {
                     {this.renderColumnConfig()}
                   </div>
                   <div className="display-inline">
-                    <button className="column-option-container" title="Refresh Students Information" onClick={this.refreshStudentsGrid}>
+                    <button
+                      className="column-option-container"
+                      title="Refresh Students Information"
+                      onClick={this.refreshStudentsGrid}
+                    >
                       <i className="fa fa-refresh" />
                     </button>
                   </div>
                 </div>
               </div>
               {/**
-              Todo: This feature will be implemented in future scope.
-               */}
+                 Todo: This feature will be implemented in future scope.
+                 */}
               {/* <div>
                 <button onClick={this.openAdvanceFilter}>Advance Filter</button>
                 <AdvanceFilter

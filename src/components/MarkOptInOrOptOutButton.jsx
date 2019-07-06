@@ -87,8 +87,10 @@ class MarkOptInOrOptOutButton extends Component {
    * on Onclick close button set the value of
    * isMarkSelectedStudentsOptInOrOptOutModalOpen to false.
    * And on the basis of this close the mark optIn/optOut modal
+   * @param {Object} event
    */
-  closeMarkSelectedStudentsOptInOrOptOutModal() {
+  closeMarkSelectedStudentsOptInOrOptOutModal(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({
       isMarkSelectedStudentsOptInOrOptOutModalOpen: false,
       selectedOptOption: '',
@@ -195,7 +197,8 @@ class MarkOptInOrOptOutButton extends Component {
    * onFormSubmit method call on submission of selected student optIn/optOut
    * @param {Object} event
    */
-  onFormSubmit() {
+  onFormSubmit(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     const { studentIds, selectedOptOption } = this.state;
     const { secretKey } = this.props;
 
