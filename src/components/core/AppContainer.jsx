@@ -44,7 +44,6 @@ class AppContainer extends Component {
   }
 
   render() {
-
     if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
 
       return (
