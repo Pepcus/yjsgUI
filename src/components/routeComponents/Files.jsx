@@ -10,7 +10,6 @@ import csv from 'csvtojson';
 
 import {
   getSecretKey,
-  stateOfAdminLogin,
 } from '../../reducers/studentRegistrationReducer';
 import {
   getFileData,
@@ -19,33 +18,28 @@ import {
 import {
   fetchFilesConfigAction,
 } from '../../actions/assetFilesActions';
-import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
+import { SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../constants/messages';
-import LinkButton from '../common/LinkButton';
 import { manageStudentTableWidth } from '../../utils/dataGridUtils';
 import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
 } from '../../utils/fileUtils';
-import {
-  resetAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  resetVisibleColumnConfigAction,
-  setLoadingStateAction,
-} from '../../actions/studentRegistrationActions';
+import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
 
 /**
  * Files component render files list and file data table.
  * @type {Class}
  */
 class Files extends Component {
+
   constructor(props) {
     super(props);
+
     this.widthRef = React.createRef();
+
     this.state = {
       showFileDetails: false,
       otherExtensionFileDetails: {},
@@ -54,23 +48,28 @@ class Files extends Component {
       backPageButton: true,
       width: window.innerWidth,
       fileData: [],
-      hasFileRoute: false
+      hasFileRoute: false,
     };
   }
 
   componentDidMount() {
+
+    const { filesConfig } = this.props;
     this.props.fetchFilesConfigAction();
     const collections = window.location.hash.split('/files/');
+
     if (collections[1]) {
-      if (this.props.filesConfig.files) {
-        this.props.filesConfig.files.forEach((fileInfo, index) => {
+      if (filesConfig.files) {
+        filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
             if (fileInfo.fileType === 'pdf') {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
+
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
+
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
         });
@@ -79,8 +78,10 @@ class Files extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (this.props.filesConfig !== nextProps.filesConfig) {
       const collections = window.location.hash.split('/files/');
+
       if (collections[1]) {
         nextProps.filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
@@ -88,8 +89,10 @@ class Files extends Component {
               const url = window.location.href.replace(fileInfo.routeName, `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
+
             const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
             const hasFileRoute = true;
+
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
         });
@@ -100,21 +103,51 @@ class Files extends Component {
   componentDidUpdate() {
     manageStudentTableWidth(this.widthRef);
   }
+
+  /**
+   * returnDisableEnable return conditional className
+   * @param {String} fileView
+   * @param {String} fileType
+   * @return {string} className
+   */
   returnDisableEnable = (fileView, fileType) => {
-    if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
-|| SUPPORTED_FILE_TYPES.XLSX === fileType) {
+
+    const { CSV, XLS, XLSX } = SUPPORTED_FILE_TYPES;
+
+    if (CSV === fileType || XLS === fileType
+      || XLSX === fileType) {
       return 'file-label-heading';
     }
     return 'file-label-heading';
   };
+
+  /**
+   * returnFlexClassName return conditional className
+   * @param {String} fileView
+   * @param {String} fileType
+   * @return {string} className
+   */
   returnFlexClassName = (fileView, fileType) => {
-    if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType
-      || SUPPORTED_FILE_TYPES.XLSX === fileType) {
+
+    const { CSV, XLS, XLSX } = SUPPORTED_FILE_TYPES;
+
+    if (CSV === fileType || XLS === fileType
+      || XLSX === fileType) {
       return 'file-flex-wrapper';
     }
     return 'file-flex-wrapper';
   };
+
+  /**
+   * onClickViewFile handle onClick of file view
+   * @param {Object} file
+   * @param {Number} index
+   * @param {String} href
+   * @param {Boolean} fileView
+   * @param {Boolean} hasFileRoute
+   */
   onClickViewFile = (file, index, href, fileView, hasFileRoute) => {
+
     this.setState({
       showFileDetails: true,
       currentFileDetails: file,
@@ -124,6 +157,7 @@ class Files extends Component {
       fileData: [],
       hasFileRoute,
     });
+
     if (!fileView) {
       this.setState({
         otherExtensionFileDetails: {
@@ -138,14 +172,18 @@ class Files extends Component {
     // fetch file data as per file details
     this.fetchFileData(file);
   };
+
   /**
-   * fetchFileData mathode will when click on any file and
+   * fetchFileData method will when click on any file and
    * it fetch that file data and save it in state.
    * @param{Object} file
+   * @return {Object} null
    */
   fetchFileData = (file) => {
+
     const fileDetails = file;
     let fileData = [];
+
     try {
       fetchFile(fileDetails)
         .then((response) => {
@@ -178,17 +216,27 @@ class Files extends Component {
     return null;
   };
 
+  /**
+   * onClickBackButton handle onClick event of back button which will display back from file data table to file list.
+   */
   onClickBackButton = () => {
     this.setState({
       backPageButton: true,
     });
   };
+
+  /**
+   * returnFileListDisplayBlock method will return conditional className of file list wrapper
+   * @return {String} className
+   */
   returnFileListDisplayBlock = () => {
-    const { width } = this.state;
+
+    const { width, showFileDetails, backPageButton } = this.state;
     const isMobile = width <= 600;
-    if (this.state.showFileDetails) {
+
+    if (showFileDetails) {
       if (isMobile) {
-        if (this.state.backPageButton) {
+        if (backPageButton) {
           return 'file-list-wrapper';
         }
         return 'file-list-none';
@@ -197,31 +245,46 @@ class Files extends Component {
     }
     return 'file-list-wrapper';
   };
+
+  /**
+   * returnTableWidthComponentClass return conditional class name of table which contained file data.
+   * @return {String} className
+   */
   returnTableWidthComponentClass = () => {
-    const { width } = this.state;
+
+    const { width, showFileDetails, backPageButton } = this.state;
     const isMobile = width <= 600;
-    if (this.state.showFileDetails) {
+
+    if (showFileDetails) {
       if (isMobile) {
-        if (this.state.backPageButton) {
+        if (backPageButton) {
           return 'file-component-none';
         }
         return 'file-component-mobile-wrapper';
-
       }
       return 'file-component';
     }
     return 'file-component';
   };
+
+  /**
+   * renderFileList method render file list
+   * @return {HTML} file list react component
+   */
   renderFileList = () => {
-    if (this.state.hasFileRoute) {
+
+    const { hasFileRoute, activeFileId } = this.state;
+    const { filesConfig } = this.props;
+
+    if (hasFileRoute) {
       return null;
     }
-    if (!isEmpty(this.props.filesConfig)) {
-      if (hasIn(this.props.filesConfig, 'files')) {
+    if (!isEmpty(filesConfig)) {
+      if (hasIn(filesConfig, 'files')) {
         return (
           <div className={this.returnFileListDisplayBlock()}>
             <h1 className="file-heading">Available Files</h1>
-            {this.props.filesConfig.files.map((file, index) => {
+            {filesConfig.files.map((file, index) => {
             const href = `files/${file.fileName}.${file.fileType ? file.fileType : 'txt'}`;
             return (
               <div
@@ -234,17 +297,17 @@ class Files extends Component {
                 >
                   <div className="flex-text-wrapper">
                     <i
-                      className={`fa fa-file ${this.state.activeFileId === index ? 'active-class-icon' : 'file-card-icon'}`}
+                      className={`fa fa-file ${activeFileId === index ? 'active-class-icon' : 'file-card-icon'}`}
                       aria-disabled="true"
                     />
-                    <span className={this.state.activeFileId === index ? 'active-link' : 'file-text-ellipsis'} title={file.fileLabel}>{file.fileLabel}</span>
+                    <span className={activeFileId === index ? 'active-link' : 'file-text-ellipsis'} title={file.fileLabel}>{file.fileLabel}</span>
                   </div>
                 </div>
                 <div>
                   <a
                     download={`${file.fileLabel}.${file.fileType}`}
                     href={href}
-                    className={this.state.activeFileId === index ? 'active-download-link' : 'download-link'}
+                    className={activeFileId === index ? 'active-download-link' : 'download-link'}
                   >
                     <i className="fa fa-download file-icon" />
                   </a>
@@ -261,8 +324,15 @@ class Files extends Component {
     return null;
   };
 
+  /**
+   * renderFileListViewButton render conditional file view button
+   * @return {HTML} back button react component
+   */
   renderFileListViewButton = () => {
-    if (!this.state.hasFileRoute) {
+
+    const { hasFileRoute } = this.state;
+
+    if (!hasFileRoute) {
       return (
         <div onClick={this.onClickBackButton} className="file-view-list-button">
           <a className="grid-small-button file-button-mobile">
@@ -273,12 +343,15 @@ class Files extends Component {
     } return null;
   };
 
+  /**
+   * renderFileDescription method render file description at the top of the table of file data
+   * @return {HTML} paragraph of file description.
+   */
   renderFileDescription = () => {
+
     const { currentFileDetails, width } = this.state;
     const isMobile = width <= 500;
-
     const fileDescription = currentFileDetails.description || '';
-
     const style = {
       textAlign: 'center',
       fontSize: '20px',
@@ -288,7 +361,6 @@ class Files extends Component {
     if (isMobile) {
       style.marginTop = '45px';
     }
-
     if (fileDescription) {
       return (
         <p style={style}>
@@ -296,54 +368,71 @@ class Files extends Component {
         </p>
       );
     }
-
     return null;
   };
 
+  /**
+   * renderFileDetails method render table of file data
+   * @return {HTML} file data table
+   */
   renderFileDetails = () => {
-    const { width } = this.state;
+
+    const { width,
+      showFileDetails,
+      fileData,
+      hasFileRoute,
+      currentFileDetails,
+      otherExtensionFileDetails,
+    } = this.state;
+    const { filesConfig } = this.props;
     const isMobile = width <= 500;
-    if (this.state.showFileDetails) {
-      if (!isEmpty(this.state.fileData)) {
+
+    if (showFileDetails) {
+      if (!isEmpty(fileData)) {
+
         if (isMobile) {
+
           return (
             <div
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
-              style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+              style={hasFileRoute ? { margin: 'auto' } : null}
             >
               {this.renderFileListViewButton()}
               {this.renderFileDescription()}
               <DataGrid
-                data={this.state.fileData}
+                data={fileData}
                 metaData={
-                  getDataGridHeadersForFileView(this.state.fileData, this.state.currentFileDetails)}
+                  getDataGridHeadersForFileView(fileData, currentFileDetails)}
               />
             </div>
           );
         }
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
-            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+            style={hasFileRoute ? { margin: 'auto' } : null}
           >
             {this.renderFileDescription()}
             <DataGrid
-              data={this.state.fileData}
+              data={fileData}
               metaData={getDataGridHeadersForFileView(
-                this.state.fileData,
-                this.state.currentFileDetails)
+                fileData,
+                currentFileDetails)
               }
             />
           </div>);
-      } else if (!isEmpty(this.state.otherExtensionFileDetails)) {
+      } else if (!isEmpty(otherExtensionFileDetails)) {
+
         if (isMobile) {
+
           return (
             <div
               className={this.returnTableWidthComponentClass()}
               ref={this.widthRef}
-              style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+              style={hasFileRoute ? { margin: 'auto' } : null}
             >
               {this.renderFileListViewButton()}
               <div className="file-text-panel">
@@ -353,8 +442,8 @@ class Files extends Component {
                   </span>
                   <div className="file-extension-download-btn">
                     <a
-                      download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                      href={this.state.otherExtensionFileDetails.href}
+                      download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
+                      href={otherExtensionFileDetails.href}
                       className="file-download-button"
                     >
                       Download
@@ -366,11 +455,12 @@ class Files extends Component {
             </div>
           );
         }
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
-            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+            style={hasFileRoute ? { margin: 'auto' } : null}
           >
             <div className="file-text-panel">
               <span className="file-text-format-wrapper">
@@ -379,8 +469,8 @@ class Files extends Component {
                 </span>
                 <div className="file-extension-download-btn">
                   <a
-                    download={`${this.state.otherExtensionFileDetails.file.fileName}.${this.state.otherExtensionFileDetails.file.fileType}`}
-                    href={this.state.otherExtensionFileDetails.href}
+                    download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
+                    href={otherExtensionFileDetails.href}
                     className="file-download-button"
                   >
                       Download
@@ -391,12 +481,14 @@ class Files extends Component {
             </div>
           </div>
         );
+
       } else if (isMobile) {
+
         return (
           <div
             className={this.returnTableWidthComponentClass()}
             ref={this.widthRef}
-            style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+            style={hasFileRoute ? { margin: 'auto' } : null}
           >
             {this.renderFileListViewButton()}
             <div className="file-text-panel">
@@ -407,11 +499,12 @@ class Files extends Component {
           </div>
         );
       }
+
       return (
         <div
           className={this.returnTableWidthComponentClass()}
           ref={this.widthRef}
-          style={this.state.hasFileRoute ? { margin: 'auto' } : null}
+          style={hasFileRoute ? { margin: 'auto' } : null}
         >
           <div className="file-text-panel">
             <span className="file-text-message">
@@ -421,11 +514,12 @@ class Files extends Component {
         </div>
       );
     }
-    if (
-      !isEmpty(this.props.filesConfig)
-      && hasIn(this.props.filesConfig, 'files')) {
+
+    if (!isEmpty(filesConfig)
+      && hasIn(filesConfig, 'files')) {
+
       return (
-        <div className="file-component" style={this.state.hasFileRoute ? { margin: 'auto' } : null} ref={this.widthRef}>
+        <div className="file-component" style={hasFileRoute ? { margin: 'auto' } : null} ref={this.widthRef}>
           <div className="file-text-panel">
             <span className="file-text-message">
           Please select a file to view.
@@ -434,6 +528,7 @@ class Files extends Component {
         </div>
       );
     }
+
     return (
       <div className="no-files-available" ref={this.widthRef}>
         <div className="file-text-panel">
@@ -445,15 +540,21 @@ class Files extends Component {
     );
   };
 
+  /**
+   * renderBackButton render back button for redirect to previous location.
+   * @return {HTML} back button
+   */
   renderBackButton = () => {
-    if (!this.state.hasFileRoute) {
+    const { hasFileRoute } = this.state;
+    const { context } = this.props;
+    if (!hasFileRoute) {
       return (
-        <Link to={this.props.context.previousLocation} className="grid-small-button">
+        <Link to={context.previousLocation} className="grid-small-button">
           <i className="fa fa-arrow-left" />
         </Link>
       );
     } return null;
-  }
+  };
 
   render() {
     return (
@@ -461,9 +562,6 @@ class Files extends Component {
         <div className="logoutButtonContainer file-logout-container display-logout-desktop">
           <div className="logoutLinkContainer">
             {this.renderBackButton()}
-            {/* <Link to="/admin" className="grid-small-button" onClick={this.performLogout}>*/}
-            {/* <i className="fa fa-power-off" />*/}
-            {/* </Link>*/}
           </div>
         </div>
         <div className="file-wrapper">
@@ -475,44 +573,27 @@ class Files extends Component {
   }
 }
 
-Files.propsType = {
-  fileData: PropTypes.array,
-  fetchFilesConfigAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func,
-  adminLoginState: PropTypes.bool,
-  filesConfig: PropTypes.object,
-  resetAdminCredentialsAction: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setRedirectValueAction: PropTypes.func,
-  resetVisibleColumnConfigAction: PropTypes.func,
+Files.propTypes = {
   context: PropTypes.object,
+  fetchFilesConfigAction: PropTypes.func,
+  filesConfig: PropTypes.object,
+  setLoadingStateAction: PropTypes.func,
 };
 
 Files.defaultProps = {
-  fileData: [],
-  setLoadingStateAction: () => {},
-  fetchFilesConfigAction: () => {},
-  resetAdminCredentialsAction: () => {},
-  setAdminLoginStateAction: () => {},
-  setRedirectValueAction: () => {},
-  resetVisibleColumnConfigAction: () => {},
-  adminLoginState: false,
-  filesConfig: {},
   context: {},
+  fetchFilesConfigAction: () => {},
+  filesConfig: {},
+  setLoadingStateAction: () => {},
 };
 
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
   fileData: getFileData(state),
   filesConfig: getFilesConfig(state),
-  adminLoginState: stateOfAdminLogin(state),
+  secretKey: getSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
-  setLoadingStateAction,
   fetchFilesConfigAction,
-  resetAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  resetVisibleColumnConfigAction,
+  setLoadingStateAction,
 })(Files);

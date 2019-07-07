@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
-import { uploadOptInFileAction, resetIsOptInSuccessAction } from '../actions/studentRegistrationActions';
+import {
+  uploadOptInFileAction,
+  resetIsOptInSuccessAction,
+} from '../actions/studentRegistrationActions';
 import {
   getSecretKey,
   isOptInSuccess,
@@ -14,16 +17,17 @@ import {
 import {
   OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
   OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
+  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from '../constants/messages';
-import {
-  UPLOAD_FILE_TEXT,
-} from '../constants/text';
+import Form from './form';
+import { UploadOptInFileJsonSchema } from '../config/fromJsonSchema.json';
 
 const customUploadOptInFileModalStyles = {
   overlay: {
     zIndex: '999',
     backgroundColor: 'rgba(21, 20, 20, 0.75)',
   },
+
   content: {
     top: '50%',
     position: 'absolute',
@@ -48,11 +52,13 @@ class UploadOptInFile extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      optInFile: null,
+      formFieldDate: {},
       isUploadOptInFileModalOpen: false,
       isFormSubmitted: false,
     };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
@@ -75,13 +81,14 @@ class UploadOptInFile extends Component {
   /**
    * closeUploadOptInFileModal method set isUploadOptInFileModalOpen to false
    * and to reset IsOptIn it call resetIsOptInSuccessAction action
+   * @param {Object} event
    */
   closeUploadOptInFileModal(event) {
     event.preventDefault ? event.preventDefault() : (event.returnValue = false);
     this.setState({ isUploadOptInFileModalOpen: false });
     this.props.resetIsOptInSuccessAction();
     this.setState({
-      optInFile: null,
+      formFieldDate: {},
       isFormSubmitted: false,
     });
   }
@@ -91,22 +98,23 @@ class UploadOptInFile extends Component {
    * @return {string} class name
    */
   renderUploadButtonClassName() {
-    if (!this.state.optInFile) {
-      return 'popup-buttons-disable';
+
+    const { optInFile } = this.state.formFieldDate;
+
+    if (!optInFile) {
+      return 'btn-upload linkButton'; // 'popup-buttons-disable';
     }
-
     return 'btn-upload linkButton';
-
   }
 
   /**
    * onFormSubmit method set isFormSubmitted to true
    * and call fileUpload method
-   * @param {Object} event
    */
-  onFormSubmit(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-    this.fileUpload(this.state.optInFile);
+  onFormSubmit() {
+    const { optInFile } = this.state.formFieldDate;
+
+    this.fileUpload(optInFile);
     this.setState({
       isFormSubmitted: true,
     });
@@ -118,7 +126,12 @@ class UploadOptInFile extends Component {
    * @param {Object} event
    */
   onChange(event) {
-    this.setState({ optInFile: event.target.files[0] });
+    this.setState({
+      formFieldDate: {
+        ...this.state.formFieldDate,
+        optInFile: event.target.files[0],
+      },
+    });
   }
 
   /**
@@ -126,19 +139,25 @@ class UploadOptInFile extends Component {
    * @param {Array} optInFile
    */
   fileUpload(optInFile) {
-    this.props.uploadOptInFileAction(this.props.secretKey, optInFile);
+
+    const { secretKey } = this.props;
+
+    this.props.uploadOptInFileAction(secretKey, optInFile);
   }
 
   /**
    * renderFailOptIn method render failed records Ids
-   * @return {ReactComponent}
+   * @return {HTML} failed records
    */
   renderFailOptIn() {
-    if (this.props.failOptIn) {
+
+    const { failOptIn } = this.props;
+
+    if (failOptIn) {
       return (
         <div className="failure-block">
           Failed Records are:
-          <div className="failure-block-records">{this.props.failOptIn}</div>
+          <div className="failure-block-records">{failOptIn}</div>
         </div>
       );
     }
@@ -147,13 +166,16 @@ class UploadOptInFile extends Component {
 
   /**
    * renderIdNotPresentMessage method render unavailable Id error message
-   * @return {ReactComponent}
+   * @return {HTML} not present Id's
    */
   renderIdNotPresentMessage() {
-    if (this.props.unavailableIdErrorMessage) {
+
+    const { errorMessageOfUnavailableId } = this.props;
+
+    if (errorMessageOfUnavailableId) {
       return (
         <div className="failure-block">
-          <div className="failure-block-records">{this.props.unavailableIdErrorMessage}</div>
+          <div className="failure-block-records">{errorMessageOfUnavailableId}</div>
         </div>
       );
     }
@@ -161,11 +183,22 @@ class UploadOptInFile extends Component {
   }
 
   /**
+   * transformErrors method return error message object
+   * @return {Object} error message object
+   */
+  transformErrors = () => ({
+    'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+  });
+
+  /**
    * renderMessage method render success or failure message of upload optIn file
-   * @return {ReactComponent}
+   * @return {HTML} message
    */
   renderMessage() {
-    if (this.props.isOptInSuccess) {
+
+    const { isSuccessOptIn, isOptInUploadFailed } = this.props;
+
+    if (isSuccessOptIn) {
       return (
         <div className="upload-message-wrapper">
           <div className="success-block">
@@ -177,7 +210,8 @@ class UploadOptInFile extends Component {
           {this.renderIdNotPresentMessage()}
         </div>
       );
-    } else if (!this.props.isOptInSuccess && this.props.isUploadOptInFailed) {
+
+    } else if (!isSuccessOptIn && isOptInUploadFailed) {
       return (
         <div className="upload-message-wrapper">
           <div className="failure-block">
@@ -193,13 +227,53 @@ class UploadOptInFile extends Component {
 
   /**
    * renderUploadOptInModal method render upload optIn modal
-   * @return {ReactComponent}
+   * @return {HTML} modal
    */
   renderUploadOptInModal() {
-    if (this.state.isUploadOptInFileModalOpen) {
+    const uiSchema = {
+      ...UploadOptInFileJsonSchema.UISchema,
+      optInFile: {
+        ...UploadOptInFileJsonSchema.UISchema.optInFile,
+        'ui:widget': () => (
+          <input
+            type="file"
+            onChange={this.onChange}
+            className="choose-file-wrapper"
+          />
+        ),
+      },
+      close: {
+        ...UploadOptInFileJsonSchema.UISchema.close,
+        'ui:widget': () => (
+          <button
+            className="button-modal button-close"
+            onClick={this.closeUploadOptInFileModal}
+          >Close
+          </button>
+        ),
+      },
+      submit: {
+        ...UploadOptInFileJsonSchema.UISchema.submit,
+        'ui:widget': () => (
+          <button
+            type="submit"
+            className={this.renderUploadButtonClassName()}
+            // disabled={this.state.isFormSubmitted}
+          >
+            <i className="fa fa-file-text card-icon" />
+            Upload
+          </button>
+
+        ),
+      },
+    };
+    const { isUploadOptInFileModalOpen } = this.state;
+    const { optInFile } = this.state.formFieldDate;
+
+    if (isUploadOptInFileModalOpen) {
       return (
         <Modal
-          isOpen={this.state.isUploadOptInFileModalOpen}
+          isOpen={isUploadOptInFileModalOpen}
           onRequestClose={this.closeUploadOptInFileModal}
           style={customUploadOptInFileModalStyles}
           contentLabel="Column Options"
@@ -208,34 +282,17 @@ class UploadOptInFile extends Component {
           ariaHideApp={false}
         >
           <div className="column-group-wrapper">
-            <div className="column-modal">
-              <h1 className="column-modal-container">{UPLOAD_FILE_TEXT}</h1>
-            </div>
-            <form onSubmit={this.onFormSubmit} className="upload-form-wrapper">
-              <div>
-                <div className="column-content-modal">
-                  <input type="file" onChange={this.onChange} className="choose-file-wrapper" />
-                  {this.renderMessage()}
-                </div>
-              </div>
-              <div className="modal-save-container">
-                <div className="save-button-wrapper">
-                  <button
-                    className="button-modal button-close"
-                    onClick={this.closeUploadOptInFileModal}
-                  >Close
-                  </button>
-                  <button
-                    type="submit"
-                    className={this.renderUploadButtonClassName()}
-                    disabled={this.state.isFormSubmitted}
-                  >
-                    <i className="fa fa-file-text card-icon" />
-                    Upload
-                  </button>
-                </div>
-              </div>
-            </form>
+            <Form
+              showErrorList={false}
+              liveValidate
+              schema={UploadOptInFileJsonSchema.Schema}
+              uiSchema={uiSchema}
+              formData={{ optInFile }}
+              transformErrors={this.transformErrors}
+              onSubmit={this.onFormSubmit}
+            >
+              {this.renderMessage()}
+            </Form>
           </div>
         </Modal>
       );
@@ -253,39 +310,38 @@ class UploadOptInFile extends Component {
         {this.renderUploadOptInModal()}
       </div>
     );
-
   }
 }
 
 UploadOptInFile.propTypes = {
-  resetIsOptInSuccessAction: PropTypes.func,
-  uploadOptInFileAction: PropTypes.func,
-  secretKey: PropTypes.string,
   failOptIn: PropTypes.string,
-  unavailableIdErrorMessage: PropTypes.string,
-  isOptInSuccess: PropTypes.bool,
-  isUploadOptInFailed: PropTypes.bool,
+  isSuccessOptIn: PropTypes.bool,
+  isOptInUploadFailed: PropTypes.bool,
+  resetIsOptInSuccessAction: PropTypes.func,
+  secretKey: PropTypes.string,
+  errorMessageOfUnavailableId: PropTypes.string,
+  uploadOptInFileAction: PropTypes.func,
 };
 
 UploadOptInFile.defaultProps = {
-  resetIsOptInSuccessAction: () => {},
-  uploadOptInFileAction: () => {},
-  secretKey: '',
   failOptIn: '',
-  unavailableIdErrorMessage: '',
-  isOptInSuccess: false,
-  isUploadOptInFailed: false,
+  isSuccessOptIn: false,
+  isOptInUploadFailed: false,
+  resetIsOptInSuccessAction: () => {},
+  secretKey: '',
+  errorMessageOfUnavailableId: '',
+  uploadOptInFileAction: () => {},
 };
 
 const mapStateToProps = state => ({
-  secretKey: getSecretKey(state),
-  isOptInSuccess: isOptInSuccess(state),
-  isUploadOptInFailed: isUploadOptInFailed(state),
   failOptIn: getFailOptIn(state),
-  unavailableIdErrorMessage: unavailableIdErrorMessage(state),
+  isSuccessOptIn: isOptInSuccess(state),
+  isOptInUploadFailed: isUploadOptInFailed(state),
+  secretKey: getSecretKey(state),
+  errorMessageOfUnavailableId: unavailableIdErrorMessage(state),
 });
 
 export default connect(mapStateToProps, {
-  uploadOptInFileAction,
   resetIsOptInSuccessAction,
+  uploadOptInFileAction,
 })(UploadOptInFile);

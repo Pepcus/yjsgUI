@@ -13,6 +13,13 @@ const styles = {
   width: '100%',
   border: '2px solid rgb(204, 204, 204) !important',
 };
+
+/**
+ * render disable button
+ * @param {Function} onClick
+ * @param {String} buttonText
+ */
+
 const DisabledButton = ({ onClick, buttonText }) => (
   <Button
     styles={styles}

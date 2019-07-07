@@ -19,7 +19,6 @@ import {
   GENDER_LABEL,
   AGE_LABEL,
   MOBILE_NUMBER_LABEL,
-  MOTHER_MOBILE_NUMBER_LABEL,
   OCCUPATION_LABEL,
   EDUCATION_LABEL,
   EMAIL_LABEL,
@@ -28,7 +27,7 @@ import {
   WHAT_YOU_WANT_TO_STUDY_LABEL,
 } from '../../constants/label';
 import {
-  YJSG_REGISTRATION_SUCCESS_MESSAGE,
+  REGISTRATION_SUCCESS_MESSAGE,
   ID_NOTE_MESSAGE,
   ID_CARD_SUGGESTION_MESSAGE,
 } from '../../constants/messages';
@@ -37,12 +36,12 @@ import {
   YOUR_SECRET_CODE_TEXT,
   IS_THERE_TEXT,
 } from '../../constants/text';
-import InputField from '../form/InputField';
-import TextAreaField from '../form/TextAreaField';
+import InputField from '../formComponents/InputField';
+import TextAreaField from '../formComponents/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
+  setStudentCredentialsAction,
 } from '../../actions/studentRegistrationActions';
 import {
   isDataCorrect,
@@ -50,11 +49,10 @@ import {
   setRegistrationData,
   validateInput,
 } from '../../utils/registrationFormUtils';
-import SelectListInputField from '../form/SelectListInputField';
+import SelectListInputField from '../formComponents/SelectListInputField';
 import {
   getNewStudent,
   isCreated,
-  isLoading,
   getUserType,
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../common/Button';
@@ -64,11 +62,15 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 /**
  * StudentRegistrationForm render student registration form
  * @type {Class}
+ * @return {HTML} registration form
  */
 class StudentRegistrationForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.formRef = React.createRef();
+
     this.state = {
       student: {
         name: '',
@@ -80,6 +82,7 @@ class StudentRegistrationForm extends Component {
         address: '',
         busStop: '',
         classAttended2019: '',
+        classAttended2018: '',
         optIn2019: 'Y',
       },
       isSubmitTriggered: false,
@@ -108,18 +111,24 @@ class StudentRegistrationForm extends Component {
     // Since the below fields are optional. we are setting them blank explicitly
     this._verifyStudentFormData({ email: '', optIn2019: 'Y' });
   }
+
   /**
    * verifyStudentFormData method verify the student data.
    * according to student data it set the error message object.
    * @param {Object} studentData
    */
   verifyStudentFormData(studentData) {
-    const errorMessageObject = extend(cloneDeep(this.state.errorMessage),
-      isDataCorrect(studentData, this.props.tenant));
+
+    const { errorMessage } = this.state;
+    const { tenant } = this.props;
+    const errorMessageObject = extend(cloneDeep(errorMessage),
+      isDataCorrect(studentData, tenant));
+
     this.setState({
       errorMessage: errorMessageObject,
     });
   }
+
   /**
    * isValidData method call the isValidUserInfo method
    * to check the error message object and according error message
@@ -127,11 +136,20 @@ class StudentRegistrationForm extends Component {
    * @return {boolean}
    */
   isValidData() {
-    return isValidUserInfo({ errorMessageObject: this.state.errorMessage, tenant: this.props.tenant });
+
+    const { errorMessage } = this.state;
+    const { tenant } = this.props;
+
+    return isValidUserInfo({ errorMessageObject: errorMessage, tenant });
   }
 
+  /**
+   * scrollToError method scroll to first form file which is in valid in mobile view only.
+   */
   scrollToError = () => {
+
     const errorNode = this.formRef.current.querySelector('.has-error');
+
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
@@ -143,22 +161,28 @@ class StudentRegistrationForm extends Component {
    * @param {Object} event
    */
   onSubmitStudentData(event) {
+
+    const { student } = this.state;
+
     event.preventDefault();
+
     // call _verifyStudentFormData method to check data student
-    this._verifyStudentFormData(this.state.student);
+    this._verifyStudentFormData(student);
     // call isValidData method to check error message
     // according to error message it will get boolean value
     if (this.isValidData()) {
       // This action call api
-      this.props.createStudentData(this.state.student);
+      this.props.createStudentDataAction(student);
       this.setState({
         isSubmitTriggered: true,
       });
+
     } else {
       this.setState({
       }, () => { this.scrollToError(); });
     }
   }
+
   /**
    * handleInputChange method set the value and name of input field
    * of student registration form.
@@ -166,13 +190,19 @@ class StudentRegistrationForm extends Component {
    * @param {String} name
    */
   handleInputChange(value, name) {
+
+    const { errorMessage, student } = this.state;
+    const { tenant } = this.props;
     const errorMessageObject = {};
+
     // validateInput set the error message in error message object according to input value and name
-    errorMessageObject[name] = validateInput({ value, name, tenant: this.props.tenant });
+    errorMessageObject[name] = validateInput({ value, name, tenant });
+
     // this will update the error object and updated error message object will be set into state.
-    const updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
+    const updatedErrorState = extend(cloneDeep(errorMessage), errorMessageObject);
     // this will get update student data
-    const updatedData = extend(cloneDeep(this.state.student),
+    const updatedData = extend(cloneDeep(student),
+
     // setRegistrationData method format name and value in key value format
       setRegistrationData(value, name));
     this.setState({
@@ -182,18 +212,23 @@ class StudentRegistrationForm extends Component {
     });
   }
 
+  /**
+   * renderSuccessMessage method render success message popup when form submitted successfully
+   * @return {HTML} success message popup
+   */
   renderSuccessMessage() {
-    if (this.props.isCreated && this.state.isSubmitTriggered) {
-      const student = this.props.newStudent;
 
+    const { isSubmitTriggered } = this.state;
+    const { newStudent, isStudentCreated } = this.props;
+
+    if (isStudentCreated && isSubmitTriggered) {
       // for pre-population on splash page
-      this.props.setStudentCredentials(student.id, student.secretKey);
-
+      this.props.setStudentCredentialsAction(newStudent.id, newStudent.secretKey);
       return (
         <Popup>
-          <p>{YJSG_REGISTRATION_SUCCESS_MESSAGE}</p>
-          <p>{YOUR_ID_TEXT}<strong>{student.id}</strong>{IS_THERE_TEXT}</p>
-          <p>{YOUR_SECRET_CODE_TEXT}<strong>{student.secretKey}</strong>{IS_THERE_TEXT}</p>
+          <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
+          <p>{YOUR_ID_TEXT}<strong>{newStudent.id}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_SECRET_CODE_TEXT}<strong>{newStudent.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
           <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
           {this.renderBackButton()}
@@ -202,8 +237,18 @@ class StudentRegistrationForm extends Component {
     }
     return null;
   }
+
+  /**
+   * renderBusStopOptions method render bus stop form field conditionally
+   * @return {HTML} bus stop form field
+   */
   renderBusStopOptions = () => {
-    if (this.props.tenant === TENANT.INDORE) {
+
+    const { student, errorMessage } = this.state;
+    const { tenant } = this.props;
+    const { INDORE } = TENANT;
+
+    if (tenant === INDORE) {
       return (
         <SelectListInputField
           type="text"
@@ -211,26 +256,32 @@ class StudentRegistrationForm extends Component {
           name="busStop"
           options={busStops}
           onInputChange={this._handleInputChange}
-          value={this.state.student.busStop}
+          value={student.busStop}
           isRequired
-          errorMessage={this.state.errorMessage.busStop.message}
+          errorMessage={errorMessage.busStop.message}
         />
       );
     } return null;
   };
+
   /**
    * renderBackButton method return link button according to user type
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderBackButton() {
-    if (this.props.userType === USER_TYPES.STUDENT) {
+
+    const { userType, context } = this.props;
+    const { STUDENT, ADMIN } = USER_TYPES;
+
+    if (userType === STUDENT) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
           linkPath="/"
         />
       );
-    } else if (this.props.userType === USER_TYPES.ADMIN) {
+
+    } else if (userType === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -238,14 +289,19 @@ class StudentRegistrationForm extends Component {
         />
       );
     }
+
     return (
       <LinkButton
         buttonText={goBackBtnText}
-        linkPath={this.props.context.previousLocation}
+        linkPath={context.previousLocation}
       />
     );
   }
+
   render() {
+
+    const { student, errorMessage } = this.state;
+
     return (
       <div className="registrationFormContainer">
         {this.renderSuccessMessage()}
@@ -258,52 +314,52 @@ class StudentRegistrationForm extends Component {
                 label={NAME_LABEL}
                 name="name"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.name}
+                value={student.name}
                 isRequired
-                errorMessage={this.state.errorMessage.name.message}
+                errorMessage={errorMessage.name.message}
               />
               <InputField
                 type="text"
                 label={FATHER_OR_HUSBAND_NAME_LABEL}
                 name="fatherName"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.fatherName}
+                value={student.fatherName}
                 isRequired
-                errorMessage={this.state.errorMessage.fatherName.message}
+                errorMessage={errorMessage.fatherName.message}
               />
               <SelectListInputField
                 name="gender"
                 label={GENDER_LABEL}
                 options={gender}
                 onInputChange={this._handleInputChange}
-                value={this.state.student.gender}
+                value={student.gender}
                 isRequired
-                errorMessage={this.state.errorMessage.gender.message}
+                errorMessage={errorMessage.gender.message}
               />
               <InputField
                 type="number"
                 label={AGE_LABEL}
                 name="age"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.age}
+                value={student.age}
                 isRequired
-                errorMessage={this.state.errorMessage.age.message}
+                errorMessage={errorMessage.age.message}
               />
               <InputField
                 type="number"
                 label={MOBILE_NUMBER_LABEL}
                 name="mobile"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.mobile}
+                value={student.mobile}
                 isRequired
-                errorMessage={this.state.errorMessage.mobile.message}
+                errorMessage={errorMessage.mobile.message}
               />
               <InputField
                 type="text"
                 label={OCCUPATION_LABEL}
                 name="occupation"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.occupation}
+                value={student.occupation}
                 isRequired={false}
               />
               <InputField
@@ -311,7 +367,7 @@ class StudentRegistrationForm extends Component {
                 label={EDUCATION_LABEL}
                 name="education"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.education}
+                value={student.education}
                 isRequired={false}
               />
               <InputField
@@ -319,9 +375,9 @@ class StudentRegistrationForm extends Component {
                 label={EMAIL_LABEL}
                 name="email"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.email}
+                value={student.email}
                 isRequired={false}
-                errorMessage={this.state.errorMessage.email.message}
+                errorMessage={errorMessage.email.message}
               />
               {this.renderBusStopOptions()}
               <SelectListInputField
@@ -329,24 +385,24 @@ class StudentRegistrationForm extends Component {
                 label={WHAT_YOU_WANT_TO_STUDY_LABEL}
                 options={studiesArray}
                 onInputChange={this._handleInputChange}
-                value={this.state.student.classAttended2019}
+                value={student.classAttended2019}
                 isRequired
-                errorMessage={this.state.errorMessage.classAttended2019.message}
+                errorMessage={errorMessage.classAttended2019.message}
               />
               <TextAreaField
                 label={ADDRESS_LABEL}
                 name="address"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.address}
+                value={student.address}
                 isRequired
-                errorMessage={this.state.errorMessage.address.message}
+                errorMessage={errorMessage.address.message}
               />
               <InputField
                 type="text"
                 label={PREVIOUS_YEAR_LEVEL_LABEL}
                 name="classAttended2018"
                 onInputChange={this._handleInputChange}
-                value={this.state.student.classAttended2018}
+                value={student.classAttended2018}
                 isRequired={false}
               />
               <div className="registrationFormButtonContainer">
@@ -373,38 +429,37 @@ class StudentRegistrationForm extends Component {
 }
 
 StudentRegistrationForm.propTypes = {
-  isLoading: PropTypes.bool,
-  isCreated: PropTypes.bool,
-  newStudent: PropTypes.object,
-  createStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  userType: PropTypes.string,
   context: PropTypes.object,
+  createStudentDataAction: PropTypes.func,
+  isStudentCreated: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  newStudent: PropTypes.object,
+  setStudentCredentialsAction: PropTypes.func,
   tenant: PropTypes.string,
+  userType: PropTypes.string,
 };
 
 StudentRegistrationForm.defaultProps = {
-  isLoading: false,
-  isCreated: false,
-  newStudent: {},
-  createStudentData: () => {},
-  setStudentCredentials: () => {},
-  userType: '',
   context: {},
+  createStudentDataAction: () => {},
+  isStudentCreated: false,
+  isLoading: false,
+  newStudent: {},
+  setStudentCredentialsAction: () => {},
   tenant: '',
+  userType: '',
 };
 
 const mapStateToProps = state => ({
-  isLoading: isLoading(state),
-  isCreated: isCreated(state),
+  isStudentCreated: isCreated(state),
   newStudent: getNewStudent(state),
-  userType: getUserType(state),
   tenant: getApplicationTenant(state),
+  userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
-  createStudentData,
-  setStudentCredentials,
+  createStudentDataAction,
   getApplicationTenant,
+  setStudentCredentialsAction,
 })(StudentRegistrationForm);
 

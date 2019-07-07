@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
@@ -21,7 +24,10 @@ import {
 import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant, isRegisterCorrectionEnabled } from '../../reducers/assetFilesReducer';
+import {
+  getApplicationTenant,
+  isRegisterCorrectionEnabled,
+} from '../../reducers/assetFilesReducer';
 
 /**
 * The StudentPage component for the student which will render -
@@ -29,8 +35,10 @@ import { getApplicationTenant, isRegisterCorrectionEnabled } from '../../reducer
  * @type {class}
  * */
 class StudentPage extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       isURLParams: false,
       isStudentLogin: false,
@@ -43,8 +51,10 @@ class StudentPage extends Component {
   }
 
   componentWillMount() {
+
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
+
     if (id && secretCode) {
       this.fetchStudentByURLParams(id, secretCode);
     }
@@ -55,9 +65,12 @@ class StudentPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
-    this.props.setUserTypeAction(USER_TYPES.STUDENT_WITH_URL);
+
+    const { STUDENT_WITH_URL } = USER_TYPES;
+
+    this.props.setStudentCredentialsAction(id, secretCode);
+    this.props.fetchStudentDataAction(id, secretCode);
+    this.props.setUserTypeAction(STUDENT_WITH_URL);
     this.setState({
       isURLParams: true,
     });
@@ -69,10 +82,13 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
    */
   redirectToStudentLogin() {
+
+    const { STUDENT } = USER_TYPES;
+
     this.setState({
       isStudentLogin: true,
     });
-    this.props.setHashLinkForStudentCredentialAction(USER_TYPES.STUDENT);
+    this.props.setHashLinkForStudentCredentialAction(STUDENT);
   }
 
   /**
@@ -81,11 +97,19 @@ class StudentPage extends Component {
    * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
    */
   redirectToNewRegistrationPage() {
+
+    const { STUDENT } = USER_TYPES;
+
     this.setState({
       isNewRegistration: true,
     });
-    this.props.setHashLinkForNewRegistrationAction(USER_TYPES.STUDENT);
+    this.props.setHashLinkForNewRegistrationAction(STUDENT);
   }
+
+  /**
+   * renderAlreadyRegisteredButton render already register button conditionally
+   * @return {HTML}
+   */
   renderAlreadyRegisteredButton = () => {
     if (this.props.isAlreadyRegisteredButtonEnabled) {
       return (
@@ -96,10 +120,11 @@ class StudentPage extends Component {
       );
     } return null;
   };
+
   /**
    * renderStudentLoginButtons method return the react component in that
    * there are two buttons one is already register and anther is new registration.
-   * @return {ReactComponent}
+   * @return {HTML}
    */
   renderStudentLoginButtons() {
     return (
@@ -112,21 +137,29 @@ class StudentPage extends Component {
       </div>
     );
   }
+
   render() {
-    if (this.state.isURLParams) {
+
+    const { isURLParams, isStudentLogin, isNewRegistration } = this.state;
+    const { tenant } = this.props;
+
+    if (isURLParams) {
       return <Switch><Redirect to="/studentCorrection" /></Switch>;
-    } else if (this.state.isStudentLogin) {
+
+    } else if (isStudentLogin) {
       return <Switch><Redirect to="/student-login" /></Switch>;
-    } else if (this.state.isNewRegistration) {
+
+    } else if (isNewRegistration) {
       return <Switch><Redirect to="/studentRegister" /></Switch>;
     }
+
     return (
       <div className="landing-page-block">
         <div className="landing-page-wrapper">
           <div className="landing-page-content">
             <div className="yjsg-event-info">
-              <h5 className="primary-color">{eventDate[this.props.tenant]}</h5>
-              <h5 className="header-text">{eventVenue[this.props.tenant]}</h5>
+              <h5 className="primary-color">{eventDate[tenant]}</h5>
+              <h5 className="header-text">{eventVenue[tenant]}</h5>
             </div>
             <div className="landing-page-logo">
               <img src={yjsgLogo} alt="yjsg logo" />
@@ -142,33 +175,37 @@ class StudentPage extends Component {
 }
 
 StudentPage.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
-  setHashLinkForStudentCredentialAction: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
+  isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setHashLinkForNewRegistrationAction: PropTypes.func,
+  setHashLinkForStudentCredentialAction: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 StudentPage.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
+  fetchStudentDataAction: () => {},
+  isAlreadyRegisteredButtonEnabled: false,
   setHashLinkForStudentCredentialAction: () => {},
   setHashLinkForNewRegistrationAction: () => {},
+  setStudentCredentialsAction: () => {},
   setUserTypeAction: () => {},
   tenant: '',
 };
+
 const mapStateToProps = state => ({
+  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
-  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
+
 export default connect(mapStateToProps, {
-  fetchStudentData,
-  setStudentCredentials,
-  setHashLinkForStudentCredentialAction,
-  setHashLinkForNewRegistrationAction,
-  setUserTypeAction,
+  fetchStudentDataAction,
   getApplicationTenant,
   isRegisterCorrectionEnabled,
+  setHashLinkForNewRegistrationAction,
+  setHashLinkForStudentCredentialAction,
+  setStudentCredentialsAction,
+  setUserTypeAction,
 })(StudentPage);

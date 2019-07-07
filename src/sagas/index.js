@@ -1,4 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
+
 import {
   createStudentSaga,
   fetchStudentSaga,
@@ -12,7 +13,11 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './rootSaga';
-import { fetchFilesConfigSaga, getAppConfigSaga, getBusCoordinatorsConfigSaga } from './assetFilesSaga';
+import {
+  fetchFilesConfigSaga,
+  getAppConfigSaga,
+  getBusCoordinatorsConfigSaga,
+} from './assetFilesSaga';
 
 const sagas = [
   takeLatest(['CREATE_STUDENT'], createStudentSaga),
@@ -30,4 +35,5 @@ const sagas = [
   takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
   takeLatest(['LOAD_BUS_COORDINATORS_DATA_ACTION'], getBusCoordinatorsConfigSaga),
 ];
+
 export default sagas;

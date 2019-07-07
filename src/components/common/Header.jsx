@@ -1,7 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 
 import headerLogo from '../../assets/images/react-logo.png';
@@ -11,7 +11,10 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
 } from '../../actions/studentRegistrationActions';
-import { routes, title } from '../../config/appConfig.json';
+import {
+  routes,
+  title,
+} from '../../config/appConfig.json';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**
@@ -24,7 +27,6 @@ import { getApplicationTenant } from '../../reducers/assetFilesReducer';
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
  * @type {Function}
- * @return {ReactComponent}
  * @constructor
  */
 const Header = ({
@@ -36,6 +38,7 @@ const Header = ({
   resetVisibleColumnConfig,
   tenant,
 }) => {
+
   /**
    * performLogout method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -51,10 +54,10 @@ const Header = ({
     resetVisibleColumnConfig();
     localStorage.clear();
   };
+
   /**
    * RenderBackButton method render back button in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
    * @constructor
    */
   const renderBackButton = (headerObject) => {
@@ -71,10 +74,10 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * renderLogOutButton method render logout button in header
     * @param {Object} headerObject
-   * @return {ReactComponent}
    * @constructor
    */
   const renderLogOutButton = (headerObject) => {
@@ -92,10 +95,10 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * RenderHeaderName method render header name in header
     * @param {Object} headerObject
-   * @return {ReactComponent}
    * @constructor
    */
   const renderHeaderName = headerObject => (
@@ -106,11 +109,11 @@ const Header = ({
       {headerObject.title ? headerObject.title : title[tenant]}
     </h2>
   );
+
   /**
    * RenderButton method render buttons with their button wrapper in header.
    * @param {Object} headerObject
-   * @return {ReactComponent}
-   * @constructor
+   * @return {HTML}
    */
   const renderButton = (headerObject) => {
     if (headerObject.hasButtons) {
@@ -124,11 +127,11 @@ const Header = ({
       );
     } return null;
   };
+
   /**
    * renderLogo method render logo in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
-   * @constructor
+   * @return {HTML}
    */
   const renderLogo = (headerObject) => {
     if (headerObject.logo) {
@@ -146,10 +149,12 @@ const Header = ({
     }
     return null;
   };
+
   // render header with their contains according to route
   return routes.map((route) => {
     const { header, path } = route;
     if (path === location) {
+
       return (
         <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
           {renderLogo(header)}
@@ -158,6 +163,7 @@ const Header = ({
         </div>
       );
     } else if (path === '/files*' && location === '/files') {
+
       return (
         <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
           {renderLogo(header)}
@@ -165,31 +171,33 @@ const Header = ({
           {renderButton(header)}
         </div>
       );
+
     } return null;
   });
 };
 
 Header.propTypes = {
-  title: PropTypes.string,
+  context: PropTypes.object,
+  location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
+  resetVisibleColumnConfig: PropTypes.func,
+  routes: PropTypes.array,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
-  resetVisibleColumnConfig: PropTypes.func,
-  location: PropTypes.string,
-  context: PropTypes.object,
-  routes: PropTypes.array,
   tenant: PropTypes.string,
+  title: PropTypes.string,
 };
+
 Header.defaultProps = {
-  title: '',
+  context: {},
+  location: '',
   resetAdminCredentials: () => {},
+  resetVisibleColumnConfig: () => {},
+  routes: [],
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
-  resetVisibleColumnConfig: () => {},
-  location: '',
-  context: {},
-  routes: [],
   tenant: '',
+  title: '',
 };
 
 const mapDispatchToProps = dispatch => ({

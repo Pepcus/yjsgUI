@@ -306,6 +306,24 @@
         "hasButtons": true,
         "backButton": true
       }
+    },
+    {
+      "name": "form",
+      "path": "/form",
+      "component": "MemberRegistrationForm",
+      "isActive": true,
+      "header": {
+        "logo": true
+      }
+    },
+    {
+      "name": "form-correction",
+      "path": "/form-correction",
+      "component": "MemberRegistrationCorrectionForm",
+      "isActive": true,
+      "header": {
+        "logo": true
+      }
     }
   ]
 }

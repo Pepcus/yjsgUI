@@ -8,10 +8,10 @@ import CustomLoader from './CustomLoader';
  * Loader render loader
  * @param {boolean} isLoading
  * @type {Function}
- * @return {ReactComponent}
  * @constructor
  */
 const Loader = ({ isLoading }) => {
+
   if (isLoading) {
     return (
       <div>
@@ -21,14 +21,17 @@ const Loader = ({ isLoading }) => {
   }
   return null;
 };
+
 const mapStateToProps = state => ({
   isLoading: getLoaderState(state),
 });
 
-Loader.propsType = {
+Loader.propTypes = {
   isLoading: PropTypes.bool,
 };
+
 Loader.defaultProps = {
   isLoading: false,
 };
+
 export default connect(mapStateToProps)(Loader);

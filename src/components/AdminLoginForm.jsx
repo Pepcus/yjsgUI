@@ -1,69 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputField from './form/InputField';
-import { formSubmitBtnText, goBackBtnText } from '../constants/yjsg';
+import {
+  formSubmitBtnText,
+  goBackBtnText,
+} from '../constants/yjsg';
 import Button from './common/Button';
+import Form from './form';
+import { AdminLoginFormJsonSchema } from '../config/fromJsonSchema.json';
 
+/**
+ * AdminLoginForm method render admin login form
+ * @param {Boolean} isAdmin
+ * @param {Object} admin
+ * @param {Function} handleAdminScreenRedirection
+ * @param {Function} handleDisableAdminLoginButtons
+ * @param {Function} setAdminLogin
+ * @param {Function} onChange
+ * @param {Function} transformErrors
+ * @return {HTML} admin login form
+ */
+const AdminLoginForm = ({
+  transformErrors,
+  isAdmin,
+  admin,
+  handleAdminScreenRedirection,
+  handleDisableAdminLoginButtons,
+  setAdminLogin,
+  onChange }) => {
 
-const AdminLoginForm = ({ isAdmin, admin, handleInputChange, adminScreenRedirection, disableAdminLoginButtons, setAdminLogin }) => {
   if (isAdmin) {
+    const uiSchema = {
+      ...AdminLoginFormJsonSchema.UISchema,
+      backButton: {
+        ...AdminLoginFormJsonSchema.UISchema.backButton,
+        'ui:widget': () => (
+          <Button
+            type="button"
+            buttonText={goBackBtnText}
+            onClick={handleDisableAdminLoginButtons}
+          />
+        ),
+      },
+      submitButton: {
+        ...AdminLoginFormJsonSchema.UISchema.submitButton,
+        'ui:widget': () => (
+          <Button
+            type="submit"
+            formName="adminCredential"
+            buttonText={formSubmitBtnText}
+            onClick={setAdminLogin}
+          />
+        ),
+      },
+    };
+
     return (
-      <div>
-        <form id="adminCredential">
-          <div className="form-input-wrapper">
-            <InputField
-              type="text"
-              name="adminId"
-              label="Admin ID"
-              placeholder="Enter Admin ID"
-              onInputChange={handleInputChange}
-              value={admin.adminId}
-            />
-            <InputField
-              type="password"
-              name="adminPassword"
-              label="Admin Password"
-              placeholder="Enter Admin Password"
-              onInputChange={handleInputChange}
-              value={admin.adminPassword}
-            />
-            {adminScreenRedirection()}
-          </div>
-          <div className="button-wrapper">
-            <Button
-              type="button"
-              buttonText={goBackBtnText}
-              onClick={disableAdminLoginButtons}
-            />
-            <Button
-              type="submit"
-              formName="adminCredential"
-              buttonText={formSubmitBtnText}
-              onClick={setAdminLogin}
-            />
-          </div>
-        </form>
+      <div className="student-already-register-form">
+        {handleAdminScreenRedirection()}
+        <Form
+          showErrorList={false}
+          liveValidate
+          schema={AdminLoginFormJsonSchema.Schema}
+          uiSchema={uiSchema}
+          formData={admin}
+          onChange={onChange}
+          transformErrors={transformErrors}
+        />
       </div>
     );
   }
   return null;
 };
 
-AdminLoginForm.propsType = {
-  isAdmin: PropTypes.bool,
+AdminLoginForm.propTypes = {
+  onChange: PropTypes.func,
+  transformErrors: PropTypes.func,
   admin: PropTypes.object,
-  handleInputChange: PropTypes.func,
-  adminScreenRedirection: PropTypes.func,
-  disableAdminLoginButtons: PropTypes.func,
+  handleAdminScreenRedirection: PropTypes.func,
+  handleDisableAdminLoginButtons: PropTypes.func,
+  isAdmin: PropTypes.bool,
   setAdminLogin: PropTypes.func,
 };
+
 AdminLoginForm.defaultProps = {
-  isAdmin: false,
+  onChange: () => {},
+  transformErrors: () => {},
   admin: {},
-  handleInputChange: () => {},
-  adminScreenRedirection: () => {},
-  disableAdminLoginButtons: () => {},
+  handleAdminScreenRedirection: () => {},
+  handleDisableAdminLoginButtons: () => {},
+  isAdmin: false,
   setAdminLogin: () => {},
 };
+
 export default AdminLoginForm;

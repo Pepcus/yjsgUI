@@ -13,10 +13,15 @@ class SelectListInputField extends Component {
 
   constructor(props) {
     super(props);
+
     this._handleOnChange = this.handleOnChange.bind(this);
     this._populateValue = this.populateValue.bind(this);
   }
 
+  /**
+   * renderOptionStatements method render options
+   * @return {*[]} options
+   */
   renderOptionStatements() {
     return this.props.options.map((iterator, index) =>
       (
@@ -25,17 +30,28 @@ class SelectListInputField extends Component {
         </option>),
     );
   }
+
+  /**
+   * populateValue method return conditional value into option
+   * @param {String} value
+   * @return {String}
+   */
   populateValue(value) {
     if (!value) {
       return 'select';
     } return value;
   }
 
-  handleOnChange(e) {
-    this.props.onInputChange(e.target.value, this.props.name);
+  /**
+   * handleOnChange handle onChange value in drop down option
+   * @param {Object} event
+   */
+  handleOnChange(event) {
+    this.props.onInputChange(event.target.value, this.props.name);
   }
 
   render() {
+
     const {
       name,
       value,
@@ -49,6 +65,7 @@ class SelectListInputField extends Component {
     const newLabel = isRequired ? `${label} * ` : label;
 
     if (errorMessage) {
+
       return (
         <div className="inputWrapper">
           <div className="has-error inputWrapperContainer errorInputField">
@@ -73,6 +90,7 @@ class SelectListInputField extends Component {
         </div>
       );
     }
+
     return (
       <div className="inputWrapper">
         <div className="inputWrapperContainer">
@@ -100,30 +118,30 @@ class SelectListInputField extends Component {
 }
 
 SelectListInputField.propTypes = {
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isRequired: PropTypes.bool,
+  label: PropTypes.string,
   name: PropTypes.string,
+  onInputChange: PropTypes.func,
+  options: PropTypes.array,
+  style: PropTypes.object,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  options: PropTypes.array,
-  label: PropTypes.string,
-  errorMessage: PropTypes.string,
-  isRequired: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onInputChange: PropTypes.func,
-  style: PropTypes.object,
 };
 
 SelectListInputField.defaultProps = {
-  name: '',
-  options: [],
-  value: '',
-  isRequired: false,
   disabled: false,
   errorMessage: '',
+  isRequired: false,
   label: '',
+  name: '',
   onInputChange: () => {},
+  options: [],
   style: {},
+  value: '',
 };
 
 export default SelectListInputField;

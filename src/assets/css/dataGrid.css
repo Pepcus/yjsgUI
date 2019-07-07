@@ -17,9 +17,127 @@ html, body {
 .logoutLinkContainer {
     display: flex;
 }
+.member-registration-form .rjsf {
+    padding: 15px 17px;
+    margin: 70px auto;
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.member-registration-correction-form .rjsf {
+    padding: 15px 17px;
+    margin: 70px auto;
+    box-shadow: 0 2px 4px 0 #eeecec;
+    background-color: rgba(248, 247, 247, 0.93);
+    overflow-x: hidden;
+    max-width: 1170px;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 1170px;
+}
+.student-already-register-form .rjsf {
+    background-color: white;
+    box-shadow: none;
+}
+.field-radio-group {
+    margin-top: 20px;
+}
+.not-editable-field-style .form-control{
+    border: none;
+    background: none;
+    width: 50%;
+    padding: 0;
+}
+.default-form-container {
+    height: 100%;
+}
+.not-editable-field-style .control-label{
+    width: 50%;
+}
+
+.field-style {
+    display: inline-grid;
+    width: 33.33%;
+}
+
+.not-editable-field-style {
+    display: inline-flex;
+    width: 33.33%;
+    align-items: center;
+    background: #efefef;
+    border-top: 2px solid #e8e8e8
+}
+
+.button-style {
+    display: inline-block;
+    width: 100%;
+}
+
+.btn-info {
+    display: none;
+}
+
+.register-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    padding: 12px 20px 5px;
+}
+
+.text-danger {
+    font-size: 11px;
+    color: red;
+    margin: 2px;
+}
+
+.control-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #4c4c4c;
+    font-size: 14px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+}
+
+.form-container {
+    background-color: #fff;
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-control {
+    width: 100%;
+    max-width: 330px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    height: auto;
+}
+
+.form-control:focus {
+    background: #f9f9f9;
+    outline-color: var(--theme-hover-color);
+}
 
 .logoutButtonContainer {
-    top: 11px;
     z-index: 2;
 }
 
@@ -173,7 +291,7 @@ html, body {
     display: block;
     text-align: center;
     line-height: 20px;
-    padding: 11px;
+    padding: 10px;
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
@@ -279,7 +397,6 @@ html, body {
 
 .text-decoration-none {
     text-decoration: none;
-    color: #ffffff;
 }
 
 .wrapper-pagination-search {
@@ -554,7 +671,7 @@ html, body {
 
 .inputFieldContainerWrapper {
     display: flex;
-   /* flex-direction: column;*/
+    flex-direction: column;
     width: 100%;
     height: auto;
     overflow-y: auto;
@@ -665,6 +782,7 @@ html, body {
     transition: 0.4s ease-in-out;
 }
 
+
 @keyframes sort-order {
     0% {
         width: 0;
@@ -698,17 +816,13 @@ html, body {
 .label input {
     margin-right: 10px;
     cursor: pointer;
-    max-height: 21px;
-    max-width: 21px;
-    min-height: 20px;
-    min-width: 20px;
+    height: 20px;
+    width: 20px;
 }
 
 .label span {
     vertical-align: super;
     font-size: 18px;
-    max-width: 100%;
-    min-width: 99%;
 }
 
 .label {
@@ -720,8 +834,6 @@ html, body {
 .modal-save-container {
     text-align: right;
     padding: 10px 30px 30px;
-    max-width: 100%;
-    min-width: 99%;
 }
 
 .modal-save-container .save-button {
@@ -736,7 +848,7 @@ html, body {
     outline: none;
     font-size: 14px;
     border-radius: 4px;
-    padding: 7px 10px;
+    padding: 6px 10px;
     font-weight: 600;
     box-shadow: none;
 }
@@ -850,7 +962,6 @@ html, body {
     display: flex;
     align-items: center;
     margin-top: 4px;
-    width: auto;
 }
 
 .column-group-wrapper {
@@ -862,8 +973,6 @@ html, body {
     padding: 0 50px;
     max-height: 300px;
     max-width: 100%;
-    min-height: 299px;
-    min-width: 99%;
     overflow: auto;
 }
 
@@ -1163,7 +1272,7 @@ body,
     top: 5px !important;
     cursor: pointer;
     right: 0 !important;
-    padding: 7px 10px 9px 10px !important;
+    padding: 6px 10px !important;
     width: auto !important;
     box-shadow: none;
     border: none;
@@ -1171,8 +1280,6 @@ body,
     border-bottom-right-radius: 4px;
     background: #e1dcdc !important;
     color: #6a6c6c;
-    max-height: 81%;
-    min-height: 80%;
 }
 
 .search:hover {
@@ -1262,8 +1369,6 @@ body,
     background: transparent;
     color: var(--theme-color);
     margin-right: 15px;
-    line-height: 20px;
-    padding: 7px;
 }
 
 .button-close:hover {
@@ -1394,7 +1499,6 @@ body,
 }
 
 .clear-search {
-    top: 10px;
     position: absolute;
     right: 12%;
     cursor: pointer;
@@ -2140,7 +2244,6 @@ body,
 
 .student-already-register-form .button-wrapper .button-container:nth-child(2) .buttonOrange {
     padding: 8px 0;
-    height: 41px;
 }
 
 .selected-student-wrapper-id {
@@ -2449,14 +2552,46 @@ body,
 .file-extension-download-btn {
     margin-top: 15px;
 }
+
+@media (max-width: 640px){
+    .register-button-wrapper {
+        display: block;
+        width: 100%;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .form-group {
+        margin-top: 7px;
+    }
+    .not-editable-field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .button-style {
+        display: block;
+        width: 100%;
+    }
+    .rjsf {
+        padding: 5px 4px;
+        margin: 0;
+    }
+}
+
 @media (max-width: 1024px) {
+    .rjsf {
+        margin: 50px auto;
+    }
+    .form-group {
+      margin-top: 15px;
+    }
     .input-radio {
         padding: 20px 18px;
     }
     .column-option-container {
         padding: 5px 7px;
     }
-
     .registration-file-container {
         padding-top: 0;
         margin-top: 0;
@@ -2790,8 +2925,33 @@ body,
     }
 
 }
-
+@media (max-width: 990px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 768px) {
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-wrapper {
+        display: block;
+    }
+    .rjsf {
+        box-shadow: none;
+        margin: 0px auto;
+    }
+    .form-group {
+        margin-top: 15px;
+    }
     .custom-modal {
         width: 70% !important;
     }
@@ -2943,10 +3103,17 @@ body,
         color: #0000EE;
         text-decoration: underline;
     }
+    .field-style {
+        display: inline-grid;
+        width: 50%;
+    }
 
 }
 
 @media (max-width: 736px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
     .landing-page-block {
         height: auto;
     }
@@ -3253,10 +3420,6 @@ body,
         padding-right: 10px;
     }
 
-    .column-option-configure:hover .file-button {
-        padding-right: 10px;
-    }
-
     .column-group {
         margin-left: 30px;
     }
@@ -3461,9 +3624,38 @@ body,
     .file-text-format-wrapper {
         max-width:95%;
     }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
 }
-
+@media (max-width: 640px) and (orientation: landscape) {
+    .default-form-container {
+        height: auto;
+    }
+}
 @media (max-width: 480px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .rjsf {
+        box-shadow: none;
+    }
+    .form-container {
+        display: block;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .search-input-bar {
         margin-top: 10px;
     }
@@ -3583,6 +3775,13 @@ body,
 }
 
 @media (max-width: 360px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
     .landing-page-logo {
         max-width: 120px;
     }
@@ -3618,6 +3817,16 @@ body,
 }
 
 @media (max-width: 320px) {
+    .default-form-container {
+        height: auto;
+    }
+    .field-style {
+        width: 100%;
+        max-width: 100%;
+    }
+    .form-group {
+        padding: 8px 8px 8px;
+    }
     .custom-modal {
         width: 90% !important;
     }

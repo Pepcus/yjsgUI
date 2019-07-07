@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import ErrorMessage from '../common/ErrorMessage';
 
 /**
- * TextAreaField render textArea field
- * @type {Class}
+ * InputField render input field custom properties.
  */
-class TextAreaField extends Component {
+class InputField extends Component {
 
   constructor(props) {
     super(props);
@@ -20,21 +19,21 @@ class TextAreaField extends Component {
   }
 
   populateValue() {
-    if (this.props.value) {
-      return this.props.value;
+    const { value } = this.props;
+    if (value) {
+      return value;
     }
     return '';
   }
 
   render() {
     const {
+      type,
       label,
       placeholder,
       errorMessage,
       isRequired,
       disabled,
-      min,
-      max,
     } = this.props;
 
     const newLabel = isRequired ? `${label} * ` : label;
@@ -45,14 +44,12 @@ class TextAreaField extends Component {
           <div className="has-error inputWrapperContainer errorInputField">
             <div className="inputLabel"><label>{newLabel}</label></div>
             <div>
-              <textarea
-                className="textAreaText"
-                type="textArea"
+              <input
+                className="inputText"
+                type={type}
                 placeholder={placeholder}
                 onChange={this._handleOnChange}
                 value={this._populateValue()}
-                min={min}
-                max={max}
                 disabled={disabled}
               />
             </div>
@@ -61,19 +58,18 @@ class TextAreaField extends Component {
         </div>
       );
     }
+
     return (
       <div className="inputWrapper">
         <div className="inputWrapperContainer">
           <div className="inputLabel"><label>{newLabel}</label></div>
           <div>
-            <textarea
-              className="textAreaText"
-              type="textArea"
+            <input
+              className="inputText"
+              type={type}
               placeholder={placeholder}
               onChange={this._handleOnChange}
               value={this._populateValue()}
-              min={min}
-              max={max}
               disabled={disabled}
             />
           </div>
@@ -84,38 +80,32 @@ class TextAreaField extends Component {
   }
 }
 
-TextAreaField.propTypes = {
-  type: PropTypes.string,
+InputField.propTypes = {
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isRequired: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string,
-  style: PropTypes.object,
+  onInputChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  placeholder: PropTypes.string,
-  onInputChange: PropTypes.func,
-  errorMessage: PropTypes.string,
-  isRequired: PropTypes.bool,
-  disabled: PropTypes.bool,
-  min: PropTypes.number,
-  max: PropTypes.number,
 };
 
-TextAreaField.defaultProps = {
-  style: {},
-  type: 'text',
+InputField.defaultProps = {
+  disabled: false,
+  errorMessage: '',
+  isRequired: false,
   label: '',
   name: '',
-  placeholder: '',
   onInputChange: () => {},
-  errorMessage: '',
+  placeholder: '',
+  type: 'text',
   value: '',
-  isRequired: false,
-  disabled: false,
-  min: 0,
-  max: 0,
 };
 
+export default InputField;
 
-export default TextAreaField;
