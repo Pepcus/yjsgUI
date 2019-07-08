@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
-import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 
 import {
@@ -35,13 +34,15 @@ import {
   updateClassAttended2019InStudentData,
 } from '../../utils/registrationFormUtils';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
-import { validation } from '../../config/memberRegistrationCorrectionFormSchema.json';
 import {
-  InitialStudentData, isObjectsEqual,
+  InitialStudentData,
+  isObjectsEqual,
   prePopulateOptIn,
 } from '../../utils/SampleFormValidation';
 import CorrectionsForm from '../CorrectionsForm';
 import FormUpdateSuccessMessage from '../FormUpdateSuccessMessage';
+import { fetchJsonSchemaFile } from '../../sagas/assetFilesAPI';
+
 
 /**
  * MemberRegistrationCorrectionForm render member registration correction form.
@@ -62,51 +63,136 @@ class MemberRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
       hasError: false,
       isFormChanged: false,
+      fileData: {},
     };
+    this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
   }
 
   componentDidMount() {
-
     const { studentData } = this.props;
+    const { onlyOptInForm } = this.state;
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = getFinalMemberData({ studentData });
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
 
-    if (!isEmpty(prePopulateOptInStudentData)) {
-      this.setState({
-        student: InitialStudentData(prePopulateOptInStudentData),
-        oldStudentDate: InitialStudentData(finalStudentData),
-        isSubmitTriggered: false,
-      });
-      this.prePopulateCourse2019(InitialStudentData(prePopulateOptInStudentData));
-    }
+    this.props.setLoadingStateAction(false);
+    this.DecideJsonFile({ prePopulateOptInStudentData, finalStudentData, onlyOptInForm });
   }
 
-  componentWillReceiveProps(nextProps) {
-
+  componentWillReceiveProps(nextProps, nextState) {
     const { studentData } = nextProps;
+    const { onlyOptInForm } = nextState;
     // get student data from session if present
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
     const finalStudentData = getFinalMemberData({ studentData });
     const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
-
-    if (!isEmpty(prePopulateOptInStudentData)) {
-      this.setState({
-        student: InitialStudentData(prePopulateOptInStudentData),
-        oldStudentDate: InitialStudentData(finalStudentData),
-        isSubmitTriggered: false,
-      });
-      this.prePopulateCourse2019(InitialStudentData(prePopulateOptInStudentData));
-    }
+    this.props.setLoadingStateAction(false);
+    this.DecideJsonFile({ prePopulateOptInStudentData, finalStudentData, onlyOptInForm });
   }
+
+  /**
+   * It decide that which JSON file will be fetch
+   * @param {Object} prePopulateOptInStudentData
+   * @param {Object} finalStudentData
+   * @param {Boolean} onlyOptInForm
+   * @return {Object}
+   */
+  DecideJsonFile = ({ prePopulateOptInStudentData, finalStudentData, onlyOptInForm }) => {
+    const { tenant, pageUser } = this.props;
+    const { ADMIN } = USER_TYPES;
+    if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
+      return this.fetchFileData({
+        pageUser,
+        tenant,
+        file: 'onlyEditOptIn',
+        prePopulateOptInStudentData,
+        finalStudentData,
+        onlyOptInForm,
+      });
+
+    } else if (isPageUserStudent({ pageUser })) {
+      return this.fetchFileData({
+        pageUser,
+        tenant,
+        file: 'STUDENT',
+        prePopulateOptInStudentData,
+        finalStudentData,
+        onlyOptInForm,
+      });
+
+    } else if (pageUser === ADMIN) {
+      return this.fetchFileData({
+        pageUser,
+        tenant,
+        file: 'ADMIN',
+        prePopulateOptInStudentData,
+        finalStudentData,
+        onlyOptInForm,
+      });
+    }
+    return null;
+  };
+
+  /**
+   * It fetch the JSON form schema for form
+   * @param {String} pageUser
+   * @param {String} tenant
+   * @param {String} file
+   * @param {Object} prePopulateOptInStudentData
+   * @param {Object} finalStudentData
+   * @param {Boolean} onlyOptInForm
+   */
+  fetchFileData = ({ pageUser, tenant, file, prePopulateOptInStudentData, finalStudentData, onlyOptInForm }) => {
+    try {
+      fetchJsonSchemaFile({ tenant, file })
+        .then((response) => {
+          if (response) {
+            if (!isEmpty(prePopulateOptInStudentData)) {
+              this.setState({
+                student: InitialStudentData({
+                  studentData: prePopulateOptInStudentData,
+                  pageUser,
+                  tenant,
+                  onlyOptInForm,
+                  fileData: response,
+                }),
+                oldStudentDate: InitialStudentData({
+                  studentData: finalStudentData,
+                  pageUser,
+                  tenant,
+                  onlyOptInForm,
+                  fileData: response,
+                }),
+                isSubmitTriggered: false,
+                fileData: response,
+                onlyOptInForm,
+              });
+              this.prePopulateCourse2019(InitialStudentData({
+                studentData: prePopulateOptInStudentData,
+                pageUser,
+                tenant,
+                onlyOptInForm,
+                fileData: response,
+              }));
+            }
+          } else {
+            this.props.setLoadingStateAction(false);
+          }
+        }, () => {
+          this.props.setLoadingStateAction(false);
+        });
+    } catch (e) {
+      this.props.setLoadingStateAction(false);
+      console.error(e);
+    }
+  };
 
   /**
    * scrollToError method scroll to first form file which is in valid in mobile view only.
    */
   scrollToError = () => {
-
     const errorNode = this.formRef.current.querySelector('.has-danger');
 
     if (errorNode) {
@@ -116,14 +202,15 @@ class MemberRegistrationCorrectionForm extends Component {
 
   /**
    * validate method check validation for only optIn is 'Y' form field and return conditional error for form field
-   * @return {}
+   * @return {Array}
    */
   validate = () => {
-    const { student } = this.state;
+    const { student, fileData } = this.state;
+
     if (student.optIn2019 === 'Y') {
-      return validation;
+      return fileData.validation;
     }
-    return {};
+    return [];
 
   };
 
@@ -131,7 +218,6 @@ class MemberRegistrationCorrectionForm extends Component {
    * updateStudentData method will update student data by onClick of submit button
    */
   updateStudentData = () => {
-
     const {
       id,
       secretKey,
@@ -163,9 +249,11 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {String} value
    */
   changeIsOnlyOptIn = (value) => {
-    this.setState({
-      onlyOptInForm: value,
-    });
+    const finalStudentData = getFinalMemberData({ studentData: this.props.studentData });
+    const prePopulateOptInStudentData = prePopulateOptIn(finalStudentData);
+
+    this.props.setLoadingStateAction(false);
+    this.DecideJsonFile({ prePopulateOptInStudentData, finalStudentData, onlyOptInForm: value });
   };
 
   /**
@@ -322,7 +410,6 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   render() {
-
     const {
       isFetch,
       studentData,
@@ -338,9 +425,10 @@ class MemberRegistrationCorrectionForm extends Component {
       isSubmitTriggered,
       isFormChanged,
       hasError,
+      fileData,
     } = this.state;
 
-    if (isFetch && studentData) {
+    if (isFetch && studentData && !isEmpty(fileData)) {
       return (
         <CorrectionsForm
           pageUser={pageUser}
@@ -355,6 +443,7 @@ class MemberRegistrationCorrectionForm extends Component {
           renderBackButton={this.renderBackButton}
           formRef={this.formRef}
           renderSubmitButtons={this.renderSubmitButtons}
+          fileData={fileData}
         >
           <FormUpdateSuccessMessage
             isSubmitTriggered={isSubmitTriggered}
@@ -362,6 +451,7 @@ class MemberRegistrationCorrectionForm extends Component {
             hasError={hasError}
             context={context}
             isStudentUpdated={isStudentUpdated}
+            isUpdatedReset={this.props.isUpdatedResetAction}
           />
         </CorrectionsForm>
       );
@@ -378,6 +468,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   isUpdatedResetAction: PropTypes.func,
   pageUser: PropTypes.string,
   secretKey: PropTypes.string,
+  setLoadingStateAction: PropTypes.string,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tenant: PropTypes.string,
   updateStudentDataAction: PropTypes.func,
@@ -391,6 +482,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   isUpdatedResetAction: () => {},
   pageUser: '',
   secretKey: '',
+  setLoadingStateAction: () => {},
   studentData: {},
   tenant: '',
   updateStudentDataAction: () => {},
