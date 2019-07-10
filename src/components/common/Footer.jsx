@@ -11,7 +11,7 @@ import {
   footerContactInfo,
 } from '../../constants/yjsg';
 import { isLoading } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 /**
  * Footer component is common footer for all route.
@@ -54,10 +54,10 @@ Footer.defaultProps = {
 
 const mapStateToProps = state => ({
   isLoading: isLoading(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
-  getApplicationTenant,
+  getTenantName,
 })(Footer);
 

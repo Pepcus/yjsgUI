@@ -1,5 +1,5 @@
 {
-  "Schema" : {
+  "schema" : {
     "type": "object",
     "required": ["optIn2019"],
     "dependencies": {
@@ -19,12 +19,12 @@
               "name": {
                 "title": "नाम",
                 "type": "string",
-                "validator": "nameValidation"
+                "validator": "nameValidator"
               },
               "fatherName": {
                 "title": "पिता / पति का नाम",
                 "type": "string",
-                "validator": "nameValidation"
+                "validator": "nameValidator"
               },
               "gender": {
                 "title": "लिंग",
@@ -35,12 +35,12 @@
               "age": {
                 "title": "उम्र",
                 "type": "number",
-                "validator": "ageValidation"
+                "validator": "ageValidator"
               },
               "mobile": {
                 "title": "मोबाइल नं",
                 "type": "number",
-                "validator": "mobileValidation"
+                "validator": "mobileValidator"
               },
               "occupation": {
                 "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -53,7 +53,7 @@
               "email": {
                 "title": "ई-मेल",
                 "type": "string",
-                "validator": "optionalEmailValidation"
+                "validator": "optionalEmailValidator"
               },
               "classAttended2018": {
                 "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
@@ -86,7 +86,7 @@
               "address": {
                 "title": "पूरा पता",
                 "type": "string",
-                "validator": "addressValidation"
+                "validator": "addressValidator"
               }
             },
             "required": [
@@ -216,7 +216,7 @@
       }
     }
   },
-  "UISchema" : {
+  "uiSchema" : {
     "ui:order": [
       "optIn2019",
       "id",
@@ -326,31 +326,31 @@
       "classNames": "not-editable-field-style"
     }
   },
-  "Data": {},
+  "data": {},
   "validation": [
     {
       "field": "name",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "fatherName",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "mobile",
-      "validates": "mobileValidation"
+      "validator": "mobileValidator"
     },
     {
       "field": "age",
-      "validates": "ageValidation"
+      "validator": "ageValidator"
     },
     {
       "field": "email",
-      "validates": "optionalEmailValidation"
+      "validator": "optionalEmailValidator"
     },
     {
       "field": "address",
-      "validates": "addressValidation"
+      "validator": "addressValidator"
     }
   ],
   "defaultStudentDataFormat": [

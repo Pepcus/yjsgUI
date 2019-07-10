@@ -48,11 +48,12 @@ import {
   isUpdatedResetAction,
 } from '../../actions/studentRegistrationActions';
 import {
-  updateClassAttended2019InStudentData,
+  updateClassAttended2019InMemberData,
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
-  validateInput, isPageUserStudent,
+  validateInput,
+  isUserStudent,
 } from '../../utils/registrationFormUtils';
 import {
   getStudent,
@@ -70,7 +71,7 @@ import {
   YES_TEXT,
 } from '../../constants/text';
 import Popup from '../common/Popup';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 
 /**
@@ -544,7 +545,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (isPageUserStudent({ pageUser })) {
+    } else if (isUserStudent({ pageUser })) {
       return (
         <Button
           type="button"
@@ -568,7 +569,7 @@ class StudentRegistrationCorrectionForm extends Component {
    */
   prePopulateCourse2019(studentData) {
 
-    const updatedData = updateClassAttended2019InStudentData(studentData);
+    const updatedData = updateClassAttended2019InMemberData(studentData);
 
     this.setState({
       student: updatedData,
@@ -937,7 +938,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const { student, errorMessage, onlyOptIn2019 } = this.state;
     const { pageUser, studentData, context, isStudentFetched } = this.props;
 
-    if (isPageUserStudent({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
+    if (isUserStudent({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
 
     } else if (isStudentFetched && student.optIn2019 === 'N') {
@@ -1147,11 +1148,11 @@ const mapStateToProps = state => ({
   pageUser: getPageUserType(state),
   secretKey: getUserSecretKey(state),
   studentData: getStudent(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
-  getApplicationTenant,
+  getTenantName,
   isUpdatedResetAction,
   updateStudentDataAction,
 })(StudentRegistrationCorrectionForm);

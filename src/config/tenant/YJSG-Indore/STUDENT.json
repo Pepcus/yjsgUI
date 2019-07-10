@@ -1,6 +1,7 @@
 {
-  "Schema" : {
+  "schema" : {
     "type": "object",
+    "required": ["optIn2019"],
     "dependencies": {
       "optIn2019": {
         "oneOf": [
@@ -18,12 +19,12 @@
               "name": {
                 "title": "नाम",
                 "type": "string",
-                "validator": "nameValidation"
+                "validator": "nameValidator"
               },
               "fatherName": {
                 "title": "पिता / पति का नाम",
                 "type": "string",
-                "validator": "nameValidation"
+                "validator": "nameValidator"
               },
               "gender": {
                 "title": "लिंग",
@@ -34,12 +35,12 @@
               "age": {
                 "title": "उम्र",
                 "type": "number",
-                "validator": "ageValidation"
+                "validator": "ageValidator"
               },
               "mobile": {
                 "title": "मोबाइल नं",
                 "type": "number",
-                "validator": "mobileValidation"
+                "validator": "mobileValidator"
               },
               "occupation": {
                 "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -52,7 +53,7 @@
               "email": {
                 "title": "ई-मेल",
                 "type": "string",
-                "validator": "optionalEmailValidation"
+                "validator": "optionalEmailValidator"
               },
               "busStop": {
                 "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
@@ -161,7 +162,7 @@
                 "type": "string"
               },
               "classAttended2019": {
-                "title": "Class",
+                "title": "आप क्या अध्ययन करना चाहते हैं ?",
                 "type": "string",
                 "enum": [
                   "Level 1",
@@ -184,154 +185,10 @@
                   "Level 8 : छहढाला-ढाल 4-5"
                 ]
               },
-              "marks2019": {
-                "title": "Marks 2019",
-                "type": "string"
-              },
-              "busNumber": {
-                "title": "Bus#",
-                "type": "string",
-                "enum": [
-                  "SELF",
-                  "B0",
-                  "B1",
-                  "B2",
-                  "B3",
-                  "B4",
-                  "B5",
-                  "B6",
-                  "B7",
-                  "B8",
-                  "B9",
-                  "B10",
-                  "B11",
-                  "B12",
-                  "B13",
-                  "B14",
-                  "B15",
-                  "B16",
-                  "B17",
-                  "B18",
-                  "B19",
-                  "B20",
-                  "B21",
-                  "B22",
-                  "B23",
-                  "B24",
-                  "B25",
-                  "B26",
-                  "B27"
-                ],
-                "enumNames": [
-                  "Self",
-                  "B0",
-                  "B1",
-                  "B2",
-                  "B3",
-                  "B4",
-                  "B5",
-                  "B6",
-                  "B7",
-                  "B8",
-                  "B9",
-                  "B10",
-                  "B11",
-                  "B12",
-                  "B13",
-                  "B14",
-                  "B15",
-                  "B16",
-                  "B17",
-                  "B18",
-                  "B19",
-                  "B20",
-                  "B21",
-                  "B22",
-                  "B23",
-                  "B24",
-                  "B25",
-                  "B26",
-                  "B27"
-                ]
-              },
-              "classRoomNo2019": {
-                "title": "Room",
-                "type": "string",
-                "enum": [
-                  "105",
-                  "106",
-                  "107",
-                  "108",
-                  "109",
-                  "110",
-                  "111",
-                  "112",
-                  "218",
-                  "219",
-                  "220",
-                  "224",
-                  "225",
-                  "227",
-                  "330",
-                  "334",
-                  "337",
-                  "340",
-                  "341",
-                  "401",
-                  "402",
-                  "403",
-                  "501",
-                  "502",
-                  "503",
-                  "504",
-                  "507",
-                  "509",
-                  "601",
-                  "603",
-                  "607"
-                ],
-                "enumNames": [
-                  "105",
-                  "106",
-                  "107",
-                  "108",
-                  "109",
-                  "110",
-                  "111",
-                  "112",
-                  "218",
-                  "219",
-                  "220",
-                  "224",
-                  "225",
-                  "227",
-                  "330",
-                  "334",
-                  "337",
-                  "340",
-                  "341",
-                  "401",
-                  "402",
-                  "403",
-                  "501",
-                  "502",
-                  "503",
-                  "504",
-                  "507",
-                  "509",
-                  "601",
-                  "603",
-                  "607"
-                ]
-              },
               "address": {
                 "title": "पूरा पता",
                 "type": "string",
-                "validator": "addressValidation"
-              },
-              "remark": {
-                "title": "Remark",
-                "type": "string"
+                "validator": "addressValidator"
               }
             },
             "required": [
@@ -342,6 +199,7 @@
               "age",
               "mobile",
               "busStop",
+              "classAttended2019",
               "address"
             ]
           },
@@ -497,7 +355,7 @@
                 "type": "string"
               },
               "classAttended2019": {
-                "title": "Class",
+                "title": "आप क्या अध्ययन करना चाहते हैं ?",
                 "type": "string",
                 "enum": [
                   "Level 1",
@@ -520,152 +378,8 @@
                   "Level 8 : छहढाला-ढाल 4-5"
                 ]
               },
-              "marks2019": {
-                "title": "Marks 2019",
-                "type": "string"
-              },
-              "busNumber": {
-                "title": "Bus#",
-                "type": "string",
-                "enum": [
-                  "SELF",
-                  "B0",
-                  "B1",
-                  "B2",
-                  "B3",
-                  "B4",
-                  "B5",
-                  "B6",
-                  "B7",
-                  "B8",
-                  "B9",
-                  "B10",
-                  "B11",
-                  "B12",
-                  "B13",
-                  "B14",
-                  "B15",
-                  "B16",
-                  "B17",
-                  "B18",
-                  "B19",
-                  "B20",
-                  "B21",
-                  "B22",
-                  "B23",
-                  "B24",
-                  "B25",
-                  "B26",
-                  "B27"
-                ],
-                "enumNames": [
-                  "Self",
-                  "B0",
-                  "B1",
-                  "B2",
-                  "B3",
-                  "B4",
-                  "B5",
-                  "B6",
-                  "B7",
-                  "B8",
-                  "B9",
-                  "B10",
-                  "B11",
-                  "B12",
-                  "B13",
-                  "B14",
-                  "B15",
-                  "B16",
-                  "B17",
-                  "B18",
-                  "B19",
-                  "B20",
-                  "B21",
-                  "B22",
-                  "B23",
-                  "B24",
-                  "B25",
-                  "B26",
-                  "B27"
-                ]
-              },
-              "classRoomNo2019": {
-                "title": "Room",
-                "type": ["string"],
-                "enum": [
-                  "105",
-                  "106",
-                  "107",
-                  "108",
-                  "109",
-                  "110",
-                  "111",
-                  "112",
-                  "218",
-                  "219",
-                  "220",
-                  "224",
-                  "225",
-                  "227",
-                  "330",
-                  "334",
-                  "337",
-                  "340",
-                  "341",
-                  "401",
-                  "402",
-                  "403",
-                  "501",
-                  "502",
-                  "503",
-                  "504",
-                  "507",
-                  "509",
-                  "601",
-                  "603",
-                  "607"
-                ],
-                "enumNames": [
-                  "105",
-                  "106",
-                  "107",
-                  "108",
-                  "109",
-                  "110",
-                  "111",
-                  "112",
-                  "218",
-                  "219",
-                  "220",
-                  "224",
-                  "225",
-                  "227",
-                  "330",
-                  "334",
-                  "337",
-                  "340",
-                  "341",
-                  "401",
-                  "402",
-                  "403",
-                  "501",
-                  "502",
-                  "503",
-                  "504",
-                  "507",
-                  "509",
-                  "601",
-                  "603",
-                  "607"
-                ]
-              },
               "address": {
                 "title": "पूरा पता",
-                "type": "string"
-              },
-              "remark": {
-                "title": "Remark",
                 "type": "string"
               }
             }
@@ -707,7 +421,7 @@
       }
     }
   },
-  "UISchema" : {
+  "uiSchema" : {
     "ui:order": ["optIn2019",
       "id",
       "name",
@@ -722,10 +436,8 @@
       "classAttended2018",
       "classAttended2019",
       "marks2019",
-      "busNumber",
       "classRoomNo2019",
       "address",
-      "remark",
       "backButton",
       "submitButton",
       "marks2018",
@@ -747,6 +459,12 @@
     "optIn2019": {
       "classNames": "field-style"
     },
+    "name": {
+      "classNames": "field-style"
+    },
+    "fatherName": {
+      "classNames": "field-style"
+    },
     "mobile": {
       "classNames": "field-style"
     },
@@ -759,10 +477,13 @@
     "email": {
       "classNames": "field-style"
     },
-    "name": {
+    "classAttended2018": {
       "classNames": "field-style"
     },
-    "fatherName": {
+    "marks2019": {
+      "classNames": "field-style"
+    },
+    "classRoomNo2019": {
       "classNames": "field-style"
     },
     "address": {
@@ -774,8 +495,8 @@
       "ui:placeholder": "कृपया एक चुनिए . . ."
     },
     "age": {
-      "classNames": "field-style",
-      "ui:widget": "updown"
+      "ui:widget": "updown",
+      "classNames": "field-style"
     },
     "gender": {
       "classNames": "field-style",
@@ -784,12 +505,6 @@
     "classAttended2019": {
       "classNames": "field-style",
       "ui:placeholder": "कृपया एक चुनिए . . ."
-    },
-    "classAttended2018": {
-      "classNames": "field-style"
-    },
-    "marks2019": {
-      "classNames": "field-style"
     },
     "id": {
       "ui:disabled": true,
@@ -809,45 +524,33 @@
       "ui:placeholder": "N.A.",
       "ui:disabled": true,
       "classNames": "not-editable-field-style"
-    },
-    "busNumber": {
-      "classNames": "field-style",
-      "ui:placeholder": "कृपया एक चुनिए . . ."
-    },
-    "classRoomNo2019": {
-      "classNames": "field-style",
-      "ui:placeholder": "कृपया एक चुनिए . . ."
-    },
-    "remark": {
-      "classNames": "field-style",
-      "ui:widget": "textarea"
     }
   },
-  "Data": {},
+  "data": {},
   "validation": [
     {
       "field": "name",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "fatherName",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "mobile",
-      "validates": "mobileValidation"
+      "validator": "mobileValidator"
     },
     {
       "field": "age",
-      "validates": "ageValidation"
+      "validator": "ageValidator"
     },
     {
       "field": "email",
-      "validates": "optionalEmailValidation"
+      "validator": "optionalEmailValidator"
     },
     {
       "field": "address",
-      "validates": "addressValidation"
+      "validator": "addressValidator"
     }
   ],
   "defaultStudentDataFormat": [

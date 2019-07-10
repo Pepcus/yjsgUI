@@ -7,6 +7,7 @@ import {
   loaderReducer,
 } from './studentRegistrationReducer';
 import { assetFilesReducer } from './assetFilesReducer';
+import { appConfigReducer } from './appConfigReducer';
 
 const rootReducer = combineReducers({
   studentRegistrationReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   allStudentsDataReducer,
   loaderReducer,
   assetFilesReducer,
+  appConfigReducer,
 });
 
 export default rootReducer;

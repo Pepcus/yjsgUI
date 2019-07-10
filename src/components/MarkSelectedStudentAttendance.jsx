@@ -224,9 +224,9 @@ class MarkSelectedStudentAttendance extends Component {
    */
   renderMarkSelectedStudentsModal() {
     const uiSchema = {
-      ...MarkSelectedStudentAttendanceJsonSchema.UISchema,
+      ...MarkSelectedStudentAttendanceJsonSchema.uiSchema,
       close: {
-        ...MarkSelectedStudentAttendanceJsonSchema.UISchema.close,
+        ...MarkSelectedStudentAttendanceJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -236,7 +236,7 @@ class MarkSelectedStudentAttendance extends Component {
         ),
       },
       submit: {
-        ...MarkSelectedStudentAttendanceJsonSchema.UISchema.submit,
+        ...MarkSelectedStudentAttendanceJsonSchema.uiSchema.submit,
         // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
@@ -265,7 +265,7 @@ class MarkSelectedStudentAttendance extends Component {
             <Form
               showErrorList={false}
               liveValidate
-              schema={MarkSelectedStudentAttendanceJsonSchema.Schema}
+              schema={MarkSelectedStudentAttendanceJsonSchema.schema}
               uiSchema={uiSchema}
               formData={{ studentIds, selectedDay: selectedDay.day }}
               onChange={this.handleSelectChange}

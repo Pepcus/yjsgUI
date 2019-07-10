@@ -26,32 +26,12 @@ export const fetchFile = (fileDetails) => {
 };
 
 /**
- * fetchJsonSchemaFile method fetch file data
- * @param {Object} fileDetails
- * @return {Promise}
- */
-export const fetchJsonSchemaFile = ({ tenant, file }) => (
-  GET({
-    url: `src/config/tenant/${tenant}/${file}.json`,
-  }));
-
-/**
  * fetchFileConfig fetch filesConfig json file
  * @return {Promise}
  */
 export const fetchFileConfig = () => (
   GET({
     url: 'files/filesConfig.json',
-  })
-);
-
-/**
- * getAppConfig fetch app json file
- * @return {Promise}
- */
-export const getAppConfig = () => (
-  GET({
-    url: 'ui_config/app.json',
   })
 );
 

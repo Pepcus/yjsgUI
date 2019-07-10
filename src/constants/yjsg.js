@@ -423,13 +423,13 @@ export const days = [
 ];
 
 export const eventDate = {
-  BHOPAL: 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
-  INDORE: 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
+  'YJSG-Bhopal': 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
+  'YJSG-Indore': 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
 };
 
 export const eventVenue = {
-  BHOPAL: 'स्थान: श्री दिगम्बर जैन हा. से. स्कूल, जैन रोड, चौक, भोपाल ',
-  INDORE: 'स्थान: सन्मति स्कूल, इन्दौर',
+  'YJSG-Bhopal': 'स्थान: श्री दिगम्बर जैन हा. से. स्कूल, जैन रोड, चौक, भोपाल ',
+  'YJSG-Indore': 'स्थान: सन्मति स्कूल, इन्दौर',
 };
 
 export const FILE_PRESENTATION_TYPE = {
@@ -509,8 +509,8 @@ export const SUPPORTED_FILE_TYPES = {
 };
 
 export const TENANT = {
-  INDORE: 'INDORE',
-  BHOPAL: 'BHOPAL',
+  INDORE: 'YJSG-Indore',
+  BHOPAL: 'YJSG-Bhopal',
 };
 
 export const USER_TYPES = {
@@ -533,8 +533,8 @@ export const yesOrNo = [
 ];
 
 export const footerContactInfo = {
-  INDORE: ' 74470-56789',
-  BHOPAL: ' अनुभव जैन, मो. 9179834281, 9303131737',
+  'YJSG-Indore': ' 74470-56789',
+  'YJSG-Bhopal': ' अनुभव जैन, मो. 9179834281, 9303131737',
 };
 
 export const footerText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
@@ -544,4 +544,10 @@ export const headerTitle = 'जैन बाल एवं युवा संस
 export const THRESHOLD_VALUE = {
   DEEP_SEARCH: 0.6,
   NORMAL_SEARCH: 0.0,
+};
+
+export const FILES_NAME = {
+  ONLY_OPT_IN_JSON: 'onlyEditOptIn',
+  MEMBER_JSON: 'STUDENT',
+  ADMIN_JSON: 'ADMIN',
 };

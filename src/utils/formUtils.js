@@ -40,10 +40,10 @@ export const verifyFormDataValidations = ({ formData, errors, validate }) => {
     validation.forEach((valid) => {
 
       const {
-        validates,
+        validator,
         field,
       } = valid;
-      const error = validations[validates](formData[field]);
+      const error = validations[validator](formData[field]);
 
       if (!isEmpty(error)) {
         errors[field].addError(error);

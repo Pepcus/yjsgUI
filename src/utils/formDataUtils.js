@@ -2,27 +2,27 @@ import {
   TENANT,
   USER_TYPES,
 } from '../constants/yjsg';
-import { isPageUserStudent } from './registrationFormUtils';
+import { isUserStudent } from './registrationFormUtils';
 
 /**
  * getFormData method return the form data for json form schema
  * @param {String} pageUser
  * @param {Boolean} onlyOptInForm
  * @param {String} tenant
- * @param {Object} student
+ * @param {Object} member
  * @param {Function} renderBackButton
  * @param {Function} renderSubmitButtons
- * @param {Object} fileData
+ * @param {Object} formDetail
  * @return {{schema: Object, uiSchema: Object , formData: Object}}
  */
 export const getFormData = ({
   pageUser,
   onlyOptInForm,
   tenant,
-  student,
+  member,
   renderBackButton,
   renderSubmitButtons,
-  fileData,
+  formConfig,
 }) => {
   const { ADMIN } = USER_TYPES;
   const { INDORE } = TENANT;
@@ -30,102 +30,102 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
 
-  if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
-    schema = fileData.Schema;
-    uiSchema = fileData.UISchema;
+  if (isUserStudent({ pageUser }) && onlyOptInForm) {
+    schema = formConfig.schema;
+    uiSchema = formConfig.uiSchema;
     formData = {
-      ...fileData.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
   } else if (tenant === INDORE) {
     if (pageUser === ADMIN) {
-      schema = fileData.Schema;
+      schema = formConfig.schema;
       uiSchema = {
-        ...fileData.UISchema,
+        ...formConfig.uiSchema,
         backButton: {
-          ...fileData.UISchema.backButton,
+          ...formConfig.uiSchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...fileData.UISchema.submitButton,
+          ...formConfig.uiSchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...fileData.Data,
-        ...student,
+        ...formConfig.data,
+        ...member,
       };
 
-    } else if (isPageUserStudent({ pageUser })) {
-      schema = fileData.Schema;
+    } else if (isUserStudent({ pageUser })) {
+      schema = formConfig.schema;
       uiSchema = {
-        ...fileData.UISchema,
+        ...formConfig.uiSchema,
         backButton: {
-          ...fileData.UISchema.backButton,
+          ...formConfig.uiSchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...fileData.UISchema.submitButton,
+          ...formConfig.uiSchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...fileData.Data,
-        ...student,
+        ...formConfig.data,
+        ...member,
       };
     }
 
   } else if (pageUser === ADMIN) {
-    schema = fileData.Schema;
+    schema = formConfig.schema;
     uiSchema = {
-      ...fileData.UISchema,
+      ...formConfig.uiSchema,
       backButton: {
-        ...fileData.UISchema.backButton,
+        ...formConfig.uiSchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...fileData.UISchema.submitButton,
+        ...formConfig.uiSchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...fileData.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
-  } else if (isPageUserStudent({ pageUser })) {
-    schema = fileData.Schema;
+  } else if (isUserStudent({ pageUser })) {
+    schema = formConfig.schema;
     uiSchema = {
-      ...fileData.UISchema,
+      ...formConfig.uiSchema,
       backButton: {
-        ...fileData.UISchema.backButton,
+        ...formConfig.uiSchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...fileData.UISchema.submitButton,
+        ...formConfig.uiSchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...fileData.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
   } else return null;

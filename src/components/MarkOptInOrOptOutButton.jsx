@@ -216,9 +216,9 @@ class MarkOptInOrOptOutButton extends Component {
    */
   renderMarkSelectedStudentsOptInOrOptOutModal() {
     const uiSchema = {
-      ...MarkOptInOrOptOutButtonJsonSchema.UISchema,
+      ...MarkOptInOrOptOutButtonJsonSchema.uiSchema,
       close: {
-        ...MarkOptInOrOptOutButtonJsonSchema.UISchema.close,
+        ...MarkOptInOrOptOutButtonJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -228,7 +228,7 @@ class MarkOptInOrOptOutButton extends Component {
         ),
       },
       submit: {
-        ...MarkOptInOrOptOutButtonJsonSchema.UISchema.submit,
+        ...MarkOptInOrOptOutButtonJsonSchema.uiSchema.submit,
         // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
@@ -258,7 +258,7 @@ class MarkOptInOrOptOutButton extends Component {
             <Form
               showErrorList={false}
               liveValidate
-              schema={MarkOptInOrOptOutButtonJsonSchema.Schema}
+              schema={MarkOptInOrOptOutButtonJsonSchema.schema}
               uiSchema={uiSchema}
               formData={{ studentIds, selectedOptOption: selectedOptOption.optIn2019 }}
               onChange={this.onClickRadioButton}

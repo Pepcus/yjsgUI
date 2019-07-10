@@ -14,8 +14,7 @@
     "properties": {
       "name": {
         "title": "नाम",
-        "type": "string",
-        "customValidator": "meraValidator"
+        "type": "string"
       },
       "fatherName": {
         "title": "पिता / पति का नाम",
@@ -183,7 +182,7 @@
       }
     }
   },
-  "UISchema": {
+  "uiSchema": {
     "name": {
       "classNames": "field-style"
     },
@@ -226,7 +225,7 @@
       "classNames": "field-style"
     }
   },
-  "Data": {
+  "data": {
     "optIn2019": "Y",
     "classAttended2018": "",
     "education": "",
@@ -236,27 +235,27 @@
   [
     {
       "field": "name",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "fatherName",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "age",
-      "validates": "ageValidation"
+      "validator": "ageValidator"
     },
     {
       "field": "mobile",
-      "validates": "mobileValidation"
+      "validator": "mobileValidator"
     },
     {
       "field": "address",
-      "validates": "addressValidation"
+      "validator": "addressValidator"
     },
     {
       "field": "email",
-      "validates": "optionalEmailValidation"
+      "validator": "optionalEmailValidator"
     }
   ]
 }

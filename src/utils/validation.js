@@ -1,19 +1,19 @@
 import {
-  nameValidation,
-  ageValidation,
-  mobileValidation,
-  optionalEmailValidation,
-  addressValidation,
-  optionalMobileValidation,
-  bhopalAgeValidate,
-} from './SampleFormValidation';
+  nameValidator,
+  ageValidator,
+  mobileValidator,
+  optionalEmailValidator,
+  addressValidator,
+  optionalMobileValidator,
+  bhopalAgeValidator,
+} from './formValidations';
 
 export default {
-  nameValidation,
-  ageValidation,
-  mobileValidation,
-  optionalEmailValidation,
-  addressValidation,
-  optionalMobileValidation,
-  bhopalAgeValidate,
+  nameValidator,
+  ageValidator,
+  mobileValidator,
+  optionalEmailValidator,
+  addressValidator,
+  optionalMobileValidator,
+  bhopalAgeValidator,
 };

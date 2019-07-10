@@ -25,9 +25,9 @@ import { getParameterByName } from '../../utils/http';
 import Button from '../common/Button';
 import { getStudent } from '../../reducers/studentRegistrationReducer';
 import {
-  getApplicationTenant,
+  getTenantName,
   isRegisterCorrectionEnabled,
-} from '../../reducers/assetFilesReducer';
+} from '../../reducers/appConfigReducer';
 
 /**
 * The StudentPage component for the student which will render -
@@ -197,12 +197,12 @@ StudentPage.defaultProps = {
 const mapStateToProps = state => ({
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
   fetchStudentDataAction,
-  getApplicationTenant,
+  getTenantName,
   isRegisterCorrectionEnabled,
   setHashLinkForNewRegistrationAction,
   setHashLinkForStudentCredentialAction,

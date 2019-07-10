@@ -10,7 +10,7 @@ import {
   CLICK_HERE_TEXT,
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from '../constants/text';
-import { isPageUserStudent } from '../utils/registrationFormUtils';
+import { isUserStudent } from '../utils/registrationFormUtils';
 import Form from './form';
 
 /**
@@ -21,25 +21,25 @@ const CorrectionsForm = ({ pageUser,
   tenant,
   onlyOptInForm,
   validate,
-  student,
+  member,
   onChange,
   transformErrors,
-  submitStudentDataForOnlyOptInCase,
+  submitMemberDataForOnlyOptInCase,
   changeIsOnlyOptIn,
   renderBackButton,
   renderSubmitButtons,
   formRef,
   children,
-  fileData }) => {
+  formConfig }) => {
 
-  const formDetails = getFormData({
+  const formSchemaDetails = getFormData({
     pageUser,
     onlyOptInForm,
     tenant,
-    student,
+    member,
     renderBackButton,
     renderSubmitButtons,
-    fileData,
+    formConfig,
   });
 
   /**
@@ -47,14 +47,14 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} back button
    */
   const getBackButton = () => {
-    if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
+    if (isUserStudent({ pageUser }) && onlyOptInForm) {
       return (
         <div>
           <Button
             buttonText={formSubmitBtnText}
             type="submit"
             value="Submit"
-            onClick={submitStudentDataForOnlyOptInCase}
+            onClick={submitMemberDataForOnlyOptInCase}
           />
         </div>
       );
@@ -73,7 +73,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} update other information link
    */
   const getLink = () => {
-    if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
+    if (isUserStudent({ pageUser }) && onlyOptInForm) {
       return (
         <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
           <a className="student-portal-link" onClick={onlyOptInChanged}>{CLICK_HERE_TEXT}
@@ -84,14 +84,14 @@ const CorrectionsForm = ({ pageUser,
     return null;
   };
 
-  if (formDetails) {
+  if (formSchemaDetails) {
     return (
       <div
-        className={isPageUserStudent({ pageUser })
+        className={isUserStudent({ pageUser })
       && onlyOptInForm ? 'form-container member-registration-correction-form' : 'default-form-container member-registration-correction-form'}
       >
         <div
-          className={isPageUserStudent({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
+          className={isUserStudent({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >
           { children }
@@ -99,9 +99,9 @@ const CorrectionsForm = ({ pageUser,
             showErrorList={false}
             validate={validate}
             liveValidate
-            schema={formDetails.schema}
-            uiSchema={formDetails.uiSchema}
-            formData={formDetails.formData}
+            schema={formSchemaDetails.schema}
+            uiSchema={formSchemaDetails.uiSchema}
+            formData={formSchemaDetails.formData}
             onChange={onChange}
             transformErrors={transformErrors}
           >
@@ -119,15 +119,15 @@ const CorrectionsForm = ({ pageUser,
 CorrectionsForm.propTypes = {
   changeIsOnlyOptIn: PropTypes.func,
   children: PropTypes.node,
-  fileData: PropTypes.object,
+  formConfig: PropTypes.object,
   formRef: PropTypes.object,
   onChange: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
   pageUser: PropTypes.string,
   renderBackButton: PropTypes.func,
   renderSubmitButtons: PropTypes.func,
-  student: PropTypes.object,
-  submitStudentDataForOnlyOptInCase: PropTypes.func,
+  member: PropTypes.object,
+  submitMemberDataForOnlyOptInCase: PropTypes.func,
   tenant: PropTypes.string,
   transformErrors: PropTypes.func,
   validate: PropTypes.func,
@@ -136,15 +136,15 @@ CorrectionsForm.propTypes = {
 CorrectionsForm.defaultProps = {
   changeIsOnlyOptIn: () => {},
   children: null,
-  fileData: {},
+  formConfig: {},
   formRef: {},
   onChange: () => {},
   onlyOptInForm: false,
   pageUser: PropTypes.string,
   renderBackButton: () => {},
   renderSubmitButtons: () => {},
-  student: {},
-  submitStudentDataForOnlyOptInCase: () => {},
+  member: {},
+  submitMemberDataForOnlyOptInCase: () => {},
   tenant: PropTypes.string,
   transformErrors: () => {},
   validate: () => {},

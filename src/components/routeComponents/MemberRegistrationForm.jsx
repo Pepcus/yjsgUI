@@ -11,6 +11,7 @@ import {
 import {
   createStudentDataAction,
   setStudentCredentialsAction,
+  setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
 import {
   ID_CARD_SUGGESTION_MESSAGE,
@@ -32,8 +33,8 @@ import {
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import Form from '../form';
-import { fetchJsonSchemaFile } from '../../sagas/assetFilesAPI';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { fetchFormConfig } from '../../sagas/formConfigAPI';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 
 /**
@@ -51,7 +52,7 @@ class MemberRegistrationForm extends Component {
       isSubmitTriggered: false,
       member: {},
       notHasAnError: false,
-      fileData: {},
+      formConfig: {},
     };
   }
 
@@ -59,11 +60,11 @@ class MemberRegistrationForm extends Component {
     const { tenant } = this.props;
     this.props.setLoadingStateAction(true);
     try {
-      fetchJsonSchemaFile({ tenant, file: 'Registration' })
+      fetchFormConfig({ tenant, fileName: 'Registration' })
         .then((response) => {
           if (response) {
             this.setState({
-              fileData: response,
+              formConfig: response,
             });
 
           } else {
@@ -75,6 +76,8 @@ class MemberRegistrationForm extends Component {
     } catch (e) {
       this.props.setLoadingStateAction(false);
       console.error(e);
+    } finally {
+      this.props.setLoadingStateAction(false);
     }
   }
 
@@ -166,17 +169,17 @@ class MemberRegistrationForm extends Component {
   renderSuccessMessage = () => {
 
     const { isSubmitTriggered } = this.state;
-    const { isStudentCreated, newStudent } = this.props;
+    const { isMemberCreated, newMember } = this.props;
 
-    if (isStudentCreated && isSubmitTriggered) {
+    if (isMemberCreated && isSubmitTriggered) {
       // for pre-population on splash page
-      this.props.setStudentCredentialsAction(newStudent.id, newStudent.secretKey);
+      this.props.setStudentCredentialsAction(newMember.id, newMember.secretKey);
 
       return (
         <Popup>
           <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
-          <p>{YOUR_ID_TEXT}<strong>{newStudent.id}</strong>{IS_THERE_TEXT}</p>
-          <p>{YOUR_SECRET_CODE_TEXT}<strong>{newStudent.secretKey}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_ID_TEXT}<strong>{newMember.id}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_SECRET_CODE_TEXT}<strong>{newMember.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
           <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
           {this.renderBackButton()}
@@ -206,13 +209,13 @@ class MemberRegistrationForm extends Component {
    //* @param {Object} errors
    * @return {Object} errors
    */
-  validate = () => this.state.fileData.validation;
+  validate = () => this.state.formConfig.validation;
 
   render() {
-    const { fileData } = this.state;
-    const { schema, UISchema, Data } = fileData;
+    const { formConfig } = this.state;
+    const { schema, uiSchema, data } = formConfig;
 
-    if (!isEmpty(fileData)) {
+    if (!isEmpty(formConfig)) {
       return (
         <div ref={this.formRef} className="member-registration-form">
           <Form
@@ -220,8 +223,8 @@ class MemberRegistrationForm extends Component {
             validate={this.validate}
             liveValidate
             schema={schema}
-            uiSchema={UISchema}
-            formData={{ ...Data, ...this.state.member }}
+            uiSchema={uiSchema}
+            formData={{ ...data, ...this.state.member }}
             onChange={this.onChange}
             transformErrors={this.transformErrors}
           >
@@ -230,7 +233,6 @@ class MemberRegistrationForm extends Component {
               <Button
                 buttonText={formSubmitBtnText}
                 type="submit"
-                formName=""
                 value="Submit"
                 onClick={this.handleSubmit}
               />
@@ -247,9 +249,9 @@ class MemberRegistrationForm extends Component {
 MemberRegistrationForm.propTypes = {
   context: PropTypes.object,
   createStudentDataAction: PropTypes.func,
-  isStudentCreated: PropTypes.bool,
-  newStudent: PropTypes.object,
-  setLoadingStateAction: PropTypes.string,
+  isMemberCreated: PropTypes.bool,
+  newMember: PropTypes.object,
+  setLoadingStateAction: PropTypes.func.isRequired,
   setStudentCredentialsAction: PropTypes.func,
   tenant: PropTypes.string,
   userType: PropTypes.string,
@@ -258,22 +260,22 @@ MemberRegistrationForm.propTypes = {
 MemberRegistrationForm.defaultProps = {
   context: {},
   createStudentDataAction: () => {},
-  isStudentCreated: false,
-  newStudent: {},
-  setLoadingStateAction: () => {},
+  isMemberCreated: false,
+  newMember: {},
   setStudentCredentialsAction: () => {},
   tenant: '',
   userType: '',
 };
 
 const mapStateToProps = state => ({
-  isStudentCreated: isCreated(state),
-  newStudent: getNewStudent(state),
-  tenant: getApplicationTenant(state),
+  isMemberCreated: isCreated(state),
+  newMember: getNewStudent(state),
+  tenant: getTenantName(state),
   userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentDataAction,
   setStudentCredentialsAction,
+  setLoadingStateAction,
 })(MemberRegistrationForm);

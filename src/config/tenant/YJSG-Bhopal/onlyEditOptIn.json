@@ -1,5 +1,5 @@
 {
-  "Schema": {
+  "schema": {
     "type": "object",
     "required": ["optIn2019"],
     "properties": {
@@ -21,7 +21,7 @@
       }
     }
   },
-  "UISchema": {
+  "uiSchema": {
     "optIn2019": {
       "ui:widget": "radio",
       "ui:options": {
@@ -32,31 +32,31 @@
       "ui:disabled": "inline"
     }
   },
-  "Data": {},
+  "data": {},
   "validation": [
     {
       "field": "name",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "fatherName",
-      "validates": "nameValidation"
+      "validator": "nameValidator"
     },
     {
       "field": "mobile",
-      "validates": "mobileValidation"
+      "validator": "mobileValidator"
     },
     {
       "field": "age",
-      "validates": "ageValidation"
+      "validator": "ageValidator"
     },
     {
       "field": "email",
-      "validates": "optionalEmailValidation"
+      "validator": "optionalEmailValidator"
     },
     {
       "field": "address",
-      "validates": "addressValidation"
+      "validator": "addressValidator"
     }
   ],
   "defaultStudentDataFormat": [

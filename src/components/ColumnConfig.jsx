@@ -179,15 +179,15 @@ class ColumnConfig extends Component {
 
   render() {
     const uiSchema = {
-      ...ColumnConfigJsonSchema.UISchema,
+      ...ColumnConfigJsonSchema.uiSchema,
       visibleColumnConfig: {
-        ...ColumnConfigJsonSchema.UISchema.visibleColumnConfig,
+        ...ColumnConfigJsonSchema.uiSchema.visibleColumnConfig,
         'ui:widget': () => (
           this.renderColumnOptions()
         ),
       },
       close: {
-        ...ColumnConfigJsonSchema.UISchema.close,
+        ...ColumnConfigJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -198,7 +198,7 @@ class ColumnConfig extends Component {
         ),
       },
       save: {
-        ...ColumnConfigJsonSchema.UISchema.save,
+        ...ColumnConfigJsonSchema.uiSchema.save,
         // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button

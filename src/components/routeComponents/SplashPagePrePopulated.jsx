@@ -42,7 +42,7 @@ import {
   invalidAdminMsg, formSubmitBtnText,
 } from '../../constants/yjsg';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 // FixMe: This component is unnecessary.
 //  Please use splash page to show pre-populated data and remove this component
@@ -435,12 +435,12 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   studentData: getStudent(state),
   isStudentFetched: isFetched(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
   fetchStudentDataAction,
-  getApplicationTenant,
+  getTenantName,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setStudentCredentialsAction,

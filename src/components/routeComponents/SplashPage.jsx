@@ -33,7 +33,7 @@ import {
 } from '../../constants/yjsg';
 import { getParameterByName } from '../../utils/http';
 import LoginForm from '../LoginForm';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 import {
   GIVEN_INFORMATION_WRONG_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -305,12 +305,12 @@ const mapStateToProps = state => ({
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),
   studentData: getStudent(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
   fetchStudentDataAction,
-  getApplicationTenant,
+  getTenantName,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,

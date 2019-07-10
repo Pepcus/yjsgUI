@@ -249,9 +249,9 @@ class UploadStudentsAttendanceFile extends Component {
    */
   renderUploadStudentsAttendanceOption() {
     const uiSchema = {
-      ...UploadStudentsAttendanceFileJsonSchema.UISchema,
+      ...UploadStudentsAttendanceFileJsonSchema.uiSchema,
       attendanceFile: {
-        ...UploadStudentsAttendanceFileJsonSchema.UISchema.attendanceFile,
+        ...UploadStudentsAttendanceFileJsonSchema.uiSchema.attendanceFile,
         'ui:widget': () => (
           <input
             type="file"
@@ -261,7 +261,7 @@ class UploadStudentsAttendanceFile extends Component {
         ),
       },
       close: {
-        ...UploadStudentsAttendanceFileJsonSchema.UISchema.close,
+        ...UploadStudentsAttendanceFileJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -271,7 +271,7 @@ class UploadStudentsAttendanceFile extends Component {
         ),
       },
       submit: {
-        ...UploadStudentsAttendanceFileJsonSchema.UISchema.submit,
+        ...UploadStudentsAttendanceFileJsonSchema.uiSchema.submit,
         'ui:widget': () => (
           <button
             type="submit"
@@ -302,7 +302,7 @@ class UploadStudentsAttendanceFile extends Component {
             <Form
               showErrorList={false}
               liveValidate
-              schema={UploadStudentsAttendanceFileJsonSchema.Schema}
+              schema={UploadStudentsAttendanceFileJsonSchema.schema}
               uiSchema={uiSchema}
               formData={{ attendanceFile, selectedDay }}
               onChange={this.handleSelectChange}

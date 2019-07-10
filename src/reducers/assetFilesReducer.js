@@ -3,11 +3,6 @@ const initialState = {
   isLoading: false,
   errorMessage: '',
   filesConfig: {},
-  modeVariable: '',
-  tenant: '',
-  isAppLoaded: false,
-  isAppLoadingFailed: false,
-  isRegisterCorrectionEnabled: false,
 };
 
 export const assetFilesReducer = (state = initialState, action) => {
@@ -33,36 +28,6 @@ export const assetFilesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-      };
-
-    case 'LOAD_APP_DATA_ACTION':
-      return {
-        ...state,
-        isAppLoaded: false,
-        isAppLoadingFailed: false,
-      };
-
-    case 'LOADED_APP_DATA_SUCCESS_ACTION':
-      return {
-        ...state,
-        isLoading: false,
-        isAppLoaded: true,
-        modeVariable: action.modeVariable.environment,
-        tenant: action.modeVariable.tenant,
-        isAppLoadingFailed: false,
-        isRegisterCorrectionEnabled: action.modeVariable.isRegisterCorrectionEnabled,
-      };
-
-    case 'LOAD_APP_DATA_FAILED_ACTION':
-      return {
-        ...state,
-        isLoading: false,
-        errorMessage: action.errorMessage,
-        modeVariable: '',
-        tenant: '',
-        isAppLoaded: false,
-        isAppLoadingFailed: true,
-        isRegisterCorrectionEnabled: false,
       };
 
     case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
@@ -102,16 +67,6 @@ export const isLoading = state => state.assetFilesReducer.isLoading;
 
 export const getFilesConfig = state => state.assetFilesReducer.filesConfig;
 
-export const getApplicationMode = state => state.assetFilesReducer.modeVariable;
-
-export const isAppLoaded = state => state.assetFilesReducer.isAppLoaded;
-
-export const getIsAppLoadedError = state => state.assetFilesReducer.isAppLoadingFailed;
-
 export const getBusCoordinators = state => state.assetFilesReducer.busCoordinators;
 
 export const isBusCoordinatorsDataFailed = state => state.assetFilesReducer.isBusCoordinatorsDataFailed;
-
-export const getApplicationTenant = state => state.assetFilesReducer.tenant;
-
-export const isRegisterCorrectionEnabled = state => state.assetFilesReducer.isRegisterCorrectionEnabled;

@@ -15,7 +15,7 @@ import {
   routes,
   title,
 } from '../../config/appConfig.json';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 /**
  * Header render the common header for all route
@@ -208,7 +208,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
