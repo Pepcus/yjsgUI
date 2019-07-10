@@ -8,7 +8,8 @@ import {
   goBackBtnText,
   invalidIdMessage,
   USER_TYPES,
-  FILES_NAME, ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
+  FILES_NAME,
+  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
 } from '../../constants/yjsg';
 import {
   isUpdatedResetAction,
