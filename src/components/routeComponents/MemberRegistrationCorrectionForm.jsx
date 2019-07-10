@@ -8,7 +8,7 @@ import {
   goBackBtnText,
   invalidIdMessage,
   USER_TYPES,
-  FILES_NAME,
+  FILES_NAME, ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
 } from '../../constants/yjsg';
 import {
   isUpdatedResetAction,
@@ -95,22 +95,22 @@ class MemberRegistrationCorrectionForm extends Component {
 
   /**
    * It fetch the JSON form schema for form
-   * @param {String} pageUser
+   * @param {String} user
    * @param {Object} prePopulateOptInMemberData
    * @param {Object} registeredMemberData
    * @param {Boolean} onlyOptInForm
    */
   getFormConfig = ({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm }) => {
-    const { tenant, pageUser } = this.props;
+    const { tenant, user } = this.props;
     const { ONLY_OPT_IN_JSON, MEMBER_JSON, ADMIN_JSON } = FILES_NAME;
     const { ADMIN } = USER_TYPES;
 
     let fileName = '';
-    if (isUserMember({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ user }) && onlyOptInForm) {
       fileName = ONLY_OPT_IN_JSON;
-    } else if (isUserMember({ pageUser })) {
+    } else if (isUserMember({ user })) {
       fileName = MEMBER_JSON;
-    } else if (pageUser === ADMIN) {
+    } else if (user === ADMIN) {
       fileName = ADMIN_JSON;
     }
     try {
@@ -137,13 +137,12 @@ class MemberRegistrationCorrectionForm extends Component {
               }));
             }
           } else {
+            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
             this.props.setLoadingStateAction(false);
           }
-        }, () => {
-          this.props.setLoadingStateAction(false);
         });
     } catch (e) {
-      this.props.setLoadingStateAction(false);
+      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
       console.error(e);
     } finally {
       this.props.setLoadingStateAction(false);
@@ -309,12 +308,12 @@ class MemberRegistrationCorrectionForm extends Component {
   renderBackButton = () => {
 
     const {
-      pageUser,
+      user,
       context,
     } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -322,7 +321,7 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (isUserMember({ pageUser })) {
+    } else if (isUserMember({ user })) {
       return (
         <Button
           type="button"
@@ -373,7 +372,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const {
       isFetch,
       memberData,
-      pageUser,
+      user,
       tenant,
       context,
       isMemberUpdated,
@@ -391,7 +390,7 @@ class MemberRegistrationCorrectionForm extends Component {
     if (isFetch && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
-          pageUser={pageUser}
+          user={user}
           tenant={tenant}
           onlyOptInForm={onlyOptInForm}
           validate={this.validate}
@@ -426,7 +425,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   isFetch: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
-  pageUser: PropTypes.string,
+  user: PropTypes.string,
   secretKey: PropTypes.string,
   setLoadingStateAction: PropTypes.func.isRequired,
   memberData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -440,7 +439,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   isFetch: false,
   isMemberUpdated: false,
   isUpdatedResetAction: () => {},
-  pageUser: '',
+  user: '',
   secretKey: '',
   memberData: {},
   tenant: '',
@@ -451,7 +450,7 @@ const mapStateToProps = state => ({
   id: getUserId(state),
   isFetch: isFetched(state),
   isMemberUpdated: isUpdated(state),
-  pageUser: getPageUserType(state),
+  user: getPageUserType(state),
   secretKey: getUserSecretKey(state),
   memberData: getStudent(state),
   tenant: getTenantName(state),

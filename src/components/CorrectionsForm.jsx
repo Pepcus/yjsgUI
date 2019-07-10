@@ -17,7 +17,7 @@ import Form from './form';
  * CorrectionsForm is functional component which render the correction form according to user type
  * @return {HTML} correction form
  */
-const CorrectionsForm = ({ pageUser,
+const CorrectionsForm = ({ user,
   tenant,
   onlyOptInForm,
   validate,
@@ -33,7 +33,7 @@ const CorrectionsForm = ({ pageUser,
   formConfig }) => {
 
   const formSchemaDetails = getFormData({
-    pageUser,
+    user,
     onlyOptInForm,
     tenant,
     member,
@@ -47,7 +47,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} back button
    */
   const getBackButton = () => {
-    if (isUserMember({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ user }) && onlyOptInForm) {
       return (
         <div>
           <Button
@@ -73,7 +73,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} update other information link
    */
   const getLink = () => {
-    if (isUserMember({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ user }) && onlyOptInForm) {
       return (
         <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
           <a className="student-portal-link" onClick={onlyOptInChanged}>{CLICK_HERE_TEXT}
@@ -87,11 +87,11 @@ const CorrectionsForm = ({ pageUser,
   if (formSchemaDetails) {
     return (
       <div
-        className={isUserMember({ pageUser })
+        className={isUserMember({ user })
       && onlyOptInForm ? 'form-container member-registration-correction-form' : 'default-form-container member-registration-correction-form'}
       >
         <div
-          className={isUserMember({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
+          className={isUserMember({ user }) && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >
           { children }
@@ -123,7 +123,7 @@ CorrectionsForm.propTypes = {
   formRef: PropTypes.object,
   onChange: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
-  pageUser: PropTypes.string,
+  user: PropTypes.string,
   renderBackButton: PropTypes.func,
   renderSubmitButtons: PropTypes.func,
   member: PropTypes.object,
@@ -140,7 +140,7 @@ CorrectionsForm.defaultProps = {
   formRef: {},
   onChange: () => {},
   onlyOptInForm: false,
-  pageUser: PropTypes.string,
+  user: PropTypes.string,
   renderBackButton: () => {},
   renderSubmitButtons: () => {},
   member: {},

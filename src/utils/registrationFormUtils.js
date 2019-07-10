@@ -451,4 +451,4 @@ export const getRegisteredMemberData = ({ memberData }) => {
   return !isEmpty(memberData) ? memberData : memberDataFromSession;
 };
 
-export const isUserMember = ({ pageUser }) => pageUser === STUDENT_WITH_URL || pageUser === STUDENT;
+export const isUserMember = ({ user }) => user === STUDENT_WITH_URL || user === STUDENT;

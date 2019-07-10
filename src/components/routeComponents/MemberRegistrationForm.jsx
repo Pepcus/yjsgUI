@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import {
+  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
   formSubmitBtnText,
   goBackBtnText,
   USER_TYPES,
@@ -68,13 +69,12 @@ class MemberRegistrationForm extends Component {
             });
 
           } else {
+            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
             this.props.setLoadingStateAction(false);
           }
-        }, () => {
-          this.props.setLoadingStateAction(false);
         });
     } catch (e) {
-      this.props.setLoadingStateAction(false);
+      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
       console.error(e);
     } finally {
       this.props.setLoadingStateAction(false);

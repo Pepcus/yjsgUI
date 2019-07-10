@@ -543,12 +543,12 @@ export const parentsRegistrationResultsFailureAction = message => ({
 });
 /**
  * setUserTypeAction action set the user type
- * @param {String} pageUser
- * @return {{pageUser: string, type: string}}
+ * @param {String} user
+ * @return {{user: string, type: string}}
  */
-export const setUserTypeAction = pageUser => ({
+export const setUserTypeAction = user => ({
   type: 'SET_USER_TYPE',
-  pageUser,
+  user,
 });
 /**
  * setLoadingStateAction action set the loading state

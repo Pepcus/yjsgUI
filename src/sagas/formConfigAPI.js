@@ -5,7 +5,9 @@ import { GET } from '../utils/http';
 * @param {Object} fileDetails
 * @return {Promise}
   */
-export const fetchFormConfig = ({ tenant, fileName }) => (
-  GET({
-    url: `src/config/tenant/${tenant}/${fileName}.json`,
-  }));
+export const fetchFormConfig = ({ tenant, fileName }) => {
+  return (
+    GET({
+      url: `src/config/tenant/${tenant}/${fileName}.json`,
+    }));
+};

@@ -6,7 +6,7 @@ import { isUserMember } from './registrationFormUtils';
 
 /**
  * getFormData method return the form data for json form schema
- * @param {String} pageUser
+ * @param {String} user
  * @param {Boolean} onlyOptInForm
  * @param {String} tenant
  * @param {Object} member
@@ -16,7 +16,7 @@ import { isUserMember } from './registrationFormUtils';
  * @return {{schema: Object, uiSchema: Object , formData: Object}}
  */
 export const getFormData = ({
-  pageUser,
+  user,
   onlyOptInForm,
   tenant,
   member,
@@ -30,7 +30,7 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
 
-  if (isUserMember({ pageUser }) && onlyOptInForm) {
+  if (isUserMember({ user }) && onlyOptInForm) {
     schema = formConfig.schema;
     uiSchema = formConfig.uiSchema;
     formData = {
@@ -39,7 +39,7 @@ export const getFormData = ({
     };
 
   } else if (tenant === INDORE) {
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       schema = formConfig.schema;
       uiSchema = {
         ...formConfig.uiSchema,
@@ -61,7 +61,7 @@ export const getFormData = ({
         ...member,
       };
 
-    } else if (isUserMember({ pageUser })) {
+    } else if (isUserMember({ user })) {
       schema = formConfig.schema;
       uiSchema = {
         ...formConfig.uiSchema,
@@ -84,7 +84,7 @@ export const getFormData = ({
       };
     }
 
-  } else if (pageUser === ADMIN) {
+  } else if (user === ADMIN) {
     schema = formConfig.schema;
     uiSchema = {
       ...formConfig.uiSchema,
@@ -106,7 +106,7 @@ export const getFormData = ({
       ...member,
     };
 
-  } else if (isUserMember({ pageUser })) {
+  } else if (isUserMember({ user })) {
     schema = formConfig.schema;
     uiSchema = {
       ...formConfig.uiSchema,
