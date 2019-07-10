@@ -32,7 +32,7 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import {
   getRegisteredMemberData,
-  isUserStudent,
+  isUserMember,
   updateClassAttended2019InMemberData,
 } from '../../utils/registrationFormUtils';
 import { getTenantName } from '../../reducers/appConfigReducer';
@@ -106,9 +106,9 @@ class MemberRegistrationCorrectionForm extends Component {
     const { ADMIN } = USER_TYPES;
 
     let fileName = '';
-    if (isUserStudent({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ pageUser }) && onlyOptInForm) {
       fileName = ONLY_OPT_IN_JSON;
-    } else if (isUserStudent({ pageUser })) {
+    } else if (isUserMember({ pageUser })) {
       fileName = MEMBER_JSON;
     } else if (pageUser === ADMIN) {
       fileName = ADMIN_JSON;
@@ -322,7 +322,7 @@ class MemberRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (isUserStudent({ pageUser })) {
+    } else if (isUserMember({ pageUser })) {
       return (
         <Button
           type="button"

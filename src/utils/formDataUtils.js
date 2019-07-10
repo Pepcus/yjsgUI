@@ -2,7 +2,7 @@ import {
   TENANT,
   USER_TYPES,
 } from '../constants/yjsg';
-import { isUserStudent } from './registrationFormUtils';
+import { isUserMember } from './registrationFormUtils';
 
 /**
  * getFormData method return the form data for json form schema
@@ -30,7 +30,7 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
 
-  if (isUserStudent({ pageUser }) && onlyOptInForm) {
+  if (isUserMember({ pageUser }) && onlyOptInForm) {
     schema = formConfig.schema;
     uiSchema = formConfig.uiSchema;
     formData = {
@@ -61,7 +61,7 @@ export const getFormData = ({
         ...member,
       };
 
-    } else if (isUserStudent({ pageUser })) {
+    } else if (isUserMember({ pageUser })) {
       schema = formConfig.schema;
       uiSchema = {
         ...formConfig.uiSchema,
@@ -106,7 +106,7 @@ export const getFormData = ({
       ...member,
     };
 
-  } else if (isUserStudent({ pageUser })) {
+  } else if (isUserMember({ pageUser })) {
     schema = formConfig.schema;
     uiSchema = {
       ...formConfig.uiSchema,

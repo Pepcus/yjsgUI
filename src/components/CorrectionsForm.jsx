@@ -10,7 +10,7 @@ import {
   CLICK_HERE_TEXT,
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from '../constants/text';
-import { isUserStudent } from '../utils/registrationFormUtils';
+import { isUserMember } from '../utils/registrationFormUtils';
 import Form from './form';
 
 /**
@@ -47,7 +47,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} back button
    */
   const getBackButton = () => {
-    if (isUserStudent({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ pageUser }) && onlyOptInForm) {
       return (
         <div>
           <Button
@@ -73,7 +73,7 @@ const CorrectionsForm = ({ pageUser,
    * @return {HTML} update other information link
    */
   const getLink = () => {
-    if (isUserStudent({ pageUser }) && onlyOptInForm) {
+    if (isUserMember({ pageUser }) && onlyOptInForm) {
       return (
         <span className="student-portal-link-heading">{UPDATE_FURTHER_INFORMATION_TEXT}
           <a className="student-portal-link" onClick={onlyOptInChanged}>{CLICK_HERE_TEXT}
@@ -87,11 +87,11 @@ const CorrectionsForm = ({ pageUser,
   if (formSchemaDetails) {
     return (
       <div
-        className={isUserStudent({ pageUser })
+        className={isUserMember({ pageUser })
       && onlyOptInForm ? 'form-container member-registration-correction-form' : 'default-form-container member-registration-correction-form'}
       >
         <div
-          className={isUserStudent({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
+          className={isUserMember({ pageUser }) && onlyOptInForm ? 'form-wrapper' : ''}
           ref={formRef}
         >
           { children }

@@ -53,7 +53,7 @@ import {
   isValidUserInfo,
   setRegistrationData,
   validateInput,
-  isUserStudent,
+  isUserMember,
 } from '../../utils/registrationFormUtils';
 import {
   getStudent,
@@ -545,7 +545,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (isUserStudent({ pageUser })) {
+    } else if (isUserMember({ pageUser })) {
       return (
         <Button
           type="button"
@@ -938,7 +938,7 @@ class StudentRegistrationCorrectionForm extends Component {
     const { student, errorMessage, onlyOptIn2019 } = this.state;
     const { pageUser, studentData, context, isStudentFetched } = this.props;
 
-    if (isUserStudent({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
+    if (isUserMember({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
 
     } else if (isStudentFetched && student.optIn2019 === 'N') {
