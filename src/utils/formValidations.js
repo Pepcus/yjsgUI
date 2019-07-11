@@ -2,7 +2,7 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { defaultStudentDataFormat } from '../config/memberRegistrationCorrectionFormSchema.json';
+
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,
@@ -22,7 +22,7 @@ import {
  * @param {String} value
  * @return {string} message
  */
-export const nameValidation = (value) => {
+export const nameValidator = (value) => {
 
   const nameRegExp = /^[a-zA-Z\s\.]+$/;
   let message = '';
@@ -44,11 +44,11 @@ export const nameValidation = (value) => {
 };
 
 /**
- * ageValidation method check validations for age field of form
+ * ageValidator method check validations for age field of form
  * @param {number} value
  * @return {string} message
  */
-export const ageValidation = (value) => {
+export const ageValidator = (value) => {
 
   const temporaryValue = !value ? null : String(value);
   let message = '';
@@ -67,11 +67,11 @@ export const ageValidation = (value) => {
 };
 
 /**
- * mobileValidation method check validations for mobile field of form
+ * mobileValidator method check validations for mobile field of form
  * @param {Number} value
  * @return {string} message
  */
-export const mobileValidation = (value) => {
+export const mobileValidator = (value) => {
 
   const temporaryValue = !value ? null : String(value);
   let message = '';
@@ -94,11 +94,11 @@ export const mobileValidation = (value) => {
 };
 
 /**
- * optionalMobileValidation method check validations for optional mobile field of form
+ * optionalMobileValidator method check validations for optional mobile field of form
  * @param {Number} value
  * @return {string} message
  */
-export const optionalMobileValidation = (value) => {
+export const optionalMobileValidator = (value) => {
 
   let message = '';
   const mobileRegExp = /^[0-9]+$/;
@@ -120,11 +120,11 @@ export const optionalMobileValidation = (value) => {
 };
 
 /**
- * optionalEmailValidation method check validations for email field of form
+ * optionalEmailValidator method check validations for email field of form
  * @param {String} value
  * @return {string} message
  */
-export const optionalEmailValidation = (value) => {
+export const optionalEmailValidator = (value) => {
 
   let message = '';
   const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -143,11 +143,11 @@ export const optionalEmailValidation = (value) => {
 };
 
 /**
- * addressValidation method check validations for address field of form
+ * addressValidator method check validations for address field of form
  * @param {String} value
  * @return {string} message
  */
-export const addressValidation = (value) => {
+export const addressValidator = (value) => {
 
   let message = '';
 
@@ -175,7 +175,7 @@ export const addressValidation = (value) => {
  * @param {Number} value
  * @return {string} message
  */
-export const bhopalAgeValidate = (value) => {
+export const bhopalAgeValidator = (value) => {
 
   let message = '';
 
@@ -201,43 +201,43 @@ export const bhopalAgeValidate = (value) => {
 export const validates = (formData, errors) => {
   if (formData.optIn2019 === 'Y') {
 
-    const nameError = nameValidation(formData.name);
+    const nameError = nameValidator(formData.name);
 
     if (!isEmpty(nameError)) {
       errors.name.addError(nameError);
     }
 
-    const fatherNameError = nameValidation(formData.fatherName);
+    const fatherNameError = nameValidator(formData.fatherName);
 
     if (!isEmpty(fatherNameError)) {
       errors.fatherName.addError(fatherNameError);
     }
 
-    const ageError = ageValidation(formData.age ? String(formData.age) : '');
+    const ageError = ageValidator(formData.age ? String(formData.age) : '');
 
     if (!isEmpty(ageError)) {
       errors.age.addError(ageError);
     }
 
-    const mobileError = mobileValidation(formData.mobile ? String(formData.mobile) : '');
+    const mobileError = mobileValidator(formData.mobile ? String(formData.mobile) : '');
 
     if (!isEmpty(mobileError)) {
       errors.mobile.addError(mobileError);
     }
 
-    const emailError = optionalEmailValidation(formData.email);
+    const emailError = optionalEmailValidator(formData.email);
 
     if (!isEmpty(emailError)) {
       errors.email.addError(emailError);
     }
 
-    const addressError = addressValidation(formData.address);
+    const addressError = addressValidator(formData.address);
 
     if (!isEmpty(addressError)) {
       errors.address.addError(addressError);
     }
 
-    const optionalMobileError = optionalMobileValidation(formData.motherMobile ? String(formData.motherMobile) : '');
+    const optionalMobileError = optionalMobileValidator(formData.motherMobile ? String(formData.motherMobile) : '');
 
     if (!isEmpty(optionalMobileError)) {
       errors.motherMobile.addError(optionalMobileError);
@@ -253,53 +253,52 @@ export const validates = (formData, errors) => {
  * @param {Object} studentData
  * @return {Object} studentData
  */
-export const prePopulateOptIn = (studentData) => {
+export const prePopulateOptIn = ({ memberData }) => {
 
-  let updatedStudentData = studentData;
+  let updatedMemberData = memberData;
 
-  if (studentData) {
+  if (memberData) {
 
     const {
       optIn2019,
-    } = studentData;
+    } = memberData;
 
-    updatedStudentData = {
-      ...studentData,
+    updatedMemberData = {
+      ...memberData,
       optIn2019: !optIn2019 ? 'Y' : optIn2019,
     };
   }
-  return updatedStudentData;
+  return updatedMemberData;
 };
 
 /**
  * InitialStudentData method format the form data into corresponding data type
  * @param {Object} studentData
+ * @param {Object} formConfig
  * @return {Object}
  * @constructor formattedStudentData
  */
-export const InitialStudentData = (studentData) => {
-  let formattedStudentData = cloneDeep(studentData);
-
-  defaultStudentDataFormat.forEach((fieldObject) => {
-
-    if (formattedStudentData[fieldObject.formField] === null) {
+export const initialMemberData = ({ memberData, formConfig }) => {
+  let formattedMemberData = cloneDeep(memberData);
+  formConfig.defaultStudentDataFormat.forEach((fieldObject) => {
+    if (formattedMemberData[fieldObject.formField] === null) {
       const property = [fieldObject.formField];
 
-      delete formattedStudentData[property];
+      delete formattedMemberData[property];
 
     } else if (fieldObject.dataType === 'string') {
-      formattedStudentData = {
-        ...formattedStudentData,
-        [fieldObject.formField]: String(formattedStudentData[fieldObject.formField]) };
+      formattedMemberData = {
+        ...formattedMemberData,
+        [fieldObject.formField]: String(formattedMemberData[fieldObject.formField]) };
 
     } else if (fieldObject.dataType === 'number') {
-      formattedStudentData = {
-        ...formattedStudentData,
-        [fieldObject.formField]: Number(formattedStudentData[fieldObject.formField]) };
+      formattedMemberData = {
+        ...formattedMemberData,
+        [fieldObject.formField]: Number(formattedMemberData[fieldObject.formField]) };
     }
   });
 
-  return formattedStudentData;
+  return formattedMemberData;
 };
 
 /**

@@ -197,9 +197,9 @@ class UpdateIdCardStatusSelectedStudents extends Component {
    */
   renderUpdateIdCardStatusSelectedStudentsModal() {
     const uiSchema = {
-      ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema,
+      ...UpdateIdCardStatusSelectedStudentsJsonSchema.uiSchema,
       close: {
-        ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema.close,
+        ...UpdateIdCardStatusSelectedStudentsJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -209,7 +209,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
         ),
       },
       submit: {
-        ...UpdateIdCardStatusSelectedStudentsJsonSchema.UISchema.submit,
+        ...UpdateIdCardStatusSelectedStudentsJsonSchema.uiSchema.submit,
         // 'classNames': this.getSubmitButtonClassName(),
         'ui:widget': () => (
           <button
@@ -238,7 +238,7 @@ class UpdateIdCardStatusSelectedStudents extends Component {
             <Form
               showErrorList={false}
               liveValidate
-              schema={UpdateIdCardStatusSelectedStudentsJsonSchema.Schema}
+              schema={UpdateIdCardStatusSelectedStudentsJsonSchema.schema}
               uiSchema={uiSchema}
               formData={{ studentIds, selectedCardOption: selectedCardOption.printStatus }}
               onChange={this.onClickRadioButton}

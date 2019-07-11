@@ -16,11 +16,11 @@ const FormUpdateSuccessMessage = ({
   isFormChanged,
   hasError,
   context,
-  isStudentUpdated,
+  isMemberUpdated,
   isUpdatedReset,
 }) => {
   // if form data is update and valid and submitted successfully.
-  if (isStudentUpdated) {
+  if (isMemberUpdated) {
     return (
       <Popup>
         <h5>{infoUpdateSuccessMessage}</h5>
@@ -51,7 +51,7 @@ FormUpdateSuccessMessage.propTypes = {
   isFormChanged: PropTypes.bool,
   hasError: PropTypes.bool,
   context: PropTypes.object,
-  isStudentUpdated: PropTypes.bool,
+  isMemberUpdated: PropTypes.bool,
   isUpdatedReset: PropTypes.func,
 };
 
@@ -60,7 +60,7 @@ FormUpdateSuccessMessage.defaultProps = {
   isFormChanged: false,
   hasError: false,
   context: false,
-  isStudentUpdated: false,
+  isMemberUpdated: false,
   isUpdatedReset: () => {},
 };
 

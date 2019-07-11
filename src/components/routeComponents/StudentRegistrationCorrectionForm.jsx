@@ -48,11 +48,12 @@ import {
   isUpdatedResetAction,
 } from '../../actions/studentRegistrationActions';
 import {
-  updateClassAttended2019InStudentData,
+  updateClassAttended2019InMemberData,
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
-  validateInput, isPageUserStudent,
+  validateInput,
+  isUserMember,
 } from '../../utils/registrationFormUtils';
 import {
   getStudent,
@@ -70,7 +71,7 @@ import {
   YES_TEXT,
 } from '../../constants/text';
 import Popup from '../common/Popup';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 
 /**
@@ -214,11 +215,11 @@ class StudentRegistrationCorrectionForm extends Component {
   renderBusNumberOption = () => {
 
     const { student } = this.state;
-    const { tenant, pageUser } = this.props;
+    const { tenant, user } = this.props;
     const { ADMIN } = USER_TYPES;
     const { INDORE } = TENANT;
 
-    if (tenant === INDORE && pageUser === ADMIN) {
+    if (tenant === INDORE && user === ADMIN) {
       return (
         <SelectListInputField
           name="busNumber"
@@ -238,10 +239,10 @@ class StudentRegistrationCorrectionForm extends Component {
   renderMark2019Field = () => {
 
     const { student } = this.state;
-    const { pageUser } = this.props;
+    const { user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <InputField
           type="text"
@@ -261,10 +262,10 @@ class StudentRegistrationCorrectionForm extends Component {
   renderClassRoom2019Field = () => {
 
     const { student } = this.state;
-    const { pageUser } = this.props;
+    const { user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <SelectListInputField
           name="classRoomNo2019"
@@ -286,10 +287,10 @@ class StudentRegistrationCorrectionForm extends Component {
   renderRemarkField = () => {
 
     const { student } = this.state;
-    const { pageUser } = this.props;
+    const { user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <TextAreaField
           label="Remark"
@@ -440,10 +441,10 @@ class StudentRegistrationCorrectionForm extends Component {
   renderOptInField = () => {
 
     const { student, errorMessage } = this.state;
-    const { pageUser } = this.props;
+    const { user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <SelectListInputField
           name="optIn2019"
@@ -475,10 +476,10 @@ class StudentRegistrationCorrectionForm extends Component {
   renderLevelField = () => {
 
     const { student, errorMessage } = this.state;
-    const { pageUser } = this.props;
+    const { user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
@@ -489,7 +490,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (student.optIn2019 === 'Y' && pageUser !== ADMIN) {
+    } else if (student.optIn2019 === 'Y' && user !== ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
@@ -502,7 +503,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (student.optIn2019 === 'N' && pageUser !== ADMIN) {
+    } else if (student.optIn2019 === 'N' && user !== ADMIN) {
       return (
         <SelectListInputField
           name="classAttended2019"
@@ -533,10 +534,10 @@ class StudentRegistrationCorrectionForm extends Component {
    */
   renderBackButton = () => {
 
-    const { pageUser, context } = this.props;
+    const { user, context } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    if (pageUser === ADMIN) {
+    if (user === ADMIN) {
       return (
         <LinkButton
           buttonText={goBackBtnText}
@@ -544,7 +545,7 @@ class StudentRegistrationCorrectionForm extends Component {
         />
       );
 
-    } else if (isPageUserStudent({ pageUser })) {
+    } else if (isUserMember({ user })) {
       return (
         <Button
           type="button"
@@ -568,7 +569,7 @@ class StudentRegistrationCorrectionForm extends Component {
    */
   prePopulateCourse2019(studentData) {
 
-    const updatedData = updateClassAttended2019InStudentData(studentData);
+    const updatedData = updateClassAttended2019InMemberData(studentData);
 
     this.setState({
       student: updatedData,
@@ -597,11 +598,11 @@ class StudentRegistrationCorrectionForm extends Component {
   isValidData() {
 
     const { errorMessage } = this.state;
-    const { pageUser, tenant } = this.props;
+    const { user, tenant } = this.props;
 
     return isValidUserInfo({
       errorMessageObject: errorMessage,
-      user: pageUser,
+      user,
       tenant,
     });
   }
@@ -935,9 +936,9 @@ class StudentRegistrationCorrectionForm extends Component {
   render() {
 
     const { student, errorMessage, onlyOptIn2019 } = this.state;
-    const { pageUser, studentData, context, isStudentFetched } = this.props;
+    const { user, studentData, context, isStudentFetched } = this.props;
 
-    if (isPageUserStudent({ pageUser }) && onlyOptIn2019 && studentData && isStudentFetched) {
+    if (isUserMember({ user }) && onlyOptIn2019 && studentData && isStudentFetched) {
       return this.renderOnlyOptIn2019();
 
     } else if (isStudentFetched && student.optIn2019 === 'N') {
@@ -1120,7 +1121,7 @@ StudentRegistrationCorrectionForm.propTypes = {
   isStudentFetched: PropTypes.bool,
   isStudentUpdated: PropTypes.bool,
   isUpdatedResetAction: PropTypes.func,
-  pageUser: PropTypes.string,
+  user: PropTypes.string,
   secretKey: PropTypes.string,
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   tenant: PropTypes.string,
@@ -1133,7 +1134,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   isStudentFetched: false,
   isStudentUpdated: false,
   isUpdatedResetAction: () => {},
-  pageUser: '',
+  user: '',
   secretKey: '',
   studentData: {},
   tenant: '',
@@ -1144,14 +1145,14 @@ const mapStateToProps = state => ({
   id: getUserId(state),
   isStudentFetched: isFetched(state),
   isStudentUpdated: isUpdated(state),
-  pageUser: getPageUserType(state),
+  user: getPageUserType(state),
   secretKey: getUserSecretKey(state),
   studentData: getStudent(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
-  getApplicationTenant,
+  getTenantName,
   isUpdatedResetAction,
   updateStudentDataAction,
 })(StudentRegistrationCorrectionForm);

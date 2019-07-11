@@ -577,14 +577,13 @@ Files.propTypes = {
   context: PropTypes.object,
   fetchFilesConfigAction: PropTypes.func,
   filesConfig: PropTypes.object,
-  setLoadingStateAction: PropTypes.func,
+  setLoadingStateAction: PropTypes.func.isRequired,
 };
 
 Files.defaultProps = {
   context: {},
   fetchFilesConfigAction: () => {},
   filesConfig: {},
-  setLoadingStateAction: () => {},
 };
 
 const mapStateToProps = state => ({

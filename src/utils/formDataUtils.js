@@ -1,137 +1,131 @@
 import {
-  defaultAdmin,
-  defaultStudent,
-  indoreAdmin,
-  indoreStudent,
-  onlyOptIn,
-} from '../config/memberRegistrationCorrectionFormSchema.json';
-import {
   TENANT,
   USER_TYPES,
 } from '../constants/yjsg';
-import {isPageUserStudent} from "./registrationFormUtils";
+import { isUserMember } from './registrationFormUtils';
 
 /**
  * getFormData method return the form data for json form schema
- * @param {String} pageUser
+ * @param {String} user
  * @param {Boolean} onlyOptInForm
  * @param {String} tenant
- * @param {Object} student
+ * @param {Object} member
  * @param {Function} renderBackButton
  * @param {Function} renderSubmitButtons
+ * @param {Object} formDetail
  * @return {{schema: Object, uiSchema: Object , formData: Object}}
  */
 export const getFormData = ({
-  pageUser,
+  user,
   onlyOptInForm,
   tenant,
-  student,
+  member,
   renderBackButton,
   renderSubmitButtons,
+  formConfig,
 }) => {
-
-  const { STUDENT_WITH_URL, STUDENT, ADMIN } = USER_TYPES;
+  const { ADMIN } = USER_TYPES;
   const { INDORE } = TENANT;
   let schema = {};
   let uiSchema = {};
   let formData = {};
 
-  if (isPageUserStudent({ pageUser }) && onlyOptInForm) {
-    schema = onlyOptIn.Schema;
-    uiSchema = onlyOptIn.UISchema;
+  if (isUserMember({ user }) && onlyOptInForm) {
+    schema = formConfig.schema;
+    uiSchema = formConfig.uiSchema;
     formData = {
-      ...onlyOptIn.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
   } else if (tenant === INDORE) {
-    if (pageUser === ADMIN) {
-      schema = indoreAdmin.Schema;
+    if (user === ADMIN) {
+      schema = formConfig.schema;
       uiSchema = {
-        ...indoreAdmin.UISchema,
+        ...formConfig.uiSchema,
         backButton: {
-          ...indoreAdmin.UISchema.backButton,
+          ...formConfig.uiSchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...indoreAdmin.UISchema.submitButton,
+          ...formConfig.uiSchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...indoreAdmin.Data,
-        ...student,
+        ...formConfig.data,
+        ...member,
       };
 
-    } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
-      schema = indoreStudent.Schema;
+    } else if (isUserMember({ user })) {
+      schema = formConfig.schema;
       uiSchema = {
-        ...indoreStudent.UISchema,
+        ...formConfig.uiSchema,
         backButton: {
-          ...indoreStudent.UISchema.backButton,
+          ...formConfig.uiSchema.backButton,
           'ui:widget': () => (
             renderBackButton()
           ),
         },
         submitButton: {
-          ...indoreStudent.UISchema.submitButton,
+          ...formConfig.uiSchema.submitButton,
           'ui:widget': () => (
             renderSubmitButtons()
           ),
         },
       };
       formData = {
-        ...indoreStudent.Data,
-        ...student,
+        ...formConfig.data,
+        ...member,
       };
     }
 
-  } else if (pageUser === ADMIN) {
-    schema = defaultAdmin.Schema;
+  } else if (user === ADMIN) {
+    schema = formConfig.schema;
     uiSchema = {
-      ...defaultAdmin.UISchema,
+      ...formConfig.uiSchema,
       backButton: {
-        ...defaultAdmin.UISchema.backButton,
+        ...formConfig.uiSchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...defaultAdmin.UISchema.submitButton,
+        ...formConfig.uiSchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...defaultAdmin.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
-  } else if (pageUser === STUDENT || pageUser === STUDENT_WITH_URL) {
-    schema = defaultStudent.Schema;
+  } else if (isUserMember({ user })) {
+    schema = formConfig.schema;
     uiSchema = {
-      ...defaultStudent.UISchema,
+      ...formConfig.uiSchema,
       backButton: {
-        ...defaultStudent.UISchema.backButton,
+        ...formConfig.uiSchema.backButton,
         'ui:widget': () => (
           renderBackButton()
         ),
       },
       submitButton: {
-        ...defaultStudent.UISchema.submitButton,
+        ...formConfig.uiSchema.submitButton,
         'ui:widget': () => (
           renderSubmitButtons()
         ),
       },
     };
     formData = {
-      ...defaultStudent.Data,
-      ...student,
+      ...formConfig.data,
+      ...member,
     };
 
   } else return null;

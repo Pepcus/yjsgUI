@@ -25,10 +25,10 @@ class FormContainer extends Component {
   };
 
   /**
-   * getFormUISchema return uiSchema
+   * getFormUiSchema return uiSchema
    * @return {Object} uiSchema
    */
-  getFormUISchema = () => {
+  getFormUiSchema = () => {
     const { uiSchema } = this.props;
     return uiSchema;
   };
@@ -96,7 +96,7 @@ class FormContainer extends Component {
         noHtml5Validate={this.props.noHtml5Validate}
         liveValidate
         schema={this.getFormSchema()}
-        uiSchema={this.getFormUISchema()}
+        uiSchema={this.getFormUiSchema()}
         formData={this.getFormData()}
         onChange={this.getOnChange()}
         transformErrors={this.getTransformErrors}

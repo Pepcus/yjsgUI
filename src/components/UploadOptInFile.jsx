@@ -56,7 +56,7 @@ class UploadOptInFile extends Component {
     this.state = {
       formFieldDate: {},
       isUploadOptInFileModalOpen: false,
-      isFormSubmitted: false,
+      // isFormSubmitted: false,
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -89,7 +89,7 @@ class UploadOptInFile extends Component {
     this.props.resetIsOptInSuccessAction();
     this.setState({
       formFieldDate: {},
-      isFormSubmitted: false,
+      // isFormSubmitted: false,
     });
   }
 
@@ -116,7 +116,7 @@ class UploadOptInFile extends Component {
 
     this.fileUpload(optInFile);
     this.setState({
-      isFormSubmitted: true,
+      // isFormSubmitted: true,
     });
   }
 
@@ -231,9 +231,9 @@ class UploadOptInFile extends Component {
    */
   renderUploadOptInModal() {
     const uiSchema = {
-      ...UploadOptInFileJsonSchema.UISchema,
+      ...UploadOptInFileJsonSchema.uiSchema,
       optInFile: {
-        ...UploadOptInFileJsonSchema.UISchema.optInFile,
+        ...UploadOptInFileJsonSchema.uiSchema.optInFile,
         'ui:widget': () => (
           <input
             type="file"
@@ -243,7 +243,7 @@ class UploadOptInFile extends Component {
         ),
       },
       close: {
-        ...UploadOptInFileJsonSchema.UISchema.close,
+        ...UploadOptInFileJsonSchema.uiSchema.close,
         'ui:widget': () => (
           <button
             className="button-modal button-close"
@@ -253,7 +253,7 @@ class UploadOptInFile extends Component {
         ),
       },
       submit: {
-        ...UploadOptInFileJsonSchema.UISchema.submit,
+        ...UploadOptInFileJsonSchema.uiSchema.submit,
         'ui:widget': () => (
           <button
             type="submit"

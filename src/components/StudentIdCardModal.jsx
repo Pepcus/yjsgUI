@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
-import upperFirst from 'lodash/upperFirst';
 import * as shortId from 'shortid';
 import Barcode from 'react-barcode';
 import {
@@ -10,7 +9,10 @@ import {
   ID_CARD_MAIN_HEADING,
 } from '../constants/text';
 
-import {convertFirstCharacterInUpperCase, getFormattedStudentId} from '../utils/dataGridUtils';
+import {
+  convertFirstCharacterInUpperCase,
+  getFormattedStudentId,
+} from '../utils/dataGridUtils';
 import { getBusCoordinators } from '../reducers/assetFilesReducer';
 
 /**

@@ -3,12 +3,18 @@ import { put } from 'redux-saga/effects';
 import {
   fetchFileConfigFailedAction,
   fetchFileConfigSuccessAction,
-  loadedAppDataSuccessAction,
-  loadAppDataFailedAction,
   loadBusCoordinatorsDataSuccessAction,
   loadBusCoordinatorsDataFailedAction,
 } from '../actions/assetFilesActions';
-import { fetchFileConfig, getAppConfig, getBusCoordinatorsConfig } from './assetFilesAPI';
+import {
+  loadedAppDataSuccessAction,
+  loadAppDataFailedAction,
+} from '../actions/appConfigActions';
+import {
+  fetchFileConfig,
+  getBusCoordinatorsConfig,
+} from './assetFilesAPI';
+import { getAppConfig } from './appConfigAPI';
 
 /**
  * fetchFilesConfigSaga saga call for fetching fileConfig json file

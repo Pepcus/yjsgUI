@@ -411,15 +411,15 @@ export const checkLevelValue = (value) => {
 /**
  * updateStudentDataAccordingClassAttended2018Level method manipulate the student data
  * according to classAttended level value of previous year.
- * @param {Object} studentData
+ * @param {Object} memberData
  * @return {Object} studentData
  */
-export const updateClassAttended2019InStudentData = (studentData) => {
+export const updateClassAttended2019InMemberData = (memberData) => {
 
-  const { classAttended2018, classAttended2019 } = studentData;
+  const { classAttended2018, classAttended2019 } = memberData;
 
   if (classAttended2019) {
-    return studentData;
+    return memberData;
   }
 
   const lastCourse = classAttended2018;
@@ -431,24 +431,24 @@ export const updateClassAttended2019InStudentData = (studentData) => {
     // in that condition will pre populate
     // the value of classAttended2019 is 'Level 8'.
     if (level > 7) {
-      return extend(cloneDeep(studentData), { classAttended2019: 'Level 8' });
+      return extend(cloneDeep(memberData), { classAttended2019: 'Level 8' });
     }
     // In classAttended2018 Level is greater than 0 and less than 8 in that condition
     // pre populate value of classAttended2019 will be classAttended2018 incremented by 1.
-    return extend(cloneDeep(studentData), { classAttended2019: `Level ${level + 1}` });
+    return extend(cloneDeep(memberData), { classAttended2019: `Level ${level + 1}` });
 
   } else if (!isEmpty(lastCourse)) {
     // If classAttended2018 value is anything else then Level classAttended2019 will be Level 1.
-    return extend(cloneDeep(studentData), { classAttended2019: 'Level 1' });
+    return extend(cloneDeep(memberData), { classAttended2019: 'Level 1' });
   }
 
-  return studentData;
+  return memberData;
 };
 
-export const getFinalMemberData = ({ studentData }) => {
+export const getRegisteredMemberData = ({ memberData }) => {
   // get student data from session if present
-  const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
-  return !isEmpty(studentData) ? studentData : studentDataFromSession;
+  const memberDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+  return !isEmpty(memberData) ? memberData : memberDataFromSession;
 };
 
-export const isPageUserStudent = ({ pageUser }) => pageUser === STUDENT_WITH_URL || pageUser === STUDENT;
+export const isUserMember = ({ user }) => user === STUDENT_WITH_URL || user === STUDENT;

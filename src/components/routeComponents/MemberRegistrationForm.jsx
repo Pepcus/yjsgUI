@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import { memberRegistration } from '../../config/memberRegistrationFormSchema.json';
 import {
+  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
   formSubmitBtnText,
   goBackBtnText,
   USER_TYPES,
@@ -12,6 +12,7 @@ import {
 import {
   createStudentDataAction,
   setStudentCredentialsAction,
+  setLoadingStateAction,
 } from '../../actions/studentRegistrationActions';
 import {
   ID_CARD_SUGGESTION_MESSAGE,
@@ -33,6 +34,8 @@ import {
 import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import Form from '../form';
+import { fetchFormConfig } from '../../sagas/formConfigAPI';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 
 /**
@@ -50,7 +53,32 @@ class MemberRegistrationForm extends Component {
       isSubmitTriggered: false,
       member: {},
       notHasAnError: false,
+      formConfig: {},
     };
+  }
+
+  componentWillMount() {
+    const { tenant } = this.props;
+    this.props.setLoadingStateAction(true);
+    try {
+      fetchFormConfig({ tenant, fileName: 'Registration' })
+        .then((response) => {
+          if (response) {
+            this.setState({
+              formConfig: response,
+            });
+
+          } else {
+            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
+            this.props.setLoadingStateAction(false);
+          }
+        });
+    } catch (e) {
+      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
+      console.error(e);
+    } finally {
+      this.props.setLoadingStateAction(false);
+    }
   }
 
   /**
@@ -90,7 +118,6 @@ class MemberRegistrationForm extends Component {
 
   /**
    * transformErrors method transform required form filed error.
-   * @param {Array} errors
    * @return {Array} errors
    */
   transformErrors = () => ({
@@ -142,18 +169,17 @@ class MemberRegistrationForm extends Component {
   renderSuccessMessage = () => {
 
     const { isSubmitTriggered } = this.state;
-    const { isStudentCreated } = this.props;
+    const { isMemberCreated, newMember } = this.props;
 
-    if (isStudentCreated && isSubmitTriggered) {
-      const member = this.props.newStudent;
+    if (isMemberCreated && isSubmitTriggered) {
       // for pre-population on splash page
-      this.props.setStudentCredentialsAction(member.id, member.secretKey);
+      this.props.setStudentCredentialsAction(newMember.id, newMember.secretKey);
 
       return (
         <Popup>
           <p>{REGISTRATION_SUCCESS_MESSAGE}</p>
-          <p>{YOUR_ID_TEXT}<strong>{member.id}</strong>{IS_THERE_TEXT}</p>
-          <p>{YOUR_SECRET_CODE_TEXT}<strong>{member.secretKey}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_ID_TEXT}<strong>{newMember.id}</strong>{IS_THERE_TEXT}</p>
+          <p>{YOUR_SECRET_CODE_TEXT}<strong>{newMember.secretKey}</strong>{IS_THERE_TEXT}</p>
           <p>{ID_NOTE_MESSAGE}</p>
           <p>{ID_CARD_SUGGESTION_MESSAGE}</p>
           {this.renderBackButton()}
@@ -183,65 +209,73 @@ class MemberRegistrationForm extends Component {
    //* @param {Object} errors
    * @return {Object} errors
    */
-  validate = () => {
-    return memberRegistration.validation;
-  };
+  validate = () => this.state.formConfig.validation;
 
   render() {
-    return (
-      <div ref={this.formRef} className="member-registration-form">
-        <Form
-          showErrorList={false}
-          validate={this.validate}
-          liveValidate
-          schema={memberRegistration.schema}
-          uiSchema={memberRegistration.UISchema}
-          formData={{ ...memberRegistration.Data, ...this.state.member }}
-          onChange={this.onChange}
-          transformErrors={this.transformErrors}
-        >
-          <div className="register-button-wrapper">
-            {this.renderBackButton()}
-            <Button
-              buttonText={formSubmitBtnText}
-              type="submit"
-              formName=""
-              value="Submit"
-              onClick={this.handleSubmit}
-            />
-          </div>
-        </Form>
-        {this.renderSuccessMessage()}
-      </div>
-    );
+    const { formConfig } = this.state;
+    const { schema, uiSchema, data } = formConfig;
+
+    if (!isEmpty(formConfig)) {
+      return (
+        <div ref={this.formRef} className="member-registration-form">
+          <Form
+            showErrorList={false}
+            validate={this.validate}
+            liveValidate
+            schema={schema}
+            uiSchema={uiSchema}
+            formData={{ ...data, ...this.state.member }}
+            onChange={this.onChange}
+            transformErrors={this.transformErrors}
+          >
+            <div className="register-button-wrapper">
+              {this.renderBackButton()}
+              <Button
+                buttonText={formSubmitBtnText}
+                type="submit"
+                value="Submit"
+                onClick={this.handleSubmit}
+              />
+            </div>
+          </Form>
+          {this.renderSuccessMessage()}
+        </div>
+      );
+    }
+    return null;
   }
 }
 
 MemberRegistrationForm.propTypes = {
   context: PropTypes.object,
   createStudentDataAction: PropTypes.func,
-  isStudentCreated: PropTypes.bool,
-  newStudent: PropTypes.object,
+  isMemberCreated: PropTypes.bool,
+  newMember: PropTypes.object,
+  setLoadingStateAction: PropTypes.func.isRequired,
   setStudentCredentialsAction: PropTypes.func,
+  tenant: PropTypes.string,
   userType: PropTypes.string,
 };
 
 MemberRegistrationForm.defaultProps = {
   context: {},
   createStudentDataAction: () => {},
-  isStudentCreated: false,
-  newStudent: {},
+  isMemberCreated: false,
+  newMember: {},
   setStudentCredentialsAction: () => {},
+  tenant: '',
   userType: '',
 };
 
 const mapStateToProps = state => ({
-  isStudentCreated: isCreated(state),
-  newStudent: getNewStudent(state),
+  isMemberCreated: isCreated(state),
+  newMember: getNewStudent(state),
+  tenant: getTenantName(state),
   userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentDataAction,
   setStudentCredentialsAction,
+  setLoadingStateAction,
 })(MemberRegistrationForm);

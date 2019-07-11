@@ -31,9 +31,9 @@ const AdminLoginForm = ({
 
   if (isAdmin) {
     const uiSchema = {
-      ...AdminLoginFormJsonSchema.UISchema,
+      ...AdminLoginFormJsonSchema.uiSchema,
       backButton: {
-        ...AdminLoginFormJsonSchema.UISchema.backButton,
+        ...AdminLoginFormJsonSchema.uiSchema.backButton,
         'ui:widget': () => (
           <Button
             type="button"
@@ -43,7 +43,7 @@ const AdminLoginForm = ({
         ),
       },
       submitButton: {
-        ...AdminLoginFormJsonSchema.UISchema.submitButton,
+        ...AdminLoginFormJsonSchema.uiSchema.submitButton,
         'ui:widget': () => (
           <Button
             type="submit"

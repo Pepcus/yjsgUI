@@ -1,6 +1,6 @@
 {
   "StudentCredentialPageJsonSchema": {
-    "Schema": {
+    "schema": {
       "type": "object",
       "properties": {
         "studentId": {
@@ -20,7 +20,7 @@
       },
       "required": ["studentId", "secretKey"]
     },
-    "UISchema": {
+    "uiSchema": {
       "studentId": {
         "ui:placeholder": "अपना आई.डी. नं. दर्ज करें"
       },
@@ -43,7 +43,7 @@
     "data": {}
   },
   "ColumnConfigJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपया स्तंभों का चयन करे",
       "type": "object",
       "properties": {
@@ -63,7 +63,7 @@
         }
       }
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["selectValue",
         "visibleColumnConfig",
         "close",
@@ -95,7 +95,7 @@
     "data": {}
   },
   "UpdateIdCardStatusSelectedStudentsJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपया दिए गए ID's को  कार्ड प्रिंट के लिए चयन करें!",
       "type": "object",
       "properties": {
@@ -128,7 +128,7 @@
       },
       "required": ["studentIds", "selectedCardOption"]
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["studentIds",
         "selectedCardOption",
         "close",
@@ -164,7 +164,7 @@
     "data": {}
   },
   "MarkSelectedStudentAttendanceJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपिया चयनित छात्रो की उपस्तिथि दर्ज करे ",
       "type": "object",
       "properties": {
@@ -207,7 +207,7 @@
       },
       "required": ["studentIds", "selectedDay"]
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["studentIds",
         "selectedDay",
         "close",
@@ -242,7 +242,7 @@
     "data": {}
   },
   "UploadOptInFileJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपिया फाइल को अपलोड करे",
       "type": "object",
       "properties": {
@@ -258,7 +258,7 @@
       },
       "required": ["optInFile"]
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["optInFile",
         "close",
         "submit"
@@ -283,7 +283,7 @@
     "data": {}
   },
   "UploadStudentsAttendanceFileJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपिया फाइल को अपलोड करे",
       "type": "object",
       "properties": {
@@ -322,7 +322,7 @@
       },
       "required": ["attendanceFile", "selectedDay"]
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["attendanceFile",
         "selectedDay",
         "close",
@@ -353,7 +353,7 @@
     "data": {}
   },
   "AdminLoginFormJsonSchema": {
-    "Schema": {
+    "schema": {
       "type": "object",
       "properties": {
         "adminId": {
@@ -373,7 +373,7 @@
       },
       "required": ["adminId", "adminPassword"]
     },
-    "UISchema": {
+    "uiSchema": {
       "adminId": {
         "ui:placeholder": "Enter Admin ID"
       },
@@ -397,7 +397,7 @@
     "data": {}
   },
   "MarkOptInOrOptOutButtonJsonSchema": {
-    "Schema": {
+    "schema": {
       "title": "कृपया चयनित छात्रों की शिविर के लिए हाँ या ना दर्ज़ करें",
       "type": "object",
       "properties": {
@@ -430,7 +430,7 @@
       },
       "required": ["studentIds", "selectedOptOption"]
     },
-    "UISchema": {
+    "uiSchema": {
       "ui:order": ["studentIds",
         "selectedOptOption",
         "close",

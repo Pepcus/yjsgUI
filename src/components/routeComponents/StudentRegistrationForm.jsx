@@ -57,7 +57,7 @@ import {
 } from '../../reducers/studentRegistrationReducer';
 import Button from '../common/Button';
 import Popup from '../common/Popup';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 
 /**
  * StudentRegistrationForm render student registration form
@@ -453,13 +453,13 @@ StudentRegistrationForm.defaultProps = {
 const mapStateToProps = state => ({
   isStudentCreated: isCreated(state),
   newStudent: getNewStudent(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
   userType: getUserType(state),
 });
 
 export default connect(mapStateToProps, {
   createStudentDataAction,
-  getApplicationTenant,
+  getTenantName,
   setStudentCredentialsAction,
 })(StudentRegistrationForm);
 

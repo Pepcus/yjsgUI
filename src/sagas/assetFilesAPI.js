@@ -36,16 +36,6 @@ export const fetchFileConfig = () => (
 );
 
 /**
- * getAppConfig fetch app json file
- * @return {Promise}
- */
-export const getAppConfig = () => (
-  GET({
-    url: 'ui_config/app.json',
-  })
-);
-
-/**
  * getBusCoordinatorsConfig fetch busCoordinatorsConfig json file
  * @return {Promise}
  */

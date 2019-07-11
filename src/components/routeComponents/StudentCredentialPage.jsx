@@ -25,7 +25,7 @@ import {
   getUserId,
   getUserSecretKey,
 } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { getTenantName } from '../../reducers/appConfigReducer';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   eventDate,
@@ -208,15 +208,15 @@ class StudentCredentialPage extends Component {
    */
   renderRegistrationCorrectionFields() {
     const uiSchema = {
-      ...StudentCredentialPageJsonSchema.UISchema,
+      ...StudentCredentialPageJsonSchema.uiSchema,
       backButton: {
-        ...StudentCredentialPageJsonSchema.UISchema.backButton,
+        ...StudentCredentialPageJsonSchema.uiSchema.backButton,
         'ui:widget': () => (
           this.renderBackButton()
         ),
       },
       viewEditButton: {
-        ...StudentCredentialPageJsonSchema.UISchema.viewEditButton,
+        ...StudentCredentialPageJsonSchema.uiSchema.viewEditButton,
         'ui:widget': () => (
           this.renderViewEditButton()
         ),
@@ -228,7 +228,7 @@ class StudentCredentialPage extends Component {
         <Form
           showErrorList={false}
           liveValidate
-          schema={StudentCredentialPageJsonSchema.Schema}
+          schema={StudentCredentialPageJsonSchema.schema}
           uiSchema={uiSchema}
           formData={credentials}
           onChange={this.onChange}
@@ -309,12 +309,12 @@ const mapStateToProps = state => ({
   secretKey: getUserSecretKey(state),
   studentData: getStudent(state),
   studentId: getUserId(state),
-  tenant: getApplicationTenant(state),
+  tenant: getTenantName(state),
 });
 
 export default connect(mapStateToProps, {
   fetchStudentDataAction,
-  getApplicationTenant,
+  getTenantName,
   setStudentCredentialsAction,
   setUserTypeAction,
 })(StudentCredentialPage);
