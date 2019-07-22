@@ -5,7 +5,7 @@ import SplashPagePrePopulated from './SplashPagePrePopulated';
 import AdminPanel from './AdminPanel';
 import StudentInformationGrid from './StudentInformationGrid';
 import StudentCredentialPage from './StudentCredentialPage';
-import StudentPage from './StudentPage';
+import StudentPage from './studentPage';
 import ParentsRegistration from './ParentsRegistrationForm';
 import Files from './Files';
 

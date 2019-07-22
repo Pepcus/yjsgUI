@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import connect from 'react-redux/es/connect/connect';
 import cssVars from 'css-vars-ponyfill';
 import { HashRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withTheme } from 'styled-components';
+
 
 import Routes from './Routes';
 import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
@@ -111,8 +114,9 @@ const mapDispatchToProps = dispatch => ({
   setLoadingState: () => dispatch(setLoadingStateAction()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AppContainer);
+export default withTheme(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(AppContainer));
 
