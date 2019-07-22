@@ -53,6 +53,8 @@ const BoxStyle = styled(Box)`
  max-height: 100%;
  align-items: center;
  margin: auto;
+ border: none;
+ box-shadow: 0 2px 1px 0 #eeecec;
  @media (max-width: 768px) {
     margin: 60px auto auto auto;
     height: 65%;
