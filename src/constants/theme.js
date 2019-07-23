@@ -5,6 +5,14 @@
  * @type {Object}
  */
 const APP_THEME = {
+  typography: {
+    mapping: {
+      heading: 'h5',
+    },
+    root: {
+      fontFamily: "'Poppins', sans-serif",
+    },
+  },
   HOME: {
     BACKGROUND_COLOR: '#f4e9e336',
   },

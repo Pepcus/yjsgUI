@@ -13,6 +13,7 @@ import {
 } from '../../actions/studentRegistrationActions';
 import { routes, title } from '../../config/appConfig.json';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+import { DEFAULT_HEADER_TEXT } from '../../constants/yjsg';
 
 /**
  * Header render the common header for all route
@@ -92,6 +93,13 @@ const Header = ({
       );
     } return null;
   };
+
+  /**
+   * It return the header text
+   * @return {string}
+   */
+  const getHeaderText = () => (title[tenant] ? title[tenant] : DEFAULT_HEADER_TEXT);
+
   /**
    * RenderHeaderName method render header name in header
     * @param {Object} headerObject
@@ -103,7 +111,7 @@ const Header = ({
       style={headerObject.titleStyle}
       className="student-info-heading"
     >
-      {headerObject.title ? headerObject.title : title[tenant]}
+      {headerObject.title ? headerObject.title : getHeaderText()}
     </h2>
   );
   /**

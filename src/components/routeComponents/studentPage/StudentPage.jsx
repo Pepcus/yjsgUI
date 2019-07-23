@@ -41,20 +41,12 @@ import ImageWrapper from './ImageWrapper';
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('HOME.BACKGROUND_COLOR')};
-  width: 100%;
   height: 100%;
   display: flex;
-  font-family: 'Poppins', sans-serif !important
 `;
 
-const BoxStyle = styled(Box)`
- width: 600px;
- max-width: 97%;
- max-height: 100%;
+const BoxStyled = styled(Box)`
  align-items: center;
- margin: auto;
- border: none;
- box-shadow: 0 2px 1px 0 #eeecec;
  @media (max-width: 768px) {
     margin: 60px auto auto auto;
     height: 65%;
@@ -147,36 +139,54 @@ class StudentPage extends Component {
     } = this.state;
 
     return (
-      <ContainerStyled>
+      <ContainerStyled
+        width="100%"
+      >
         <RedirectToRoute
           isURLParams={isURLParams}
           isStudentLogin={isStudentLogin}
           isNewRegistration={isNewRegistration}
         />
-        <BoxStyle>
+        <BoxStyled
+          width="600px"
+          maxWidth="97%"
+          maxHeight="100%"
+          margin="auto"
+          borderStyle="none"
+          boxShadow="0 2px 1px 0 #eeecec"
+        >
           <Col>
             <Row width="100%" display="inline-block">
               <Typography
-                as="h5"
+                type="heading"
                 fontWeight="600"
                 fontSize="18px"
                 color="#f9570a"
                 align="center"
-                fontFamily="Poppins, sans-serif"
+                theme={theme}
               >
-                {eventDate[tenant]}
+                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
               </Typography>
               <Typography
-                as="h5"
+                type="heading"
                 fontSize="16px"
                 align="center"
-                fontFamily="Poppins, sans-serif"
+                theme={theme}
               >
-                {eventVenue[tenant]}
+                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
               </Typography>
             </Row>
-            <ImageWrapper tagname="div">
-              <img src={yjsgLogo} alt="yjsg logo" style={{ width: '100%' }} />
+            <ImageWrapper
+              tagname="div"
+              width="50%"
+              margin="auto"
+              padding="20px"
+            >
+              <img
+                src={yjsgLogo}
+                alt="yjsg logo"
+                style={{ width: '100%' }}
+              />
             </ImageWrapper>
             <Row
               justify="center"
@@ -189,14 +199,14 @@ class StudentPage extends Component {
               <Button
                 margin="10px"
                 color="primary"
-                theme={this.props.theme}
+                theme={theme}
                 onClick={this.redirectToNewRegistrationPage}
               >
                 {newRegistrationBtnText}
               </Button>
             </Row>
           </Col>
-        </BoxStyle>
+        </BoxStyled>
       </ContainerStyled>
     );
   }

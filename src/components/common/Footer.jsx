@@ -29,9 +29,10 @@ class Footer extends Component {
     return ('footer print-media-none footer-none');
   };
   render() {
+    const { tenant } = this.props;
     return (
       <div className={this.getClassName()} >
-        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo[this.props.tenant]}</span>
+        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo[tenant ? tenant : 'DEFAULT_FOOTER_CONTACT_INFORMATION']}</span>
         </p>
       </div>
     );

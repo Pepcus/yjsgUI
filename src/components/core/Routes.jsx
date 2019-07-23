@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
 
 import Footer from '../common/Footer';
 import Loader from '../common/Loader';
