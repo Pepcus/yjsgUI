@@ -12,6 +12,7 @@
     "jsbarcode": "^3.11.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "polished": "^3.4.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-barcode": "^1.3.4",
@@ -30,6 +31,7 @@
     "routes": "^2.1.0",
     "shortid": "^2.2.14",
     "simple-react-data-grid": "2.6.0",
+    "styled-components": "^4.3.2",
     "whatwg-fetch": "^3.0.0",
     "xlsx": "^0.14.1"
   },
@@ -64,9 +66,9 @@
     "path": "^0.12.7",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.12.1",
+    "webpack": "^4.36.1",
     "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.7.2"
   },
   "browserslist": [
     "last 2 version",
