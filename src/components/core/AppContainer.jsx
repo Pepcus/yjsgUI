@@ -1,16 +1,26 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import connect from 'react-redux/es/connect/connect';
 import cssVars from 'css-vars-ponyfill';
-import { HashRouter, Route } from 'react-router-dom';
+import {
+  HashRouter,
+  Route,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { withTheme } from 'styled-components';
-
 
 import Routes from './Routes';
-import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
-import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
+import {
+  loadAppDataAction,
+  loadBusCoordinatorsDataAction,
+} from '../../actions/assetFilesActions';
+import {
+  getApplicationMode,
+  isAppLoaded,
+  getIsAppLoadedError,
+} from '../../reducers/assetFilesReducer';
+import {
+  ERROR_MESSAGE_OF_LOAD_APP_DATA,
+} from '../../constants/text';
 import cssJSON from '../../config/cssVariables.json';
 import {
   setLoadingStateAction,
@@ -27,6 +37,7 @@ class AppContainer extends Component {
       loadAppData,
       mode,
       setLoadingState,
+      isLoaded,
     } = this.props;
 
     loadBusCoordinatorsData();
@@ -36,7 +47,7 @@ class AppContainer extends Component {
      * CSS variable doesn't support in IE for that we use 'css-vars-ponyfill'.
      * reference:- https://jhildenbiddle.github.io/css-vars-ponyfill/#/
      */
-    if (this.props.isAppLoaded) {
+    if (isLoaded) {
       cssVars({
         // Only styles from CodePen's CSS panel
         include: 'style:not([data-ignore])',
@@ -49,7 +60,7 @@ class AppContainer extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isAppLoaded) {
+    if (nextProps.isLoaded) {
       cssVars({
         // Only styles from CodePen's CSS panel
         include: 'style:not([data-ignore])',
@@ -63,13 +74,17 @@ class AppContainer extends Component {
   }
 
   render() {
-    if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
+    const {
+      isLoaded,
+      isAppLoadingFailed,
+    } = this.props;
+    if (isLoaded && !isAppLoadingFailed) {
       return (
         <HashRouter>
           <Route path="/" component={Routes} />
         </HashRouter>
       );
-    } else if (this.props.isAppLoadingFailed) {
+    } else if (isAppLoadingFailed) {
       return (
         <div>
           <div className="empty-column-message">
@@ -89,7 +104,7 @@ AppContainer.propTypes = {
   loadAppData: PropTypes.func,
   setLoadingState: PropTypes.func.isRequired,
   loadBusCoordinatorsData: PropTypes.func,
-  isAppLoaded: PropTypes.bool,
+  isLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
   mode: PropTypes.string,
 };
@@ -97,14 +112,14 @@ AppContainer.propTypes = {
 AppContainer.defaultProps = {
   loadAppData: () => {},
   loadBusCoordinatorsData: () => {},
-  isAppLoaded: false,
+  isLoaded: false,
   isAppLoadingFailed: false,
   mode: '',
 };
 
 const mapStateToProps = state => ({
   mode: getApplicationMode(state),
-  isAppLoaded: isAppLoaded(state),
+  isLoaded: isAppLoaded(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
 });
 
@@ -114,9 +129,8 @@ const mapDispatchToProps = dispatch => ({
   setLoadingState: () => dispatch(setLoadingStateAction()),
 });
 
-export default withTheme(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(AppContainer));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AppContainer);
 

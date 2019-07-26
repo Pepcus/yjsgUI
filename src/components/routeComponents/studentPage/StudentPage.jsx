@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   Button,
@@ -28,14 +28,20 @@ import {
   newRegistrationBtnText,
   USER_TYPES,
 } from '../../../constants/yjsg';
-import { getParameterByName } from '../../../utils/http';
-import { getStudent } from '../../../reducers/studentRegistrationReducer';
+import {
+  getParameterByName,
+} from '../../../utils/http';
+import {
+  getStudent,
+} from '../../../reducers/studentRegistrationReducer';
 import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
 } from '../../../reducers/assetFilesReducer';
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
-import { RedirectToRoute } from './RedirectToRoute';
+import {
+  RedirectToRoute,
+} from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
 
 
@@ -130,7 +136,6 @@ class StudentPage extends Component {
     const {
       tenant,
       isAlreadyRegisteredButtonEnabled,
-      theme,
     } = this.props;
     const {
       isURLParams,
@@ -158,20 +163,18 @@ class StudentPage extends Component {
           <Col>
             <Row width="100%" display="inline-block">
               <Typography
-                type="heading"
+                type="title"
                 fontWeight="600"
                 fontSize="18px"
                 color="#f9570a"
                 align="center"
-                theme={theme}
               >
                 {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
               </Typography>
               <Typography
-                type="heading"
+                type="title"
                 fontSize="16px"
                 align="center"
-                theme={theme}
               >
                 {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
               </Typography>
@@ -193,13 +196,11 @@ class StudentPage extends Component {
             >
               <AlreadyRegisteredButton
                 isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
-                theme={theme}
                 redirectToStudentLogin={this.redirectToStudentLogin}
               />
               <Button
                 margin="10px"
                 color="primary"
-                theme={theme}
                 onClick={this.redirectToNewRegistrationPage}
               >
                 {newRegistrationBtnText}
@@ -220,7 +221,6 @@ StudentPage.propTypes = {
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
-  theme: PropTypes.object,
 };
 
 StudentPage.defaultProps = {
@@ -231,7 +231,6 @@ StudentPage.defaultProps = {
   setHashLinkForNewRegistrationAction: () => {},
   setUserTypeAction: () => {},
   tenant: '',
-  theme: {},
 };
 
 const mapStateToProps = state => ({
@@ -240,7 +239,7 @@ const mapStateToProps = state => ({
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 
-export default withTheme(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchStudentData,
   getApplicationTenant,
   isRegisterCorrectionEnabled,
@@ -248,4 +247,4 @@ export default withTheme(connect(mapStateToProps, {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-})(StudentPage));
+})(StudentPage);
