@@ -1,0 +1,39 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "adminId": {
+        "title": "Admin ID",
+        "type": "string"
+      },
+      "adminPassword": {
+        "title": "Admin Password",
+        "type": "string"
+      }
+    },
+    "required": ["adminId", "adminPassword"]
+  },
+  "uiSchema": {
+    "adminId": {
+      "ui:autofocus": true,
+      "ui:field": "InputField",
+      "ui:placeholder": "Enter Admin ID",
+      "ui:options": {
+        "type": "number",
+        "col": {
+          "size": 5.5
+        }
+      }
+    },
+    "adminPassword": {
+      "ui:field": "InputField",
+      "ui:placeholder": "Enter Admin Password",
+      "ui:options": {
+        "col": {
+          "size": 5.5
+        }
+      }
+    }
+  },
+  "data": {}
+}

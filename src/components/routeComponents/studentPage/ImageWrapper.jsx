@@ -8,4 +8,3 @@ const ImageWrapper = styled(Row)`
 `;
 
 export default ImageWrapper;
-

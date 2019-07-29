@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
 
-export const RedirectToRoute = ({ isURLParams, isStudentLogin, isNewRegistration }) => {
+export const RedirectToRoute = ({
+  isNewRegistration,
+  isStudentLogin,
+  isURLParams,
+}) => {
   const routes = {
     isURLParams: '/studentCorrection',
     isStudentLogin: '/student-login',
@@ -25,14 +29,13 @@ export const RedirectToRoute = ({ isURLParams, isStudentLogin, isNewRegistration
 };
 
 RedirectToRoute.propTypes = {
-  isURLParams: PropTypes.bool,
-  isStudentLogin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
+  isStudentLogin: PropTypes.bool,
+  isURLParams: PropTypes.bool,
 };
 
 RedirectToRoute.defaultProps = {
-  isURLParams: false,
-  isStudentLogin: false,
   isNewRegistration: false,
+  isStudentLogin: false,
+  isURLParams: false,
 };
-

@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  Button,
-  Box,
-  Container,
-  Col,
-  getThemeProps,
-  Row,
-  Typography,
-} from 'ravenjs';
+import Box from 'ravenjs/lib/Box';
+import Button from 'ravenjs/lib/Button';
+import Col from 'ravenjs/lib/Col';
+import Container from 'ravenjs/lib/Container';
+import { getThemeProps } from 'ravenjs//utils/theme';
+import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
   fetchStudentData,
@@ -20,28 +18,22 @@ import {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-} from '../../../actions/studentRegistrationActions';
-import yjsgLogo from '../../../assets/images/yjsgLogo.png';
+} from 'actions/studentRegistrationActions';
+import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
   newRegistrationBtnText,
   USER_TYPES,
-} from '../../../constants/yjsg';
-import {
-  getParameterByName,
-} from '../../../utils/http';
-import {
-  getStudent,
-} from '../../../reducers/studentRegistrationReducer';
+} from 'constants/yjsg';
+import { getParameterByName } from 'utils/http';
+import { getStudent } from 'reducers/studentRegistrationReducer';
 import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
-} from '../../../reducers/assetFilesReducer';
+} from 'reducers/assetFilesReducer';
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
-import {
-  RedirectToRoute,
-} from './RedirectToRoute';
+import { RedirectToRoute } from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
 
 
@@ -65,8 +57,7 @@ const ImageStyled = styled.img`
 `;
 
 // TODO: responsive css @media remaining
-// TODO: button color remaining
-// TODO: code refactoring remaining
+
 /**
 * The StudentPage component for the student which will render -
 * Two buttons (Already Registered and New Registration) .
@@ -76,14 +67,12 @@ const ImageStyled = styled.img`
 class StudentPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isURLParams: false,
       isStudentLogin: false,
       isNewRegistration: false,
     };
-    // FIXME: Use arrow functions to avoid binding.
-    this.redirectToStudentLogin = this.redirectToStudentLogin.bind(this);
-    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
 
   componentWillMount() {
@@ -113,28 +102,28 @@ class StudentPage extends Component {
    * it set the value of isStudentLogin is true.
    * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
    */
-  redirectToStudentLogin() {
+  redirectToStudentLogin = () => {
     const { STUDENT } = USER_TYPES;
 
     this.setState({
       isStudentLogin: true,
     });
     this.props.setHashLinkForStudentCredentialAction(STUDENT);
-  }
+  };
 
   /**
    * redirectToNewRegistrationPage method call by onclick of button new registration
    * it set the value of isNewRegistration is true.
    * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
    */
-  redirectToNewRegistrationPage() {
+  redirectToNewRegistrationPage = () => {
     const { STUDENT } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
     this.props.setHashLinkForNewRegistrationAction(STUDENT);
-  }
+  };
 
   render() {
     const {
@@ -226,9 +215,9 @@ StudentPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
-  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 
 export default connect(mapStateToProps, {
