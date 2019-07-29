@@ -275,7 +275,7 @@ class StudentCredentialPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo"/>
+              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
               <Form
