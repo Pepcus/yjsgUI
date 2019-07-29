@@ -8,17 +8,11 @@ import { alreadyRegisteredBtnText } from '../../../constants/yjsg';
 
 const AlreadyRegisteredButton = ({
   isAlreadyRegisteredButtonEnabled,
-  theme,
   redirectToStudentLogin,
 }) => {
   if (isAlreadyRegisteredButtonEnabled) {
     return (
-      <Button
-        margin="10px"
-        color="primary"
-        theme={theme}
-        onClick={redirectToStudentLogin}
-      >
+      <Button margin="10px" onClick={redirectToStudentLogin}>
         {alreadyRegisteredBtnText}
       </Button>
     );
@@ -27,13 +21,11 @@ const AlreadyRegisteredButton = ({
 
 AlreadyRegisteredButton.propTypes = {
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
-  theme: PropTypes.object,
   redirectToStudentLogin: PropTypes.func,
 };
 
 AlreadyRegisteredButton.defaultProps = {
   isAlreadyRegisteredButtonEnabled: false,
-  theme: {},
   redirectToStudentLogin: () => {},
 };
 

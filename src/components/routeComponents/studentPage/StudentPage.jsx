@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   Button,
@@ -28,14 +28,20 @@ import {
   newRegistrationBtnText,
   USER_TYPES,
 } from '../../../constants/yjsg';
-import { getParameterByName } from '../../../utils/http';
-import { getStudent } from '../../../reducers/studentRegistrationReducer';
+import {
+  getParameterByName,
+} from '../../../utils/http';
+import {
+  getStudent,
+} from '../../../reducers/studentRegistrationReducer';
 import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
 } from '../../../reducers/assetFilesReducer';
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
-import { RedirectToRoute } from './RedirectToRoute';
+import {
+  RedirectToRoute,
+} from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
 
 
@@ -47,11 +53,15 @@ const ContainerStyled = styled(Container)`
 
 const BoxStyled = styled(Box)`
  align-items: center;
- @media (max-width: 768px) {
-    margin: 60px auto auto auto;
-    height: 65%;
-    width: 97%;
-  }
+ ${({ theme }) => theme.media.down('md')`
+        margin: 60px auto auto auto;
+        height: 65%;
+        width: 97%;
+    `};
+`;
+
+const ImageStyled = styled.img`
+  width: 100%;
 `;
 
 // TODO: responsive css @media remaining
@@ -130,7 +140,6 @@ class StudentPage extends Component {
     const {
       tenant,
       isAlreadyRegisteredButtonEnabled,
-      theme,
     } = this.props;
     const {
       isURLParams,
@@ -139,9 +148,7 @@ class StudentPage extends Component {
     } = this.state;
 
     return (
-      <ContainerStyled
-        width="100%"
-      >
+      <ContainerStyled width="100%">
         <RedirectToRoute
           isURLParams={isURLParams}
           isStudentLogin={isStudentLogin}
@@ -153,25 +160,23 @@ class StudentPage extends Component {
           maxHeight="100%"
           margin="auto"
           borderStyle="none"
-          boxShadow="0 2px 1px 0 #eeecec"
+          elevation={5}
         >
           <Col>
             <Row width="100%" display="inline-block">
               <Typography
-                type="heading"
+                type="title"
                 fontWeight="600"
                 fontSize="18px"
                 color="#f9570a"
                 align="center"
-                theme={theme}
               >
                 {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
               </Typography>
               <Typography
-                type="heading"
+                type="title"
                 fontSize="16px"
                 align="center"
-                theme={theme}
               >
                 {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
               </Typography>
@@ -182,26 +187,14 @@ class StudentPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <img
-                src={yjsgLogo}
-                alt="yjsg logo"
-                style={{ width: '100%' }}
-              />
+              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
             </ImageWrapper>
-            <Row
-              justify="center"
-            >
+            <Row justify="center">
               <AlreadyRegisteredButton
                 isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
-                theme={theme}
                 redirectToStudentLogin={this.redirectToStudentLogin}
               />
-              <Button
-                margin="10px"
-                color="primary"
-                theme={theme}
-                onClick={this.redirectToNewRegistrationPage}
-              >
+              <Button margin="10px" onClick={this.redirectToNewRegistrationPage}>
                 {newRegistrationBtnText}
               </Button>
             </Row>
@@ -220,7 +213,6 @@ StudentPage.propTypes = {
   setHashLinkForNewRegistrationAction: PropTypes.func,
   setUserTypeAction: PropTypes.func,
   tenant: PropTypes.string,
-  theme: PropTypes.object,
 };
 
 StudentPage.defaultProps = {
@@ -231,7 +223,6 @@ StudentPage.defaultProps = {
   setHashLinkForNewRegistrationAction: () => {},
   setUserTypeAction: () => {},
   tenant: '',
-  theme: {},
 };
 
 const mapStateToProps = state => ({
@@ -240,7 +231,7 @@ const mapStateToProps = state => ({
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 
-export default withTheme(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchStudentData,
   getApplicationTenant,
   isRegisterCorrectionEnabled,
@@ -248,4 +239,4 @@ export default withTheme(connect(mapStateToProps, {
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-})(StudentPage));
+})(StudentPage);
