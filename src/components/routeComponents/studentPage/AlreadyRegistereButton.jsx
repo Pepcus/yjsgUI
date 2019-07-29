@@ -12,11 +12,7 @@ const AlreadyRegisteredButton = ({
 }) => {
   if (isAlreadyRegisteredButtonEnabled) {
     return (
-      <Button
-        margin="10px"
-        color="primary"
-        onClick={redirectToStudentLogin}
-      >
+      <Button margin="10px" onClick={redirectToStudentLogin}>
         {alreadyRegisteredBtnText}
       </Button>
     );

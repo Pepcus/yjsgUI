@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 import React from 'react';
-import _get from 'lodash/get';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty'
 
 
 import * as shortId from 'shortid';
@@ -37,21 +38,21 @@ function InputField(props) {
     registry,
   } = props;
 
-  const title = _get(schema, 'title', name);
+  const title = get(schema, 'title', name);
 
-  const type = _get(schema, 'type', 'number');
+  const type = get(schema, 'type', 'number');
 
-  const minLength = _get(schema, 'minLength');
+  const minLength = get(schema, 'minLength');
 
-  const maxLength = _get(schema, 'maxLength');
+  const maxLength = get(schema, 'maxLength');
 
-  const titleStyle = _get(uiSchema, 'ui:options.style.titleStyle');
+  const titleStyle = get(uiSchema, 'ui:options.style.titleStyle');
 
-  const fieldStyle = _get(uiSchema, 'ui:options.style.fieldStyle');
+  const fieldStyle = get(uiSchema, 'ui:options.style.fieldStyle');
 
-  const colProps = _get(props, 'content.props.uiSchema.ui:options.col', {});
+  const colProps = get(props, 'content.props.uiSchema.ui:options.col', {});
 
-  const placeholder = _get(uiSchema, 'ui:placeholder', '');
+  const placeholder = get(uiSchema, 'ui:placeholder', '');
 
   const errorList = () => (
     <List>
@@ -63,7 +64,10 @@ function InputField(props) {
   );
 
   function handleOnChange(event) {
-    if (event.target.value === '') {
+    // form validation for required filed not work is case the value of field is empty or null
+    const value = event ? event.target.value : '';
+
+    if (isEmpty(value) || value === null) {
       onChange(undefined);
     } else {
       onChange(event.target.value);

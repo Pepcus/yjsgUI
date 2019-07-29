@@ -55,17 +55,21 @@ import fields from '../../common/fields';
 
 const BoxStyled = styled(Box)`
  align-items: center;
- @media (max-width: 768px) {
-    margin: 60px auto auto auto;
-    height: 65%;
-    width: 97%;
-  }
+ ${({ theme }) => theme.media.down('md')`
+        margin: 60px auto auto auto;
+        height: 65%;
+        width: 97%;
+    `};
 `;
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('HOME.BACKGROUND_COLOR')};
   height: 100%;
   display: flex;
+`;
+
+const ImageStyled = styled.img`
+  width: 100%;
 `;
 
 // FixMe:This component is unnecessary.
@@ -228,9 +232,7 @@ class StudentCredentialPage extends Component {
       context,
     } = this.props;
     return (
-      <ContainerStyled
-        width="100%"
-      >
+      <ContainerStyled width="100%">
         <RedirectToRoute
           isURLParams={isURLParams}
           redirectToStudentCorrectionLogin={redirectToStudentCorrectionLogin}
@@ -246,7 +248,7 @@ class StudentCredentialPage extends Component {
           maxHeight="100%"
           margin="auto"
           borderStyle="none"
-          boxShadow="0 2px 1px 0 #eeecec"
+          elevation={5}
         >
           <Col>
             <Row width="100%" display="inline-block">
@@ -273,11 +275,7 @@ class StudentCredentialPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <img
-                src={yjsgLogo}
-                alt="yjsg logo"
-                style={{ width: '100%' }}
-              />
+              <ImageStyled src={yjsgLogo} alt="yjsg logo"/>
             </ImageWrapper>
             <Row justify="center">
               <Form
@@ -292,12 +290,8 @@ class StudentCredentialPage extends Component {
                 onChange={this.onChange}
                 transformErrors={this.transformErrors}
               />
-              <Row
-                justify="space-between"
-                width="65%"
-              >
+              <Row justify="space-between" width="65%">
                 <Button
-                  color="primary"
                   width="170px"
                   padding="5px 8px"
                   onClick={this.redirectToPreviousLocation}
@@ -305,7 +299,6 @@ class StudentCredentialPage extends Component {
                   {goBackBtnText}
                 </Button>
                 <Button
-                  color="primary"
                   width="170px"
                   padding="5px 8px"
                   onClick={this.fetchStudentById}

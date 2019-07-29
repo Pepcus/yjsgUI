@@ -53,11 +53,15 @@ const ContainerStyled = styled(Container)`
 
 const BoxStyled = styled(Box)`
  align-items: center;
- @media (max-width: 768px) {
-    margin: 60px auto auto auto;
-    height: 65%;
-    width: 97%;
-  }
+ ${({ theme }) => theme.media.down('md')`
+        margin: 60px auto auto auto;
+        height: 65%;
+        width: 97%;
+    `};
+`;
+
+const ImageStyled = styled.img`
+  width: 100%;
 `;
 
 // TODO: responsive css @media remaining
@@ -144,9 +148,7 @@ class StudentPage extends Component {
     } = this.state;
 
     return (
-      <ContainerStyled
-        width="100%"
-      >
+      <ContainerStyled width="100%">
         <RedirectToRoute
           isURLParams={isURLParams}
           isStudentLogin={isStudentLogin}
@@ -158,7 +160,7 @@ class StudentPage extends Component {
           maxHeight="100%"
           margin="auto"
           borderStyle="none"
-          boxShadow="0 2px 1px 0 #eeecec"
+          elevation={5}
         >
           <Col>
             <Row width="100%" display="inline-block">
@@ -185,24 +187,14 @@ class StudentPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <img
-                src={yjsgLogo}
-                alt="yjsg logo"
-                style={{ width: '100%' }}
-              />
+              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
             </ImageWrapper>
-            <Row
-              justify="center"
-            >
+            <Row justify="center">
               <AlreadyRegisteredButton
                 isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
                 redirectToStudentLogin={this.redirectToStudentLogin}
               />
-              <Button
-                margin="10px"
-                color="primary"
-                onClick={this.redirectToNewRegistrationPage}
-              >
+              <Button margin="10px" onClick={this.redirectToNewRegistrationPage}>
                 {newRegistrationBtnText}
               </Button>
             </Row>
