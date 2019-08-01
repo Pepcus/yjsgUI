@@ -201,10 +201,10 @@ Header.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
-  setAdminLoginState: () => dispatch(setAdminLoginStateAction()),
-  setRedirectValue: () => dispatch(setRedirectValueAction()),
-  resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
+  resetAdminCredentials: props => dispatch(resetAdminCredentialsAction(props)),
+  setAdminLoginState: props => dispatch(setAdminLoginStateAction(props)),
+  setRedirectValue: props => dispatch(setRedirectValueAction(props)),
+  resetVisibleColumnConfig: props => dispatch(resetVisibleColumnConfigAction(props)),
 });
 
 const mapStateToProps = state => ({

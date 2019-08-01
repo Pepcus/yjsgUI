@@ -38,7 +38,7 @@ import {
 } from 'constants/yjsg';
 import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getParameterByName } from 'utils/http';
-import { getTransformedErrors } from 'utils/formUtil';
+import { getTransformedErrors } from 'utils/formUtils';
 import fields from 'components/common/fields';
 import ImageWrapper from './ImageWrapper';
 import {
@@ -64,6 +64,10 @@ const ContainerStyled = styled(Container)`
 
 const ImageStyled = styled.img`
   width: 100%;
+`;
+
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('colors.HEADER')};
 `;
 
 /**
@@ -168,7 +172,7 @@ class StudentCredentialPage extends Component {
   };
 
   /**
-   * return array of errors object by transforming them error
+   * Return array of errors object by transforming them error
    * @param {Array} errors
    * @return {Array}
    */
@@ -240,15 +244,14 @@ class StudentCredentialPage extends Component {
         >
           <Col>
             <Row width="100%" display="inline-block">
-              <Typography
+              <TypographyStyled
                 type="title"
                 fontWeight="600"
                 fontSize="18px"
-                color="#f9570a"
                 align="center"
               >
                 {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
-              </Typography>
+              </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"

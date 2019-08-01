@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import styled from 'styled-components';
 
 import Col from 'ravenjs/lib/Col';
-import Input from 'ravenjs/lib/Input';
 import Row from 'ravenjs/lib/Row';
+import {
+  Select,
+  SelectOption,
+} from 'ravenjs/lib/Input';
+
+import InputField from 'components/common/fields/InputField';
 
 const defaultTitleStyle = {
   'fontWeight': 'bold',
@@ -16,21 +22,31 @@ const defaultTitleStyle = {
   'fontSize': '14px',
 };
 
+const SelectStyled = styled(Select)`
+border-radius: 4px;
+&:invalid {
+    color: gray;
+  }
+`;
+
+const SelectOptionStyled = styled(SelectOption)`
+color: black;
+`;
+
 /**
  * InputField if inputField for JSON form
  * @param {Object} props
  * @return {HTML}
  * @constructor
  */
-function InputField(props) {
+
+function SelectList(props) {
 
   const {
-    autofocus,
     disabled,
     idSchema,
     name,
     onChange,
-    readonly,
     required,
     schema,
     uiSchema,
@@ -38,13 +54,11 @@ function InputField(props) {
 
   const title = get(schema, 'title', name);
 
-  const type = get(schema, 'type', 'number');
-
   const defaultValue = get(schema, 'default', '');
 
-  const minLength = get(schema, 'minLength');
+  const enumNames = get(schema, 'enumNames', []);
 
-  const maxLength = get(schema, 'maxLength');
+  const enums = get(schema, 'enum', []);
 
   const titleStyle = get(uiSchema, 'ui:options.style.titleStyle');
 
@@ -65,33 +79,60 @@ function InputField(props) {
     }
   }
 
-  return (
-    <Col {...colProps}>
-      <Row width="auto" margin="0 0 0 0" >
-        <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-          {title}{required ? '*' : ''}
-        </label>
-      </Row>
-      <Row width="auto" margin="0 0 0 0">
-        <Input
-          id={idSchema.$id}
-          autoFocus={autofocus}
-          style={{ ...fieldStyle }}
-          disabled={disabled}
-          readonly={readonly}
-          onChange={handleOnChange}
-          type={type}
-          min={minLength}
-          max={maxLength}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-        />
-      </Row>
-    </Col>
-  );
+  const renderOptionStatements = () => {
+    if (enumNames) {
+      return enums.map((iterator, index) =>
+        (
+          <SelectOptionStyled value={iterator} key={index}>
+            {enumNames[index]}
+          </SelectOptionStyled>),
+      );
+    }
+    return enums.map((iterator, index) =>
+      (
+        <SelectOptionStyled value={iterator} key={index}>
+          {iterator}
+        </SelectOptionStyled>),
+    );
+  };
+
+  const getSelectList = () => {
+    if (enums) {
+      return (
+        <Col {...colProps}>
+          <Row width="auto" margin="0 0 0 0">
+            <label style={{ ...defaultTitleStyle, ...titleStyle }}>
+              {title}{required ? '*' : ''}
+            </label>
+          </Row>
+          <Row width="100%" margin="0 0 0 0">
+            <SelectStyled
+              disabled={disabled}
+              style={{ ...fieldStyle }}
+              width="100%"
+              minWidth="100%"
+              id={idSchema.$id}
+              onChange={handleOnChange}
+              required={required}
+              defaultValue={defaultValue}
+            >
+              <SelectOptionStyled
+                value=""
+                disabled="disabled"
+                style={{ display: 'none', color: 'red' }}
+              >{placeholder}
+              </SelectOptionStyled>
+              {renderOptionStatements()}
+            </SelectStyled>
+          </Row>
+        </Col>
+      );
+    } return <InputField {...props} />;
+  };
+  return getSelectList();
 }
 
-InputField.propTypes = {
+SelectList.propTypes = {
   /**
    *  If `true`, field should automatically get focus when the page loads
    */
@@ -130,7 +171,7 @@ InputField.propTypes = {
   uiSchema: PropTypes.object,
 };
 
-InputField.defaultProps = {
+SelectList.defaultProps = {
   autofocus: false,
   disabled: false,
   idSchema: {},
@@ -142,4 +183,4 @@ InputField.defaultProps = {
   uiSchema: {},
 };
 
-export default InputField;
+export default SelectList;
