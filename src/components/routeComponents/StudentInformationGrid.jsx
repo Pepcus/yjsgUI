@@ -29,7 +29,7 @@ import {
   setVisibleColumnConfigAction,
   resetVisibleColumnConfigAction,
   resetIsSuccessAction,
-  fetchStudentData,
+  fetchStudentDataAction,
   setUserTypeAction,
 } from '../../actions/studentRegistrationActions';
 import AdvanceSearch from '../AdvanceSearch';
@@ -357,7 +357,7 @@ class StudentInformationGrid extends Component {
    */
   handleEditClick(rowData) {
     if (!isEmpty(rowData)) {
-      this.props.fetchStudentData(String(rowData.studentId), adminPassword);
+      this.props.fetchStudentDataAction({ id: String(rowData.studentId), secretKey: adminPassword });
       this.props.setStudentDataAction(this.props.studentData);
       this.props.updateStudentByAdminAction(String(rowData.studentId), adminPassword);
       this.props.setUserTypeAction(USER_TYPES.ADMIN);
@@ -632,7 +632,7 @@ StudentInformationGrid.propTypes = {
   setVisibleColumnConfigAction: PropTypes.func,
   setStudentDataAction: PropTypes.func,
   updateStudentByAdminAction: PropTypes.func,
-  fetchStudentData: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
   studentData: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -656,7 +656,7 @@ StudentInformationGrid.defaultProps = {
   setVisibleColumnConfigAction: () => {},
   setStudentDataAction: () => {},
   updateStudentByAdminAction: () => {},
-  fetchStudentData: () => {},
+  fetchStudentDataAction: () => {},
   studentData: {},
   setUserTypeAction: () => {},
   mode: '',
@@ -673,7 +673,7 @@ const mapStateToProps = state => ({
   mode: getApplicationMode(state),
 });
 export default connect(mapStateToProps, {
-  fetchStudentData,
+  fetchStudentDataAction,
   getAllStudentsAction,
   setStudentDataAction,
   updateStudentByAdminAction,

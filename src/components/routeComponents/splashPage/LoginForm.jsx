@@ -15,7 +15,6 @@ import {
 } from 'constants/yjsg';
 import AdminLoginForm from './AdminLoginForm';
 
-
 /**
  * @param {Object} admin
  * @param {Function} enableAdminLoginButtons

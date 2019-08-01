@@ -3,8 +3,7 @@ import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
-
-export const RedirectToRoute = ({
+const RedirectToRoute = ({
   isNewRegistration,
   isStudentLogin,
   isURLParams,
@@ -39,3 +38,5 @@ RedirectToRoute.defaultProps = {
   isStudentLogin: false,
   isURLParams: false,
 };
+
+export default RedirectToRoute;

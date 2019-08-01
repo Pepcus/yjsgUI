@@ -12,16 +12,16 @@ import styled from 'styled-components';
 import Box from 'ravenjs/lib/Box';
 import Col from 'ravenjs/lib/Col';
 import Container from 'ravenjs/lib/Container';
-import { getThemeProps } from 'ravenjs//utils/theme';
+import { getThemeProps } from 'ravenjs/utils/theme';
 import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 
 import {
-  fetchStudentData,
+  fetchStudentDataAction,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 } from 'actions/studentRegistrationActions';
 import {
   getAdminId,
@@ -51,7 +51,7 @@ import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 
 const ContainerStyled = styled(Container)`
-  background-color: ${getThemeProps('HOME.BACKGROUND_COLOR')};
+  background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
 `;
@@ -70,7 +70,7 @@ const ImageStyled = styled.img`
 `;
 
 /**
- *SplashPage render home page of admin
+ * SplashPage component will be render home page of admin
  * @type {Class}
  */
 class SplashPage extends Component {
@@ -89,7 +89,7 @@ class SplashPage extends Component {
   }
 
   /**
-   * when student login through URL then this method will
+   * When student login through URL then this method will
    * get id and secretCode form URL and fetch data of that particular student.
    */
   componentWillMount() {
@@ -106,7 +106,7 @@ class SplashPage extends Component {
   }
 
   /**
-   * handel the onchange of admin login form
+   * Handle the onChange of admin login form
    * @param {Object} formData
    * @param {Array} errors
    */
@@ -119,7 +119,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * transformErrors method return error message object
+   * Method return error message object
    * @param {Array} errors
    * @return {Array}
    */
@@ -133,7 +133,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * setRedirectToRoute set the path to which redirect
+   * Method set the path to which redirect
    * @param {String} redirectToRoute
    */
   setRedirectToRoute = (redirectToRoute) => {
@@ -143,22 +143,23 @@ class SplashPage extends Component {
   };
 
   /**
-   * fetchStudentByURLParams method fetch student data.
+   * Method fetch student data.
    * And verify the student credential and if fetch student data is
    * success then it set the value of isURLParams to true.
    * @param {String} id
    * @param {String} secretCode
    */
   fetchStudentByURLParams = (id, secretCode) => {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+    const { setStudentCredentials, fetchStudentData } = this.props;
+    setStudentCredentials({ id, secretKey: secretCode });
+    fetchStudentData({ id, secretKey: secretCode });
     this.setState({
       isURLParams: true,
     });
   };
 
   /**
-   * enableAdminLoginButtons method enable the admin login
+   * Method enable the admin login
    * button by onClick of admin login button.
    * It set the value of isAdmin to true.
    */
@@ -169,7 +170,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * handleDisableAdminLoginButtons method disable the admin login
+   * Method disable the admin login
    * button by onClick of go back button.
    * It set the value of isAdmin to false.
    */
@@ -180,7 +181,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * handleAdminScreenRedirection method redirect to admin page on some condition.
+   * Method redirect to admin page on some condition.
    * @return {HTML}
    */
   handleAdminScreenRedirection = () => {
@@ -193,6 +194,7 @@ class SplashPage extends Component {
       adminLoginState,
       id,
       password,
+      setAdminLoginState,
     } = this.props;
 
     if (!adminLoginState) {
@@ -219,7 +221,7 @@ class SplashPage extends Component {
         }
         // if admin credential is valid then it set admin login true in redux store
         // and redirect to "/student-search" route
-        this.props.setAdminLoginStateAction(true);
+        setAdminLoginState(true);
         if (redirectToRoute) {
           this.setRedirectToRoute('');
           return <Switch><Redirect to={redirectToRoute} /></Switch>;
@@ -239,32 +241,34 @@ class SplashPage extends Component {
 
 
   /**
-   * setAdminLogin method set the admin login credential
+   * Method set the admin login credential
    * @param {Object} event
    */
   setAdminLogin = (event) => {
     const { admin } = this.state;
+    const { setAdminCredentials } = this.props;
 
     event.preventDefault();
     if (this.state.hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
       });
-      this.props.setAdminCredentialsAction(admin.adminId, admin.adminPassword);
+      setAdminCredentials({ id: admin.adminId, password: admin.adminPassword });
     }
   };
 
   /**
-   * redirectToNewRegistrationPage method set the value of isNewRegistration true on Onclick
+   * Method set the value of isNewRegistration true on Onclick
    * of new registration button.
    */
   redirectToNewRegistrationPage = () => {
+    const { setHashLinkForNewRegistration } = this.props;
     const { ADMIN } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
-    this.props.setHashLinkForNewRegistrationAction(ADMIN);
+    setHashLinkForNewRegistration(ADMIN);
   };
 
   render() {
@@ -340,9 +344,9 @@ SplashPage.propTypes = {
   fetchStudentData: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
-  setAdminCredentialsAction: PropTypes.func,
-  setAdminLoginStateAction: PropTypes.func,
-  setHashLinkForNewRegistrationAction: PropTypes.func,
+  setAdminCredentials: PropTypes.func,
+  setAdminLoginState: PropTypes.func,
+  setHashLinkForNewRegistration: PropTypes.func,
   setStudentCredentials: PropTypes.func,
   tenant: PropTypes.string,
 };
@@ -352,9 +356,9 @@ SplashPage.defaultProps = {
   fetchStudentData: () => {},
   id: '',
   password: '',
-  setAdminCredentialsAction: () => {},
-  setAdminLoginStateAction: () => {},
-  setHashLinkForNewRegistrationAction: () => {},
+  setAdminCredentials: () => {},
+  setAdminLoginState: () => {},
+  setHashLinkForNewRegistration: () => {},
   setStudentCredentials: () => {},
   tenant: '',
 };
@@ -370,11 +374,15 @@ const mapStateToProps = state => ({
   tenant: getApplicationTenant(state),
 });
 
-export default connect(mapStateToProps, {
-  fetchStudentData,
-  getApplicationTenant,
-  setAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setHashLinkForNewRegistrationAction,
-  setStudentCredentials,
-})(SplashPage);
+const mapDispatchToProps = dispatch => ({
+  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
+  setAdminCredentials: props => dispatch(setAdminCredentialsAction(props)),
+  setAdminLoginState: props => dispatch(setAdminLoginStateAction(props)),
+  setHashLinkForNewRegistration: props => dispatch(setHashLinkForNewRegistrationAction(props)),
+  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SplashPage);

@@ -18,7 +18,7 @@ export const createStudentData = student => ({
  * @param {String} secretKey
  * @return {{secretKey: String, id: String, type: string}}
  */
-export const setStudentCredentials = (id, secretKey) => ({
+export const setStudentCredentialsAction = ({ id, secretKey }) => ({
   type: 'SET_STUDENT_CREDENTIALS',
   id,
   secretKey,
@@ -50,7 +50,7 @@ export const createStudentFailedAction = message => ({
  * @param {String} secretKey
  * @return {{secretKey: *, id: *, type: string}}
  */
-export const fetchStudentData = (id, secretKey) => ({
+export const fetchStudentDataAction = ({ id, secretKey }) => ({
   type: 'FETCH_STUDENT',
   id,
   secretKey,
@@ -115,7 +115,7 @@ export const updateStudentFailedAction = message => ({
  * @param {String} password
  * @return {{password: *, id: *, type: string}}
  */
-export const setAdminCredentialsAction = (id, password) => ({
+export const setAdminCredentialsAction = ({ id, password }) => ({
   type: 'SET_ADMIN_CREDENTIALS',
   id,
   password,

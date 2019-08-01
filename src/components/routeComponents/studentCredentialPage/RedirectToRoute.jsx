@@ -76,4 +76,3 @@ RedirectToRoute.defaultProps = {
 };
 
 export default RedirectToRoute;
-
