@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape,security/detect-unsafe-regex */
 import isEmpty from 'lodash/isEmpty';
 import extend from 'lodash/extend';
 import cloneDeep from 'lodash/cloneDeep';
