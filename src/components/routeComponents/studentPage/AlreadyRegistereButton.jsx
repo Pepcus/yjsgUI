@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from 'ravenjs';
+import Button from 'ravenjs/lib/Button';
 
-import { alreadyRegisteredBtnText } from '../../../constants/yjsg';
+import { alreadyRegisteredBtnText } from 'constants/yjsg';
 
 const AlreadyRegisteredButton = ({
   isAlreadyRegisteredButtonEnabled,

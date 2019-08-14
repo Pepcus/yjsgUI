@@ -10,9 +10,9 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import InputField from '../form/InputField';
 import {
-  fetchStudentData,
+  fetchStudentDataAction,
   setAdminCredentialsAction,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   setAdminLoginStateAction,
 } from '../../actions/studentRegistrationActions';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
@@ -200,7 +200,7 @@ class SplashPagePrePopulated extends Component {
       adminLoginState: true,
       adminCredentialErrorMessage: true,
     });
-    this.props.setAdminCredentialsAction(this.state.admin.adminId, this.state.admin.adminPassword);
+    this.props.setAdminCredentialsAction({ id: this.state.admin.adminId, password: this.state.admin.adminPassword });
   }
 
   /**
@@ -210,7 +210,7 @@ class SplashPagePrePopulated extends Component {
   /* fetchStudentById () {
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
+    this.props.fetchStudentDataAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.setState({
       registeredStudentCredentialErrorMessage: true,
@@ -372,8 +372,8 @@ class SplashPagePrePopulated extends Component {
 }
 
 SplashPagePrePopulated.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  fetchStudentDataAction: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
   setAdminCredentialsAction: PropTypes.func,
   studentId: PropTypes.string,
@@ -385,8 +385,8 @@ SplashPagePrePopulated.propTypes = {
 };
 
 SplashPagePrePopulated.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
+  fetchStudentDataAction: () => {},
+  setStudentCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
   setAdminCredentialsAction: () => {},
   studentId: '',
@@ -411,8 +411,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   getApplicationTenant,

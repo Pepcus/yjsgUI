@@ -4,49 +4,40 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  Button,
-  Box,
-  Container,
-  Col,
-  getThemeProps,
-  Row,
-  Typography,
-} from 'ravenjs';
+import Box from 'ravenjs/lib/Box';
+import Button from 'ravenjs/lib/Button';
+import Col from 'ravenjs/lib/Col';
+import Container from 'ravenjs/lib/Container';
+import { getThemeProps } from 'ravenjs//utils/theme';
+import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setHashLinkForStudentCredentialAction,
   setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-} from '../../../actions/studentRegistrationActions';
-import yjsgLogo from '../../../assets/images/yjsgLogo.png';
+} from 'actions/studentRegistrationActions';
+import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
   newRegistrationBtnText,
   USER_TYPES,
-} from '../../../constants/yjsg';
-import {
-  getParameterByName,
-} from '../../../utils/http';
-import {
-  getStudent,
-} from '../../../reducers/studentRegistrationReducer';
+} from 'constants/yjsg';
+import { getParameterByName } from 'utils/http';
+import { getStudent } from 'reducers/studentRegistrationReducer';
 import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
-} from '../../../reducers/assetFilesReducer';
+} from 'reducers/assetFilesReducer';
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
-import {
-  RedirectToRoute,
-} from './RedirectToRoute';
+import RedirectToRoute from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
 
-
 const ContainerStyled = styled(Container)`
-  background-color: ${getThemeProps('HOME.BACKGROUND_COLOR')};
+  background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
 `;
@@ -65,25 +56,22 @@ const ImageStyled = styled.img`
 `;
 
 // TODO: responsive css @media remaining
-// TODO: button color remaining
-// TODO: code refactoring remaining
+
 /**
-* The StudentPage component for the student which will render -
-* Two buttons (Already Registered and New Registration) .
+ * The StudentPage component for the student which will render -
+ * Two buttons (Already Registered and New Registration) .
  * @type {class}
  * @return {HTML}
  * */
 class StudentPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isURLParams: false,
       isStudentLogin: false,
       isNewRegistration: false,
     };
-    // FIXME: Use arrow functions to avoid binding.
-    this.redirectToStudentLogin = this.redirectToStudentLogin.bind(this);
-    this.redirectToNewRegistrationPage = this.redirectToNewRegistrationPage.bind(this);
   }
 
   componentWillMount() {
@@ -100,41 +88,46 @@ class StudentPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
-    this.props.setUserTypeAction(USER_TYPES.STUDENT_WITH_URL);
+    const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
+    const { STUDENT_WITH_URL } = USER_TYPES;
+
+    setStudentCredentials({ id, secretKey: secretCode });
+    fetchStudentData({ id, secretKey: secretCode });
+    setUserType(STUDENT_WITH_URL);
     this.setState({
       isURLParams: true,
     });
   }
 
   /**
-   * redirectToStudentLogin method call by onclick of button already register
+   * Method call by onClick of button already register
    * it set the value of isStudentLogin is true.
-   * And set user is student in reducer through setHashLinkForStudentCredentialAction action.
+   * And set user is student in reducer through setHashLinkForStudentCredential action.
    */
-  redirectToStudentLogin() {
+  redirectToStudentLogin = () => {
+    const { setHashLinkForStudentCredential } = this.props;
     const { STUDENT } = USER_TYPES;
 
     this.setState({
       isStudentLogin: true,
     });
-    this.props.setHashLinkForStudentCredentialAction(STUDENT);
-  }
+    setHashLinkForStudentCredential(STUDENT);
+  };
 
   /**
-   * redirectToNewRegistrationPage method call by onclick of button new registration
+   * Method call by onclick of button new registration
    * it set the value of isNewRegistration is true.
-   * And set user is student in reducer through setHashLinkForNewRegistrationAction action.
+   * And set user is student in reducer through setHashLinkForNewRegistration action.
    */
-  redirectToNewRegistrationPage() {
+  redirectToNewRegistrationPage = () => {
+    const { setHashLinkForNewRegistration } = this.props;
     const { STUDENT } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
-    this.props.setHashLinkForNewRegistrationAction(STUDENT);
-  }
+    setHashLinkForNewRegistration(STUDENT);
+  };
 
   render() {
     const {
@@ -209,9 +202,9 @@ StudentPage.propTypes = {
   fetchStudentData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setStudentCredentials: PropTypes.func,
-  setHashLinkForStudentCredentialAction: PropTypes.func,
-  setHashLinkForNewRegistrationAction: PropTypes.func,
-  setUserTypeAction: PropTypes.func,
+  setHashLinkForStudentCredential: PropTypes.func,
+  setHashLinkForNewRegistration: PropTypes.func,
+  setUserType: PropTypes.func,
   tenant: PropTypes.string,
 };
 
@@ -219,24 +212,27 @@ StudentPage.defaultProps = {
   fetchStudentData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
   setStudentCredentials: () => {},
-  setHashLinkForStudentCredentialAction: () => {},
-  setHashLinkForNewRegistrationAction: () => {},
-  setUserTypeAction: () => {},
+  setHashLinkForStudentCredential: () => {},
+  setHashLinkForNewRegistration: () => {},
+  setUserType: () => {},
   tenant: '',
 };
 
 const mapStateToProps = state => ({
+  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   studentData: getStudent(state),
   tenant: getApplicationTenant(state),
-  isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
 });
 
-export default connect(mapStateToProps, {
-  fetchStudentData,
-  getApplicationTenant,
-  isRegisterCorrectionEnabled,
-  setStudentCredentials,
-  setHashLinkForStudentCredentialAction,
-  setHashLinkForNewRegistrationAction,
-  setUserTypeAction,
-})(StudentPage);
+const mapDispatchToProps = dispatch => ({
+  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
+  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+  setHashLinkForStudentCredential: props => dispatch(setHashLinkForStudentCredentialAction(props)),
+  setHashLinkForNewRegistration: props => dispatch(setHashLinkForNewRegistrationAction(props)),
+  setUserType: props => dispatch(setUserTypeAction(props)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(StudentPage);

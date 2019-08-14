@@ -5,22 +5,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 
-import {
-  Button,
-  Box,
-  Container,
-  Col,
-  Form,
-  getThemeProps,
-  Row,
-  Typography,
-} from 'ravenjs';
+import Box from 'ravenjs/lib/Box';
+import Button from 'ravenjs/lib/Button';
+import Col from 'ravenjs/lib/Col';
+import Container from 'ravenjs/lib/Container';
+import Form from 'ravenjs/lib/Form';
+import { getThemeProps } from 'ravenjs//utils/theme';
+import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
-  fetchStudentData,
-  setStudentCredentials,
+  fetchStudentDataAction,
+  setStudentCredentialsAction,
   setUserTypeAction,
-} from '../../../actions/studentRegistrationActions';
+} from 'actions/studentRegistrationActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -28,30 +26,26 @@ import {
   getHash,
   getUserId,
   getUserSecretKey,
-} from '../../../reducers/studentRegistrationReducer';
-import { getApplicationTenant } from '../../../reducers/assetFilesReducer';
-import yjsgLogo from '../../../assets/images/yjsgLogo.png';
+} from 'reducers/studentRegistrationReducer';
+import { getApplicationTenant } from 'reducers/assetFilesReducer';
+import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
   goBackBtnText,
   viewEditInfoBtnText,
   USER_TYPES,
-} from '../../../constants/yjsg';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from '../../../constants/messages';
-
-import { getParameterByName } from '../../../utils/http';
+} from 'constants/yjsg';
+import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
+import { getParameterByName } from 'utils/http';
+import { getTransformedErrors } from 'utils/formUtil';
+import fields from 'components/common/fields';
 import ImageWrapper from './ImageWrapper';
 import {
   schema,
   uiSchema,
 } from './studentCredentialFormSchema.json';
-import { getTransformedErrors } from '../../../utils/formUtil';
-import { RedirectToRoute } from './RedirectToRoute';
-import fields from '../../common/fields';
-
+import RedirectToRoute from './RedirectToRoute';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -63,7 +57,7 @@ const BoxStyled = styled(Box)`
 `;
 
 const ContainerStyled = styled(Container)`
-  background-color: ${getThemeProps('HOME.BACKGROUND_COLOR')};
+  background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
 `;
@@ -71,9 +65,6 @@ const ContainerStyled = styled(Container)`
 const ImageStyled = styled.img`
   width: 100%;
 `;
-
-// FixMe:This component is unnecessary.
-//  Please use splash page to show pre-populated data and remove this component
 
 /**
  * StudentCredentialPage is render student credential form
@@ -92,8 +83,6 @@ class StudentCredentialPage extends Component {
       hasError: true,
       redirectToStudentCorrectionLogin: false,
     };
-
-    this.fetchStudentById = this.fetchStudentById.bind(this);
   }
 
   componentWillMount() {
@@ -125,21 +114,21 @@ class StudentCredentialPage extends Component {
   }
 
   /**
-   * fetchStudentByURLParams method fetch
-   * the particular student data according id and secretKey
+   * Method fetch the particular student data according id and secretKey
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams(id, secretCode) {
-    this.props.setStudentCredentials(id, secretCode);
-    this.props.fetchStudentData(id, secretCode);
+  fetchStudentByURLParams = (id, secretCode) => {
+    const { fetchStudentData, setStudentCredentials } = this.props;
+    setStudentCredentials({ id, secretKey: secretCode });
+    fetchStudentData({ id, secretKey: secretCode });
     this.setState({
       isURLParams: true,
     });
-  }
+  };
 
   /**
-   * onChange method handle onChange of student login form
+   * Method handle onChange of student login form
    * @param {Object} formData
    * @param {Object} errors
    */
@@ -155,29 +144,28 @@ class StudentCredentialPage extends Component {
   };
 
   /**
-   * fetchStudentById method fetch the student
+   * Method fetch the student
    * data on submit of student credential
    * @param {Object} event
    */
-  fetchStudentById(event) {
+  fetchStudentById = (event) => {
     const {
       credentials,
       hasError,
     } = this.state;
+    const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
     const { STUDENT } = USER_TYPES;
 
     event.preventDefault();
     if (hasError) {
-      this.props.setStudentCredentials(credentials.studentId,
-        credentials.secretKey);
-      this.props.fetchStudentData(credentials.studentId,
-        credentials.secretKey);
-      this.props.setUserTypeAction(STUDENT);
+      setStudentCredentials({ id: credentials.studentId, secretKey: credentials.secretKey });
+      fetchStudentData({ id: credentials.studentId, secretKey: credentials.secretKey });
+      setUserType(STUDENT);
       this.setState({
         redirectToStudentCorrectionLogin: true,
       });
     }
-  }
+  };
 
   /**
    * return array of errors object by transforming them error
@@ -194,7 +182,7 @@ class StudentCredentialPage extends Component {
   };
 
   /**
-   * redirect to previous location
+   * Redirect to previous location
    */
   redirectToPreviousLocation = () => {
     const { hashLink } = this.props;
@@ -315,38 +303,44 @@ class StudentCredentialPage extends Component {
 }
 
 StudentCredentialPage.propTypes = {
-  fetchStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
   context: PropTypes.object,
-  studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  secretKey: PropTypes.string,
+  fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
+  secretKey: PropTypes.string,
+  setStudentCredentials: PropTypes.func,
+  setUserType: PropTypes.func,
+  studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   tenant: PropTypes.string,
-  setUserTypeAction: PropTypes.func,
 };
 
 StudentCredentialPage.defaultProps = {
-  fetchStudentData: () => {},
-  setStudentCredentials: () => {},
   context: {},
-  studentId: '',
-  secretKey: '',
+  fetchStudentData: () => {},
   hashLink: '',
+  secretKey: '',
+  setStudentCredentials: () => {},
+  setUserType: () => {},
+  studentId: '',
   tenant: '',
-  setUserTypeAction: () => {},
 };
+
 const mapStateToProps = state => ({
-  studentId: getUserId(state),
+  hashLink: getHash(state),
   id: getAdminId(state),
-  secretKey: getUserSecretKey(state),
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),
-  hashLink: getHash(state),
+  secretKey: getUserSecretKey(state),
+  studentId: getUserId(state),
   tenant: getApplicationTenant(state),
 });
-export default connect(mapStateToProps, {
-  fetchStudentData,
-  setStudentCredentials,
-  setUserTypeAction,
-  getApplicationTenant,
-})(StudentCredentialPage);
+
+const mapDispatchToProps = dispatch => ({
+  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
+  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+  setUserType: props => dispatch(setUserTypeAction(props)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(StudentCredentialPage);

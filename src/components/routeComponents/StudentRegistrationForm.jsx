@@ -42,7 +42,7 @@ import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';
 import {
   createStudentData,
-  setStudentCredentials,
+  setStudentCredentialsAction,
 } from '../../actions/studentRegistrationActions';
 import {
   isDataCorrect,
@@ -187,7 +187,7 @@ class StudentRegistrationForm extends Component {
       const student = this.props.newStudent;
 
       // for pre-population on splash page
-      this.props.setStudentCredentials(student.id, student.secretKey);
+      this.props.setStudentCredentialsAction({ id: student.id, secretKey: student.secretKey });
 
       return (
         <Popup>
@@ -377,7 +377,7 @@ StudentRegistrationForm.propTypes = {
   isCreated: PropTypes.bool,
   newStudent: PropTypes.object,
   createStudentData: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setStudentCredentialsAction: PropTypes.func,
   userType: PropTypes.string,
   context: PropTypes.object,
   tenant: PropTypes.string,
@@ -388,7 +388,7 @@ StudentRegistrationForm.defaultProps = {
   isCreated: false,
   newStudent: {},
   createStudentData: () => {},
-  setStudentCredentials: () => {},
+  setStudentCredentialsAction: () => {},
   userType: '',
   context: {},
   tenant: '',
@@ -404,7 +404,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   createStudentData,
-  setStudentCredentials,
+  setStudentCredentialsAction,
   getApplicationTenant,
 })(StudentRegistrationForm);
 

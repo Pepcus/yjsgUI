@@ -17,7 +17,21 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.json'],
-      }
+        moduleDirectory: ['./src', './node_modules']
+      },
+      alias: {
+        map: [
+          ['actions', './src/actions'],
+          ['assets', './src/assets'],
+          ['components', './src/components'],
+          ['constants', './src/constants'],
+          ['config', './src/config'],
+          ['sagas', './src/sagas'],
+          ['store', './src/store'],
+          ['utils', './src/utils'],
+          ['reducers', './src/reducers'],
+        ]
+      },
     },
     propWrapperFunctions: [
       'forbidExtraProps', // https://www.npmjs.com/package/airbnb-prop-types

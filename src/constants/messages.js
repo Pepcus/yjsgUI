@@ -59,3 +59,5 @@ export const ENTER_SECRET_CODE_MESSAGE = 'अपना सीक्रेट क
 export const MESSAGE_FOR_PDF_FILE_DOWNLOAD = ' जानकारी दिखाने के लिए फ़ाइल का स्वरूप अमान्य है, कृपया फ़ाइल को डाउनलोड करें, तथा डाउनलोड करने के लिए नीचे दिए गए बटन पर क्लिक करें |';
 
 export const BUS_COORDINATOR_ERROR_MESSAGE = 'बस समन्वयकों की जानकारी उपलब्ध नहीं है, क्या आप छात्रों के आईडी कार्ड का प्रिंट जारी रखना चाहते हैं ?';
+
+export const GIVEN_INFORMATION_WRONG_MESSAGE = 'दी गई जानकारी गलत है |';

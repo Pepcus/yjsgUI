@@ -2,17 +2,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty'
+import isEmpty from 'lodash/isEmpty';
 
-
-import * as shortId from 'shortid';
-import {
-  Col,
-  Input,
-  Row,
-  List,
-  ListItem,
-} from 'ravenjs';
+import Col from 'ravenjs/lib/Col';
+import Input from 'ravenjs/lib/Input';
+import Row from 'ravenjs/lib/Row';
 
 const defaultTitleStyle = {
   'fontWeight': 'bold',
@@ -22,20 +16,25 @@ const defaultTitleStyle = {
   'fontSize': '14px',
 };
 
+/**
+ * InputField if inputField for JSON form
+ * @param {Object} props
+ * @return {HTML}
+ * @constructor
+ */
+
 function InputField(props) {
 
   const {
-    schema,
-    uiSchema,
+    autofocus,
+    disabled,
+    idSchema,
     name,
     onChange,
     readonly,
-    disabled,
     required,
-    rawErrors,
-    autofocus,
-    idSchema,
-    registry,
+    schema,
+    uiSchema,
   } = props;
 
   const title = get(schema, 'title', name);
@@ -53,15 +52,6 @@ function InputField(props) {
   const colProps = get(props, 'content.props.uiSchema.ui:options.col', {});
 
   const placeholder = get(uiSchema, 'ui:placeholder', '');
-
-  const errorList = () => (
-    <List>
-      {rawErrors ? rawErrors.map(error => (
-        <ListItem key={shortId.generate()}>
-          {error}
-        </ListItem>)) : null}
-    </List>
-  );
 
   function handleOnChange(event) {
     // form validation for required filed not work is case the value of field is empty or null
@@ -121,17 +111,9 @@ InputField.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The array of field errors
-   */
-  rawErrors: PropTypes.array,
-  /**
    * If `true`, the field will be readonly.
    */
   readonly: PropTypes.bool,
-  /**
-   * The form's registry object, containing the registered custom fields and widgets.
-   */
-  registry: PropTypes.object,
   /**
    * Is this a required field?
    */
@@ -152,9 +134,7 @@ InputField.defaultProps = {
   idSchema: {},
   name: '',
   onChange: () => {},
-  rawErrors: [],
   readonly: false,
-  registry: {},
   required: false,
   schema: {},
   uiSchema: {},

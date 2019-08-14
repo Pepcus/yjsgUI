@@ -13,8 +13,8 @@ const APP_THEME = {
       fontFamily: "'Poppins', sans-serif",
     },
   },
-  HOME: {
-    BACKGROUND_COLOR: '#f4e9e336',
+  home: {
+    backgroundColor: '#f4e9e336',
   },
   palette: {
     primary: {
