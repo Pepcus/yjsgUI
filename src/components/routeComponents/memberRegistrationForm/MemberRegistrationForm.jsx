@@ -34,7 +34,7 @@ import { fetchFormConfig } from 'sagas/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
-  verifyFormDataValidations,
+  validateForm,
 } from 'utils/formUtils';
 import fields from 'components/common/fields';
 import RedirectToRoute from './RedirectToRoute';
@@ -45,9 +45,6 @@ const BoxStyled = styled(Box)`
  overflow-x: hidden;
  overflow-y: auto;
  background-color: ${getThemeProps('palette.policyMuted.color')};
- ${({ theme }) => theme.media.down('md')`
-      
-    `};
 `;
 
 const ContainerStyled = styled(Container)`
@@ -69,7 +66,7 @@ class MemberRegistrationForm extends Component {
     this.state = {
       isSubmitTriggered: false,
       member: {},
-      notHasAnError: false,
+      hasError: false,
       formConfig: {},
       isAdminLocation: false,
       isStudentLocation: false,
@@ -107,19 +104,18 @@ class MemberRegistrationForm extends Component {
    * onClick of submit button.
    */
   handleSubmit = () => {
-    const { notHasAnError, member } = this.state;
+    const { hasError, member } = this.state;
     const { createStudentData } = this.props;
 
-    if (notHasAnError) {
+    if (hasError) {
+      this.setState({}, () => {
+        this.scrollToError();
+      });
+    } else {
       createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
-        notHasAnError: false,
-      });
-
-    } else {
-      this.setState({}, () => {
-        this.scrollToError();
+        hasError: false,
       });
     }
   };
@@ -181,7 +177,7 @@ class MemberRegistrationForm extends Component {
         ...member,
         ...event.formData,
       },
-      notHasAnError: isEmpty(event.errors),
+      hasError: !isEmpty(event.errors),
     });
   };
 
@@ -194,7 +190,7 @@ class MemberRegistrationForm extends Component {
   validate = (formData, errors) => {
     const { validation } = this.state.formConfig;
 
-    return verifyFormDataValidations({ formData, errors, validate: validation });
+    return validateForm({ formData, errors, validate: validation });
   };
 
   render() {
@@ -304,8 +300,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createStudentData: props => dispatch(createStudentDataAction(props)),
-  setLoadingState: props => dispatch(setLoadingStateAction(props)),
+  createStudentData: member => dispatch(createStudentDataAction(member)),
+  setLoadingState: flag => dispatch(setLoadingStateAction(flag)),
 });
 
 export default connect(

@@ -378,11 +378,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
-  setAdminCredentials: props => dispatch(setAdminCredentialsAction(props)),
-  setAdminLoginState: props => dispatch(setAdminLoginStateAction(props)),
-  setHashLinkForNewRegistration: props => dispatch(setHashLinkForNewRegistrationAction(props)),
-  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+  fetchStudentData: ({ id, secretKey }) => dispatch(fetchStudentDataAction({ id, secretKey })),
+  setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
+  setAdminLoginState: flag => dispatch(setAdminLoginStateAction(flag)),
+  setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
 });
 
 export default connect(

@@ -23,18 +23,19 @@ const defaultTitleStyle = {
 };
 
 const SelectStyled = styled(Select)`
-border-radius: 4px;
-&:invalid {
-    color: gray;
-  }
+  border-radius: 4px;
+  &:invalid {
+      color: gray;
+    }
 `;
 
 const SelectOptionStyled = styled(SelectOption)`
-color: black;
+  color: black;
+  display: ${props => (props.hidden ? 'none' : null)}
 `;
 
 /**
- * InputField if inputField for JSON form
+ * SelectList if SelectList for JSON form
  * @param {Object} props
  * @return {HTML}
  * @constructor
@@ -60,55 +61,43 @@ function SelectList(props) {
 
   const enums = get(schema, 'enum', []);
 
-  const titleStyle = get(uiSchema, 'ui:options.style.titleStyle');
+  const style = get(uiSchema, 'ui:options.style', {});
 
-  const fieldStyle = get(uiSchema, 'ui:options.style.fieldStyle');
-
-  const colProps = get(props, 'content.props.uiSchema.ui:options.col', {});
+  const { titleStyle, fieldStyle } = style;
 
   const placeholder = get(uiSchema, 'ui:placeholder', '');
 
   function handleOnChange(event) {
-    // form validation for required filed not work is case the value of field is empty or null
-    const values = event ? event.target.value : '';
+    // Form validation does not work for required filed because the value of the field is empty or null.
+    const value = event ? event.target.value : '';
 
-    if (isEmpty(values) || values === null) {
-      onChange(undefined);
+    if (isEmpty(value)) {
+      onChange();
     } else {
-      onChange(values);
+      onChange(value);
     }
   }
 
-  const renderOptionStatements = () => {
-    if (enumNames) {
-      return enums.map((iterator, index) =>
-        (
-          <SelectOptionStyled value={iterator} key={index}>
-            {enumNames[index]}
-          </SelectOptionStyled>),
-      );
-    }
-    return enums.map((iterator, index) =>
-      (
-        <SelectOptionStyled value={iterator} key={index}>
-          {iterator}
-        </SelectOptionStyled>),
-    );
-  };
+  const renderOptions = () => enums.map((enumValue, index) =>
+    (
+      <SelectOptionStyled value={enumValue} key={index}>
+        {enumNames[index] || enumValue}
+      </SelectOptionStyled>),
+  );
 
   const getSelectList = () => {
     if (enums) {
       return (
-        <Col {...colProps}>
-          <Row width="auto" margin="0 0 0 0">
+        <Col>
+          <Row width="auto" margin="0">
             <label style={{ ...defaultTitleStyle, ...titleStyle }}>
               {title}{required ? '*' : ''}
             </label>
           </Row>
-          <Row width="100%" margin="0 0 0 0">
+          <Row width="100%" margin="0">
             <SelectStyled
               disabled={disabled}
-              style={{ ...fieldStyle }}
+              style={fieldStyle}
               width="100%"
               minWidth="100%"
               id={idSchema.$id}
@@ -118,11 +107,11 @@ function SelectList(props) {
             >
               <SelectOptionStyled
                 value=""
-                disabled="disabled"
-                style={{ display: 'none', color: 'red' }}
+                disabled
+                hidden
               >{placeholder}
               </SelectOptionStyled>
-              {renderOptionStatements()}
+              {renderOptions()}
             </SelectStyled>
           </Row>
         </Col>

@@ -338,9 +338,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
-  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
-  setUserType: props => dispatch(setUserTypeAction(props)),
+  fetchStudentData: ({ id, secretKey }) => dispatch(fetchStudentDataAction({ id, secretKey })),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
+  setUserType: userType => dispatch(setUserTypeAction(userType)),
 });
 
 export default connect(

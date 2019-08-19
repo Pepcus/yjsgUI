@@ -1,5 +1,5 @@
 import SplashPage from './splashPage';
-import MemberRegistrationForm from './memberRegistraionForm';
+import MemberRegistrationForm from './memberRegistrationForm';
 import StudentRegistrationCorrectionForm from './StudentRegistrationCorrectionForm';
 import SplashPagePrePopulated from './SplashPagePrePopulated';
 import AdminPanel from './AdminPanel';

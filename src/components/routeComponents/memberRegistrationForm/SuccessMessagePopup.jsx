@@ -69,7 +69,7 @@ SuccessMessagePopup.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
 });
 
 export default connect(null, mapDispatchToProps)(SuccessMessagePopup);

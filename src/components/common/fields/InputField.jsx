@@ -46,33 +46,30 @@ function InputField(props) {
 
   const maxLength = get(schema, 'maxLength');
 
-  const titleStyle = get(uiSchema, 'ui:options.style.titleStyle');
+  const style = get(uiSchema, 'ui:options.style', {});
 
-  const fieldStyle = get(uiSchema, 'ui:options.style.fieldStyle');
-
-  const colProps = get(props, 'content.props.uiSchema.ui:options.col', {});
+  const { titleStyle, fieldStyle } = style;
 
   const placeholder = get(uiSchema, 'ui:placeholder', '');
 
   function handleOnChange(event) {
-    // form validation for required filed not work is case the value of field is empty or null
-    const values = event ? event.target.value : '';
+    // Form validation does not work for required filed because the value of the field is empty or null.
+    const value = event ? event.target.value : '';
 
-    if (isEmpty(values) || values === null) {
-      onChange(undefined);
+    if (isEmpty(value)) {
+      onChange();
     } else {
-      onChange(values);
+      onChange(value);
     }
   }
-
   return (
-    <Col {...colProps}>
-      <Row width="auto" margin="0 0 0 0" >
+    <Col>
+      <Row width="auto" margin="0" >
         <label style={{ ...defaultTitleStyle, ...titleStyle }}>
           {title}{required ? '*' : ''}
         </label>
       </Row>
-      <Row width="auto" margin="0 0 0 0">
+      <Row width="auto" margin="0">
         <Input
           id={idSchema.$id}
           autoFocus={autofocus}
