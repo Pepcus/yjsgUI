@@ -7,7 +7,7 @@ export const checkValidUserInfo = errorMessageObject => ({
  * @param {Object} student
  * @return {{student: Object, type: string}}
  */
-export const createStudentData = student => ({
+export const createStudentDataAction = student => ({
   type: 'CREATE_STUDENT',
   student,
 });

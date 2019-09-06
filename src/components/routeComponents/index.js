@@ -1,5 +1,5 @@
 import SplashPage from './splashPage';
-import StudentRegistrationForm from './StudentRegistrationForm';
+import MemberRegistrationForm from './memberRegistrationForm';
 import StudentRegistrationCorrectionForm from './StudentRegistrationCorrectionForm';
 import SplashPagePrePopulated from './SplashPagePrePopulated';
 import AdminPanel from './AdminPanel';
@@ -12,7 +12,7 @@ import Files from './Files';
 export default {
   StudentPage,
   SplashPage,
-  StudentRegistrationForm,
+  MemberRegistrationForm,
   StudentRegistrationCorrectionForm,
   SplashPagePrePopulated,
   AdminPanel,

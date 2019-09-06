@@ -25,6 +25,17 @@ const APP_THEME = {
       light: '#d24c0c',
       text: '#FFFFFF',
     },
+    default: {
+      borderColor: '#dbd7d6',
+      color: '#dbd7d6',
+      dark: '#010306',
+      gradientColor: 'linear-gradient(to top, #ebebec, #ebebec)',
+      light: '#dbd7d6',
+      text: '#010306',
+    },
+  },
+  colors: {
+    HEADER: '#f9570a',
   },
 };
 

@@ -55,6 +55,10 @@ const ImageStyled = styled.img`
   width: 100%;
 `;
 
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('colors.HEADER')};
+`;
+
 // TODO: responsive css @media remaining
 
 /**
@@ -157,15 +161,14 @@ class StudentPage extends Component {
         >
           <Col>
             <Row width="100%" display="inline-block">
-              <Typography
+              <TypographyStyled
                 type="title"
                 fontWeight="600"
                 fontSize="18px"
-                color="#f9570a"
                 align="center"
               >
                 {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
-              </Typography>
+              </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
@@ -225,11 +228,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
-  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
-  setHashLinkForStudentCredential: props => dispatch(setHashLinkForStudentCredentialAction(props)),
-  setHashLinkForNewRegistration: props => dispatch(setHashLinkForNewRegistrationAction(props)),
-  setUserType: props => dispatch(setUserTypeAction(props)),
+  fetchStudentData: ({ id, secretKey }) => dispatch(fetchStudentDataAction({ id, secretKey })),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
+  setHashLinkForStudentCredential: userType => dispatch(setHashLinkForStudentCredentialAction(userType)),
+  setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
+  setUserType: userType => dispatch(setUserTypeAction(userType)),
 });
 
 export default connect(

@@ -46,7 +46,7 @@ import {
   GIVEN_INFORMATION_WRONG_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
-import { getTransformedErrors } from 'utils/formUtil';
+import { getTransformedErrors } from 'utils/formUtils';
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 
@@ -67,6 +67,10 @@ const BoxStyled = styled(Box)`
 
 const ImageStyled = styled.img`
   width: 100%;
+`;
+
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('colors.HEADER')};
 `;
 
 /**
@@ -295,15 +299,14 @@ class SplashPage extends Component {
         >
           <Col>
             <Row width="100%" display="inline-block">
-              <Typography
+              <TypographyStyled
                 align="center"
-                color="#f9570a"
                 fontSize="18px"
                 fontWeight="600"
                 type="title"
               >
                 {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
-              </Typography>
+              </TypographyStyled>
               <Typography
                 align="center"
                 fontSize="16px"
@@ -375,11 +378,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: props => dispatch(fetchStudentDataAction(props)),
-  setAdminCredentials: props => dispatch(setAdminCredentialsAction(props)),
-  setAdminLoginState: props => dispatch(setAdminLoginStateAction(props)),
-  setHashLinkForNewRegistration: props => dispatch(setHashLinkForNewRegistrationAction(props)),
-  setStudentCredentials: props => dispatch(setStudentCredentialsAction(props)),
+  fetchStudentData: ({ id, secretKey }) => dispatch(fetchStudentDataAction({ id, secretKey })),
+  setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
+  setAdminLoginState: flag => dispatch(setAdminLoginStateAction(flag)),
+  setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
 });
 
 export default connect(
