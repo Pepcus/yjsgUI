@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
 /**
+ * RedirectToRoute method redirect to corresponding route.
  * @param {Boolean} context
  * @param {Boolean} isAdminLocation
  * @param {Boolean} isPreviousLocation

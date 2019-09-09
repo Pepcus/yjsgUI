@@ -57,7 +57,7 @@ const LoginForm = ({
     );
 
   } else if (isNewRegistration) {
-    return <Switch><Redirect to="/studentRegister" /></Switch>;
+    return <Switch><Redirect to="/member-register" /></Switch>;
 
   } else if (!isAdmin) {
     return (

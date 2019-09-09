@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 
-import { parentsRegistrationAction } from '../../actions/studentRegistrationActions';
+import { parentsRegistrationAction } from '../../actions/memberRegistrationActions';
 import Button from '../common/Button';
 import { formSubmitBtnText } from '../../constants/yjsg';
 import Popup from '../common/Popup';

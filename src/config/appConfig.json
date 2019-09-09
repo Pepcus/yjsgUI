@@ -182,7 +182,7 @@
     {
       "name": "default",
       "path": "/",
-      "component": "StudentPage",
+      "component": "MemberPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -213,8 +213,8 @@
     },
     {
       "name": "memberSearch",
-      "path": "/student-search",
-      "component": "StudentInformationGrid",
+      "path": "/member-search",
+      "component": "MemberInformationGrid",
       "isActive": true,
       "header": {
         "logo": true,
@@ -243,7 +243,7 @@
     },
     {
       "name": "memberRegister",
-      "path": "/studentRegister",
+      "path": "/member-register",
       "component": "MemberRegistrationForm",
       "isActive": true,
       "header": {
@@ -252,7 +252,7 @@
     },
     {
       "name": "registrationCorrection",
-      "path": "/studentCorrection",
+      "path": "/member-registration-correction",
       "component": "StudentRegistrationCorrectionForm",
       "isActive": true,
       "header": {
@@ -272,8 +272,8 @@
     },
     {
       "name": "memberLogin",
-      "path": "/student-login",
-      "component": "StudentCredentialPage",
+      "path": "/member-login",
+      "component": "MemberCredentialPage",
       "isActive": true,
       "header": {
         "titleStyle": {

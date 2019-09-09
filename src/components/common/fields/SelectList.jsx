@@ -55,6 +55,8 @@ function SelectList(props) {
 
   const title = get(schema, 'title', name);
 
+  const label = get(uiSchema, 'ui:options.label', true);
+
   const defaultValue = get(schema, 'default', '');
 
   const enumNames = get(schema, 'enumNames', []);
@@ -91,7 +93,7 @@ function SelectList(props) {
         <Col>
           <Row width="auto" margin="0">
             <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-              {title}{required ? '*' : ''}
+              {label ? title : ''}{required && label ? '*' : ''}
             </label>
           </Row>
           <Row width="100%" margin="0">

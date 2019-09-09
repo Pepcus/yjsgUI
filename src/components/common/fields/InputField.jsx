@@ -34,9 +34,11 @@ function InputField(props) {
     required,
     schema,
     uiSchema,
+    formData,
   } = props;
-
   const title = get(schema, 'title', name);
+
+  const label = get(uiSchema, 'ui:options.label', true);
 
   const type = get(schema, 'type', 'number');
 
@@ -66,7 +68,7 @@ function InputField(props) {
     <Col>
       <Row width="auto" margin="0" >
         <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-          {title}{required ? '*' : ''}
+          {label ? title : ''}{required && label ? '*' : ''}
         </label>
       </Row>
       <Row width="auto" margin="0">
@@ -81,7 +83,9 @@ function InputField(props) {
           min={minLength}
           max={maxLength}
           placeholder={placeholder}
+          value={formData}
           defaultValue={defaultValue}
+          color="primary"
         />
       </Row>
     </Col>
@@ -97,6 +101,10 @@ InputField.propTypes = {
    * If `true`, the field is disabled.
    */
   disabled: PropTypes.bool,
+  /**
+   * The field data.
+   */
+  formData: PropTypes.string,
   /**
    * The schema object for identifying the field.
    */
@@ -130,6 +138,7 @@ InputField.propTypes = {
 InputField.defaultProps = {
   autofocus: false,
   disabled: false,
+  formData: undefined,
   idSchema: {},
   name: '',
   onChange: () => {},

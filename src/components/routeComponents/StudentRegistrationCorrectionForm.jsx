@@ -44,7 +44,7 @@ import {
 import InputField from '../form/InputField';
 import TextAreaField from '../form/TextAreaField';
 import LinkButton from '../common/LinkButton';
-import { updateStudentData, isUpdatedResetAction } from '../../actions/studentRegistrationActions';
+import { updateMemberData, isUpdatedResetAction } from '../../actions/memberRegistrationActions';
 import {
   updateClassAttended2019InStudentData,
   isDataCorrect,
@@ -53,13 +53,13 @@ import {
   validateInput,
 } from '../../utils/registrationFormUtils';
 import {
-  getStudent,
+  getMember,
   isFetched,
   isUpdated,
   getUserId,
   getUserSecretKey,
   getPageUserType,
-} from '../../reducers/studentRegistrationReducer';
+} from '../../reducers/memberRegistrationReducer';
 import SelectListInputField from '../form/SelectListInputField';
 import Button from '../common/Button';
 import { CLICK_HERE_TEXT, NO_TEXT, UPDATE_FURTHER_INFORMATION_TEXT, YES_TEXT } from '../../constants/text';
@@ -118,7 +118,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
   componentDidMount() {
     // get student data from session if present
-    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+    const studentDataFromSession = JSON.parse(sessionStorage.getItem('memberData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
     const studentData = !isEmpty(this.props.studentData)
@@ -134,7 +134,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
   componentWillReceiveProps(nextProps) {
     // get student data from session if present
-    const studentDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+    const studentDataFromSession = JSON.parse(sessionStorage.getItem('memberData'));
     // If student data is not present in props then it will get from session store
     // for maintain the student credential in case student get back to student correction form
     const studentData = !isEmpty(nextProps.studentData)
@@ -476,9 +476,9 @@ class StudentRegistrationCorrectionForm extends Component {
     const { id, secretKey } = this.props;
     const { student } = this.state;
     // Calls api to update student data
-    this.props.updateStudentData({ id,
+    this.props.updateMemberData({ id,
       secretKey,
-      student });
+      member: student });
   }
   /**
    * scrollToError method scroll to first form file which is in valid in mobile view only.
@@ -937,7 +937,7 @@ StudentRegistrationCorrectionForm.propTypes = {
   studentData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isUpdated: PropTypes.bool,
   isFetched: PropTypes.bool,
-  updateStudentData: PropTypes.func,
+  updateMemberData: PropTypes.func,
   id: PropTypes.string,
   secretKey: PropTypes.string,
   context: PropTypes.object,
@@ -949,7 +949,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   studentData: {},
   isUpdated: false,
   isFetched: false,
-  updateStudentData: () => {},
+  updateMemberData: () => {},
   id: '',
   secretKey: '',
   context: {},
@@ -958,7 +958,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   tenant: '',
 };
 const mapStateToProps = state => ({
-  studentData: getStudent(state),
+  studentData: getMember(state),
   isUpdated: isUpdated(state),
   isFetched: isFetched(state),
   id: getUserId(state),
@@ -967,7 +967,7 @@ const mapStateToProps = state => ({
   tenant: getApplicationTenant(state),
 });
 export default connect(mapStateToProps, {
-  updateStudentData,
+  updateMemberData,
   isUpdatedResetAction,
   getApplicationTenant,
 })(StudentRegistrationCorrectionForm);

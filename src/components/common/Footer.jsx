@@ -8,7 +8,7 @@ import {
   yjsgFooterText,
   yjsgFooterContactInfo,
 } from '../../constants/yjsg';
-import { isLoading } from '../../reducers/studentRegistrationReducer';
+import { isLoading } from '../../reducers/memberRegistrationReducer';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 
 /**

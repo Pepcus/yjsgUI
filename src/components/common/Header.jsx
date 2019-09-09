@@ -10,7 +10,7 @@ import {
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
-} from '../../actions/studentRegistrationActions';
+} from '../../actions/memberRegistrationActions';
 import { routes, title } from '../../config/appConfig.json';
 import { getApplicationTenant } from '../../reducers/assetFilesReducer';
 import { DEFAULT_HEADER_TEXT } from '../../constants/yjsg';
@@ -47,8 +47,8 @@ const Header = ({
    */
   const performLogout = () => {
     resetAdminCredentials();
-    setAdminLoginState(false);
-    setRedirectValue(false);
+    setAdminLoginState({ adminLoginState: false });
+    setRedirectValue({ redirect: false });
     resetVisibleColumnConfig();
     localStorage.clear();
   };
@@ -202,8 +202,8 @@ Header.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
-  setAdminLoginState: flag => dispatch(setAdminLoginStateAction(flag)),
-  setRedirectValue: flag => dispatch(setRedirectValueAction(flag)),
+  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
+  setRedirectValue: ({ redirect }) => dispatch(setRedirectValueAction({ redirect })),
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
 });
 

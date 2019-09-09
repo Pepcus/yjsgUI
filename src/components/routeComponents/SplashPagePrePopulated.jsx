@@ -10,23 +10,23 @@ import LinkButton from '../common/LinkButton';
 import Button from '../common/Button';
 import InputField from '../form/InputField';
 import {
-  fetchStudentDataAction,
+  fetchMemberDataAction,
   setAdminCredentialsAction,
-  setStudentCredentialsAction,
+  setMemberCredentialsAction,
   setAdminLoginStateAction,
-} from '../../actions/studentRegistrationActions';
+} from '../../actions/memberRegistrationActions';
 import yjsgLogo from '../../assets/images/yjsgLogo.png';
 import {
   getAdminId,
   getAdminPassword,
   getSearchResults,
-  getStudent,
+  getMember,
   isFetched,
   isLoading,
   stateOfAdminLogin,
   getUserId,
   getUserSecretKey,
-} from '../../reducers/studentRegistrationReducer';
+} from '../../reducers/memberRegistrationReducer';
 import {
   adminId,
   adminPassword,
@@ -156,13 +156,13 @@ class SplashPagePrePopulated extends Component {
             </div>
           );
         }
-        this.props.setAdminLoginStateAction(true);
-        return <Switch><Redirect to="/student-search" /></Switch>;
+        this.props.setAdminLoginStateAction({ adminLoginState: true });
+        return <Switch><Redirect to="/member-search" /></Switch>;
 
       }
       return null;
     }
-    return <Switch><Redirect to="/student-search" /></Switch>;
+    return <Switch><Redirect to="/member-search" /></Switch>;
 
   }
 
@@ -182,7 +182,7 @@ class SplashPagePrePopulated extends Component {
       } else if (this.props.studentData && this.props.isFetched) {
         return (
           <div>
-            <Redirect to={'/studentCorrection'}/>
+            <Redirect to={'/member-registration-correction'}/>
           </div>
         )
       }
@@ -210,7 +210,7 @@ class SplashPagePrePopulated extends Component {
   /* fetchStudentById () {
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
-    this.props.fetchStudentDataAction(this.state.credentials.studentId,
+    this.props.fetchMemberDataAction(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.setState({
       registeredStudentCredentialErrorMessage: true,
@@ -318,14 +318,14 @@ class SplashPagePrePopulated extends Component {
   }
 
   /**
-   * renderLoginField method redirect to "/student-login" or
+   * renderLoginField method redirect to "/member-login" or
    * render admin login field or admin home page buttons
    * according to condition.
    * @return {ReactComponent}
    */
   renderLoginField() {
     if (this.state.isCorrection) {
-      return <Switch><Redirect to="/student-login" /></Switch>;
+      return <Switch><Redirect to="/member-login" /></Switch>;
     } else if (this.state.isAdmin) {
       return this.renderAdminLoginFields();
     }
@@ -338,7 +338,7 @@ class SplashPagePrePopulated extends Component {
         />
         <LinkButton
           buttonText={newRegistrationBtnText}
-          linkPath="/studentRegister"
+          linkPath="/member-register"
         />
         <Button
           buttonText={adminLoginBtnText}
@@ -372,8 +372,8 @@ class SplashPagePrePopulated extends Component {
 }
 
 SplashPagePrePopulated.propTypes = {
-  fetchStudentDataAction: PropTypes.func,
-  setStudentCredentialsAction: PropTypes.func,
+  fetchMemberDataAction: PropTypes.func,
+  setMemberCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
   setAdminCredentialsAction: PropTypes.func,
   studentId: PropTypes.string,
@@ -385,8 +385,8 @@ SplashPagePrePopulated.propTypes = {
 };
 
 SplashPagePrePopulated.defaultProps = {
-  fetchStudentDataAction: () => {},
-  setStudentCredentialsAction: () => {},
+  fetchMemberDataAction: () => {},
+  setMemberCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
   setAdminCredentialsAction: () => {},
   studentId: '',
@@ -405,14 +405,14 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
   searchResults: getSearchResults(state),
   adminLoginState: stateOfAdminLogin(state),
-  studentData: getStudent(state),
+  studentData: getMember(state),
   isFetched: isFetched(state),
   tenant: getApplicationTenant(state),
 });
 
 export default connect(mapStateToProps, {
-  fetchStudentDataAction,
-  setStudentCredentialsAction,
+  fetchMemberDataAction,
+  setMemberCredentialsAction,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   getApplicationTenant,

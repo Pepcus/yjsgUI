@@ -24,7 +24,7 @@ import {
 import cssJSON from '../../config/cssVariables.json';
 import {
   setLoadingStateAction,
-} from '../../actions/studentRegistrationActions';
+} from '../../actions/memberRegistrationActions';
 
 
 /**

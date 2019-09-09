@@ -1,0 +1,32 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "optInFile": {
+        "type": "string"
+      }
+    },
+    "required": ["optInFile"]
+  },
+  "uiSchema": {
+    "ui:order": ["optInFile"],
+    "optInFile": {
+      "ui:field": "UploadFileField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "width": "88%",
+            "margin-left": "30px"
+          }
+        },
+        "label": false,
+        "btnProps" : {
+          "color": "tertiary",
+          "width": "24px",
+          "margin-right": "10px"
+        }
+      },
+      "ui:widget": "file"
+    }
+  }
+}
