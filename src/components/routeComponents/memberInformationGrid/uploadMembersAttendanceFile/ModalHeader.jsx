@@ -10,7 +10,6 @@ import {
   UPLOAD_FILE_TEXT,
 } from 'constants/text';
 
-
 const RowStyled = styled(Row)`
     background: ${getThemeProps('colors.header')};
 `;
