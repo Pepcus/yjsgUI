@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import styled from 'styled-components';
 
 import Col from 'ravenjs/lib/Col';
 import Input from 'ravenjs/lib/Input';
 import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
-const defaultTitleStyle = {
-  'fontWeight': 'bold',
-  'display': 'block',
-  'marginBottom': '7px',
-  'color': '#4c4c4c',
-  'fontSize': '14px',
-};
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('typography.titleFieldColor.color')}
+   font-weight: bold !important;
+   display: block;
+  `;
 
 /**
  * InputField if inputField for JSON form
@@ -65,11 +66,11 @@ function InputField(props) {
     }
   }
   return (
-    <Col>
+    <Col padding="0">
       <Row width="auto" margin="0" >
-        <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-          {label ? title : ''}{required && label ? '*' : ''}
-        </label>
+        <TypographyStyled type="label" style={titleStyle}>
+          {label ? title : null}{required && label ? '*' : null}
+        </TypographyStyled>
       </Row>
       <Row width="auto" margin="0">
         <Input

@@ -19,7 +19,11 @@ import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 import { getThemeProps } from 'ravenjs/esm/utils/theme';
 
-import { formatMembers } from 'utils/dataGridUtils';
+import {
+  formatMembers,
+  getMultipleIdSearchResult,
+  getAdvanceSearchResult,
+} from 'utils/dataGridUtils';
 import fields from 'components/common/fields';
 import { schema, uiSchema } from './advanceSearchShema.json';
 
@@ -130,7 +134,7 @@ class AdvanceSearch extends Component {
           if (String(member.id) === String(checkedUncheckedIdObject.id)) {
             finalMemberObject = {
               ...member,
-              studentId: String(checkedUncheckedIdObject.id),
+              memberId: String(checkedUncheckedIdObject.id),
               isChecked: checkedUncheckedIdObject.isChecked,
             };
           }
@@ -175,7 +179,7 @@ class AdvanceSearch extends Component {
         if (String(member.id) === String(checkedUncheckedIdObject.id)) {
           finalMemberObject = {
             ...member,
-            studentId: String(checkedUncheckedIdObject.id),
+            memberId: String(checkedUncheckedIdObject.id),
             isChecked: checkedUncheckedIdObject.isChecked,
           };
         }
@@ -257,8 +261,7 @@ class AdvanceSearch extends Component {
     // isMultipleIdSearchCheck is uncheck it do the search result according to search string
     // type of search (thresholdValue)
     if (!isMultipleIdSearchCheck) {
-      const foundKeys = metaData.headerConfig.map(object => object.key,
-      );
+      const foundKeys = metaData.headerConfig.map(object => object.key);
       const options = {
         shouldSort: true,
         threshold: Number(thresholdValue),
@@ -269,46 +272,11 @@ class AdvanceSearch extends Component {
         keys: foundKeys,
       };
       if (!isEmpty(formData.inputValue)) {
-        const fuse = new Fuse(members, options);
-        const result = fuse.search(formData.inputValue);
-        const membersData = result.map((member) => {
-          let finalMemberObject = member;
-          checkedIds.forEach((checkedUncheckedIdObject) => {
-            if (String(member.id) === String(checkedUncheckedIdObject.id)) {
-              finalMemberObject = {
-                ...member,
-                studentId: String(checkedUncheckedIdObject.id),
-                isChecked: checkedUncheckedIdObject.isChecked,
-              };
-            }
-          });
-          return finalMemberObject;
-        });
+        const membersData = getAdvanceSearchResult({ members, options, formData, checkedIds });
         onFilter(formatMembers({ members: membersData }));
       }
     } else if (!isEmpty(formData.inputValue)) {
-      // isMultipleIdSearchCheck is check it do the search result according to search Ids.
-      const searchMembersIds = formData.inputValue.split(',');
-      const searchResult = [];
-      searchMembersIds.forEach((element) => {
-        const result = members.filter(member =>
-          member.id === Number(element));
-        searchResult.push(...result);
-      });
-      const uniqSearchResult = uniqWith(searchResult, isEqual);
-      const membersData = uniqSearchResult.map((member) => {
-        let finalMemberObject = member;
-        checkedIds.forEach((checkedUncheckedIdObject) => {
-          if (String(member.id) === String(checkedUncheckedIdObject.id)) {
-            finalMemberObject = {
-              ...member,
-              studentId: String(checkedUncheckedIdObject.id),
-              isChecked: checkedUncheckedIdObject.isChecked,
-            };
-          }
-        });
-        return finalMemberObject;
-      });
+      const membersData = getMultipleIdSearchResult({ members, checkedIds, formData });
       onFilter(formatMembers({ members: membersData }));
     }
   };
@@ -316,7 +284,7 @@ class AdvanceSearch extends Component {
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
     return (
-      <ColStyled size={8}>
+      <ColStyled size={12}>
         <BoxStyled
           width="auto"
           padding="20px 25px"
@@ -325,7 +293,7 @@ class AdvanceSearch extends Component {
           backgroundColor="advancedSearch"
         >
           <Row alignItems="center">
-            <Col size={10} padding="0" margin="0 0 0 13px">
+            <Col size={10} padding="0 0 0 20px" margin="0">
               <Form
                 showErrorList={false}
                 liveValidate
@@ -339,14 +307,14 @@ class AdvanceSearch extends Component {
               />
               {this.clearButton()}
             </Col>
-            <Col size={1} padding="0">
+            <Col size={2} padding="0 20px 0 0">
               <Button
-                margin="0px 0px 0px -17px;"
                 borderRadius="0 4px 4px 0"
                 noMinWidth
+                noMinHeight
                 padding="5px"
-                minHeight="36px"
-                width="34px"
+                height="36px"
+                width="100%"
                 type="submit"
                 form="advanceSearch"
                 value="Submit"

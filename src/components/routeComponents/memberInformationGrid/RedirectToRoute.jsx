@@ -25,13 +25,13 @@ const RedirectToRoute = ({
   };
   let routeName = '';
   if (fileRedirection || isMemberDataSet || isAdminRoute) {
-    const routesFlag = {
+    const routeFlags = {
       fileRedirection,
       isMemberDataSet,
       isAdminRoute,
     };
-    Object.keys(routesFlag).forEach((routeFlag) => {
-      if (routesFlag[routeFlag]) {
+    Object.keys(routeFlags).forEach((routeFlag) => {
+      if (routeFlags[routeFlag]) {
         routeName = routes[routeFlag];
       }
     });

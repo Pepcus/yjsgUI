@@ -1,5 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep';
 import upperFirst from 'lodash/upperFirst';
+import uniqWith from 'lodash/uniqWith';
+import isEqual from 'lodash/isEqual';
+import Fuse from 'fuse.js';
 
 import {
   gridMetaData,
@@ -7,8 +10,10 @@ import {
 
 /**
  * manageMembersTableWidth method is called when we have to manage table width in grid page.
- * It finds a table class and take dynamic width of it and assigned to footer class after that whole table width managed accordingly.
- * Also gives styling according to the table's width and also will add or remove class according to browser window width.
+ * It finds a table class and take dynamic width of it and assigned to footer class after
+ * that whole table width managed accordingly.
+ * Also gives styling according to the table's width and also will add or remove class according
+ * to browser window width.
  * @param {Object} widthRef
  */
 export const manageMembersTableWidth = (widthRef) => {
@@ -125,7 +130,7 @@ export const getFormattedMemberId = ({ memberId }) => {
  * @param {Object} visibleColumnConfig
  * @param {Object} metaData
  * @param {Component} EditButton
- * @return {Object} metaData
+ * @return {Object} updatedMetaData
  */
 export const formatMetaData = ({ visibleColumnConfig, metaData, EditButton }) => {
   let formattedMetaData = [];
@@ -158,7 +163,7 @@ export const getSelectedMembers = ({ idCheckStatusList, members }) => {
     members.forEach((member) => {
       if (idCheckStatusObject.isChecked) {
         if (Number(member.id) === idCheckStatusObject.id) {
-          checkedMembers.push({ ...member, studentId: String(member.id) });
+          checkedMembers.push({ ...member, memberId: String(member.id) });
         }
       }
     });
@@ -167,22 +172,20 @@ export const getSelectedMembers = ({ idCheckStatusList, members }) => {
 };
 
 /**
- * setAllMembersAsUnchecked method make isChecked to false
- * in member object
+ * setAllMembersAsUnchecked method make isChecked to false in member object
  * @param {Array} members
  * @return {Array}
  */
 export const setAllMembersAsUnchecked = ({ members }) => members.map(member => ({ id: member.id, isChecked: false }));
 
 /**
- * Method format members array in which
- * assign id as studentId to object.
+ * Method format members array in which assign id as memberId to object.
  * @param {Array} members
  * @return {Array} members
  */
 export const formatMembers = ({ members }) => members.map((item) => {
-  if (!('studentId' in item)) {
-    return ({ ...item, studentId: String(item.id), isChecked: false });
+  if (!('memberId' in item)) {
+    return ({ ...item, memberId: String(item.id), isChecked: false });
   }
   return item;
 },
@@ -202,11 +205,11 @@ export const getChangedVisibleColumnConfig = ({ selectValue, temporaryVisibleCol
 };
 
 /**
- * extractMembersId method set the selected members Id into studentId Array
+ * extractMembersId method set the selected members Id into memberId Array
  * @param {Array} selectedStudents
  * @return {*}
  */
-export const extractMembersId = ({ selectedMembers }) => selectedMembers.map(student => String(student.studentId));
+export const extractMembersId = ({ selectedMembers }) => selectedMembers.map(student => String(student.memberId));
 
 export const getStyled = ({ width }) => {
   let style = {};
@@ -242,3 +245,69 @@ export const convertFirstCharacterInUpperCase = ({ sentence }) => {
   });
   return words;
 };
+
+/**
+ * Set the value of edit column on the basis of any column selected on not.
+ * @param {Object} visibleColumnConfig
+ * @return {Object} changedVisibleColumnConfig
+ */
+export const getUpdatedVisibleColumnConfig = ({ visibleColumnConfig }) => {
+  let count = 0;
+  let changedVisibleColumnConfig = {};
+
+  for (const key in visibleColumnConfig) {
+    if (visibleColumnConfig[key]) {
+      count += 1;
+    }
+    if (count > 0) {
+      changedVisibleColumnConfig = { ...visibleColumnConfig, edit: true };
+    } else {
+      changedVisibleColumnConfig = { ...visibleColumnConfig, edit: false };
+    }
+  }
+  return changedVisibleColumnConfig;
+};
+
+export const getMultipleIdSearchResult = ({ members, checkedIds, formData }) => {
+  // isMultipleIdSearchCheck is check it do the search result according to search Ids.
+  const searchMembersIds = formData.inputValue.split(',');
+  const searchResult = [];
+  searchMembersIds.forEach((element) => {
+    const result = members.filter(member =>
+      member.id === Number(element));
+    searchResult.push(...result);
+  });
+  const uniqSearchResult = uniqWith(searchResult, isEqual);
+  return uniqSearchResult.map((member) => {
+    let finalMemberObject = member;
+    checkedIds.forEach((checkedUncheckedIdObject) => {
+      if (String(member.id) === String(checkedUncheckedIdObject.id)) {
+        finalMemberObject = {
+          ...member,
+          memberId: String(checkedUncheckedIdObject.id),
+          isChecked: checkedUncheckedIdObject.isChecked,
+        };
+      }
+    });
+    return finalMemberObject;
+  });
+};
+
+export const getAdvanceSearchResult = ({ members, options, formData, checkedIds }) => {
+  const fuse = new Fuse(members, options);
+  const result = fuse.search(formData.inputValue);
+  return result.map((member) => {
+    let finalMemberObject = member;
+    checkedIds.forEach((checkedUncheckedIdObject) => {
+      if (String(member.id) === String(checkedUncheckedIdObject.id)) {
+        finalMemberObject = {
+          ...member,
+          memberId: String(checkedUncheckedIdObject.id),
+          isChecked: checkedUncheckedIdObject.isChecked,
+        };
+      }
+    });
+    return finalMemberObject;
+  });
+};
+

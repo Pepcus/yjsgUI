@@ -4,7 +4,7 @@ import { CSVLink } from 'react-csv';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
@@ -18,6 +19,7 @@ import {
   getSelectedMembers,
   manageMembersTableWidth,
   setAllMembersAsUnchecked,
+  getUpdatedVisibleColumnConfig,
 } from 'utils/dataGridUtils';
 import 'assets/css/card-print.css';
 import { getApplicationMode } from 'reducers/assetFilesReducer';
@@ -98,17 +100,17 @@ const PrintMediaDisplayNoneBoxStyled = styled(Box)`
          display:none;
      }
      ${({ theme }) => theme.media.down('lg')`
-     margin: unset;
-     padding: 2px 2px;
+         margin: unset;
+         padding: 2px 2px;
      `};
 `;
 
 const DesktopRowStyled = styled(Row)`
     ${({ theme }) => theme.media.down('lg')`
-       display: none;
-       input[type = "checkbox"] {
+        display: none;
+        input[type = "checkbox"] {
         width:25px;
-    }
+      }
     `}
 `;
 
@@ -124,10 +126,10 @@ const MobileRowStyled = styled(Row)`
 
 const RowStyled = styled(Row)`
   ${({ theme }) => theme.media.down('lg')`
-     margin: 20px 0 0 180px !important;
+       margin: 20px 0 0 180px !important;
   `}
   ${({ theme }) => theme.media.down('md')`
-     margin: 70px 0 0 0 !important;
+       margin: 70px 0 0 0 !important;
   `}
 `;
 
@@ -184,7 +186,7 @@ class MemberInformationGrid extends Component {
     const { refresh } = this.state;
     const { members } = this.props;
     if (isEmpty(members)) {
-      if (nextProps.members !== members) {
+      if (!isEqual(nextProps.members, members)) {
         const idCheckStatusList = setAllMembersAsUnchecked({ members: nextProps.members });
         this.setState({
           members: formatMembers({ members: nextProps.members }),
@@ -201,7 +203,7 @@ class MemberInformationGrid extends Component {
       });
     }
     if (refresh) {
-      if (nextProps.members !== members) {
+      if (!isEqual(nextProps.members, members)) {
         const idCheckStatusList = setAllMembersAsUnchecked({ members: nextProps.members });
         this.setState({
           members: formatMembers({ members: nextProps.members }),
@@ -263,18 +265,20 @@ class MemberInformationGrid extends Component {
    */
   getSelectedRow = (selectedRow) => {
     const { members, checkedIds } = this.state;
+    const { members: membersFormProps } = this.props;
     let listOfIsCheckedStatusMembersId = [];
     const membersData = members.map((member) => {
-      let memberObject = { ...member, id: Number(member.studentId) };
+      let memberObject = { ...member, id: Number(member.memberId) };
       selectedRow.forEach((selectedRowMember) => {
-        if (String(selectedRowMember.studentId) === String(member.studentId)) {
-          memberObject = { ...member,
-            id: Number(member.studentId),
-            studentId: String(member.studentId),
+        if (String(selectedRowMember.memberId) === String(member.memberId)) {
+          memberObject = {
+            ...member,
+            id: Number(member.memberId),
+            memberId: String(member.memberId),
             isChecked: selectedRowMember.isChecked,
           };
           listOfIsCheckedStatusMembersId.push({
-            id: Number(member.studentId),
+            id: Number(member.memberId),
             isChecked: selectedRowMember.isChecked,
           });
         }
@@ -293,7 +297,7 @@ class MemberInformationGrid extends Component {
     this.setState({
       members: membersData,
       checkedIds: idCheckStatusList,
-      selectedMembers: getSelectedMembers({ idCheckStatusList, members: this.props.members }),
+      selectedMembers: getSelectedMembers({ idCheckStatusList, members: membersFormProps }),
     });
     listOfIsCheckedStatusMembersId = [];
   };
@@ -321,23 +325,7 @@ class MemberInformationGrid extends Component {
    * @param {variable} selectValue,
    */
   setValuesOfVisibleColumnConfig = ({ visibleColumnConfig, selectValue }) => {
-    /**
-     * Set the value of edit column on the basis of any column selected on not.
-     */
-    let count = 0;
-    let changedVisibleColumnConfig = {};
-
-    for (const key in visibleColumnConfig) {
-      if (visibleColumnConfig[key]) {
-        count += 1;
-      }
-      if (count > 0) {
-        changedVisibleColumnConfig = { ...visibleColumnConfig, edit: true };
-      } else {
-        changedVisibleColumnConfig = { ...visibleColumnConfig, edit: false };
-      }
-    }
-
+    const changedVisibleColumnConfig = getUpdatedVisibleColumnConfig({ visibleColumnConfig });
     const { metaData } = this.state;
     const { setVisibleColumnConfig } = this.props;
 
@@ -364,9 +352,9 @@ class MemberInformationGrid extends Component {
   handleEditClick(rowData) {
     const { memberData, fetchMemberData, setMemberData, updateMemberByAdmin, setUserType } = this.props;
     if (!isEmpty(rowData)) {
-      fetchMemberData({ id: String(rowData.studentId), secretKey: adminPassword });
+      fetchMemberData({ id: String(rowData.memberId), secretKey: adminPassword });
       setMemberData({ member: memberData });
-      updateMemberByAdmin({ id: String(rowData.studentId), secretKey: adminPassword });
+      updateMemberByAdmin({ id: String(rowData.memberId), secretKey: adminPassword });
       setUserType({ pageUser: USER_TYPES.ADMIN });
       this.setState({
         isMemberDataSet: true,
@@ -463,6 +451,7 @@ class MemberInformationGrid extends Component {
       checkedIds,
       selectedMembers,
       fileDownloadMessage,
+      members: updatedMembers,
     } = this.state;
     const { adminLoginState, members } = this.props;
     return (
@@ -517,7 +506,7 @@ class MemberInformationGrid extends Component {
           />
           <MemberDataGrid
             metaData={metaData}
-            members={this.state.members}
+            members={updatedMembers}
             getSelectedRow={this.getSelectedRow}
             onClickAllExport={this.onClickAllExport}
           />

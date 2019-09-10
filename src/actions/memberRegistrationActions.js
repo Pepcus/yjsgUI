@@ -27,7 +27,7 @@ export const setMemberCredentialsAction = ({ id, secretKey }) => ({
  * createMemberSuccessAction action will call when
  * create member AIP response is success
  * @param {Object} newMember
- * @return {{newMember: {Object}, type: string}}
+ * @return {{newMember: Object, type: string}}
  */
 export const createMemberSuccessAction = newMember => ({
   type: 'CREATE_MEMBER_SUCCESS',
@@ -37,7 +37,7 @@ export const createMemberSuccessAction = newMember => ({
  * createMemberFailedAction action will call when
  * create member AIP response is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: string, message: String}}
  */
 export const createMemberFailedAction = message => ({
   type: 'CREATE_MEMBER_FAILED',
@@ -48,7 +48,7 @@ export const createMemberFailedAction = message => ({
  * member data will fetched
  * @param {String} id
  * @param {String} secretKey
- * @return {{secretKey: *, id: *, type: string}}
+ * @return {{secretKey: String, id: String, type: string}}
  */
 export const fetchMemberDataAction = ({ id, secretKey }) => ({
   type: 'FETCH_MEMBER',
@@ -59,7 +59,7 @@ export const fetchMemberDataAction = ({ id, secretKey }) => ({
  * fetchMemberSuccessAction action will call when
  * fetch member data AIP response is success
  * @param {Object} member
- * @return {{member: {Object}, type: string}}
+ * @return {{member: Object, type: string}}
  */
 export const fetchMemberSuccessAction = member => ({
   type: 'FETCH_MEMBER_SUCCESS',
@@ -80,7 +80,7 @@ export const fetchMemberFailedAction = message => ({
  * @param {String} id
  * @param {String} secretKey
  * @param {Object} updatedMember
- * @return {{updatedMember: {Object}, secretKey: {String}, id: {String}, type: string}}
+ * @return {{updatedMember: Object, secretKey: String, id: String, type: string}}
  */
 export const updateMemberData = ({ id, secretKey, member }) => ({
   type: 'UPDATE_MEMBER',
@@ -92,7 +92,7 @@ export const updateMemberData = ({ id, secretKey, member }) => ({
  * updateMemberSuccessAction action will call when
  * update member data AIP response is success
  * @param {Object} member
- * @return {{member: {Object}, type: string}}
+ * @return {{member: Object, type: string}}
  */
 export const updateMemberSuccessAction = member => ({
   type: 'UPDATE_MEMBER_SUCCESS',
@@ -102,7 +102,7 @@ export const updateMemberSuccessAction = member => ({
  * updateMemberFailedAction action will call when
  * update member data AIP response is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: string, message: String}}
  */
 export const updateMemberFailedAction = message => ({
   type: 'UPDATE_MEMBER_FAILED',
@@ -113,7 +113,7 @@ export const updateMemberFailedAction = message => ({
  * when admin login with their credential
  * @param {String} id
  * @param {String} password
- * @return {{password: *, id: *, type: string}}
+ * @return {{password: String, id: String, type: string}}
  */
 export const setAdminCredentialsAction = ({ id, password }) => ({
   type: 'SET_ADMIN_CREDENTIALS',
@@ -135,7 +135,7 @@ export const resetAdminCredentialsAction = () => ({
  * @param {String} adminKey
  * @param {String} searchKey
  * @param {String} searchValue
- * @return {{searchKey: {String}, type: string, adminKey: {String}, searchValue: {String}}}
+ * @return {{searchKey: String, type: string, adminKey: String, searchValue: String}}
  */
 export const fetchSearchResultsAction = ({ adminKey, searchKey, searchValue }) => ({
   type: 'FETCH_SEARCH_RESULTS',
@@ -146,7 +146,7 @@ export const fetchSearchResultsAction = ({ adminKey, searchKey, searchValue }) =
 /**
  * fetchSearchResultsSuccessAction action will call when fetch search result is success
  * @param {Array} searchResults
- * @return {{type: string, searchResults: {Array}}}
+ * @return {{type: string, searchResults: Array}}
  */
 export const fetchSearchResultsSuccessAction = searchResults => ({
   type: 'FETCH_SEARCH_RESULTS_SUCCESS',
@@ -173,7 +173,7 @@ export const clearSearchResultsAction = () => ({
 /**
  * setNoRecordsFoundMessageAction action will call when search result is empty
  * @param {String} message
- * @return {{type: string, message: *}}
+ * @return {{type: String, message: String}}
  */
 export const setNoRecordsFoundMessageAction = message => ({
   type: 'SET_NO_RECORDS_FOUND_MESSAGE',
@@ -182,7 +182,7 @@ export const setNoRecordsFoundMessageAction = message => ({
 /**
  * getAllMembersAction action will call when all members data will fetch.
  * @param {String} secretKey
- * @return {{secretKey: {String}, type: string}}
+ * @return {{secretKey: String, type: String}}
  */
 export const getAllMembersAction = ({ secretKey }) => ({
   type: 'GET_ALL_MEMBERS',
@@ -192,7 +192,7 @@ export const getAllMembersAction = ({ secretKey }) => ({
  * getAllMembersDataResultsSuccessAction action will call
  * when fetch all members data API responds is success.
  * @param {Array} members
- * @return {{members: *, type: string}}
+ * @return {{members: Array, type: String}}
  */
 export const getAllMembersDataResultsSuccessAction = members => ({
   type: 'GET_ALL_MEMBER_RESULTS_SUCCESS',
@@ -202,7 +202,7 @@ export const getAllMembersDataResultsSuccessAction = members => ({
  * getAllMembersDataResultsFailureAction action will call
  * when fetch all members data API responds is fail.
  * @param {String} errorMessage
- * @return {{errorMessage: *, type: string}}
+ * @return {{errorMessage: String, type: String}}
  */
 export const getAllMembersDataResultsFailureAction = errorMessage => ({
   type: 'GET_ALL_MEMBERS_RESULTS_FAILURE',
@@ -212,7 +212,7 @@ export const getAllMembersDataResultsFailureAction = errorMessage => ({
  * setRedirectValueAction action will call when admin is login
  * or admin is logout
  * @param {Boolean} redirect
- * @return {{redirect: {Boolean}, type: string}}
+ * @return {{redirect: Boolean, type: String}}
  */
 export const setRedirectValueAction = ({ redirect }) => ({
   type: 'SET_REDIRECT_VALUE',
@@ -222,7 +222,7 @@ export const setRedirectValueAction = ({ redirect }) => ({
  * setAdminLoginStateAction action will call when admin is login
  * or logout
  * @param {Boolean} adminLoginState
- * @return {{adminLoginState: {Boolean}, type: string}}
+ * @return {{adminLoginState: Boolean, type: String}}
  */
 export const setAdminLoginStateAction = ({ adminLoginState }) => ({
   type: 'SET_ADMIN_LOGIN_STATE',
@@ -232,7 +232,7 @@ export const setAdminLoginStateAction = ({ adminLoginState }) => ({
  * setMemberDataAction action will call when click on edit button of particular row
  * in members grid
  * @param {Object} member
- * @return {{member: {Object}, isFetched: boolean, type: string}}
+ * @return {{member: Object, isFetched: Boolean, type: String}}
  */
 export const setMemberDataAction = ({ member }) => ({
   type: 'SET_MEMBER_DATA',
@@ -244,7 +244,7 @@ export const setMemberDataAction = ({ member }) => ({
  * when member data will update by admin
  * @param {String} id
  * @param {String} secretKey
- * @return {{secretKey: {String}, id: {String}, type: string}}
+ * @return {{secretKey: String, id: String, type: String}}
  */
 export const updateMemberByAdminAction = ({ id, secretKey }) => ({
   type: 'UPDATE_MEMBER_BY_ADMIN',
@@ -253,7 +253,7 @@ export const updateMemberByAdminAction = ({ id, secretKey }) => ({
 });
 /**
  * isUpdatedResetAction action will call when reset the update information form store
- * @return {{secretKey: string, member: string, isUpdated: boolean, id: string, type: string}}
+ * @return {{secretKey: String, member: String, isUpdated: Boolean, id: String, type: String}}
  */
 export const isUpdatedResetAction = () => ({
   type: 'RESET_IS_UPDATE',
@@ -267,7 +267,7 @@ export const isUpdatedResetAction = () => ({
  * call when set the updated column option data in store
  * @param {Object} visibleColumnConfig
  * @param {Boolean} selectValue
- * @return {{visibleColumnConfig: {Object}, selectValue: {Boolean}, type: string}}
+ * @return {{visibleColumnConfig: Object, selectValue: Boolean, type: String}}
  */
 export const setVisibleColumnConfigAction = ({ visibleColumnConfig, selectValue }) => ({
   type: 'SET_VISIBLE_COLUMN_CONFIG_DATA',
@@ -277,7 +277,7 @@ export const setVisibleColumnConfigAction = ({ visibleColumnConfig, selectValue 
 /**
  * resetVisibleColumnConfigAction action will set the column option to initial state in store
  * on logout of admin
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetVisibleColumnConfigAction = () => ({
   type: 'RESET_VISIBLE_COLUMN_CONFIG_DATA',
@@ -287,7 +287,7 @@ export const resetVisibleColumnConfigAction = () => ({
  * @param {String} secretKey
  * @param {Object} attendanceFile
  * @param {String} day
- * @return {{secretKey: {String}, type: string, day: {string},  attendanceFile: {Object}}}
+ * @return {{secretKey: String, type: String, day: String,  attendanceFile: Object}}
  */
 export const uploadMembersAttendanceFileAction = ({ secretKey, attendanceFile, day }) => ({
   type: 'UPLOAD_ATTENDANCE_FILE',
@@ -299,7 +299,7 @@ export const uploadMembersAttendanceFileAction = ({ secretKey, attendanceFile, d
  * uploadAttendanceFileResultsSuccessAction action will call
  * when upload members attendance file API response is success
  * @param {Object} response
- * @return {{type: string, failRecordIds: null}}
+ * @return {{type: String, failRecordIds: Null}}
  */
 export const uploadAttendanceFileResultsSuccessAction = response => ({
   type: 'UPLOAD_ATTENDANCE_FILE_SUCCESS',
@@ -310,7 +310,7 @@ export const uploadAttendanceFileResultsSuccessAction = response => ({
  * uploadAttendanceFileResultsFailureAction action will call when
  * upload members attendance file API response is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: String, message: String}}
  */
 export const uploadAttendanceFileResultsFailureAction = message => ({
   type: 'UPLOAD_ATTENDANCE_FILE_FAILED',
@@ -319,7 +319,7 @@ export const uploadAttendanceFileResultsFailureAction = message => ({
 /**
  * resetIsSuccessAction action will call when reset
  * the isSuccess flag of members attendance file upload
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetIsSuccessAction = () => ({
   type: 'RESET_IS_SUCCESS',
@@ -328,7 +328,7 @@ export const resetIsSuccessAction = () => ({
  * uploadOptInFileAction action will call when upload members optIn file
  * @param {String} secretKey
  * @param {Object} optInFile
- * @return {{secretKey: {String}, optInFile: {String}, type: string}}
+ * @return {{secretKey: String, optInFile: String, type: String}}
  */
 export const uploadOptInFileAction = ({ secretKey, optInFile }) => ({
   type: 'UPLOAD_OPT_IN_FILE',
@@ -339,7 +339,7 @@ export const uploadOptInFileAction = ({ secretKey, optInFile }) => ({
  * uploadOptInFileResultsSuccessAction action will call
  * when upload members optIn file API respond is success
  * @param {Object} response
- * @return {{type: string, failRecordIds: null}}
+ * @return {{type: String, failRecordIds: Null}}
  */
 export const uploadOptInFileResultsSuccessAction = response => ({
   type: 'UPLOAD_OPT_IN_FILE_SUCCESS',
@@ -350,7 +350,7 @@ export const uploadOptInFileResultsSuccessAction = response => ({
  * uploadOptInFileResultsFailureAction action will call
  * when upload members optIn file API respond is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: String, message: String}}
  */
 export const uploadOptInFileResultsFailureAction = message => ({
   type: 'UPLOAD_OPT_IN_FILE_FAILED',
@@ -359,7 +359,7 @@ export const uploadOptInFileResultsFailureAction = message => ({
 /**
  * resetIsOptInSuccessAction action will call when
  * reset isOptInSuccess flag
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetIsOptInSuccessAction = () => ({
   type: 'RESET_IS_OPT_IN_SUCCESS',
@@ -369,7 +369,7 @@ export const resetIsOptInSuccessAction = () => ({
  * @param {String} secretKey
  * @param {Array} selectedMembersId
  * @param {Object} day
- * @return {{secretKey: {String}, type: string, day: {Object}, selectedMembersId: {Array}}}
+ * @return {{secretKey: String, type: String, day: Object, selectedMembersId: Array}}
  */
 export const markSelectedMembersAttendanceAction = ({ secretKey, selectedMembersId, day }) => ({
   type: 'MARK_SELECTED_MEMBERS_ATTENDANCE',
@@ -381,7 +381,7 @@ export const markSelectedMembersAttendanceAction = ({ secretKey, selectedMembers
  * markSelectedMembersAttendanceResultsSuccessAction action will call
  * when mark selected members attendance AIP responds is success
  * @param {Object} response
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const markSelectedMembersAttendanceResultsSuccessAction = response => ({
   type: 'MARK_SELECTED_MEMBERS_ATTENDANCE_SUCCESS',
@@ -390,7 +390,7 @@ export const markSelectedMembersAttendanceResultsSuccessAction = response => ({
  * markSelectedMembersAttendanceResultsFailureAction action will call
  * when mark selected members attendance AIP responds is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: String, message: String}}
  */
 export const markSelectedMembersAttendanceResultsFailureAction = message => ({
   type: 'MARK_SELECTED_MEMBERS_ATTENDANCE_FAILED',
@@ -398,7 +398,7 @@ export const markSelectedMembersAttendanceResultsFailureAction = message => ({
 });
 /**
  * resetIsMarkAttendanceSuccessAction action will call when reset isMarkAttendanceSuccess flag
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetIsMarkAttendanceSuccessAction = () => ({
   type: 'RESET_IS_MARK_ATTENDANCE_SUCCESS',
@@ -408,7 +408,7 @@ export const resetIsMarkAttendanceSuccessAction = () => ({
  * @param {String} secretKey
  * @param {Array} selectedMembersId
  * @param {Object} opt
- * @return {{opt: {Object}, secretKey: {String}, type: string, selectedMembersId: {Array}}}
+ * @return {{opt: Object, secretKey: String, type: String, selectedMembersId: Array}}
  */
 export const markSelectedMembersOptInOrOptOutAction = ({ secretKey, selectedMembersId, opt }) => ({
   type: 'MARK_SELECTED_MEMBERS_OPT_IN_OR_OPT_OUT',
@@ -420,7 +420,7 @@ export const markSelectedMembersOptInOrOptOutAction = ({ secretKey, selectedMemb
  * markSelectedMembersOptInOrOptOutResultsSuccessAction action will call
  * when mark selected members optInOrOptOut AIP responds is success
  * @param {Object} response
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const markSelectedMembersOptInOrOptOutResultsSuccessAction = response => ({
   type: 'MARK_SELECTED_MEMBERS_OPT_IN_OR_OPT_OUT_SUCCESS',
@@ -429,7 +429,7 @@ export const markSelectedMembersOptInOrOptOutResultsSuccessAction = response => 
  * markSelectedMembersOptInOrOptOutResultsFailureAction action will call
  * when mark selected members OptInOrOptOut AIP responds is fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: String, message: String}}
  */
 export const markSelectedMembersOptInOrOptOutResultsFailureAction = message => ({
   type: 'MARK_SELECTED_MEMBERS_OPT_IN_OR_OPT_OUT_FAILED',
@@ -437,7 +437,7 @@ export const markSelectedMembersOptInOrOptOutResultsFailureAction = message => (
 });
 /**
  * resetIsMarkOptInOrOptOutSuccessAction action will call when reset isMarkOptInOrOptOutSuccess flag
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetIsMarkOptInOrOptOutSuccessAction = () => ({
   type: 'RESET_IS_MARK_OPT_IN_OR_OPT_OUT_SUCCESS',
@@ -448,12 +448,7 @@ export const resetIsMarkOptInOrOptOutSuccessAction = () => ({
  * @param {String} secretKey
  * @param {Array} selectedMembersId
  * @param {Object} IdCardStatus
- * @return {{
- * IdCardStatus: {Object},
- * secretKey: {String},
- * type: string,
- * selectedMembersId: {Array}
- * }}
+ * @return {{IdCardStatus: Object, secretKey: String, type: string, selectedMembersId: Array}}
  */
 export const updateIdCardStatusSelectedMembersAction = ({ secretKey, selectedMembersId, IdCardStatus }) => ({
   type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_MEMBERS',
@@ -465,7 +460,7 @@ export const updateIdCardStatusSelectedMembersAction = ({ secretKey, selectedMem
  * updateIdCardStatusSelectedMembersResultsSuccessAction action will call when
  * update selected member IdCard status AIP response success
  * @param {Object} response
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const updateIdCardStatusSelectedMembersResultsSuccessAction = response => ({
   type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_MEMBERS_SUCCESS',
@@ -474,7 +469,7 @@ export const updateIdCardStatusSelectedMembersResultsSuccessAction = response =>
  * updateIdCardStatusSelectedMembersResultsFailureAction action will call when
  * update selected member IdCard status AIP response fail
  * @param {String} message
- * @return {{type: string, message: {String}}}
+ * @return {{type: String, message: String}}
  */
 export const updateIdCardStatusSelectedMembersResultsFailureAction = message => ({
   type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_MEMBERS_FAILED',
@@ -483,7 +478,7 @@ export const updateIdCardStatusSelectedMembersResultsFailureAction = message => 
 /**
  * resetIsUpdateIdCardStatusSuccessAction action will
  * call when reset isUpdateIdCardStatusSuccess flag
- * @return {{type: string}}
+ * @return {{type: String}}
  */
 export const resetIsUpdateIdCardStatusSuccessAction = () => ({
   type: 'RESET_IS_UPDATE_ID_CARD_STATUS_SUCCESS',
@@ -492,7 +487,7 @@ export const resetIsUpdateIdCardStatusSuccessAction = () => ({
  * setHashLinkForMemberCredentialAction action will call when set user
  * type redirect to member registration correction form
  * @param {String} hashLink
- * @return {{hashLink: {String}, type: string}}
+ * @return {{hashLink: String, type: String}}
  */
 export const setHashLinkForMemberCredentialAction = hashLink => ({
   type: 'SET_HASH_LINK_FOR_MEMBER_CREDENTIAL',
@@ -502,7 +497,7 @@ export const setHashLinkForMemberCredentialAction = hashLink => ({
  * setHashLinkForNewRegistrationAction action will
  * call to set user type when redirect to new registration route
  * @param {String} userType
- * @return {{userType: {String}, type: string}}
+ * @return {{userType: String, type: String}}
  */
 export const setHashLinkForNewRegistrationAction = userType => ({
   type: 'SET_HASH_LINK_FOR_NEW_REGISTRATION',
@@ -513,7 +508,7 @@ export const setHashLinkForNewRegistrationAction = userType => ({
  * @param {String} name
  * @param {Number} members
  * @param {String} phoneNumber
- * @return {{phoneNumber: {String}, members: {Number}, name: {String}, type: string}}
+ * @return {{phoneNumber: String, members: Number, name: String, type: String}}
  */
 export const parentsRegistrationAction = ({ name, members, phoneNumber }) => ({
   type: 'PARENTS_REGISTRATION',
@@ -525,7 +520,7 @@ export const parentsRegistrationAction = ({ name, members, phoneNumber }) => ({
  * parentsRegistrationResultsSuccessAction action will call
  * when parents registration AIP response is success
  * @param {Object} response
- * @return {{response: {Object}, type: string}}
+ * @return {{response: Object, type: String}}
  */
 export const parentsRegistrationResultsSuccessAction = response => ({
   type: 'PARENTS_REGISTRATION_RESULT_SUCCESS',
@@ -535,7 +530,7 @@ export const parentsRegistrationResultsSuccessAction = response => ({
  * parentsRegistrationResultsFailureAction action will call
  * when parents registration AIP response is fail
  * @param {String} message
- * @return {{type: string, message: *}}
+ * @return {{type: String, message: String}}
  */
 export const parentsRegistrationResultsFailureAction = message => ({
   type: 'PARENTS_REGISTRATION_RESULT_FAILED',
@@ -544,7 +539,7 @@ export const parentsRegistrationResultsFailureAction = message => ({
 /**
  * setUserTypeAction action set the user type
  * @param {String} pageUser
- * @return {{pageUser: string, type: string}}
+ * @return {{pageUser: String, type: String}}
  */
 export const setUserTypeAction = ({ pageUser }) => ({
   type: 'SET_USER_TYPE',
@@ -553,7 +548,7 @@ export const setUserTypeAction = ({ pageUser }) => ({
 /**
  * setLoadingStateAction action set the loading state
  * @param {Boolean} isLoading
- * @return {{isLoading: boolean, type: string}}
+ * @return {{isLoading: Boolean, type: String}}
  */
 export const setLoadingStateAction = isLoading => ({
   type: 'SET_LOADING_STATE',

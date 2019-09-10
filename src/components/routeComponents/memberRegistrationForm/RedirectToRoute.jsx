@@ -29,13 +29,13 @@ const RedirectToRoute = ({
   let routeName = '';
 
   if (isAdminLocation || isStudentLocation || isPreviousLocation) {
-    const routesFlag = {
+    const routeFlags = {
       isAdminLocation,
       isStudentLocation,
     };
 
-    Object.keys(routesFlag).forEach((routeFlag) => {
-      if (routesFlag[routeFlag]) {
+    Object.keys(routeFlags).forEach((routeFlag) => {
+      if (routeFlags[routeFlag]) {
         routeName = routes[routeFlag];
       }
     });

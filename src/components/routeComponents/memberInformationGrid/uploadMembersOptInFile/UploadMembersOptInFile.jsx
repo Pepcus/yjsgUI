@@ -39,6 +39,13 @@ const CloseButtonStyled = styled(Button)`
     float: right;
 `;
 
+const ButtonStyled = styled(Button)`
+   ${({ theme }) => theme.media.down('xl')`
+       min-height: 36px;
+       padding: 5px;
+    `}
+`;
+
 /**
  * UploadMembersOptInFile render upload optIn file modal
  * @type {Class}
@@ -99,10 +106,12 @@ class UploadMembersOptInFile extends Component {
    * @param {Array} errors
    */
   onChange = ({ formData, errors }) => {
-    if (formData !== this.state.formData) {
+    const { formData: previousFormData } = this.state;
+
+    if (formData !== previousFormData) {
       this.setState({
         formData: {
-          ...this.state.formData,
+          ...previousFormData,
           optInFile: formData.optInFile,
         },
         hasError: !isEmpty(errors),
@@ -217,14 +226,14 @@ class UploadMembersOptInFile extends Component {
   render() {
     return (
       <Row display="inline-block" margin="0 0 0 10px">
-        <Button
+        <ButtonStyled
           color="primary"
           title="Upload Attendance"
           onClick={this.openModal}
         >
           <FaIcon icon={faUpload} />
           Upload Opt In
-        </Button>
+        </ButtonStyled>
         {this.renderUploadOptInModal()}
       </Row>
     );

@@ -154,11 +154,11 @@
     max-width: 55px;
     min-width: 54px;
 }
-.cell__studentId, .cell__ID {
+.cell__memberId, .cell__ID {
     max-width: 55px;
     min-width: 54px;
 }
-.cell__studentId> div.table-cell {
+.cell__memberId> div.table-cell {
     font-family: sans-serif;
 }
 .cell__grid__select-column {

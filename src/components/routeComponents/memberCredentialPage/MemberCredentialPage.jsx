@@ -92,7 +92,7 @@ class MemberCredentialPage extends Component {
   componentWillMount() {
     const {
       context,
-      studentId,
+      memberId,
       secretKey,
     } = this.props;
 
@@ -100,7 +100,7 @@ class MemberCredentialPage extends Component {
     // pre populate the id and secretKey of previous login student
     if (context.previousLocation === '/admin') {
       this.setState({
-        credentials: { studentId, secretKey },
+        credentials: { memberId, secretKey },
       });
     // else student credential fields are empty
     } else if (context.previousLocation === '/') {
@@ -162,8 +162,8 @@ class MemberCredentialPage extends Component {
 
     event.preventDefault();
     if (hasError) {
-      setStudentCredentials({ id: credentials.studentId, secretKey: credentials.secretKey });
-      fetchStudentData({ id: credentials.studentId, secretKey: credentials.secretKey });
+      setStudentCredentials({ id: credentials.memberId, secretKey: credentials.secretKey });
+      fetchStudentData({ id: credentials.memberId, secretKey: credentials.secretKey });
       setUserType({ pageUser: STUDENT });
       this.setState({
         redirectToStudentCorrectionLogin: true,
@@ -312,7 +312,7 @@ MemberCredentialPage.propTypes = {
   secretKey: PropTypes.string,
   setStudentCredentials: PropTypes.func,
   setUserType: PropTypes.func,
-  studentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  memberId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   tenant: PropTypes.string,
 };
 
@@ -323,7 +323,7 @@ MemberCredentialPage.defaultProps = {
   secretKey: '',
   setStudentCredentials: () => {},
   setUserType: () => {},
-  studentId: '',
+  memberId: '',
   tenant: '',
 };
 
@@ -333,7 +333,7 @@ const mapStateToProps = state => ({
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),
   secretKey: getUserSecretKey(state),
-  studentId: getUserId(state),
+  memberId: getUserId(state),
   tenant: getApplicationTenant(state),
 });
 

@@ -23,10 +23,10 @@ const RedirectToRoute = ({
   };
 
   if (isURLParams || isNewRegistration || isStudentLogin) {
-    const routesFlag = { isURLParams, isNewRegistration, isStudentLogin };
+    const routeFlags = { isURLParams, isNewRegistration, isStudentLogin };
 
-    return Object.keys(routesFlag).map((routeFlag) => {
-      if (routesFlag[routeFlag]) {
+    return Object.keys(routeFlags).map((routeFlag) => {
+      if (routeFlags[routeFlag]) {
         return <Switch key={shortId.generate()}><Redirect to={routes[routeFlag]} /></Switch>;
       }
       return null;

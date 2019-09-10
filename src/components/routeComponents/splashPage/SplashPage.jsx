@@ -163,8 +163,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method enable the admin login
-   * button by onClick of admin login button.
+   * Method enable the admin login button by onClick of admin login button.
    * It set the value of isAdmin to true.
    */
   enableAdminLoginButtons = () => {
@@ -262,8 +261,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method set the value of isNewRegistration true on Onclick
-   * of new registration button.
+   * Method set the value of isNewRegistration true on Onclick of new registration button.
    */
   redirectToNewRegistrationPage = () => {
     const { setHashLinkForNewRegistration } = this.props;

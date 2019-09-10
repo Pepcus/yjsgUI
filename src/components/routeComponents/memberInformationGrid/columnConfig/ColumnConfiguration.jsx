@@ -192,7 +192,8 @@ class ColumnConfiguration extends Component {
    * and call closeColumnOption() method.
    */
   setValuesOfVisibleColumnConfig = () => {
-    const { visibleColumnConfig, selectValue } = this.state.formData;
+    const { formData } = this.state;
+    const { visibleColumnConfig, selectValue } = formData;
     const { setValuesOfVisibleColumnConfig, closeColumnOption } = this.props;
 
     setValuesOfVisibleColumnConfig({
@@ -208,13 +209,14 @@ class ColumnConfiguration extends Component {
    * @param {Object} formData
    */
   setCheckValue = ({ formData }) => {
-    const temporaryVisibleColumnConfig = cloneDeep(this.state.formData.visibleColumnConfig);
-    const { selectValue } = this.state.formData;
+    const { formData: previousFormData } = this.state;
+    const temporaryVisibleColumnConfig = cloneDeep(previousFormData.visibleColumnConfig);
+    const { selectValue } = previousFormData;
 
     if (selectValue !== formData.selectValue) {
       this.setState({
         formData: {
-          ...this.state.formData,
+          ...previousFormData,
           selectValue: formData.selectValue,
           visibleColumnConfig: getChangedVisibleColumnConfig({
             selectValue: formData.selectValue,

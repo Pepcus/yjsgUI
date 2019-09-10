@@ -260,7 +260,6 @@
     },
     "address": {
       "ui:field": "InputField",
-      "ui:widget": "textarea",
       "ui:options": {
         "style": {
           "titleStyle": {
@@ -309,7 +308,6 @@
     },
     "age": {
       "ui:field": "InputField",
-      "ui:widget": "updown",
       "ui:options": {
         "style": {
           "fieldStyle": {

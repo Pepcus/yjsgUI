@@ -42,7 +42,7 @@ const CloseButtonStyled = styled(Button)`
 
 const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('xl')`
-       min-height: 30px;
+       min-height: 36px;
        padding: 5px;
     `}
 `;
@@ -105,7 +105,8 @@ class UploadMembersAttendanceFile extends Component {
    */
   fileUpload = (attendanceFile) => {
     const { secretKey, uploadMembersAttendanceFile } = this.props;
-    const { selectedDay } = this.state.formData;
+    const { formData } = this.state;
+    const { selectedDay } = formData;
 
     uploadMembersAttendanceFile({ secretKey, attendanceFile, day: selectedDay });
   };
@@ -135,10 +136,11 @@ class UploadMembersAttendanceFile extends Component {
    * @param {Array} errors
    */
   handleSelectChange = ({ formData, errors }) => {
-    if (formData !== this.state.formData) {
+    const { formData: previousFormData } = this.state;
+    if (formData !== previousFormData) {
       this.setState({
         formData: {
-          ...this.state.formData,
+          ...previousFormData,
           attendanceFile: formData.attendanceFile,
           selectedDay: formData.selectedDay,
         },

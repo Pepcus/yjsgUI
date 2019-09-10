@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import * as shortId from 'shortid';
@@ -74,7 +74,7 @@ const MemberInformationWrapper = styled(Box)`
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.69) !important;
+    background-color: ${getThemeProps('palette.transparent.color')};
 }
 `;
 
@@ -114,7 +114,7 @@ class MembersIdCard extends Component {
   renderMembersIdCard({ selectedMembers }) {
     const { busCoordinators = {} } = this.props;
     const membersIdCards = selectedMembers.map((member) => {
-      const memberId = getFormattedMemberId({ memberId: member.studentId });
+      const memberId = getFormattedMemberId({ memberId: member.memberId });
       const name = convertFirstCharacterInUpperCase({ sentence: member.name });
       const fatherName = convertFirstCharacterInUpperCase({ sentence: member.fatherName });
       const addressString = member.address ? member.address.replace(/,/g, ', ') : member.address;
@@ -129,7 +129,7 @@ class MembersIdCard extends Component {
           borderColor="warning"
         >
           <Typography
-            color="#ffffff"
+            color="white"
             fontWeight="600"
             padding="0"
             fontFamily="'Roboto Condensed', Serif"
@@ -143,7 +143,7 @@ class MembersIdCard extends Component {
             >
               <img
                 src="../../LOGO.png"
-                alt="yjsg-logo"
+                alt="header-logo"
                 style={{ 'max-width': '100%' }}
               />
             </BoxStyled>
@@ -371,7 +371,7 @@ class MembersIdCard extends Component {
                   fontSize="13px"
                   padding="0 0 0 3px"
                 >
-                  {member.studentId}
+                  {member.memberId}
                 </CardTextWrapper>
               </RowStyled>
               <BarcodeWrapperStyled flex="0 0 auto" margin="3px 0 0 0">

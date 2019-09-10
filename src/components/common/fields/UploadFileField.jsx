@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import get from 'lodash/get';
+import styled from 'styled-components';
 import { faFileImport } from '@fortawesome/free-solid-svg-icons/faFileImport';
 
 import Button from 'ravenjs/lib/Button';
@@ -9,14 +10,14 @@ import Col from 'ravenjs/lib/Col';
 import FaIcon from 'ravenjs/lib/FaIcon';
 import Input from 'ravenjs/lib/Input';
 import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
-const defaultTitleStyle = {
-  'fontWeight': 'bold',
-  'display': 'block',
-  'marginBottom': '7px',
-  'color': '#4c4c4c',
-  'fontSize': '14px',
-};
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('typography.titleFieldColor.color')}
+   font-weight: bold !important;
+   display: block;
+  `;
 
 /**
  * UploadFileField if UploadFileField for JSON form
@@ -142,43 +143,45 @@ class UploadFileField extends Component {
     return (
       <Row width="auto">
         <Col size={12}>
-          <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-            {label ? title : ''}{required && label ? '*' : ''}
-          </label>
+          <TypographyStyled type="label" style={titleStyle}>
+            {label ? title : null}{required && label ? '*' : null}
+          </TypographyStyled>
         </Col>
-        <Col style={{ 'max-width': '50%', position: 'relative' }}>
-          <Input
-            disabled
-            required={required}
-            type="text"
-            value={this.getInputLabel()}
-            style={{ ...fieldStyle }}
-          />
-          <input
-            accept={accept}
-            defaultValue=""
-            disabled={disabled}
-            id={id}
-            multiple={multiple}
-            onChange={this.handleOnInputChange}
-            ref={this.hiddenFileInputRef}
-            required={required}
-            style={this.getHiddenInputStyle()}
-            tabIndex={-1}
-            type="file"
-          />
-        </Col>
-        <Col size="auto" style={{ 'max-width': '50%' }}>
-          <Button
-            disabled={disabled}
-            onClick={this.handleOnUploadClick}
-            type="button"
-            {...btnProps}
-          >
-            {showIcon && <FaIcon icon={faFileImport} margin="0 5px 0 0" />}
-            {btnLabel}
-          </Button>
-        </Col>
+        <Row width="100%">
+          <Col size={8} style={{ position: 'relative' }}>
+            <Input
+              disabled
+              required={required}
+              type="text"
+              value={this.getInputLabel()}
+              style={{ ...fieldStyle }}
+            />
+            <Input
+              accept={accept}
+              defaultValue=""
+              disabled={disabled}
+              id={id}
+              multiple={multiple}
+              onChange={this.handleOnInputChange}
+              ref={this.hiddenFileInputRef}
+              required={required}
+              style={this.getHiddenInputStyle()}
+              tabIndex={-1}
+              type="file"
+            />
+          </Col>
+          <Col size={4}>
+            <Button
+              disabled={disabled}
+              onClick={this.handleOnUploadClick}
+              type="button"
+              {...btnProps}
+            >
+              {showIcon && <FaIcon icon={faFileImport} margin="0 5px 0 0" />}
+              {btnLabel}
+            </Button>
+          </Col>
+        </Row>
       </Row>
     );
   }

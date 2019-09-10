@@ -8,7 +8,6 @@
     }
   },
   "uiSchema": {
-    "order": ["inputValue"],
     "inputValue": {
       "ui:field": "InputField",
       "ui:options": {

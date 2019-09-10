@@ -6,7 +6,7 @@
   "columnsList": [
     {
       "label": "ID",
-      "key": "studentId"
+      "key": "memberId"
     },
     {
       "label": "Name",

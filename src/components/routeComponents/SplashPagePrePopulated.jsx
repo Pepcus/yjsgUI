@@ -79,7 +79,7 @@ class SplashPagePrePopulated extends Component {
   componentDidMount() {
     this.setState({
       credentials: {
-        studentId: this.props.studentId,
+        memberId: this.props.memberId,
         secretKey: this.props.secretKey,
       },
     });
@@ -88,7 +88,7 @@ class SplashPagePrePopulated extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       credentials: {
-        studentId: nextProps.studentId,
+        memberId: nextProps.memberId,
         secretKey: nextProps.secretKey,
       },
     });
@@ -208,9 +208,9 @@ class SplashPagePrePopulated extends Component {
    */
   // This may be use in future.
   /* fetchStudentById () {
-    this.props.setStudentCredentials(this.state.credentials.studentId,
+    this.props.setStudentCredentials(this.state.credentials.memberId,
       this.state.credentials.secretKey);
-    this.props.fetchMemberDataAction(this.state.credentials.studentId,
+    this.props.fetchMemberDataAction(this.state.credentials.memberId,
       this.state.credentials.secretKey);
     this.setState({
       registeredStudentCredentialErrorMessage: true,
@@ -249,11 +249,11 @@ class SplashPagePrePopulated extends Component {
       <div>
         <InputField
           type={'number'}
-          name={'studentId'}
+          name={'memberId'}
           label={ID_NUMBER_TEXT}
           placeholder={ENTER_ID_NUMBER_MESSAGE}
           onInputChange={this._handleInputChange}
-          value={this.state.credentials.studentId}
+          value={this.state.credentials.memberId}
         />
         <InputField
           type={'text'}
@@ -376,7 +376,7 @@ SplashPagePrePopulated.propTypes = {
   setMemberCredentialsAction: PropTypes.func,
   setAdminLoginStateAction: PropTypes.func,
   setAdminCredentialsAction: PropTypes.func,
-  studentId: PropTypes.string,
+  memberId: PropTypes.string,
   secretKey: PropTypes.string,
   adminLoginState: PropTypes.bool,
   id: PropTypes.string,
@@ -389,7 +389,7 @@ SplashPagePrePopulated.defaultProps = {
   setMemberCredentialsAction: () => {},
   setAdminLoginStateAction: () => {},
   setAdminCredentialsAction: () => {},
-  studentId: '',
+  memberId: '',
   secretKey: '',
   adminLoginState: false,
   id: '',
@@ -398,7 +398,7 @@ SplashPagePrePopulated.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  studentId: getUserId(state),
+  memberId: getUserId(state),
   id: getAdminId(state),
   secretKey: getUserSecretKey(state),
   password: getAdminPassword(state),

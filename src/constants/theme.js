@@ -12,6 +12,9 @@ const APP_THEME = {
     root: {
       fontFamily: "'Poppins', sans-serif",
     },
+    titleFieldColor: {
+      color: '#4c4c4c',
+    },
   },
   home: {
     backgroundColor: '#f4e9e336',
@@ -43,6 +46,9 @@ const APP_THEME = {
       gradientColor: 'linear-gradient(to top, #ebebec, #ebebec)',
       light: '#dbd7d6',
       text: '#010306',
+    },
+    transparent: {
+      color: 'rgba(255, 255, 255, 0.69)',
     },
     modal: {
       borderColor: '#898787',

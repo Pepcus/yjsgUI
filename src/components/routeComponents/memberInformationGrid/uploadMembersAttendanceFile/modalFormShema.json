@@ -52,8 +52,7 @@
           "width": "24px",
           "margin-right": "10px"
         }
-      },
-      "ui:widget": "file"
+      }
     },
     "selectedDay": {
       "ui:placeholder": "कृपया एक चुनिए . . .",

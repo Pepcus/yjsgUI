@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { getThemeProps } from 'ravenjs/utils/theme';
 import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/esm/lib/Typography';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
   UPLOAD_FILE_TEXT,

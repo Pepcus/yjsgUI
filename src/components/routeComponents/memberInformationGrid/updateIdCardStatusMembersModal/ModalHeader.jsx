@@ -4,12 +4,11 @@ import styled from 'styled-components';
 
 import { getThemeProps } from 'ravenjs/utils/theme';
 import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/esm/lib/Typography';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
   ID_CARD_PRINT_STATUS_FOR_SELECTED_STUDENTS_LABEL,
 } from 'constants/label';
-
 
 const RowStyled = styled(Row)`
     background: ${getThemeProps('colors.header')};

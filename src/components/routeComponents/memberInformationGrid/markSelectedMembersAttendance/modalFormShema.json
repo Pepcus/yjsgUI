@@ -34,7 +34,8 @@
     "required": ["selectedDay"]
   },
   "uiSchema": {
-    "ui:order": ["membersId",
+    "ui:order": [
+      "membersId",
       "selectedDay"
     ],
     "membersId": {

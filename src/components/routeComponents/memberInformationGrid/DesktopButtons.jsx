@@ -59,7 +59,8 @@ const DesktopButtons = ({
       padding="10px"
       width="68px"
       noMinWidth
-      minHeight="36px"
+      noMinHeight
+      height="36px"
       margin="0 0 0 10px"
       onClick={redirectToFile}
     >
@@ -71,7 +72,8 @@ const DesktopButtons = ({
       padding="10px"
       title="Configure"
       noMinWidth
-      minHeight="36px"
+      noMinHeight
+      height="36px"
       margin="0 0 0 10px"
       onClick={openColumnOption}
     >
@@ -81,7 +83,8 @@ const DesktopButtons = ({
       width="36px"
       padding="10px"
       noMinWidth
-      minHeight="36px"
+      noMinHeight
+      height="36px"
       margin="0 0 0 10px"
       title="Refresh Students Information"
       onClick={refreshMembersGrid}

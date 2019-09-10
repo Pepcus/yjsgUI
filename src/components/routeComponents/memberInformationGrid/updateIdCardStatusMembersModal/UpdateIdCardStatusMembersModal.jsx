@@ -13,7 +13,7 @@ import FaIcon from 'ravenjs/lib/FaIcon';
 import Form from 'ravenjs/lib/Form';
 import Modal from 'ravenjs/lib/Modal';
 import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/esm/lib/Typography';
+import Typography from 'ravenjs/lib/Typography';
 
 import {
   resetIsUpdateIdCardStatusSuccessAction,
@@ -81,6 +81,14 @@ class UpdateIdCardStatusMembersModal extends Component {
         membersId: extractMembersId({ selectedMembers }),
       },
     });
+  };
+
+  /**
+   * Method open the modal on the basis of selectedMembers
+   */
+  checkOpenModalCondition = () => {
+    const { selectedMembers } = this.props;
+    !isEmpty(selectedMembers) ? this.openModal() : null;
   };
 
   /**
@@ -247,10 +255,7 @@ class UpdateIdCardStatusMembersModal extends Component {
           softDisable={isEmpty(selectedMembers)}
           color="tertiary"
           noMinWidth
-          onClick={() => {
-            !isEmpty(selectedMembers) ? this.openModal()
-              : null;
-          }}
+          onClick={this.checkOpenModalCondition}
         >
           <FaIcon icon={faPrint} />Print Later
         </ButtonStyled>

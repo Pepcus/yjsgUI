@@ -6,8 +6,7 @@ import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 
 /**
- * CoordinatorInformation method render coordination contact
- * number into the members Id card footer
+ * CoordinatorInformation method render coordination contact number into the members Id card footer
  * @param {String} busNumber
  * @param {String} value
  * @param {String} label

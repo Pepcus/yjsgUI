@@ -9,7 +9,6 @@
     "required": ["optInFile"]
   },
   "uiSchema": {
-    "ui:order": ["optInFile"],
     "optInFile": {
       "ui:field": "UploadFileField",
       "ui:options": {
@@ -25,8 +24,7 @@
           "width": "24px",
           "margin-right": "10px"
         }
-      },
-      "ui:widget": "file"
+      }
     }
   }
 }

@@ -121,8 +121,7 @@ class MemberRegistrationForm extends Component {
   };
 
   /**
-   * Scroll page upto first form field which fielded by invalid data
-   * onclick of submit button
+   * Scroll page upto first form field which fielded by invalid data onclick of submit button
    */
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-danger');
@@ -188,7 +187,8 @@ class MemberRegistrationForm extends Component {
    * @return {Object} errors
    */
   validate = (formData, errors) => {
-    const { validation } = this.state.formConfig;
+    const { formConfig } = this.state;
+    const { validation } = formConfig;
 
     return validateForm({ formData, errors, validate: validation });
   };

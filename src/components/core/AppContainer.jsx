@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import cssVars from 'css-vars-ponyfill';
 import {
   HashRouter,
