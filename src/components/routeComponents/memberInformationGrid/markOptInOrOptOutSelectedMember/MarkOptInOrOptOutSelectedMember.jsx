@@ -150,6 +150,14 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   /**
+   * Method open the modal on the basis of selectedMembers
+   */
+  checkOpenModalCondition = () => {
+    const { selectedMembers } = this.props;
+    !isEmpty(selectedMembers) ? this.openModal() : null;
+  };
+
+  /**
    * Method render mark selected members optIn/optOut modal
    * @return {HTML} modal
    */
@@ -252,10 +260,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
           softDisable={isEmpty(selectedMembers)}
           color="tertiary"
           noMinWidth
-          onClick={() => {
-            !isEmpty(selectedMembers) ? this.openModal()
-              : null;
-          }}
+          onClick={this.checkOpenModalCondition}
         >
           <FaIcon icon={faInfoCircle} />Mark Opt In / Out
         </ButtonStyled>

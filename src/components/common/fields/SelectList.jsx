@@ -26,12 +26,12 @@ const TypographyStyled = styled(Typography)`
 const SelectStyled = styled(Select)`
   border-radius: 4px;
   &:invalid {
-      color: gray;
+      color: ${getThemeProps('palette.text.color')};
     }
 `;
 
 const SelectOptionStyled = styled(SelectOption)`
-  color: black;
+  color: ${getThemeProps('palette.dark.color')};
   display: ${props => (props.hidden ? 'none' : null)}
 `;
 

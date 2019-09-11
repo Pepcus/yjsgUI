@@ -18,6 +18,7 @@ import {
 } from 'constants/text';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/dataGridUtils';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
+
 import CoordinatorInformation from './CoordinatorInformation';
 
 const BoxStyled = styled(Box)`

@@ -56,12 +56,12 @@ const LinkStyled = styled(Link)`
     font-weight: 600;
     font-size: 16px;
     padding: 4px 6px;
-    border: 1px solid #fffefd;
+    border: 1px solid ${getThemeProps('palette.white.color')};
     margin-right: 10px;
     border-radius: 3px;
     background-color: ${getThemeProps('colors.header')}
     ${({ theme }) => theme.media.down('lg')`
-        color: ${getThemeProps('palette.white.color')};;
+        color: ${getThemeProps('palette.white.color')};
         background-color: ${getThemeProps('colors.header')};
         outline: none;
         text-align: center;

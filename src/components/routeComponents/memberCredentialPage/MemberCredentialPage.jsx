@@ -40,6 +40,7 @@ import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getParameterByName } from 'utils/http';
 import { getTransformedErrors } from 'utils/formUtils';
 import fields from 'components/common/fields';
+
 import ImageWrapper from './ImageWrapper';
 import {
   schema,

@@ -165,6 +165,14 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   /**
+   * Method open the modal on the basis of selectedMembers
+   */
+  checkOpenModalCondition = () => {
+    const { selectedMembers } = this.props;
+    !isEmpty(selectedMembers) ? this.openModal() : null;
+  };
+
+  /**
    * Method render mark selected members attendance modal
    * @return {HTML} modal
    */
@@ -267,9 +275,7 @@ class MarkSelectedMembersAttendance extends Component {
           softDisable={isEmpty(selectedMembers)}
           color="tertiary"
           noMinWidth
-          onClick={() => {
-            !isEmpty(selectedMembers) ? this.openModal() : null;
-          }}
+          onClick={this.checkOpenModalCondition}
         >
           <FaIcon icon={faUser} />Mark as Present
         </ButtonStyled>
