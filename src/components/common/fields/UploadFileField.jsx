@@ -19,6 +19,16 @@ const TypographyStyled = styled(Typography)`
    display: block;
   `;
 
+const InputStyled = styled(Input)`
+    height: 38;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    zIndex: -1;
+`;
+
 /**
  * UploadFileField if UploadFileField for JSON form
  */
@@ -67,22 +77,6 @@ class UploadFileField extends Component {
     }
     return get(files, '[0].name', '1 file selected.');
   };
-
-  /**
-   * Styles for the hidden `input` element
-   *
-   * @method getHiddenInputStyle
-   * @return {Object}
-   */
-  getHiddenInputStyle = () => ({
-    height: 38,
-    opacity: 0,
-    overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: -1,
-  });
 
   handleOnUploadClick = (event) => {
     event.preventDefault();
@@ -156,7 +150,7 @@ class UploadFileField extends Component {
               value={this.getInputLabel()}
               style={{ ...fieldStyle }}
             />
-            <Input
+            <InputStyled
               accept={accept}
               defaultValue=""
               disabled={disabled}
@@ -165,7 +159,6 @@ class UploadFileField extends Component {
               onChange={this.handleOnInputChange}
               ref={this.hiddenFileInputRef}
               required={required}
-              style={this.getHiddenInputStyle()}
               tabIndex={-1}
               type="file"
             />
