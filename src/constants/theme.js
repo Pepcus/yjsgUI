@@ -17,7 +17,7 @@ const APP_THEME = {
     },
   },
   home: {
-    backgroundColor: '#f4e9e336',
+    backgroundColor: 'rgba(244, 233, 227, 0.21176470588235294)',
   },
   palette: {
     advancedSearch: {

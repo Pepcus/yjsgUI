@@ -1,10 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Button from 'ravenjs/lib/Button';
 
 import { alreadyRegisteredBtnText } from 'constants/yjsg';
+
+const ButtonStyled = styled(Button)`
+   ${({ theme }) => theme.media.down('sm')`
+       width: 100%;
+   `}
+   @media (max-width: 823px) and (orientation: landscape) {
+        width: 60%
+    }
+`;
 
 const AlreadyRegisteredButton = ({
   isAlreadyRegisteredButtonEnabled,
@@ -12,9 +22,9 @@ const AlreadyRegisteredButton = ({
 }) => {
   if (isAlreadyRegisteredButtonEnabled) {
     return (
-      <Button margin="10px" onClick={redirectToStudentLogin}>
+      <ButtonStyled margin="10px" onClick={redirectToStudentLogin}>
         {alreadyRegisteredBtnText}
-      </Button>
+      </ButtonStyled>
     );
   } return null;
 };
