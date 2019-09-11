@@ -13,6 +13,7 @@ import Box from 'ravenjs/lib/Box';
 import Button from 'ravenjs/lib/Button';
 import Container from 'ravenjs/lib/Container';
 import FaIcon from 'ravenjs/lib/FaIcon';
+import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 import { getThemeProps } from 'ravenjs/utils/theme';
 
@@ -90,24 +91,26 @@ class SelectedMembersActionWrapper extends Component {
       return (
         <Popup>
           <Typography type="subheading">{ BUS_COORDINATOR_ERROR_MESSAGE }</Typography>
-          <Button
-            color="tertiary"
-            noMinWidth
-            margin="5px"
-            width="100px"
-            onClick={() => { this.onClickPrintCancel(false); }}
-          >
+          <Row width="100%" justify="center">
+            <Button
+              color="tertiary"
+              noMinWidth
+              margin="5px"
+              width="100px"
+              onClick={() => { this.onClickPrintCancel(false); }}
+            >
               No
-          </Button>
-          <Button
-            color="tertiary"
-            margin="5px"
-            noMinWidth
-            width="100px"
-            onClick={this.printCards}
-          >
+            </Button>
+            <Button
+              color="tertiary"
+              margin="5px"
+              noMinWidth
+              width="100px"
+              onClick={this.printCards}
+            >
               Yes
-          </Button>
+            </Button>
+          </Row>
         </Popup>
 
       );

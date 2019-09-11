@@ -14,6 +14,7 @@ import { OK_TEXT } from 'constants/yjsg';
 
 const MessageStyled = styled(Typography)`
   color: ${getThemeProps('palette.white.color')};
+  width: 100%;
 `;
 
 /**
@@ -35,9 +36,9 @@ const FileDownloadMessagePopup = ({
           {FILE_DOWNLOAD_MESSAGE}
         </MessageStyled>
         <Row
-          width="170px"
+          width="100%"
           display="inline-block"
-          margin="10px 30px 0 30px"
+          margin="10px 0px 0 0px"
         >
           <Button
             color="tertiary"

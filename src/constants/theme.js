@@ -47,6 +47,14 @@ const APP_THEME = {
       light: '#dbd7d6',
       text: '#010306',
     },
+    popup: {
+      borderColor: 'rgb(249, 87, 10)',
+      color: '#dbd7d6',
+      dark: '#010306',
+      light: '#dbd7d6',
+      text: '#010306',
+      backgroundColor: 'rgb(249, 87, 10)',
+    },
     transparent: {
       color: 'rgba(255, 255, 255, 0.69)',
     },
