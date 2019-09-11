@@ -11,7 +11,7 @@ const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
        width: 100%;
    `}
-   @media (max-width: 823px) and (orientation: landscape) {
+   @media (max-width: 992px) and (orientation: landscape) {
         width: 60%
     }
 `;

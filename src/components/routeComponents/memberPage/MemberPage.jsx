@@ -40,7 +40,7 @@ const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
-  @media (max-width: 823px) and (orientation: landscape) {
+  @media (max-width: 992px) and (orientation: landscape) {
      width: auto;
      height: auto;
     }
@@ -50,7 +50,7 @@ const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
        width: 100%;
    `}
-   @media (max-width: 823px) and (orientation: landscape) {
+   @media (max-width: 992px) and (orientation: landscape) {
         width: 60%
     } 
 `;
@@ -62,7 +62,7 @@ const BoxStyled = styled(Box)`
         height: 65%;
         width: 97%;
     `};
-    @media (max-width: 823px) and (orientation: landscape) {
+    @media (max-width: 992px) and (orientation: landscape) {
         margin: 40px auto 40px auto;
         height: 65%;
         width: 65%;
