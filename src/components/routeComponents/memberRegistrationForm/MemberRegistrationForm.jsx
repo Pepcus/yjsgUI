@@ -10,7 +10,7 @@ import Button from 'ravenjs/lib/Button';
 import Container from 'ravenjs/lib/Container';
 import Form from 'ravenjs/lib/Form';
 import Row from 'ravenjs/lib/Row';
-import { getThemeProps } from 'ravenjs//utils/theme';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
 import {
   ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
@@ -19,17 +19,17 @@ import {
   USER_TYPES,
 } from 'constants/yjsg';
 import {
-  createStudentDataAction,
+  createMemberDataAction,
   setLoadingStateAction,
-} from 'actions/studentRegistrationActions';
+} from 'actions/memberRegistrationActions';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
 import {
-  getNewStudent,
+  getNewMember,
   getUserType,
   isCreated,
-} from 'reducers/studentRegistrationReducer';
+} from 'reducers/memberRegistrationReducer';
 import { fetchFormConfig } from 'sagas/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
@@ -121,8 +121,7 @@ class MemberRegistrationForm extends Component {
   };
 
   /**
-   * Scroll page upto first form field which fielded by invalid data
-   * onclick of submit button
+   * Scroll page upto first form field which fielded by invalid data onclick of submit button
    */
   scrollToError = () => {
     const errorNode = this.formRef.current.querySelector('.has-danger');
@@ -188,7 +187,8 @@ class MemberRegistrationForm extends Component {
    * @return {Object} errors
    */
   validate = (formData, errors) => {
-    const { validation } = this.state.formConfig;
+    const { formConfig } = this.state;
+    const { validation } = formConfig;
 
     return validateForm({ formData, errors, validate: validation });
   };
@@ -294,13 +294,13 @@ MemberRegistrationForm.defaultProps = {
 
 const mapStateToProps = state => ({
   isMemberCreated: isCreated(state),
-  newMember: getNewStudent(state),
+  newMember: getNewMember(state),
   tenant: getApplicationTenant(state),
   userType: getUserType(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  createStudentData: member => dispatch(createStudentDataAction(member)),
+  createStudentData: member => dispatch(createMemberDataAction(member)),
   setLoadingState: flag => dispatch(setLoadingStateAction(flag)),
 });
 

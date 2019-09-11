@@ -308,10 +308,10 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
   return isValid;
 };
 
-export const isDataCorrect = (studentData, tenant) => {
+export const isDataCorrect = (memberData, tenant) => {
   const errorMessageObject = {};
-  for (const info in studentData) {
-    errorMessageObject[info] = validateInput({ value: studentData[info], name: info, tenant });
+  for (const info in memberData) {
+    errorMessageObject[info] = validateInput({ value: memberData[info], name: info, tenant });
   }
   return errorMessageObject;
 };

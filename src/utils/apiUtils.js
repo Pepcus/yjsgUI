@@ -1,4 +1,4 @@
-export const formatUpdateStudentDataPayload = (updatedStudent) => {
+export const formatUpdateMemberDataPayload = (updatedMember) => {
   const {
     address,
     age,
@@ -18,7 +18,7 @@ export const formatUpdateStudentDataPayload = (updatedStudent) => {
     classAttended2019,
     secretKey,
     remark,
-  } = updatedStudent;
+  } = updatedMember;
 
   const newData = {
     address,
@@ -46,7 +46,7 @@ export const formatUpdateStudentDataPayload = (updatedStudent) => {
   };
 };
 
-export const formatCreateStudentDataPayload = (student) => ({
-  ...student,
+export const formatCreateMemberDataPayload = member => ({
+  ...member,
 });
 

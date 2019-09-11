@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import styled from 'styled-components';
 
 import Col from 'ravenjs/lib/Col';
 import Input from 'ravenjs/lib/Input';
 import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
-const defaultTitleStyle = {
-  'fontWeight': 'bold',
-  'display': 'block',
-  'marginBottom': '7px',
-  'color': '#4c4c4c',
-  'fontSize': '14px',
-};
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('typography.titleFieldColor.color')}
+   font-weight: bold !important;
+   display: block;
+  `;
 
 /**
  * InputField if inputField for JSON form
@@ -34,9 +35,11 @@ function InputField(props) {
     required,
     schema,
     uiSchema,
+    formData,
   } = props;
-
   const title = get(schema, 'title', name);
+
+  const label = get(uiSchema, 'ui:options.label', true);
 
   const type = get(schema, 'type', 'number');
 
@@ -63,11 +66,11 @@ function InputField(props) {
     }
   }
   return (
-    <Col>
+    <Col padding="0">
       <Row width="auto" margin="0" >
-        <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-          {title}{required ? '*' : ''}
-        </label>
+        <TypographyStyled type="label" style={titleStyle}>
+          {label ? title : null}{required && label ? '*' : null}
+        </TypographyStyled>
       </Row>
       <Row width="auto" margin="0">
         <Input
@@ -81,7 +84,9 @@ function InputField(props) {
           min={minLength}
           max={maxLength}
           placeholder={placeholder}
+          value={formData}
           defaultValue={defaultValue}
+          color="primary"
         />
       </Row>
     </Col>
@@ -97,6 +102,10 @@ InputField.propTypes = {
    * If `true`, the field is disabled.
    */
   disabled: PropTypes.bool,
+  /**
+   * The field data.
+   */
+  formData: PropTypes.string,
   /**
    * The schema object for identifying the field.
    */
@@ -130,6 +139,7 @@ InputField.propTypes = {
 InputField.defaultProps = {
   autofocus: false,
   disabled: false,
+  formData: undefined,
   idSchema: {},
   name: '',
   onChange: () => {},

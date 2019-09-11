@@ -12,11 +12,17 @@ const APP_THEME = {
     root: {
       fontFamily: "'Poppins', sans-serif",
     },
+    titleFieldColor: {
+      color: '#4c4c4c',
+    },
   },
   home: {
     backgroundColor: '#f4e9e336',
   },
   palette: {
+    advancedSearch: {
+      color: '#f8f8f8',
+    },
     primary: {
       borderColor: '#d24c0c',
       color: '#d24c0c',
@@ -25,7 +31,15 @@ const APP_THEME = {
       light: '#d24c0c',
       text: '#FFFFFF',
     },
-    default: {
+    secondary: {
+      borderColor: '#d24c0c',
+      color: '#FFFFFF',
+      dark: '#010306',
+      gradientColor: 'linear-gradient(to top, #FFFFFF, #FFFFFF)',
+      light: '#d24c0c',
+      text: '#d24c0c',
+    },
+    tertiary: {
       borderColor: '#dbd7d6',
       color: '#dbd7d6',
       dark: '#010306',
@@ -33,9 +47,22 @@ const APP_THEME = {
       light: '#dbd7d6',
       text: '#010306',
     },
+    transparent: {
+      color: 'rgba(255, 255, 255, 0.69)',
+    },
+    modal: {
+      borderColor: '#898787',
+      color: '#f8f6f6',
+      dark: '#010306',
+      light: '#f8f6f6',
+    },
+    checkbox: {
+      color: '#9e9e9e',
+    },
   },
   colors: {
-    HEADER: '#f9570a',
+    header: '#f9570a',
+    smallHeader: '#f6c458',
   },
 };
 

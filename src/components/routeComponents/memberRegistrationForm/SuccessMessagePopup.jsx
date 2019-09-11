@@ -18,8 +18,18 @@ import {
   YOUR_SECRET_CODE_TEXT,
 } from 'constants/text';
 import { goBackBtnText } from 'constants/yjsg';
-import { setStudentCredentialsAction } from 'actions/studentRegistrationActions';
+import { setMemberCredentialsAction } from 'actions/memberRegistrationActions';
 
+/**
+ * SuccessMessagePopup render success message when member registration done successfully.
+ * @param {Boolean} isSubmitTriggered
+ * @param {Boolean} isMemberCreated
+ * @param {Object} newMember
+ * @param {Function} redirectToPreviousLocation
+ * @param {Function} setStudentCredentials
+ * @return {HTML}
+ * @constructor
+ */
 const SuccessMessagePopup = ({
   isSubmitTriggered,
   isMemberCreated,
@@ -39,7 +49,7 @@ const SuccessMessagePopup = ({
         <Typography type="body" fontSize="16px">{ID_NOTE_MESSAGE}</Typography>
         <Typography type="body" fontSize="16px">{ID_CARD_SUGGESTION_MESSAGE}</Typography>
         <Button
-          color="default"
+          color="tertiary"
           width="170px"
           margin="10px 25px"
           onClick={redirectToPreviousLocation}
@@ -69,7 +79,7 @@ SuccessMessagePopup.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
+  setStudentCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
 });
 
 export default connect(null, mapDispatchToProps)(SuccessMessagePopup);

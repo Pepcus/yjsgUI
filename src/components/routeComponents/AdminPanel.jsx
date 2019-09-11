@@ -16,7 +16,7 @@ import {
   getSearchResults,
   isLoading,
   stateOfAdminLogin,
-} from '../../reducers/studentRegistrationReducer';
+} from '../../reducers/memberRegistrationReducer';
 import { setRegistrationData } from '../../utils/registrationFormUtils';
 import {
   clearSearchResultsAction,
@@ -25,7 +25,7 @@ import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
-} from '../../actions/studentRegistrationActions';
+} from '../../actions/memberRegistrationActions';
 import LinkButton from '../common/LinkButton';
 
 // FIXME: Add missing propTypes and defaultProps.
@@ -55,7 +55,7 @@ class AdminPanel extends Component {
   }
   componentWillMount() {
     if (this.props.adminLoginState) {
-      this.props.setRedirectValueAction(true);
+      this.props.setRedirectValueAction({ redirect: true });
     }
   }
 
@@ -70,8 +70,8 @@ class AdminPanel extends Component {
 
   performLogout() {
     this.props.resetAdminCredentialsAction();
-    this.props.setAdminLoginStateAction(false);
-    this.props.setRedirectValueAction(false);
+    this.props.setAdminLoginStateAction({ adminLoginState: false });
+    this.props.setRedirectValueAction({ redirect: false });
   }
 
   populateResults() {
@@ -91,7 +91,7 @@ class AdminPanel extends Component {
       this.setState({
         redirect: true,
       });
-      this.props.setRedirectValueAction(true);
+      this.props.setRedirectValueAction({ redirect: true });
     } else {
       alert('Invalid Admin');
     }
@@ -144,7 +144,7 @@ class AdminPanel extends Component {
                 <LinkButton
                   buttonText="Student Information"
                   onClick={this._setRedirectValue}
-                  linkPath="/student-search"
+                  linkPath="/member-search"
                 />
               </div>
             </div>

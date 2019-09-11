@@ -250,8 +250,8 @@ export const validates = (formData, errors) => {
 
 /**
  * prePopulateOptIn method pre populate the optIn value
- * @param {Object} studentData
- * @return {Object} studentData
+ * @param {Object} memberData
+ * @return {Object} memberData
  */
 export const prePopulateOptIn = ({ memberData }) => {
 
@@ -272,11 +272,11 @@ export const prePopulateOptIn = ({ memberData }) => {
 };
 
 /**
- * InitialStudentData method format the form data into corresponding data type
- * @param {Object} studentData
+ * Method format the form data into corresponding data type
+ * @param {Object} memberData
  * @param {Object} formConfig
  * @return {Object}
- * @constructor formattedStudentData
+ * @constructor formattedMemberData
  */
 export const initialMemberData = ({ memberData, formConfig }) => {
   let formattedMemberData = cloneDeep(memberData);

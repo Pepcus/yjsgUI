@@ -3,21 +3,21 @@ import MemberRegistrationForm from './memberRegistrationForm';
 import StudentRegistrationCorrectionForm from './StudentRegistrationCorrectionForm';
 import SplashPagePrePopulated from './SplashPagePrePopulated';
 import AdminPanel from './AdminPanel';
-import StudentInformationGrid from './StudentInformationGrid';
-import StudentCredentialPage from './studentCredentialPage';
-import StudentPage from './studentPage';
+import MemberInformationGrid from './memberInformationGrid';
+import MemberCredentialPage from './memberCredentialPage';
+import MemberPage from './memberPage';
 import ParentsRegistration from './ParentsRegistrationForm';
 import Files from './Files';
 
 export default {
-  StudentPage,
+  MemberPage,
   SplashPage,
   MemberRegistrationForm,
   StudentRegistrationCorrectionForm,
   SplashPagePrePopulated,
   AdminPanel,
-  StudentInformationGrid,
-  StudentCredentialPage,
+  MemberInformationGrid,
+  MemberCredentialPage,
   ParentsRegistration,
   Files,
 };

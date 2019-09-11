@@ -7,30 +7,31 @@ import styled from 'styled-components';
 
 import Col from 'ravenjs/lib/Col';
 import Row from 'ravenjs/lib/Row';
+import Typography from 'ravenjs/lib/Typography';
 import {
   Select,
   SelectOption,
 } from 'ravenjs/lib/Input';
+import { getThemeProps } from 'ravenjs/utils/theme';
+
 
 import InputField from 'components/common/fields/InputField';
 
-const defaultTitleStyle = {
-  'fontWeight': 'bold',
-  'display': 'block',
-  'marginBottom': '7px',
-  'color': '#4c4c4c',
-  'fontSize': '14px',
-};
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('typography.titleFieldColor.color')}
+   font-weight: bold !important;
+   display: block;
+  `;
 
 const SelectStyled = styled(Select)`
   border-radius: 4px;
   &:invalid {
-      color: gray;
+      color: ${getThemeProps('palette.text.color')};
     }
 `;
 
 const SelectOptionStyled = styled(SelectOption)`
-  color: black;
+  color: ${getThemeProps('palette.dark.color')};
   display: ${props => (props.hidden ? 'none' : null)}
 `;
 
@@ -54,6 +55,8 @@ function SelectList(props) {
   } = props;
 
   const title = get(schema, 'title', name);
+
+  const label = get(uiSchema, 'ui:options.label', true);
 
   const defaultValue = get(schema, 'default', '');
 
@@ -90,9 +93,9 @@ function SelectList(props) {
       return (
         <Col>
           <Row width="auto" margin="0">
-            <label style={{ ...defaultTitleStyle, ...titleStyle }}>
-              {title}{required ? '*' : ''}
-            </label>
+            <TypographyStyled type="label" style={titleStyle}>
+              {label ? title : null}{required && label ? '*' : null}
+            </TypographyStyled>
           </Row>
           <Row width="100%" margin="0">
             <SelectStyled

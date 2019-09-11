@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import validations from 'utils/validation';
 
 /**
- * getTransformErrors return transformErrors function
+ * Method return transformErrors function
  * @param {Array} errors
  * @param {Function} transformErrors
  * @return {Array} errors
@@ -27,7 +27,7 @@ export const getTransformedErrors = ({ errors, transformErrors }) => {
 };
 
 /**
- * handle form data validation
+ * Handle form data validation
  * @param {Object} formData
  * @param {Object} errors
  * @param {Function} validate

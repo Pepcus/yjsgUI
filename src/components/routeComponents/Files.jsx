@@ -11,7 +11,7 @@ import csv from 'csvtojson';
 import {
   getSecretKey,
   stateOfAdminLogin,
-} from '../../reducers/studentRegistrationReducer';
+} from '../../reducers/memberRegistrationReducer';
 import {
   getFileData,
   getFilesConfig,
@@ -22,7 +22,7 @@ import {
 import { goBackBtnText, SUPPORTED_FILE_TYPES } from '../../constants/yjsg';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from '../../constants/messages';
 import LinkButton from '../common/LinkButton';
-import { manageStudentTableWidth } from '../../utils/dataGridUtils';
+import { manageMembersTableWidth } from '../../utils/dataGridUtils';
 import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
@@ -33,7 +33,7 @@ import {
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
   setLoadingStateAction,
-} from '../../actions/studentRegistrationActions';
+} from '../../actions/memberRegistrationActions';
 // import Popup from '../common/Popup';
 import { fetchFile } from '../../sagas/assetFilesAPI';
 import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
@@ -98,7 +98,7 @@ class Files extends Component {
   }
 
   componentDidUpdate() {
-    manageStudentTableWidth(this.widthRef);
+    manageMembersTableWidth(this.widthRef);
   }
   returnDisableEnable = (fileView, fileType) => {
     if (SUPPORTED_FILE_TYPES.CSV === fileType || SUPPORTED_FILE_TYPES.XLS === fileType

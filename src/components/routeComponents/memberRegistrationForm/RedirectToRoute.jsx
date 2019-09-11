@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 
 /**
+ * RedirectToRoute method redirect to corresponding route.
  * @param {Boolean} context
  * @param {Boolean} isAdminLocation
  * @param {Boolean} isPreviousLocation
@@ -28,13 +29,13 @@ const RedirectToRoute = ({
   let routeName = '';
 
   if (isAdminLocation || isStudentLocation || isPreviousLocation) {
-    const routesFlag = {
+    const routeFlags = {
       isAdminLocation,
       isStudentLocation,
     };
 
-    Object.keys(routesFlag).forEach((routeFlag) => {
-      if (routesFlag[routeFlag]) {
+    Object.keys(routeFlags).forEach((routeFlag) => {
+      if (routeFlags[routeFlag]) {
         routeName = routes[routeFlag];
       }
     });

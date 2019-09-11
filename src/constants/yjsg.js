@@ -251,6 +251,7 @@ export const eventVenue = {
   'YJSG-Indore': 'स्थान: सन्मति स्कूल, इन्दौर',
   DEFAULT_EVENT_VENUE: 'स्थान: सन्मति स्कूल, इन्दौर',
 };
+export const OK_TEXT = 'OK';
 
 export const goBackBtnText = 'Back';
 

@@ -17,21 +17,21 @@ import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 
 import {
-  fetchStudentDataAction,
+  fetchMemberDataAction,
   setAdminCredentialsAction,
   setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-  setStudentCredentialsAction,
-} from 'actions/studentRegistrationActions';
+  setMemberCredentialsAction,
+} from 'actions/memberRegistrationActions';
 import {
   getAdminId,
   getAdminPassword,
   getSearchResults,
-  getStudent,
+  getMember,
   isFetched,
   isLoading,
   stateOfAdminLogin,
-} from 'reducers/studentRegistrationReducer';
+} from 'reducers/memberRegistrationReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   adminId,
@@ -70,7 +70,7 @@ const ImageStyled = styled.img`
 `;
 
 const TypographyStyled = styled(Typography)`
-   color: ${getThemeProps('colors.HEADER')};
+   color: ${getThemeProps('colors.header')};
 `;
 
 /**
@@ -93,8 +93,8 @@ class SplashPage extends Component {
   }
 
   /**
-   * When student login through URL then this method will
-   * get id and secretCode form URL and fetch data of that particular student.
+   * When member login through URL then this method will
+   * get id and secretCode form URL and fetch data of that particular member.
    */
   componentWillMount() {
     const id = getParameterByName('id');
@@ -105,7 +105,7 @@ class SplashPage extends Component {
       this.setRedirectToRoute(redirectToRoute);
     }
     if (id && secretCode) {
-      this.fetchStudentByURLParams(id, secretCode);
+      this.fetchMemberByURLParams(id, secretCode);
     }
   }
 
@@ -147,24 +147,23 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method fetch student data.
-   * And verify the student credential and if fetch student data is
+   * Method fetch member data.
+   * And verify the member credential and if fetch member data is
    * success then it set the value of isURLParams to true.
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams = (id, secretCode) => {
-    const { setStudentCredentials, fetchStudentData } = this.props;
-    setStudentCredentials({ id, secretKey: secretCode });
-    fetchStudentData({ id, secretKey: secretCode });
+  fetchMemberByURLParams = (id, secretCode) => {
+    const { setMemberCredentials, fetchMemberData } = this.props;
+    setMemberCredentials({ id, secretKey: secretCode });
+    fetchMemberData({ id, secretKey: secretCode });
     this.setState({
       isURLParams: true,
     });
   };
 
   /**
-   * Method enable the admin login
-   * button by onClick of admin login button.
+   * Method enable the admin login button by onClick of admin login button.
    * It set the value of isAdmin to true.
    */
   enableAdminLoginButtons = () => {
@@ -224,13 +223,13 @@ class SplashPage extends Component {
           );
         }
         // if admin credential is valid then it set admin login true in redux store
-        // and redirect to "/student-search" route
-        setAdminLoginState(true);
+        // and redirect to "/member-search" route
+        setAdminLoginState({ adminLoginState: true });
         if (redirectToRoute) {
           this.setRedirectToRoute('');
           return <Switch><Redirect to={redirectToRoute} /></Switch>;
         }
-        return <Switch><Redirect to="/student-search" /></Switch>;
+        return <Switch><Redirect to="/member-search" /></Switch>;
       }
       return null;
     }
@@ -238,9 +237,9 @@ class SplashPage extends Component {
       this.setRedirectToRoute('');
       return <Switch><Redirect to={redirectToRoute} /></Switch>;
     }
-    // if admin is already login then it redirect to "/student-search"
+    // if admin is already login then it redirect to "/member-search"
     // without any credential.
-    return <Switch><Redirect to="/student-search" /></Switch>;
+    return <Switch><Redirect to="/member-search" /></Switch>;
   };
 
 
@@ -262,8 +261,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method set the value of isNewRegistration true on Onclick
-   * of new registration button.
+   * Method set the value of isNewRegistration true on Onclick of new registration button.
    */
   redirectToNewRegistrationPage = () => {
     const { setHashLinkForNewRegistration } = this.props;
@@ -285,7 +283,7 @@ class SplashPage extends Component {
     const { tenant } = this.props;
 
     if (isURLParams) {
-      return <Switch><Redirect to="/studentCorrection" /></Switch>;
+      return <Switch><Redirect to="/member-registration-correction" /></Switch>;
     }
     return (
       <ContainerStyled width="100%">
@@ -344,25 +342,25 @@ class SplashPage extends Component {
 
 SplashPage.propTypes = {
   adminLoginState: PropTypes.bool,
-  fetchStudentData: PropTypes.func,
+  fetchMemberData: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
   setAdminCredentials: PropTypes.func,
   setAdminLoginState: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setMemberCredentials: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
   adminLoginState: false,
-  fetchStudentData: () => {},
+  fetchMemberData: () => {},
   id: '',
   password: '',
   setAdminCredentials: () => {},
   setAdminLoginState: () => {},
   setHashLinkForNewRegistration: () => {},
-  setStudentCredentials: () => {},
+  setMemberCredentials: () => {},
   tenant: '',
 };
 
@@ -373,16 +371,16 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),
-  studentData: getStudent(state),
+  studentData: getMember(state),
   tenant: getApplicationTenant(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: ({ id, secretKey }) => dispatch(fetchStudentDataAction({ id, secretKey })),
+  fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
-  setAdminLoginState: flag => dispatch(setAdminLoginStateAction(flag)),
+  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
-  setStudentCredentials: ({ id, secretKey }) => dispatch(setStudentCredentialsAction({ id, secretKey })),
+  setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
 });
 
 export default connect(
