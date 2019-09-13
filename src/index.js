@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { generateTheme } from 'ravenjs';
+import { generateTheme } from 'ravenjs/utils/theme';
 
 import './assets/css/index.css';
 import './assets/css/dataGrid.css';

@@ -130,6 +130,7 @@ const RowStyled = styled(Row)`
   `}
   ${({ theme }) => theme.media.down('md')`
        margin: 70px 0 0 0 !important;
+       width: 100%;
   `}
 `;
 
