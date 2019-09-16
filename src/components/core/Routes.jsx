@@ -1,20 +1,24 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Footer from '../common/Footer';
-import Loader from '../common/Loader';
+import Box from 'ravenjs/lib/Box';
+
+import { routes } from 'config/appConfig.json';
+import Header from 'components/common/Header';
+import Loader from 'components/common/Loader';
+import Footer from 'components/common/Footer';
+
 import Context from './ConfigProvider';
 import RouteComponents from '../routeComponents';
-import Header from '../common/Header';
-import { routes } from '../../config/appConfig.json';
 
 
 /**
  * Routes component maintain all routes
  * And send all previous location path to all routes.
  * @type {Class}
- * @return {ReactComponent}
+ * @return {HTML}
  */
 class Routes extends Component {
   constructor(props) {
@@ -25,14 +29,17 @@ class Routes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
+    const { location } = this.props;
+
+    if (nextProps.location.pathname !== location.pathname) {
       this.setState({
-        previousLocation: this.props.location.pathname,
+        previousLocation: location.pathname,
       });
     }
   }
   renderRoutes = Consumer => routes.map((route) => {
     const RouteComponent = RouteComponents[route.component];
+
     if (route.isActive) {
       return (
         <Route
@@ -50,17 +57,20 @@ class Routes extends Component {
   });
   render() {
     const { Consumer } = Context;
+    const { previousLocation } = this.state;
+    const { location } = this.props;
+
     return (
-      <div>
-        <Context.Provider previousLocation={this.state.previousLocation}>
+      <Box padding="0" backgroundColor="unset" margin="0" borderStyle="unset">
+        <Context.Provider previousLocation={previousLocation}>
           <Consumer>
-            {context => <Header context={context} location={this.props.location.pathname} />}
+            {context => <Header context={context} location={location.pathname} />}
           </Consumer>
           {this.renderRoutes(Consumer)}
           <Loader />
-          <Footer />
+          <Footer location={location.pathname} />
         </Context.Provider>
-      </div>
+      </Box>
     );
   }
 }
@@ -72,4 +82,5 @@ Routes.propTypes = {
 Routes.defaultProps = {
   location: {},
 };
+
 export default Routes;

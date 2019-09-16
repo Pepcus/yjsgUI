@@ -217,7 +217,7 @@ const Header = ({
   const renderHeaderName = headerObject => (
     <HeaderStyled
       type="title"
-      style={headerObject.titleStyle}
+      style={headerObject.titleStyle ? headerObject.titleStyle : {}}
     >
       {headerObject.title ? headerObject.title : getHeaderText()}
     </HeaderStyled>
@@ -275,10 +275,16 @@ const Header = ({
   };
   // render header with their contains according to route
   return routes.map((route) => {
-    const { header, path } = route;
+    const { header = {}, path } = route;
     if (path === location) {
       return (
-        <HeaderWrapper borderRadius="0" padding="0" margin="0" key={path} style={header.headerWrapperStyle}>
+        <HeaderWrapper
+          borderRadius="0"
+          padding="0"
+          margin="0"
+          key={path}
+          style={header.headerWrapperStyle ? header.headerWrapperStyle : {}}
+        >
           {renderLogo(header)}
           {renderHeaderName(header)}
           {renderButton(header)}
@@ -286,7 +292,13 @@ const Header = ({
       );
     } else if (path === '/files*' && location === '/files') {
       return (
-        <HeaderWrapper borderRadius="0" padding="0" margin="0" key={path} style={header.headerWrapperStyle}>
+        <HeaderWrapper
+          borderRadius="0"
+          padding="0"
+          margin="0"
+          key={path}
+          style={header.headerWrapperStyle ? header.headerWrapperStyle : {}}
+        >
           {renderLogo(header)}
           {renderHeaderName(header)}
           {renderButton(header)}
@@ -297,34 +309,34 @@ const Header = ({
 };
 
 Header.propTypes = {
-  title: PropTypes.string,
+  context: PropTypes.object,
+  location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
+  resetVisibleColumnConfig: PropTypes.func,
+  routes: PropTypes.array,
   setAdminLoginState: PropTypes.func,
   setRedirectValue: PropTypes.func,
-  resetVisibleColumnConfig: PropTypes.func,
-  location: PropTypes.string,
-  context: PropTypes.object,
-  routes: PropTypes.array,
   tenant: PropTypes.string,
+  title: PropTypes.object,
 };
 
 Header.defaultProps = {
-  title: '',
+  context: {},
+  location: '',
   resetAdminCredentials: () => {},
+  resetVisibleColumnConfig: () => {},
+  routes: [],
   setAdminLoginState: () => {},
   setRedirectValue: () => {},
-  resetVisibleColumnConfig: () => {},
-  location: '',
-  context: {},
-  routes: [],
   tenant: '',
+  title: {},
 };
 
 const mapDispatchToProps = dispatch => ({
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
+  resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
   setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setRedirectValue: ({ redirect }) => dispatch(setRedirectValueAction({ redirect })),
-  resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
 });
 
 const mapStateToProps = state => ({

@@ -241,6 +241,8 @@ export const yjsgFooterContactInfo = {
   DEFAULT_FOOTER_CONTACT_INFORMATION: ' 74470-56789',
 };
 
+export const DEFAULT_FOOTER_CONTACT_INFORMATION = ' 74470-56789';
+
 export const eventDate = {
   'YJSG-Bhopal': 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
   'YJSG-Indore': 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',

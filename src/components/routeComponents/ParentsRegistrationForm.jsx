@@ -242,11 +242,6 @@ class ParentsRegistration extends Component {
               </div>
             </form>
           </div>
-          <div className="footer print-media-none footer-index">
-            <p className="footer-text footer-index">
-              <span className="contact-no-footer footer-index">किसी अन्य जानकारी के लिए संपर्क सूत्र: प्रकाश छाबड़ा (99260 40137)</span>
-            </p>
-          </div>
         </div>
       );
     }
