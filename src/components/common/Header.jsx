@@ -107,8 +107,8 @@ const LinkStyled = styled(Link)`
     margin-right: 10px;
     border-radius: 3px;
     &:hover {
-    background-color: ${getThemeProps('palette.primary.color')};
-    transition: 0.3s all;
+        background-color: ${getThemeProps('palette.primary.color')};
+        transition: 0.3s all;
     }
     ${({ theme }) => theme.media.down('lg')`
         background-color: ${getThemeProps('colors.header')};
@@ -134,7 +134,6 @@ const LinkStyled = styled(Link)`
  * @param {String} tenant
  * @type {Function}
  * @return {HTML}
- * @constructor
  */
 const Header = ({
   context,
