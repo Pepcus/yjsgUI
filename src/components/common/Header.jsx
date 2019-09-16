@@ -1,19 +1,127 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons/faPowerOff';
 
+import Box from 'ravenjs/lib/Box';
+import FaIcon from 'ravenjs/lib/FaIcon';
+import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
-import headerLogo from '../../assets/images/react-logo.png';
+import headerLogo from 'assets/images/react-logo.png';
 import {
   resetAdminCredentialsAction,
   setAdminLoginStateAction,
   setRedirectValueAction,
   resetVisibleColumnConfigAction,
-} from '../../actions/memberRegistrationActions';
-import { routes, title } from '../../config/appConfig.json';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
-import { DEFAULT_HEADER_TEXT } from '../../constants/yjsg';
+} from 'actions/memberRegistrationActions';
+import { routes, title } from 'config/appConfig.json';
+import { getApplicationTenant } from 'reducers/assetFilesReducer';
+import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';
+
+const HeaderWrapper = styled(Box)`
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    z-index: 2;
+    background-color: ${getThemeProps('colors.header')};
+    color: ${getThemeProps('palette.white.color')};
+    text-align: center;
+    left: 0;
+    ${({ theme }) => theme.media.down('lg')`
+        position: relative;
+        display: block;
+    `}
+    @media print {
+        display:none;
+    }
+`;
+
+const ImageWrapper = styled(Box)`
+    z-index: 5;
+    left: 10px;
+    top: -5px;
+    width: auto;
+    ${({ theme }) => theme.media.down('lg')`
+        left: 5px;
+        top: 0;
+        width: 90px;
+    `}
+`;
+
+const ImageStyled = styled('img')`
+    ${({ theme }) => theme.media.down('lg')`
+        width: 100%;
+    `}
+`;
+
+const HeaderStyled = styled(Typography)`
+        font-size: 24px !important;
+    ${({ theme }) => theme.media.down('lg')`
+        position: relative
+    `}
+    ${({ theme }) => theme.media.down('md')`
+        line-height: 28px;
+        box-sizing: border-box;
+        font-size: 22px ! important;
+    `}
+    ${({ theme }) => theme.media.down('sm')`
+        line-height: 28px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 18px;
+    `}
+`;
+
+const ButtonWrapper = styled(Box)`
+    right: 28px;
+    margin: 0 0 10px 0;
+    top: 11px;
+    z-index: 2;
+    ${({ theme }) => theme.media.down('lg')`
+        display: none;
+        top: 66px;
+        right: 0;
+        z-index: 1;
+    `}
+    ${({ theme }) => theme.media.down('md')`
+        right: 0;
+        margin-top: 17px;
+        z-index: 1;
+        `}
+`;
+
+const LinkStyled = styled(Link)`
+    color: ${getThemeProps('palette.white.color')};
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 2px 15px;
+    border: 1px solid ${getThemeProps('palette.white.color')};
+    margin-right: 10px;
+    border-radius: 3px;
+    &:hover {
+        background-color: ${getThemeProps('palette.primary.color')};
+        transition: 0.3s all;
+    }
+    ${({ theme }) => theme.media.down('lg')`
+        background-color: ${getThemeProps('colors.header')};
+        outline: none;
+        text-align: center;
+        line-height: 20px;
+        padding: 10px;
+        box-shadow: none;
+        font-size: 14px;
+        margin-right: 0;
+        border-radius: 4px;
+    `}
+`;
 
 /**
  * Header render the common header for all route
@@ -25,8 +133,7 @@ import { DEFAULT_HEADER_TEXT } from '../../constants/yjsg';
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
  * @type {Function}
- * @return {ReactComponent}
- * @constructor
+ * @return {HTML}
  */
 const Header = ({
   context,
@@ -37,8 +144,9 @@ const Header = ({
   resetVisibleColumnConfig,
   tenant,
 }) => {
+
   /**
-   * performLogout method will call when click on logout button
+   * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
    * It reset the admin login state to false by calling action setAdminLoginStateAction()
    * It reset the visibleColumnConfig to initial
@@ -52,44 +160,44 @@ const Header = ({
     resetVisibleColumnConfig();
     localStorage.clear();
   };
+
   /**
-   * RenderBackButton method render back button in header
+   * Method render back button in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {HTML}
    * @constructor
    */
   const renderBackButton = (headerObject) => {
     if (headerObject.backButton) {
       return (
-        <Link
+        <LinkStyled
           to={
             headerObject.backButtonRedirectTo
               ? headerObject.backButtonRedirectTo : context.previousLocation}
-          className="grid-small-button"
         >
-          <i className="fa fa-arrow-left card-icon" />Back
-        </Link>
+          <FaIcon margin="0 5px 0 0" icon={faArrowLeft} />Back
+        </LinkStyled>
       );
     } return null;
   };
+
   /**
-   * renderLogOutButton method render logout button in header
-    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * Method render logout button in header
+   * @param {Object} headerObject
+   * @return {HTML}
    * @constructor
    */
   const renderLogOutButton = (headerObject) => {
     if (headerObject.logoutButton) {
       return (
-        <Link
+        <LinkStyled
           to={
             headerObject.logoutButtonRedirectTo
               ? headerObject.logoutButtonRedirectTo : context.previousLocation}
           onClick={performLogout}
-          className="grid-small-button"
         >
-          <i className="fa fa-power-off card-icon" />Logout
-        </Link>
+          <FaIcon margin="0 5px 0 0" icon={faPowerOff} />Logout
+        </LinkStyled>
       );
     } return null;
   };
@@ -101,55 +209,66 @@ const Header = ({
   const getHeaderText = () => (title[tenant] ? title[tenant] : DEFAULT_HEADER_TEXT);
 
   /**
-   * RenderHeaderName method render header name in header
-    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * Method render header name in header
+   * @param {Object} headerObject
+   * @return {HTML}
    * @constructor
    */
   const renderHeaderName = headerObject => (
-    <h2
+    <HeaderStyled
+      type="title"
       style={headerObject.titleStyle}
-      className="student-info-heading"
     >
       {headerObject.title ? headerObject.title : getHeaderText()}
-    </h2>
+    </HeaderStyled>
   );
+
   /**
    * RenderButton method render buttons with their button wrapper in header.
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {HTML}
    * @constructor
    */
   const renderButton = (headerObject) => {
     if (headerObject.hasButtons) {
       return (
-        <div
-          className="logoutButtonContainer display-mobile-none logoutLinkContainer "
+        <ButtonWrapper
+          width="auto"
+          borderStyle="none"
+          backgroundColor="unset"
+          borderRadius="0"
+          position="absolute"
+          padding="10px 10px"
         >
           {renderBackButton(headerObject)}
           {renderLogOutButton(headerObject)}
-        </div>
+        </ButtonWrapper>
       );
     } return null;
   };
+
   /**
-   * renderLogo method render logo in header
+   * Method render logo in header
    * @param {Object} headerObject
-   * @return {ReactComponent}
+   * @return {HTML}
    * @constructor
    */
   const renderLogo = (headerObject) => {
     if (headerObject.logo) {
       return (
-        <div
-          className="yjsg-logo"
+        <ImageWrapper
+          position="absolute"
+          padding="0"
+          margin="0"
+          borderRadius="0"
+          backgroundColor="unset"
+          borderStyle="none"
         >
-          <img
+          <ImageStyled
             src={headerLogo}
             alt="logo"
-            className="yjsg-logo-img"
           />
-        </div>
+        </ImageWrapper>
       );
     }
     return null;
@@ -159,19 +278,19 @@ const Header = ({
     const { header, path } = route;
     if (path === location) {
       return (
-        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+        <HeaderWrapper borderRadius="0" padding="0" margin="0" key={path} style={header.headerWrapperStyle}>
           {renderLogo(header)}
           {renderHeaderName(header)}
           {renderButton(header)}
-        </div>
+        </HeaderWrapper>
       );
     } else if (path === '/files*' && location === '/files') {
       return (
-        <div key={path} style={header.headerWrapperStyle} className="student-logo-header print-media-none">
+        <HeaderWrapper borderRadius="0" padding="0" margin="0" key={path} style={header.headerWrapperStyle}>
           {renderLogo(header)}
           {renderHeaderName(header)}
           {renderButton(header)}
-        </div>
+        </HeaderWrapper>
       );
     } return null;
   });
@@ -188,6 +307,7 @@ Header.propTypes = {
   routes: PropTypes.array,
   tenant: PropTypes.string,
 };
+
 Header.defaultProps = {
   title: '',
   resetAdminCredentials: () => {},

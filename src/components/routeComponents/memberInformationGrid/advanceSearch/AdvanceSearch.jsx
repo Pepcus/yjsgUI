@@ -64,7 +64,7 @@ const BoxStyled = styled(Box)`
         margin: 0 5px;
         display: block;
         text-align: center;
-        width: auto
+        width: 100%
    `}
 `;
 
