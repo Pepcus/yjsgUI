@@ -45,13 +45,29 @@ const BoxStyled = styled(Box)`
  overflow-x: hidden;
  overflow-y: auto;
  background-color: ${getThemeProps('palette.policyMuted.color')};
+ ${({ theme }) => theme.media.down('lg')`
+     margin: auto; 
+     height: 100%;
+ `}
 `;
 
 const ContainerStyled = styled(Container)`
   height: max-content;
   display: flex;
+  ${({ theme }) => theme.media.down('lg')`
+     height: 100%; 
+ `}
+ ${({ theme }) => theme.media.down('md')`
+     height: auto; 
+ `}
 `;
 
+const ButtonStyled = styled(Button)`
+ ${({ theme }) => theme.media.down('sm')`
+     width: 100%
+     margin: 10px 10px; 
+ `}
+`;
 /**
  * MemberRegistrationForm will be render student registration form
  * @type {Class}
@@ -244,20 +260,20 @@ class MemberRegistrationForm extends Component {
               transformErrors={this.transformErrors}
             />
             <Row justify="center" margin="0 0 25px 0">
-              <Button
+              <ButtonStyled
                 width="170px"
                 margin="10px 25px"
                 onClick={this.redirectToPreviousLocation}
               >
                 {goBackBtnText}
-              </Button>
-              <Button
+              </ButtonStyled>
+              <ButtonStyled
                 width="170px"
                 margin="10px 25px"
                 onClick={this.handleSubmit}
               >
                 {formSubmitBtnText}
-              </Button>
+              </ButtonStyled>
             </Row>
             <SuccessMessagePopup
               isSubmitTriggered={isSubmitTriggered}

@@ -91,8 +91,8 @@ function SelectList(props) {
   const getSelectList = () => {
     if (enums) {
       return (
-        <Col>
-          <Row width="auto" margin="0">
+        <Col size={12}>
+          <Row width="100%" margin="0">
             <TypographyStyled type="label" style={titleStyle}>
               {label ? title : null}{required && label ? '*' : null}
             </TypographyStyled>

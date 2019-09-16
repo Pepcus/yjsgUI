@@ -66,13 +66,13 @@ function InputField(props) {
     }
   }
   return (
-    <Col padding="0">
-      <Row width="auto" margin="0" >
+    <Col padding="0" size={12}>
+      <Row width="100%" margin="0" >
         <TypographyStyled type="label" style={titleStyle}>
           {label ? title : null}{required && label ? '*' : null}
         </TypographyStyled>
       </Row>
-      <Row width="auto" margin="0">
+      <Row width="100%" margin="0">
         <Input
           id={idSchema.$id}
           autoFocus={autofocus}
