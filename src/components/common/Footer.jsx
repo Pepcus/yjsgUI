@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Box from 'ravenjs/lib/Box';
 import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
 
 import {
   yjsgFooterText,
@@ -21,10 +22,10 @@ const FooterWrapper = styled(Box)`
     bottom: 0;
     z-index: 999;
     width: 100%;
-    color: #858585;
+    color: ${getThemeProps('palette.footer.color')};
     padding: 10px 0;
-    background: #f2f2f2;
-    border-top: 1px solid #e8e6e6;
+    background: ${getThemeProps('palette.footer.backgroundColor')};
+    border-top: 1px solid ${getThemeProps('palette.footer.borderColor')};
     ${({ theme }) => theme.media.down('lg')`
         position: relative;
     `}
@@ -35,7 +36,7 @@ const FooterWrapper = styled(Box)`
 
 const FooterStyled = styled(Typography)`
     font-size: 14px !important;
-    background: #f2f2f2;
+    background: ${getThemeProps('palette.footer.backgroundColor')};
     margin: 0 !important;
 `;
 
