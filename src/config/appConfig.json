@@ -3,6 +3,10 @@
     "INDORE" : " जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष) ",
     "BHOPAL" : " श्री दि. जैन बाल एवं युवा संस्कार शिक्षण शिविर ( १३ वॉं )"
   },
+  "footerTitle": {
+    "INDORE": " 74470-56789",
+    "BHOPAL": " अनुभव जैन, मो. 9179834281, 9303131737"
+  },
   "columnsList": [
     {
       "label": "ID",
@@ -191,6 +195,11 @@
         "headerWrapperStyle": {
           "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -205,6 +214,11 @@
         "headerWrapperStyle": {
           "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -222,6 +236,11 @@
         "backButtonRedirectTo": "/admin",
         "logoutButton": true,
         "logoutButtonRedirectTo": "/admin"
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -236,6 +255,11 @@
         "headerWrapperStyle": {
           "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -248,6 +272,11 @@
           "padding": "10px 0px 10px 80px"
         },
         "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -260,6 +289,11 @@
           "padding": "10px 0px 10px 80px"
         },
         "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -274,6 +308,11 @@
         "hasButtons": true,
         "backButton": true,
         "logoutButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -288,6 +327,11 @@
         "headerWrapperStyle": {
           "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -301,6 +345,11 @@
         },
         "title": "अभिभावक सम्मलेन (Parents' Convention)",
         "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": "प्रकाश छाबड़ा (99260 40137)"
       }
     },
     {
@@ -315,6 +364,11 @@
         "logo": true,
         "hasButtons": true,
         "backButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     }
   ]

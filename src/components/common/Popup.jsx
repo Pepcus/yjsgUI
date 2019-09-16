@@ -24,7 +24,7 @@ const RowStyled = styled(Row)`
     max-width: 50%;
     text-align: center;
     line-height: 30px;
-     @media (max-width: 992px) and (orientation: landscape) {
+    @media (max-width: 992px) and (orientation: landscape) {
         max-width: 60%;
     } 
     ${({ theme }) => theme.media.down('sm')`
@@ -43,7 +43,7 @@ const RowStyled = styled(Row)`
  */
 const Popup = ({ children }) => (
   <BoxStyled
-    elevation="1"
+    elevation={1}
     backgroundColor="transparent"
     height="100%"
     position="fixed"
@@ -59,6 +59,7 @@ const Popup = ({ children }) => (
 Popup.propTypes = {
   children: PropTypes.node,
 };
+
 Popup.defaultProps = {
   children: '',
 };

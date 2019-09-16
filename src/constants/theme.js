@@ -85,6 +85,11 @@ const APP_THEME = {
     checkbox: {
       color: COLORS.LIGHT_GRAY_2,
     },
+    footer: {
+      color: COLORS.LIGHT_GRAY_2,
+      backgroundColor: COLORS.LIGHT_GRAY_3,
+      borderColor: COLORS.LIGHT_GRAY_3,
+    },
   },
 };
 

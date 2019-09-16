@@ -7,30 +7,57 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
-import Routes from './Routes';
+import Box from 'ravenjs/lib/Box/index';
+import FaIcon from 'ravenjs/lib/FaIcon';
+import Typography from 'ravenjs/lib/Typography';
+import { getThemeProps } from 'ravenjs/utils/theme';
+
 import {
   loadAppDataAction,
   loadBusCoordinatorsDataAction,
-} from '../../actions/assetFilesActions';
+} from 'actions/assetFilesActions';
 import {
   getApplicationMode,
   isAppLoaded,
   getIsAppLoadedError,
-} from '../../reducers/assetFilesReducer';
+} from 'reducers/assetFilesReducer';
 import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
-} from '../../constants/text';
-import cssJSON from '../../config/cssVariables.json';
+} from 'constants/text';
+import cssJSON from 'config/cssVariables.json';
 import {
   setLoadingStateAction,
-} from '../../actions/memberRegistrationActions';
+} from 'actions/memberRegistrationActions';
+import Routes from './Routes';
 
+const MessageBoxStyled = styled(Box)`
+    height: auto !important;
+    margin: 20px 10px;
+    color: ${getThemeProps('palette.text.color')};
+    padding: 15px 20px;
+    border: 1px solid ${getThemeProps('palette.action.disabledBackground')};
+    animation-name: column-message;
+    animation-duration: 0.7s;
+    transition: 0.3s all;
+    background: ${getThemeProps('palette.action.hover')};
+    width: 98%
+    ${({ theme }) => theme.media.down('lg')`
+        width: 95%
+    `}
+    ${({ theme }) => theme.media.down('md')`
+        line-height: 22px;
+        display: flex;
+    `}
+`;
 
 /**
  * AppContainer is the wrapper of application.
  */
 class AppContainer extends Component {
+
   componentDidMount() {
     const {
       loadBusCoordinatorsData,
@@ -43,6 +70,7 @@ class AppContainer extends Component {
     loadBusCoordinatorsData();
     loadAppData();
     setLoadingState(false);
+
     /**
      * CSS variable doesn't support in IE for that we use 'css-vars-ponyfill'.
      * reference:- https://jhildenbiddle.github.io/css-vars-ponyfill/#/
@@ -59,6 +87,7 @@ class AppContainer extends Component {
       });
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoaded) {
       cssVars({
@@ -78,6 +107,7 @@ class AppContainer extends Component {
       isLoaded,
       isAppLoadingFailed,
     } = this.props;
+
     if (isLoaded && !isAppLoadingFailed) {
       return (
         <HashRouter>
@@ -86,14 +116,12 @@ class AppContainer extends Component {
       );
     } else if (isAppLoadingFailed) {
       return (
-        <div>
-          <div className="empty-column-message">
-            <span className="circle-icon">
-              <i className="fa fa-exclamation-triangle" />
-            </span>
-            {ERROR_MESSAGE_OF_LOAD_APP_DATA}
-          </div>
-        </div>
+        <MessageBoxStyled>
+          <Typography type="caption" padding="0 15px 0 0">
+            <FaIcon icon={faExclamationTriangle} />
+          </Typography>
+          {ERROR_MESSAGE_OF_LOAD_APP_DATA}
+        </MessageBoxStyled>
       );
     }
     return null;
@@ -101,26 +129,26 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  loadAppData: PropTypes.func,
-  setLoadingState: PropTypes.func.isRequired,
-  loadBusCoordinatorsData: PropTypes.func,
-  isLoaded: PropTypes.bool,
   isAppLoadingFailed: PropTypes.bool,
+  isLoaded: PropTypes.bool,
+  loadAppData: PropTypes.func,
+  loadBusCoordinatorsData: PropTypes.func,
   mode: PropTypes.string,
+  setLoadingState: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
+  isAppLoadingFailed: false,
+  isLoaded: false,
   loadAppData: () => {},
   loadBusCoordinatorsData: () => {},
-  isLoaded: false,
-  isAppLoadingFailed: false,
   mode: '',
 };
 
 const mapStateToProps = state => ({
-  mode: getApplicationMode(state),
-  isLoaded: isAppLoaded(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
+  isLoaded: isAppLoaded(state),
+  mode: getApplicationMode(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -133,4 +161,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(AppContainer);
-
