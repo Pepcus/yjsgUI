@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 
-import Col from 'ravenjs/lib/Col';
+import Box from 'ravenjs/lib/Box';
 import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 import {
@@ -91,7 +91,7 @@ function SelectList(props) {
   const getSelectList = () => {
     if (enums) {
       return (
-        <Col size={12}>
+        <Box backgroundColor="unset" borderStyle="none" padding="0">
           <Row width="100%" margin="0">
             <TypographyStyled type="label" style={titleStyle}>
               {label ? title : null}{required && label ? '*' : null}
@@ -117,7 +117,7 @@ function SelectList(props) {
               {renderOptions()}
             </SelectStyled>
           </Row>
-        </Col>
+        </Box>
       );
     } return <InputField {...props} />;
   };

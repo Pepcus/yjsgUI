@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 
-import Col from 'ravenjs/lib/Col';
+import Box from 'ravenjs/lib/Box';
 import Input from 'ravenjs/lib/Input';
 import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
@@ -66,7 +66,7 @@ function InputField(props) {
     }
   }
   return (
-    <Col padding="0" size={12}>
+    <Box backgroundColor="unset" borderStyle="none" padding="0">
       <Row width="100%" margin="0" >
         <TypographyStyled type="label" style={titleStyle}>
           {label ? title : null}{required && label ? '*' : null}
@@ -89,7 +89,7 @@ function InputField(props) {
           color="primary"
         />
       </Row>
-    </Col>
+    </Box>
   );
 }
 

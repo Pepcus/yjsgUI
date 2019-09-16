@@ -21,7 +21,13 @@
       "ui:options": {
         "type": "number",
         "col": {
-          "size": 5.5
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
         }
       }
     },
@@ -30,7 +36,13 @@
       "ui:placeholder": "Enter Admin Password",
       "ui:options": {
         "col": {
-          "size": 5.5
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
         }
       }
     }

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Button from 'ravenjs/lib/Button';
 import Col from 'ravenjs/lib/Col';
@@ -15,6 +16,16 @@ import {
   schema,
   uiSchema,
 } from './adminLoginFormSchema.json';
+
+const ButtonStyled = styled(Button)`
+ ${({ theme }) => theme.media.down('sm')`
+     width: 100%
+     margin: 10px 10px; 
+ `}
+ @media (max-width: 992px) and (orientation: landscape) {
+     width: 100%;
+ }
+`;
 
 /**
  * @param {Object} admin
@@ -51,21 +62,21 @@ const AdminLoginForm = ({
             uiSchema={uiSchema}
           />
           {handleAdminScreenRedirection()}
-          <Row justify="space-between" width="65%">
-            <Button
-              padding="5px 8px"
-              width="170px"
+          <Row justify="center" margin="0 0 25px 0">
+            <ButtonStyled
+              width="185px"
+              margin="10px 15px"
               onClick={handleDisableAdminLoginButtons}
             >
               {goBackBtnText}
-            </Button>
-            <Button
-              padding="5px 8px"
-              width="170px"
+            </ButtonStyled>
+            <ButtonStyled
+              width="185px"
+              margin="10px 15px"
               onClick={setAdminLogin}
             >
               {formSubmitBtnText}
-            </Button>
+            </ButtonStyled>
           </Row>
         </Row>
       </Col>

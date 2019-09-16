@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Button from 'ravenjs/lib/Button';
 import Row from 'ravenjs/lib/Row';
@@ -14,6 +15,16 @@ import {
   newRegistrationBtnText,
 } from 'constants/yjsg';
 import AdminLoginForm from './AdminLoginForm';
+
+const ButtonStyled = styled(Button)`
+ ${({ theme }) => theme.media.down('sm')`
+     width: 100%
+     margin: 10px 10px; 
+ `}
+ @media (max-width: 992px) and (orientation: landscape) {
+     width: 100%;
+ }
+`;
 
 /**
  * @param {Object} admin
@@ -61,19 +72,21 @@ const LoginForm = ({
 
   } else if (!isAdmin) {
     return (
-      <Row justify="center">
-        <Button
-          margin="10px"
+      <Row justify="center" margin="0 0 25px 0">
+        <ButtonStyled
+          width="185px"
+          margin="10px 15px"
           onClick={redirectToNewRegistrationPage}
         >
           {newRegistrationBtnText}
-        </Button>
-        <Button
-          margin="10px"
+        </ButtonStyled>
+        <ButtonStyled
+          width="185px"
+          margin="10px 15px"
           onClick={enableAdminLoginButtons}
         >
           {adminLoginBtnText}
-        </Button>
+        </ButtonStyled>
       </Row>
     );
   } return null;
