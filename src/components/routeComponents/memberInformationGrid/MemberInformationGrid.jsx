@@ -134,6 +134,10 @@ const RowStyled = styled(Row)`
   `}
 `;
 
+const ButtonStyled = styled(Button)`
+ width: 27px;
+`;
+
 /**
  * MemberInformationGrid render member information grid.
  * @type {Class}
@@ -383,26 +387,24 @@ class MemberInformationGrid extends Component {
   EditButton = ({ rowData }) => (
     <Box backgroundColor="unset" borderStyle="none" width="auto" margin="0" padding="5px 3px">
       <DesktopRowStyled gutter={false}>
-        <Button
+        <ButtonStyled
           onClick={() => { this.handleEditClick(rowData); }}
-          width="27px !important"
           padding="7px"
           noMinWidth
           noMinHeight
         >
           <FaIcon icon={faEdit} />
-        </Button>
+        </ButtonStyled>
       </DesktopRowStyled>
       <MobileRowStyled gutter={false}>
-        <Button
+        <ButtonStyled
           onClick={() => { this.handleEditClick(rowData); }}
-          width="27px !important"
           padding="7px"
           noMinWidth
           noMinHeight
         >
           <FaIcon icon={faEdit} />
-        </Button>
+        </ButtonStyled>
       </MobileRowStyled>
     </Box>
   );

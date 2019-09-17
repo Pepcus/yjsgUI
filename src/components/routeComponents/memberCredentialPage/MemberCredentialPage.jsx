@@ -51,16 +51,30 @@ import RedirectToRoute from './RedirectToRoute';
 const BoxStyled = styled(Box)`
  align-items: center;
  ${({ theme }) => theme.media.down('md')`
-        margin: 60px auto auto auto;
-        height: 65%;
-        width: 97%;
-    `};
+     margin: 60px auto auto auto;
+     height: 75%;
+     width: 97%;
+ `};
+ ${({ theme }) => theme.media.down('sm')`
+     margin: 60px auto;
+ `}
+ @media (max-width: 992px) and (orientation: landscape) {
+     width: 70%;
+     margin: 60px auto;
+ }
 `;
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
+  ${({ theme }) => theme.media.down('sm')`
+      height: auto;
+      min-height: 100%;
+  `}
+  @media (max-width: 992px) and (orientation: landscape) {
+      height: auto;
+  }
 `;
 
 const ImageStyled = styled.img`
@@ -68,7 +82,18 @@ const ImageStyled = styled.img`
 `;
 
 const TypographyStyled = styled(Typography)`
-   color: ${getThemeProps('colors.header')};
+  color: ${getThemeProps('colors.header')};
+`;
+
+const ButtonStyled = styled(Button)`
+ width: 185px;
+ ${({ theme }) => theme.media.down('sm')`
+     width: 100%
+     margin: 10px 10px; 
+ `}
+ @media (max-width: 992px) and (orientation: landscape) {
+     width: 100%;
+ }
 `;
 
 /**
@@ -244,7 +269,7 @@ class MemberCredentialPage extends Component {
           elevation={5}
         >
           <Col>
-            <Row width="100%" display="inline-block">
+            <Row width="100%" display="inline-block" margin="10px 0 0 0">
               <TypographyStyled
                 type="title"
                 fontWeight="600"
@@ -282,21 +307,19 @@ class MemberCredentialPage extends Component {
                 onChange={this.onChange}
                 transformErrors={this.transformErrors}
               />
-              <Row justify="space-between" width="65%">
-                <Button
-                  width="170px"
-                  padding="5px 8px"
+              <Row justify="center" margin="0 0 25px 0">
+                <ButtonStyled
+                  margin="10px 15px"
                   onClick={this.redirectToPreviousLocation}
                 >
                   {goBackBtnText}
-                </Button>
-                <Button
-                  width="170px"
-                  padding="5px 8px"
+                </ButtonStyled>
+                <ButtonStyled
+                  margin="10px 15px"
                   onClick={this.fetchStudentById}
                 >
                   {viewEditInfoBtnText}
-                </Button>
+                </ButtonStyled>
               </Row>
             </Row>
           </Col>

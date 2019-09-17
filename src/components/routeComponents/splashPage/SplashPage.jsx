@@ -54,15 +54,30 @@ const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
   height: 100%;
   display: flex;
+  ${({ theme }) => theme.media.down('sm')`
+      height: auto;
+      min-height: 100%;
+  `}
+  @media (max-width: 992px) and (orientation: landscape) {
+      height: auto;
+  }
 `;
 
 const BoxStyled = styled(Box)`
  align-items: center;
+ width: 600px;
  ${({ theme }) => theme.media.down('md')`
-        margin: 60px auto auto auto;
-        height: 65%;
-        width: 97%;
-    `};
+     margin: 60px auto auto auto;
+     height: 85%;
+     width: 97%;
+ `};
+ ${({ theme }) => theme.media.down('sm')`
+     margin: 60px auto;
+ `}
+ @media (max-width: 992px) and (orientation: landscape) {
+     width: 70%;
+     margin: 60px auto;
+ }
 `;
 
 const ImageStyled = styled.img`
@@ -70,7 +85,7 @@ const ImageStyled = styled.img`
 `;
 
 const TypographyStyled = styled(Typography)`
-   color: ${getThemeProps('colors.header')};
+  color: ${getThemeProps('colors.header')};
 `;
 
 /**
@@ -288,12 +303,11 @@ class SplashPage extends Component {
     return (
       <ContainerStyled width="100%">
         <BoxStyled
+          maxWidth="97%"
+          maxHeight="100%"
+          margin="auto"
           borderStyle="none"
           elevation={5}
-          margin="auto"
-          maxHeight="100%"
-          maxWidth="97%"
-          width="600px"
         >
           <Col>
             <Row width="100%" display="inline-block">

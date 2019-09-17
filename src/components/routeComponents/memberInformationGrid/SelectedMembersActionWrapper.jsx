@@ -32,6 +32,10 @@ const BoxStyled = styled(Box)`
   }
 `;
 
+const PopupButtonStyled = styled(Button)`
+  width: 100px;
+`;
+
 const CSVLinkStyled = styled(CSVLink)`
     pointer-events: ${props => (props.disable === 'true' ? 'none' : 'all')};
     cursor: ${props => (props.disable === 'true' ? 'not-allowed' : null)};
@@ -92,24 +96,22 @@ class SelectedMembersActionWrapper extends Component {
         <Popup>
           <Typography type="subheading">{ BUS_COORDINATOR_ERROR_MESSAGE }</Typography>
           <Row width="100%" justify="center">
-            <Button
+            <PopupButtonStyled
               color="tertiary"
               noMinWidth
               margin="5px"
-              width="100px"
               onClick={() => { this.onClickPrintCancel(false); }}
             >
               No
-            </Button>
-            <Button
+            </PopupButtonStyled>
+            <PopupButtonStyled
               color="tertiary"
               margin="5px"
               noMinWidth
-              width="100px"
               onClick={this.printCards}
             >
               Yes
-            </Button>
+            </PopupButtonStyled>
           </Row>
         </Popup>
 

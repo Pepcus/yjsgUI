@@ -63,6 +63,7 @@ const ContainerStyled = styled(Container)`
 `;
 
 const ButtonStyled = styled(Button)`
+ width: 185px
  ${({ theme }) => theme.media.down('sm')`
      width: 100%
      margin: 10px 10px; 
@@ -261,14 +262,12 @@ class MemberRegistrationForm extends Component {
             />
             <Row justify="center" margin="0 0 25px 0">
               <ButtonStyled
-                width="170px"
                 margin="10px 25px"
                 onClick={this.redirectToPreviousLocation}
               >
                 {goBackBtnText}
               </ButtonStyled>
               <ButtonStyled
-                width="170px"
                 margin="10px 25px"
                 onClick={this.handleSubmit}
               >
