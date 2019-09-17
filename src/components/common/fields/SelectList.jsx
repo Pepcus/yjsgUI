@@ -5,7 +5,6 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
 import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 import {
