@@ -65,6 +65,7 @@ const ContainerStyled = styled(Container)`
 
 const BoxStyled = styled(Box)`
  align-items: center;
+ width: 600px;
  ${({ theme }) => theme.media.down('md')`
      margin: 60px auto auto auto;
      height: 85%;
@@ -302,7 +303,6 @@ class SplashPage extends Component {
     return (
       <ContainerStyled width="100%">
         <BoxStyled
-          width="600px"
           maxWidth="97%"
           maxHeight="100%"
           margin="auto"

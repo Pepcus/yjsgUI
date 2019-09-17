@@ -91,7 +91,7 @@ function SelectList(props) {
   const getSelectList = () => {
     if (enums) {
       return (
-        <Box backgroundColor="unset" borderStyle="none" padding="0">
+        <div>
           <Row width="100%" margin="0">
             <TypographyStyled type="label" style={titleStyle}>
               {label ? title : null}{required && label ? '*' : null}
@@ -117,7 +117,7 @@ function SelectList(props) {
               {renderOptions()}
             </SelectStyled>
           </Row>
-        </Box>
+        </div>
       );
     } return <InputField {...props} />;
   };

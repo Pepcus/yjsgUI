@@ -66,7 +66,7 @@ function InputField(props) {
     }
   }
   return (
-    <Box backgroundColor="unset" borderStyle="none" padding="0">
+    <div>
       <Row width="100%" margin="0" >
         <TypographyStyled type="label" style={titleStyle}>
           {label ? title : null}{required && label ? '*' : null}
@@ -89,7 +89,7 @@ function InputField(props) {
           color="primary"
         />
       </Row>
-    </Box>
+    </div>
   );
 }
 

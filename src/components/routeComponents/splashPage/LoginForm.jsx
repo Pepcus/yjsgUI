@@ -17,6 +17,7 @@ import {
 import AdminLoginForm from './AdminLoginForm';
 
 const ButtonStyled = styled(Button)`
+ width: 180px;
  ${({ theme }) => theme.media.down('sm')`
      width: 100%
      margin: 10px 10px; 
@@ -74,14 +75,12 @@ const LoginForm = ({
     return (
       <Row justify="center" margin="0 0 25px 0">
         <ButtonStyled
-          width="185px"
           margin="10px 15px"
           onClick={redirectToNewRegistrationPage}
         >
           {newRegistrationBtnText}
         </ButtonStyled>
         <ButtonStyled
-          width="185px"
           margin="10px 15px"
           onClick={enableAdminLoginButtons}
         >

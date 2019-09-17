@@ -18,6 +18,7 @@ import {
 } from './adminLoginFormSchema.json';
 
 const ButtonStyled = styled(Button)`
+ width: 185px    
  ${({ theme }) => theme.media.down('sm')`
      width: 100%
      margin: 10px 10px; 
@@ -64,14 +65,12 @@ const AdminLoginForm = ({
           {handleAdminScreenRedirection()}
           <Row justify="center" margin="0 0 25px 0">
             <ButtonStyled
-              width="185px"
               margin="10px 15px"
               onClick={handleDisableAdminLoginButtons}
             >
               {goBackBtnText}
             </ButtonStyled>
             <ButtonStyled
-              width="185px"
               margin="10px 15px"
               onClick={setAdminLogin}
             >
