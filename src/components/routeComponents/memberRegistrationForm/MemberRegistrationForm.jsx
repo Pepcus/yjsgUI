@@ -259,6 +259,7 @@ class MemberRegistrationForm extends Component {
               formData={{ ...data, ...member }}
               onChange={this.onChange}
               transformErrors={this.transformErrors}
+              onSubmit={this.handleSubmit}
             />
             <Row justify="center" margin="0 0 25px 0">
               <ButtonStyled

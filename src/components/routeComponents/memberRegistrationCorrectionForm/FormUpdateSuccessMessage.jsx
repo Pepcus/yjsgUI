@@ -43,7 +43,7 @@ const FormUpdateSuccessMessage = ({
 
     return (
       <Popup>
-        <Row width="100%" justify="center" margin="0">
+        <Row display="inline-block" width="100%" justify="center" margin="0">
           <Typography type="body" fontSize="16px">{infoUpdateSuccessMessage}</Typography>
           <Button
             color="tertiary"
@@ -60,8 +60,8 @@ const FormUpdateSuccessMessage = ({
     // if form data is not update and valid.
     return (
       <Popup>
-        <Row width="100%" justify="center" margin="0">
-          <Typography type="body" fontSize="16px">{noInfoChangeMessage}</Typography>
+        <Row display="inline-block" width="100%" justify="center" margin="0">
+          <Typography fullWidth noWrapWidth type="body" fontSize="16px">{noInfoChangeMessage}</Typography>
           <Button
             color="tertiary"
             margin="10px 25px"

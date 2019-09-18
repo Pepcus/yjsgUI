@@ -343,7 +343,6 @@ class MemberRegistrationCorrectionForm extends Component {
       this.updateMemberData();
     }
   };
-
   /**
    * Method transform error of form field conditionally
    * optIn value should not be 'N'

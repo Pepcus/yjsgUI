@@ -29,6 +29,8 @@ export const getFormData = ({
   let schema = {};
   let uiSchema = {};
   let formData = {};
+  let validation = [];
+  let defaultStudentDataFormat = [];
   if (isUserMember({ user }) && onlyOptInForm) {
     schema = formConfig.schema;
     uiSchema = formConfig.uiSchema;
@@ -36,6 +38,8 @@ export const getFormData = ({
       ...formConfig.data,
       ...member,
     };
+    validation = formConfig.validation;
+    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
 
   } else if (tenant === INDORE) {
     if (user === ADMIN) {
@@ -59,7 +63,8 @@ export const getFormData = ({
         ...formConfig.data,
         ...member,
       };
-
+      validation = formConfig.validation;
+      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
     } else if (isUserMember({ user })) {
       schema = formConfig.schema;
       uiSchema = {
@@ -81,6 +86,8 @@ export const getFormData = ({
         ...formConfig.data,
         ...member,
       };
+      validation = formConfig.validation;
+      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
     }
 
   } else if (user === ADMIN) {
@@ -104,6 +111,8 @@ export const getFormData = ({
       ...formConfig.data,
       ...member,
     };
+    validation = formConfig.validation;
+    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
 
   } else if (isUserMember({ user })) {
     schema = formConfig.schema;
@@ -126,7 +135,8 @@ export const getFormData = ({
       ...formConfig.data,
       ...member,
     };
-
+    validation = formConfig.validation;
+    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
   } else return null;
-  return { schema, uiSchema, formData };
+  return { schema, uiSchema, formData, validation, defaultStudentDataFormat };
 };
