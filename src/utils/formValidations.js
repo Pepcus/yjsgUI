@@ -15,7 +15,7 @@ import {
   ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
   ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
-} from '../constants/messages';
+} from 'constants/messages';
 
 /**
  * nameValidate method check validations for name field of form
@@ -283,21 +283,19 @@ export const initialMemberData = ({ memberData, formConfig }) => {
   formConfig.defaultStudentDataFormat.forEach((fieldObject) => {
     if (formattedMemberData[fieldObject.formField] === null) {
       const property = [fieldObject.formField];
-
       delete formattedMemberData[property];
 
-    } else if (fieldObject.dataType === 'string') {
+    } else if (fieldObject.dataType === 'string' && formattedMemberData[fieldObject.formField] !== undefined) {
       formattedMemberData = {
         ...formattedMemberData,
         [fieldObject.formField]: String(formattedMemberData[fieldObject.formField]) };
 
-    } else if (fieldObject.dataType === 'number') {
+    } else if (fieldObject.dataType === 'number' && formattedMemberData[fieldObject.formField] !== undefined) {
       formattedMemberData = {
         ...formattedMemberData,
         [fieldObject.formField]: Number(formattedMemberData[fieldObject.formField]) };
     }
   });
-
   return formattedMemberData;
 };
 

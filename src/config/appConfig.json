@@ -282,7 +282,7 @@
     {
       "name": "registrationCorrection",
       "path": "/member-registration-correction",
-      "component": "StudentRegistrationCorrectionForm",
+      "component": "MemberRegistrationCorrectionForm",
       "isActive": true,
       "header": {
         "titleStyle": {

@@ -172,17 +172,17 @@
               "remark": {
                 "title": "Remark",
                 "type": "string"
-              },
-              "required": [
-                "id",
-                "name",
-                "fatherName",
-                "gender",
-                "age",
-                "mobile",
-                "address"
-              ]
-            }
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "fatherName",
+              "gender",
+              "age",
+              "mobile",
+              "address"
+            ]
           },
           {
             "properties": {
@@ -403,92 +403,410 @@
       "marks2016"
     ],
     "optIn2019": {
-      "classNames": "field-style"
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "name": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "fatherName": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "mobile": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "occupation": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "education": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "email": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "classAttended2018": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "marks2019": {
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "backButton": {
-      "classNames": "button-style",
       "ui:options": {
-        "label": false
+        "label": false,
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
+        }
       }
     },
     "submitButton": {
-      "classNames": "button-style",
       "ui:options": {
-        "label": false
+        "label": false,
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
+        }
       }
     },
     "address": {
+      "ui:field": "InputField",
       "ui:widget": "textarea",
-      "classNames": "field-style"
-    },
-    "busStop": {
-      "ui:placeholder": "कृपया एक चुनिए . . ."
+      "ui:options": {
+        "style": {
+          "titleStyle": {
+          },
+          "fieldStyle": {
+            "height": "35px"
+          }
+        },
+        "type": "text",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "age": {
-      "classNames": "field-style",
-      "ui:widget": "updown"
+      "ui:widget": "updown",
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "gender": {
-      "classNames": "field-style",
-      "ui:placeholder": "कृपया एक चुनिए . . ."
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "classAttended2019": {
-      "classNames": "field-style",
-      "ui:placeholder": "कृपया एक चुनिए . . ."
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "id": {
       "ui:disabled": true,
-      "classNames": "field-style"
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "marks2018": {
       "ui:placeholder": "N.A.",
       "ui:disabled": true,
-      "classNames": "not-editable-field-style"
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "marks2017": {
       "ui:placeholder": "N.A.",
       "ui:disabled": true,
-      "classNames": "not-editable-field-style"
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "marks2016": {
       "ui:placeholder": "N.A.",
       "ui:disabled": true,
-      "classNames": "not-editable-field-style"
-    },
-    "busNumber": {
-      "ui:placeholder": "कृपया एक चुनिए . . ."
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "classRoomNo2019": {
-      "classNames": "field-style",
-      "ui:placeholder": "कृपया एक चुनिए . . ."
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     },
     "remark": {
-      "classNames": "field-style",
-      "ui:widget": "textarea"
+      "ui:field": "InputField",
+      "ui:widget": "textarea",
+      "ui:options": {
+        "style": {
+          "titleStyle": {
+          },
+          "fieldStyle": {
+            "height": "35px",
+            "width": "31.33%"
+          }
+        },
+        "type": "text",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
     }
   },
   "data": {},

@@ -38,7 +38,7 @@ const CloseButtonStyled = styled(Button)`
 `;
 
 const ButtonStyled = styled(Button)`
-   ${({ theme }) => theme.media.down('md')`
+   ${({ theme }) => theme.media.down('lg')`
      display: none;
    `};
 `;

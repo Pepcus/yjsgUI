@@ -561,3 +561,9 @@ export const SUPPORTED_FILE_TYPES = {
 };
 
 export const ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG = 'Error occurred to load form config.';
+
+export const FILES_NAME = {
+  ONLY_OPT_IN_JSON: 'onlyEditOptIn',
+  MEMBER_JSON: 'STUDENT',
+  ADMIN_JSON: 'ADMIN',
+};
