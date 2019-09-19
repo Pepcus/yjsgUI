@@ -96,6 +96,8 @@ const BoxStyled = styled(Box)`
 `;
 
 const PrintMediaDisplayNoneBoxStyled = styled(Box)`
+     padding: 20px 0px 0px 0px;
+     margin: unset;
      @media print {
          display:none;
      }
@@ -115,21 +117,19 @@ const DesktopRowStyled = styled(Row)`
 `;
 
 const MobileRowStyled = styled(Row)`
-    display: none;
-    ${({ theme }) => theme.media.down('lg')`
-       display: block;
-       input[type = "checkbox"] {
-       width:25px;
+ display: none;
+ ${({ theme }) => theme.media.down('lg')`
+     display: block;
+     input[type = "checkbox"] {
+         width:25px;
     }
     `}
 `;
 
 const RowStyled = styled(Row)`
-  ${({ theme }) => theme.media.down('lg')`
-       margin: 20px 0 0 180px !important;
-  `}
+  display: -webkit-inline-box;
+  width: 100%;
   ${({ theme }) => theme.media.down('md')`
-       margin: 70px 0 0 0 !important;
        width: 100%;
   `}
 `;
@@ -488,7 +488,7 @@ class MemberInformationGrid extends Component {
               setIsAdminRouteFlag={this.setIsAdminRouteFlag}
               redirectToFile={this.redirectToFile}
             />
-            <RowStyled margin="20px 0 0 0 !important" backgroundColor="unset" borderStyle="none" className="modal">
+            <RowStyled margin="0 0 0 0" backgroundColor="unset" borderStyle="none" className="modal">
               <AdvanceSearch
                 metaData={metaData}
                 members={members}

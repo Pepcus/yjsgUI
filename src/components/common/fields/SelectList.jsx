@@ -51,13 +51,12 @@ function SelectList(props) {
     required,
     schema,
     uiSchema,
+    formData,
   } = props;
 
   const title = get(schema, 'title', name);
 
   const label = get(uiSchema, 'ui:options.label', true);
-
-  const defaultValue = get(schema, 'default', '');
 
   const enumNames = get(schema, 'enumNames', []);
 
@@ -105,7 +104,7 @@ function SelectList(props) {
               id={idSchema.$id}
               onChange={handleOnChange}
               required={required}
-              defaultValue={defaultValue}
+              value={formData || ''}
             >
               <SelectOptionStyled
                 value=""

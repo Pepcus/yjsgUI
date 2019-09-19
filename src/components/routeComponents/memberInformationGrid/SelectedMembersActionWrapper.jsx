@@ -26,9 +26,15 @@ import MarkSelectedMembersAttendance from './markSelectedMembersAttendance';
 import UpdateIdCardStatusMembersModal from './updateIdCardStatusMembersModal';
 import MembersIdCard from './membersIdCard/MembersIdCard';
 
+const ContainerStyled = styled(Container)`
+  position: unset;
+  ${({ theme }) => theme.media.down('sm')`
+       margin: 0;
+  `}
+`;
 const BoxStyled = styled(Box)`
   @media print {
-   display:none;
+      display:none;
   }
 `;
 
@@ -50,13 +56,13 @@ const CSVLinkStyled = styled(CSVLink)`
     :hover { 
      background-color: ${props => (props.disable === 'true' ? getThemeProps('palette.action.hover') : getThemeProps('palette.action.selected'))};
     }
-    ${({ theme }) => theme.media.down('md')`
+    ${({ theme }) => theme.media.down('lg')`
      display: none;
     `};
 `;
 
 const ButtonStyled = styled(Button)`
-   ${({ theme }) => theme.media.down('md')`
+   ${({ theme }) => theme.media.down('lg')`
      display: none;
    `};
 `;
@@ -153,7 +159,7 @@ class SelectedMembersActionWrapper extends Component {
       ({ label: item.label, key: item.key, disable: item.disable }),
     );
     return (
-      <Container margin="5px 0" width="auto">
+      <ContainerStyled margin="5px 0" width="auto">
         <BoxStyled
           width="94%"
           margin="0 0px 0 10px"
@@ -201,7 +207,7 @@ class SelectedMembersActionWrapper extends Component {
         <MembersIdCard
           selectedMembers={selectedMembers}
         />
-      </Container>
+      </ContainerStyled>
     );
   }
 }

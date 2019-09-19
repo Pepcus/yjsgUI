@@ -22,14 +22,36 @@
     }
   },
   "uiSchema": {
+    "ui:disabled": true,
     "optIn2019": {
       "ui:widget": "radio",
+      "ui:field": "RadioField",
       "ui:options": {
-        "inline": true
+        "style": {
+          "fieldStyle": {
+            "margin": "10px"
+          }
+        },
+        "inline": true,
+        "col": {
+          "padding": "15px 50px 5px 50px"
+        }
       }
     },
     "name": {
-      "ui:disabled": "inline"
+      "ui:disabled": "inline",
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "padding": "20px 50px 0 50px"
+        }
+      }
     }
   },
   "data": {},

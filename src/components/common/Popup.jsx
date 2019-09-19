@@ -18,6 +18,7 @@ const BoxStyled = styled(Box)`
 `;
 
 const RowStyled = styled(Row)`
+    margin: 0 !important;
     border-radius: 4px;
     padding: 50px;
     background: ${getThemeProps('palette.popup.backgroundColor')};

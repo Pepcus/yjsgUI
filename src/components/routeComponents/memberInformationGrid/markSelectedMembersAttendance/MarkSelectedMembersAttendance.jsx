@@ -35,7 +35,7 @@ import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
 
 const ButtonStyled = styled(Button)`
-   ${({ theme }) => theme.media.down('md')`
+   ${({ theme }) => theme.media.down('lg')`
      width: 100%;
    `};
 `;

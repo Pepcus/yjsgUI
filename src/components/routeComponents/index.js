@@ -1,6 +1,6 @@
 import SplashPage from './splashPage';
 import MemberRegistrationForm from './memberRegistrationForm';
-import StudentRegistrationCorrectionForm from './StudentRegistrationCorrectionForm';
+import MemberRegistrationCorrectionForm from './memberRegistrationCorrectionForm';
 import SplashPagePrePopulated from './SplashPagePrePopulated';
 import AdminPanel from './AdminPanel';
 import MemberInformationGrid from './memberInformationGrid';
@@ -13,7 +13,7 @@ export default {
   MemberPage,
   SplashPage,
   MemberRegistrationForm,
-  StudentRegistrationCorrectionForm,
+  MemberRegistrationCorrectionForm,
   SplashPagePrePopulated,
   AdminPanel,
   MemberInformationGrid,

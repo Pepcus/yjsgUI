@@ -82,7 +82,7 @@ export const fetchMemberFailedAction = message => ({
  * @param {Object} updatedMember
  * @return {{updatedMember: Object, secretKey: String, id: String, type: string}}
  */
-export const updateMemberData = ({ id, secretKey, member }) => ({
+export const updateMemberDataAction = ({ id, secretKey, member }) => ({
   type: 'UPDATE_MEMBER',
   id,
   secretKey,

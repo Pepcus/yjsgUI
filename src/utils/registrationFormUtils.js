@@ -14,10 +14,25 @@ import {
   ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE,
   ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
-  DOUBLE_QUOTE_ERROR_MESSAGE, ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
-} from '../constants/messages';
-import { TENANT } from '../constants/yjsg';
+  DOUBLE_QUOTE_ERROR_MESSAGE,
+  ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
+} from 'constants/messages';
+import {
+  TENANT,
+  USER_TYPES,
+} from 'constants/yjsg';
 
+const {
+  STUDENT_WITH_URL,
+  STUDENT,
+} = USER_TYPES;
+
+/**
+ * setRegistrationData method set form field data in key value pair format
+ * @param {String} value
+ * @param {String} name
+ * @return {Object} formData
+ */
 export const setRegistrationData = (value, name) => {
   const formData = {};
   formData[name] = value;
@@ -46,7 +61,7 @@ export const validateInput = ({ value, name, tenant }) => {
     return ageValidate(value, name);
   }
   if (name === 'age' && tenant === TENANT.BHOPAL) {
-    return ageValidateForBhpoal(value, name);
+    return ageValidateForBhopal(value, name);
   }
   if (name === 'mobile') {
     return mobileValidate(value, name);
@@ -85,7 +100,7 @@ export const optionalEmailValidate = (value, name) => {
 };
 
 /**
- *
+ * nameValidate method check validations for name form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -111,7 +126,7 @@ export const nameValidate = (value, name) => {
 };
 
 /**
- *
+ * addressValidate method check validations for address form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -129,7 +144,7 @@ export const addressValidate = (value, name) => {
     errorMessageObject.message = DOUBLE_QUOTE_ERROR_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else if (value.length < 15) {
-    errorMessageObject.message = FULL_ADDRESS_MESSAGE+INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
+    errorMessageObject.message = FULL_ADDRESS_MESSAGE + INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
   } else {
     errorMessageObject.message = '';
@@ -139,7 +154,7 @@ export const addressValidate = (value, name) => {
 };
 
 /**
- *
+ * ageValidate method check validations for age form field
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -159,23 +174,34 @@ export const ageValidate = (value, name) => {
   return errorMessageObject;
 };
 
-export const ageValidateForBhpoal = (value, name) => {
+/**
+ * ageValidateForBhopal method check validations for age form field in Bhopal tenant case
+ * @param {String} value
+ * @param {String} name
+ * @return {Object} errorMessageObject
+ */
+export const ageValidateForBhopal = (value, name) => {
+
   const errorMessageObject = {};
+
   if (isEmpty(value)) {
     errorMessageObject.message = THIS_INFORMATION_IS_COMPULSORY_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
+
   } else if (value > 66 || value < 5) {
     errorMessageObject.message = ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE;
     errorMessageObject[`isValid_${name}`] = false;
+
   } else {
     errorMessageObject.message = '';
     errorMessageObject[`isValid_${name}`] = true;
   }
+
   return errorMessageObject;
 };
 
 /**
- *
+ * mobileValidate method check validations for mobile number form field
  * @param {Number} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -201,7 +227,7 @@ export const mobileValidate = (value, name) => {
 };
 
 /**
- *
+ * optionalMobileValidate method check validations for optional mobile number form field
  * @param {Number} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -228,7 +254,7 @@ export const optionalMobileValidate = (value, name) => {
 
 
 /**
- *
+ * requireFieldsValidate method check validations for form field which are required
  * @param {String} value
  * @param {String} name
  * @return {Object} errorMessageObject
@@ -308,6 +334,12 @@ export const isValidUserInfo = ({ errorMessageObject, user, tenant }) => {
   return isValid;
 };
 
+/**
+ * isDataCorrect method return errorObject of student data fields
+ * @param {Object} memberData
+ * @param {String} tenant
+ * @return {Object} errorMessageObject
+ */
 export const isDataCorrect = (memberData, tenant) => {
   const errorMessageObject = {};
   for (const info in memberData) {
@@ -316,39 +348,57 @@ export const isDataCorrect = (memberData, tenant) => {
   return errorMessageObject;
 };
 
+/**
+ * checkLevelValue method check level value and return it into number type
+ * @param {String} value
+ * @return {number}
+ */
 export const checkLevelValue = (value) => {
   const level = value ? value.slice(6, 8) : -1;
   return (Number(level));
 };
+
 /**
  * updateStudentDataAccordingClassAttended2018Level method manipulate the student data
  * according to classAttended level value of previous year.
- * @param {Object} studentData
+ * @param {Object} memberData
  * @return {Object} studentData
  */
-export const updateClassAttended2019InStudentData = (studentData) => {
-  const { classAttended2018, classAttended2019 } = studentData;
+export const updateClassAttended2019InMemberData = (memberData) => {
+
+  const { classAttended2018, classAttended2019 } = memberData;
 
   if (classAttended2019) {
-    return studentData;
+    return memberData;
   }
 
   const lastCourse = classAttended2018;
   const level = checkLevelValue(lastCourse);
+
   /* In classAttended2018 Level is greater than 0 (level > 0) condition will satisfied.*/
   if (level > 0) {
     // In classAttended2018 Level is greater than 7 like 'Level 8'
     // in that condition will pre populate
     // the value of classAttended2019 is 'Level 8'.
     if (level > 7) {
-      return extend(cloneDeep(studentData), { classAttended2019: 'Level 8' });
+      return extend(cloneDeep(memberData), { classAttended2019: 'Level 8' });
     }
     // In classAttended2018 Level is greater than 0 and less than 8 in that condition
     // pre populate value of classAttended2019 will be classAttended2018 incremented by 1.
-    return extend(cloneDeep(studentData), { classAttended2019: `Level ${level + 1}` });
+    return extend(cloneDeep(memberData), { classAttended2019: `Level ${level + 1}` });
+
   } else if (!isEmpty(lastCourse)) {
     // If classAttended2018 value is anything else then Level classAttended2019 will be Level 1.
-    return extend(cloneDeep(studentData), { classAttended2019: 'Level 1' });
+    return extend(cloneDeep(memberData), { classAttended2019: 'Level 1' });
   }
-  return studentData;
+
+  return memberData;
 };
+
+export const getRegisteredMemberData = ({ memberData }) => {
+  // get student data from session if present
+  const memberDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+  return !isEmpty(memberData) ? memberData : memberDataFromSession;
+};
+
+export const isUserMember = ({ user }) => user === STUDENT_WITH_URL || user === STUDENT;

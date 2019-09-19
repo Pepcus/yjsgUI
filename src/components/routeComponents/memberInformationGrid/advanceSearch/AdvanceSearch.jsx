@@ -1,9 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-import Fuse from 'fuse.js';
 import isEmpty from 'lodash/isEmpty';
-import uniqWith from 'lodash/uniqWith';
-import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
@@ -27,9 +24,23 @@ import {
 import fields from 'components/common/fields';
 import { schema, uiSchema } from './advanceSearchShema.json';
 
-const ColStyled = styled(Col)`
-    display: contents;
-    margin-left: 650px
+const AdvanceSearchWrapper = styled(Box)`
+    background-color: unset;
+    border-style: unset;
+    display: flex;
+    flex-flow: row-reverse
+    width: 65%;
+    ${({ theme }) => theme.media.down('xl')`
+        width: 60%;
+    `}
+    ${({ theme }) => theme.media.down('lg')`
+        width: 75%;
+    `} 
+    ${({ theme }) => theme.media.down('sm')`
+      width: 100%
+      margin: 0;
+      padding: 10px 0px;
+    `}
 `;
 
 const TypographyStyled = styled(Typography)`
@@ -284,7 +295,7 @@ class AdvanceSearch extends Component {
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
     return (
-      <ColStyled size={12}>
+      <AdvanceSearchWrapper>
         <BoxStyled
           width="auto"
           padding="20px 25px"
@@ -366,7 +377,7 @@ class AdvanceSearch extends Component {
             </Row>
           </Row>
         </BoxStyled>
-      </ColStyled>
+      </AdvanceSearchWrapper>
     );
   }
 }

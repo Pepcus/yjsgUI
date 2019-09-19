@@ -37,6 +37,7 @@ const MobileButtonsContainerStyled = styled(Container)`
 
 
 const MobileButtonsBoxStyled = styled(Box)`
+    padding: 0px 12px
     display: flex;
     &:hover {
     border-radius: 4px;

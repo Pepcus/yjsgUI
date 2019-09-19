@@ -34,7 +34,7 @@ import { fetchFormConfig } from 'sagas/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
-  validateForm,
+  verifyFormDataValidations,
 } from 'utils/formUtils';
 import fields from 'components/common/fields';
 import RedirectToRoute from './RedirectToRoute';
@@ -207,7 +207,7 @@ class MemberRegistrationForm extends Component {
     const { formConfig } = this.state;
     const { validation } = formConfig;
 
-    return validateForm({ formData, errors, validate: validation });
+    return verifyFormDataValidations({ formData, errors, validate: validation });
   };
 
   render() {
@@ -259,6 +259,7 @@ class MemberRegistrationForm extends Component {
               formData={{ ...data, ...member }}
               onChange={this.onChange}
               transformErrors={this.transformErrors}
+              onSubmit={this.handleSubmit}
             />
             <Row justify="center" margin="0 0 25px 0">
               <ButtonStyled

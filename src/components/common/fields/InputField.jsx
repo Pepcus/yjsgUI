@@ -42,8 +42,6 @@ function InputField(props) {
 
   const type = get(schema, 'type', 'number');
 
-  const defaultValue = get(schema, 'default', '');
-
   const minLength = get(schema, 'minLength');
 
   const maxLength = get(schema, 'maxLength');
@@ -83,8 +81,7 @@ function InputField(props) {
           min={minLength}
           max={maxLength}
           placeholder={placeholder}
-          value={formData}
-          defaultValue={defaultValue}
+          value={formData || ''}
           color="primary"
         />
       </Row>
