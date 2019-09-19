@@ -589,7 +589,6 @@ class Files extends Component {
         </FileDescriptionStyled>
       );
     }
-
     return null;
   };
 
