@@ -113,8 +113,8 @@ const FilesListStyled = styled(Box)`
         background-color: ${getThemeProps('palette.advancedSearch.color')};
     ${({ theme }) => theme.media.down('lg')`
         max-height: ${props => (props.isDisplayCondition ? 'initial' : 'none')};;
-        height: ${props => (props.isDisplayCondition ? '100%' : '100%')};
-        width: ${props => (props.isDisplayCondition ? '260px' : '260px')};
+        height: 100%;
+        width: 260px;
         display: ${props => (props.isDisplayCondition ? 'block' : 'none')};
         overflow-y: ${props => (props.isDisplayCondition ? 'unset' : 'scroll')};
         position: fixed;
@@ -125,17 +125,17 @@ const FilesListStyled = styled(Box)`
         position: relative;
     }
     ${({ theme }) => theme.media.down('md')`
-        max-height: ${props => (props.isDisplayCondition ? 'initial' : 'initial')};
-        height: ${props => (props.isDisplayCondition ? '100%' : '100%')};
+        max-height: initial;
+        height: 100%;
         width: ${props => (props.isDisplayCondition ? '100%' : '260px')};
         left: ${props => (props.isDisplayCondition ? 'auto' : 'none')};
-        margin: ${props => (props.isDisplayCondition ? '0' : '0')};
+        margin: 0;
         overflow-y: ${props => (props.isDisplayCondition ? 'inherit' : 'scroll')};
-        position: ${props => (props.isDisplayCondition ? 'relative' : 'relative')};
+        position: relative;
         display: ${props => (props.isDisplayCondition ? 'block' : 'none')}
     `}
     ${({ theme }) => theme.media.down('sm')`
-        margin: ${props => (props.isDisplayCondition ? '0' : '0')};
+        margin: 0;
         display: ${props => (props.isDisplayCondition ? 'block' : 'none')}
     `}
 `;
@@ -149,8 +149,7 @@ const MessageBoxWrapper = styled(Box)`
     ${({ theme }) => theme.media.down('lg')`
         display:  ${props => (props.isDisplayMessage ? 'unset' : 'none')}
         max-width: ${props => (props.isMobile ? '100%' : '64%')}
-        margin: ${props => (props.isMobile ? '0' : 'unset')};
-        file-Component-mobile-wrapper margin: ${props => (props.isMobile ? 'unset' : '0 0 0 270px')};
+        margin: ${props => (props.isMobile ? '0' : '0 0 0 270px')};
     `}
     ${({ theme }) => theme.media.down('md')`
         padding: 0;
