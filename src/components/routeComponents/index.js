@@ -5,7 +5,7 @@ import MemberInformationGrid from './memberInformationGrid';
 import MemberCredentialPage from './memberCredentialPage';
 import Files from './files';
 import MemberPage from './memberPage';
-import ParentsRegistration from './ParentsRegistrationForm';
+import ParentsRegistration from './parentsRegistrationForm/ParentsRegistrationForm';
 
 export default {
   MemberPage,
