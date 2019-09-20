@@ -73,3 +73,46 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   }
   return metaData;
 };
+
+/**
+ * It return flag value for file list display condition
+ * @param {Number} width
+ * @param {Boolean} showFileDetails
+ * @param {Boolean} backPageButton
+ * @return {boolean}
+ */
+export const getFileListDisplayCondition = ({ width, showFileDetails, backPageButton }) => {
+  const isMobile = width <= 600;
+  if (showFileDetails) {
+    if (isMobile) {
+      if (backPageButton) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+  return true;
+};
+
+/**
+ * It return flag value for message display condition
+ * @param {Number} width
+ * @param {Boolean} showFileDetails
+ * @param {Boolean} backPageButton
+ * @return {boolean}
+ */
+export const getMessageDisplayCondition = ({ width, showFileDetails, backPageButton }) => {
+  const isMobile = width <= 600;
+  if (showFileDetails) {
+    if (isMobile) {
+      if (backPageButton) {
+        return false;
+      }
+      return true;
+
+    }
+    return true;
+  }
+  return true;
+};

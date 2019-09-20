@@ -244,25 +244,6 @@
       }
     },
     {
-      "name": "home",
-      "path": "/home",
-      "component": "SplashPagePrePopulated",
-      "isActive": false,
-      "header": {
-        "titleStyle": {
-          "padding": "10px 0"
-        },
-        "headerWrapperStyle": {
-          "height": "auto"
-        }
-      },
-      "footer": {
-        "titleStyle": {},
-        "footerWrapperStyle": {},
-        "title": ""
-      }
-    },
-    {
       "name": "memberRegister",
       "path": "/member-register",
       "component": "MemberRegistrationForm",
@@ -289,25 +270,6 @@
           "padding": "10px 0px 10px 80px"
         },
         "logo": true
-      },
-      "footer": {
-        "titleStyle": {},
-        "footerWrapperStyle": {},
-        "title": ""
-      }
-    },
-    {
-      "name": "adminPanel",
-      "path": "/adminPanel",
-      "component": "AdminPanel",
-      "isActive": false,
-      "header": {
-        "titleStyle": {
-          "padding": "10px 0"
-        },
-        "hasButtons": true,
-        "backButton": true,
-        "logoutButton": true
       },
       "footer": {
         "titleStyle": {},
