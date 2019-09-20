@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 
+import Col from 'ravenjs/lib/Col';
 import Row from 'ravenjs/lib/Row';
 import Typography from 'ravenjs/lib/Typography';
 import {
@@ -64,7 +65,7 @@ function SelectList(props) {
 
   const style = get(uiSchema, 'ui:options.style', {});
 
-  const { titleStyle, fieldStyle } = style;
+  const { titleStyle, fieldStyle, fieldWrapper } = style;
 
   const placeholder = get(uiSchema, 'ui:placeholder', '');
 
@@ -89,7 +90,8 @@ function SelectList(props) {
   const getSelectList = () => {
     if (enums) {
       return (
-        <div>
+        /* This Col is used for adjust the position of field in form */
+        <Col {...fieldWrapper}>
           <Row width="100%" margin="0">
             <TypographyStyled type="label" style={titleStyle}>
               {label ? title : null}{required && label ? '*' : null}
@@ -115,7 +117,7 @@ function SelectList(props) {
               {renderOptions()}
             </SelectStyled>
           </Row>
-        </div>
+        </Col>
       );
     } return <InputField {...props} />;
   };

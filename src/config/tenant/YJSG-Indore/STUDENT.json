@@ -640,6 +640,14 @@
           },
           "fieldStyle": {
             "height": "35px"
+          },
+          "fieldWrapper": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 5.9
+            }
           }
         },
         "type": "text",
@@ -648,7 +656,7 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 8
           },
           "padding": "0 10px 0 10px"
         }

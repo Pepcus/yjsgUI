@@ -792,8 +792,15 @@
           "titleStyle": {
           },
           "fieldStyle": {
-            "height": "35px",
-            "width": "31.33%"
+            "height": "auto"
+          },
+          "fieldWrapper": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 3.9
+            }
           }
         },
         "type": "text",
@@ -802,7 +809,7 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 12
           },
           "padding": "0 10px 0 10px"
         }
