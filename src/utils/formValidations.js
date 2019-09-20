@@ -2,7 +2,6 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-
 import {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,

@@ -23,6 +23,7 @@ import CoordinatorInformation from './CoordinatorInformation';
 
 const BoxStyled = styled(Box)`
    float: left;
+   border-color: ${getThemeProps('palette.idCard.colors')}
 `;
 
 const TypographyStyled = styled(Typography)`
@@ -80,6 +81,7 @@ const MemberInformationWrapper = styled(Box)`
 `;
 
 const FooterWrapperStyle = styled(Typography)`
+    background-color: ${getThemeProps('palette.idCard.colors')}
     display: flex;
     min-height: 25px;
     max-height: 100%;
@@ -96,6 +98,10 @@ const MemberIdCardWrapper = styled(Box)`
       visibility: visible;
     }
 `;
+
+const SmallHeadingWrapper = styled(Typography)`
+    background-color: ${getThemeProps('palette.idCard.colors')}
+`
 
 /**
  * MembersIdCard render members IdCard
@@ -127,7 +133,6 @@ class MembersIdCard extends Component {
           width="45%"
           margin="15px 10px 15px"
           padding="0"
-          borderColor="warning"
         >
           <Typography
             color="white"
@@ -148,17 +153,16 @@ class MembersIdCard extends Component {
                 style={{ 'max-width': '100%' }}
               />
             </BoxStyled>
-            <Typography
+            <SmallHeadingWrapper
               gutterBottom="0"
               fontSize="13px"
               type="body"
               fontWeight="100"
-              backgroundColor="warning"
               padding="1px"
               align="center"
             >
               { YJSG_ID_CARD_SMALL_HEADING }
-            </Typography>
+            </SmallHeadingWrapper>
             <TypographyStyled
               color="dark"
               padding="2px"
@@ -395,7 +399,6 @@ class MembersIdCard extends Component {
             fontSize="9px"
             type="body"
             fontWeight="bold"
-            backgroundColor="warning"
             padding="0 5px"
             align="center"
           >

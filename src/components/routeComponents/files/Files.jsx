@@ -325,7 +325,7 @@ const DownloadFileStyle = styled('a')`
     &:hover {
         transition: 0.3s all;
         background-color: ${getThemeProps('typography.titleFieldColor.color')};
-}
+    }
 `;
 
 /**
