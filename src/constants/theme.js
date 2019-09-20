@@ -1,8 +1,12 @@
-
 const COLORS = {
-  HOVER: '#d24c0c',
-  PRIMARY: '#f9570a',
-  YELLOW: '#f6c458',
+  DARK_ORANGE: '#d24c0c',
+  ORANGE: '#f9570a',
+  LIGHT_ORANGE: '#F57F17',
+  LIGHTER_ORANGE: '#f6c458',
+  DARK_BLUE: '#015b9a',
+  BLUE: '#0868ac',
+  LIGHT_BLUE: '#087DAC',
+  LIGHTER_BLUE: '#b6dfef',
   DARKER: '#010306',
   LIGHT_GRAY_1: '#4c4c4c',
   LIGHT_GRAY_2: '#898787',
@@ -19,76 +23,158 @@ const COLORS = {
  * @type {Object}
  */
 const APP_THEME = {
-  colors: {
-    header: COLORS.PRIMARY,
-    smallHeader: COLORS.YELLOW,
+  development: {
+    colors: {
+      header: COLORS.BLUE,
+      smallHeader: COLORS.LIGHTER_BLUE,
+    },
+    typography: {
+      mapping: {
+        heading: 'h5',
+      },
+      root: {
+        fontFamily: "'Poppins', sans-serif",
+      },
+      titleFieldColor: {
+        color: COLORS.LIGHT_GRAY_1,
+      },
+    },
+    home: {
+      backgroundColor: COLORS.LIGHTER,
+    },
+    palette: {
+      advancedSearch: {
+        color: COLORS.LIGHT_GRAY_4,
+      },
+      primary: {
+        borderColor: COLORS.DARK_BLUE,
+        color: COLORS.DARK_BLUE,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.BLUE}, ${COLORS.BLUE})`,
+        light: COLORS.DARK_BLUE,
+        text: COLORS.WHITE,
+      },
+      secondary: {
+        borderColor: COLORS.DARK_BLUE,
+        color: COLORS.WHITE,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.WHITE}, ${COLORS.WHITE})`,
+        light: COLORS.DARK_BLUE,
+        text: COLORS.DARK_BLUE,
+      },
+      tertiary: {
+        borderColor: COLORS.LIGHT_1,
+        color: COLORS.LIGHT_1,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.LIGHT_GRAY_3}, ${COLORS.LIGHT_GRAY_3})`,
+        light: COLORS.LIGHT_1,
+        text: COLORS.DARKER,
+      },
+      popup: {
+        borderColor: COLORS.BLUE,
+        color: COLORS.LIGHT_1,
+        dark: COLORS.DARKER,
+        light: COLORS.LIGHT_1,
+        text: COLORS.DARKER,
+        backgroundColor: COLORS.BLUE,
+      },
+      transparent: {
+        color: COLORS.TRANSPARENT,
+      },
+      modal: {
+        borderColor: COLORS.LIGHT_GRAY_2,
+        color: COLORS.LIGHT_GRAY_4,
+        dark: COLORS.DARKER,
+        light: COLORS.LIGHT_GRAY_4,
+      },
+      checkbox: {
+        color: COLORS.LIGHT_GRAY_2,
+      },
+      footer: {
+        color: COLORS.LIGHT_GRAY_2,
+        backgroundColor: COLORS.LIGHT_GRAY_3,
+        borderColor: COLORS.LIGHT_GRAY_3,
+      },
+      idCard: {
+        colors: COLORS.LIGHT_BLUE,
+      },
+    },
   },
-  typography: {
-    mapping: {
-      heading: 'h5',
+  production: {
+    colors: {
+      header: COLORS.ORANGE,
+      smallHeader: COLORS.LIGHTER_ORANGE,
     },
-    root: {
-      fontFamily: "'Poppins', sans-serif",
+    typography: {
+      mapping: {
+        heading: 'h5',
+      },
+      root: {
+        fontFamily: "'Poppins', sans-serif",
+      },
+      titleFieldColor: {
+        color: COLORS.LIGHT_GRAY_1,
+      },
     },
-    titleFieldColor: {
-      color: COLORS.LIGHT_GRAY_1,
+    home: {
+      backgroundColor: COLORS.LIGHTER,
     },
-  },
-  home: {
-    backgroundColor: COLORS.LIGHTER,
-  },
-  palette: {
-    advancedSearch: {
-      color: COLORS.LIGHT_GRAY_4,
-    },
-    primary: {
-      borderColor: COLORS.HOVER,
-      color: COLORS.HOVER,
-      dark: COLORS.DARKER,
-      gradientColor: `linear-gradient(to top, ${COLORS.PRIMARY}, ${COLORS.PRIMARY})`,
-      light: COLORS.HOVER,
-      text: COLORS.WHITE,
-    },
-    secondary: {
-      borderColor: COLORS.HOVER,
-      color: COLORS.WHITE,
-      dark: COLORS.DARKER,
-      gradientColor: `linear-gradient(to top, ${COLORS.WHITE}, ${COLORS.WHITE})`,
-      light: COLORS.HOVER,
-      text: COLORS.HOVER,
-    },
-    tertiary: {
-      borderColor: COLORS.LIGHT_1,
-      color: COLORS.LIGHT_1,
-      dark: COLORS.DARKER,
-      gradientColor: `linear-gradient(to top, ${COLORS.LIGHT_GRAY_3}, ${COLORS.LIGHT_GRAY_3})`,
-      light: COLORS.LIGHT_1,
-      text: COLORS.DARKER,
-    },
-    popup: {
-      borderColor: COLORS.PRIMARY,
-      color: COLORS.LIGHT_1,
-      dark: COLORS.DARKER,
-      light: COLORS.LIGHT_1,
-      text: COLORS.DARKER,
-      backgroundColor: COLORS.PRIMARY,
-    },
-    transparent: {
-      color: COLORS.TRANSPARENT,
-    },
-    modal: {
-      borderColor: COLORS.LIGHT_GRAY_2,
-      color: COLORS.LIGHT_GRAY_4,
-      dark: COLORS.DARKER,
-      light: COLORS.LIGHT_GRAY_4,
-    },
-    checkbox: {
-      color: COLORS.LIGHT_GRAY_2,
-    },
-    footer: {
-      color: COLORS.LIGHT_GRAY_2,
-      backgroundColor: COLORS.LIGHT_GRAY_3,
-      borderColor: COLORS.LIGHT_GRAY_3,
+    palette: {
+      advancedSearch: {
+        color: COLORS.LIGHT_GRAY_4,
+      },
+      primary: {
+        borderColor: COLORS.DARK_ORANGE,
+        color: COLORS.DARK_ORANGE,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.ORANGE}, ${COLORS.ORANGE})`,
+        light: COLORS.DARK_ORANGE,
+        text: COLORS.WHITE,
+      },
+      secondary: {
+        borderColor: COLORS.DARK_ORANGE,
+        color: COLORS.WHITE,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.WHITE}, ${COLORS.WHITE})`,
+        light: COLORS.DARK_ORANGE,
+        text: COLORS.DARK_ORANGE,
+      },
+      tertiary: {
+        borderColor: COLORS.LIGHT_1,
+        color: COLORS.LIGHT_1,
+        dark: COLORS.DARKER,
+        gradientColor: `linear-gradient(to top, ${COLORS.LIGHT_GRAY_3}, ${COLORS.LIGHT_GRAY_3})`,
+        light: COLORS.LIGHT_1,
+        text: COLORS.DARKER,
+      },
+      popup: {
+        borderColor: COLORS.ORANGE,
+        color: COLORS.LIGHT_1,
+        dark: COLORS.DARKER,
+        light: COLORS.LIGHT_1,
+        text: COLORS.DARKER,
+        backgroundColor: COLORS.ORANGE,
+      },
+      transparent: {
+        color: COLORS.TRANSPARENT,
+      },
+      modal: {
+        borderColor: COLORS.LIGHT_GRAY_2,
+        color: COLORS.LIGHT_GRAY_4,
+        dark: COLORS.DARKER,
+        light: COLORS.LIGHT_GRAY_4,
+      },
+      checkbox: {
+        color: COLORS.LIGHT_GRAY_2,
+      },
+      footer: {
+        color: COLORS.LIGHT_GRAY_2,
+        backgroundColor: COLORS.LIGHT_GRAY_3,
+        borderColor: COLORS.LIGHT_GRAY_3,
+      },
+      idCard: {
+        colors: COLORS.LIGHT_ORANGE,
+      },
     },
   },
 };
