@@ -567,3 +567,25 @@ export const FILES_NAME = {
   MEMBER_JSON: 'STUDENT',
   ADMIN_JSON: 'ADMIN',
 };
+
+export const CLOSE_BROWSER_MANUALLY_MESSAGE = 'Please close your browser manually.';
+
+export const CUSTOM_FOOTER_INFORMATION = 'किसी कारणवश आपका रजिस्ट्रेशन नहीं हो पाया! कृपया श्री प्रकाश छाबड़ा से 99260 40137 पर संपर्क करें!';
+
+export const THANKS = 'धन्यवाद्';
+
+export const DATE = 'दिनांक :';
+
+export const EVENT_DATE = 'रविवार १७ फरवरी';
+
+export const TIME = 'समय :';
+
+export const EVENT_TIME = 'प्रातः ९ से १ बजे';
+
+export const PLACE = 'स्थान :';
+
+export const EVENT_PLACE = 'श्री चंद्रप्रभु दिगंबर जैन मांगलिक भवन, अंजनी नगर';
+
+export const EVENT_TITLE = 'सम्मिलित होने के लिए कृपया निचे दी गई जानकारी देवें!';
+
+export const REGISTRATION_SUCCESS_MESSAGE = 'आपका रजिस्ट्रेशन संपन्न हुआ!';
