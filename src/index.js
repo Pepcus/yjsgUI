@@ -29,7 +29,7 @@ getAppConfig().then((response) => {
   } else {
     ReactDOM.render(
       <Provider store={store}>
-        <ThemeProvider theme={generateTheme(APP_THEME.development)}>
+        <ThemeProvider theme={generateTheme(APP_THEME.production)}>
           <AppContainer />
         </ThemeProvider>
       </Provider>, document.getElementById('root'));
