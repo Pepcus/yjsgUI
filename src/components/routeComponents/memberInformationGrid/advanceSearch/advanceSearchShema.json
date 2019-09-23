@@ -20,6 +20,9 @@
             "position": "relative",
             "borderRadius": "4px 0 0 4px",
             "margin": "8px 0 0 0"
+          },
+          "fieldWrapper": {
+            "padding": "0"
           }
         }
       }

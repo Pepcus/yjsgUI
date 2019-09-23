@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import Box from 'ravenjs/lib/Box';
 import Button from 'ravenjs/lib/Button';
 import Container from 'ravenjs/lib/Container';
+import Col from 'ravenjs/lib/Col';
 import Form from 'ravenjs/lib/Form';
 import Row from 'ravenjs/lib/Row';
 import { getThemeProps } from 'ravenjs/utils/theme';
@@ -49,6 +50,9 @@ const BoxStyled = styled(Box)`
      margin: auto; 
      height: 100%;
  `}
+ @media (max-width: 992px) and (orientation: landscape) {
+        height: auto;
+    }
 `;
 
 const ContainerStyled = styled(Container)`
@@ -60,15 +64,11 @@ const ContainerStyled = styled(Container)`
  ${({ theme }) => theme.media.down('md')`
      height: auto; 
  `}
+ @media (max-width: 992px) and (orientation: landscape) {
+        height: auto;
+    }
 `;
 
-const ButtonStyled = styled(Button)`
- width: 185px
- ${({ theme }) => theme.media.down('sm')`
-     width: 100%
-     margin: 10px 10px; 
- `}
-`;
 /**
  * MemberRegistrationForm will be render student registration form
  * @type {Class}
@@ -262,18 +262,22 @@ class MemberRegistrationForm extends Component {
               onSubmit={this.handleSubmit}
             />
             <Row justify="center" margin="0 0 25px 0">
-              <ButtonStyled
-                margin="10px 25px"
-                onClick={this.redirectToPreviousLocation}
-              >
-                {goBackBtnText}
-              </ButtonStyled>
-              <ButtonStyled
-                margin="10px 25px"
-                onClick={this.handleSubmit}
-              >
-                {formSubmitBtnText}
-              </ButtonStyled>
+              <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+                <Button
+                  width="100%"
+                  onClick={this.redirectToPreviousLocation}
+                >
+                  {goBackBtnText}
+                </Button>
+              </Col>
+              <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+                <Button
+                  width="100%"
+                  onClick={this.handleSubmit}
+                >
+                  {formSubmitBtnText}
+                </Button>
+              </Col>
             </Row>
             <SuccessMessagePopup
               isSubmitTriggered={isSubmitTriggered}

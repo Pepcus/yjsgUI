@@ -44,22 +44,26 @@ const AdvanceSearchWrapper = styled(Box)`
 `;
 
 const TypographyStyled = styled(Typography)`
-    top: 42px;
+    top: 60px;
     position: absolute;
-    right: 43%;
+    right: 41%;
     cursor: pointer;
     font-size: 17px !important;
     color: ${getThemeProps('palette.action.disabledBackground')};
     ${({ theme }) => theme.media.down('xl')`
-      right: 42%;
+      right: 54%;
     `}
     ${({ theme }) => theme.media.down('lg')`
-      right: 22%;
+      right: 37%;
     `}
     ${({ theme }) => theme.media.down('sm')`
       right: 18%;
-      top: 33px;
+      top: 45px;
     `}
+    @media (max-width: 768px) and (orientation: landscape) {
+     right: 40%;
+      top: 50px;
+ }
 `;
 
 const BoxStyled = styled(Box)`

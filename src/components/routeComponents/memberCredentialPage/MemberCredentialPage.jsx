@@ -59,7 +59,7 @@ const BoxStyled = styled(Box)`
      margin: 60px auto;
  `}
  @media (max-width: 992px) and (orientation: landscape) {
-     width: 70%;
+     width: 64%;
      margin: 60px auto;
  }
 `;
@@ -83,17 +83,6 @@ const ImageStyled = styled.img`
 
 const TypographyStyled = styled(Typography)`
   color: ${getThemeProps('colors.header')};
-`;
-
-const ButtonStyled = styled(Button)`
- width: 185px;
- ${({ theme }) => theme.media.down('sm')`
-     width: 100%
-     margin: 10px 10px; 
- `}
- @media (max-width: 992px) and (orientation: landscape) {
-     width: 100%;
- }
 `;
 
 /**
@@ -176,9 +165,8 @@ class MemberCredentialPage extends Component {
   /**
    * Method fetch the student
    * data on submit of student credential
-   * @param {Object} event
    */
-  fetchStudentById = (event) => {
+  fetchStudentById = () => {
     const {
       credentials,
       hasError,
@@ -186,7 +174,6 @@ class MemberCredentialPage extends Component {
     const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
     const { STUDENT } = USER_TYPES;
 
-    event.preventDefault();
     if (hasError) {
       setStudentCredentials({ id: credentials.memberId, secretKey: credentials.secretKey });
       fetchStudentData({ id: credentials.memberId, secretKey: credentials.secretKey });
@@ -306,20 +293,25 @@ class MemberCredentialPage extends Component {
                 formData={credentials}
                 onChange={this.onChange}
                 transformErrors={this.transformErrors}
+                onSubmit={this.fetchStudentById}
               />
-              <Row justify="center" margin="0 0 25px 0">
-                <ButtonStyled
-                  margin="10px 15px"
-                  onClick={this.redirectToPreviousLocation}
-                >
-                  {goBackBtnText}
-                </ButtonStyled>
-                <ButtonStyled
-                  margin="10px 15px"
-                  onClick={this.fetchStudentById}
-                >
-                  {viewEditInfoBtnText}
-                </ButtonStyled>
+              <Row width="100%" justify="center" margin="0 0 25px 0">
+                <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
+                  <Button
+                    width="100%"
+                    onClick={this.redirectToPreviousLocation}
+                  >
+                    {goBackBtnText}
+                  </Button>
+                </Col>
+                <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
+                  <Button
+                    width="100%"
+                    onClick={this.fetchStudentById}
+                  >
+                    {viewEditInfoBtnText}
+                  </Button>
+                </Col>
               </Row>
             </Row>
           </Col>

@@ -75,7 +75,7 @@ const BoxStyled = styled(Box)`
      margin: 60px auto;
  `}
  @media (max-width: 992px) and (orientation: landscape) {
-     width: 70%;
+     width: 64%;
      margin: 60px auto;
  }
 `;
@@ -260,13 +260,11 @@ class SplashPage extends Component {
 
   /**
    * Method set the admin login credential
-   * @param {Object} event
    */
-  setAdminLogin = (event) => {
+  setAdminLogin = () => {
     const { admin } = this.state;
     const { setAdminCredentials } = this.props;
 
-    event.preventDefault();
     if (this.state.hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
