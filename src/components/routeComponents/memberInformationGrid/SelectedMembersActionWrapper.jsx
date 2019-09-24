@@ -39,22 +39,24 @@ const BoxStyled = styled(Box)`
 `;
 
 const PopupButtonStyled = styled(Button)`
-  width: 100px;
+    width: 100px;
 `;
-
 const CSVLinkStyled = styled(CSVLink)`
     pointer-events: ${props => (props.disable === 'true' ? 'none' : 'all')};
     cursor: ${props => (props.disable === 'true' ? 'not-allowed' : null)};
     font-size: 14px;
-    padding: 9px 10px;
-    text-decoration: none;
-    outline: medium none;
     border-radius: 4px;
     background-color: ${getThemeProps('palette.action.hover')};
     color: ${props => (props.disable === 'true' ? getThemeProps('palette.common.placeholder') : getThemeProps('palette.common.darker'))};
+    padding: 8px 10px;
+    position: relative;
+    text-decoration: none;
     box-shadow: ${props => (props.disable === 'true' ? null : getThemeProps('palette.action.disabled'))};
-    :hover { 
-     background-color: ${props => (props.disable === 'true' ? getThemeProps('palette.action.hover') : getThemeProps('palette.action.selected'))};
+    &:hover {
+        background-color: ${props => (props.disable === 'true' ? getThemeProps('palette.action.hover') : getThemeProps('palette.action.selected'))};
+    }
+    &:active {
+        box-shadow: none;
     }
     ${({ theme }) => theme.media.down('lg')`
      display: none;
