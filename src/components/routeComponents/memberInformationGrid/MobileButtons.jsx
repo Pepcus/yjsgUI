@@ -44,10 +44,10 @@ const MobileButtonsBoxStyled = styled(Box)`
     transition: 0.3s all;
     }
     ${({ theme }) => theme.media.down('lg')`
-      margin: 0 10px;
+      margin: 0;
     `};
     ${({ theme }) => theme.media.down('md')`
-      margin: 0 10px;
+      margin: 0;
     `};
 `;
 

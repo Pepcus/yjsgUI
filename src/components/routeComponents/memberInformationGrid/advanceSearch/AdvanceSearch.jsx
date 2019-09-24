@@ -37,33 +37,37 @@ const AdvanceSearchWrapper = styled(Box)`
         width: 75%;
     `} 
     ${({ theme }) => theme.media.down('sm')`
-      width: 100%
-      margin: 0;
-      padding: 10px 0px;
+        width: 100%
+        margin: 0;
+        padding: 10px 0px;
     `}
 `;
 
 const TypographyStyled = styled(Typography)`
-    top: 42px;
+    top: 60px;
     position: absolute;
-    right: 43%;
+    right: 41%;
     cursor: pointer;
     font-size: 17px !important;
     color: ${getThemeProps('palette.action.disabledBackground')};
     ${({ theme }) => theme.media.down('xl')`
-      right: 42%;
+        right: 54%;
     `}
     ${({ theme }) => theme.media.down('lg')`
-      right: 22%;
+        right: 37%;
     `}
     ${({ theme }) => theme.media.down('sm')`
-      right: 18%;
-      top: 33px;
+        right: 18%;
+        top: 45px;
     `}
+    @media (max-width: 768px) and (orientation: landscape) {
+        right: 40%;
+        top: 50px;
+    }
 `;
 
 const BoxStyled = styled(Box)`
-     display: inline-block;
+   display: inline-block;
    ${({ theme }) => theme.media.down('xl')`
          margin: 0 50px 0 0;
     `}
@@ -89,12 +93,12 @@ const LabelStyled = styled.label`
     font-weight: 500;
     vertical-align: text-top;
     ${({ theme }) => theme.media.down('md')`
-      margin-right: 8px;
-      margin-left: 8px;
+        margin-right: 8px;
+        margin-left: 8px;
     `}
     @media (max-width: 375px) {
-      margin-right: 4px;
-      margin-left: 3px;
+        margin-right: 4px;
+        margin-left: 3px;
     }
 `;
 

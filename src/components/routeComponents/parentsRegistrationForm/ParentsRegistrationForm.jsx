@@ -37,6 +37,10 @@ const ContainerStyled = styled(Container)`
     ${({ theme }) => theme.media.down('md')`
         height: 100%; 
     `}
+    @media (max-width: 992px) and (orientation: landscape) {
+        height: auto;
+        padding: 50px;
+    }
 `;
 
 const BoxStyled = styled(Box)`
@@ -52,6 +56,15 @@ const BoxStyled = styled(Box)`
          margin: auto; 
          height: 100%;
      `}
+     ${({ theme }) => theme.media.down('md')`
+        height: 100%; 
+        margin: auto;
+        overflow-y: hidden;
+    `}
+    @media (max-width: 992px) and (orientation: landscape) {
+        overflow-y: auto;
+        margin: 0px auto 0 auto
+    }
 `;
 
 const HeadingStyled = styled(Typography)`
@@ -250,12 +263,11 @@ class ParentsRegistration extends Component {
           isSubmitTriggered={isSubmitTriggered}
           closePopUp={this.closePopUp}
         />
-        <CustomFooter />
         <CloseBrowserPopup
           isCloseBrowserPopMessage={isCloseBrowserPopMessage}
         />
+        <CustomFooter />
       </CustomFooterWrapper>
-
     );
   }
 }

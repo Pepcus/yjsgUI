@@ -22,16 +22,9 @@
     }
   },
   "uiSchema": {
-    "ui:disabled": true,
     "optIn2019": {
       "ui:widget": "radio",
-      "ui:field": "RadioField",
       "ui:options": {
-        "style": {
-          "fieldStyle": {
-            "margin": "10px"
-          }
-        },
         "inline": true,
         "col": {
           "padding": "15px 50px 5px 50px"
