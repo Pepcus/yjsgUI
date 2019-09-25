@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Row from 'ravenjs/lib/Row';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Row from 'pepcus-core/lib/Row';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 const BoxStyled = styled(Box)`
     top: 0;

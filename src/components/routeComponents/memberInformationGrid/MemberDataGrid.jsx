@@ -6,10 +6,10 @@ import DataGrid from 'simple-react-data-grid';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Box from 'ravenjs/lib/Box';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   INFORMATION_NOT_AVAILABLE_MESSAGE,

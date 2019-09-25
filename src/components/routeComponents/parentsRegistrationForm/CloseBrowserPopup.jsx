@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { CLOSE_BROWSER_MANUALLY_MESSAGE } from 'constants/yjsg';
 import Popup from 'components/common/Popup';

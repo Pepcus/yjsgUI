@@ -7,13 +7,13 @@ import styled from 'styled-components';
 import { faFileCsv } from '@fortawesome/free-solid-svg-icons/faFileCsv';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Col from 'ravenjs/lib/Col';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Form from 'ravenjs/lib/Form';
-import Modal from 'ravenjs/lib/Modal';
-import Row from 'ravenjs/lib/Row';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Col from 'pepcus-core/lib/Col';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Form from 'pepcus-core/lib/Form';
+import Modal from 'pepcus-core/lib/Modal';
+import Row from 'pepcus-core/lib/Row';
 
 import {
   uploadOptInFileAction,

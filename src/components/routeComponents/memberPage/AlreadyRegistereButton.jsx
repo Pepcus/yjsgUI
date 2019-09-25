@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from 'ravenjs/lib/Button';
+import Button from 'pepcus-core/lib/Button';
 
 import { alreadyRegisteredBtnText } from 'constants/yjsg';
 

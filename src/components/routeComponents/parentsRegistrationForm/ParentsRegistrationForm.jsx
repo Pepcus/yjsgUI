@@ -5,13 +5,13 @@ import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Container from 'ravenjs/lib/Container';
-import Form from 'ravenjs/lib/Form';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Container from 'pepcus-core/lib/Container';
+import Form from 'pepcus-core/lib/Form';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { parentsRegistrationAction } from 'actions/memberRegistrationActions';
 import {

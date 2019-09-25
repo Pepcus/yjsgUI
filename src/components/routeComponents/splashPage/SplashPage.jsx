@@ -9,12 +9,12 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Col from 'ravenjs/lib/Col';
-import Container from 'ravenjs/lib/Container';
-import { getThemeProps } from 'ravenjs/utils/theme';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
+import Box from 'pepcus-core/lib/Box';
+import Col from 'pepcus-core/lib/Col';
+import Container from 'pepcus-core/lib/Container';
+import { getThemeProps } from 'pepcus-core/utils/theme';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,

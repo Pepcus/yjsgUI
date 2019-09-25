@@ -5,13 +5,13 @@ import get from 'lodash/get';
 import styled from 'styled-components';
 import { faFileImport } from '@fortawesome/free-solid-svg-icons/faFileImport';
 
-import Button from 'ravenjs/lib/Button';
-import Col from 'ravenjs/lib/Col';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Input from 'ravenjs/lib/Input';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Button from 'pepcus-core/lib/Button';
+import Col from 'pepcus-core/lib/Col';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Input from 'pepcus-core/lib/Input';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 const TypographyStyled = styled(Typography)`
    color: ${getThemeProps('typography.titleFieldColor.color')}

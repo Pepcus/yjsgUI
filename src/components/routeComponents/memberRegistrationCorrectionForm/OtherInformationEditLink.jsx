@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Link from 'ravenjs/lib/Link';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Link from 'pepcus-core/lib/Link';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   CLICK_HERE_TEXT,

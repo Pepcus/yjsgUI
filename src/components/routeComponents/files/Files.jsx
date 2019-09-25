@@ -14,13 +14,13 @@ import { faList } from '@fortawesome/free-solid-svg-icons/faList';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Col from 'ravenjs/lib/Col';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Col from 'pepcus-core/lib/Col';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   getSecretKey,

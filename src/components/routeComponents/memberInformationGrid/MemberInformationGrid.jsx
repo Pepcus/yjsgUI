@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Container from 'ravenjs/lib/Container';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Row from 'ravenjs/lib/Row';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Container from 'pepcus-core/lib/Container';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Row from 'pepcus-core/lib/Row';
 
 import {
   formatMetaData,

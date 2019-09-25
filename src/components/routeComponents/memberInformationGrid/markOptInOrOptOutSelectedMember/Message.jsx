@@ -2,8 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from 'ravenjs/lib/Box';
-import Typography from 'ravenjs/lib/Typography';
+import Box from 'pepcus-core/lib/Box';
+import Typography from 'pepcus-core/lib/Typography';
 
 import {
   OPT_IN_OR_OPT_OUT_FAILED_MESSAGE,

@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from 'ravenjs/lib/Button';
-import Col from 'ravenjs/lib/Col';
-import Form from 'ravenjs/lib/Form';
-import Row from 'ravenjs/lib/Row';
+import Button from 'pepcus-core/lib/Button';
+import Col from 'pepcus-core/lib/Col';
+import Form from 'pepcus-core/lib/Form';
+import Row from 'pepcus-core/lib/Row';
 
 import {
   goBackBtnText,

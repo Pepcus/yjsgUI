@@ -5,11 +5,11 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 
-import Col from 'ravenjs/lib/Col';
-import Input from 'ravenjs/lib/Input';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Col from 'pepcus-core/lib/Col';
+import Input from 'pepcus-core/lib/Input';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 const TypographyStyled = styled(Typography)`
    color: ${getThemeProps('typography.titleFieldColor.color')}

@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from 'ravenjs/lib/Button';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Button from 'pepcus-core/lib/Button';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import { FILE_DOWNLOAD_MESSAGE } from 'constants/text';
