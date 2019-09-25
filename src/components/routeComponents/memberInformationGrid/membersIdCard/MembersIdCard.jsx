@@ -7,10 +7,10 @@ import * as shortId from 'shortid';
 import Barcode from 'react-barcode';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   YJSG_ID_CARD_SMALL_HEADING,

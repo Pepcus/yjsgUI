@@ -5,16 +5,16 @@ import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import CheckboxNew from 'ravenjs/lib/CheckboxNew';
-import Container from 'ravenjs/lib/Container';
-import Col from 'ravenjs/lib/Col';
-import Form from 'ravenjs/lib/Form';
-import Modal from 'ravenjs/lib/Modal';
-import Typography from 'ravenjs/lib/Typography';
-import Row from 'ravenjs/lib/Row';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import CheckboxNew from 'pepcus-core/lib/CheckboxNew';
+import Container from 'pepcus-core/lib/Container';
+import Col from 'pepcus-core/lib/Col';
+import Form from 'pepcus-core/lib/Form';
+import Modal from 'pepcus-core/lib/Modal';
+import Typography from 'pepcus-core/lib/Typography';
+import Row from 'pepcus-core/lib/Row';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   columnsList,

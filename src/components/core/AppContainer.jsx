@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
-import Box from 'ravenjs/lib/Box/index';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box/index';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   loadAppDataAction,

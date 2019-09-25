@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import Button from 'ravenjs/lib/Button';
-import Box from 'ravenjs/lib/Box/index';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import Button from 'pepcus-core/lib/Button';
+import Box from 'pepcus-core/lib/Box/index';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import {

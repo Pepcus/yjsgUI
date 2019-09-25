@@ -7,8 +7,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from 'ravenjs/lib/Button';
-import Row from 'ravenjs/lib/Row';
+import Button from 'pepcus-core/lib/Button';
+import Row from 'pepcus-core/lib/Row';
 
 import {
   adminLoginBtnText,

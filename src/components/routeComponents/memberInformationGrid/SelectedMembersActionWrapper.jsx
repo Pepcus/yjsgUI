@@ -9,13 +9,13 @@ import styled from 'styled-components';
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Container from 'ravenjs/lib/Container';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Container from 'pepcus-core/lib/Container';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import { isBusCoordinatorsDataFailed } from 'reducers/assetFilesReducer';

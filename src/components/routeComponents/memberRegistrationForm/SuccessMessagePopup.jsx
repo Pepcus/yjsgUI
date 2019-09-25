@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Button from 'ravenjs/lib/Button';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
+import Button from 'pepcus-core/lib/Button';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
 import {

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import { generateTheme } from 'ravenjs/utils/theme';
+import { generateTheme } from 'pepcus-core/utils/theme';
 
 import './assets/css/index.css';
 import './assets/css/dataGrid.css';

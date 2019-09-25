@@ -6,9 +6,9 @@ import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import FaIcon from 'ravenjs/lib/FaIcon';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import FaIcon from 'pepcus-core/lib/FaIcon';
 
 import UploadMembersAttendanceFile from './uploadMembersAttendanceFile';
 /**

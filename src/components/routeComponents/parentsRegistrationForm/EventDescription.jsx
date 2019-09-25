@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
+import Box from 'pepcus-core/lib/Box';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 import {
   DATE,

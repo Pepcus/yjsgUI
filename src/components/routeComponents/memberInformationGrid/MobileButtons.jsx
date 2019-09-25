@@ -8,11 +8,11 @@ import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons/faPowerOff';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
 
-import Box from 'ravenjs/lib/Box';
-import Container from 'ravenjs/lib/Container';
-import FaIcon from 'ravenjs/lib/FaIcon';
-import Link from 'ravenjs/lib/Link';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Container from 'pepcus-core/lib/Container';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Link from 'pepcus-core/lib/Link';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 const MobileButtonsContainerStyled = styled(Container)`
     top: 11px;

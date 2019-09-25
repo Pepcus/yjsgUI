@@ -5,8 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
 
 import {
   ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,

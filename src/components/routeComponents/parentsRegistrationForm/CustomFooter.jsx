@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Typography from 'ravenjs/lib/Typography';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   CUSTOM_FOOTER_INFORMATION,

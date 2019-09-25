@@ -2,8 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 /**
  * CoordinatorInformation method render coordination contact number into the members Id card footer

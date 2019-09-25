@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Box from 'ravenjs/lib/Box';
+import Box from 'pepcus-core/lib/Box';
 
 import { routes } from 'config/appConfig.json';
 import Header from 'components/common/Header';

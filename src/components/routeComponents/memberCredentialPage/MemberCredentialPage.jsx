@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 
-import Box from 'ravenjs/lib/Box';
-import Button from 'ravenjs/lib/Button';
-import Col from 'ravenjs/lib/Col';
-import Container from 'ravenjs/lib/Container';
-import Form from 'ravenjs/lib/Form';
-import { getThemeProps } from 'ravenjs//utils/theme';
-import Row from 'ravenjs/lib/Row';
-import Typography from 'ravenjs/lib/Typography';
+import Box from 'pepcus-core/lib/Box';
+import Button from 'pepcus-core/lib/Button';
+import Col from 'pepcus-core/lib/Col';
+import Container from 'pepcus-core/lib/Container';
+import Form from 'pepcus-core/lib/Form';
+import { getThemeProps } from 'pepcus-core//utils/theme';
+import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,

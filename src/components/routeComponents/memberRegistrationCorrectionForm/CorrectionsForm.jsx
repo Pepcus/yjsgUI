@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Box from 'ravenjs/lib/Box';
-import Container from 'ravenjs/lib/Container';
-import Form from 'ravenjs/lib/Form';
-import { getThemeProps } from 'ravenjs/utils/theme';
+import Box from 'pepcus-core/lib/Box';
+import Container from 'pepcus-core/lib/Container';
+import Form from 'pepcus-core/lib/Form';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import fields from 'components/common/fields';
 import { USER_TYPES } from 'constants/yjsg';
