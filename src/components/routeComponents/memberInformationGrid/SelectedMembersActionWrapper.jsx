@@ -39,10 +39,10 @@ const BoxStyled = styled(Box)`
 `;
 
 const PopupButtonStyled = styled(Button)`
-    width: 100px;
+     width: 100px;
 `;
 const CSVLinkStyled = styled(CSVLink)`
-    pointer-events: ${props => (props.disable === 'true' ? 'none' : 'all')};
+    display: ${props => (props.disable === 'true' ? 'none' : 'all')};
     cursor: ${props => (props.disable === 'true' ? 'not-allowed' : null)};
     font-size: 14px;
     border-radius: 4px;
@@ -67,6 +67,12 @@ const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('lg')`
      display: none;
    `};
+`;
+
+const DisabledButtonStyled = styled(Button)`
+   margin: 0;
+   padding: 5px 10px;
+   display: ${props => (props.isView === 'true' ? 'unset' : 'none')};
 `;
 
 /**
@@ -178,6 +184,17 @@ class SelectedMembersActionWrapper extends Component {
             <FaIcon icon={faDownload} />
             Export
           </CSVLinkStyled>
+          <DisabledButtonStyled
+            isView={isEmpty(selectedMembers).toString()}
+            softDisable={isEmpty(selectedMembers)}
+            color="tertiary"
+            noMinWidth
+            onClick={
+              () => null}
+          >
+            <FaIcon icon={faDownload} />
+            Export
+          </DisabledButtonStyled>
           <ButtonStyled
             margin="0 0 0 10px"
             softDisable={isEmpty(selectedMembers)}

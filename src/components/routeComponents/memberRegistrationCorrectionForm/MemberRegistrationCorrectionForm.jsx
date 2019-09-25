@@ -270,8 +270,10 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   changeIsOnlyOptIn = (value) => {
     const { member } = this.state;
-    const registeredMemberData = getRegisteredMemberData({ memberData: member });
-    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
+    const { memberData } = this.props;
+    const registeredMemberData = getRegisteredMemberData({ memberData });
+    const currentRegisteredMemberData = getRegisteredMemberData({ memberData: member });
+    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: currentRegisteredMemberData });
     this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm: value });
   };
 

@@ -37,6 +37,10 @@ const RowStyled = styled(Row)`
 `;
 
 const TwoIdCardWrapperStyled = styled(Box)`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   align-content: center;
    overflow: hidden;
    :nth-child(4n){
         page-break-after: always;
@@ -101,7 +105,7 @@ const MemberIdCardWrapper = styled(Box)`
 
 const SmallHeadingWrapper = styled(Typography)`
     background-color: ${getThemeProps('palette.idCard.colors')}
-`
+`;
 
 /**
  * MembersIdCard render members IdCard
