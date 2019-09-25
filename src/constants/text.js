@@ -1,4 +1,4 @@
-import { text } from '../config/constants.json';
+import { text } from 'config/constants.json';
 
 export const PLEASE_SELECT_ANY_ONE_TEXT = text.PLEASE_SELECT_ANY_ONE_TEXT || '';
 

@@ -212,12 +212,13 @@ html, body {
 }
 
 .render-table {
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
     padding: 0 !important;
     margin: 16px 10px 0 !important;
     border-top: 1px solid #c2c1bf !important;
     border-right: 1px solid #c2c1bf !important;
     border-bottom: 1px solid #c2c1bf !important;
-    overflow: auto !important;
     display: grid !important;
 }
 

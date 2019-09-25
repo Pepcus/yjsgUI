@@ -3,10 +3,14 @@
     "INDORE" : " जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष) ",
     "BHOPAL" : " श्री दि. जैन बाल एवं युवा संस्कार शिक्षण शिविर ( १३ वॉं )"
   },
+  "footerTitle": {
+    "INDORE": " 74470-56789",
+    "BHOPAL": " अनुभव जैन, मो. 9179834281, 9303131737"
+  },
   "columnsList": [
     {
       "label": "ID",
-      "key": "studentId"
+      "key": "memberId"
     },
     {
       "label": "Name",
@@ -182,17 +186,20 @@
     {
       "name": "default",
       "path": "/",
-      "component": "StudentPage",
+      "component": "MemberPage",
       "isActive": true,
       "header": {
         "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
+          "padding": "10px 0"
         },
         "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
+          "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -202,88 +209,91 @@
       "isActive": true,
       "header": {
         "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
+          "padding": "10px 0"
         },
         "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
+          "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
       "name": "memberSearch",
-      "path": "/student-search",
-      "component": "StudentInformationGrid",
+      "path": "/member-search",
+      "component": "MemberInformationGrid",
       "isActive": true,
       "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
         "logo": true,
         "hasButtons": true,
         "backButton": true,
         "backButtonRedirectTo": "/admin",
         "logoutButton": true,
         "logoutButtonRedirectTo": "/admin"
-      }
-    },
-    {
-      "name": "home",
-      "path": "/home",
-      "component": "SplashPagePrePopulated",
-      "isActive": false,
-      "header": {
-        "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
-        },
-        "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
-        }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
       "name": "memberRegister",
-      "path": "/studentRegister",
-      "component": "StudentRegistrationForm",
+      "path": "/member-register",
+      "component": "MemberRegistrationForm",
       "isActive": true,
       "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
         "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
       "name": "registrationCorrection",
-      "path": "/studentCorrection",
-      "component": "StudentRegistrationCorrectionForm",
+      "path": "/member-registration-correction",
+      "component": "MemberRegistrationCorrectionForm",
       "isActive": true,
       "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
         "logo": true
-      }
-    },
-    {
-      "name": "adminPanel",
-      "path": "/adminPanel",
-      "component": "AdminPanel",
-      "isActive": false,
-      "header": {
-        "hasButtons": true,
-        "backButton": true,
-        "logoutButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
       "name": "memberLogin",
-      "path": "/student-login",
-      "component": "StudentCredentialPage",
+      "path": "/member-login",
+      "component": "MemberCredentialPage",
       "isActive": true,
       "header": {
         "titleStyle": {
-          "padding": "15px 0",
-          "fontSize": "25px"
+          "padding": "10px 0"
         },
         "headerWrapperStyle": {
-          "height": "auto",
-          "backgroundColor": "rgba(244, 233, 227, 0.21)"
+          "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     },
     {
@@ -292,8 +302,16 @@
       "component": "ParentsRegistration",
       "isActive": true,
       "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
         "title": "अभिभावक सम्मलेन (Parents' Convention)",
         "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": "प्रकाश छाबड़ा (99260 40137)"
       }
     },
     {
@@ -302,9 +320,17 @@
       "component": "Files",
       "isActive": true,
       "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
         "logo": true,
         "hasButtons": true,
         "backButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
       }
     }
   ]

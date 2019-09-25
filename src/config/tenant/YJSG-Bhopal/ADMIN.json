@@ -1,0 +1,932 @@
+{
+  "schema" : {
+    "type": "object",
+    "dependencies": {
+      "optIn2019": {
+        "oneOf": [
+          {
+            "properties": {
+              "optIn2019": {
+                "enum": [
+                  "Y"
+                ]
+              },
+              "id": {
+                "title": "आई.डी.",
+                "type": "number"
+              },
+              "name": {
+                "title": "नाम",
+                "type": "string",
+                "validator": "nameValidator"
+              },
+              "fatherName": {
+                "title": "पिता / पति का नाम",
+                "type": "string",
+                "validator": "nameValidator"
+              },
+              "gender": {
+                "title": "लिंग",
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female"
+                ],
+                "enumNames": [
+                  "पुरुष",
+                  "स्त्री"
+                ]
+              },
+              "age": {
+                "title": "उम्र",
+                "type": "number",
+                "validator": "ageValidator"
+              },
+              "mobile": {
+                "title": "मोबाइल नं",
+                "type": "number",
+                "validator": "mobileValidator"
+              },
+              "occupation": {
+                "title": "व्यवसाय (युवा वर्ग हेतु)",
+                "type": "string"
+              },
+              "education": {
+                "title": "स्कूल शिक्षा",
+                "type": "string"
+              },
+              "email": {
+                "title": "ई-मेल",
+                "type": "string",
+                "validator": "optionalEmailValidator"
+              },
+              "classAttended2018": {
+                "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
+                "type": "string"
+              },
+              "classAttended2019": {
+                "title": "Class",
+                "type": "string",
+                "enum": [
+                  "Level 1",
+                  "Level 2",
+                  "Level 3",
+                  "Level 4",
+                  "Level 5",
+                  "Level 6",
+                  "Level 7",
+                  "Level 8"
+                ],
+                "enumNames": [
+                  "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
+                  "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
+                  "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
+                  "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
+                  "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
+                  "Level 6 :  छहढाला-ढाल 1-2",
+                  "Level 7 : छहढाला-ढाल 3",
+                  "Level 8 : छहढाला-ढाल 4-5"
+                ]
+              },
+              "marks2019": {
+                "title": "Marks 2019",
+                "type": "string"
+              },
+              "classRoomNo2019": {
+                "title": "Room",
+                "type": [
+                  "string"
+                ],
+                "enum": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ],
+                "enumNames": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ]
+              },
+              "address": {
+                "title": "पूरा पता",
+                "type": "string",
+                "validator": "addressValidator"
+              },
+              "remark": {
+                "title": "Remark",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "fatherName",
+              "gender",
+              "age",
+              "mobile",
+              "address"
+            ]
+          },
+          {
+            "properties": {
+              "optIn2019": {
+                "enum": [
+                  "N"
+                ]
+              },
+              "id": {
+                "title": "आई.डी.",
+                "type": "number"
+              },
+              "name": {
+                "title": "नाम",
+                "type": "string"
+              },
+              "fatherName": {
+                "title": "पिता / पति का नाम",
+                "type": "string"
+              },
+              "gender": {
+                "title": "लिंग",
+                "type": "string",
+                "enum": ["Male", "Female"],
+                "enumNames": ["पुरुष", "स्त्री"]
+              },
+              "age": {
+                "title": "उम्र",
+                "type": "number"
+              },
+              "mobile": {
+                "title": "मोबाइल नं",
+                "type": "number"
+              },
+              "occupation": {
+                "title": "व्यवसाय (युवा वर्ग हेतु)",
+                "type": "string"
+              },
+              "education": {
+                "title": "स्कूल शिक्षा",
+                "type": "string"
+              },
+              "email": {
+                "title": "ई-मेल",
+                "type": "string"
+              },
+              "classAttended2018": {
+                "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
+                "type": "string"
+              },
+              "classAttended2019": {
+                "title": "Class",
+                "type": "string",
+                "enum": [
+                  "Level 1",
+                  "Level 2",
+                  "Level 3",
+                  "Level 4",
+                  "Level 5",
+                  "Level 6",
+                  "Level 7",
+                  "Level 8"
+                ],
+                "enumNames": [
+                  "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
+                  "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
+                  "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
+                  "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
+                  "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
+                  "Level 6 :  छहढाला-ढाल 1-2",
+                  "Level 7 : छहढाला-ढाल 3",
+                  "Level 8 : छहढाला-ढाल 4-5"
+                ]
+              },
+              "marks2019": {
+                "title": "Marks 2019",
+                "type": "string"
+              },
+              "classRoomNo2019": {
+                "title": "Room",
+                "type": "string",
+                "enum": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ],
+                "enumNames": [
+                  "105",
+                  "106",
+                  "107",
+                  "108",
+                  "109",
+                  "110",
+                  "111",
+                  "112",
+                  "218",
+                  "219",
+                  "220",
+                  "224",
+                  "225",
+                  "227",
+                  "330",
+                  "334",
+                  "337",
+                  "340",
+                  "341",
+                  "401",
+                  "402",
+                  "403",
+                  "501",
+                  "502",
+                  "503",
+                  "504",
+                  "507",
+                  "509",
+                  "601",
+                  "603",
+                  "607"
+                ]
+              },
+              "address": {
+                "title": "पूरा पता",
+                "type": "string"
+              },
+              "remark": {
+                "title": "Remark",
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "properties": {
+      "optIn2019": {
+        "title": "2019 के शिविर की स्वीकृति ?",
+        "type": "string",
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "enumNames": [
+          "हाँ",
+          "नहीं"
+        ],
+        "default": "Y"
+      },
+      "backButton": {
+        "type": "string"
+      },
+      "submitButton": {
+        "type": "string"
+      },
+      "marks2018": {
+        "title": "Marks 2018:",
+        "type": "string"
+      },
+      "marks2017": {
+        "title": "Marks 2017:",
+        "type": "string"
+      },
+      "marks2016": {
+        "title": "Marks 2016:",
+        "type": "string"
+      }
+    }
+  },
+  "uiSchema" : {
+    "ui:order": [
+      "optIn2019",
+      "id",
+      "name",
+      "fatherName",
+      "gender",
+      "age",
+      "mobile",
+      "occupation",
+      "education",
+      "email",
+      "classAttended2018",
+      "classAttended2019",
+      "marks2019",
+      "classRoomNo2019",
+      "address",
+      "remark",
+      "backButton",
+      "submitButton",
+      "marks2018",
+      "marks2017",
+      "marks2016"
+    ],
+    "optIn2019": {
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "name": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "fatherName": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "mobile": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "occupation": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "education": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "email": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "classAttended2018": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "marks2019": {
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "backButton": {
+      "ui:options": {
+        "label": false,
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "submitButton": {
+      "ui:options": {
+        "label": false,
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "address": {
+      "ui:field": "InputField",
+      "ui:widget": "textarea",
+      "ui:options": {
+        "style": {
+          "titleStyle": {
+          },
+          "fieldStyle": {
+            "height": "35px"
+          }
+        },
+        "type": "text",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "age": {
+      "ui:widget": "updown",
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "gender": {
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "classAttended2019": {
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "id": {
+      "ui:disabled": true,
+      "ui:field": "InputField",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "number",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "marks2018": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "marks2017": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "marks2016": {
+      "ui:placeholder": "N.A.",
+      "ui:disabled": true,
+      "ui:options": {
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "classRoomNo2019": {
+      "ui:field": "SelectList",
+      "ui:placeholder": "कृपया एक चुनिए . . .",
+      "ui:options": {
+        "style": {
+          "fieldStyle": {
+            "height": "auto"
+          }
+        },
+        "type": "string",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    },
+    "remark": {
+      "ui:field": "InputField",
+      "ui:widget": "textarea",
+      "ui:options": {
+        "style": {
+          "titleStyle": {
+          },
+          "fieldStyle": {
+            "height": "auto"
+          },
+          "fieldWrapper": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 3.9
+            }
+          }
+        },
+        "type": "text",
+        "col": {
+          "size": {
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 12
+          },
+          "padding": "0 10px 0 10px"
+        }
+      }
+    }
+  },
+  "data": {},
+  "validation": [
+    {
+      "field": "name",
+      "validator": "nameValidator"
+    },
+    {
+      "field": "fatherName",
+      "validator": "nameValidator"
+    },
+    {
+      "field": "mobile",
+      "validator": "mobileValidator"
+    },
+    {
+      "field": "age",
+      "validator": "ageValidator"
+    },
+    {
+      "field": "email",
+      "validator": "optionalEmailValidator"
+    },
+    {
+      "field": "address",
+      "validator": "addressValidator"
+    }
+  ],
+  "defaultStudentDataFormat": [
+    {
+      "formField": "optIn2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "id",
+      "dataType": "number"
+    },
+    {
+      "formField": "name",
+      "dataType": "string"
+    },
+    {
+      "formField": "fatherName",
+      "dataType": "string"
+    },
+    {
+      "formField": "gender",
+      "dataType": "string"
+    },
+    {
+      "formField": "age",
+      "dataType": "number"
+    },
+    {
+      "formField": "mobile",
+      "dataType": "number"
+    },
+    {
+      "formField": "occupation",
+      "dataType": "string"
+    },
+    {
+      "formField": "education",
+      "dataType": "string"
+    },
+    {
+      "formField": "email",
+      "dataType": "string"
+    },
+    {
+      "formField": "busStop",
+      "dataType": "string"
+    },
+    {
+      "formField": "classAttended2018",
+      "dataType": "string"
+    },
+    {
+      "formField": "classAttended2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2018",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2017",
+      "dataType": "string"
+    },
+    {
+      "formField": "marks2016",
+      "dataType": "string"
+    },
+    {
+      "formField": "busNumber",
+      "dataType": "string"
+    },
+    {
+      "formField": "classRoomNo2019",
+      "dataType": "string"
+    },
+    {
+      "formField": "address",
+      "dataType": "string"
+    },
+    {
+      "formField": "remark",
+      "dataType": "string"
+    }
+  ]
+}

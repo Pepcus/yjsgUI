@@ -1,123 +1,123 @@
 import { put } from 'redux-saga/effects';
 
 import {
-  createStudent,
-  fetchStudent,
-  searchStudent,
-  updateStudent,
-  getAllStudentsAPI,
+  createMember,
+  fetchMember,
+  searchMember,
+  updateMember,
+  getAllMembersAPI,
   uploadAttendanceAPI,
   uploadOptInAPI,
-  markSelectedStudentsAttendanceAPI,
-  markSelectedStudentsOptInOrOptOutAPI,
-  updateIdCardStatusSelectedStudentsAPI,
+  markSelectedMembersAttendanceAPI,
+  markSelectedMembersOptInOrOptOutAPI,
+  updateIdCardStatusSelectedMembersAPI,
   parentsRegistrationAPI,
-} from './studentRegisterAPI';
+} from './memberRegisterAPI';
 import {
-  createStudentFailedAction,
-  createStudentSuccessAction,
+  createMemberFailedAction,
+  createMemberSuccessAction,
   fetchSearchResultsFailureAction,
   fetchSearchResultsSuccessAction,
-  fetchStudentFailedAction,
-  fetchStudentSuccessAction,
+  fetchMemberFailedAction,
+  fetchMemberSuccessAction,
   setNoRecordsFoundMessageAction,
-  updateStudentFailedAction,
-  updateStudentSuccessAction,
-  getAllStudentsDataResultsSuccessAction,
-  getAllStudentsDataResultsFailureAction,
+  updateMemberFailedAction,
+  updateMemberSuccessAction,
+  getAllMembersDataResultsSuccessAction,
+  getAllMembersDataResultsFailureAction,
   uploadAttendanceFileResultsSuccessAction,
   uploadAttendanceFileResultsFailureAction,
   uploadOptInFileResultsSuccessAction,
   uploadOptInFileResultsFailureAction,
-  markSelectedStudentsAttendanceResultsSuccessAction,
-  markSelectedStudentsAttendanceResultsFailureAction,
-  markSelectedStudentsOptInOrOptOutResultsSuccessAction,
-  markSelectedStudentsOptInOrOptOutResultsFailureAction,
-  updateIdCardStatusSelectedStudentsResultsSuccessAction,
-  updateIdCardStatusSelectedStudentsResultsFailureAction,
+  markSelectedMembersAttendanceResultsSuccessAction,
+  markSelectedMembersAttendanceResultsFailureAction,
+  markSelectedMembersOptInOrOptOutResultsSuccessAction,
+  markSelectedMembersOptInOrOptOutResultsFailureAction,
+  updateIdCardStatusSelectedMembersResultsSuccessAction,
+  updateIdCardStatusSelectedMembersResultsFailureAction,
   parentsRegistrationResultsSuccessAction,
   parentsRegistrationResultsFailureAction,
   setLoadingStateAction,
-} from '../actions/studentRegistrationActions';
+} from '../actions/memberRegistrationActions';
 
 /**
- * createStudentSaga sage call when create a new student.
+ * createMemberSaga sage call when create a new member.
  * @param {Object} action
  */
-export function* createStudentSaga(action) {
-  const { student } = action;
-  const errorMessage = 'Error creating new student.';
+export function* createMemberSaga(action) {
+  const { member } = action;
+  const errorMessage = 'Error creating new member.';
   try {
-    const response = yield createStudent(student);
+    const response = yield createMember(member);
     if (response.student) {
-      yield put(createStudentSuccessAction(response.student));
+      yield put(createMemberSuccessAction(response.student));
     } else {
-      yield put(createStudentFailedAction(errorMessage));
+      yield put(createMemberFailedAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(createStudentFailedAction(errorMessage));
+    yield put(createMemberFailedAction(errorMessage));
     yield put(setLoadingStateAction(false));
     throw e;
   }
 }
 
 /**
- * fetchStudentSaga saga call when fetch particular student
+ * fetchMemberSaga saga call when fetch particular member
  * @param {Object} action
  */
-export function* fetchStudentSaga(action) {
+export function* fetchMemberSaga(action) {
   const { id, secretKey } = action;
-  const errorMessage = 'Error fetching student details.';
+  const errorMessage = 'Error fetching member details.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield fetchStudent(id, secretKey);
+    const response = yield fetchMember(id, secretKey);
     if (response.student) {
-      yield put(fetchStudentSuccessAction(response.student));
+      yield put(fetchMemberSuccessAction(response.student));
     } else {
-      yield put(fetchStudentFailedAction(errorMessage));
+      yield put(fetchMemberFailedAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(fetchStudentFailedAction(errorMessage));
+    yield put(fetchMemberFailedAction(errorMessage));
     yield put(setLoadingStateAction(false));
     throw e;
   }
 }
 
 /**
- * updateStudentSaga saga call when update student.
+ * updateMemberSaga saga call when update member.
  * @param {Object} action
  */
-export function* updateStudentSaga(action) {
-  const { id, secretKey, student } = action;
-  const errorMessage = 'Error updating student details.';
+export function* updateMemberSaga(action) {
+  const { id, secretKey, member } = action;
+  const errorMessage = 'Error updating member details.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield updateStudent({ id, secretKey, student });
+    const response = yield updateMember({ id, secretKey, member });
     if (response) {
-      yield put(updateStudentSuccessAction(response));
+      yield put(updateMemberSuccessAction(response.student));
     } else {
-      yield put(updateStudentFailedAction(errorMessage));
+      yield put(updateMemberFailedAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(updateStudentFailedAction(errorMessage));
+    yield put(updateMemberFailedAction(errorMessage));
     yield put(setLoadingStateAction(false));
     throw e;
   }
 }
 
 /**
- * searchStudentSaga saga call when search particular student with searchKey
+ * searchMemberSaga saga call when search particular member with searchKey
  * @param {Object} action
  */
-export function* searchStudentSaga(action) {
+export function* searchMemberSaga(action) {
   const { searchKey, searchValue, adminKey } = action;
-  const errorMessage = 'Error fetching student details.';
+  const errorMessage = 'Error fetching member details.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield searchStudent(adminKey, searchKey, searchValue);
+    const response = yield searchMember({ adminKey, searchKey, searchValue });
     if (response.students) {
       yield put(fetchSearchResultsSuccessAction(response.students));
     } else {
@@ -132,29 +132,29 @@ export function* searchStudentSaga(action) {
 }
 
 /**
- * getAllStudentsSaga saga call when fetch all student data.
+ * getAllMembersSaga saga call when fetch all member data.
  * @param {Object} action
  */
-export function* getAllStudentsSaga(action) {
+export function* getAllMembersSaga(action) {
   const { secretKey } = action;
-  const errorMessage = 'Error getting student details.';
+  const errorMessage = 'Error getting member details.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield getAllStudentsAPI(secretKey);
+    const response = yield getAllMembersAPI(secretKey);
     if (response.students) {
-      yield put(getAllStudentsDataResultsSuccessAction(response.students));
+      yield put(getAllMembersDataResultsSuccessAction(response.students));
     } else {
       throw response;
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(getAllStudentsDataResultsFailureAction(errorMessage));
+    yield put(getAllMembersDataResultsFailureAction(errorMessage));
     yield put(setLoadingStateAction(false));
   }
 }
 
 /**
- * uploadAttendanceFileSaga saga call when submit students attendance csv file.
+ * uploadAttendanceFileSaga saga call when submit members attendance csv file.
  * @param {Object} action
  */
 export function* uploadAttendanceFileSaga(action) {
@@ -177,7 +177,7 @@ export function* uploadAttendanceFileSaga(action) {
 
 /**
  * /**
- * uploadOptInFileSaga saga call when submit students optIn csv file.
+ * uploadOptInFileSaga saga call when submit members optIn csv file.
  * @param {Object} action
  */
 export function* uploadOptInFileSaga(action) {
@@ -199,67 +199,67 @@ export function* uploadOptInFileSaga(action) {
 }
 
 /**
- * markSelectedStudentsAttendanceSaga saga call when mark selected students attendance.
+ * markSelectedMembersAttendanceSaga saga call when mark selected members attendance.
  * @param {Object} action
  */
-export function* markSelectedStudentsAttendanceSaga(action) {
-  const { secretKey, selectedStudentsId, day } = action;
-  const errorMessage = 'Error getting mark selected students attendance.';
+export function* markSelectedMembersAttendanceSaga(action) {
+  const { secretKey, selectedMembersId, day } = action;
+  const errorMessage = 'Error getting mark selected members attendance.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markSelectedStudentsAttendanceAPI(secretKey, selectedStudentsId, day);
+    const response = yield markSelectedMembersAttendanceAPI({ secretKey, selectedMembersId, day });
     if (response.message === 'Updated Successfully') {
-      yield put(markSelectedStudentsAttendanceResultsSuccessAction(response));
+      yield put(markSelectedMembersAttendanceResultsSuccessAction(response));
     } else {
-      yield put(markSelectedStudentsAttendanceResultsFailureAction(errorMessage));
+      yield put(markSelectedMembersAttendanceResultsFailureAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(markSelectedStudentsAttendanceResultsFailureAction(errorMessage));
+    yield put(markSelectedMembersAttendanceResultsFailureAction(errorMessage));
     yield put(setLoadingStateAction(false));
   }
 }
 
 /**
- * markSelectedStudentsOptInOrOptOutSaga saga call when mark selected students optIn
+ * markSelectedMembersOptInOrOptOutSaga saga call when mark selected members optIn
  * @param {Object} action
  */
-export function* markSelectedStudentsOptInOrOptOutSaga(action) {
-  const { secretKey, selectedStudentsId, opt } = action;
-  const errorMessage = 'Error getting mark selected students opt in or opt out.';
+export function* markSelectedMembersOptInOrOptOutSaga(action) {
+  const { secretKey, selectedMembersId, opt } = action;
+  const errorMessage = 'Error getting mark selected members opt in or opt out.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markSelectedStudentsOptInOrOptOutAPI(secretKey, selectedStudentsId, opt);
+    const response = yield markSelectedMembersOptInOrOptOutAPI({ secretKey, selectedMembersId, opt });
     if (response.message === 'Updated Successfully') {
-      yield put(markSelectedStudentsOptInOrOptOutResultsSuccessAction(response));
+      yield put(markSelectedMembersOptInOrOptOutResultsSuccessAction(response));
     } else {
-      yield put(markSelectedStudentsOptInOrOptOutResultsFailureAction(errorMessage));
+      yield put(markSelectedMembersOptInOrOptOutResultsFailureAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(markSelectedStudentsOptInOrOptOutResultsFailureAction(errorMessage));
+    yield put(markSelectedMembersOptInOrOptOutResultsFailureAction(errorMessage));
     yield put(setLoadingStateAction(false));
   }
 }
 
 /**
- * updateIdCardStatusSelectedStudentsSaga saga call when update Id card status of selected students
+ * updateIdCardStatusSelectedMembersSaga saga call when update Id card status of selected members
  * @param {Object} action
  */
-export function* updateIdCardStatusSelectedStudentsSaga(action) {
-  const { secretKey, selectedStudentsId, IdCardStatus } = action;
-  const errorMessage = 'Error getting update Id card status of selected students.';
+export function* updateIdCardStatusSelectedMembersSaga(action) {
+  const { secretKey, selectedMembersId, IdCardStatus } = action;
+  const errorMessage = 'Error getting update Id card status of selected members.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield updateIdCardStatusSelectedStudentsAPI(secretKey, selectedStudentsId, IdCardStatus);
+    const response = yield updateIdCardStatusSelectedMembersAPI({ secretKey, selectedMembersId, IdCardStatus });
     if (response.message === 'Updated Successfully') {
-      yield put(updateIdCardStatusSelectedStudentsResultsSuccessAction(response));
+      yield put(updateIdCardStatusSelectedMembersResultsSuccessAction(response));
     } else {
-      yield put(updateIdCardStatusSelectedStudentsResultsFailureAction(errorMessage));
+      yield put(updateIdCardStatusSelectedMembersResultsFailureAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(updateIdCardStatusSelectedStudentsResultsFailureAction(errorMessage));
+    yield put(updateIdCardStatusSelectedMembersResultsFailureAction(errorMessage));
     yield put(setLoadingStateAction(false));
   }
 }

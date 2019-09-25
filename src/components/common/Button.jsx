@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
+/*
+  TODO: This component is deprecated.
+ */
 const Button = ({ onClick, disabled, buttonText, type, formName, styles }) => (
   <ButtonContainer>
     <button

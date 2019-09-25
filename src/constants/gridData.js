@@ -14,7 +14,7 @@ export const gridMetaData = [
   },
   {
     'label': 'ID',
-    'key': 'studentId',
+    'key': 'memberId',
     'type': 'Number',
     'emptyCells': 'NA',
   },

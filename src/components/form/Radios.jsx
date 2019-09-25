@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/*
+  TODO: This component is deprecated.
+ */
 const Radios = (props) => {
 
   const { name, value, checked, text, onInputChange } = props;

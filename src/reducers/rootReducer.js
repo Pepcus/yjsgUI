@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 
 import {
-  studentRegistrationReducer,
-  studentSearchReducer,
-  allStudentsDataReducer,
+  memberRegistrationReducer,
+  memberSearchReducer,
+  allMembersDataReducer,
   loaderReducer,
-} from './studentRegistrationReducer';
+} from './memberRegistrationReducer';
 import { assetFilesReducer } from './assetFilesReducer';
 
 const rootReducer = combineReducers({
-  studentRegistrationReducer,
-  studentSearchReducer,
-  allStudentsDataReducer,
+  memberRegistrationReducer,
+  memberSearchReducer,
+  allMembersDataReducer,
   loaderReducer,
   assetFilesReducer,
 });

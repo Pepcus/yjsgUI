@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
-import { getLoaderState } from '../../reducers/studentRegistrationReducer';
+import { connect } from 'react-redux';
+import { getLoaderState } from '../../reducers/memberRegistrationReducer';
 import CustomLoader from './CustomLoader';
 
 /**
  * Loader render loader
  * @param {boolean} isLoading
  * @type {Function}
- * @return {ReactComponent}
- * @constructor
+ * @return {HTML}
  */
 const Loader = ({ isLoading }) => {
   if (isLoading) {
@@ -25,7 +24,7 @@ const mapStateToProps = state => ({
   isLoading: getLoaderState(state),
 });
 
-Loader.propsType = {
+Loader.propTypes = {
   isLoading: PropTypes.bool,
 };
 Loader.defaultProps = {
