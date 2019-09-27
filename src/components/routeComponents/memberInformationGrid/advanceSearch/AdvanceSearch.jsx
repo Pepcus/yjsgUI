@@ -44,26 +44,12 @@ const AdvanceSearchWrapper = styled(Box)`
 `;
 
 const TypographyStyled = styled(Typography)`
-    top: 60px;
+    top: 23px;
     position: absolute;
-    right: 41%;
+    right: 0.5%;
     cursor: pointer;
     font-size: 17px !important;
     color: ${getThemeProps('palette.action.disabledBackground')};
-    ${({ theme }) => theme.media.down('xl')`
-        right: 54%;
-    `}
-    ${({ theme }) => theme.media.down('lg')`
-        right: 37%;
-    `}
-    ${({ theme }) => theme.media.down('sm')`
-        right: 18%;
-        top: 45px;
-    `}
-    @media (max-width: 768px) and (orientation: landscape) {
-        right: 40%;
-        top: 50px;
-    }
 `;
 
 const BoxStyled = styled(Box)`
@@ -100,6 +86,10 @@ const LabelStyled = styled.label`
         margin-right: 4px;
         margin-left: 3px;
     }
+`;
+
+const FormWroperrStyled = styled(Col)`
+  position: relative;
 `;
 
 /**
@@ -308,7 +298,7 @@ class AdvanceSearch extends Component {
           backgroundColor="advancedSearch"
         >
           <Row alignItems="center">
-            <Col size={10} padding="0 0 0 20px" margin="0">
+            <FormWroperrStyled size={10} padding="0 0 0 20px" margin="0">
               <Form
                 showErrorList={false}
                 liveValidate
@@ -321,7 +311,7 @@ class AdvanceSearch extends Component {
                 onSubmit={this.advanceSearch}
               />
               {this.clearButton()}
-            </Col>
+            </FormWroperrStyled>
             <Col size={2} padding="0 20px 0 0">
               <Button
                 borderRadius="0 4px 4px 0"
@@ -349,7 +339,7 @@ class AdvanceSearch extends Component {
           className = "advance-search-button display-none">
             <i className="fa fa-trash card-icon"/>Clear
           </button>*/}
-          <Row display="block" margin="0px" /* className="advance-input-radio"*/>
+          <Row display="block" margin="0px">
             {/** TODO: thisNormal Search search option(exact search).
                This may be use in future.*/}
             {/* <div className="input-radio-container display-none">

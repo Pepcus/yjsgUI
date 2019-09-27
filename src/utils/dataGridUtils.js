@@ -102,13 +102,6 @@ export const chunkArray = (Array, chunkSize) => {
   return results;
 };
 
-export const setAppColor = (mode) => {
-  for (const key in mode) {
-    if (mode.hasOwnProperty(key)) {
-      document.documentElement.style.setProperty(key, mode[key]);
-    }
-  }
-};
 /**
  * getFormattedMemberId method convert the memberID into four digit memberID.
  * @param {Number} memberId

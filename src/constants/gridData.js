@@ -1,5 +1,4 @@
 import moment from 'moment';
-import cssJSON from '../config/cssVariables.json';
 
 /**
  * gridData is student grid columns heading data.
@@ -299,7 +298,7 @@ export const gridMetaData = [
  *  }
  *  }
  */
-export const gridHeaderData = ({ mode = 'production' }) => ({
+export const gridHeaderData = ({ color }) => ({
   headerConfig: gridMetaData,
   topDrawer: {
     'pagination': false,
@@ -322,7 +321,7 @@ export const gridHeaderData = ({ mode = 'production' }) => ({
   includeAllInGlobalFilter: false,
   includeGlobalFilter: true,
   exportFileName: `StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`,
-  loaderColor: cssJSON[mode]['--app-loader-color'],
+  loaderColor: color,
 });
 
 export const getStyles = () => ({

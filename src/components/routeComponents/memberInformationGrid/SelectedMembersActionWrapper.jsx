@@ -73,6 +73,9 @@ const DisabledButtonStyled = styled(Button)`
    margin: 0;
    padding: 5px 10px;
    display: ${props => (props.isView ? 'unset' : 'none')};
+   ${({ theme }) => theme.media.down('lg')`
+     display: none;
+   `};
 `;
 
 /**
