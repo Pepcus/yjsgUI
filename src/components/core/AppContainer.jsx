@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { connect } from 'react-redux';
-import cssVars from 'css-vars-ponyfill';
 import {
   HashRouter,
   Route,
@@ -27,7 +26,6 @@ import {
 import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
 } from 'constants/text';
-import cssJSON from 'config/cssVariables.json';
 import {
   setLoadingStateAction,
 } from 'actions/memberRegistrationActions';
@@ -70,36 +68,6 @@ class AppContainer extends Component {
     loadBusCoordinatorsData();
     loadAppData();
     setLoadingState(false);
-
-    /**
-     * CSS variable doesn't support in IE for that we use 'css-vars-ponyfill'.
-     * reference:- https://jhildenbiddle.github.io/css-vars-ponyfill/#/
-     */
-    if (isLoaded) {
-      cssVars({
-        // Only styles from CodePen's CSS panel
-        include: 'style:not([data-ignore])',
-        // Treat all browsers as legacy
-        variables: {
-          ...cssJSON[mode],
-        },
-        onlyLegacy: true,
-      });
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isLoaded) {
-      cssVars({
-        // Only styles from CodePen's CSS panel
-        include: 'style:not([data-ignore])',
-        // Treat all browsers as legacy
-        variables: {
-          ...cssJSON[nextProps.mode],
-        },
-        onlyLegacy: true,
-      });
-    }
   }
 
   render() {

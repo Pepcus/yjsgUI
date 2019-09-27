@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 
 import Box from 'pepcus-core/lib/Box';
@@ -152,7 +152,7 @@ class MemberInformationGrid extends Component {
       selectedMembers: [],
       selectValue: this.props.selectValue,
       members: [],
-      metaData: gridHeaderData({ mode: this.props.mode }),
+      metaData: gridHeaderData({ color: this.props.theme.colors.header }),
       columnOptionIsOpen: false,
       isMemberDataSet: false,
       isAdminRoute: false,
@@ -543,6 +543,7 @@ MemberInformationGrid.propTypes = {
   setRedirectValue: PropTypes.func,
   setUserType: PropTypes.func,
   setVisibleColumnConfig: PropTypes.func,
+  theme: PropTypes.object,
   updateMemberByAdmin: PropTypes.func,
   visibleColumnConfig: PropTypes.object,
 };
@@ -564,6 +565,7 @@ MemberInformationGrid.defaultProps = {
   setRedirectValue: () => {},
   setUserType: () => {},
   setVisibleColumnConfig: () => {},
+  theme: {},
   updateMemberByAdmin: () => {},
   visibleColumnConfig: {},
 };
@@ -594,4 +596,4 @@ const mapDispatchToProps = dispatch => ({
   updateMemberByAdmin: ({ id, secretKey }) => dispatch(updateMemberByAdminAction({ id, secretKey })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MemberInformationGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(MemberInformationGrid));

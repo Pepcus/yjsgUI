@@ -1,8 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
 import times from 'lodash/times';
 import uniqueId from 'lodash/uniqueId';
+import styled from 'styled-components';
+
+import Box from 'pepcus-core/lib/Box';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 /**
  * CustomLoader will render loader.
@@ -11,9 +14,11 @@ import uniqueId from 'lodash/uniqueId';
  * @constructor
  */
 
+const LoaderStyled = styled(Box)`
+  background: ${getThemeProps('colors.header')}
+`;
 
-const CustomLoader = (props) => {
-  const { loaderColor, styles } = props;
+const CustomLoader = () => {
   const customStyles = {
     loader: {
       position: 'absolute',
@@ -30,26 +35,16 @@ const CustomLoader = (props) => {
         <div className="lds-spinner">
           {times(12,
             () =>
-              (<div
-                className="lds-spinner-color"
+              (<LoaderStyled
+                padding="0"
+                borderStyle="none"
                 key={uniqueId('loaderSection')}
-                style={{ 'background': loaderColor }}
                />))
           }
         </div>
       </div>
     </div>
   );
-};
-
-CustomLoader.propTypes = {
-  loaderColor: PropTypes.string,
-  styles: PropTypes.object,
-};
-
-CustomLoader.defaultProps = {
-  loaderColor: '',
-  styles: {},
 };
 
 export default CustomLoader;
