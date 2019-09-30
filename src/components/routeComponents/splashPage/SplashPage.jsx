@@ -383,7 +383,7 @@ const mapStateToProps = state => ({
   isLoading: isLoading(state),
   password: getAdminPassword(state),
   searchResults: getSearchResults(state),
-  studentData: getMember(state),
+  memberData: getMember(state),
   tenant: getApplicationTenant(state),
 });
 

@@ -70,7 +70,7 @@ const ContainerStyled = styled(Container)`
 `;
 
 /**
- * MemberRegistrationForm will be render student registration form
+ * MemberRegistrationForm will be render member registration form
  * @type {Class}
  */
 class MemberRegistrationForm extends Component {
@@ -166,9 +166,9 @@ class MemberRegistrationForm extends Component {
    */
   redirectToPreviousLocation = () => {
     const { userType } = this.props;
-    const { STUDENT, ADMIN } = USER_TYPES;
+    const { MEMBER, ADMIN } = USER_TYPES;
 
-    if (userType === STUDENT) {
+    if (userType === MEMBER) {
       this.setState({
         isStudentLocation: true,
       });

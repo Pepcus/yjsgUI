@@ -7,7 +7,7 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import {
-  OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL,
+  OPT_IN_STATUS_FOR_SELECTED_MEMBERS_LABEL,
 } from 'constants/label';
 
 const RowStyled = styled(Row)`
@@ -25,7 +25,7 @@ const ModalHeader = () => (
       fontSize="20px"
       color="white"
     >
-      {OPT_IN_STATUS_FOR_SELECTED_STUDENTS_LABEL}
+      {OPT_IN_STATUS_FOR_SELECTED_MEMBERS_LABEL}
     </Typography>
   </RowStyled>
 );

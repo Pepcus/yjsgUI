@@ -39,9 +39,9 @@ export const adminId = 'yjsgadmin';
 export const adminPassword = '451727';
 
 export const USER_TYPES = {
-  STUDENT: 'student',
+  MEMBER: 'member',
   ADMIN: 'admin',
-  STUDENT_WITH_URL: 'student_with_url',
+  MEMBER_WITH_URL: 'member_with_url',
 };
 
 export const TENANT = {

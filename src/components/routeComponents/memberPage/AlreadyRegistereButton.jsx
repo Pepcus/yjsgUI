@@ -18,11 +18,11 @@ const ButtonStyled = styled(Button)`
 
 const AlreadyRegisteredButton = ({
   isAlreadyRegisteredButtonEnabled,
-  redirectToStudentLogin,
+  redirectToMemberLogin,
 }) => {
   if (isAlreadyRegisteredButtonEnabled) {
     return (
-      <ButtonStyled margin="10px" onClick={redirectToStudentLogin}>
+      <ButtonStyled margin="10px" onClick={redirectToMemberLogin}>
         {alreadyRegisteredBtnText}
       </ButtonStyled>
     );
@@ -31,12 +31,12 @@ const AlreadyRegisteredButton = ({
 
 AlreadyRegisteredButton.propTypes = {
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
-  redirectToStudentLogin: PropTypes.func,
+  redirectToMemberLogin: PropTypes.func,
 };
 
 AlreadyRegisteredButton.defaultProps = {
   isAlreadyRegisteredButtonEnabled: false,
-  redirectToStudentLogin: () => {},
+  redirectToMemberLogin: () => {},
 };
 
 export default AlreadyRegisteredButton;

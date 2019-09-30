@@ -86,7 +86,7 @@ const TypographyStyled = styled(Typography)`
 `;
 
 /**
- * MemberCredentialPage is render student credential form
+ * MemberCredentialPage is render member credential form
  * @type {Class}
  */
 class MemberCredentialPage extends Component {
@@ -111,7 +111,7 @@ class MemberCredentialPage extends Component {
       secretKey,
     } = this.props;
 
-    // If admin redirect to student credential page in that case
+    // If admin redirect to member credential page in that case
     // pre populate the id and secretKey of previous login student
     if (context.previousLocation === '/admin') {
       this.setState({
@@ -172,12 +172,12 @@ class MemberCredentialPage extends Component {
       hasError,
     } = this.state;
     const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
-    const { STUDENT } = USER_TYPES;
+    const { MEMBER } = USER_TYPES;
 
     if (hasError) {
       setStudentCredentials({ id: credentials.memberId, secretKey: credentials.secretKey });
       fetchStudentData({ id: credentials.memberId, secretKey: credentials.secretKey });
-      setUserType({ pageUser: STUDENT });
+      setUserType({ pageUser: MEMBER });
       this.setState({
         redirectToStudentCorrectionLogin: true,
       });
@@ -205,14 +205,14 @@ class MemberCredentialPage extends Component {
     const { hashLink } = this.props;
     const {
       ADMIN,
-      STUDENT,
+      MEMBER,
     } = USER_TYPES;
 
     if (hashLink === ADMIN) {
       this.setState({
         isAdminLocation: true,
       });
-    } else if (hashLink === STUDENT) {
+    } else if (hashLink === MEMBER) {
       this.setState({
         isStudentLocation: true,
       });
