@@ -1,4 +1,4 @@
-export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
+export const FOOTER_CONTACT_TEXT = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:';
 
 export const DEFAULT_HEADER_TEXT = ' जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष) ';
 

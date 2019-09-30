@@ -9,7 +9,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  yjsgFooterText,
+  FOOTER_CONTACT_TEXT,
   DEFAULT_FOOTER_CONTACT_INFORMATION,
 } from 'constants/yjsg';
 import { isLoading } from 'reducers/memberRegistrationReducer';
@@ -66,7 +66,7 @@ const Footer = ({
     <FooterStyled
       type="title"
       style={footerObject.titleStyle}
-    > {yjsgFooterText}
+    > {FOOTER_CONTACT_TEXT}
       <TitleStyled type="caption">
         {footerObject.title ? footerObject.title : getFooterText()}
       </TitleStyled>
