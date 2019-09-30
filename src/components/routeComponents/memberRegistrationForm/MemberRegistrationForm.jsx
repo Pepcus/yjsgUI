@@ -31,7 +31,7 @@ import {
   getUserType,
   isCreated,
 } from 'reducers/memberRegistrationReducer';
-import { fetchFormConfig } from 'sagas/formConfigAPI';
+import { fetchFormConfig } from 'api/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,

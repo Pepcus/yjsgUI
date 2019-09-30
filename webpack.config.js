@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
     alias: {
       actions: path.resolve(__dirname, 'src/actions'),
+      api: path.resolve(__dirname, 'src/api'),
       assets: path.resolve(__dirname, 'src/assets'),
       components: path.resolve(__dirname, 'src/components'),
       config: path.resolve(__dirname, 'src/config'),

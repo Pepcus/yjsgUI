@@ -38,7 +38,7 @@ import {
   updateClassAttended2019InMemberData,
 } from 'utils/registrationFormUtils';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { fetchFormConfig } from 'sagas/formConfigAPI';
+import { fetchFormConfig } from 'api/formConfigAPI';
 import {
   initialMemberData,
   isObjectsEqual,

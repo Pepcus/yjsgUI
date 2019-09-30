@@ -7,8 +7,12 @@ import {
   loadAppDataFailedAction,
   loadBusCoordinatorsDataSuccessAction,
   loadBusCoordinatorsDataFailedAction,
-} from '../actions/assetFilesActions';
-import { fetchFileConfig, getAppConfig, getBusCoordinatorsConfig } from './assetFilesAPI';
+} from 'actions/assetFilesActions';
+import {
+  fetchFileConfig,
+  getAppConfig,
+  getBusCoordinatorsConfig,
+} from 'api/assetFilesAPI';
 
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';

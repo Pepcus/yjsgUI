@@ -1,4 +1,4 @@
-import { GET } from '../utils/http';
+import { GET } from 'utils/http';
 
 export const fetchFile = (fileDetails) => {
   let responseType = 'json';
