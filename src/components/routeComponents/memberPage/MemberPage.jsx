@@ -80,7 +80,7 @@ const TypographyStyled = styled(Typography)`
 // TODO: responsive css @media remaining
 
 /**
- * The MemberPage component for the student which will render -
+ * The MemberPage component for the member which will render -
  * Two buttons (Already Registered and New Registration) .
  * @type {class}
  * @return {HTML}
@@ -91,7 +91,7 @@ class MemberPage extends Component {
 
     this.state = {
       isURLParams: false,
-      isStudentLogin: false,
+      isMemberLogin: false,
       isNewRegistration: false,
     };
   }
@@ -101,21 +101,21 @@ class MemberPage extends Component {
     const secretCode = getParameterByName('secretCode');
 
     if (id && secretCode) {
-      this.fetchStudentByURLParams(id, secretCode);
+      this.fetchMemberByURLParams(id, secretCode);
     }
   }
 
-  /** If student login through URL fetchStudentByURLParams method will call.
+  /** If member login through URL fetchMemberByURLParams method will call.
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchStudentByURLParams(id, secretCode) {
-    const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
-    const { STUDENT_WITH_URL } = USER_TYPES;
+  fetchMemberByURLParams(id, secretCode) {
+    const { fetchMemberData, setMemberCredentials, setUserType } = this.props;
+    const { MEMBER_WITH_URL } = USER_TYPES;
 
-    setStudentCredentials({ id, secretKey: secretCode });
-    fetchStudentData({ id, secretKey: secretCode });
-    setUserType({ pageUser: STUDENT_WITH_URL });
+    setMemberCredentials({ id, secretKey: secretCode });
+    fetchMemberData({ id, secretKey: secretCode });
+    setUserType({ pageUser: MEMBER_WITH_URL });
     this.setState({
       isURLParams: true,
     });
@@ -123,32 +123,32 @@ class MemberPage extends Component {
 
   /**
    * Method call by onClick of button already register
-   * it set the value of isStudentLogin is true.
-   * And set user is student in reducer through setHashLinkForStudentCredential action.
+   * it set the value of isMemberLogin is true.
+   * And set user is member in reducer through setHashLinkForMemberCredential action.
    */
-  redirectToStudentLogin = () => {
-    const { setHashLinkForStudentCredential } = this.props;
-    const { STUDENT } = USER_TYPES;
+  redirectToMemberLogin = () => {
+    const { setHashLinkForMemberCredential } = this.props;
+    const { MEMBER } = USER_TYPES;
 
     this.setState({
-      isStudentLogin: true,
+      isMemberLogin: true,
     });
-    setHashLinkForStudentCredential(STUDENT);
+    setHashLinkForMemberCredential(MEMBER);
   };
 
   /**
    * Method call by onclick of button new registration
    * it set the value of isNewRegistration is true.
-   * And set user is student in reducer through setHashLinkForNewRegistration action.
+   * And set user is member in reducer through setHashLinkForNewRegistration action.
    */
   redirectToNewRegistrationPage = () => {
     const { setHashLinkForNewRegistration } = this.props;
-    const { STUDENT } = USER_TYPES;
+    const { MEMBER } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
-    setHashLinkForNewRegistration(STUDENT);
+    setHashLinkForNewRegistration(MEMBER);
   };
 
   render() {
@@ -158,7 +158,7 @@ class MemberPage extends Component {
     } = this.props;
     const {
       isURLParams,
-      isStudentLogin,
+      isMemberLogin,
       isNewRegistration,
     } = this.state;
 
@@ -166,7 +166,7 @@ class MemberPage extends Component {
       <ContainerStyled width="100%">
         <RedirectToRoute
           isURLParams={isURLParams}
-          isStudentLogin={isStudentLogin}
+          isMemberLogin={isMemberLogin}
           isNewRegistration={isNewRegistration}
         />
         <BoxStyled
@@ -206,7 +206,7 @@ class MemberPage extends Component {
             <Row justify="center">
               <AlreadyRegisteredButton
                 isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
-                redirectToStudentLogin={this.redirectToStudentLogin}
+                redirectToMemberLogin={this.redirectToMemberLogin}
               />
               <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
                 {newRegistrationBtnText}
@@ -220,35 +220,35 @@ class MemberPage extends Component {
 }
 
 MemberPage.propTypes = {
-  fetchStudentData: PropTypes.func,
+  fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
-  setHashLinkForStudentCredential: PropTypes.func,
+  setHashLinkForMemberCredential: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
-  setStudentCredentials: PropTypes.func,
+  setMemberCredentials: PropTypes.func,
   setUserType: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 MemberPage.defaultProps = {
-  fetchStudentData: () => {},
+  fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
-  setHashLinkForStudentCredential: () => {},
+  setHashLinkForMemberCredential: () => {},
   setHashLinkForNewRegistration: () => {},
-  setStudentCredentials: () => {},
+  setMemberCredentials: () => {},
   setUserType: () => {},
   tenant: '',
 };
 
 const mapStateToProps = state => ({
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
-  studentData: getMember(state),
+  memberData: getMember(state),
   tenant: getApplicationTenant(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchStudentData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
-  setStudentCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
-  setHashLinkForStudentCredential: userType => dispatch(setHashLinkForMemberCredentialAction(userType)),
+  fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
+  setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
+  setHashLinkForMemberCredential: userType => dispatch(setHashLinkForMemberCredentialAction(userType)),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
 });

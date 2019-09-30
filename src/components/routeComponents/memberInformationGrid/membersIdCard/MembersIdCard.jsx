@@ -13,8 +13,8 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  YJSG_ID_CARD_SMALL_HEADING,
-  YJSG_ID_CARD_MAIN_HEADING,
+  MEMBER_ID_CARD_SMALL_HEADING,
+  MEMBER_ID_CARD_MAIN_HEADING,
 } from 'constants/text';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/dataGridUtils';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
@@ -165,7 +165,7 @@ class MembersIdCard extends Component {
               padding="1px"
               align="center"
             >
-              { YJSG_ID_CARD_SMALL_HEADING }
+              { MEMBER_ID_CARD_SMALL_HEADING }
             </SmallHeadingWrapper>
             <TypographyStyled
               color="dark"
@@ -176,7 +176,7 @@ class MembersIdCard extends Component {
               align="center"
               fontSize="18px"
             >
-              { YJSG_ID_CARD_MAIN_HEADING }
+              { MEMBER_ID_CARD_MAIN_HEADING }
             </TypographyStyled>
           </Typography>
           <MemberInformationWrapper

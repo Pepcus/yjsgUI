@@ -23,8 +23,8 @@ import {
 } from 'constants/yjsg';
 
 const {
-  STUDENT_WITH_URL,
-  STUDENT,
+  MEMBER_WITH_URL,
+  MEMBER,
 } = USER_TYPES;
 
 /**
@@ -359,10 +359,10 @@ export const checkLevelValue = (value) => {
 };
 
 /**
- * updateStudentDataAccordingClassAttended2018Level method manipulate the student data
+ * updateClassAttended2019InMemberData method manipulate the member data
  * according to classAttended level value of previous year.
  * @param {Object} memberData
- * @return {Object} studentData
+ * @return {Object} memberData
  */
 export const updateClassAttended2019InMemberData = (memberData) => {
 
@@ -401,4 +401,4 @@ export const getRegisteredMemberData = ({ memberData }) => {
   return !isEmpty(memberData) ? memberData : memberDataFromSession;
 };
 
-export const isUserMember = ({ user }) => user === STUDENT_WITH_URL || user === STUDENT;
+export const isUserMember = ({ user }) => user === MEMBER_WITH_URL || user === MEMBER;

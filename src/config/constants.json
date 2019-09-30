@@ -1,10 +1,6 @@
 {
   "text": {
     "PLEASE_SELECT_ANY_ONE_TEXT": "कृपया एक चुनिए . . .",
-    "YES_TEXT": "हाँ",
-    "NO_TEXT": "ना",
-    "ID_NUMBER_TEXT": "आई.डी. नं.",
-    "SECRET_CODE_TEXT": "सीक्रेट कोड",
     "UPDATE_FURTHER_INFORMATION_TEXT": "कृपिया अन्य जानकारी बदलने हेतु यहाँ",
     "CLICK_HERE_TEXT": "क्लिक करे |",
     "YOUR_ID_TEXT": "आपका ID: ",
@@ -14,7 +10,7 @@
     "IS_THERE_TEXT": " है |",
     "ERROR_MESSAGE_OF_LOAD_APP_DATA": "Error occurred to load application data.",
     "FILE_DOWNLOAD_MESSAGE": "File downloading started...",
-    "YJSG_ID_CARD_SMALL_HEADING": "जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019",
-    "YJSG_ID_CARD_MAIN_HEADING": "Young Jain Study Group (YJSG)"
+    "MEMBER_ID_CARD_SMALL_HEADING": "जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019",
+    "MEMBER_ID_CARD_MAIN_HEADING": "Young Jain Study Group (YJSG)"
   }
 }

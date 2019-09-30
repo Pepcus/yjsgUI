@@ -6,24 +6,24 @@ import * as shortId from 'shortid';
 /**
  * RedirectToRoute method redirect to corresponding route.
  * @param {Boolean} isNewRegistration
- * @param {Boolean} isStudentLogin
+ * @param {Boolean} isMemberLogin
  * @param {Boolean} isURLParams
  * @return {HTML}
  * @constructor
  */
 const RedirectToRoute = ({
   isNewRegistration,
-  isStudentLogin,
+  isMemberLogin,
   isURLParams,
 }) => {
   const routes = {
     isURLParams: '/member-registration-correction',
-    isStudentLogin: '/member-login',
+    isMemberLogin: '/member-login',
     isNewRegistration: '/member-register',
   };
 
-  if (isURLParams || isNewRegistration || isStudentLogin) {
-    const routeFlags = { isURLParams, isNewRegistration, isStudentLogin };
+  if (isURLParams || isNewRegistration || isMemberLogin) {
+    const routeFlags = { isURLParams, isNewRegistration, isMemberLogin };
 
     return Object.keys(routeFlags).map((routeFlag) => {
       if (routeFlags[routeFlag]) {
@@ -37,13 +37,13 @@ const RedirectToRoute = ({
 
 RedirectToRoute.propTypes = {
   isNewRegistration: PropTypes.bool,
-  isStudentLogin: PropTypes.bool,
+  isMemberLogin: PropTypes.bool,
   isURLParams: PropTypes.bool,
 };
 
 RedirectToRoute.defaultProps = {
   isNewRegistration: false,
-  isStudentLogin: false,
+  isMemberLogin: false,
   isURLParams: false,
 };
 
