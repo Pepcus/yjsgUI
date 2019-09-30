@@ -43,7 +43,7 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/memberRegistrationActions';
-import { fetchFile } from 'sagas/assetFilesAPI';
+import { fetchFile } from 'api/assetFilesAPI';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;

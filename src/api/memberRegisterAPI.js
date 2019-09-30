@@ -1,8 +1,8 @@
-import { PUT, POST, GET, PATCH } from '../utils/http';
+import { PUT, POST, GET, PATCH } from 'utils/http';
 import {
   formatUpdateMemberDataPayload,
   formatCreateMemberDataPayload,
-} from '../utils/apiUtils';
+} from 'utils/apiUtils';
 
 export const updateMember = ({ id, secretKey, member }) =>
   PUT({

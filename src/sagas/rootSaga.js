@@ -12,7 +12,7 @@ import {
   markSelectedMembersOptInOrOptOutAPI,
   updateIdCardStatusSelectedMembersAPI,
   parentsRegistrationAPI,
-} from './memberRegisterAPI';
+} from 'api/memberRegisterAPI';
 import {
   createMemberFailedAction,
   createMemberSuccessAction,
@@ -38,7 +38,7 @@ import {
   parentsRegistrationResultsSuccessAction,
   parentsRegistrationResultsFailureAction,
   setLoadingStateAction,
-} from '../actions/memberRegistrationActions';
+} from 'actions/memberRegistrationActions';
 
 /**
  * createMemberSaga sage call when create a new member.

@@ -6,15 +6,15 @@ import { ThemeProvider } from 'styled-components';
 
 import { generateTheme } from 'pepcus-core/utils/theme';
 
-import './assets/css/index.css';
-import './assets/css/dataGrid.css';
-import './assets/css/tableGrid.css';
-import './assets/css/card-print.css';
-import './assets/css/loader.css';
-import AppContainer from './components/core/AppContainer';
-import store from './store/store';
-import APP_THEME from './constants/theme';
-import { getAppConfig } from './sagas/assetFilesAPI';
+import 'assets/css/index.css';
+import 'assets/css/dataGrid.css';
+import 'assets/css/tableGrid.css';
+import 'assets/css/card-print.css';
+import 'assets/css/loader.css';
+import AppContainer from 'components/core/AppContainer';
+import store from 'store/store';
+import APP_THEME from 'constants/theme';
+import { getAppConfig } from 'api/assetFilesAPI';
 
 getAppConfig().then((response) => {
   let fileConfig = {};
