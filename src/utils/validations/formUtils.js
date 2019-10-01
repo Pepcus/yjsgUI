@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import validations from 'utils/validations/validation';
+import validations from './validation';
 
 /**
  * Method return transformErrors function
