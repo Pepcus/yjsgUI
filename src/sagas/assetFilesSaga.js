@@ -12,7 +12,7 @@ import {
   fetchFileConfig,
   getAppConfig,
   getBusCoordinatorsConfig,
-} from 'api/assetFilesAPI';
+} from 'apis/assetFilesAPI';
 
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';

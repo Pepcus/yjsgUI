@@ -6,7 +6,7 @@ import Fuse from 'fuse.js';
 
 import {
   gridMetaData,
-} from '../constants/gridData';
+} from 'constants/gridData';
 
 /**
  * manageMembersTableWidth method is called when we have to manage table width in grid page.
@@ -202,7 +202,7 @@ export const getChangedVisibleColumnConfig = ({ selectValue, temporaryVisibleCol
  * @param {Array} selectedStudents
  * @return {*}
  */
-export const extractMembersId = ({ selectedMembers }) => selectedMembers.map(student => String(student.memberId));
+export const extractMembersId = ({ selectedMembers }) => selectedMembers.map(member => String(member.memberId));
 
 export const getStyled = ({ width }) => {
   let style = {};

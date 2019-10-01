@@ -27,7 +27,7 @@ import {
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
-import { extractMembersId } from 'utils/dataGridUtils';
+import { extractMembersId } from 'utils/common';
 
 import { schema, uiSchema } from './modalFormShema.json';
 import Message from './Message';

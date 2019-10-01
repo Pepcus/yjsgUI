@@ -40,13 +40,13 @@ import {
   eventVenue,
   USER_TYPES,
 } from 'constants/yjsg';
-import { getParameterByName } from 'utils/http';
+import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   GIVEN_INFORMATION_WRONG_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
-import { getTransformedErrors } from 'utils/formUtils';
+import { getTransformedErrors } from 'utils/validations';
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 

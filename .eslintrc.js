@@ -22,7 +22,7 @@ module.exports = {
       alias: {
         map: [
           ['actions', './src/actions'],
-          ['api', './src/api'],
+          ['apis', './src/apis'],
           ['assets', './src/assets'],
           ['components', './src/components'],
           ['constants', './src/constants'],

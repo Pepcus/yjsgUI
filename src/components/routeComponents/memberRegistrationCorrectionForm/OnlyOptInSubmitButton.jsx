@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Button from 'pepcus-core/lib/Button';
 import Row from 'pepcus-core/lib/Row';
 
-import { isUserMember } from 'utils/registrationFormUtils';
+import { isUserMember } from 'utils/form';
 import { formSubmitBtnText } from 'constants/yjsg';
 
 const SubmitButtonStyled = styled(Button)`

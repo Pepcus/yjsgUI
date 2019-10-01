@@ -1,4 +1,4 @@
-import { GET } from 'utils/http';
+import { GET } from 'apis/http';
 
 /**
  * fetchFormConfig method fetch file data

@@ -26,7 +26,7 @@ import {
   newRegistrationBtnText,
   USER_TYPES,
 } from 'constants/yjsg';
-import { getParameterByName } from 'utils/http';
+import { getParameterByName } from 'apis/http';
 import { getMember } from 'reducers/memberRegistrationReducer';
 import {
   getApplicationTenant,

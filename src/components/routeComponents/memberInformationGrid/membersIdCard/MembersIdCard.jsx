@@ -16,7 +16,7 @@ import {
   MEMBER_ID_CARD_SMALL_HEADING,
   MEMBER_ID_CARD_MAIN_HEADING,
 } from 'constants/text';
-import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/dataGridUtils';
+import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
 
 import CoordinatorInformation from './CoordinatorInformation';

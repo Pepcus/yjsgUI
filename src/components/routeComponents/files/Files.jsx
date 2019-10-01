@@ -33,17 +33,17 @@ import {
 } from 'actions/assetFilesActions';
 import { SUPPORTED_FILE_TYPES } from 'constants/yjsg';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from 'constants/messages';
-import { manageMembersTableWidth } from 'utils/dataGridUtils';
+import { manageMembersTableWidth } from 'utils/common';
 import {
   formatXlsxToJson,
   getDataGridHeadersForFileView,
   getFileListDisplayCondition,
   getMessageDisplayCondition,
-} from 'utils/fileUtils';
+} from 'utils/routes';
 import {
   setLoadingStateAction,
 } from 'actions/memberRegistrationActions';
-import { fetchFile } from 'api/assetFilesAPI';
+import { fetchFile } from 'apis/assetFilesAPI';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;

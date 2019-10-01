@@ -20,7 +20,7 @@ import {
   formatMembers,
   getMultipleIdSearchResult,
   getAdvanceSearchResult,
-} from 'utils/dataGridUtils';
+} from 'utils/common';
 import fields from 'components/common/fields';
 import { schema, uiSchema } from './advanceSearchShema.json';
 

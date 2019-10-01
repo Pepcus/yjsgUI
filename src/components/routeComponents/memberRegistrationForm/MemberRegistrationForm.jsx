@@ -31,12 +31,12 @@ import {
   getUserType,
   isCreated,
 } from 'reducers/memberRegistrationReducer';
-import { fetchFormConfig } from 'api/formConfigAPI';
+import { fetchFormConfig } from 'apis/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
   verifyFormDataValidations,
-} from 'utils/formUtils';
+} from 'utils/validations';
 import fields from 'components/common/fields';
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';

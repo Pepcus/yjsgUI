@@ -12,7 +12,7 @@ import {
   markSelectedMembersOptInOrOptOutAPI,
   updateIdCardStatusSelectedMembersAPI,
   parentsRegistrationAPI,
-} from 'api/memberRegisterAPI';
+} from 'apis/memberRegisterAPI';
 import {
   createMemberFailedAction,
   createMemberSuccessAction,

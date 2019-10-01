@@ -20,7 +20,7 @@ import {
   manageMembersTableWidth,
   setAllMembersAsUnchecked,
   getUpdatedVisibleColumnConfig,
-} from 'utils/dataGridUtils';
+} from 'utils/common';
 import 'assets/css/card-print.css';
 import { getApplicationMode } from 'reducers/assetFilesReducer';
 import { gridHeaderData } from 'constants/gridData';
