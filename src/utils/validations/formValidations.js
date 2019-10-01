@@ -192,62 +192,6 @@ export const bhopalAgeValidator = (value) => {
 };
 
 /**
- * validates method check validation of form fields and return errors object
- * @param {Object} formData
- * @param {Object} errors
- * @return {Object} errors
- */
-export const validates = (formData, errors) => {
-  if (formData.optIn2019 === 'Y') {
-
-    const nameError = nameValidator(formData.name);
-
-    if (!isEmpty(nameError)) {
-      errors.name.addError(nameError);
-    }
-
-    const fatherNameError = nameValidator(formData.fatherName);
-
-    if (!isEmpty(fatherNameError)) {
-      errors.fatherName.addError(fatherNameError);
-    }
-
-    const ageError = ageValidator(formData.age ? String(formData.age) : '');
-
-    if (!isEmpty(ageError)) {
-      errors.age.addError(ageError);
-    }
-
-    const mobileError = mobileValidator(formData.mobile ? String(formData.mobile) : '');
-
-    if (!isEmpty(mobileError)) {
-      errors.mobile.addError(mobileError);
-    }
-
-    const emailError = optionalEmailValidator(formData.email);
-
-    if (!isEmpty(emailError)) {
-      errors.email.addError(emailError);
-    }
-
-    const addressError = addressValidator(formData.address);
-
-    if (!isEmpty(addressError)) {
-      errors.address.addError(addressError);
-    }
-
-    const optionalMobileError = optionalMobileValidator(formData.motherMobile ? String(formData.motherMobile) : '');
-
-    if (!isEmpty(optionalMobileError)) {
-      errors.motherMobile.addError(optionalMobileError);
-    }
-
-    return errors;
-  }
-  return {};
-};
-
-/**
  * prePopulateOptIn method pre populate the optIn value
  * @param {Object} memberData
  * @return {Object} memberData

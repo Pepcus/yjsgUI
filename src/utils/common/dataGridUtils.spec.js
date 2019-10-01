@@ -1,7 +1,7 @@
 import { describe } from 'mocha';
 import assert from 'assert';
 
-import { chunkArray } from './dataGridUtils';
+import { chunkArray } from '.';
 
 const arrayChunk = [
   [

@@ -37,8 +37,8 @@ import {
   USER_TYPES,
 } from 'constants/yjsg';
 import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
-import { getParameterByName } from 'utils/http';
-import { getTransformedErrors } from 'utils/formUtils';
+import { getParameterByName } from 'apis/http';
+import { getTransformedErrors } from 'utils/validations';
 import fields from 'components/common/fields';
 
 import ImageWrapper from './ImageWrapper';

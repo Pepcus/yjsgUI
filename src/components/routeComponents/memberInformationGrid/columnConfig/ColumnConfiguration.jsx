@@ -23,7 +23,7 @@ import {
   chunkArray,
   getChangedVisibleColumnConfig,
   getStyled,
-} from 'utils/dataGridUtils';
+} from 'utils/common';
 import { PLEASE_SELECT_COLUMNS_TEXT } from 'constants/text';
 
 import { schema, uiSchema } from './columnConfig.json';

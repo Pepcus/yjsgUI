@@ -36,19 +36,19 @@ import {
   getRegisteredMemberData,
   isUserMember,
   updateClassAttended2019InMemberData,
-} from 'utils/registrationFormUtils';
+} from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { fetchFormConfig } from 'api/formConfigAPI';
+import { fetchFormConfig } from 'apis/formConfigAPI';
 import {
   initialMemberData,
   isObjectsEqual,
   prePopulateOptIn,
-} from 'utils/formValidations';
+} from 'utils/validations';
 import {
   getTransformedErrors,
   verifyFormDataValidations,
-} from 'utils/formUtils';
-import { getFormData } from 'utils/formDataUtils';
+} from 'utils/validations';
+import { getFormData } from 'utils/form';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';

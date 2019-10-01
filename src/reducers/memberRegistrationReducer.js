@@ -1,6 +1,6 @@
 import {
   getInitialVisibleColumnConfig,
-} from '../utils/dataGridUtils';
+} from '../utils/common';
 
 const initialState = {
   member: {},

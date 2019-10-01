@@ -11,7 +11,7 @@ import {
   CLICK_HERE_TEXT,
   UPDATE_FURTHER_INFORMATION_TEXT,
 } from 'constants/text';
-import { isUserMember } from 'utils/registrationFormUtils';
+import { isUserMember } from 'utils/form';
 
 const LinkStyled = styled(Link)`
   &:hover {

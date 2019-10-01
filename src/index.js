@@ -14,7 +14,7 @@ import 'assets/css/loader.css';
 import AppContainer from 'components/core/AppContainer';
 import store from 'store/store';
 import APP_THEME from 'constants/theme';
-import { getAppConfig } from 'api/assetFilesAPI';
+import { getAppConfig } from 'apis/assetFilesAPI';
 
 getAppConfig().then((response) => {
   let fileConfig = {};

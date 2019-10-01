@@ -15,7 +15,7 @@ import Typography from 'pepcus-core/esm/lib/Typography';
 import Row from 'pepcus-core/lib/Row';
 import Modal from 'pepcus-core/lib/Modal';
 
-import { extractMembersId } from 'utils/dataGridUtils';
+import { extractMembersId } from 'utils/common';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
