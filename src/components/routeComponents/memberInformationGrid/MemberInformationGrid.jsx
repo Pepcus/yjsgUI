@@ -25,14 +25,18 @@ import 'assets/css/card-print.css';
 import { getApplicationMode } from 'reducers/assetFilesReducer';
 import { gridHeaderData } from 'constants/gridData';
 import {
-  allMembersData,
-  getSelectValue,
   getMember,
   getSecretKey,
+} from 'reducers/memberRegistrationReducer';
+
+import {
+  allMembersData,
+  getSelectValue,
   getVisibleColumnConfig,
   stateOfAdminLogin,
   stateOfRedirect,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/allMembersDataReducer';
+
 import {
   fetchMemberDataAction,
   getAllMembersAction,

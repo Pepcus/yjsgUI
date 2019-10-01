@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getLoaderState } from 'reducers/memberRegistrationReducer';
+import { getLoaderState } from 'reducers/loaderReducer';
 
 import CustomLoader from './CustomLoader';
 

@@ -24,18 +24,21 @@ import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
 import {
-  getPageUserType,
   getMember,
   getUserId,
   getUserSecretKey,
-  getUserType,
   isFetched,
   isUpdated,
 } from 'reducers/memberRegistrationReducer';
 import {
+  getPageUserType,
+  getUserType,
+} from 'reducers/allMembersDataReducer';
+import {
   getRegisteredMemberData,
   isUserMember,
   updateClassAttended2019InMemberData,
+  getFormData,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { fetchFormConfig } from 'apis/formConfigAPI';
@@ -43,12 +46,9 @@ import {
   initialMemberData,
   isObjectsEqual,
   prePopulateOptIn,
-} from 'utils/validations';
-import {
   getTransformedErrors,
   verifyFormDataValidations,
 } from 'utils/validations';
-import { getFormData } from 'utils/form';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';

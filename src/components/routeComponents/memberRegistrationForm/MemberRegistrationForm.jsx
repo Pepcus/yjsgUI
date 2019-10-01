@@ -28,9 +28,11 @@ import {
 } from 'constants/messages';
 import {
   getNewMember,
-  getUserType,
   isCreated,
 } from 'reducers/memberRegistrationReducer';
+import {
+  getUserType,
+} from 'reducers/allMembersDataReducer';
 import { fetchFormConfig } from 'apis/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {

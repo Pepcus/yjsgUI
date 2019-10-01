@@ -26,12 +26,12 @@ import {
 import {
   getAdminId,
   getAdminPassword,
-  getSearchResults,
   getMember,
   isFetched,
-  isLoading,
-  stateOfAdminLogin,
 } from 'reducers/memberRegistrationReducer';
+import {
+  stateOfAdminLogin,
+} from 'reducers/allMembersDataReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   adminId,
@@ -228,7 +228,7 @@ class SplashPage extends Component {
             >
               <Typography
                 type="title"
-                fontSize="12px"
+                fontSize="14px"
                 align="center"
                 color="error"
               >
@@ -380,9 +380,7 @@ const mapStateToProps = state => ({
   adminLoginState: stateOfAdminLogin(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
-  isLoading: isLoading(state),
   password: getAdminPassword(state),
-  searchResults: getSearchResults(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),
 });

@@ -12,7 +12,6 @@ import {
   FOOTER_CONTACT_TEXT,
   DEFAULT_FOOTER_CONTACT_INFORMATION,
 } from 'constants/yjsg';
-import { isLoading } from 'reducers/memberRegistrationReducer';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { routes, footerTitle } from 'config/appConfig.json';
 
@@ -52,13 +51,11 @@ const TitleStyled = styled(Typography)`
  * Footer component is common footer that will be rendered in bottom of all pages
  * @param {String} location
  * @param {String} tenant
- * @param {Boolean} isLoaderLoaded
  * @return {HTML}
  */
 const Footer = ({
   location,
   tenant,
-  isLoaderLoaded,
 }) => {
   const getFooterText = () => (footerTitle[tenant] ? footerTitle[tenant] : DEFAULT_FOOTER_CONTACT_INFORMATION);
 
@@ -75,7 +72,7 @@ const Footer = ({
 
   return routes.map((route) => {
     const { footer = {}, path } = route;
-    if (path === location && !isLoaderLoaded) {
+    if (path === location) {
       return (
         <FooterWrapper
           borderRadius="0"
@@ -91,7 +88,6 @@ const Footer = ({
 };
 
 Footer.propTypes = {
-  isLoaderLoaded: PropTypes.bool,
   location: PropTypes.string,
   routes: PropTypes.array,
   tenant: PropTypes.string,
@@ -99,7 +95,6 @@ Footer.propTypes = {
 };
 
 Footer.defaultProps = {
-  isLoaderLoaded: false,
   location: '',
   routes: [],
   tenant: '',
@@ -107,7 +102,6 @@ Footer.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isLoaderLoaded: isLoading(state),
   tenant: getApplicationTenant(state),
 });
 

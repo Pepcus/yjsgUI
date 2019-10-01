@@ -21,11 +21,13 @@ import {
 } from 'actions/memberRegistrationActions';
 import {
   getSecretKey,
+} from 'reducers/memberRegistrationReducer';
+import {
   isOptInSuccess,
   getFailOptIn,
   isUploadOptInFailed,
   unavailableIdErrorMessage,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/allMembersDataReducer';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';

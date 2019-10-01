@@ -25,9 +25,11 @@ import {
 } from 'actions/memberRegistrationActions';
 import {
   getSecretKey,
+} from 'reducers/memberRegistrationReducer';
+import {
   isMarkAttendanceSuccess,
   isMarkAttendanceFailed,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
 
 import Message from './Message';

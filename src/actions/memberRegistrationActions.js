@@ -1,7 +1,3 @@
-export const checkValidUserInfo = errorMessageObject => ({
-  type: 'CHECK_FOR_VALID_USER_INFO',
-  errorMessageObject,
-});
 /**
  * createMemberDataAction action will call when new member will create.
  * @param {Object} member
@@ -130,55 +126,7 @@ export const resetAdminCredentialsAction = () => ({
   id: '',
   password: '',
 });
-/**
- * fetchSearchResultsAction action fetch the member data according the searchValue
- * @param {String} adminKey
- * @param {String} searchKey
- * @param {String} searchValue
- * @return {{searchKey: String, type: string, adminKey: String, searchValue: String}}
- */
-export const fetchSearchResultsAction = ({ adminKey, searchKey, searchValue }) => ({
-  type: 'FETCH_SEARCH_RESULTS',
-  adminKey,
-  searchKey,
-  searchValue,
-});
-/**
- * fetchSearchResultsSuccessAction action will call when fetch search result is success
- * @param {Array} searchResults
- * @return {{type: string, searchResults: Array}}
- */
-export const fetchSearchResultsSuccessAction = searchResults => ({
-  type: 'FETCH_SEARCH_RESULTS_SUCCESS',
-  searchResults,
-});
-/**
- * fetchSearchResultsFailureAction action will call
- * when fetch search result API responds is fail
- * @param {String} errorMessage
- * @return {{errorMessage: *, type: string}}
- */
-export const fetchSearchResultsFailureAction = errorMessage => ({
-  type: 'FETCH_SEARCH_RESULTS_FAILURE',
-  errorMessage,
-});
-/**
- * clearSearchResultsAction action will call
- * when click on click on clear button of search
- * @return {{type: string}}
- */
-export const clearSearchResultsAction = () => ({
-  type: 'CLEAR_SEARCH_RESULTS',
-});
-/**
- * setNoRecordsFoundMessageAction action will call when search result is empty
- * @param {String} message
- * @return {{type: String, message: String}}
- */
-export const setNoRecordsFoundMessageAction = message => ({
-  type: 'SET_NO_RECORDS_FOUND_MESSAGE',
-  message,
-});
+
 /**
  * getAllMembersAction action will call when all members data will fetch.
  * @param {String} secretKey
