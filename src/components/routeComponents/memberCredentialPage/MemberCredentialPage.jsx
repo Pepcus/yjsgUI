@@ -17,8 +17,10 @@ import Typography from 'pepcus-core/lib/Typography';
 import {
   fetchMemberDataAction,
   setMemberCredentialsAction,
-  setUserTypeAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setUserTypeAction,
+} from 'actions/allMembersDataActions';
 import {
   getAdminId,
   getAdminPassword,

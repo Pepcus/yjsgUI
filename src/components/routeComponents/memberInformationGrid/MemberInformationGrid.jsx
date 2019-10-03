@@ -39,17 +39,19 @@ import {
 
 import {
   fetchMemberDataAction,
-  getAllMembersAction,
   resetAdminCredentialsAction,
-  resetVisibleColumnConfigAction,
-  resetIsSuccessAction,
   setMemberDataAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  setVisibleColumnConfigAction,
-  setUserTypeAction,
   updateMemberByAdminAction,
 } from 'actions/memberRegistrationActions';
+import {
+  getAllMembersAction,
+  setRedirectValueAction,
+  setAdminLoginStateAction,
+  setVisibleColumnConfigAction,
+  resetVisibleColumnConfigAction,
+  resetIsSuccessAction,
+  setUserTypeAction,
+} from 'actions/allMembersDataActions';
 import {
   adminPassword,
   USER_TYPES,

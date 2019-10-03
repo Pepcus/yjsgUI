@@ -16,9 +16,9 @@ import Modal from 'pepcus-core/lib/Modal';
 import Row from 'pepcus-core/lib/Row';
 
 import {
-  uploadOptInFileAction,
   resetIsOptInSuccessAction,
-} from 'actions/memberRegistrationActions';
+  uploadOptInFileAction,
+} from 'actions/allMembersDataActions';
 import {
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';

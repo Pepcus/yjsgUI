@@ -15,11 +15,10 @@ import Form from 'pepcus-core/lib/Form';
 import Modal from 'pepcus-core/lib/Modal';
 import Row from 'pepcus-core/lib/Row';
 
-
 import {
-  uploadMembersAttendanceFileAction,
   resetIsSuccessAction,
-} from 'actions/memberRegistrationActions';
+  uploadMembersAttendanceFileAction,
+} from 'actions/allMembersDataActions';
 import {
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';

@@ -20,9 +20,9 @@ import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
 import {
-  resetIsMarkAttendanceSuccessAction,
   markSelectedMembersAttendanceAction,
-} from 'actions/memberRegistrationActions';
+  resetIsMarkAttendanceSuccessAction,
+} from 'actions/allMembersDataActions';
 import {
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';

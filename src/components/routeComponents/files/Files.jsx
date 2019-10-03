@@ -42,7 +42,7 @@ import {
 } from 'utils/routes';
 import {
   setLoadingStateAction,
-} from 'actions/memberRegistrationActions';
+} from 'actions/loaderActions';
 import { fetchFile } from 'apis/assetFilesAPI';
 
 const FileWrapper = styled(Box)`

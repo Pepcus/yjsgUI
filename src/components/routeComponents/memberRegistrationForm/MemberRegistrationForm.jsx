@@ -21,8 +21,10 @@ import {
 } from 'constants/yjsg';
 import {
   createMemberDataAction,
-  setLoadingStateAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setLoadingStateAction,
+} from 'actions/loaderActions';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
