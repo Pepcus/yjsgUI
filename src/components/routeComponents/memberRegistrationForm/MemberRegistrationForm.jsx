@@ -34,7 +34,7 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import {
   getUserType,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import { fetchFormConfig } from 'apis/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {

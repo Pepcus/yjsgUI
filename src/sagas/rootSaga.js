@@ -33,9 +33,11 @@ import {
   markSelectedMembersOptInOrOptOutResultsFailureAction,
   updateIdCardStatusSelectedMembersResultsSuccessAction,
   updateIdCardStatusSelectedMembersResultsFailureAction,
+} from 'actions/allMembersDataActions';
+import {
   parentsRegistrationResultsSuccessAction,
   parentsRegistrationResultsFailureAction,
-} from 'actions/allMembersDataActions';
+} from 'actions/parentsRegistrationAction';
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';

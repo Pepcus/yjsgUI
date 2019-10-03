@@ -20,7 +20,7 @@ import {
 } from 'actions/memberRegistrationActions';
 import {
   setUserTypeAction,
-} from 'actions/allMembersDataActions';
+} from 'actions/appActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -29,7 +29,7 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import {
   getHash,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {

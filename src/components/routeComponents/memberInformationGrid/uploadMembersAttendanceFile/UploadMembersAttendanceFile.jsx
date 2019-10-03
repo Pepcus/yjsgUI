@@ -16,7 +16,7 @@ import Modal from 'pepcus-core/lib/Modal';
 import Row from 'pepcus-core/lib/Row';
 
 import {
-  resetIsSuccessAction,
+  resetIsSuccessOfMemberAttendanceFileUploadAction,
   uploadMembersAttendanceFileAction,
 } from 'actions/allMembersDataActions';
 import {
@@ -72,7 +72,7 @@ class UploadMembersAttendanceFile extends Component {
 
   /**
    * Method set isModalOpen to false
-   * and reset isSuccess by calling resetIsSuccessAction action
+   * and reset isSuccess by calling resetIsSuccessOfMemberAttendanceFileUploadAction action
    * @param {Object} event
    */
   closeModal = (event) => {
@@ -271,7 +271,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  resetIsSuccess: () => dispatch(resetIsSuccessAction()),
+  resetIsSuccess: () => dispatch(resetIsSuccessOfMemberAttendanceFileUploadAction()),
   uploadMembersAttendanceFile: ({ secretKey, attendanceFile, day }) =>
     dispatch(uploadMembersAttendanceFileAction({ secretKey, attendanceFile, day })),
 });

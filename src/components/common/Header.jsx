@@ -17,10 +17,10 @@ import {
   resetAdminCredentialsAction,
 } from 'actions/memberRegistrationActions';
 import {
+  resetVisibleColumnConfigAction,
   setRedirectValueAction,
   setAdminLoginStateAction,
-  resetVisibleColumnConfigAction,
-} from 'actions/allMembersDataActions';
+} from 'actions/appActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';

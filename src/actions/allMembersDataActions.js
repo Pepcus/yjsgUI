@@ -31,50 +31,6 @@ export const getAllMembersDataResultsFailureAction = errorMessage => ({
 });
 
 /**
- * setRedirectValueAction action will call when admin is login
- * or admin is logout
- * @param {Boolean} redirect
- * @return {{redirect: Boolean, type: String}}
- */
-export const setRedirectValueAction = ({ redirect }) => ({
-  type: 'SET_REDIRECT_VALUE',
-  redirect,
-});
-
-/**
- * setAdminLoginStateAction action will call when admin is login
- * or logout
- * @param {Boolean} adminLoginState
- * @return {{adminLoginState: Boolean, type: String}}
- */
-export const setAdminLoginStateAction = ({ adminLoginState }) => ({
-  type: 'SET_ADMIN_LOGIN_STATE',
-  adminLoginState,
-});
-
-/**
- * setVisibleColumnConfigAction action will
- * call when set the updated column option data in store
- * @param {Object} visibleColumnConfig
- * @param {Boolean} selectValue
- * @return {{visibleColumnConfig: Object, selectValue: Boolean, type: String}}
- */
-export const setVisibleColumnConfigAction = ({ visibleColumnConfig, selectValue }) => ({
-  type: 'SET_VISIBLE_COLUMN_CONFIG_DATA',
-  visibleColumnConfig,
-  selectValue,
-});
-
-/**
- * resetVisibleColumnConfigAction action will set the column option to initial state in store
- * on logout of admin
- * @return {{type: String}}
- */
-export const resetVisibleColumnConfigAction = () => ({
-  type: 'RESET_VISIBLE_COLUMN_CONFIG_DATA',
-});
-
-/**
  * uploadMembersAttendanceFileAction action will call when upload member attendance file
  * @param {String} secretKey
  * @param {Object} attendanceFile
@@ -112,12 +68,12 @@ export const uploadAttendanceFileResultsFailureAction = message => ({
 });
 
 /**
- * resetIsSuccessAction action will call when reset
+ * resetIsSuccessOfMemberAttendanceFileUploadAction action will call when reset
  * the isSuccess flag of members attendance file upload
  * @return {{type: String}}
  */
-export const resetIsSuccessAction = () => ({
-  type: 'RESET_IS_SUCCESS',
+export const resetIsSuccessOfMemberAttendanceFileUploadAction = () => ({
+  type: 'RESET_IS_SUCCESS_OF_MEMBER_ATTENDANCE_FILE',
 });
 
 /**
@@ -138,11 +94,14 @@ export const uploadOptInFileAction = ({ secretKey, optInFile }) => ({
  * @param {Object} response
  * @return {{type: String, failRecordIds: Null}}
  */
-export const uploadOptInFileResultsSuccessAction = response => ({
-  type: 'UPLOAD_OPT_IN_FILE_SUCCESS',
-  failRecordIds: response.failRecordIds,
-  idNotExist: response.idNotExist,
-});
+export const uploadOptInFileResultsSuccessAction = (response) => {
+  const { failRecordIds, idNotExist } = response;
+  return ({
+    type: 'UPLOAD_OPT_IN_FILE_SUCCESS',
+    failRecordIds,
+    idNotExist,
+  });
+};
 
 /**
  * uploadOptInFileResultsFailureAction action will call
@@ -181,10 +140,9 @@ export const markSelectedMembersAttendanceAction = ({ secretKey, selectedMembers
 /**
  * markSelectedMembersAttendanceResultsSuccessAction action will call
  * when mark selected members attendance AIP responds is success
- * @param {Object} response
  * @return {{type: String}}
  */
-export const markSelectedMembersAttendanceResultsSuccessAction = response => ({
+export const markSelectedMembersAttendanceResultsSuccessAction = () => ({
   type: 'MARK_SELECTED_MEMBERS_ATTENDANCE_SUCCESS',
 });
 
@@ -224,10 +182,9 @@ export const markSelectedMembersOptInOrOptOutAction = ({ secretKey, selectedMemb
 /**
  * markSelectedMembersOptInOrOptOutResultsSuccessAction action will call
  * when mark selected members optInOrOptOut AIP responds is success
- * @param {Object} response
  * @return {{type: String}}
  */
-export const markSelectedMembersOptInOrOptOutResultsSuccessAction = response => ({
+export const markSelectedMembersOptInOrOptOutResultsSuccessAction = () => ({
   type: 'MARK_SELECTED_MEMBERS_OPT_IN_OR_OPT_OUT_SUCCESS',
 });
 
@@ -268,10 +225,9 @@ export const updateIdCardStatusSelectedMembersAction = ({ secretKey, selectedMem
 /**
  * updateIdCardStatusSelectedMembersResultsSuccessAction action will call when
  * update selected member IdCard status AIP response success
- * @param {Object} response
  * @return {{type: String}}
  */
-export const updateIdCardStatusSelectedMembersResultsSuccessAction = response => ({
+export const updateIdCardStatusSelectedMembersResultsSuccessAction = () => ({
   type: 'UPDATE_ID_CARD_STATUS_OF_SELECTED_MEMBERS_SUCCESS',
 });
 
@@ -293,72 +249,4 @@ export const updateIdCardStatusSelectedMembersResultsFailureAction = message => 
  */
 export const resetIsUpdateIdCardStatusSuccessAction = () => ({
   type: 'RESET_IS_UPDATE_ID_CARD_STATUS_SUCCESS',
-});
-
-/**
- * setHashLinkForMemberCredentialAction action will call when set user
- * type redirect to member registration correction form
- * @param {String} hashLink
- * @return {{hashLink: String, type: String}}
- */
-export const setHashLinkForMemberCredentialAction = hashLink => ({
-  type: 'SET_HASH_LINK_FOR_MEMBER_CREDENTIAL',
-  hashLink,
-});
-
-/**
- * setHashLinkForNewRegistrationAction action will
- * call to set user type when redirect to new registration route
- * @param {String} userType
- * @return {{userType: String, type: String}}
- */
-export const setHashLinkForNewRegistrationAction = userType => ({
-  type: 'SET_HASH_LINK_FOR_NEW_REGISTRATION',
-  userType,
-});
-
-/**
- * parentsRegistrationAction action will call when submit form of parents registration
- * @param {String} name
- * @param {Number} members
- * @param {String} phoneNumber
- * @return {{phoneNumber: String, members: Number, name: String, type: String}}
- */
-export const parentsRegistrationAction = ({ name, members, phoneNumber }) => ({
-  type: 'PARENTS_REGISTRATION',
-  name,
-  members,
-  phoneNumber,
-});
-
-/**
- * parentsRegistrationResultsSuccessAction action will call
- * when parents registration AIP response is success
- * @param {Object} response
- * @return {{response: Object, type: String}}
- */
-export const parentsRegistrationResultsSuccessAction = response => ({
-  type: 'PARENTS_REGISTRATION_RESULT_SUCCESS',
-  response,
-});
-
-/**
- * parentsRegistrationResultsFailureAction action will call
- * when parents registration AIP response is fail
- * @param {String} message
- * @return {{type: String, message: String}}
- */
-export const parentsRegistrationResultsFailureAction = message => ({
-  type: 'PARENTS_REGISTRATION_RESULT_FAILED',
-  message,
-});
-
-/**
- * setUserTypeAction action set the user type
- * @param {String} pageUser
- * @return {{pageUser: String, type: String}}
- */
-export const setUserTypeAction = ({ pageUser }) => ({
-  type: 'SET_USER_TYPE',
-  pageUser,
 });

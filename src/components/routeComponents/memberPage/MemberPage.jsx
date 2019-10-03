@@ -17,10 +17,10 @@ import {
   setMemberCredentialsAction,
 } from 'actions/memberRegistrationActions';
 import {
-  setHashLinkForMemberCredentialAction,
-  setHashLinkForNewRegistrationAction,
   setUserTypeAction,
-} from 'actions/allMembersDataActions';
+  setHashLinkForNewRegistrationAction,
+  setHashLinkForMemberCredentialAction,
+} from 'actions/appActions';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,

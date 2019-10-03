@@ -22,9 +22,9 @@ import {
   setMemberCredentialsAction,
 } from 'actions/memberRegistrationActions';
 import {
-  setAdminLoginStateAction,
   setHashLinkForNewRegistrationAction,
-} from 'actions/allMembersDataActions';
+  setAdminLoginStateAction,
+} from 'actions/appActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -33,7 +33,7 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import {
   stateOfAdminLogin,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   adminId,

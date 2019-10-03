@@ -35,7 +35,7 @@ import {
 import {
   getPageUserType,
   getUserType,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import {
   getRegisteredMemberData,
   isUserMember,

@@ -1,8 +1,4 @@
-import { getInitialVisibleColumnConfig } from 'utils/common';
-
 const allMembersDataReducerInitialState = {
-  selectValue: true,
-  visibleColumnConfig: getInitialVisibleColumnConfig(),
   isUploadAttendanceSuccess: false,
   isUploadAttendanceFailed: false,
   isOptInSuccess: false,
@@ -11,7 +7,6 @@ const allMembersDataReducerInitialState = {
   isMarkAttendanceSuccess: false,
   isMarkOptInOrOptOutSuccess: false,
   isUpdateIdCardStatusSuccess: false,
-  pageUser: '',
 };
 
 export const allMembersDataReducer = (state = allMembersDataReducerInitialState, action) => {
@@ -34,28 +29,6 @@ export const allMembersDataReducer = (state = allMembersDataReducerInitialState,
         members: [],
         isLoading: false,
       };
-    case 'SET_REDIRECT_VALUE':
-      return {
-        ...state,
-        redirect: action.redirect,
-      };
-    case 'SET_ADMIN_LOGIN_STATE':
-      return {
-        ...state,
-        adminLoginState: action.adminLoginState,
-      };
-    case 'SET_VISIBLE_COLUMN_CONFIG_DATA':
-      return {
-        ...state,
-        visibleColumnConfig: action.visibleColumnConfig,
-        selectValue: action.selectValue,
-      };
-    case 'RESET_VISIBLE_COLUMN_CONFIG_DATA':
-      return {
-        ...state,
-        visibleColumnConfig: allMembersDataReducerInitialState.visibleColumnConfig,
-        selectValue: allMembersDataReducerInitialState.selectValue,
-      };
     case 'UPLOAD_ATTENDANCE_FILE_SUCCESS':
       return {
         ...state,
@@ -74,7 +47,7 @@ export const allMembersDataReducer = (state = allMembersDataReducerInitialState,
         failRecordIds: '',
         idNotExistErrorMessage: '',
       };
-    case 'RESET_IS_SUCCESS':
+    case 'RESET_IS_SUCCESS_OF_MEMBER_ATTENDANCE_FILE':
       return {
         ...state,
         isUploadAttendanceSuccess: false,
@@ -160,29 +133,6 @@ export const allMembersDataReducer = (state = allMembersDataReducerInitialState,
         isUpdateIdCardStatusSuccess: false,
         isUpdateIdCardStatusFailed: false,
       };
-    case 'SET_HASH_LINK_FOR_MEMBER_CREDENTIAL':
-      return {
-        ...state,
-        hashLink: action.hashLink,
-      };
-    case 'SET_HASH_LINK_FOR_NEW_REGISTRATION':
-      return {
-        ...state,
-        userType: action.userType,
-      };
-    case 'PARENTS_REGISTRATION_RESULT_SUCCESS':
-      return {
-        ...state,
-      };
-    case 'PARENTS_REGISTRATION_RESULT_FAILED':
-      return {
-        ...state,
-      };
-    case 'SET_USER_TYPE':
-      return {
-        ...state,
-        pageUser: action.pageUser,
-      };
     default: {
       return {
         ...state,
@@ -192,14 +142,6 @@ export const allMembersDataReducer = (state = allMembersDataReducerInitialState,
 };
 
 export const allMembersData = state => state.allMembersDataReducer.members;
-
-export const stateOfRedirect = state => state.allMembersDataReducer.redirect;
-
-export const stateOfAdminLogin = state => state.allMembersDataReducer.adminLoginState;
-
-export const getVisibleColumnConfig = state => state.allMembersDataReducer.visibleColumnConfig;
-
-export const getSelectValue = state => state.allMembersDataReducer.selectValue;
 
 export const getSuccess = state => state.allMembersDataReducer.isUploadAttendanceSuccess;
 
@@ -218,10 +160,6 @@ export const isMarkAttendanceSuccess = state => state.allMembersDataReducer.isMa
 export const isMarkOptInOrOptOutSuccess = state => state.allMembersDataReducer.isMarkOptInOrOptOutSuccess;
 
 export const isUpdateIdCardStatusSuccess = state => state.allMembersDataReducer.isUpdateIdCardStatusSuccess;
-
-export const getHash = state => state.allMembersDataReducer.hashLink;
-
-export const getUserType = state => state.allMembersDataReducer.userType;
 
 export const isMarkAttendanceFailed = state => state.allMembersDataReducer.isMarkAttendanceFailed;
 
@@ -243,9 +181,4 @@ export const idNotExistErrorMessage = state => state.allMembersDataReducer.idNot
  * @return {String} unavailableIdErrorMessage
  */
 export const unavailableIdErrorMessage = state => state.allMembersDataReducer.unavailableIdErrorMessage;
-/**
- * getPageUserType return the user type
- * @param {Object} state
- * @return {string|String}
- */
-export const getPageUserType = state => state.allMembersDataReducer.pageUser;
+
