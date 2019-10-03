@@ -1,5 +1,4 @@
 const initialState = {
-  fileData: [],
   isLoading: false,
   errorMessage: '',
   filesConfig: {},
@@ -85,10 +84,6 @@ export const assetFilesReducer = (state = initialState, action) => {
     }
   }
 };
-
-export const getFileData = state => state.assetFilesReducer.fileData;
-
-export const isLoading = state => state.assetFilesReducer.isLoading;
 
 export const getFilesConfig = state => state.assetFilesReducer.filesConfig;
 

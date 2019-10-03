@@ -22,11 +22,12 @@ import {
 import {
   getAdminId,
   getAdminPassword,
-  getSearchResults,
-  getHash,
   getUserId,
   getUserSecretKey,
 } from 'reducers/memberRegistrationReducer';
+import {
+  getHash,
+} from 'reducers/allMembersDataReducer';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
@@ -347,7 +348,6 @@ const mapStateToProps = state => ({
   hashLink: getHash(state),
   id: getAdminId(state),
   password: getAdminPassword(state),
-  searchResults: getSearchResults(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
   tenant: getApplicationTenant(state),

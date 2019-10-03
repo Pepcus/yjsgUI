@@ -16,11 +16,8 @@ import {
 import {
   createMemberFailedAction,
   createMemberSuccessAction,
-  fetchSearchResultsFailureAction,
-  fetchSearchResultsSuccessAction,
   fetchMemberFailedAction,
   fetchMemberSuccessAction,
-  setNoRecordsFoundMessageAction,
   updateMemberFailedAction,
   updateMemberSuccessAction,
   getAllMembersDataResultsSuccessAction,
@@ -103,29 +100,6 @@ export function* updateMemberSaga(action) {
     yield put(setLoadingStateAction(false));
   } catch (e) {
     yield put(updateMemberFailedAction(errorMessage));
-    yield put(setLoadingStateAction(false));
-    throw e;
-  }
-}
-
-/**
- * searchMemberSaga saga call when search particular member with searchKey
- * @param {Object} action
- */
-export function* searchMemberSaga(action) {
-  const { searchKey, searchValue, adminKey } = action;
-  const errorMessage = 'Error fetching member details.';
-  try {
-    yield put(setLoadingStateAction(true));
-    const response = yield searchMember({ adminKey, searchKey, searchValue });
-    if (response.students) {
-      yield put(fetchSearchResultsSuccessAction(response.students));
-    } else {
-      yield put(setNoRecordsFoundMessageAction(response.message));
-    }
-    yield put(setLoadingStateAction(false));
-  } catch (e) {
-    yield put(fetchSearchResultsFailureAction(errorMessage));
     yield put(setLoadingStateAction(false));
     throw e;
   }
