@@ -48,7 +48,7 @@ import {
   GIVEN_INFORMATION_WRONG_MESSAGE,
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
-import { getTransformedErrors } from 'utils/validations';
+import { getTransformedErrors } from 'utils/form';
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 
