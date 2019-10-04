@@ -15,10 +15,12 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import headerLogo from 'assets/images/react-logo.png';
 import {
   resetAdminCredentialsAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  resetVisibleColumnConfigAction,
 } from 'actions/memberRegistrationActions';
+import {
+  resetVisibleColumnConfigAction,
+  setRedirectValueAction,
+  setAdminLoginStateAction,
+} from 'actions/appActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';

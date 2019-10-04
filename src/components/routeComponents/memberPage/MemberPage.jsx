@@ -15,10 +15,12 @@ import Typography from 'pepcus-core/lib/Typography';
 import {
   fetchMemberDataAction,
   setMemberCredentialsAction,
-  setHashLinkForMemberCredentialAction,
-  setHashLinkForNewRegistrationAction,
-  setUserTypeAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setUserTypeAction,
+  setHashLinkForNewRegistrationAction,
+  setHashLinkForMemberCredentialAction,
+} from 'actions/appActions';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,

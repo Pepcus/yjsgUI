@@ -17,8 +17,10 @@ import Typography from 'pepcus-core/lib/Typography';
 import {
   fetchMemberDataAction,
   setMemberCredentialsAction,
-  setUserTypeAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setUserTypeAction,
+} from 'actions/appActions';
 import {
   getAdminId,
   getAdminPassword,
@@ -27,7 +29,7 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import {
   getHash,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {

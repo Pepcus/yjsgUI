@@ -13,7 +13,7 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import { parentsRegistrationAction } from 'actions/memberRegistrationActions';
+import { parentsRegistrationAction } from 'actions/parentsRegistrationAction';
 import {
   formSubmitBtnText,
   EVENT_TITLE,

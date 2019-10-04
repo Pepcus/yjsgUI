@@ -21,8 +21,10 @@ import {
 } from 'constants/yjsg';
 import {
   createMemberDataAction,
-  setLoadingStateAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setLoadingStateAction,
+} from 'actions/loaderActions';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
@@ -32,7 +34,7 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import {
   getUserType,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import { fetchFormConfig } from 'apis/formConfigAPI';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {

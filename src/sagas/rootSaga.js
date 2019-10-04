@@ -3,7 +3,6 @@ import { put } from 'redux-saga/effects';
 import {
   createMember,
   fetchMember,
-  searchMember,
   updateMember,
   getAllMembersAPI,
   uploadAttendanceAPI,
@@ -20,6 +19,8 @@ import {
   fetchMemberSuccessAction,
   updateMemberFailedAction,
   updateMemberSuccessAction,
+} from 'actions/memberRegistrationActions';
+import {
   getAllMembersDataResultsSuccessAction,
   getAllMembersDataResultsFailureAction,
   uploadAttendanceFileResultsSuccessAction,
@@ -32,10 +33,14 @@ import {
   markSelectedMembersOptInOrOptOutResultsFailureAction,
   updateIdCardStatusSelectedMembersResultsSuccessAction,
   updateIdCardStatusSelectedMembersResultsFailureAction,
+} from 'actions/allMembersDataActions';
+import {
   parentsRegistrationResultsSuccessAction,
   parentsRegistrationResultsFailureAction,
+} from 'actions/parentsRegistrationAction';
+import {
   setLoadingStateAction,
-} from 'actions/memberRegistrationActions';
+} from 'actions/loaderActions';
 
 /**
  * createMemberSaga sage call when create a new member.

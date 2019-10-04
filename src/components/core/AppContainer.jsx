@@ -19,7 +19,6 @@ import {
   loadBusCoordinatorsDataAction,
 } from 'actions/assetFilesActions';
 import {
-  getApplicationMode,
   isAppLoaded,
   getIsAppLoadedError,
 } from 'reducers/assetFilesReducer';
@@ -28,7 +27,7 @@ import {
 } from 'constants/text';
 import {
   setLoadingStateAction,
-} from 'actions/memberRegistrationActions';
+} from 'actions/loaderActions';
 import Routes from './Routes';
 
 const MessageBoxStyled = styled(Box)`
@@ -60,9 +59,7 @@ class AppContainer extends Component {
     const {
       loadBusCoordinatorsData,
       loadAppData,
-      mode,
       setLoadingState,
-      isLoaded,
     } = this.props;
 
     loadBusCoordinatorsData();
@@ -101,7 +98,6 @@ AppContainer.propTypes = {
   isLoaded: PropTypes.bool,
   loadAppData: PropTypes.func,
   loadBusCoordinatorsData: PropTypes.func,
-  mode: PropTypes.string,
   setLoadingState: PropTypes.func.isRequired,
 };
 
@@ -110,13 +106,11 @@ AppContainer.defaultProps = {
   isLoaded: false,
   loadAppData: () => {},
   loadBusCoordinatorsData: () => {},
-  mode: '',
 };
 
 const mapStateToProps = state => ({
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
-  mode: getApplicationMode(state),
 });
 
 const mapDispatchToProps = dispatch => ({

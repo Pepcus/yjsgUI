@@ -28,28 +28,32 @@ import {
   getMember,
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';
-
 import {
-  allMembersData,
+  stateOfRedirect,
+  stateOfAdminLogin,
   getSelectValue,
   getVisibleColumnConfig,
-  stateOfAdminLogin,
-  stateOfRedirect,
+} from 'reducers/appReducer';
+import {
+  allMembersData,
 } from 'reducers/allMembersDataReducer';
-
 import {
   fetchMemberDataAction,
-  getAllMembersAction,
   resetAdminCredentialsAction,
-  resetVisibleColumnConfigAction,
-  resetIsSuccessAction,
   setMemberDataAction,
-  setAdminLoginStateAction,
-  setRedirectValueAction,
-  setVisibleColumnConfigAction,
-  setUserTypeAction,
   updateMemberByAdminAction,
 } from 'actions/memberRegistrationActions';
+import {
+  getAllMembersAction,
+  resetIsSuccessOfMemberAttendanceFileUploadAction,
+} from 'actions/allMembersDataActions';
+import {
+  resetVisibleColumnConfigAction,
+  setRedirectValueAction,
+  setAdminLoginStateAction,
+  setVisibleColumnConfigAction,
+  setUserTypeAction,
+} from 'actions/appActions';
 import {
   adminPassword,
   USER_TYPES,
@@ -589,7 +593,7 @@ const mapDispatchToProps = dispatch => ({
   fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   getAllMembers: ({ secretKey }) => dispatch(getAllMembersAction({ secretKey })),
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
-  resetIsSuccess: () => dispatch(resetIsSuccessAction()),
+  resetIsSuccess: () => dispatch(resetIsSuccessOfMemberAttendanceFileUploadAction()),
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
   setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setMemberData: ({ member }) => dispatch(setMemberDataAction({ member })),

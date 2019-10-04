@@ -17,9 +17,11 @@ import {
 } from 'constants/yjsg';
 import {
   isUpdatedResetAction,
-  setLoadingStateAction,
   updateMemberDataAction,
 } from 'actions/memberRegistrationActions';
+import {
+  setLoadingStateAction,
+} from 'actions/loaderActions';
 import {
   THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
 } from 'constants/messages';
@@ -33,7 +35,7 @@ import {
 import {
   getPageUserType,
   getUserType,
-} from 'reducers/allMembersDataReducer';
+} from 'reducers/appReducer';
 import {
   getRegisteredMemberData,
   isUserMember,

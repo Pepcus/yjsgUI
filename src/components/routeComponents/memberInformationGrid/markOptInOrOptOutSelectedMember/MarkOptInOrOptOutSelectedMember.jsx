@@ -19,7 +19,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import {
   resetIsMarkOptInOrOptOutSuccessAction,
   markSelectedMembersOptInOrOptOutAction,
-} from 'actions/memberRegistrationActions';
+} from 'actions/allMembersDataActions';
 import {
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';

@@ -30,16 +30,6 @@ export const fetchMember = (id, secretKey) =>
     },
   });
 
-export const searchMember = ({ adminKey, searchKey, searchValue }) =>
-  GET({
-    url: `/v1/students?${searchKey}=${searchValue}`,
-    headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'secretKey': adminKey,
-    },
-  });
-
 export const getAllMembersAPI = secretKey =>
   GET({
     url: '/v1/students',

@@ -18,7 +18,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import {
   resetIsUpdateIdCardStatusSuccessAction,
   updateIdCardStatusSelectedMembersAction,
-} from 'actions/memberRegistrationActions';
+} from 'actions/allMembersDataActions';
 import {
   getSecretKey,
 } from 'reducers/memberRegistrationReducer';
