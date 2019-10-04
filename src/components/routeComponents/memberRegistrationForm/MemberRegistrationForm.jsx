@@ -40,7 +40,7 @@ import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
   verifyFormDataValidations,
-} from 'utils/form';
+} from 'utils/validations';
 import fields from 'components/common/fields';
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';

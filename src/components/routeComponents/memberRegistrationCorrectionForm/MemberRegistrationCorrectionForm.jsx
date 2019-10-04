@@ -48,11 +48,9 @@ import {
   initialMemberData,
   isObjectsEqual,
   prePopulateOptIn,
-} from 'utils/validations';
-import {
   getTransformedErrors,
   verifyFormDataValidations,
-} from 'utils/form';
+} from 'utils/validations';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
