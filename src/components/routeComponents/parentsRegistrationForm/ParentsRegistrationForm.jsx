@@ -20,7 +20,7 @@ import {
 } from 'constants/yjsg';
 import fields from 'components/common/fields';
 import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
-import { getTransformedErrors, verifyFormDataValidations } from 'utils/validations';
+import { getTransformedErrors, verifyFormDataValidations } from 'utils/form';
 
 import { schema, uiSchema, validation } from './formSchema.json';
 import CloseBrowserPopup from './CloseBrowserPopup';
