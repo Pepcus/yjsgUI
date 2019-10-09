@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ErrorMessage from '../common/ErrorMessage';
 
+/*
+  TODO: This component is deprecated.
+ */
 /**
  * TextAreaField render textArea field
  * @type {Class}

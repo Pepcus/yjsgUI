@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 import ButtonContainer from './ButtonContainer';
 
+/*
+  TODO: This component is deprecated.
+ */
 const LinkButton = ({ linkPath, onClick, buttonText }) => (
   <ButtonContainer>
     <Link

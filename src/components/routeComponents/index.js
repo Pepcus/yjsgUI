@@ -1,23 +1,19 @@
-import SplashPage from './SplashPage';
-import StudentRegistrationForm from './StudentRegistrationForm';
-import StudentRegistrationCorrectionForm from './StudentRegistrationCorrectionForm';
-import SplashPagePrePopulated from './SplashPagePrePopulated';
-import AdminPanel from './AdminPanel';
-import StudentInformationGrid from './StudentInformationGrid';
-import StudentCredentialPage from './StudentCredentialPage';
-import StudentPage from './StudentPage';
-import ParentsRegistration from './ParentsRegistrationForm';
-import Files from './Files';
+import SplashPage from './splashPage';
+import MemberRegistrationForm from './memberRegistrationForm';
+import MemberRegistrationCorrectionForm from './memberRegistrationCorrectionForm';
+import MemberInformationGrid from './memberInformationGrid';
+import MemberCredentialPage from './memberCredentialPage';
+import Files from './files';
+import MemberPage from './memberPage';
+import ParentsRegistration from './parentsRegistrationForm';
 
 export default {
-  StudentPage,
+  MemberPage,
   SplashPage,
-  StudentRegistrationForm,
-  StudentRegistrationCorrectionForm,
-  SplashPagePrePopulated,
-  AdminPanel,
-  StudentInformationGrid,
-  StudentCredentialPage,
+  MemberRegistrationForm,
+  MemberRegistrationCorrectionForm,
+  MemberInformationGrid,
+  MemberCredentialPage,
   ParentsRegistration,
   Files,
 };

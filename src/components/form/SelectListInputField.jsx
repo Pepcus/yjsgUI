@@ -5,6 +5,9 @@ import {
   PLEASE_SELECT_ANY_ONE_TEXT,
 } from '../../constants/text';
 
+/*
+  TODO: This component is deprecated.
+ */
 /**
  * SelectListInputField render dropdown list.
  * @type {Class}

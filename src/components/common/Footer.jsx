@@ -1,56 +1,107 @@
-/*
-* this class laval component will converted into functional laval*/
-import React, { Component } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import Box from 'pepcus-core/lib/Box';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  yjsgFooterText,
-  yjsgFooterContactInfo,
-} from '../../constants/yjsg';
-import { isLoading } from '../../reducers/studentRegistrationReducer';
-import { getApplicationTenant } from '../../reducers/assetFilesReducer';
+  FOOTER_CONTACT_TEXT,
+  DEFAULT_FOOTER_CONTACT_INFORMATION,
+} from 'constants/yjsg';
+import { getApplicationTenant } from 'reducers/assetFilesReducer';
+import { routes, footerTitle } from 'config/appConfig.json';
+
+const FooterWrapper = styled(Box)`
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    color: ${getThemeProps('palette.footer.color')};
+    padding: 10px 0;
+    background: ${getThemeProps('palette.footer.backgroundColor')};
+    border-top: 1px solid ${getThemeProps('palette.footer.borderColor')};
+    ${({ theme }) => theme.media.down('lg')`
+        position: relative;
+    `}
+    @media print {
+        display: none;
+    }
+`;
+
+const FooterStyled = styled(Typography)`
+    font-size: 14px !important;
+    background: ${getThemeProps('palette.footer.backgroundColor')};
+    margin: 0 !important;
+`;
+
+const TitleStyled = styled(Typography)`
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    ${({ theme }) => theme.media.down('sm')`
+        display: block;
+   `}  
+`;
 
 /**
- * Footer component is comment footer will will be render in bottom of all page
- * @type {Class}
- * @return {ReactComponent}
+ * Footer component is common footer that will be rendered in bottom of all pages
+ * @param {String} location
+ * @param {String} tenant
+ * @return {HTML}
  */
-class Footer extends Component {
+const Footer = ({
+  location,
+  tenant,
+}) => {
+  const getFooterText = () => (footerTitle[tenant] ? footerTitle[tenant] : DEFAULT_FOOTER_CONTACT_INFORMATION);
 
-  /**
-   * getClassName method render className according where footer show and hide
-   * @return {string}
-   */
-  getClassName = () => {
-    if (this.props.isLoading) {
-      return ('disable-footer');
-    }
-    return ('footer print-media-none footer-none');
-  };
-  render() {
-    return (
-      <div className={this.getClassName()} >
-        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo[this.props.tenant]}</span>
-        </p>
-      </div>
-    );
-  }
-}
+  const renderFooterName = footerObject => (
+    <FooterStyled
+      type="title"
+      style={footerObject.titleStyle}
+    > {FOOTER_CONTACT_TEXT}
+      <TitleStyled type="caption">
+        {footerObject.title ? footerObject.title : getFooterText()}
+      </TitleStyled>
+    </FooterStyled>
+  );
 
+  return routes.map((route) => {
+    const { footer = {}, path } = route;
+    if (path === location) {
+      return (
+        <FooterWrapper
+          borderRadius="0"
+          padding="0"
+          margin="0"
+          style={footer.footerWrapperStyle ? footer.footerWrapperStyle : {}}
+        >
+          {renderFooterName(footer)}
+        </FooterWrapper>
+      );
+    } return null;
+  });
+};
 
 Footer.propTypes = {
-  isLoading: PropTypes.bool,
+  location: PropTypes.string,
+  routes: PropTypes.array,
   tenant: PropTypes.string,
+  title: PropTypes.object,
 };
 
 Footer.defaultProps = {
-  isLoading: false,
+  location: '',
+  routes: [],
   tenant: '',
+  title: {},
 };
 
 const mapStateToProps = state => ({
-  isLoading: isLoading(state),
   tenant: getApplicationTenant(state),
 });
 

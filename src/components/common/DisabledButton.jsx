@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import Button from './Button';
 
+/*
+  TODO: This component is deprecated.
+ */
 const styles = {
   color: 'rgb(255, 255, 255)',
   backgroundColor: 'rgb(204, 204, 204) !important',

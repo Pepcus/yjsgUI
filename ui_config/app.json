@@ -1,5 +1,5 @@
 {
   "environment": "production",
-  "tenant": "BHOPAL",
-  "isRegisterCorrectionEnabled": false
+  "tenant": "YJSG-Indore",
+  "isRegisterCorrectionEnabled": true
 }

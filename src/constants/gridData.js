@@ -13,7 +13,7 @@ export const gridMetaData = [
   },
   {
     'label': 'ID',
-    'key': 'studentId',
+    'key': 'memberId',
     'type': 'Number',
     'emptyCells': 'NA',
   },
@@ -298,7 +298,7 @@ export const gridMetaData = [
  *  }
  *  }
  */
-export const gridHeaderData = () => ({
+export const gridHeaderData = ({ color }) => ({
   headerConfig: gridMetaData,
   topDrawer: {
     'pagination': false,
@@ -321,7 +321,7 @@ export const gridHeaderData = () => ({
   includeAllInGlobalFilter: false,
   includeGlobalFilter: true,
   exportFileName: `StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`,
-  loaderColor: 'var(--app-loader-color)',
+  loaderColor: color,
 });
 
 export const getStyles = () => ({

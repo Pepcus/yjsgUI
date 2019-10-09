@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 
-import {
-  studentRegistrationReducer,
-  studentSearchReducer,
-  allStudentsDataReducer,
-  loaderReducer,
-} from './studentRegistrationReducer';
+import { appReducer } from './appReducer';
+import { memberRegistrationReducer } from './memberRegistrationReducer';
+import { allMembersDataReducer } from './allMembersDataReducer';
 import { assetFilesReducer } from './assetFilesReducer';
+import { loaderReducer } from './loaderReducer';
+import { parentsRegistrationReducer } from './parentsRegistrationReducer';
 
 const rootReducer = combineReducers({
-  studentRegistrationReducer,
-  studentSearchReducer,
-  allStudentsDataReducer,
+  appReducer,
+  memberRegistrationReducer,
+  allMembersDataReducer,
   loaderReducer,
   assetFilesReducer,
+  parentsRegistrationReducer,
 });
 
 export default rootReducer;
