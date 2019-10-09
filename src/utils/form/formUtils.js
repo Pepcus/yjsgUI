@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import validations from './validation';
+import * as validationTypes from 'utils/validations';
 
 /**
  * Method return transformErrors function
@@ -38,12 +38,11 @@ export const verifyFormDataValidations = ({ formData, errors, validate }) => {
   const validation = validate;
   if (!isEmpty(validation) && formData) {
     validation.forEach((valid) => {
-
       const {
         validator,
         field,
       } = valid;
-      const error = validations[validator](formData[field]);
+      const error = validationTypes[validator](formData[field]);
 
       if (!isEmpty(error)) {
         errors[field].addError(error);
