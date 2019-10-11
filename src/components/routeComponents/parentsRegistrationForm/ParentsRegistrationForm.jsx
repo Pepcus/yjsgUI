@@ -112,7 +112,7 @@ class ParentsRegistration extends Component {
       isSubmitTriggered: false,
       isCloseBrowserPopMessage: false,
       formData: {},
-      hasError: false,
+      hasError: true,
     };
 
   }

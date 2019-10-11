@@ -111,6 +111,7 @@ const LinkStyled = styled(Link)`
     &:hover {
         background-color: ${getThemeProps('palette.primary.color')};
         transition: 0.3s all;
+        border: 1px solid ${getThemeProps('palette.primary.color')};
     }
     ${({ theme }) => theme.media.down('lg')`
         background-color: ${getThemeProps('colors.header')};

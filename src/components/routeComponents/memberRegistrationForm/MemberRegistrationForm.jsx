@@ -129,14 +129,14 @@ class MemberRegistrationForm extends Component {
     const { createStudentData } = this.props;
 
     if (hasError) {
-      this.setState({}, () => {
-        this.scrollToError();
-      });
-    } else {
       createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
         hasError: false,
+      });
+    } else {
+      this.setState({}, () => {
+        this.scrollToError();
       });
     }
   };
@@ -197,7 +197,7 @@ class MemberRegistrationForm extends Component {
         ...member,
         ...event.formData,
       },
-      hasError: !isEmpty(event.errors),
+      hasError: isEmpty(event.errors),
     });
   };
 

@@ -51,6 +51,10 @@ const FileWrapper = styled(Box)`
     padding-top: 100px;
     ${({ theme }) => theme.media.down('xl')`
         padding-top: 0;
+        margin-top: 100px;
+    `}
+    ${({ theme }) => theme.media.down('lg')`
+        padding-top: 0;
         margin-top: 0;
     `}
 `;
@@ -187,8 +191,8 @@ const ListElementWrapper = styled(Col)`
 const FaIconStyled = styled(FaIcon)`
      margin-right: 10px;
      font-size: 14px;
-     color: ${props => (props.isView ? getThemeProps('colors.header') : 'unset')};
-     cursor: ${props => (props.isView ? 'unset' : 'text')};
+     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : 'unset')};
+     cursor: ${props => (props.isview === 'true' ? 'unset' : 'text')};
 `;
 
 const ListElementStyle = styled(Typography)`
@@ -198,13 +202,13 @@ const ListElementStyle = styled(Typography)`
      max-width: 100%;
      white-space: nowrap;
      display: inline-block;
-     color: ${props => (props.isView ? getThemeProps('colors.header') : 'unset')};  
+     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : 'unset')};  
 `;
 
 const FileDownloadIcon = styled('a')`
     cursor: pointer;
     margin-left: 10px;
-    color: ${props => (props.isView ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
+    color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
     transition: 0.3s all;
     &:hover{
         color: ${getThemeProps('palette.primary.borderColor')};
@@ -514,14 +518,14 @@ class Files extends Component {
                     <ListElementWrapper
                       onClick={() => this.onClickViewFile(file, index, href, file.isViewable)}
                     >
-                      <Row display="flex" wrap="normal">
+                      <Row display="flex" wrap="nowrap">
                         <FaIconStyled
                           icon={faFile}
-                          isView={activeFileId === index}
+                          isview={toString(activeFileId === index)}
                         />
                         <ListElementStyle
                           type="caption"
-                          isView={activeFileId === index}
+                          isview={toString(activeFileId === index)}
                           title={file.fileLabel}
                         >
                           {file.fileLabel}
@@ -531,7 +535,7 @@ class Files extends Component {
                     <FileDownloadIcon
                       download={`${file.fileLabel}.${file.fileType}`}
                       href={href}
-                      isView={activeFileId === index}
+                      isview={toString(activeFileId === index)}
                     >
                       <FaIcon icon={faDownload} />
                     </FileDownloadIcon>

@@ -36,6 +36,10 @@ const RowStyled = styled(Row)`
    align-items: end;
 `;
 
+const CardFiledWrapper = styled(RowStyled)`
+   display: unset !important;
+`;
+
 const TwoIdCardWrapperStyled = styled(Box)`
    display: flex;
    justify-content: center;
@@ -154,7 +158,7 @@ class MembersIdCard extends Component {
               <img
                 src="../../LOGO.png"
                 alt="header-logo"
-                style={{ 'max-width': '100%' }}
+                style={{ 'maxWidth': '100%' }}
               />
             </BoxStyled>
             <SmallHeadingWrapper
@@ -286,9 +290,8 @@ class MembersIdCard extends Component {
               display="flex"
               padding="0"
             >
-              <RowStyled
+              <CardFiledWrapper
                 gutter={false}
-                display="unset"
                 height="10px"
                 flex="1"
                 margin="0 0 0 3px"
@@ -307,7 +310,7 @@ class MembersIdCard extends Component {
                 >
                   {member.busStop}
                 </CardTextWrapper>
-              </RowStyled>
+              </CardFiledWrapper>
               <RowStyled flex="0.5 0 0" margin="0 0 0 3px">
                 <Typography
                   type="caption"
@@ -331,9 +334,8 @@ class MembersIdCard extends Component {
               padding="0"
               display="flex"
             >
-              <RowStyled
+              <CardFiledWrapper
                 gutter={false}
-                display="unset"
                 height="10px"
                 flex="1"
                 margin="0 0 0 4px"
@@ -353,7 +355,7 @@ class MembersIdCard extends Component {
                 >
                   {address}
                 </CardTextWrapper>
-              </RowStyled>
+              </CardFiledWrapper>
             </Row>
             <Row
               padding="0"

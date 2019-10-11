@@ -397,7 +397,7 @@ class MemberInformationGrid extends Component {
       <DesktopRowStyled gutter={false}>
         <ButtonStyled
           onClick={() => { this.handleEditClick(rowData); }}
-          padding="7px"
+          padding="6px"
           noMinWidth
           noMinHeight
         >
