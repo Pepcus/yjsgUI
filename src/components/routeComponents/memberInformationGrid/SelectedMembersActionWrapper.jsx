@@ -47,13 +47,15 @@ const CSVLinkStyled = styled(CSVLink)`
     font-size: 14px;
     border-radius: 4px;
     background-color: ${getThemeProps('palette.action.hover')};
-    color: ${props => (props.disable === 'true' ? getThemeProps('palette.common.placeholder') : getThemeProps('palette.common.darker'))};
+    color: ${props => (props.disable === 'true' ? getThemeProps('palette.common.placeholder')
+    : getThemeProps('palette.common.darker'))};
     padding: 8px 11px;
     position: relative;
     text-decoration: none;
     box-shadow: ${props => (props.disable === 'true' ? null : getThemeProps('palette.action.disabled'))};
     &:hover {
-        background-color: ${props => (props.disable === 'true' ? getThemeProps('palette.action.hover') : getThemeProps('palette.action.selected'))};
+        background-color: ${props => (props.disable === 'true' ? getThemeProps('palette.action.hover')
+    : getThemeProps('palette.action.selected'))};
     }
     &:active {
         box-shadow: none;

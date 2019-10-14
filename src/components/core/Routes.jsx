@@ -13,7 +13,6 @@ import Footer from 'components/common/Footer';
 import Context from './ConfigProvider';
 import RouteComponents from '../routeComponents';
 
-
 /**
  * Routes component maintain all routes
  * And send all previous location path to all routes.

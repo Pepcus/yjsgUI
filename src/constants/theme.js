@@ -1,3 +1,5 @@
+import { rgba } from 'polished';
+
 const COLORS = {
   DARK_ORANGE: '#d24c0c',
   ORANGE: '#f9570a',
@@ -99,6 +101,15 @@ const APP_THEME = {
         colors: COLORS.LIGHT_BLUE,
       },
     },
+    effects: {
+      inputFocus: {
+        '&:focus': {
+          outline: 'none',
+          borderColor: COLORS.LIGHT_BLUE,
+          boxShadow: `inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px ${rgba(COLORS.LIGHT_BLUE, 0.5)}`,
+        },
+      },
+    },
   },
   production: {
     colors: {
@@ -174,6 +185,15 @@ const APP_THEME = {
       },
       idCard: {
         colors: COLORS.LIGHT_ORANGE,
+      },
+    },
+    effects: {
+      inputFocus: {
+        '&:focus': {
+          outline: 'none',
+          borderColor: COLORS.LIGHT_ORANGE,
+          boxShadow: `inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px ${rgba(COLORS.LIGHTER_ORANGE, 0.5)}`,
+        },
       },
     },
   },

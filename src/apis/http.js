@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 /**
  *
  * @param {String} url
- * @param secretKey
+ * @param {String} secretKey
  * @return {Promise} response
  */
 export const GET = ({ url, headers, responseType = null }) => {
