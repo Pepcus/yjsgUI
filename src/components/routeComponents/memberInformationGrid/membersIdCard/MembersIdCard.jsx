@@ -36,7 +36,7 @@ const RowStyled = styled(Row)`
    align-items: end;
 `;
 
-const CardFiledWrapper = styled(RowStyled)`
+const CardFieldWrapper = styled(RowStyled)`
    display: unset !important;
 `;
 
@@ -290,7 +290,7 @@ class MembersIdCard extends Component {
               display="flex"
               padding="0"
             >
-              <CardFiledWrapper
+              <CardFieldWrapper
                 gutter={false}
                 height="10px"
                 flex="1"
@@ -310,7 +310,7 @@ class MembersIdCard extends Component {
                 >
                   {member.busStop}
                 </CardTextWrapper>
-              </CardFiledWrapper>
+              </CardFieldWrapper>
               <RowStyled flex="0.5 0 0" margin="0 0 0 3px">
                 <Typography
                   type="caption"
@@ -334,7 +334,7 @@ class MembersIdCard extends Component {
               padding="0"
               display="flex"
             >
-              <CardFiledWrapper
+              <CardFieldWrapper
                 gutter={false}
                 height="10px"
                 flex="1"
@@ -355,7 +355,7 @@ class MembersIdCard extends Component {
                 >
                   {address}
                 </CardTextWrapper>
-              </CardFiledWrapper>
+              </CardFieldWrapper>
             </Row>
             <Row
               padding="0"
