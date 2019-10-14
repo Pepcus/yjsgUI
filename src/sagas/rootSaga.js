@@ -11,7 +11,7 @@ import {
   markSelectedMembersOptInOrOptOutAPI,
   updateIdCardStatusSelectedMembersAPI,
   parentsRegistrationAPI,
-} from 'apis/memberRegisterAPI';
+} from 'apis/member';
 import {
   createMemberFailedAction,
   createMemberSuccessAction,
