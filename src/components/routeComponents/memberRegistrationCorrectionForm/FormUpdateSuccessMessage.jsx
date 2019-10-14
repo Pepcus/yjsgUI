@@ -61,7 +61,7 @@ const FormUpdateSuccessMessage = ({
     return (
       <Popup>
         <Row display="inline-block" width="100%" justify="center" margin="0">
-          <Typography fullWidth noWrapWidth type="body" fontSize="16px">{noInfoChangeMessage}</Typography>
+          <Typography fullWidth type="body" fontSize="16px">{noInfoChangeMessage}</Typography>
           <Button
             color="tertiary"
             margin="10px 25px"

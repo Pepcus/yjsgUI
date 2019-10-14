@@ -88,7 +88,7 @@ const LabelStyled = styled.label`
     }
 `;
 
-const FormWroperrStyled = styled(Col)`
+const FormWrapperStyled = styled(Col)`
   position: relative;
 `;
 
@@ -298,7 +298,7 @@ class AdvanceSearch extends Component {
           backgroundColor="advancedSearch"
         >
           <Row alignItems="center">
-            <FormWroperrStyled size={10} padding="0 0 0 20px" margin="0">
+            <FormWrapperStyled size={10} padding="0 0 0 20px" margin="0">
               <Form
                 showErrorList={false}
                 liveValidate
@@ -311,7 +311,7 @@ class AdvanceSearch extends Component {
                 onSubmit={this.advanceSearch}
               />
               {this.clearButton()}
-            </FormWroperrStyled>
+            </FormWrapperStyled>
             <Col size={2} padding="0 20px 0 0">
               <Button
                 borderRadius="0 4px 4px 0"

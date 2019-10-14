@@ -41,6 +41,8 @@ import {
   isUserMember,
   updateClassAttended2019InMemberData,
   getFormData,
+  getTransformedErrors,
+  verifyFormDataValidations,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { fetchFormConfig } from 'apis/formConfigAPI';
@@ -49,10 +51,6 @@ import {
   isObjectsEqual,
   prePopulateOptIn,
 } from 'utils/validations';
-import {
-  getTransformedErrors,
-  verifyFormDataValidations,
-} from 'utils/form';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
@@ -98,7 +96,7 @@ class MemberRegistrationCorrectionForm extends Component {
     this.state = {
       formData: {},
       formConfig: {},
-      hasError: false,
+      hasError: true,
       isFormChanged: false,
       isSubmitTriggered: false,
       isPreviousLocation: false,
@@ -326,7 +324,6 @@ class MemberRegistrationCorrectionForm extends Component {
         isSubmitTriggered: true,
       });
       this.updateMemberData();
-
     } else {
       this.setState({
         isFormChanged: false,
@@ -504,7 +501,10 @@ class MemberRegistrationCorrectionForm extends Component {
 
 MemberRegistrationCorrectionForm.propTypes = {
   context: PropTypes.object,
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   isFetch: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
   isUpdatedReset: PropTypes.func,

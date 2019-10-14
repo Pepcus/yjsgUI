@@ -103,7 +103,7 @@ InputField.propTypes = {
   /**
    * The field data.
    */
-  formData: PropTypes.string,
+  formData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * The schema object for identifying the field.
    */
