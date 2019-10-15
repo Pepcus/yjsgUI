@@ -1,10 +1,10 @@
-const initialStateOfLoader = {
+const initialStateOfLogin = {
   isAdminLogin: false,
   adminId: '',
   adminPassword: '',
 };
 
-export const loginReducer = (state = initialStateOfLoader, action) => {
+export const loginReducer = (state = initialStateOfLogin, action) => {
   switch (action.type) {
     case 'ADMIN_LOGIN_SUCCESS':
       return {
