@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import appConfig from './app';
 import { appReducer } from './appReducer';
 import { memberRegistrationReducer } from './memberRegistrationReducer';
 import { allMembersDataReducer } from './allMembersDataReducer';
@@ -8,6 +9,7 @@ import { loaderReducer } from './loaderReducer';
 import { parentsRegistrationReducer } from './parentsRegistrationReducer';
 
 const rootReducer = combineReducers({
+  appConfig,
   appReducer,
   memberRegistrationReducer,
   allMembersDataReducer,
