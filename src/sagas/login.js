@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 
 import { setLoadingStateAction } from 'actions/loaderActions';
-import { loginAdmin } from 'apis/login/login';
+import { loginAdmin } from 'apis/login';
 import {
   loginAdminSuccessAction,
   loginAdminFailureAction,
