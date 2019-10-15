@@ -12,7 +12,6 @@ import {
   updateMemberIdCardStatus,
   registerParent,
 } from 'apis/member';
-
 import {
   createMemberFailedAction,
   createMemberSuccessAction,
