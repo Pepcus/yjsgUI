@@ -1,4 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
+
+import { bootstrapApplication } from './core';
 import {
   createMemberSaga,
   fetchMemberSaga,
@@ -13,7 +15,12 @@ import {
 } from './rootSaga';
 import { fetchFilesConfigSaga, getAppConfigSaga, getBusCoordinatorsConfigSaga } from './assetFilesSaga';
 
+const coreSagas = [
+  takeLatest('BOOTSTRAP_APPLICATION', bootstrapApplication),
+];
+
 const sagas = [
+  ...coreSagas,
   takeLatest(['CREATE_MEMBER'], createMemberSaga),
   takeLatest(['FETCH_MEMBER'], fetchMemberSaga),
   takeLatest(['UPDATE_MEMBER'], updateMemberSaga),
