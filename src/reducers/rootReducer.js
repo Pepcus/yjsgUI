@@ -7,6 +7,7 @@ import { allMembersDataReducer } from './allMembersDataReducer';
 import { assetFilesReducer } from './assetFilesReducer';
 import { loaderReducer } from './loaderReducer';
 import { parentsRegistrationReducer } from './parentsRegistrationReducer';
+import { loginReducer } from './loginReducer';
 
 const rootReducer = combineReducers({
   appConfig,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   loaderReducer,
   assetFilesReducer,
   parentsRegistrationReducer,
+  loginReducer,
 });
 
 export default rootReducer;

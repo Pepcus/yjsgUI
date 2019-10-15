@@ -6,8 +6,6 @@ const initialState = {
   isCreated: false,
   id: '',
   secretKey: '',
-  adminId: '',
-  adminPassword: '',
   updateMessage: '',
   updatedMember: {},
 };
@@ -97,20 +95,6 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isFetched: false,
       };
 
-    case 'SET_ADMIN_CREDENTIALS':
-      return {
-        ...state,
-        adminId: action.id,
-        adminPassword: action.password,
-      };
-
-    case 'RESET_ADMIN_CREDENTIALS':
-      return {
-        ...state,
-        adminId: action.id,
-        adminPassword: action.password,
-      };
-
     case 'SET_MEMBER_DATA':
       return {
         ...state,
@@ -152,9 +136,3 @@ export const isFetched = state => state.memberRegistrationReducer.isFetched;
 export const getUserId = state => state.memberRegistrationReducer.id;
 
 export const getUserSecretKey = state => state.memberRegistrationReducer.secretKey;
-
-export const getAdminId = state => state.memberRegistrationReducer.adminId;
-
-export const getAdminPassword = state => state.memberRegistrationReducer.adminPassword;
-
-export const getSecretKey = state => state.memberRegistrationReducer.adminPassword;

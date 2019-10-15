@@ -21,7 +21,7 @@ import {
 } from 'actions/allMembersDataActions';
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   isUpdateIdCardStatusSuccess,
   isUpdateIdCardStatusFailed,
