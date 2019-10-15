@@ -45,7 +45,7 @@ import {
   verifyFormDataValidations,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { fetchFormConfig } from 'apis/formConfigAPI';
+import { fetchFormConfig } from 'apis/file';
 import {
   initialMemberData,
   isObjectsEqual,

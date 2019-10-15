@@ -35,7 +35,7 @@ import {
 import {
   getUserType,
 } from 'reducers/appReducer';
-import { fetchFormConfig } from 'apis/formConfigAPI';
+import { fetchFormConfig } from 'apis/file';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
