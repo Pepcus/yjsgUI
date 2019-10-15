@@ -4,13 +4,13 @@ import {
   createMember,
   fetchMember,
   updateMember,
-  getAllMembersAPI,
-  uploadAttendanceAPI,
-  uploadOptInAPI,
-  markSelectedMembersAttendanceAPI,
-  markSelectedMembersOptInOrOptOutAPI,
-  updateIdCardStatusSelectedMembersAPI,
-  parentsRegistrationAPI,
+  fetchMembers,
+  uploadAttendance,
+  uploadOptIn,
+  markMemberAttendance,
+  markMemberOptStatus,
+  updateMemberIdCardStatus,
+  registerParent,
 } from 'apis/member';
 import {
   createMemberFailedAction,
@@ -119,7 +119,7 @@ export function* getAllMembersSaga(action) {
   const errorMessage = 'Error getting member details.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield getAllMembersAPI(secretKey);
+    const response = yield fetchMembers(secretKey);
     if (response.students) {
       yield put(getAllMembersDataResultsSuccessAction(response.students));
     } else {
@@ -141,7 +141,7 @@ export function* uploadAttendanceFileSaga(action) {
   const errorMessage = 'Error occurred while uploading attendance file.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield uploadAttendanceAPI(secretKey, attendanceFile, day);
+    const response = yield uploadAttendance(secretKey, attendanceFile, day);
     if (response.totalRecords) {
       yield put(uploadAttendanceFileResultsSuccessAction(response));
     } else {
@@ -164,7 +164,7 @@ export function* uploadOptInFileSaga(action) {
   const errorMessage = 'Error occurred while uploading opt-in file.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield uploadOptInAPI(secretKey, optInFile);
+    const response = yield uploadOptIn(secretKey, optInFile);
     if (response.totalRecords) {
       yield put(uploadOptInFileResultsSuccessAction(response));
     } else {
@@ -186,7 +186,7 @@ export function* markSelectedMembersAttendanceSaga(action) {
   const errorMessage = 'Error getting mark selected members attendance.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markSelectedMembersAttendanceAPI({ secretKey, selectedMembersId, day });
+    const response = yield markMemberAttendance({ secretKey, selectedMembersId, day });
     if (response.message === 'Updated Successfully') {
       yield put(markSelectedMembersAttendanceResultsSuccessAction(response));
     } else {
@@ -208,7 +208,7 @@ export function* markSelectedMembersOptInOrOptOutSaga(action) {
   const errorMessage = 'Error getting mark selected members opt in or opt out.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markSelectedMembersOptInOrOptOutAPI({ secretKey, selectedMembersId, opt });
+    const response = yield markMemberOptStatus({ secretKey, selectedMembersId, opt });
     if (response.message === 'Updated Successfully') {
       yield put(markSelectedMembersOptInOrOptOutResultsSuccessAction(response));
     } else {
@@ -230,7 +230,7 @@ export function* updateIdCardStatusSelectedMembersSaga(action) {
   const errorMessage = 'Error getting update Id card status of selected members.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield updateIdCardStatusSelectedMembersAPI({ secretKey, selectedMembersId, IdCardStatus });
+    const response = yield updateMemberIdCardStatus({ secretKey, selectedMembersId, IdCardStatus });
     if (response.message === 'Updated Successfully') {
       yield put(updateIdCardStatusSelectedMembersResultsSuccessAction(response));
     } else {
@@ -252,7 +252,7 @@ export function* parentsRegistrationSaga(action) {
   const errorMessage = 'Error getting registration.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield parentsRegistrationAPI(name, members, phoneNumber);
+    const response = yield registerParent(name, members, phoneNumber);
     if (response.message === 'Registration successful') {
       yield put(parentsRegistrationResultsSuccessAction(response));
     } else {

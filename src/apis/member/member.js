@@ -30,7 +30,7 @@ export const fetchMember = (id, secretKey) =>
     },
   });
 
-export const getAllMembersAPI = secretKey =>
+export const fetchMembers = secretKey =>
   GET({
     url: '/v1/students',
     headers: {
@@ -40,8 +40,8 @@ export const getAllMembersAPI = secretKey =>
     },
   });
 
-export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
-  const file = new FormData();
+export const uploadAttendance = (secretKey, attendanceFile, day) => {
+  const file = new window.FormData();
   file.append('file', attendanceFile);
   file.append('day', day);
   return (
@@ -54,8 +54,8 @@ export const uploadAttendanceAPI = (secretKey, attendanceFile, day) => {
     }));
 };
 
-export const uploadOptInAPI = (secretKey, optInFile) => {
-  const file = new FormData();
+export const uploadOptIn = (secretKey, optInFile) => {
+  const file = new window.FormData();
   file.append('file', optInFile);
   return (
     PATCH({
@@ -67,7 +67,7 @@ export const uploadOptInAPI = (secretKey, optInFile) => {
     }));
 };
 
-export const markSelectedMembersAttendanceAPI = ({ secretKey, selectedMembersId, day }) =>
+export const markMemberAttendance = ({ secretKey, selectedMembersId, day }) =>
   PUT({
     url: `v1/students/attendance?id=${selectedMembersId}`,
     headers: {
@@ -77,7 +77,7 @@ export const markSelectedMembersAttendanceAPI = ({ secretKey, selectedMembersId,
     body: day,
   });
 
-export const markSelectedMembersOptInOrOptOutAPI = (secretKey, selectedMembersId, opt) =>
+export const markMemberOptStatus = (secretKey, selectedMembersId, opt) =>
   PATCH({
     url: `v1/students/optin?id=${selectedMembersId}`,
     headers: {
@@ -87,7 +87,7 @@ export const markSelectedMembersOptInOrOptOutAPI = (secretKey, selectedMembersId
     body: JSON.stringify(opt),
   });
 
-export const updateIdCardStatusSelectedMembersAPI = ({ secretKey, selectedMembersId, IdCardStatus }) =>
+export const updateMemberIdCardStatus = ({ secretKey, selectedMembersId, IdCardStatus }) =>
   PATCH({
     url: `v1/students/reprint?id=${selectedMembersId}`,
     headers: {
@@ -97,7 +97,7 @@ export const updateIdCardStatusSelectedMembersAPI = ({ secretKey, selectedMember
     body: JSON.stringify(IdCardStatus),
   });
 
-export const parentsRegistrationAPI = (name, members, phoneNumber) =>
+export const registerParent = (name, members, phoneNumber) =>
   POST({
     url: '/v1/events',
     body: {
