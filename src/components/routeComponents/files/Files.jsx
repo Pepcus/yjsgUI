@@ -43,7 +43,7 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
-import { fetchFile } from 'apis/assetFilesAPI';
+import { fetchFile } from 'apis/file';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;

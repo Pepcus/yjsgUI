@@ -9,10 +9,12 @@ import {
   loadBusCoordinatorsDataFailedAction,
 } from 'actions/assetFilesActions';
 import {
-  fetchFileConfig,
   getAppConfig,
   getBusCoordinatorsConfig,
 } from 'apis/assetFilesAPI';
+import {
+  fetchFileConfig,
+} from 'apis/file';
 
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';
