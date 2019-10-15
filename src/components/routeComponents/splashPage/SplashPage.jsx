@@ -243,7 +243,6 @@ class SplashPage extends Component {
           this.setRedirectToRoute('');
           return <Switch><Redirect to={redirectToRoute} /></Switch>;
         }
-        return <Switch><Redirect to="/member-search" /></Switch>;
       }
       return null;
     }

@@ -11,7 +11,7 @@ import {
 import {
   getAppConfig,
   getBusCoordinatorsConfig,
-} from 'apis/assetFilesAPI';
+} from 'apis/core';
 import {
   fetchFileConfig,
 } from 'apis/file';
