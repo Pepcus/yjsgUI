@@ -14,13 +14,13 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import headerLogo from 'assets/images/react-logo.png';
 import {
-  resetAdminCredentialsAction,
-} from 'actions/memberRegistrationActions';
-import {
   resetVisibleColumnConfigAction,
   setRedirectValueAction,
-  setAdminLoginStateAction,
 } from 'actions/appActions';
+import {
+  resetLoginAdminStateAction,
+  resetAdminCredentialsAction,
+} from 'actions/loginActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';
@@ -131,7 +131,7 @@ const LinkStyled = styled(Link)`
  * @param {Object} context
  * @param {String} location
  * @param {Function} resetAdminCredentials
- * @param {Function} setAdminLoginState
+ * @param {Function} resetLoginAdminState
  * @param {Function} setRedirectValue
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
@@ -142,7 +142,7 @@ const Header = ({
   context,
   location,
   resetAdminCredentials,
-  setAdminLoginState,
+  resetLoginAdminState,
   setRedirectValue,
   resetVisibleColumnConfig,
   tenant,
@@ -151,14 +151,14 @@ const Header = ({
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
-   * It reset the admin login state to false by calling action setAdminLoginStateAction()
+   * It reset the admin login state to false by calling action resetLoginAdminStateAction()
    * It reset the visibleColumnConfig to initial
    * state by calling action resetVisibleColumnConfigAction()
    * And clear local store.
    */
   const performLogout = () => {
     resetAdminCredentials();
-    setAdminLoginState({ adminLoginState: false });
+    resetLoginAdminState();
     setRedirectValue({ redirect: false });
     resetVisibleColumnConfig();
     localStorage.clear();
@@ -317,7 +317,7 @@ Header.propTypes = {
   resetAdminCredentials: PropTypes.func,
   resetVisibleColumnConfig: PropTypes.func,
   routes: PropTypes.array,
-  setAdminLoginState: PropTypes.func,
+  resetLoginAdminState: PropTypes.func,
   setRedirectValue: PropTypes.func,
   tenant: PropTypes.string,
   title: PropTypes.object,
@@ -329,7 +329,7 @@ Header.defaultProps = {
   resetAdminCredentials: () => {},
   resetVisibleColumnConfig: () => {},
   routes: [],
-  setAdminLoginState: () => {},
+  resetLoginAdminState: () => {},
   setRedirectValue: () => {},
   tenant: '',
   title: {},
@@ -338,7 +338,7 @@ Header.defaultProps = {
 const mapDispatchToProps = dispatch => ({
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
-  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
+  resetLoginAdminState: () => dispatch(resetLoginAdminStateAction()),
   setRedirectValue: ({ redirect }) => dispatch(setRedirectValueAction({ redirect })),
 });
 

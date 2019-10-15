@@ -26,11 +26,13 @@ import { getApplicationMode } from 'reducers/assetFilesReducer';
 import { gridHeaderData } from 'constants/gridData';
 import {
   getMember,
-  getSecretKey,
 } from 'reducers/memberRegistrationReducer';
 import {
+  getSecretKey,
+  getAdminLoginState,
+} from 'reducers/loginReducer';
+import {
   stateOfRedirect,
-  stateOfAdminLogin,
   getSelectValue,
   getVisibleColumnConfig,
 } from 'reducers/appReducer';
@@ -39,7 +41,6 @@ import {
 } from 'reducers/allMembersDataReducer';
 import {
   fetchMemberDataAction,
-  resetAdminCredentialsAction,
   setMemberDataAction,
   updateMemberByAdminAction,
 } from 'actions/memberRegistrationActions';
@@ -50,12 +51,14 @@ import {
 import {
   resetVisibleColumnConfigAction,
   setRedirectValueAction,
-  setAdminLoginStateAction,
   setVisibleColumnConfigAction,
   setUserTypeAction,
 } from 'actions/appActions';
 import {
-  adminPassword,
+  resetLoginAdminStateAction,
+  resetAdminCredentialsAction,
+} from 'actions/loginActions';
+import {
   USER_TYPES,
 } from 'constants/yjsg';
 
@@ -257,17 +260,22 @@ class MemberInformationGrid extends Component {
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentials()
-   * It reset the admin login state to false by calling action setAdminLoginState()
+   * It reset the admin login state to false by calling action resetLoginAdminState()
    * It reset the visibleColumnConfig to initial
    * state by calling action resetVisibleColumnConfig()
    * And clear local store.
    */
   performLogout = () => {
-    const { resetAdminCredentials, setAdminLoginState, setRedirectValue, resetVisibleColumnConfig } = this.props;
+    const {
+      resetAdminCredentials,
+      setRedirectValue,
+      resetVisibleColumnConfig,
+      resetLoginAdminState,
+    } = this.props;
     resetAdminCredentials();
-    setAdminLoginState({ adminLoginState: false });
     setRedirectValue({ redirect: false });
     resetVisibleColumnConfig();
+    resetLoginAdminState();
     localStorage.clear();
   };
 
@@ -363,11 +371,11 @@ class MemberInformationGrid extends Component {
    * @param {Object} rowData
    */
   handleEditClick(rowData) {
-    const { memberData, fetchMemberData, setMemberData, updateMemberByAdmin, setUserType } = this.props;
+    const { memberData, fetchMemberData, setMemberData, updateMemberByAdmin, setUserType, secretKey } = this.props;
     if (!isEmpty(rowData)) {
-      fetchMemberData({ id: String(rowData.memberId), secretKey: adminPassword });
+      fetchMemberData({ id: String(rowData.memberId), secretKey });
       setMemberData({ member: memberData });
-      updateMemberByAdmin({ id: String(rowData.memberId), secretKey: adminPassword });
+      updateMemberByAdmin({ id: String(rowData.memberId), secretKey });
       setUserType({ pageUser: USER_TYPES.ADMIN });
       this.setState({
         isMemberDataSet: true,
@@ -464,12 +472,12 @@ class MemberInformationGrid extends Component {
       fileDownloadMessage,
       members: updatedMembers,
     } = this.state;
-    const { adminLoginState, members } = this.props;
+    const { members, isAdminLogin } = this.props;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
           fileRedirection={fileRedirection}
-          adminLoginState={adminLoginState}
+          isAdminLogin={isAdminLogin}
           isMemberDataSet={isMemberDataSet}
           isAdminRoute={isAdminRoute}
         />
@@ -532,7 +540,7 @@ class MemberInformationGrid extends Component {
   }
 }
 MemberInformationGrid.propTypes = {
-  adminLoginState: PropTypes.bool,
+  isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   getAllMembers: PropTypes.func,
   members: PropTypes.array,
@@ -546,7 +554,6 @@ MemberInformationGrid.propTypes = {
   resetVisibleColumnConfig: PropTypes.func,
   secretKey: PropTypes.string,
   selectValue: PropTypes.bool,
-  setAdminLoginState: PropTypes.func,
   setMemberData: PropTypes.func,
   setRedirectValue: PropTypes.func,
   setUserType: PropTypes.func,
@@ -554,10 +561,11 @@ MemberInformationGrid.propTypes = {
   theme: PropTypes.object,
   updateMemberByAdmin: PropTypes.func,
   visibleColumnConfig: PropTypes.object,
+  resetLoginAdminState: PropTypes.func,
 };
 
 MemberInformationGrid.defaultProps = {
-  adminLoginState: false,
+  isAdminLogin: false,
   fetchMemberData: () => {},
   getAllMembers: () => {},
   members: [],
@@ -568,7 +576,6 @@ MemberInformationGrid.defaultProps = {
   resetVisibleColumnConfig: () => {},
   secretKey: '',
   selectValue: true,
-  setAdminLoginState: () => {},
   setMemberData: () => {},
   setRedirectValue: () => {},
   setUserType: () => {},
@@ -576,10 +583,11 @@ MemberInformationGrid.defaultProps = {
   theme: {},
   updateMemberByAdmin: () => {},
   visibleColumnConfig: {},
+  resetLoginAdminState: () => {},
 };
 
 const mapStateToProps = state => ({
-  adminLoginState: stateOfAdminLogin(state),
+  isAdminLogin: getAdminLoginState(state),
   memberData: getMember(state),
   members: allMembersData(state),
   mode: getApplicationMode(state),
@@ -595,13 +603,13 @@ const mapDispatchToProps = dispatch => ({
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
   resetIsSuccess: () => dispatch(resetIsSuccessOfMemberAttendanceFileUploadAction()),
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
-  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setMemberData: ({ member }) => dispatch(setMemberDataAction({ member })),
   setRedirectValue: ({ redirect }) => dispatch(setRedirectValueAction({ redirect })),
   setVisibleColumnConfig: ({ visibleColumnConfig, selectValue }) =>
     dispatch(setVisibleColumnConfigAction({ visibleColumnConfig, selectValue })),
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
   updateMemberByAdmin: ({ id, secretKey }) => dispatch(updateMemberByAdminAction({ id, secretKey })),
+  resetLoginAdminState: () => dispatch(resetLoginAdminStateAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTheme(MemberInformationGrid));

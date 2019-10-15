@@ -5,16 +5,16 @@ import * as shortId from 'shortid';
 
 /**
  * RedirectToRoute method redirect to corresponding route.
- * @param {Boolean} adminLoginState
  * @param {Boolean} fileRedirection
+ * @param {Boolean} isAdminLogin
  * @param {Boolean} isAdminRoute
  * @param {Boolean} isMemberDataSet
  * @return {HTML}
  * @constructor
  */
 const RedirectToRoute = ({
-  adminLoginState,
   fileRedirection,
+  isAdminLogin,
   isAdminRoute,
   isMemberDataSet,
 }) => {
@@ -38,20 +38,20 @@ const RedirectToRoute = ({
     if (routeName) {
       return <Switch key={shortId.generate()}><Redirect to={routeName} /></Switch>;
     }
-  } else if (!adminLoginState) {
+  } else if (!isAdminLogin) {
     return <Switch key={shortId.generate()}><Redirect to="/admin" /></Switch>;
   } return null;
 };
 
 RedirectToRoute.propTypes = {
-  adminLoginState: PropTypes.bool,
+  isAdminLogin: PropTypes.bool,
   fileRedirection: PropTypes.bool,
   isAdminRoute: PropTypes.bool,
   isMemberDataSet: PropTypes.bool,
 };
 
 RedirectToRoute.defaultProps = {
-  adminLoginState: true,
+  isAdminLogin: true,
   fileRedirection: false,
   isAdminRoute: false,
   isMemberDataSet: false,

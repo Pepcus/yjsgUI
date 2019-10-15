@@ -24,7 +24,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   getFilesConfig,
 } from 'reducers/assetFilesReducer';

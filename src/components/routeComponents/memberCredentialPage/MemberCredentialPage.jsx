@@ -22,8 +22,6 @@ import {
   setUserTypeAction,
 } from 'actions/appActions';
 import {
-  getAdminId,
-  getAdminPassword,
   getUserId,
   getUserSecretKey,
 } from 'reducers/memberRegistrationReducer';
@@ -348,8 +346,6 @@ MemberCredentialPage.defaultProps = {
 
 const mapStateToProps = state => ({
   hashLink: getHash(state),
-  id: getAdminId(state),
-  password: getAdminPassword(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
   tenant: getApplicationTenant(state),

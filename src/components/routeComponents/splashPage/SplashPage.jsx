@@ -18,26 +18,26 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,
-  setAdminCredentialsAction,
   setMemberCredentialsAction,
 } from 'actions/memberRegistrationActions';
 import {
   setHashLinkForNewRegistrationAction,
-  setAdminLoginStateAction,
 } from 'actions/appActions';
 import {
+  loginAdminAction,
+  setAdminCredentialsAction,
+} from 'actions/loginActions';
+import {
+  getAdminLoginState,
   getAdminId,
   getAdminPassword,
+} from 'reducers/loginReducer';
+import {
   getMember,
   isFetched,
 } from 'reducers/memberRegistrationReducer';
-import {
-  stateOfAdminLogin,
-} from 'reducers/appReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
-  adminId,
-  adminPassword,
   eventDate,
   eventVenue,
   USER_TYPES,
@@ -101,7 +101,7 @@ class SplashPage extends Component {
     this.state = {
       admin: {},
       adminCredentialErrorMessage: false,
-      hasError: true,
+      hasError: false,
       isAdmin: false,
       isNewRegistration: false,
       isURLParams: false,
@@ -211,16 +211,14 @@ class SplashPage extends Component {
       redirectToRoute,
     } = this.state;
     const {
-      adminLoginState,
       id,
       password,
-      setAdminLoginState,
+      isAdminLogin,
     } = this.props;
-
-    if (!adminLoginState) {
+    if (!isAdminLogin) {
       // Verify admin credential
       if (adminCredentialErrorMessage) {
-        if (id !== adminId || password !== adminPassword) {
+        if (!isEmpty(id) || !isEmpty(password)) {
           // If admin credential is not valid it gives the error message.
           return (
             <Row
@@ -241,7 +239,6 @@ class SplashPage extends Component {
         }
         // if admin credential is valid then it set admin login true in redux store
         // and redirect to "/member-search" route
-        setAdminLoginState({ adminLoginState: true });
         if (redirectToRoute) {
           this.setRedirectToRoute('');
           return <Switch><Redirect to={redirectToRoute} /></Switch>;
@@ -264,14 +261,14 @@ class SplashPage extends Component {
    * Method set the admin login credential
    */
   setAdminLogin = () => {
-    const { admin } = this.state;
-    const { setAdminCredentials } = this.props;
-
-    if (this.state.hasError) {
+    const { admin, hasError } = this.state;
+    const { setAdminCredentials, loginAdmin } = this.props;
+    if (hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
       });
       setAdminCredentials({ id: admin.adminId, password: admin.adminPassword });
+      loginAdmin({ adminId: admin.adminId, adminPassword: admin.adminPassword });
     }
   };
 
@@ -355,44 +352,44 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
-  adminLoginState: PropTypes.bool,
+  isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   id: PropTypes.string,
   password: PropTypes.string,
   setAdminCredentials: PropTypes.func,
-  setAdminLoginState: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
+  loginAdmin: PropTypes.func,
   tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
-  adminLoginState: false,
+  isAdminLogin: false,
   fetchMemberData: () => {},
   id: '',
   password: '',
   setAdminCredentials: () => {},
-  setAdminLoginState: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
+  loginAdmin: () => {},
   tenant: '',
 };
 
 const mapStateToProps = state => ({
-  adminLoginState: stateOfAdminLogin(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
   password: getAdminPassword(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),
+  isAdminLogin: getAdminLoginState(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
-  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
+  loginAdmin: ({ adminId, adminPassword }) => dispatch(loginAdminAction({ adminId, adminPassword })),
 });
 
 export default connect(
