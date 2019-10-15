@@ -16,12 +16,8 @@ export function* loginAdminSaga(action) {
   const errorMessage = 'Error getting login.';
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield loginAdmin({ adminId, adminPassword });
-    if (response === true) {
-      yield put(loginAdminSuccessAction(response));
-    } else {
-      yield put(loginAdminFailureAction(errorMessage));
-    }
+    yield loginAdmin({ adminId, adminPassword });
+    yield put(loginAdminSuccessAction());
     yield put(setLoadingStateAction(false));
   } catch (e) {
     yield put(loginAdminFailureAction(errorMessage));
