@@ -115,30 +115,6 @@ export const updateMemberFailedAction = message => ({
 });
 
 /**
- * setAdminCredentialsAction action will call
- * when admin login with their credential
- * @param {String} id
- * @param {String} password
- * @return {{password: String, id: String, type: string}}
- */
-export const setAdminCredentialsAction = ({ id, password }) => ({
-  type: 'SET_ADMIN_CREDENTIALS',
-  id,
-  password,
-});
-
-/**
- * resetAdminCredentialsAction action will call
- * when admin logout.
- * @return {{password: string, id: string, type: string}}
- */
-export const resetAdminCredentialsAction = () => ({
-  type: 'RESET_ADMIN_CREDENTIALS',
-  id: '',
-  password: '',
-});
-
-/**
  * setMemberDataAction action will call when click on edit button of particular row
  * in members grid
  * @param {Object} member

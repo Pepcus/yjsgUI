@@ -11,7 +11,12 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './rootSaga';
-import { fetchFilesConfigSaga, getAppConfigSaga, getBusCoordinatorsConfigSaga } from './assetFilesSaga';
+import {
+  fetchFilesConfigSaga,
+  getAppConfigSaga,
+  getBusCoordinatorsConfigSaga,
+} from './assetFilesSaga';
+import { loginAdminSaga } from './login';
 
 const sagas = [
   takeLatest(['CREATE_MEMBER'], createMemberSaga),
@@ -27,5 +32,6 @@ const sagas = [
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
   takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
   takeLatest(['LOAD_BUS_COORDINATORS_DATA_ACTION'], getBusCoordinatorsConfigSaga),
+  takeLatest(['ADMIN_LOGIN'], loginAdminSaga),
 ];
 export default sagas;
