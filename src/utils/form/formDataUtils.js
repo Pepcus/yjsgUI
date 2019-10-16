@@ -3,7 +3,7 @@ import {
   USER_TYPES,
 } from 'constants/yjsg';
 import { isUserMember } from './registrationFormUtils';
-
+// TODO: remove tenant check condition
 /**
  * TODO by Pratik: Need to be refactored
  *

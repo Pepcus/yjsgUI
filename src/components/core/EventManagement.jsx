@@ -4,9 +4,9 @@ import { ThemeProvider } from 'styled-components';
 import { connect } from 'react-redux';
 import { generateTheme } from 'pepcus-core/utils/theme';
 
-import APP_THEME from 'constants/theme';
 import AppContainer from 'components/core/AppContainer';
 import { getAppConfig, getBootstrappedFlag } from 'reducers/app';
+import { getAppTheme } from 'reducers/themeReducer';
 import { bootstrapApplicationAction } from 'actions/coreActions';
 import CustomLoader from 'components/common/CustomLoader';
 
@@ -19,8 +19,8 @@ class EventManagement extends React.Component {
   }
 
   renderApplicationBody() {
-    const { config } = this.props;
-    const theme = generateTheme(APP_THEME[config.environment ? config.environment : 'production']);
+    const { appTheme } = this.props;
+    const theme = generateTheme(appTheme);
 
     return (
       <ThemeProvider theme={theme}>
@@ -44,14 +44,14 @@ class EventManagement extends React.Component {
 }
 
 EventManagement.propTypes = {
+  appTheme: PropTypes.object,
   bootstrappedFlag: PropTypes.bool,
-  config: PropTypes.object,
   bootstrapApplicationAction: PropTypes.func.isRequired,
 };
 
 EventManagement.defaultProps = {
+  appTheme: {},
   bootstrappedFlag: false,
-  config: {},
 };
 
 
@@ -59,6 +59,7 @@ function mapStateToProps(state) {
   return {
     config: getAppConfig(state),
     bootstrappedFlag: getBootstrappedFlag(state),
+    appTheme: getAppTheme(state),
   };
 }
 
