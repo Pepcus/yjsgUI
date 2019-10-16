@@ -3,7 +3,7 @@ import {
   USER_TYPES,
 } from 'constants/yjsg';
 import { isUserMember } from './registrationFormUtils';
-
+// TODO: remove tenant check condition
 /**
  * getFormData method return the form data for json form schema
  * @param {String} user

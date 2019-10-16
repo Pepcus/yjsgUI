@@ -11,3 +11,8 @@ export const getBusCoordinatorsConfig = () => (
     url: 'ui_config/busCoordinators.json',
   })
 );
+
+export const getAppTheme = ({ tenant }) => (
+  GET({
+    url: `src/config/tenant/${tenant}/theme.json`,
+  }));
