@@ -100,7 +100,7 @@ class MemberRegistrationForm extends Component {
 
     setLoadingState(true);
     try {
-      fetchFormConfig({ tenant, fileName: 'Registration' })
+      fetchFormConfig({ tenant: tenant ? tenant : 'default', fileName: 'Registration' })
         .then((response) => {
           if (response) {
             this.setState({

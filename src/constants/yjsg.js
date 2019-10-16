@@ -7,12 +7,12 @@ export const DEFAULT_FOOTER_CONTACT_INFORMATION = ' 74470-56789';
 export const eventDate = {
   'YJSG-Bhopal': 'दिनांक: ९ जून २०१९, रविवार से १६ जून २०१९, रविवार तक ',
   'YJSG-Indore': 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
-  DEFAULT_EVENT_DATE: 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
+  'default': 'दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक',
 };
 export const eventVenue = {
   'YJSG-Bhopal': 'स्थान: श्री दिगम्बर जैन हा. से. स्कूल, जैन रोड, चौक, भोपाल ',
   'YJSG-Indore': 'स्थान: सन्मति स्कूल, इन्दौर',
-  DEFAULT_EVENT_VENUE: 'स्थान: सन्मति स्कूल, इन्दौर',
+  'default': 'स्थान: सन्मति स्कूल, इन्दौर',
 };
 export const OK_TEXT = 'OK';
 
@@ -47,6 +47,7 @@ export const USER_TYPES = {
 export const TENANT = {
   INDORE: 'YJSG-Indore',
   BHOPAL: 'YJSG-Bhopal',
+  DEFAULT: 'default',
 };
 
 export const FILE_PRESENTATION_TYPE = {

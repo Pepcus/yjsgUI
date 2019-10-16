@@ -313,14 +313,14 @@ class SplashPage extends Component {
                 fontWeight="600"
                 type="title"
               >
-                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
+                {eventDate[tenant ? tenant : 'default']}
               </TypographyStyled>
               <Typography
                 align="center"
                 fontSize="16px"
                 type="title"
               >
-                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
+                {eventVenue[tenant ? tenant : 'default']}
               </Typography>
             </Row>
             <ImageWrapper

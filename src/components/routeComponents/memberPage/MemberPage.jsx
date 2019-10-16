@@ -187,14 +187,14 @@ class MemberPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
+                {eventDate[tenant ? tenant : 'default']}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
+                {eventVenue[tenant ? tenant : 'default']}
               </Typography>
             </Row>
             <ImageWrapper
