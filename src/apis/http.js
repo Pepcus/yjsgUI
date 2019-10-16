@@ -114,10 +114,9 @@ export const PATCH = ({ url, headers, body }) => {
  * @param {String}url
  * @return {String}decodeURIComponent
  */
-export const getParameterByName = (name, url) => {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
-  const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+export const getParameterByName = (name, url = window.location.href) => {
+  const formattedName = name.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp(`[?&]${formattedName}(=([^&#]*)|&|#|$)`);
   const results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
