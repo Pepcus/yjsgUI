@@ -32,7 +32,6 @@ class EventManagement extends React.Component {
 
   render() {
     const { appConfig: { bootstrapped } } = this.props;
-    console.log('appConfig', this.props.appConfig);
     if (bootstrapped) {
       return this.renderApplicationBody();
     }

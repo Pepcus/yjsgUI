@@ -1,6 +1,5 @@
 import { put } from 'redux-saga/effects';
 
-import { getAppConfig } from 'apis/core';
 import { setLoadingStateAction } from 'actions/loaderActions';
 import { setAppConfigAction } from 'actions/app';
 import { getAppConfigSaga, getBusCoordinatorsConfigSaga } from 'sagas/assetFilesSaga';
