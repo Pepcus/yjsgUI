@@ -25,7 +25,7 @@ export const getFormData = ({
   formConfig,
 }) => {
   const { ADMIN } = USER_TYPES;
-  const { INDORE } = TENANT;
+  const { INDORE, DEFAULT } = TENANT;
   let schema = {};
   let uiSchema = {};
   let formData = {};
@@ -41,7 +41,7 @@ export const getFormData = ({
     validation = formConfig.validation;
     defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
 
-  } else if (tenant === INDORE) {
+  } else if (tenant === INDORE || tenant === DEFAULT || !tenant) {
     if (user === ADMIN) {
       schema = formConfig.schema;
       uiSchema = {

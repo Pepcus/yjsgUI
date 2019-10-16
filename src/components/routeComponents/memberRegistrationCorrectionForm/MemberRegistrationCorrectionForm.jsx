@@ -159,7 +159,7 @@ class MemberRegistrationCorrectionForm extends Component {
       fileName = ADMIN_JSON;
     }
     try {
-      fetchFormConfig({ tenant, fileName })
+      fetchFormConfig({ tenant: tenant ? tenant : 'default', fileName })
         .then((response) => {
           if (response) {
             if (this.mounted) {
@@ -181,7 +181,7 @@ class MemberRegistrationCorrectionForm extends Component {
                   formConfig: getFormData({
                     user,
                     onlyOptInForm,
-                    tenant,
+                    tenant: tenant ? tenant : 'default',
                     member: this.state.member,
                     renderBackButton: this.renderBackButton,
                     renderSubmitButtons: this.renderSubmitButtons,
@@ -465,7 +465,7 @@ class MemberRegistrationCorrectionForm extends Component {
           renderBackButton={this.renderBackButton}
           renderSubmitButtons={this.renderSubmitButtons}
           submitMemberDataForOnlyOptInCase={this.submitMemberDataForOnlyOptInCase}
-          tenant={tenant}
+          tenant={tenant ? tenant : 'default'}
           transformErrors={this.transformErrors}
           user={user}
           validate={this.validate}
