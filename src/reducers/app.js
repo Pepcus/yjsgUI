@@ -10,6 +10,7 @@ const appConfig = (state = { ...initialState }, action) => {
       return {
         ...state,
         ...action.config,
+        tenant: action.config.tenant || 'default',
       };
     }
     case 'SET_BOOTSTRAPPED_FLAG': {
