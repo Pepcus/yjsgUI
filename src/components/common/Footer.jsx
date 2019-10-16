@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -63,42 +62,37 @@ const Footer = ({
     <FooterStyled
       type="title"
       style={footerObject.titleStyle}
-    > {FOOTER_CONTACT_TEXT}
+    >
+      {FOOTER_CONTACT_TEXT}
       <TitleStyled type="caption">
         {footerObject.title ? footerObject.title : getFooterText()}
       </TitleStyled>
     </FooterStyled>
   );
 
-  return routes.map((route) => {
-    const { footer = {}, path } = route;
-    if (path === location) {
-      return (
-        <FooterWrapper
-          borderRadius="0"
-          padding="0"
-          margin="0"
-          style={footer.footerWrapperStyle ? footer.footerWrapperStyle : {}}
-        >
-          {renderFooterName(footer)}
-        </FooterWrapper>
-      );
-    } return null;
-  });
+  const route = routes.find(({ path }) => path === location);
+  const { footer = {} } = route;
+
+  return (
+    <FooterWrapper
+      borderRadius="0"
+      padding="0"
+      margin="0"
+      style={footer.footerWrapperStyle ? footer.footerWrapperStyle : {}}
+    >
+      {renderFooterName(footer)}
+    </FooterWrapper>
+  );
 };
 
 Footer.propTypes = {
   location: PropTypes.string,
-  routes: PropTypes.array,
   tenant: PropTypes.string,
-  title: PropTypes.object,
 };
 
 Footer.defaultProps = {
   location: '',
-  routes: [],
   tenant: '',
-  title: {},
 };
 
 const mapStateToProps = state => ({

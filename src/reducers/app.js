@@ -1,13 +1,15 @@
+import get from 'lodash/get';
+
 const initialState = {
   bootstrapped: false,
 };
 
-export const appConfig = (state = { ...initialState }, action) => {
+const appConfig = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'SET_APP_CONFIG': {
       return {
         ...state,
-        config: action.config,
+        ...action.config,
       };
     }
     case 'SET_BOOTSTRAPPED_FLAG': {
@@ -22,6 +24,10 @@ export const appConfig = (state = { ...initialState }, action) => {
   }
 };
 
-export const getAppConfig = state => state.appConfig.config;
+export const getAppConfig = state => state.appConfig;
 
 export const getBootstrappedFlag = state => state.appConfig.bootstrapped;
+
+export const getTenantName = state => get(state, 'appConfig.tenant');
+
+export default appConfig;
