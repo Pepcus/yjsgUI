@@ -23,14 +23,4 @@ export const fetchFileConfig = () => (
   })
 );
 
-/**
- * fetchFormConfig method fetch file data
- * @param {Object} fileDetails
- * @return {Promise}
- */
-export const fetchFormConfig = ({ tenant, fileName }) => (
-  GET({
-    url: `src/config/tenant/${tenant}/${fileName}.json`,
-  }));
-
 // TODO by Pratik : Add download file API

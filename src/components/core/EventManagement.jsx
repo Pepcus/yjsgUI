@@ -8,6 +8,7 @@ import APP_THEME from 'constants/theme';
 import AppContainer from 'components/core/AppContainer';
 import { getAppConfig } from 'reducers/app';
 import { bootstrapApplicationAction } from 'actions/coreActions';
+import CustomLoader from 'components/common/CustomLoader';
 
 /**
  * Wrapper of the entire application
@@ -36,7 +37,9 @@ class EventManagement extends React.Component {
     }
 
     return (
-      <h1>Loading</h1>
+      <div>
+        <CustomLoader />
+      </div>
     );
   }
 }

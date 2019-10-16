@@ -1,6 +1,6 @@
-import {put} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
-import { getAppConfig } from 'apis/assetFilesAPI';
+import { getAppConfig } from 'apis/core';
 import { setLoadingStateAction } from 'actions/loaderActions';
 import { setAppConfigAction } from 'actions/app';
 
