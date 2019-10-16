@@ -6,7 +6,7 @@ import { generateTheme } from 'pepcus-core/utils/theme';
 
 import APP_THEME from 'constants/theme';
 import AppContainer from 'components/core/AppContainer';
-import { getAppConfig } from 'reducers/app';
+import { getAppConfig, getBootstrappedFlag } from 'reducers/app';
 import { bootstrapApplicationAction } from 'actions/coreActions';
 import CustomLoader from 'components/common/CustomLoader';
 
@@ -19,8 +19,8 @@ class EventManagement extends React.Component {
   }
 
   renderApplicationBody() {
-    const { appConfig } = this.props;
-    const theme = generateTheme(APP_THEME[appConfig.environment ? appConfig.environment : 'production']);
+    const { config } = this.props;
+    const theme = generateTheme(APP_THEME[config.environment ? config.environment : 'production']);
 
     return (
       <ThemeProvider theme={theme}>
@@ -30,9 +30,8 @@ class EventManagement extends React.Component {
   }
 
   render() {
-    const { appConfig: { bootstrapped } } = this.props;
-
-    if (bootstrapped) {
+    const { bootstrappedFlag } = this.props;
+    if (bootstrappedFlag) {
       return this.renderApplicationBody();
     }
 
@@ -45,18 +44,21 @@ class EventManagement extends React.Component {
 }
 
 EventManagement.propTypes = {
-  appConfig: PropTypes.object,
+  bootstrappedFlag: PropTypes.bool,
+  config: PropTypes.object,
   bootstrapApplicationAction: PropTypes.func.isRequired,
 };
 
 EventManagement.defaultProps = {
-  appConfig: {},
+  bootstrappedFlag: false,
+  config: {},
 };
 
 
 function mapStateToProps(state) {
   return {
-    appConfig: getAppConfig(state),
+    config: getAppConfig(state),
+    bootstrappedFlag: getBootstrappedFlag(state),
   };
 }
 

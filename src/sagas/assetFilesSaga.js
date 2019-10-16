@@ -15,6 +15,7 @@ import {
 import {
   fetchFileConfig,
 } from 'apis/file';
+import { setAppConfigAction } from 'actions/app';
 
 export function* fetchFilesConfigSaga() {
   const errorMessage = 'Unable to fetch file config.';
@@ -32,11 +33,12 @@ export function* fetchFilesConfigSaga() {
 }
 
 export function* getAppConfigSaga() {
-  const errorMessage = 'Unable to fetch  config.';
+  const errorMessage = 'Unable to fetch config.';
   try {
-    const response = yield getAppConfig();
-    if (response) {
-      yield put(loadedAppDataSuccessAction(response));
+    const appConfig = yield getAppConfig();
+    if (appConfig) {
+      yield put(loadedAppDataSuccessAction(appConfig));
+      yield put(setAppConfigAction({ ...appConfig }));
     } else {
       yield put(loadAppDataFailedAction(errorMessage));
     }

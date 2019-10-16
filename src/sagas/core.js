@@ -1,20 +1,24 @@
 import { put } from 'redux-saga/effects';
 
-import { getAppConfig } from 'apis/core';
-import { setLoadingStateAction } from 'actions/loaderActions';
-import { setAppConfigAction } from 'actions/app';
+import {
+  setLoadingStateAction,
+} from 'actions/loaderActions';
+import {
+  setBootstrappedFlag,
+} from 'actions/app';
 
-export function* bootstrapApplication(action) {
-  console.log('bootstrapApplication --- ', action);
+import { getAppConfigSaga, getBusCoordinatorsConfigSaga } from 'sagas/assetFilesSaga';
 
+export function* bootstrapApplication() {
   try {
     yield put(setLoadingStateAction(true));
-    const appConfig = yield getAppConfig();
-
-    yield put(setAppConfigAction(appConfig));
-    console.log('appConfig --- ', appConfig);
+    yield getAppConfigSaga();
+    yield getBusCoordinatorsConfigSaga();
+    yield put(setBootstrappedFlag(true));
   } catch (e) {
     console.error('Error - ', e);
+    yield put(setBootstrappedFlag(false));
+    yield put(setLoadingStateAction(false));
   } finally {
     yield put(setLoadingStateAction(false));
   }

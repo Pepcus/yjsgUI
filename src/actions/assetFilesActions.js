@@ -12,14 +12,6 @@ export const fetchFileConfigFailedAction = errorMessage => ({
   errorMessage,
 });
 
-export const loadAppDataAction = () => ({
-  type: 'LOAD_APP_DATA_ACTION',
-});
-
-export const loadBusCoordinatorsDataAction = () => ({
-  type: 'LOAD_BUS_COORDINATORS_DATA_ACTION',
-});
-
 export const loadBusCoordinatorsDataSuccessAction = busCoordinators => ({
   type: 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION',
   busCoordinators,

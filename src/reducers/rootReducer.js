@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import appConfig from './app';
+import { appConfig } from './app';
 import { appReducer } from './appReducer';
 import { memberRegistrationReducer } from './memberRegistrationReducer';
 import { allMembersDataReducer } from './allMembersDataReducer';

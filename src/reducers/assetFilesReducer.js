@@ -7,6 +7,7 @@ const initialState = {
   isAppLoaded: false,
   isAppLoadingFailed: false,
   isRegisterCorrectionEnabled: false,
+  isBusCoordinatorsDataFailed: false,
 };
 
 export const assetFilesReducer = (state = initialState, action) => {
@@ -30,12 +31,6 @@ export const assetFilesReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
-    case 'LOAD_APP_DATA_ACTION':
-      return {
-        ...state,
-        isAppLoaded: false,
-        isAppLoadingFailed: false,
-      };
     case 'LOADED_APP_DATA_SUCCESS_ACTION':
       return {
         ...state,
@@ -56,11 +51,6 @@ export const assetFilesReducer = (state = initialState, action) => {
         isAppLoaded: false,
         isAppLoadingFailed: true,
         isRegisterCorrectionEnabled: false,
-      };
-    case 'LOAD_BUS_COORDINATORS_DATA_ACTION':
-      return {
-        ...state,
-        isBusCoordinatorsDataFailed: false,
       };
     case 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION':
       return {
