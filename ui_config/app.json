@@ -1,5 +1,4 @@
 {
   "environment": "production",
-  "tenant": "default",
   "isRegisterCorrectionEnabled": true
 }

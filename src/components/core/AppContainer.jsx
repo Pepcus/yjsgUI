@@ -20,7 +20,7 @@ import {
 import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
 } from 'constants/text';
-import Routes from './Routes';
+import Routes from 'components/core/Routes';
 
 const MessageBoxStyled = styled(Box)`
     height: auto !important;

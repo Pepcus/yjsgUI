@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -9,15 +8,16 @@ import { routes } from 'config/appConfig.json';
 import Header from 'components/common/Header';
 import Loader from 'components/common/Loader';
 import Footer from 'components/common/Footer';
+import AppRoute from './AppRoute';
 
-import Context from './ConfigProvider';
-import RouteComponents from '../routeComponents';
+import Context from '../ConfigProvider';
+import RouteComponents from '../../routeComponents';
 
 /**
  * Routes component maintain all routes
  * And send all previous location path to all routes.
+ *
  * @type {Class}
- * @return {HTML}
  */
 class Routes extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class Routes extends Component {
       });
     }
   }
-  renderRoutes = Consumer => routes.map((route) => {
+  renderRoutes = () => routes.map((route) => {
     const RouteComponent = RouteComponents[route.component];
 
     if (route.isActive) {
@@ -46,13 +46,13 @@ class Routes extends Component {
           exact
           path={route.path}
           component={() => (
-            <Consumer>
-              { context => <RouteComponent context={context} /> }
-            </Consumer>
-            )}
+            <AppRoute key={route.name} route={route} Component={RouteComponent} />
+          )}
         />
       );
-    } return null;
+    }
+
+    return null;
   });
   render() {
     const { Consumer } = Context;
@@ -65,7 +65,7 @@ class Routes extends Component {
           <Consumer>
             {context => <Header context={context} location={location.pathname} />}
           </Consumer>
-          {this.renderRoutes(Consumer)}
+          {this.renderRoutes()}
           <Loader />
           <Footer location={location.pathname} />
         </Context.Provider>
