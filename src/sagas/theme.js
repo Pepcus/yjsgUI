@@ -1,13 +1,15 @@
-import { put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { getAppTheme } from 'apis/core';
 import {
   loadedAppThemeSuccessAction,
   loadAppThemeFailedAction,
 } from 'actions/themeActions';
+import { getTenantName } from 'reducers/app';
 
-export function* getAppThemeSaga({ tenant }) {
+export function* getAppThemeSaga() {
   const errorMessage = 'Unable to fetch theme.';
   try {
+    const tenant = yield select(getTenantName);
     const appTheme = yield getAppTheme({ tenant });
     if (appTheme) {
       yield put(loadedAppThemeSuccessAction(appTheme));

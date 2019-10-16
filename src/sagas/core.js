@@ -6,19 +6,31 @@ import {
 import {
   setBootstrappedFlag,
 } from 'actions/app';
-import {
-  getAppConfigSaga,
-  getBusCoordinatorsConfigSaga,
-} from 'sagas/assetFilesSaga';
+
 import { getAppThemeSaga } from 'sagas/theme';
-import { getAppConfig } from 'reducers/app';
+import { getAppConfig, getTenantName } from 'reducers/app';
+import { getAppConfigSaga, getBusCoordinatorsConfigSaga } from 'sagas/assetFilesSaga';
+import { fetchAppConfig } from 'apis/core';
+import { setApplicationConfigurationAction } from 'actions/config';
+
+function* getAppConfigurableDataSaga() {
+  const tenant = yield select(getTenantName);
+  const appConfig = yield fetchAppConfig(tenant);
+  yield put(setApplicationConfigurationAction(appConfig));
+}
+
+function* getApplicationConstants() {
+  const tenant = yield select(getTenantName);
+}
 
 export function* bootstrapApplication() {
   try {
     yield put(setLoadingStateAction(true));
     yield getAppConfigSaga();
-    const config = yield select(getAppConfig);
-    yield getAppThemeSaga({ tenant: config.tenant ? config.tenant : 'default' });
+    yield select(getAppConfig);
+    yield getAppThemeSaga();
+    yield getAppConfigurableDataSaga();
+    yield getApplicationConstants();
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
   } catch (e) {

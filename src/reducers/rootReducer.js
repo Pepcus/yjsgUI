@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import appConfig from './app';
+import config from './config';
 import { appReducer } from './appReducer';
 import { theme } from './themeReducer';
 import { memberRegistrationReducer } from './memberRegistrationReducer';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   appConfig,
   theme,
   appReducer,
+  config,
   memberRegistrationReducer,
   allMembersDataReducer,
   loaderReducer,
