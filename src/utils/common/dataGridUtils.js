@@ -184,14 +184,19 @@ export const formatMembers = ({ members }) => members.map((item) => {
 },
 );
 
+// TODO by Pratik: Need to be refactored
 export const getChangedVisibleColumnConfig = ({ selectValue, temporaryVisibleColumnConfig }) => {
   if (selectValue) {
     for (const key in temporaryVisibleColumnConfig) {
-      temporaryVisibleColumnConfig[key] = true;
+      if (Object.prototype.hasOwnProperty.call(temporaryVisibleColumnConfig, key)) {
+        temporaryVisibleColumnConfig[key] = true;
+      }
     }
   } else if (!selectValue) {
     for (const key in temporaryVisibleColumnConfig) {
-      temporaryVisibleColumnConfig[key] = false;
+      if (Object.prototype.hasOwnProperty.call(temporaryVisibleColumnConfig, key)) {
+        temporaryVisibleColumnConfig[key] = false;
+      }
     }
   }
   return temporaryVisibleColumnConfig;
@@ -249,13 +254,15 @@ export const getUpdatedVisibleColumnConfig = ({ visibleColumnConfig }) => {
   let changedVisibleColumnConfig = {};
 
   for (const key in visibleColumnConfig) {
-    if (visibleColumnConfig[key]) {
-      count += 1;
-    }
-    if (count > 0) {
-      changedVisibleColumnConfig = { ...visibleColumnConfig, edit: true };
-    } else {
-      changedVisibleColumnConfig = { ...visibleColumnConfig, edit: false };
+    if (Object.prototype.hasOwnProperty.call(visibleColumnConfig, key)) {
+      if (visibleColumnConfig[key]) {
+        count += 1;
+      }
+      if (count > 0) {
+        changedVisibleColumnConfig = { ...visibleColumnConfig, edit: true };
+      } else {
+        changedVisibleColumnConfig = { ...visibleColumnConfig, edit: false };
+      }
     }
   }
   return changedVisibleColumnConfig;
