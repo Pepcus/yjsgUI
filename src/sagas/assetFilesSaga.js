@@ -32,7 +32,7 @@ export function* fetchFilesConfigSaga() {
 }
 
 export function* getAppConfigSaga() {
-  const errorMessage = 'Unable to fetch  config.';
+  const errorMessage = 'Unable to fetch config.';
   try {
     const response = yield getAppConfig();
     if (response) {
