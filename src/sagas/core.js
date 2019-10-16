@@ -8,10 +8,9 @@ import { getAppConfigSaga, getBusCoordinatorsConfigSaga } from 'sagas/assetFiles
 export function* bootstrapApplication() {
   try {
     yield put(setLoadingStateAction(true));
-    const appConfig = yield getAppConfig();
     yield getAppConfigSaga();
     yield getBusCoordinatorsConfigSaga();
-    yield put(setAppConfigAction(appConfig));
+    yield put(setAppConfigAction());
   } catch (e) {
     console.error('Error - ', e);
     yield put(setLoadingStateAction(false));

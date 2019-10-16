@@ -9,6 +9,7 @@ import AppContainer from 'components/core/AppContainer';
 import { getAppConfig } from 'reducers/app';
 import { bootstrapApplicationAction } from 'actions/coreActions';
 import CustomLoader from 'components/common/CustomLoader';
+import { getApplicationMode } from 'reducers/assetFilesReducer';
 
 /**
  * Wrapper of the entire application
@@ -19,8 +20,8 @@ class EventManagement extends React.Component {
   }
 
   renderApplicationBody() {
-    const { appConfig } = this.props;
-    const theme = generateTheme(APP_THEME[appConfig.environment ? appConfig.environment : 'production']);
+    const { modeVariable } = this.props;
+    const theme = generateTheme(APP_THEME[modeVariable ? modeVariable : 'production']);
 
     return (
       <ThemeProvider theme={theme}>
@@ -31,7 +32,7 @@ class EventManagement extends React.Component {
 
   render() {
     const { appConfig: { bootstrapped } } = this.props;
-
+    console.log('appConfig', this.props.appConfig);
     if (bootstrapped) {
       return this.renderApplicationBody();
     }
@@ -47,16 +48,19 @@ class EventManagement extends React.Component {
 EventManagement.propTypes = {
   appConfig: PropTypes.object,
   bootstrapApplicationAction: PropTypes.func.isRequired,
+  modeVariable: PropTypes.string,
 };
 
 EventManagement.defaultProps = {
   appConfig: {},
+  modeVariable: '',
 };
 
 
 function mapStateToProps(state) {
   return {
     appConfig: getAppConfig(state),
+    modeVariable: getApplicationMode(state),
   };
 }
 
