@@ -11,10 +11,14 @@ import Button from 'pepcus-core/lib/Button';
 import {
   ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
   formSubmitBtnText,
-  FILES_NAME,
   goBackBtnText,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
+import {
+  FILES_NAME,
+} from 'constants/file';
 import {
   isUpdatedResetAction,
   updateMemberDataAction,

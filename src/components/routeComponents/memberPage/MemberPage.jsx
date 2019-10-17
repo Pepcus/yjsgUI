@@ -25,8 +25,10 @@ import {
   eventDate,
   eventVenue,
   newRegistrationBtnText,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getMember } from 'reducers/memberRegistrationReducer';
 import {

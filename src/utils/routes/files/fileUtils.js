@@ -1,5 +1,5 @@
 import * as XLSX from 'xlsx';
-import { FILE_PRESENTATION_TYPE } from 'constants/yjsg';
+import { FILE_PRESENTATION_TYPE } from 'constants/file';
 
 export const formatXlsxToJson = (response) => {
   const data = new Uint8Array(response);

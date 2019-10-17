@@ -34,40 +34,13 @@ export const infoUpdateSuccessMessage = 'आपकी जानकारी स�
 
 export const adminLoginBtnText = 'Admin Login';
 
-export const adminId = 'yjsgadmin';
-
-export const adminPassword = '451727';
-
-export const USER_TYPES = {
-  MEMBER: 'member',
-  ADMIN: 'admin',
-  MEMBER_WITH_URL: 'member_with_url',
-};
-
 export const TENANT = {
   INDORE: 'YJSG-Indore',
   BHOPAL: 'YJSG-Bhopal',
   DEFAULT: 'default',
 };
 
-export const FILE_PRESENTATION_TYPE = {
-  NORMAL_TABULAR: 'normalTabular',
-  COMPLEX_GRID: 'complexGrid',
-};
-
-export const SUPPORTED_FILE_TYPES = {
-  CSV: 'csv',
-  XLSX: 'xlsx',
-  XLS: 'xls',
-};
-
 export const ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG = 'Error occurred to load form config.';
-
-export const FILES_NAME = {
-  ONLY_OPT_IN_JSON: 'onlyEditOptIn',
-  MEMBER_JSON: 'STUDENT',
-  ADMIN_JSON: 'ADMIN',
-};
 
 export const CLOSE_BROWSER_MANUALLY_MESSAGE = 'Please close your browser manually.';
 

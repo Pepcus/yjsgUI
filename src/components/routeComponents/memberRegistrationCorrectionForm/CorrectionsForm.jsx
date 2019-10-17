@@ -9,7 +9,9 @@ import Form from 'pepcus-core/lib/Form';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import fields from 'components/common/fields';
-import { USER_TYPES } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import OtherInformationEditLink from './OtherInformationEditLink';
 import OnlyOptInSubmitButton from './OnlyOptInSubmitButton';
 

@@ -31,7 +31,7 @@ import {
 import {
   fetchFilesConfigAction,
 } from 'actions/assetFilesActions';
-import { SUPPORTED_FILE_TYPES } from 'constants/yjsg';
+import { SUPPORTED_FILE_TYPES } from 'constants/file';
 import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from 'constants/messages';
 import { manageMembersTableWidth } from 'utils/common';
 import {

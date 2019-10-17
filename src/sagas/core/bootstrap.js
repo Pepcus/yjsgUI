@@ -19,14 +19,12 @@ import {
   fetchAppConfig,
   getAppConfig,
   getBusCoordinatorsConfig,
-  getConstantsConfig,
-  getDefaultConstantsConfig,
+  getAppConstants,
 } from 'apis/core';
 import { setApplicationConfigurationAction } from 'actions/config';
 import { mergeObjects } from 'utils/common/object';
 import {
-  loadConstantsConfigFailedAction,
-  loadConstantsConfigSuccessAction,
+  setAppConstantsAction,
 } from 'actions/appConstantsActions';
 
 function* getAppConfigurableDataSaga() {
@@ -37,20 +35,10 @@ function* getAppConfigurableDataSaga() {
 
 function* getApplicationConstants() {
   const tenant = yield select(getTenantName);
-  const errorMessage = 'Unable to fetch constants config.';
-  try {
-    const defaultConstantsConfig = yield getDefaultConstantsConfig();
-    const tenantConstantsConfig = yield getConstantsConfig({ tenant });
-    const finalConstantsConfig = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
-    if (finalConstantsConfig) {
-      yield put(loadConstantsConfigSuccessAction(finalConstantsConfig));
-    } else {
-      yield put(loadConstantsConfigFailedAction(errorMessage));
-    }
-  } catch (e) {
-    console.error(e);
-    yield put(loadConstantsConfigFailedAction(errorMessage));
-  }
+  const defaultConstantsConfig = yield getAppConstants({ tenant: 'default' });
+  const tenantConstantsConfig = yield getAppConstants({ tenant });
+  const constants = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
+  yield put(setAppConstantsAction(constants));
 }
 
 export function* getAppConfigSaga() {

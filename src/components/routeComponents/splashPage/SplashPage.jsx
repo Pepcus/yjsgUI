@@ -40,8 +40,10 @@ import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   eventDate,
   eventVenue,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {

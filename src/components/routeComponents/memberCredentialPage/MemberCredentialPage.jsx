@@ -35,8 +35,10 @@ import {
   eventVenue,
   goBackBtnText,
   viewEditInfoBtnText,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
