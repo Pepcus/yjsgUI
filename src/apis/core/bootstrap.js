@@ -26,3 +26,9 @@ export const getAppTheme = ({ tenant }) => (
   GET({
     url: `src/config/tenant/${tenant}/theme.json`,
   }));
+
+export const getAppConstants = ({ tenant }) => (
+  GET({
+    url: `src/config/tenant/${tenant}/constants/text.json`,
+  })
+);

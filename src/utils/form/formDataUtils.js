@@ -1,7 +1,9 @@
 import {
   TENANT,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import { isUserMember } from './registrationFormUtils';
 // TODO: remove tenant check condition
 /**

@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import {
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 
 const {
   MEMBER_WITH_URL,

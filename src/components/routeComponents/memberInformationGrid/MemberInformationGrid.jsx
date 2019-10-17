@@ -60,7 +60,7 @@ import {
 } from 'actions/loginActions';
 import {
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 
 import ColumnConfiguration from './columnConfig';
 import AdvanceSearch from './advanceSearch/AdvanceSearch';

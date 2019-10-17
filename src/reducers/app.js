@@ -27,7 +27,7 @@ const appConfig = (state = { ...initialState }, action) => {
 
 export const getAppConfig = state => state.appConfig;
 
-export const getBootstrappedFlag = state => state.appConfig.bootstrapped;
+export const isBootstrapComplete = state => state.appConfig.bootstrapped;
 
 export const getTenantName = state => get(state, 'appConfig.tenant');
 

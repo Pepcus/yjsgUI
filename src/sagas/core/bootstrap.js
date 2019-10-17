@@ -19,8 +19,13 @@ import {
   fetchAppConfig,
   getAppConfig,
   getBusCoordinatorsConfig,
+  getAppConstants,
 } from 'apis/core';
 import { setApplicationConfigurationAction } from 'actions/config';
+import { mergeObjects } from 'utils/common/object';
+import {
+  setAppConstantsAction,
+} from 'actions/appConstantsActions';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
@@ -30,6 +35,10 @@ function* getAppConfigurableDataSaga() {
 
 function* getApplicationConstants() {
   const tenant = yield select(getTenantName);
+  const defaultConstantsConfig = yield getAppConstants({ tenant: 'default' });
+  const tenantConstantsConfig = yield getAppConstants({ tenant });
+  const constants = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
+  yield put(setAppConstantsAction(constants));
 }
 
 export function* getAppConfigSaga() {

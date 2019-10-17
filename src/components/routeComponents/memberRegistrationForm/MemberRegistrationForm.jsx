@@ -17,8 +17,10 @@ import {
   ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
   formSubmitBtnText,
   goBackBtnText,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import {
   createMemberDataAction,
 } from 'actions/memberRegistrationActions';

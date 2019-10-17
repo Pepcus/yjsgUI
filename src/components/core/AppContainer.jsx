@@ -18,7 +18,7 @@ import {
   getIsAppLoadedError,
 } from 'reducers/assetFilesReducer';
 import {
-  getBootstrappedFlag,
+  isBootstrapComplete,
 } from 'reducers/app';
 import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
@@ -49,6 +49,7 @@ const MessageBoxStyled = styled(Box)`
  * AppContainer is the wrapper of application.
  * @param {Boolean} isLoaded
  * @param {Boolean} isAppLoadingFailed
+ * @param {Boolean} bootstrapFlag
  * @return {HTML}
  */
 const AppContainer = ({
@@ -91,7 +92,7 @@ AppContainer.defaultProps = {
 const mapStateToProps = state => ({
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
-  bootstrapFlag: getBootstrappedFlag(state),
+  bootstrapFlag: isBootstrapComplete(state),
 });
 
 const mapDispatchToProps = () => ({
