@@ -20,11 +20,8 @@ import {
 import {
   isBootstrapComplete,
 } from 'reducers/app';
-import {
-  ERROR_MESSAGE_OF_LOAD_APP_DATA,
-} from 'constants/text';
 import Routes from 'components/core/Routes';
-import {getAppConstantsConfig} from "reducers/constants";
+import { getAppConstantsConfig } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     height: auto !important;
@@ -55,12 +52,12 @@ const MessageBoxStyled = styled(Box)`
  * @return {HTML}
  */
 const AppContainer = ({
-                        appConstants,
+  appConstants,
   isLoaded,
   isAppLoadingFailed,
   bootstrapFlag,
 }) => {
-
+  const { ERROR_MESSAGE_OF_LOAD_APP_DATA } = appConstants;
   if (isLoaded && !isAppLoadingFailed) {
     return (
       <HashRouter>

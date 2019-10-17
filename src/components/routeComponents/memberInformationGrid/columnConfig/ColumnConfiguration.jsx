@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
@@ -21,7 +22,7 @@ import {
   getChangedVisibleColumnConfig,
   getStyled,
 } from 'utils/common';
-import { PLEASE_SELECT_COLUMNS_TEXT } from 'constants/text';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 import { schema, uiSchema } from './columnConfig.json';
 
@@ -437,7 +438,8 @@ class ColumnConfiguration extends Component {
   };
 
   render() {
-    const { closeColumnOption, columnOptionIsOpen } = this.props;
+    const { closeColumnOption, columnOptionIsOpen, appConstants } = this.props;
+    const { PLEASE_SELECT_COLUMNS_TEXT, CLOSE, SAVE } = appConstants;
     const UiSchema = {
       ...uiSchema,
       visibleColumnConfig: {
@@ -491,7 +493,7 @@ class ColumnConfiguration extends Component {
                 noMinWidth
                 onClick={closeColumnOption}
               >
-                Close
+                { CLOSE }
               </ButtonStyled>
             </CloseButtonWrapperStyled>
             <SaveButtonWrapperStyled padding="0" size={2}>
@@ -500,7 +502,7 @@ class ColumnConfiguration extends Component {
                 noMinWidth
                 onClick={this.setValuesOfVisibleColumnConfig}
               >
-                Save
+                { SAVE }
               </Button>
             </SaveButtonWrapperStyled>
           </Row>
@@ -511,6 +513,7 @@ class ColumnConfiguration extends Component {
 }
 
 ColumnConfiguration.propTypes = {
+  appConstants: PropTypes.object,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
   selectValue: PropTypes.bool,
@@ -519,6 +522,7 @@ ColumnConfiguration.propTypes = {
 };
 
 ColumnConfiguration.defaultProps = {
+  appConstants: {},
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
   selectValue: true,
@@ -526,4 +530,10 @@ ColumnConfiguration.defaultProps = {
   visibleColumnConfig: {},
 };
 
-export default ColumnConfiguration;
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+export default connect(
+  mapStateToProps,
+  null,
+)(ColumnConfiguration);

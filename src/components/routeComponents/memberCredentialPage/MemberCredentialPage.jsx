@@ -28,20 +28,13 @@ import {
 import {
   getHash,
 } from 'reducers/appReducer';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
-import {
-  eventDate,
-  eventVenue,
-  goBackBtnText,
-  viewEditInfoBtnText,
-} from 'constants/yjsg';
 import {
   USER_TYPES,
 } from 'constants/member';
-import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
+import { getAppConstantsConfig } from 'reducers/constants';
 import fields from 'components/common/fields';
 
 import ImageWrapper from './ImageWrapper';
@@ -193,6 +186,8 @@ class MemberCredentialPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -236,9 +231,15 @@ class MemberCredentialPage extends Component {
       isPreviousLocation,
     } = this.state;
     const {
-      tenant,
       context,
+      appConstants,
     } = this.props;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+      BACK,
+      VIEW_OR_EDIT_INFO,
+    } = appConstants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -266,14 +267,14 @@ class MemberCredentialPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'default']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'default']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -304,7 +305,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.redirectToPreviousLocation}
                   >
-                    {goBackBtnText}
+                    {BACK}
                   </Button>
                 </Col>
                 <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
@@ -312,7 +313,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.fetchStudentById}
                   >
-                    {viewEditInfoBtnText}
+                    {VIEW_OR_EDIT_INFO}
                   </Button>
                 </Col>
               </Row>
@@ -325,6 +326,7 @@ class MemberCredentialPage extends Component {
 }
 
 MemberCredentialPage.propTypes = {
+  appConstants: PropTypes,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
@@ -332,10 +334,10 @@ MemberCredentialPage.propTypes = {
   setStudentCredentials: PropTypes.func,
   setUserType: PropTypes.func,
   memberId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  tenant: PropTypes.string,
 };
 
 MemberCredentialPage.defaultProps = {
+  appConstants: {},
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
@@ -343,14 +345,13 @@ MemberCredentialPage.defaultProps = {
   setStudentCredentials: () => {},
   setUserType: () => {},
   memberId: '',
-  tenant: '',
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   hashLink: getHash(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
-  tenant: getApplicationTenant(state),
 });
 
 const mapDispatchToProps = dispatch => ({
