@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { generateTheme } from 'pepcus-core/utils/theme';
 
 import AppContainer from 'components/core/AppContainer';
-import { getAppConfig, getBootstrappedFlag } from 'reducers/app';
+import { getAppConfig, isBootstrapComplete } from 'reducers/app';
 import { getAppTheme } from 'reducers/themeReducer';
 import { bootstrapApplicationAction } from 'actions/coreActions';
 import CustomLoader from 'components/common/CustomLoader';
@@ -58,7 +58,7 @@ EventManagement.defaultProps = {
 function mapStateToProps(state) {
   return {
     config: getAppConfig(state),
-    bootstrappedFlag: getBootstrappedFlag(state),
+    bootstrappedFlag: isBootstrapComplete(state),
     appTheme: getAppTheme(state),
   };
 }

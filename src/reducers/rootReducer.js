@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import appConfig from './app';
 import config from './config';
 import { appReducer } from './appReducer';
+import { constantsConfigReducer } from './constantsConfigReducer';
 import { theme } from './themeReducer';
 import { memberRegistrationReducer } from './memberRegistrationReducer';
 import { allMembersDataReducer } from './allMembersDataReducer';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   theme,
   appReducer,
   config,
+  constantsConfigReducer,
   memberRegistrationReducer,
   allMembersDataReducer,
   loaderReducer,
