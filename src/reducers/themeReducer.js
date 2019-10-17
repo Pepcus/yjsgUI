@@ -5,14 +5,14 @@ const initialState = {
 
 export const theme = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case 'LOADED_APP_THEME_SUCCESS_ACTION': {
+    case 'LOAD_APP_THEME_SUCCESS_ACTION': {
       return {
         ...state,
         hasAppTheme: true,
         appTheme: { ...action.appTheme },
       };
     }
-    case 'LOADED_APP_THEME_FAILED_ACTION': {
+    case 'LOAD_APP_THEME_FAILED_ACTION': {
       return {
         ...state,
         appTheme: {},

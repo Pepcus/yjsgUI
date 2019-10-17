@@ -1,7 +1,7 @@
 import { put, select } from 'redux-saga/effects';
 import { getAppTheme } from 'apis/core';
 import {
-  loadedAppThemeSuccessAction,
+  loadAppThemeSuccessAction,
   loadAppThemeFailedAction,
 } from 'actions/themeActions';
 import { getTenantName } from 'reducers/app';
@@ -12,7 +12,7 @@ export function* getAppThemeSaga() {
     const tenant = yield select(getTenantName);
     const appTheme = yield getAppTheme({ tenant });
     if (appTheme) {
-      yield put(loadedAppThemeSuccessAction(appTheme));
+      yield put(loadAppThemeSuccessAction(appTheme));
     } else {
       yield put(loadAppThemeFailedAction(errorMessage));
     }

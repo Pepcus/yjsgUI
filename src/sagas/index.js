@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
 
-import { bootstrapApplication } from './core';
+import { bootstrapApplication } from './core/bootstrap';
 import {
   createMemberSaga,
   fetchMemberSaga,
@@ -12,10 +12,10 @@ import {
   updateMemberSaga,
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
-} from './rootSaga';
+} from './member';
 import {
   fetchFilesConfigSaga,
-} from './assetFilesSaga';
+} from './file';
 import { loginAdminSaga } from './login';
 
 const coreSagas = [

@@ -18,6 +18,9 @@ import {
   getIsAppLoadedError,
 } from 'reducers/assetFilesReducer';
 import {
+  getBootstrappedFlag,
+} from 'reducers/app';
+import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
 } from 'constants/text';
 import Routes from 'components/core/Routes';
@@ -51,6 +54,7 @@ const MessageBoxStyled = styled(Box)`
 const AppContainer = ({
   isLoaded,
   isAppLoadingFailed,
+  bootstrapFlag,
 }) => {
 
   if (isLoaded && !isAppLoadingFailed) {
@@ -59,7 +63,7 @@ const AppContainer = ({
         <Route path="/" component={Routes} />
       </HashRouter>
     );
-  } else if (isAppLoadingFailed) {
+  } else if (isAppLoadingFailed || !bootstrapFlag) {
     return (
       <MessageBoxStyled>
         <Typography type="caption" padding="0 15px 0 0">
@@ -75,16 +79,19 @@ const AppContainer = ({
 AppContainer.propTypes = {
   isAppLoadingFailed: PropTypes.bool,
   isLoaded: PropTypes.bool,
+  bootstrapFlag: PropTypes.bool,
 };
 
 AppContainer.defaultProps = {
   isAppLoadingFailed: false,
   isLoaded: false,
+  bootstrapFlag: false,
 };
 
 const mapStateToProps = state => ({
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
+  bootstrapFlag: getBootstrappedFlag(state),
 });
 
 const mapDispatchToProps = () => ({
