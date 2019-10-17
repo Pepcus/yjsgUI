@@ -1,13 +1,11 @@
-const initialState = {
-  appConstants: {},
-};
+const initialState = {};
 
-export const constants = (state = initialState, action) => {
-  switch (action.type) {
+export const constants = (state = initialState, { type, ...actionProps }) => {
+  switch (type) {
     case 'SET_APP_CONSTANTS_ACTION': {
       return {
         ...state,
-        appConstants: action.appConstants,
+        ...actionProps.appConstants,
       };
     }
 
@@ -17,4 +15,4 @@ export const constants = (state = initialState, action) => {
   }
 };
 
-export const getAppConstantsConfig = state => state.constants.appConstants;
+export const getAppConstantsConfig = state => state.appConstants;
