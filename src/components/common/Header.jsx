@@ -23,7 +23,7 @@ import {
 } from 'actions/loginActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';
+import {getAppConstantsConfig} from "reducers/constants";
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -128,6 +128,7 @@ const LinkStyled = styled(Link)`
 
 /**
  * Header render the common header for all route
+ * @param {Object} appConstants
  * @param {Object} context
  * @param {String} location
  * @param {Function} resetAdminCredentials
@@ -139,6 +140,7 @@ const LinkStyled = styled(Link)`
  * @return {HTML}
  */
 const Header = ({
+  appConstants,
   context,
   location,
   resetAdminCredentials,
@@ -148,6 +150,7 @@ const Header = ({
   tenant,
 }) => {
 
+  const { BACK, LOGOUT } = appConstants;
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -178,7 +181,7 @@ const Header = ({
             headerObject.backButtonRedirectTo
               ? headerObject.backButtonRedirectTo : context.previousLocation}
         >
-          <FaIcon margin="0 5px 0 0" icon={faArrowLeft} />Back
+          <FaIcon margin="0 5px 0 0" icon={faArrowLeft} />{BACK}
         </LinkStyled>
       );
     } return null;
@@ -199,7 +202,7 @@ const Header = ({
               ? headerObject.logoutButtonRedirectTo : context.previousLocation}
           onClick={performLogout}
         >
-          <FaIcon margin="0 5px 0 0" icon={faPowerOff} />Logout
+          <FaIcon margin="0 5px 0 0" icon={faPowerOff} />{LOGOUT}
         </LinkStyled>
       );
     } return null;
@@ -209,7 +212,7 @@ const Header = ({
    * It return the header text
    * @return {string}
    */
-  const getHeaderText = () => (title[tenant] ? title[tenant] : DEFAULT_HEADER_TEXT);
+  const getHeaderText = () => (title[tenant] ? title[tenant] : '');
 
   /**
    * Method render header name in header
@@ -312,6 +315,7 @@ const Header = ({
 };
 
 Header.propTypes = {
+  appConstants: PropTypes.object,
   context: PropTypes.object,
   location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
@@ -324,6 +328,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
+  appConstants: {},
   context: {},
   location: '',
   resetAdminCredentials: () => {},
@@ -343,6 +348,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   tenant: getApplicationTenant(state),
 });
 

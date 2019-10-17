@@ -24,6 +24,7 @@ import {
   ERROR_MESSAGE_OF_LOAD_APP_DATA,
 } from 'constants/text';
 import Routes from 'components/core/Routes';
+import {getAppConstantsConfig} from "reducers/constants";
 
 const MessageBoxStyled = styled(Box)`
     height: auto !important;
@@ -47,12 +48,14 @@ const MessageBoxStyled = styled(Box)`
 
 /**
  * AppContainer is the wrapper of application.
+ * @param {Object} appConstants
  * @param {Boolean} isLoaded
  * @param {Boolean} isAppLoadingFailed
  * @param {Boolean} bootstrapFlag
  * @return {HTML}
  */
 const AppContainer = ({
+                        appConstants,
   isLoaded,
   isAppLoadingFailed,
   bootstrapFlag,
@@ -78,18 +81,21 @@ const AppContainer = ({
 };
 
 AppContainer.propTypes = {
+  appConstants: PropTypes.object,
   isAppLoadingFailed: PropTypes.bool,
   isLoaded: PropTypes.bool,
   bootstrapFlag: PropTypes.bool,
 };
 
 AppContainer.defaultProps = {
+  appConstants: {},
   isAppLoadingFailed: false,
   isLoaded: false,
   bootstrapFlag: false,
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
   bootstrapFlag: isBootstrapComplete(state),
