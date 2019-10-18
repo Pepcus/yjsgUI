@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -11,6 +10,8 @@ import Button from 'pepcus-core/lib/Button';
 import FaIcon from 'pepcus-core/lib/FaIcon';
 
 import UploadMembersAttendanceFile from './uploadMembersAttendanceFile';
+import {getConstants} from "reducers/constants";
+import {connect} from "react-redux";
 /**
  TODO: This will be use in future scope.
  */
@@ -49,66 +50,78 @@ const IconButtonStyled = styled(Button)`
 `;
 
 const DesktopButtons = ({
+  constants,
   redirectToFile,
   openColumnOption,
   refreshMembersGrid,
-}) => (
-  <DesktopButtonsContainerStyled>
-    <Box width="auto" borderStyle="none" backgroundColor="unset">
-      {/**
-       TODO: This will be use in future scope.
-       */}
-      {/* <UploadMembersOptInFile />*/}
-      <FilesButtonStyled
-        padding="10px"
-        width="68px"
-        noMinWidth
-        noMinHeight
-        height="36px"
-        margin="0 0 0 10px"
-        onClick={redirectToFile}
-      >
-        <FaIcon icon={faFile} />Files
-      </FilesButtonStyled>
-      <UploadMembersAttendanceFile />
-      <IconButtonStyled
-        width="36px"
-        padding="10px"
-        title="Configure"
-        noMinWidth
-        noMinHeight
-        height="36px"
-        margin="0 0 0 10px"
-        onClick={openColumnOption}
-      >
-        <FaIcon icon={faCog} />
-      </IconButtonStyled>
-      <IconButtonStyled
-        width="36px"
-        padding="10px"
-        noMinWidth
-        noMinHeight
-        height="36px"
-        margin="0 0 0 10px"
-        title="Refresh Students Information"
-        onClick={refreshMembersGrid}
-      >
-        <FaIcon icon={faSync} />
-      </IconButtonStyled>
-    </Box>
-  </DesktopButtonsContainerStyled>
-);
+}) => {
+  const { FILES } = constants;
+
+  return (
+    <DesktopButtonsContainerStyled>
+      <Box width="auto" borderStyle="none" backgroundColor="unset">
+        {/**
+         TODO: This will be use in future scope.
+         */}
+        {/* <UploadMembersOptInFile />*/}
+        <FilesButtonStyled
+          padding="10px"
+          width="68px"
+          noMinWidth
+          noMinHeight
+          height="36px"
+          margin="0 0 0 10px"
+          onClick={redirectToFile}
+        >
+          <FaIcon icon={faFile} />
+          {FILES}
+        </FilesButtonStyled>
+        <UploadMembersAttendanceFile />
+        <IconButtonStyled
+          width="36px"
+          padding="10px"
+          title="Configure"
+          noMinWidth
+          noMinHeight
+          height="36px"
+          margin="0 0 0 10px"
+          onClick={openColumnOption}
+        >
+          <FaIcon icon={faCog} />
+        </IconButtonStyled>
+        <IconButtonStyled
+          width="36px"
+          padding="10px"
+          noMinWidth
+          noMinHeight
+          height="36px"
+          margin="0 0 0 10px"
+          title="Refresh Students Information"
+          onClick={refreshMembersGrid}
+        >
+          <FaIcon icon={faSync} />
+        </IconButtonStyled>
+      </Box>
+    </DesktopButtonsContainerStyled>
+  );
+};
 
 DesktopButtons.propTypes = {
+  constants: PropTypes.object,
   openColumnOption: PropTypes.func,
   redirectToFile: PropTypes.func,
   refreshMembersGrid: PropTypes.func,
 };
 
 DesktopButtons.defaultProps = {
+  constants: {},
   openColumnOption: () => {},
   redirectToFile: () => {},
   refreshMembersGrid: () => {},
 };
 
-export default DesktopButtons;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(DesktopButtons);

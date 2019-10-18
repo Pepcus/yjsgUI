@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,12 +7,9 @@ import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  FOOTER_CONTACT_TEXT,
-  DEFAULT_FOOTER_CONTACT_INFORMATION,
-} from 'constants/yjsg';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { routes, footerTitle } from 'config/appConfig.json';
+import { getConstants } from 'reducers/constants';
 
 const FooterWrapper = styled(Box)`
     text-align: center;
@@ -49,16 +45,18 @@ const TitleStyled = styled(Typography)`
 
 /**
  * Footer component is common footer that will be rendered in bottom of all pages
+ * @param {Object} constants
  * @param {String} location
  * @param {String} tenant
  * @return {HTML}
  */
 const Footer = ({
+  constants,
   location,
   tenant,
 }) => {
-  const getFooterText = () => (footerTitle[tenant] ? footerTitle[tenant] : DEFAULT_FOOTER_CONTACT_INFORMATION);
-
+  const getFooterText = () => (footerTitle[tenant] ? footerTitle[tenant] : '');
+  const { FOOTER_CONTACT_TEXT } = constants;
   const renderFooterName = footerObject => (
     <FooterStyled
       type="title"
@@ -88,6 +86,7 @@ const Footer = ({
 };
 
 Footer.propTypes = {
+  constants: PropTypes.object,
   location: PropTypes.string,
   routes: PropTypes.array,
   tenant: PropTypes.string,
@@ -95,6 +94,7 @@ Footer.propTypes = {
 };
 
 Footer.defaultProps = {
+  constants: {},
   location: '',
   routes: [],
   tenant: '',
@@ -102,6 +102,7 @@ Footer.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   tenant: getApplicationTenant(state),
 });
 

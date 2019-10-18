@@ -25,10 +25,8 @@ import {
   isUpdateIdCardStatusSuccess,
   isUpdateIdCardStatusFailed,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import { extractMembersId } from 'utils/common';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormShema.json';
 import Message from './Message';
@@ -111,6 +109,8 @@ class UpdateIdCardStatusMembersModal extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -160,7 +160,8 @@ class UpdateIdCardStatusMembersModal extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isIdCardUpdateStatusSuccess, isIdCardUpdateStatusFailed } = this.props;
+    const { isIdCardUpdateStatusSuccess, isIdCardUpdateStatusFailed, constants } = this.props;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -228,7 +229,7 @@ class UpdateIdCardStatusMembersModal extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={3}>
@@ -237,7 +238,7 @@ class UpdateIdCardStatusMembersModal extends Component {
                   noMinWidth
                   onClick={this.onFormSubmit}
                 >
-                  Submit
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -249,7 +250,8 @@ class UpdateIdCardStatusMembersModal extends Component {
   };
 
   render() {
-    const { selectedMembers } = this.props;
+    const { selectedMembers, constants } = this.props;
+    const { PRINT_LATER } = constants;
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -258,7 +260,7 @@ class UpdateIdCardStatusMembersModal extends Component {
           noMinWidth
           onClick={this.checkOpenModalCondition}
         >
-          <FaIcon icon={faPrint} />Print Later
+          <FaIcon icon={faPrint} />{PRINT_LATER}
         </ButtonStyled>
         {this.renderModal()}
       </Row>
@@ -267,6 +269,7 @@ class UpdateIdCardStatusMembersModal extends Component {
 }
 
 UpdateIdCardStatusMembersModal.propTypes = {
+  constants: PropTypes.object,
   isIdCardUpdateStatusFailed: PropTypes.bool,
   isIdCardUpdateStatusSuccess: PropTypes.bool,
   resetIsUpdateIdCardStatusSuccess: PropTypes.func,
@@ -276,6 +279,7 @@ UpdateIdCardStatusMembersModal.propTypes = {
 };
 
 UpdateIdCardStatusMembersModal.defaultProps = {
+  constants: {},
   isIdCardUpdateStatusFailed: false,
   isIdCardUpdateStatusSuccess: false,
   resetIsUpdateIdCardStatusSuccess: () => {},
@@ -285,6 +289,7 @@ UpdateIdCardStatusMembersModal.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isIdCardUpdateStatusFailed: isUpdateIdCardStatusFailed(state),
   isIdCardUpdateStatusSuccess: isUpdateIdCardStatusSuccess(state),
   secretKey: getSecretKey(state),

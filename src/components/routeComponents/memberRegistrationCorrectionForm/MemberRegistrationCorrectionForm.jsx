@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -8,11 +7,6 @@ import styled from 'styled-components';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 
-import {
-  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
-  formSubmitBtnText,
-  goBackBtnText,
-} from 'constants/yjsg';
 import {
   USER_TYPES,
 } from 'constants/member';
@@ -26,9 +20,6 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import {
   getMember,
   getUserId,
@@ -55,6 +46,7 @@ import {
   isObjectsEqual,
   prePopulateOptIn,
 } from 'utils/validations';
+import { getConstants } from 'reducers/constants';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
@@ -150,7 +142,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Boolean} onlyOptInForm
    */
   getFormConfig = ({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm }) => {
-    const { tenant, user, setLoadingState } = this.props;
+    const { tenant, user, setLoadingState, constants } = this.props;
+    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = constants;
     const { ONLY_OPT_IN_JSON, MEMBER_JSON, ADMIN_JSON } = FILES_NAME;
     const { ADMIN } = USER_TYPES;
 
@@ -231,12 +224,13 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   validate = (formData, errors) => {
     const { member, formConfig } = this.state;
+    const { constants } = this.props;
     const { validation } = formConfig;
 
     if (member.optIn2019 === 'N') {
       return [];
     } else if (member.optIn2019 !== 'N') {
-      return verifyFormDataValidations({ formData, errors, validate: validation });
+      return verifyFormDataValidations({ formData, errors, validate: validation, constants });
     } return [];
   };
 
@@ -303,11 +297,15 @@ class MemberRegistrationCorrectionForm extends Component {
    * Method render submit button
    * @return {HTML} submit button
    */
-  renderSubmitButtons = () => (
-    <SubmitButtonStyled onClick={this.handleSubmit}>
-      {formSubmitBtnText}
-    </SubmitButtonStyled>
-  );
+  renderSubmitButtons = () => {
+    const { constants } = this.props;
+    const { SUBMIT } = constants;
+    return (
+      <SubmitButtonStyled onClick={this.handleSubmit}>
+        {SUBMIT}
+      </SubmitButtonStyled>
+    );
+  };
 
   /**
    * Method submit updated form data on conditional
@@ -357,6 +355,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const { member } = this.state;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -375,15 +375,16 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {HTML}
    */
   renderBackButton = () => {
-    const { user } = this.props;
+    const { user, constants } = this.props;
     const { ADMIN } = USER_TYPES;
+    const { BACK } = constants;
 
     if (user === ADMIN) {
       return (
         <BackButtonStyled
           onClick={this.redirectToPreviousLocation}
         >
-          {goBackBtnText}
+          {BACK}
         </BackButtonStyled>
       );
 
@@ -392,7 +393,7 @@ class MemberRegistrationCorrectionForm extends Component {
         <BackButtonStyled
           onClick={this.onlyOptInChanged}
         >
-          {goBackBtnText}
+          {BACK}
         </BackButtonStyled>
       );
     }
@@ -401,7 +402,7 @@ class MemberRegistrationCorrectionForm extends Component {
       <BackButtonStyled
         onClick={this.redirectToPreviousLocation}
       >
-        {goBackBtnText}
+        {BACK}
       </BackButtonStyled>
     );
   };
@@ -504,6 +505,7 @@ class MemberRegistrationCorrectionForm extends Component {
 }
 
 MemberRegistrationCorrectionForm.propTypes = {
+  constants: PropTypes.object,
   context: PropTypes.object,
   id: PropTypes.oneOfType([
     PropTypes.string,
@@ -521,6 +523,7 @@ MemberRegistrationCorrectionForm.propTypes = {
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
+  constants: {},
   context: {},
   id: '',
   isFetch: false,
@@ -534,6 +537,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   id: getUserId(state),
   isFetch: isFetched(state),
   isMemberUpdated: isUpdated(state),

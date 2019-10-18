@@ -1,21 +1,18 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 import DataGrid from 'simple-react-data-grid';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import Box from 'pepcus-core/lib/Box';
 import FaIcon from 'pepcus-core/lib/FaIcon';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  INFORMATION_NOT_AVAILABLE_MESSAGE,
-  NO_COLUMNS_SELECTED_MESSAGE,
-} from 'constants/messages';
 import { getStyles } from 'constants/gridData';
+import { getConstants } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     margin: 20px 10px;
@@ -51,11 +48,17 @@ const GridWrapperStyled = styled(Box)`
  * @return {HTML}
  */
 const MemberDataGrid = ({
+  constants,
   metaData,
   members,
   getSelectedRow,
   onClickAllExport,
 }) => {
+  const {
+    NO_COLUMNS_SELECTED_MESSAGE,
+    INFORMATION_NOT_AVAILABLE_MESSAGE,
+  } = constants;
+
   if (isEmpty(metaData.headerConfig)) {
     return (
       <MessageBoxStyled>
@@ -89,6 +92,7 @@ const MemberDataGrid = ({
 };
 
 MemberDataGrid.propTypes = {
+  constants: PropTypes.object,
   getSelectedRow: PropTypes.func,
   members: PropTypes.array,
   metaData: PropTypes.object,
@@ -96,10 +100,15 @@ MemberDataGrid.propTypes = {
 };
 
 MemberDataGrid.defaultProps = {
+  constants: {},
   getSelectedRow: () => {},
   members: [],
   metaData: {},
   onClickAllExport: () => {},
 };
 
-export default MemberDataGrid;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(MemberDataGrid);

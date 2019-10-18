@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { CSVLink } from 'react-csv';
 import isEmpty from 'lodash/isEmpty';
@@ -19,7 +18,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import { isBusCoordinatorsDataFailed } from 'reducers/assetFilesReducer';
-import { BUS_COORDINATOR_ERROR_MESSAGE } from 'constants/messages';
+import { getConstants } from 'reducers/constants';
 
 import MarkSelectedMembersAttendance from './markSelectedMembersAttendance';
 // import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
@@ -108,7 +107,12 @@ class SelectedMembersActionWrapper extends Component {
    */
   renderCoordinatorUnavailableWarningPopup = () => {
     const { isBusCoordinatorsError } = this.state;
-    const { isBusCoordinatorsInformationFailed } = this.props;
+    const { isBusCoordinatorsInformationFailed, constants } = this.props;
+    const {
+      BUS_COORDINATOR_ERROR_MESSAGE,
+      NO,
+      YES,
+    } = constants;
 
     if (isBusCoordinatorsInformationFailed && isBusCoordinatorsError) {
       return (
@@ -121,7 +125,7 @@ class SelectedMembersActionWrapper extends Component {
               margin="5px"
               onClick={() => { this.onClickPrintCancel(false); }}
             >
-              No
+              {NO}
             </PopupButtonStyled>
             <PopupButtonStyled
               color="tertiary"
@@ -129,7 +133,7 @@ class SelectedMembersActionWrapper extends Component {
               noMinWidth
               onClick={this.printCards}
             >
-              Yes
+              {YES}
             </PopupButtonStyled>
           </Row>
         </Popup>
@@ -164,7 +168,12 @@ class SelectedMembersActionWrapper extends Component {
       isBusCoordinatorsInformationFailed,
       // May use in future
       clearSelectedMembers,
+      constants,
     } = this.props;
+    const {
+      EXPORT,
+      PRINT_NOW,
+    } = constants;
 
     const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
@@ -187,7 +196,7 @@ class SelectedMembersActionWrapper extends Component {
             filename={`StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`}
           >
             <FaIcon icon={faDownload} />
-            Export
+            {EXPORT}
           </CSVLinkStyled>
           <DisabledButtonStyled
             isView={isEmpty(selectedMembers)}
@@ -196,7 +205,7 @@ class SelectedMembersActionWrapper extends Component {
             noMinWidth
           >
             <FaIcon icon={faDownload} />
-            Export
+            {EXPORT}
           </DisabledButtonStyled>
           <ButtonStyled
             margin="0 0 0 10px"
@@ -209,7 +218,8 @@ class SelectedMembersActionWrapper extends Component {
                       ? this.onClickPrintCancel(true) : this.printWindow();
                   }}
           >
-            <FaIcon icon={faPrint} />Print Now
+            <FaIcon icon={faPrint} />
+            {PRINT_NOW}
           </ButtonStyled>
           <UpdateIdCardStatusMembersModal
             selectedMembers={selectedMembers}
@@ -235,6 +245,7 @@ class SelectedMembersActionWrapper extends Component {
 }
 
 SelectedMembersActionWrapper.propTypes = {
+  constants: PropTypes.object,
   selectedMembers: PropTypes.array,
   metaData: PropTypes.object,
   isBusCoordinatorsInformationFailed: PropTypes.bool,
@@ -242,13 +253,15 @@ SelectedMembersActionWrapper.propTypes = {
 };
 
 SelectedMembersActionWrapper.defaultProps = {
+  constants: {},
   selectedMembers: [],
   metaData: {},
   isBusCoordinatorsInformationFailed: false,
   clearSelectedMembers: () => {},
 };
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isBusCoordinatorsInformationFailed: isBusCoordinatorsDataFailed(state),
 });
 
-export default connect(mapStateToProps, {})(SelectedMembersActionWrapper);
+export default connect(mapStateToProps, null)(SelectedMembersActionWrapper);

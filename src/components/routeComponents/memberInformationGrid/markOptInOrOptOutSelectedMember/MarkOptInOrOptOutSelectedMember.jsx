@@ -1,6 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-// import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
@@ -27,10 +25,8 @@ import {
   isMarkOptInOrOptOutSuccess,
   isMarkOptInOrOptOutFailed,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import { extractMembersId } from 'utils/common';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormSchema.json';
 import ModalHeader from './ModalHeader';
@@ -108,6 +104,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -165,7 +163,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed } = this.props;
+    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, constants } = this.props;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -233,7 +232,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={3}>
@@ -242,7 +241,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
                   noMinWidth
                   onClick={this.onFormSubmit}
                 >
-                  Submit
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -254,7 +253,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   render() {
-    const { selectedMembers } = this.props;
+    const { selectedMembers, constants } = this.props;
+    const { MARK_OPT_IN_OR_OUT } = constants;
 
     return (
       <Row display="inline-block" margin="0 0 0 10px">
@@ -264,7 +264,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
           noMinWidth
           onClick={this.checkOpenModalCondition}
         >
-          <FaIcon icon={faInfoCircle} />Mark Opt In / Out
+          <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
         </ButtonStyled>
         {this.renderModal()}
       </Row>
@@ -273,6 +273,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
 }
 
 MarkOptInOrOptOutSelectedMember.propTypes = {
+  constants: PropTypes.object,
   clearSelectedMembers: PropTypes.func,
   isMarkOptOutOrOptInFailed: PropTypes.bool,
   isMarkOptOutOrOptInSuccess: PropTypes.bool,
@@ -283,6 +284,7 @@ MarkOptInOrOptOutSelectedMember.propTypes = {
 };
 
 MarkOptInOrOptOutSelectedMember.defaultProps = {
+  constants: {},
   clearSelectedMembers: () => {},
   isMarkOptOutOrOptInFailed: false,
   isMarkOptOutOrOptInSuccess: false,
@@ -293,6 +295,7 @@ MarkOptInOrOptOutSelectedMember.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isMarkOptOutOrOptInFailed: isMarkOptInOrOptOutFailed(state),
   isMarkOptOutOrOptInSuccess: isMarkOptInOrOptOutSuccess(state),
   secretKey: getSecretKey(state),

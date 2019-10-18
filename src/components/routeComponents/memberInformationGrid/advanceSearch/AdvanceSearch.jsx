@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -22,6 +22,8 @@ import {
   getAdvanceSearchResult,
 } from 'utils/common';
 import fields from 'components/common/fields';
+import { getConstants } from 'reducers/constants';
+
 import { schema, uiSchema } from './advanceSearchShema.json';
 
 const AdvanceSearchWrapper = styled(Box)`
@@ -288,6 +290,11 @@ class AdvanceSearch extends Component {
 
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
+    const { constants } = this.props;
+    const {
+      DEEP_SEARCH,
+      MULTIPLE_ID_SEARCH,
+    } = constants;
     return (
       <AdvanceSearchWrapper>
         <BoxStyled
@@ -359,7 +366,7 @@ class AdvanceSearch extends Component {
                 onChange={this.onChangeDeepSearchCheckBox}
                 checked={isDeepSearchCheck}
               />
-              <LabelStyled htmlFor="deep_search">Deep Search</LabelStyled>
+              <LabelStyled htmlFor="deep_search">{DEEP_SEARCH}</LabelStyled>
               <CheckboxNew
                 color="checkbox"
                 inactiveColor="checkbox"
@@ -367,7 +374,7 @@ class AdvanceSearch extends Component {
                 onChange={this.onChangeMultipleIdSearchCheckBox}
                 checked={isMultipleIdSearchCheck}
               />
-              <LabelStyled htmlFor="deep_search">Multiple ID Search</LabelStyled>
+              <LabelStyled htmlFor="deep_search">{MULTIPLE_ID_SEARCH}</LabelStyled>
             </Row>
           </Row>
         </BoxStyled>
@@ -377,6 +384,7 @@ class AdvanceSearch extends Component {
 }
 
 AdvanceSearch.propTypes = {
+  constants: PropTypes.object,
   checkedIds: PropTypes.array,
   members: PropTypes.array,
   metaData: PropTypes.object,
@@ -384,10 +392,15 @@ AdvanceSearch.propTypes = {
 };
 
 AdvanceSearch.defaultProps = {
+  constants: {},
   checkedIds: [],
   members: [],
   metaData: {},
   onFilter: () => {},
 };
 
-export default AdvanceSearch;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(AdvanceSearch);

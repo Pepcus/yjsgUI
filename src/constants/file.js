@@ -7,6 +7,8 @@ export const SUPPORTED_FILE_TYPES = {
   CSV: 'csv',
   XLSX: 'xlsx',
   XLS: 'xls',
+  TXT: 'txt',
+  PDF: 'pdf',
 };
 
 export const FILES_NAME = {

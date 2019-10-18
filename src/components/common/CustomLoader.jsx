@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import times from 'lodash/times';
 import uniqueId from 'lodash/uniqueId';

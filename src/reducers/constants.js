@@ -5,7 +5,7 @@ export const constants = (state = initialState, { type, ...actionProps }) => {
     case 'SET_APP_CONSTANTS_ACTION': {
       return {
         ...state,
-        ...actionProps.appConstants,
+        ...actionProps.constants,
       };
     }
 
@@ -15,4 +15,4 @@ export const constants = (state = initialState, { type, ...actionProps }) => {
   }
 };
 
-export const getAppConstantsConfig = state => state.appConstants;
+export const getConstants = state => state.constants.text;

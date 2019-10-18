@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -28,10 +27,8 @@ import {
   isUploadOptInFailed,
   unavailableIdErrorMessage,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import fields from 'components/common/fields';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormSchema.json';
 import Message from './Message';
@@ -137,6 +134,8 @@ class UploadMembersOptInFile extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -157,11 +156,16 @@ class UploadMembersOptInFile extends Component {
   renderUploadOptInModal = () => {
     const { isModalOpen, formData } = this.state;
     const {
+      constants,
       isSuccessOptIn,
       isOptInUploadFailed,
       failOptIn,
       errorMessageOfUnavailableId,
     } = this.props;
+    const {
+      CLOSE,
+      UPLOAD,
+    } = constants;
 
     if (isModalOpen) {
       return (
@@ -204,7 +208,7 @@ class UploadMembersOptInFile extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={4}>
@@ -214,7 +218,7 @@ class UploadMembersOptInFile extends Component {
                   onClick={this.onFormSubmit}
                 >
                   <FaIcon height="15px" icon={faFileCsv} />
-                  Upload
+                  {UPLOAD}
                 </Button>
               </Col>
             </Row>
@@ -226,6 +230,9 @@ class UploadMembersOptInFile extends Component {
   };
 
   render() {
+    const { constants } = this.props;
+    const { UPLOAD_OPT_IN } = constants;
+
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -234,7 +241,7 @@ class UploadMembersOptInFile extends Component {
           onClick={this.openModal}
         >
           <FaIcon icon={faUpload} />
-          Upload Opt In
+          {UPLOAD_OPT_IN}
         </ButtonStyled>
         {this.renderUploadOptInModal()}
       </Row>
@@ -243,6 +250,7 @@ class UploadMembersOptInFile extends Component {
 }
 
 UploadMembersOptInFile.propTypes = {
+  constants: PropTypes.object,
   failOptIn: PropTypes.string,
   errorMessageOfUnavailableId: PropTypes.string,
   isOptInUploadFailed: PropTypes.bool,
@@ -253,6 +261,7 @@ UploadMembersOptInFile.propTypes = {
 };
 
 UploadMembersOptInFile.defaultProps = {
+  constants: {},
   failOptIn: '',
   errorMessageOfUnavailableId: '',
   isOptInUploadFailed: false,
@@ -263,6 +272,7 @@ UploadMembersOptInFile.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   failOptIn: getFailOptIn(state),
   errorMessageOfUnavailableId: unavailableIdErrorMessage(state),
   isOptInUploadFailed: isUploadOptInFailed(state),

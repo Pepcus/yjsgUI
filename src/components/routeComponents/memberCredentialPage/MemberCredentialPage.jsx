@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -28,20 +27,13 @@ import {
 import {
   getHash,
 } from 'reducers/appReducer';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
-import {
-  eventDate,
-  eventVenue,
-  goBackBtnText,
-  viewEditInfoBtnText,
-} from 'constants/yjsg';
 import {
   USER_TYPES,
 } from 'constants/member';
-import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
+import { getConstants } from 'reducers/constants';
 import fields from 'components/common/fields';
 
 import ImageWrapper from './ImageWrapper';
@@ -57,7 +49,7 @@ const BoxStyled = styled(Box)`
      margin: 60px auto auto auto;
      height: 75%;
      width: 97%;
- `};
+ `}
  ${({ theme }) => theme.media.down('sm')`
      margin: 60px auto;
  `}
@@ -193,6 +185,8 @@ class MemberCredentialPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -236,9 +230,15 @@ class MemberCredentialPage extends Component {
       isPreviousLocation,
     } = this.state;
     const {
-      tenant,
       context,
+      constants,
     } = this.props;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+      BACK,
+      VIEW_OR_EDIT_INFO,
+    } = constants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -266,14 +266,14 @@ class MemberCredentialPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'default']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'default']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -304,7 +304,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.redirectToPreviousLocation}
                   >
-                    {goBackBtnText}
+                    {BACK}
                   </Button>
                 </Col>
                 <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
@@ -312,7 +312,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.fetchStudentById}
                   >
-                    {viewEditInfoBtnText}
+                    {VIEW_OR_EDIT_INFO}
                   </Button>
                 </Col>
               </Row>
@@ -325,6 +325,7 @@ class MemberCredentialPage extends Component {
 }
 
 MemberCredentialPage.propTypes = {
+  constants: PropTypes,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
@@ -332,10 +333,10 @@ MemberCredentialPage.propTypes = {
   setStudentCredentials: PropTypes.func,
   setUserType: PropTypes.func,
   memberId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  tenant: PropTypes.string,
 };
 
 MemberCredentialPage.defaultProps = {
+  constants: {},
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
@@ -343,14 +344,13 @@ MemberCredentialPage.defaultProps = {
   setStudentCredentials: () => {},
   setUserType: () => {},
   memberId: '',
-  tenant: '',
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   hashLink: getHash(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
-  tenant: getApplicationTenant(state),
 });
 
 const mapDispatchToProps = dispatch => ({

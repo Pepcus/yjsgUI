@@ -2,27 +2,14 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  DOUBLE_QUOTE_ERROR_MESSAGE,
-  FULL_ADDRESS_MESSAGE,
-  INFORMATION_HELPFUL_TO_CONTACT_MESSAGE,
-  INVALID_EMAIL_MESSAGE,
-  INVALID_NAME_MESSAGE,
-  NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE,
-  ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
-  ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE,
-  ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
-  ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE,
-  SINGLE_QUOTE_ERROR_MESSAGE,
-} from 'constants/messages';
-
 /**
  * nameValidate method check validations for name field of form
  * @param {String} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const nameValidator = (value) => {
-
+export const nameValidator = (value, constants) => {
+  const { INVALID_NAME_MESSAGE, NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE } = constants;
   const nameRegExp = /^[a-zA-Z\s\.]+$/;
   let message = '';
 
@@ -45,10 +32,11 @@ export const nameValidator = (value) => {
 /**
  * ageValidator method check validations for age field of form
  * @param {number} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const ageValidator = (value) => {
-
+export const ageValidator = (value, constants) => {
+  const { ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE } = constants;
   const temporaryValue = !value ? null : String(value);
   let message = '';
 
@@ -68,10 +56,14 @@ export const ageValidator = (value) => {
 /**
  * mobileValidator method check validations for mobile field of form
  * @param {Number} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const mobileValidator = (value) => {
-
+export const mobileValidator = (value, constants) => {
+  const {
+    ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE,
+    ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE,
+  } = constants;
   const temporaryValue = !value ? null : String(value);
   let message = '';
   const mobileRegExp = /^[0-9]+$/;
@@ -95,10 +87,11 @@ export const mobileValidator = (value) => {
 /**
  * optionalMobileValidator method check validations for optional mobile field of form
  * @param {Number} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const optionalMobileValidator = (value) => {
-
+export const optionalMobileValidator = (value, constants) => {
+  const { ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE, ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE } = constants;
   let message = '';
   const mobileRegExp = /^[0-9]+$/;
 
@@ -121,10 +114,11 @@ export const optionalMobileValidator = (value) => {
 /**
  * optionalEmailValidator method check validations for email field of form
  * @param {String} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const optionalEmailValidator = (value) => {
-
+export const optionalEmailValidator = (value, constants) => {
+  const { INVALID_EMAIL_MESSAGE } = constants;
   let message = '';
   const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -144,10 +138,16 @@ export const optionalEmailValidator = (value) => {
 /**
  * addressValidator method check validations for address field of form
  * @param {String} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const addressValidator = (value) => {
-
+export const addressValidator = (value, constants) => {
+  const {
+    SINGLE_QUOTE_ERROR_MESSAGE,
+    DOUBLE_QUOTE_ERROR_MESSAGE,
+    FULL_ADDRESS_MESSAGE,
+    INFORMATION_HELPFUL_TO_CONTACT_MESSAGE,
+  } = constants;
   let message = '';
 
   if (isEmpty(value)) {
@@ -172,10 +172,11 @@ export const addressValidator = (value) => {
 /**
  * bhopalAgeValidate method check validations for age field of form for Bhopal tenant
  * @param {Number} value
+ * @param {Object} constants
  * @return {string} message
  */
-export const bhopalAgeValidator = (value) => {
-
+export const bhopalAgeValidator = (value, constants) => {
+  const { ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE } = constants;
   let message = '';
 
   if (isEmpty(value)) {
