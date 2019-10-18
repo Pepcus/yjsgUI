@@ -19,7 +19,7 @@ const ButtonStyled = styled(Button)`
  ${({ theme }) => theme.media.down('sm')`
      width: 100%
      margin: 10px 10px; 
- `}
+ `};
  @media (max-width: 992px) and (orientation: landscape) {
      width: 100%;
  }
@@ -58,7 +58,6 @@ const LoginForm = ({
     NEW_REGISTRATION,
     ADMIN_LOGIN,
   } = appConstants;
-
   if (isAdmin) {
     return (
       <AdminLoginForm

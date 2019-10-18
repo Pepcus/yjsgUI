@@ -37,8 +37,8 @@ function* getApplicationConstants() {
   const tenant = yield select(getTenantName);
   const defaultConstantsConfig = yield getAppConstants({ tenant: 'default' });
   const tenantConstantsConfig = yield getAppConstants({ tenant });
-  const constants = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
-  yield put(setAppConstantsAction(constants));
+  const text = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
+  yield put(setAppConstantsAction({ text }));
 }
 
 export function* getAppConfigSaga() {

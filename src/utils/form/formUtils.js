@@ -34,7 +34,7 @@ export const getTransformedErrors = ({ errors, transformErrors }) => {
  * @param {Object} validations
  * @return {Object} errors
  */
-export const verifyFormDataValidations = ({ formData, errors, validate }) => {
+export const verifyFormDataValidations = ({ formData, errors, validate, constants }) => {
   const validation = validate;
   if (!isEmpty(validation) && formData) {
     validation.forEach((valid) => {
@@ -42,7 +42,7 @@ export const verifyFormDataValidations = ({ formData, errors, validate }) => {
         validator,
         field,
       } = valid;
-      const error = validationTypes[validator](formData[field]);
+      const error = validationTypes[validator](formData[field], constants);
 
       if (!isEmpty(error)) {
         errors[field].addError(error);

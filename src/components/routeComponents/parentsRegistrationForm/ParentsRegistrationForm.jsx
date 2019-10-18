@@ -147,7 +147,10 @@ class ParentsRegistration extends Component {
    * @param {Object} errors
    * @return {Object}
    */
-  validate = (formData, errors) => verifyFormDataValidations({ formData, errors, validate: validation });
+  validate = (formData, errors) => {
+    const { appConstants } = this.props;
+    return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
+  };
 
   /**
    * It is the onChange of form

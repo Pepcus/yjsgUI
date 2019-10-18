@@ -209,8 +209,9 @@ class MemberRegistrationForm extends Component {
   validate = (formData, errors) => {
     const { formConfig } = this.state;
     const { validation } = formConfig;
+    const { appConstants } = this.props;
 
-    return verifyFormDataValidations({ formData, errors, validate: validation });
+    return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
   };
 
   render() {

@@ -224,12 +224,13 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   validate = (formData, errors) => {
     const { member, formConfig } = this.state;
+    const { appConstants } = this.props;
     const { validation } = formConfig;
 
     if (member.optIn2019 === 'N') {
       return [];
     } else if (member.optIn2019 !== 'N') {
-      return verifyFormDataValidations({ formData, errors, validate: validation });
+      return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
     } return [];
   };
 

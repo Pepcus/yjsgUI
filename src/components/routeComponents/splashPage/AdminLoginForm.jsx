@@ -108,4 +108,4 @@ const mapStateToProps = state => ({
   appConstants: getAppConstantsConfig(state),
 });
 
-export default connect(mapStateToProps, null)(AdminLoginForm);
+export default connect(mapStateToProps, {})(AdminLoginForm);
