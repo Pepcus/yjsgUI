@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Method render success or failure message of upload optIn file
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {String} failRecordIds
  * @param {String} errorMessageOfUnavailableId
  * @param {Boolean} isOptInUploadFailed
@@ -17,7 +17,7 @@ import { getAppConstantsConfig } from 'reducers/constants';
  * @return {HTML} message
  */
 const Message = ({
-  appConstants,
+  constants,
   failOptIn,
   errorMessageOfUnavailableId,
   isOptInUploadFailed,
@@ -27,7 +27,7 @@ const Message = ({
     OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
     OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
     FAILED_RECORDS_ARE,
-  } = appConstants;
+  } = constants;
   /**
    * renderFailOptIn method render failed records Ids
    * @return {HTML} failed records
@@ -80,7 +80,7 @@ const Message = ({
 };
 
 Message.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   errorMessageOfUnavailableId: PropTypes.string,
   failOptIn: PropTypes.string,
   isOptInUploadFailed: PropTypes.bool,
@@ -88,7 +88,7 @@ Message.propTypes = {
 };
 
 Message.defaultProps = {
-  appConstants: {},
+  constants: {},
   errorMessageOfUnavailableId: '',
   failOptIn: '',
   isOptInUploadFailed: false,
@@ -96,7 +96,7 @@ Message.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(Message);

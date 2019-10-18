@@ -8,7 +8,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const PopupWrapper = styled(Box)`
     background-color: ${getThemeProps('colors.WHITE')};
@@ -41,10 +41,10 @@ const PopupWrapper = styled(Box)`
  * @return {HTML}
  */
 const CloseBrowserPopup = ({
-  appConstants,
+  constants,
   isCloseBrowserPopMessage,
 }) => {
-  const { CLOSE_BROWSER_MANUALLY_MESSAGE } = appConstants;
+  const { CLOSE_BROWSER_MANUALLY_MESSAGE } = constants;
   if (isCloseBrowserPopMessage) {
     return (
       <PopupWrapper>
@@ -58,17 +58,17 @@ const CloseBrowserPopup = ({
 };
 
 CloseBrowserPopup.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isCloseBrowserPopMessage: PropTypes.bool,
 };
 
 CloseBrowserPopup.defaultProps = {
-  appConstants: {},
+  constants: {},
   isCloseBrowserPopMessage: false,
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(CloseBrowserPopup);

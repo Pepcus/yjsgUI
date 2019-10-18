@@ -7,7 +7,7 @@ import Button from 'pepcus-core/lib/Button';
 import Row from 'pepcus-core/lib/Row';
 
 import { isUserMember } from 'utils/form';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const SubmitButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
@@ -17,7 +17,7 @@ const SubmitButtonStyled = styled(Button)`
 
 /**
  * OnlyOptInSubmitButton render back button conditionally
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} onlyOptInForm
  * @param {Function} submitMemberDataForOnlyOptInCase
  * @param {String} user
@@ -25,12 +25,12 @@ const SubmitButtonStyled = styled(Button)`
  * @constructor
  */
 const OnlyOptInSubmitButton = ({
-  appConstants,
+  constants,
   onlyOptInForm,
   submitMemberDataForOnlyOptInCase,
   user,
 }) => {
-  const { SUBMIT } = appConstants;
+  const { SUBMIT } = constants;
 
   if (isUserMember({ user }) && onlyOptInForm) {
     return (
@@ -46,21 +46,21 @@ const OnlyOptInSubmitButton = ({
 };
 
 OnlyOptInSubmitButton.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   onlyOptInForm: PropTypes.bool,
   submitMemberDataForOnlyOptInCase: PropTypes.func,
   user: PropTypes.string,
 };
 
 OnlyOptInSubmitButton.defaultProps = {
-  appConstants: {},
+  constants: {},
   onlyOptInForm: false,
   submitMemberDataForOnlyOptInCase: () => {},
   user: '',
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(OnlyOptInSubmitButton);

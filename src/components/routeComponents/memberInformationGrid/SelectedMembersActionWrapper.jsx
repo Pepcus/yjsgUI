@@ -18,7 +18,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import { isBusCoordinatorsDataFailed } from 'reducers/assetFilesReducer';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import MarkSelectedMembersAttendance from './markSelectedMembersAttendance';
 // import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
@@ -107,12 +107,12 @@ class SelectedMembersActionWrapper extends Component {
    */
   renderCoordinatorUnavailableWarningPopup = () => {
     const { isBusCoordinatorsError } = this.state;
-    const { isBusCoordinatorsInformationFailed, appConstants } = this.props;
+    const { isBusCoordinatorsInformationFailed, constants } = this.props;
     const {
       BUS_COORDINATOR_ERROR_MESSAGE,
       NO,
       YES,
-    } = appConstants;
+    } = constants;
 
     if (isBusCoordinatorsInformationFailed && isBusCoordinatorsError) {
       return (
@@ -168,12 +168,12 @@ class SelectedMembersActionWrapper extends Component {
       isBusCoordinatorsInformationFailed,
       // May use in future
       clearSelectedMembers,
-      appConstants,
+      constants,
     } = this.props;
     const {
       EXPORT,
       PRINT_NOW,
-    } = appConstants;
+    } = constants;
 
     const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
@@ -245,7 +245,7 @@ class SelectedMembersActionWrapper extends Component {
 }
 
 SelectedMembersActionWrapper.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   selectedMembers: PropTypes.array,
   metaData: PropTypes.object,
   isBusCoordinatorsInformationFailed: PropTypes.bool,
@@ -253,14 +253,14 @@ SelectedMembersActionWrapper.propTypes = {
 };
 
 SelectedMembersActionWrapper.defaultProps = {
-  appConstants: {},
+  constants: {},
   selectedMembers: [],
   metaData: {},
   isBusCoordinatorsInformationFailed: false,
   clearSelectedMembers: () => {},
 };
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isBusCoordinatorsInformationFailed: isBusCoordinatorsDataFailed(state),
 });
 

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import Button from 'pepcus-core/lib/Button';
 import Row from 'pepcus-core/lib/Row';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import AdminLoginForm from './AdminLoginForm';
 
@@ -26,7 +26,7 @@ const ButtonStyled = styled(Button)`
 `;
 
 /**
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Object} admin
  * @param {Function} enableAdminLoginButtons
  * @param {Function} handleDisableAdminLoginButtons
@@ -45,7 +45,7 @@ const ButtonStyled = styled(Button)`
  * @return {HTML}
  */
 const LoginForm = ({
-  appConstants,
+  constants,
   admin,
   enableAdminLoginButtons,
   handleDisableAdminLoginButtons,
@@ -65,7 +65,7 @@ const LoginForm = ({
   const {
     NEW_REGISTRATION,
     ADMIN_LOGIN,
-  } = appConstants;
+  } = constants;
   if (isAdmin) {
     return (
       <AdminLoginForm
@@ -108,7 +108,7 @@ const LoginForm = ({
 };
 
 LoginForm.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   admin: PropTypes.object,
   enableAdminLoginButtons: PropTypes.func,
   handleDisableAdminLoginButtons: PropTypes.func,
@@ -127,7 +127,7 @@ LoginForm.propTypes = {
 };
 
 LoginForm.defaultProps = {
-  appConstants: {},
+  constants: {},
   admin: {},
   enableAdminLoginButtons: () => {},
   handleDisableAdminLoginButtons: () => {},
@@ -146,7 +146,7 @@ LoginForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(LoginForm);

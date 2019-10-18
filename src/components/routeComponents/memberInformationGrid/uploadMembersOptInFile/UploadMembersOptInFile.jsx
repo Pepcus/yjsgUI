@@ -28,7 +28,7 @@ import {
   unavailableIdErrorMessage,
 } from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormSchema.json';
 import Message from './Message';
@@ -134,8 +134,8 @@ class UploadMembersOptInFile extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -156,7 +156,7 @@ class UploadMembersOptInFile extends Component {
   renderUploadOptInModal = () => {
     const { isModalOpen, formData } = this.state;
     const {
-      appConstants,
+      constants,
       isSuccessOptIn,
       isOptInUploadFailed,
       failOptIn,
@@ -165,7 +165,7 @@ class UploadMembersOptInFile extends Component {
     const {
       CLOSE,
       UPLOAD,
-    } = appConstants;
+    } = constants;
 
     if (isModalOpen) {
       return (
@@ -230,8 +230,8 @@ class UploadMembersOptInFile extends Component {
   };
 
   render() {
-    const { appConstants } = this.props;
-    const { UPLOAD_OPT_IN } = appConstants;
+    const { constants } = this.props;
+    const { UPLOAD_OPT_IN } = constants;
 
     return (
       <Row display="inline-block" margin="0 0 0 10px">
@@ -250,7 +250,7 @@ class UploadMembersOptInFile extends Component {
 }
 
 UploadMembersOptInFile.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   failOptIn: PropTypes.string,
   errorMessageOfUnavailableId: PropTypes.string,
   isOptInUploadFailed: PropTypes.bool,
@@ -261,7 +261,7 @@ UploadMembersOptInFile.propTypes = {
 };
 
 UploadMembersOptInFile.defaultProps = {
-  appConstants: {},
+  constants: {},
   failOptIn: '',
   errorMessageOfUnavailableId: '',
   isOptInUploadFailed: false,
@@ -272,7 +272,7 @@ UploadMembersOptInFile.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   failOptIn: getFailOptIn(state),
   errorMessageOfUnavailableId: unavailableIdErrorMessage(state),
   isOptInUploadFailed: isUploadOptInFailed(state),

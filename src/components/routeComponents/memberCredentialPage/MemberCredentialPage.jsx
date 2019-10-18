@@ -33,7 +33,7 @@ import {
 } from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 import fields from 'components/common/fields';
 
 import ImageWrapper from './ImageWrapper';
@@ -185,8 +185,8 @@ class MemberCredentialPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -231,14 +231,14 @@ class MemberCredentialPage extends Component {
     } = this.state;
     const {
       context,
-      appConstants,
+      constants,
     } = this.props;
     const {
       EVENT_DATE,
       EVENT_VENUE,
       BACK,
       VIEW_OR_EDIT_INFO,
-    } = appConstants;
+    } = constants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -325,7 +325,7 @@ class MemberCredentialPage extends Component {
 }
 
 MemberCredentialPage.propTypes = {
-  appConstants: PropTypes,
+  constants: PropTypes,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
@@ -336,7 +336,7 @@ MemberCredentialPage.propTypes = {
 };
 
 MemberCredentialPage.defaultProps = {
-  appConstants: {},
+  constants: {},
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
@@ -347,7 +347,7 @@ MemberCredentialPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   hashLink: getHash(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),

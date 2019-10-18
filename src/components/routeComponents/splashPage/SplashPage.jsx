@@ -42,7 +42,7 @@ import {
 import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getTransformedErrors } from 'utils/form';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
@@ -140,8 +140,8 @@ class SplashPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
 
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -235,12 +235,12 @@ class SplashPage extends Component {
     } = this.state;
     const {
       tenant,
-      appConstants,
+      constants,
     } = this.props;
     const {
       EVENT_DATE,
       EVENT_VENUE,
-    } = appConstants;
+    } = constants;
 
     if (isURLParams) {
       return <Switch><Redirect to="/member-registration-correction" /></Switch>;
@@ -305,7 +305,7 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   id: PropTypes.string,
@@ -318,7 +318,7 @@ SplashPage.propTypes = {
 };
 
 SplashPage.defaultProps = {
-  appConstants: {},
+  constants: {},
   isAdminLogin: false,
   fetchMemberData: () => {},
   id: '',
@@ -331,7 +331,7 @@ SplashPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
   password: getAdminPassword(state),

@@ -35,7 +35,7 @@ import {
   verifyFormDataValidations,
 } from 'utils/form';
 import fields from 'components/common/fields';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';
@@ -91,8 +91,8 @@ class MemberRegistrationForm extends Component {
   }
 
   componentWillMount() {
-    const { tenant, setLoadingState, appConstants } = this.props;
-    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = appConstants;
+    const { tenant, setLoadingState, constants } = this.props;
+    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = constants;
 
     setLoadingState(true);
     try {
@@ -154,8 +154,8 @@ class MemberRegistrationForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
 
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -209,9 +209,9 @@ class MemberRegistrationForm extends Component {
   validate = (formData, errors) => {
     const { formConfig } = this.state;
     const { validation } = formConfig;
-    const { appConstants } = this.props;
+    const { constants } = this.props;
 
-    return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
+    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
   };
 
   render() {
@@ -224,7 +224,7 @@ class MemberRegistrationForm extends Component {
       member,
     } = this.state;
     const {
-      appConstants,
+      constants,
       isMemberCreated,
       newMember,
       context,
@@ -232,7 +232,7 @@ class MemberRegistrationForm extends Component {
     const {
       BACK,
       SUBMIT,
-    } = appConstants;
+    } = constants;
     const {
       schema,
       uiSchema,
@@ -303,7 +303,7 @@ class MemberRegistrationForm extends Component {
 }
 
 MemberRegistrationForm.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   context: PropTypes.object,
   createStudentData: PropTypes.func,
   isMemberCreated: PropTypes.bool,
@@ -314,7 +314,7 @@ MemberRegistrationForm.propTypes = {
 };
 
 MemberRegistrationForm.defaultProps = {
-  appConstants: {},
+  constants: {},
   context: {},
   createStudentData: () => {},
   isMemberCreated: false,
@@ -324,7 +324,7 @@ MemberRegistrationForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isMemberCreated: isCreated(state),
   newMember: getNewMember(state),
   tenant: getApplicationTenant(state),

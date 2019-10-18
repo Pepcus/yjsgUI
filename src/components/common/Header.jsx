@@ -22,7 +22,7 @@ import {
 } from 'actions/loginActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -127,7 +127,7 @@ const LinkStyled = styled(Link)`
 
 /**
  * Header render the common header for all route
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Object} context
  * @param {String} location
  * @param {Function} resetAdminCredentials
@@ -139,7 +139,7 @@ const LinkStyled = styled(Link)`
  * @return {HTML}
  */
 const Header = ({
-  appConstants,
+  constants,
   context,
   location,
   resetAdminCredentials,
@@ -149,7 +149,7 @@ const Header = ({
   tenant,
 }) => {
 
-  const { BACK, LOGOUT } = appConstants;
+  const { BACK, LOGOUT } = constants;
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -314,7 +314,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   context: PropTypes.object,
   location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
@@ -327,7 +327,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  appConstants: {},
+  constants: {},
   context: {},
   location: '',
   resetAdminCredentials: () => {},
@@ -347,7 +347,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   tenant: getApplicationTenant(state),
 });
 

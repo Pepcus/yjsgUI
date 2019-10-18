@@ -7,23 +7,23 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Method return back button
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Function} redirectToPreviousLocation
  * @return {HTML} Button
  * @constructor
  */
 const InvalidMemberPopUp = ({
-  appConstants,
+  constants,
   redirectToPreviousLocation,
 }) => {
   const {
     INVALID_ID_MESSAGE,
     BACK,
-  } = appConstants;
+  } = constants;
 
   return (
     <Popup>
@@ -43,17 +43,17 @@ const InvalidMemberPopUp = ({
 };
 
 InvalidMemberPopUp.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   redirectToPreviousLocation: PropTypes.func,
 };
 
 InvalidMemberPopUp.defaultProps = {
-  appConstants: {},
+  constants: {},
   redirectToPreviousLocation: () => {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(InvalidMemberPopUp);

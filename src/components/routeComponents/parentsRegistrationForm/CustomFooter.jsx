@@ -7,7 +7,7 @@ import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const FooterStyled = styled(Box)`
     z-index: 1000;
@@ -62,11 +62,11 @@ const FooterTextStyled = styled(Typography)`
  * It return the custom footer
  * @return {HTML}
  */
-const CustomFooter = ({ appConstants }) => {
+const CustomFooter = ({ constants }) => {
   const {
     CUSTOM_FOOTER_INFORMATION,
     THANKS,
-  } = appConstants;
+  } = constants;
 
   return (
     <FooterStyled>
@@ -85,15 +85,15 @@ const CustomFooter = ({ appConstants }) => {
 };
 
 CustomFooter.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
 };
 
 CustomFooter.defaultProps = {
-  appConstants: {},
+  constants: {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(CustomFooter);

@@ -7,7 +7,7 @@ import Box from 'pepcus-core/lib/Box';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const TextFieldWrapper = styled(Box)`
     margin-bottom: 5px;
@@ -31,7 +31,7 @@ const TextFieldStyled = styled(Typography)`
  * It return the event description
  * @return {HTML}
  */
-const EventDescription = ({ appConstants }) => {
+const EventDescription = ({ constants }) => {
   const {
     DATE,
     PARENT_EVENT_DATE,
@@ -39,7 +39,7 @@ const EventDescription = ({ appConstants }) => {
     EVENT_TIME,
     PLACE,
     EVENT_PLACE,
-  } = appConstants;
+  } = constants;
 
   return (
     <Row
@@ -104,15 +104,15 @@ const EventDescription = ({ appConstants }) => {
 };
 
 EventDescription.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
 };
 
 EventDescription.defaultProps = {
-  appConstants: {},
+  constants: {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(EventDescription);

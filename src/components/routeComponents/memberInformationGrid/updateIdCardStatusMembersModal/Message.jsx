@@ -5,25 +5,25 @@ import PropTypes from 'prop-types';
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Message method render the success or failed
  * message of update members Id card status
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} isIdCardUpdateStatusSuccess
  * @param {Boolean} isIdCardUpdateStatusFailed
  * @return {HTML} message
  */
 const Message = ({
-  appConstants,
+  constants,
   isIdCardUpdateStatusSuccess,
   isIdCardUpdateStatusFailed,
 }) => {
   const {
     UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE,
     UPDATED_ID_CARD_STATUS_FAILED_MESSAGE,
-  } = appConstants;
+  } = constants;
   if (isIdCardUpdateStatusSuccess) {
     return (
       <Box padding="10px" margin="10px 20px" borderStyle="none" width="auto">
@@ -45,19 +45,19 @@ const Message = ({
 };
 
 Message.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isIdCardUpdateStatusFailed: PropTypes.bool,
   isIdCardUpdateStatusSuccess: PropTypes.bool,
 };
 
 Message.defaultProps = {
-  appConstants: {},
+  constants: {},
   isIdCardUpdateStatusFailed: false,
   isIdCardUpdateStatusSuccess: false,
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(Message);

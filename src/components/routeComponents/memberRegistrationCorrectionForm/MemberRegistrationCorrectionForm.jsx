@@ -46,7 +46,7 @@ import {
   isObjectsEqual,
   prePopulateOptIn,
 } from 'utils/validations';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
@@ -142,8 +142,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Boolean} onlyOptInForm
    */
   getFormConfig = ({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm }) => {
-    const { tenant, user, setLoadingState, appConstants } = this.props;
-    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = appConstants;
+    const { tenant, user, setLoadingState, constants } = this.props;
+    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = constants;
     const { ONLY_OPT_IN_JSON, MEMBER_JSON, ADMIN_JSON } = FILES_NAME;
     const { ADMIN } = USER_TYPES;
 
@@ -224,13 +224,13 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   validate = (formData, errors) => {
     const { member, formConfig } = this.state;
-    const { appConstants } = this.props;
+    const { constants } = this.props;
     const { validation } = formConfig;
 
     if (member.optIn2019 === 'N') {
       return [];
     } else if (member.optIn2019 !== 'N') {
-      return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
+      return verifyFormDataValidations({ formData, errors, validate: validation, constants });
     } return [];
   };
 
@@ -298,8 +298,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {HTML} submit button
    */
   renderSubmitButtons = () => {
-    const { appConstants } = this.props;
-    const { SUBMIT } = appConstants;
+    const { constants } = this.props;
+    const { SUBMIT } = constants;
     return (
       <SubmitButtonStyled onClick={this.handleSubmit}>
         {SUBMIT}
@@ -355,8 +355,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const { member } = this.state;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -375,9 +375,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {HTML}
    */
   renderBackButton = () => {
-    const { user, appConstants } = this.props;
+    const { user, constants } = this.props;
     const { ADMIN } = USER_TYPES;
-    const { BACK } = appConstants;
+    const { BACK } = constants;
 
     if (user === ADMIN) {
       return (
@@ -505,7 +505,7 @@ class MemberRegistrationCorrectionForm extends Component {
 }
 
 MemberRegistrationCorrectionForm.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   context: PropTypes.object,
   id: PropTypes.oneOfType([
     PropTypes.string,
@@ -523,7 +523,7 @@ MemberRegistrationCorrectionForm.propTypes = {
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
-  appConstants: {},
+  constants: {},
   context: {},
   id: '',
   isFetch: false,
@@ -537,7 +537,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   id: getUserId(state),
   isFetch: isFetched(state),
   isMemberUpdated: isUpdated(state),

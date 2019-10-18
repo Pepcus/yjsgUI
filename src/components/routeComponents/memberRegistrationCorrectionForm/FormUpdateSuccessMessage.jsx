@@ -8,11 +8,11 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
 import { isUpdatedResetAction } from 'actions/memberRegistrationActions';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * It return success message popup
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} hasError
  * @param {Boolean} isFormChanged
  * @param {Boolean} isMemberUpdated
@@ -23,7 +23,7 @@ import { getAppConstantsConfig } from 'reducers/constants';
  * @constructor
  */
 const FormUpdateSuccessMessage = ({
-  appConstants,
+  constants,
   hasError,
   isFormChanged,
   isMemberUpdated,
@@ -35,7 +35,7 @@ const FormUpdateSuccessMessage = ({
     INFO_UPDATE_SUCCESS_MESSAGE,
     BACK,
     NO_INFO_CHANGE_MESSAGE,
-  } = appConstants;
+  } = constants;
 
   // if form data is update and valid and submitted successfully.
   if (isMemberUpdated) {
@@ -80,7 +80,7 @@ const FormUpdateSuccessMessage = ({
 };
 
 FormUpdateSuccessMessage.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   hasError: PropTypes.bool,
   isFormChanged: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
@@ -90,7 +90,7 @@ FormUpdateSuccessMessage.propTypes = {
 };
 
 FormUpdateSuccessMessage.defaultProps = {
-  appConstants: {},
+  constants: {},
   hasError: false,
   isFormChanged: false,
   isMemberUpdated: false,
@@ -100,7 +100,7 @@ FormUpdateSuccessMessage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 const mapDispatchToProps = dispatch => ({

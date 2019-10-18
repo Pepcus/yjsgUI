@@ -42,7 +42,7 @@ import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
 import { fetchFile } from 'apis/file';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;
@@ -613,7 +613,7 @@ class Files extends Component {
       backPageButton,
     } = this.state;
     const isDisplayMessage = getMessageDisplayCondition({ width, showFileDetails, backPageButton });
-    const { filesConfig, appConstants } = this.props;
+    const { filesConfig, constants } = this.props;
     const {
       MESSAGE_FOR_PDF_FILE_DOWNLOAD,
       DOWNLOAD,
@@ -621,7 +621,7 @@ class Files extends Component {
       NOTHING_TO_SHOW,
       PLEASE_SELECT_A_FILE_TO_VIEW,
       NO_FILES_AVAILABLE,
-    } = appConstants;
+    } = constants;
     const isMobile = width <= 500;
 
     if (showFileDetails) {
@@ -838,7 +838,7 @@ class Files extends Component {
 }
 
 Files.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   fetchFilesConfig: PropTypes.func,
   setLoadingState: PropTypes.func,
   filesConfig: PropTypes.object,
@@ -846,7 +846,7 @@ Files.propTypes = {
 };
 
 Files.defaultProps = {
-  appConstants: {},
+  constants: {},
   setLoadingState: () => {},
   fetchFilesConfig: () => {},
   filesConfig: {},
@@ -854,7 +854,7 @@ Files.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   secretKey: getSecretKey(state),
   filesConfig: getFilesConfig(state),
 });

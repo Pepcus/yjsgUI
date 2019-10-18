@@ -12,7 +12,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { getStyles } from 'constants/gridData';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     margin: 20px 10px;
@@ -48,7 +48,7 @@ const GridWrapperStyled = styled(Box)`
  * @return {HTML}
  */
 const MemberDataGrid = ({
-  appConstants,
+  constants,
   metaData,
   members,
   getSelectedRow,
@@ -57,7 +57,7 @@ const MemberDataGrid = ({
   const {
     NO_COLUMNS_SELECTED_MESSAGE,
     INFORMATION_NOT_AVAILABLE_MESSAGE,
-  } = appConstants;
+  } = constants;
 
   if (isEmpty(metaData.headerConfig)) {
     return (
@@ -92,7 +92,7 @@ const MemberDataGrid = ({
 };
 
 MemberDataGrid.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   getSelectedRow: PropTypes.func,
   members: PropTypes.array,
   metaData: PropTypes.object,
@@ -100,7 +100,7 @@ MemberDataGrid.propTypes = {
 };
 
 MemberDataGrid.defaultProps = {
-  appConstants: {},
+  constants: {},
   getSelectedRow: () => {},
   members: [],
   metaData: {},
@@ -108,7 +108,7 @@ MemberDataGrid.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(MemberDataGrid);

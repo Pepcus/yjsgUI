@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Button from 'pepcus-core/lib/Button';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
@@ -17,11 +17,11 @@ const ButtonStyled = styled(Button)`
 `;
 
 const AlreadyRegisteredButton = ({
-  appConstants,
+  constants,
   isAlreadyRegisteredButtonEnabled,
   redirectToMemberLogin,
 }) => {
-  const { ALREADY_REGISTERED } = appConstants;
+  const { ALREADY_REGISTERED } = constants;
   if (isAlreadyRegisteredButtonEnabled) {
     return (
       <ButtonStyled margin="10px" onClick={redirectToMemberLogin}>
@@ -32,19 +32,19 @@ const AlreadyRegisteredButton = ({
 };
 
 AlreadyRegisteredButton.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   redirectToMemberLogin: PropTypes.func,
 };
 
 AlreadyRegisteredButton.defaultProps = {
-  appConstants: {},
+  constants: {},
   isAlreadyRegisteredButtonEnabled: false,
   redirectToMemberLogin: () => {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(AlreadyRegisteredButton);

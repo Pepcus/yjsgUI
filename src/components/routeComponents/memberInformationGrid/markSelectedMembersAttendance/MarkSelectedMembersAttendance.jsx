@@ -27,7 +27,7 @@ import {
   isMarkAttendanceFailed,
 } from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import Message from './Message';
 import { schema, uiSchema } from './modalFormShema.json';
@@ -121,8 +121,8 @@ class MarkSelectedMembersAttendance extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -179,8 +179,8 @@ class MarkSelectedMembersAttendance extends Component {
    */
   renderModal = () => {
     const { isModalOpen, formData } = this.state;
-    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, appConstants } = this.props;
-    const { CLOSE, SUBMIT } = appConstants;
+    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, constants } = this.props;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -269,8 +269,8 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   render() {
-    const { selectedMembers, appConstants } = this.props;
-    const { MARK_AS_PRESENT } = appConstants;
+    const { selectedMembers, constants } = this.props;
+    const { MARK_AS_PRESENT } = constants;
 
     return (
       <RowStyled display="inline-block" margin="0 0 0 10px">
@@ -289,7 +289,7 @@ class MarkSelectedMembersAttendance extends Component {
 }
 
 MarkSelectedMembersAttendance.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isAttendanceMarkFailed: PropTypes.bool,
   isAttendanceMarkSuccess: PropTypes.bool,
   markSelectedMembersAttendance: PropTypes.func,
@@ -299,7 +299,7 @@ MarkSelectedMembersAttendance.propTypes = {
 };
 
 MarkSelectedMembersAttendance.defaultProps = {
-  appConstants: {},
+  constants: {},
   isAttendanceMarkFailed: false,
   isAttendanceMarkSuccess: false,
   markSelectedMembersAttendance: () => {},
@@ -309,7 +309,7 @@ MarkSelectedMembersAttendance.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isAttendanceMarkFailed: isMarkAttendanceFailed(state),
   isAttendanceMarkSuccess: isMarkAttendanceSuccess(state),
   secretKey: getSecretKey(state),

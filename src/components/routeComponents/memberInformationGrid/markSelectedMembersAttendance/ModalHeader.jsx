@@ -7,16 +7,16 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const RowStyled = styled(Row)`
     background: ${getThemeProps('colors.header')};
 `;
 
 const ModalHeader = ({
-  appConstants,
+  constants,
 }) => {
-  const { MARK_SELECTED_MEMBERS_ATTENDANCE_LABEL } = appConstants;
+  const { MARK_SELECTED_MEMBERS_ATTENDANCE_LABEL } = constants;
 
   return (
     <RowStyled
@@ -36,15 +36,15 @@ const ModalHeader = ({
 };
 
 ModalHeader.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
 };
 
 ModalHeader.defaultProps = {
-  appConstants: {},
+  constants: {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(ModalHeader);

@@ -21,7 +21,7 @@ import {
   getChangedVisibleColumnConfig,
   getStyled,
 } from 'utils/common';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './columnConfig.json';
 
@@ -437,8 +437,8 @@ class ColumnConfiguration extends Component {
   };
 
   render() {
-    const { closeColumnOption, columnOptionIsOpen, appConstants } = this.props;
-    const { PLEASE_SELECT_COLUMNS_TEXT, CLOSE, SAVE } = appConstants;
+    const { closeColumnOption, columnOptionIsOpen, constants } = this.props;
+    const { PLEASE_SELECT_COLUMNS_TEXT, CLOSE, SAVE } = constants;
     const UiSchema = {
       ...uiSchema,
       visibleColumnConfig: {
@@ -512,7 +512,7 @@ class ColumnConfiguration extends Component {
 }
 
 ColumnConfiguration.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
   selectValue: PropTypes.bool,
@@ -521,7 +521,7 @@ ColumnConfiguration.propTypes = {
 };
 
 ColumnConfiguration.defaultProps = {
-  appConstants: {},
+  constants: {},
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
   selectValue: true,
@@ -530,7 +530,7 @@ ColumnConfiguration.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 export default connect(
   mapStateToProps,

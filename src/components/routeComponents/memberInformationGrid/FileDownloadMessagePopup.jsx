@@ -9,7 +9,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const MessageStyled = styled(Typography)`
   color: ${getThemeProps('palette.white.color')};
@@ -18,20 +18,20 @@ const MessageStyled = styled(Typography)`
 
 /**
  * FileDownloadMessagePopup render popup of file download
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} fileDownloadMessage
  * @param {Boolean} onClickAllExport
  * @return {HTML}
  */
 const FileDownloadMessagePopup = ({
-  appConstants,
+  constants,
   fileDownloadMessage,
   onClickAllExport,
 }) => {
   const {
     FILE_DOWNLOAD_MESSAGE,
     OK_TEXT,
-  } = appConstants;
+  } = constants;
 
   if (fileDownloadMessage) {
     return (
@@ -60,19 +60,19 @@ const FileDownloadMessagePopup = ({
 };
 
 FileDownloadMessagePopup.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   fileDownloadMessage: PropTypes.bool,
   onClickAllExport: PropTypes.func,
 };
 
 FileDownloadMessagePopup.defaultProps = {
-  appConstants: {},
+  constants: {},
   fileDownloadMessage: false,
   onClickAllExport: () => {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(FileDownloadMessagePopup);

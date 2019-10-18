@@ -8,7 +8,7 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { isUserMember } from 'utils/form';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const LinkStyled = styled(Link)`
   &:hover {
@@ -19,7 +19,7 @@ const LinkStyled = styled(Link)`
 
 /**
  * Render link of update other information conditionally
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Function} changeIsOnlyOptIn
  * @param {Boolean} onlyOptInForm
  * @param {String} user
@@ -27,7 +27,7 @@ const LinkStyled = styled(Link)`
  * @constructor
  */
 const OtherInformationEditLink = ({
-  appConstants,
+  constants,
   changeIsOnlyOptIn,
   onlyOptInForm,
   user,
@@ -35,7 +35,7 @@ const OtherInformationEditLink = ({
   const {
     UPDATE_FURTHER_INFORMATION_TEXT,
     CLICK_HERE_TEXT,
-  } = appConstants;
+  } = constants;
 
   const onlyOptInChanged = () => {
     changeIsOnlyOptIn(false);
@@ -53,21 +53,21 @@ const OtherInformationEditLink = ({
 };
 
 OtherInformationEditLink.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   changeIsOnlyOptIn: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
   user: PropTypes.string,
 };
 
 OtherInformationEditLink.defaultProps = {
-  appConstants: {},
+  constants: {},
   changeIsOnlyOptIn: () => {},
   onlyOptInForm: false,
   user: '',
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(OtherInformationEditLink);

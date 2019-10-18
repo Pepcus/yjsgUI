@@ -9,7 +9,7 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
 import { setMemberCredentialsAction } from 'actions/memberRegistrationActions';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const TextWrapper = styled(Typography)`
     font-size: 16px !important;
@@ -17,7 +17,7 @@ const TextWrapper = styled(Typography)`
 
 /**
  * SuccessMessagePopup render success message when member registration done successfully.
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isMemberCreated
  * @param {Object} newMember
@@ -27,7 +27,7 @@ const TextWrapper = styled(Typography)`
  * @constructor
  */
 const SuccessMessagePopup = ({
-  appConstants,
+  constants,
   isSubmitTriggered,
   isMemberCreated,
   newMember,
@@ -42,7 +42,7 @@ const SuccessMessagePopup = ({
     ID_NOTE_MESSAGE,
     ID_CARD_SUGGESTION_MESSAGE,
     BACK,
-  } = appConstants;
+  } = constants;
 
   if (isMemberCreated && isSubmitTriggered) {
     // for pre-population on splash page
@@ -72,7 +72,7 @@ const SuccessMessagePopup = ({
 };
 
 SuccessMessagePopup.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isSubmitTriggered: PropTypes.bool,
   isMemberCreated: PropTypes.bool,
   newMember: PropTypes.object,
@@ -81,7 +81,7 @@ SuccessMessagePopup.propTypes = {
 };
 
 SuccessMessagePopup.defaultProps = {
-  appConstants: {},
+  constants: {},
   isSubmitTriggered: false,
   isMemberCreated: false,
   newMember: {},
@@ -90,7 +90,7 @@ SuccessMessagePopup.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 const mapDispatchToProps = dispatch => ({

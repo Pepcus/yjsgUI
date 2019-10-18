@@ -10,7 +10,7 @@ import Box from 'pepcus-core/lib/Box/index';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const PopupWrapper = styled(Box)`
     background-color: ${getThemeProps('colors.WHITE')};
@@ -40,14 +40,14 @@ const PopupWrapper = styled(Box)`
 `;
 /**
  * RegistrationSuccessPopup return registration success popup
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isCloseBrowserPopMessage
  * @param {Function} closePopUp
  * @return {HTML}
  */
 const RegistrationSuccessPopup = ({
-  appConstants,
+  constants,
   isSubmitTriggered,
   closePopUp,
   isCloseBrowserPopMessage,
@@ -56,7 +56,7 @@ const RegistrationSuccessPopup = ({
     PARENT_REGISTRATION_SUCCESS_MESSAGE,
     THANKS,
     CLOSE,
-  } = appConstants;
+  } = constants;
 
   if (isSubmitTriggered && !isCloseBrowserPopMessage) {
     return (
@@ -82,21 +82,21 @@ const RegistrationSuccessPopup = ({
 };
 
 RegistrationSuccessPopup.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   closePopUp: PropTypes.func,
   isCloseBrowserPopMessage: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
 };
 
 RegistrationSuccessPopup.defaultProps = {
-  appConstants: {},
+  constants: {},
   closePopUp: () => {},
   isCloseBrowserPopMessage: false,
   isSubmitTriggered: false,
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(RegistrationSuccessPopup);

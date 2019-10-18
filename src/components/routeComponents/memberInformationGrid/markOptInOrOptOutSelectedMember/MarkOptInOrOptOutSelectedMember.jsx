@@ -26,7 +26,7 @@ import {
   isMarkOptInOrOptOutFailed,
 } from 'reducers/allMembersDataReducer';
 import { extractMembersId } from 'utils/common';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormSchema.json';
 import ModalHeader from './ModalHeader';
@@ -104,8 +104,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -163,8 +163,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, appConstants } = this.props;
-    const { CLOSE, SUBMIT } = appConstants;
+    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, constants } = this.props;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -253,8 +253,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   render() {
-    const { selectedMembers, appConstants } = this.props;
-    const { MARK_OPT_IN_OR_OUT } = appConstants;
+    const { selectedMembers, constants } = this.props;
+    const { MARK_OPT_IN_OR_OUT } = constants;
 
     return (
       <Row display="inline-block" margin="0 0 0 10px">
@@ -273,7 +273,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
 }
 
 MarkOptInOrOptOutSelectedMember.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   clearSelectedMembers: PropTypes.func,
   isMarkOptOutOrOptInFailed: PropTypes.bool,
   isMarkOptOutOrOptInSuccess: PropTypes.bool,
@@ -284,7 +284,7 @@ MarkOptInOrOptOutSelectedMember.propTypes = {
 };
 
 MarkOptInOrOptOutSelectedMember.defaultProps = {
-  appConstants: {},
+  constants: {},
   clearSelectedMembers: () => {},
   isMarkOptOutOrOptInFailed: false,
   isMarkOptOutOrOptInSuccess: false,
@@ -295,7 +295,7 @@ MarkOptInOrOptOutSelectedMember.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isMarkOptOutOrOptInFailed: isMarkOptInOrOptOutFailed(state),
   isMarkOptOutOrOptInSuccess: isMarkOptInOrOptOutSuccess(state),
   secretKey: getSecretKey(state),

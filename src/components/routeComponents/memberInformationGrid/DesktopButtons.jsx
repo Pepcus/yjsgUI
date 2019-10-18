@@ -10,7 +10,7 @@ import Button from 'pepcus-core/lib/Button';
 import FaIcon from 'pepcus-core/lib/FaIcon';
 
 import UploadMembersAttendanceFile from './uploadMembersAttendanceFile';
-import {getAppConstantsConfig} from "reducers/constants";
+import {getConstants} from "reducers/constants";
 import {connect} from "react-redux";
 /**
  TODO: This will be use in future scope.
@@ -50,12 +50,12 @@ const IconButtonStyled = styled(Button)`
 `;
 
 const DesktopButtons = ({
-  appConstants,
+  constants,
   redirectToFile,
   openColumnOption,
   refreshMembersGrid,
 }) => {
-  const { FILES } = appConstants;
+  const { FILES } = constants;
 
   return (
     <DesktopButtonsContainerStyled>
@@ -107,21 +107,21 @@ const DesktopButtons = ({
 };
 
 DesktopButtons.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   openColumnOption: PropTypes.func,
   redirectToFile: PropTypes.func,
   refreshMembersGrid: PropTypes.func,
 };
 
 DesktopButtons.defaultProps = {
-  appConstants: {},
+  constants: {},
   openColumnOption: () => {},
   redirectToFile: () => {},
   refreshMembersGrid: () => {},
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(DesktopButtons);

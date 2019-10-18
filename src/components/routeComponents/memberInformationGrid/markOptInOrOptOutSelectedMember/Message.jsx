@@ -5,25 +5,25 @@ import PropTypes from 'prop-types';
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Message method render the success or failed
  * message of update members Id card status
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} isMarkOptOutOrOptInSuccess
  * @param {Boolean} isMarkOptOutOrOptInFailed
  * @return {HTML} message
  */
 const Message = ({
-  appConstants,
+  constants,
   isMarkOptOutOrOptInSuccess,
   isMarkOptOutOrOptInFailed,
 }) => {
   const {
     OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE,
     OPT_IN_OR_OPT_OUT_FAILED_MESSAGE,
-  } = appConstants;
+  } = constants;
 
   if (isMarkOptOutOrOptInSuccess) {
     return (
@@ -46,19 +46,19 @@ const Message = ({
 };
 
 Message.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isMarkOptOutOrOptInFailed: PropTypes.bool,
   isMarkOptOutOrOptInSuccess: PropTypes.bool,
 };
 
 Message.defaultProps = {
-  appConstants: {},
+  constants: {},
   isMarkOptOutOrOptInFailed: false,
   isMarkOptOutOrOptInSuccess: false,
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(Message);

@@ -10,7 +10,7 @@ import Form from 'pepcus-core/lib/Form';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import {
   schema,
@@ -18,7 +18,7 @@ import {
 } from './adminLoginFormSchema.json';
 
 /**
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Object} admin
  * @param {Boolean} adminCredentialErrorMessage
  * @param {String} redirectToRoute
@@ -34,7 +34,7 @@ import {
  * @return {HTML}
  */
 const AdminLoginForm = ({
-  appConstants,
+  constants,
   admin,
   adminCredentialErrorMessage,
   redirectToRoute,
@@ -52,7 +52,7 @@ const AdminLoginForm = ({
     BACK,
     SUBMIT,
     GIVEN_INFORMATION_WRONG_MESSAGE,
-  } = appConstants;
+  } = constants;
 
   /**
    * Method redirect to admin page on some condition.
@@ -142,7 +142,7 @@ const AdminLoginForm = ({
 };
 
 AdminLoginForm.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   admin: PropTypes.object,
   handleDisableAdminLoginButtons: PropTypes.func,
   isAdmin: PropTypes.bool,
@@ -158,7 +158,7 @@ AdminLoginForm.propTypes = {
 };
 
 AdminLoginForm.defaultProps = {
-  appConstants: {},
+  constants: {},
   admin: {},
   handleDisableAdminLoginButtons: () => {},
   isAdmin: false,
@@ -174,7 +174,7 @@ AdminLoginForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, {})(AdminLoginForm);

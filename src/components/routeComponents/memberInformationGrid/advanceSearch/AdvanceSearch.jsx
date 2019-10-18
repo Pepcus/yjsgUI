@@ -22,7 +22,7 @@ import {
   getAdvanceSearchResult,
 } from 'utils/common';
 import fields from 'components/common/fields';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './advanceSearchShema.json';
 
@@ -290,11 +290,11 @@ class AdvanceSearch extends Component {
 
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
-    const { appConstants } = this.props;
+    const { constants } = this.props;
     const {
       DEEP_SEARCH,
       MULTIPLE_ID_SEARCH,
-    } = appConstants;
+    } = constants;
     return (
       <AdvanceSearchWrapper>
         <BoxStyled
@@ -384,7 +384,7 @@ class AdvanceSearch extends Component {
 }
 
 AdvanceSearch.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   checkedIds: PropTypes.array,
   members: PropTypes.array,
   metaData: PropTypes.object,
@@ -392,7 +392,7 @@ AdvanceSearch.propTypes = {
 };
 
 AdvanceSearch.defaultProps = {
-  appConstants: {},
+  constants: {},
   checkedIds: [],
   members: [],
   metaData: {},
@@ -400,7 +400,7 @@ AdvanceSearch.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(AdvanceSearch);

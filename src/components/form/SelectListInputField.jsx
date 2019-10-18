@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ErrorMessage from 'components/common/ErrorMessage';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /*
   TODO: This component is deprecated.
@@ -40,7 +40,7 @@ class SelectListInputField extends Component {
 
   render() {
     const {
-      appConstants,
+      constants,
       name,
       value,
       label,
@@ -51,7 +51,7 @@ class SelectListInputField extends Component {
     } = this.props;
     const {
       PLEASE_SELECT_ANY_ONE_TEXT,
-    } = appConstants;
+    } = constants;
 
     const newLabel = isRequired ? `${label} * ` : label;
 
@@ -107,7 +107,7 @@ class SelectListInputField extends Component {
 }
 
 SelectListInputField.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   name: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -123,7 +123,7 @@ SelectListInputField.propTypes = {
 };
 
 SelectListInputField.defaultProps = {
-  appConstants: {},
+  constants: {},
   name: '',
   options: [],
   value: '',
@@ -136,7 +136,7 @@ SelectListInputField.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(SelectListInputField);

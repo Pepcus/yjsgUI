@@ -30,7 +30,7 @@ import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
 } from 'reducers/assetFilesReducer';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
 import RedirectToRoute from './RedirectToRoute';
@@ -152,7 +152,7 @@ class MemberPage extends Component {
 
   render() {
     const {
-      appConstants,
+      constants,
       tenant,
       isAlreadyRegisteredButtonEnabled,
     } = this.props;
@@ -165,7 +165,7 @@ class MemberPage extends Component {
       EVENT_DATE,
       EVENT_VENUE,
       NEW_REGISTRATION,
-    } = appConstants;
+    } = constants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -224,7 +224,7 @@ class MemberPage extends Component {
 }
 
 MemberPage.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setHashLinkForMemberCredential: PropTypes.func,
@@ -235,7 +235,7 @@ MemberPage.propTypes = {
 };
 
 MemberPage.defaultProps = {
-  appConstants: {},
+  constants: {},
   fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
   setHashLinkForMemberCredential: () => {},
@@ -246,7 +246,7 @@ MemberPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),

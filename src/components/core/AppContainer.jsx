@@ -21,7 +21,7 @@ import {
   isBootstrapComplete,
 } from 'reducers/app';
 import Routes from 'components/core/Routes';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     height: auto !important;
@@ -45,19 +45,19 @@ const MessageBoxStyled = styled(Box)`
 
 /**
  * AppContainer is the wrapper of application.
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {Boolean} isLoaded
  * @param {Boolean} isAppLoadingFailed
  * @param {Boolean} bootstrapFlag
  * @return {HTML}
  */
 const AppContainer = ({
-  appConstants,
+  constants,
   isLoaded,
   isAppLoadingFailed,
   bootstrapFlag,
 }) => {
-  const { ERROR_MESSAGE_OF_LOAD_APP_DATA } = appConstants;
+  const { ERROR_MESSAGE_OF_LOAD_APP_DATA } = constants;
   if (isLoaded && !isAppLoadingFailed) {
     return (
       <HashRouter>
@@ -78,21 +78,21 @@ const AppContainer = ({
 };
 
 AppContainer.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   isAppLoadingFailed: PropTypes.bool,
   isLoaded: PropTypes.bool,
   bootstrapFlag: PropTypes.bool,
 };
 
 AppContainer.defaultProps = {
-  appConstants: {},
+  constants: {},
   isAppLoadingFailed: false,
   isLoaded: false,
   bootstrapFlag: false,
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
   bootstrapFlag: isBootstrapComplete(state),

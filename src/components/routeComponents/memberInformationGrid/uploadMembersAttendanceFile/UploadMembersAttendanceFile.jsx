@@ -28,7 +28,7 @@ import {
   idNotExistErrorMessage,
 } from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
@@ -115,8 +115,8 @@ class UploadMembersAttendanceFile extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -156,7 +156,7 @@ class UploadMembersAttendanceFile extends Component {
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
     const {
-      appConstants,
+      constants,
       isUploadAttendanceSuccess,
       isAttendanceUploadFailed,
       failRecordIds,
@@ -165,7 +165,7 @@ class UploadMembersAttendanceFile extends Component {
     const {
       CLOSE,
       UPLOAD,
-    } = appConstants;
+    } = constants;
 
     if (isModalOpen) {
       return (
@@ -231,8 +231,8 @@ class UploadMembersAttendanceFile extends Component {
   };
 
   render() {
-    const { appConstants } = this.props;
-    const { UPLOAD_ATTENDANCE } = appConstants;
+    const { constants } = this.props;
+    const { UPLOAD_ATTENDANCE } = constants;
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -250,7 +250,7 @@ class UploadMembersAttendanceFile extends Component {
 }
 
 UploadMembersAttendanceFile.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   failRecordIds: PropTypes.string,
   errorMessageOfIdNotExist: PropTypes.string,
   isAttendanceUploadFailed: PropTypes.bool,
@@ -261,7 +261,7 @@ UploadMembersAttendanceFile.propTypes = {
 };
 
 UploadMembersAttendanceFile.defaultProps = {
-  appConstants: {},
+  constants: {},
   failRecordIds: '',
   errorMessageOfIdNotExist: '',
   isAttendanceUploadFailed: false,
@@ -272,7 +272,7 @@ UploadMembersAttendanceFile.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   failRecordIds: getFailRecordIds(state),
   errorMessageOfIdNotExist: idNotExistErrorMessage(state),
   isAttendanceUploadFailed: isUploadAttendanceFailed(state),

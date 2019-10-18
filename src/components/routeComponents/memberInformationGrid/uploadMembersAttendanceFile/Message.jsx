@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Method render success or failure message of upload attendance
- * @param {Object} appConstants
+ * @param {Object} constants
  * @param {String} errorMessageOfIdNotExist
  * @param {String} failRecordIds
  * @param {Boolean} isAttendanceUploadFailed
@@ -17,7 +17,7 @@ import { getAppConstantsConfig } from 'reducers/constants';
  * @return {HTML} message
  */
 const Message = ({
-  appConstants,
+  constants,
   errorMessageOfIdNotExist,
   failRecordIds,
   isAttendanceUploadFailed,
@@ -26,7 +26,7 @@ const Message = ({
   const {
     ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE,
     ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE,
-  } = appConstants;
+  } = constants;
 
   /**
    * Method method render failed records Ids
@@ -80,7 +80,7 @@ const Message = ({
 };
 
 Message.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   errorMessageOfIdNotExist: PropTypes.string,
   failRecordIds: PropTypes.string,
   isAttendanceUploadFailed: PropTypes.bool,
@@ -88,7 +88,7 @@ Message.propTypes = {
 };
 
 Message.defaultProps = {
-  appConstants: {},
+  constants: {},
   errorMessageOfIdNotExist: '',
   failRecordIds: '',
   isAttendanceUploadFailed: false,
@@ -96,7 +96,7 @@ Message.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 export default connect(mapStateToProps, null)(Message);

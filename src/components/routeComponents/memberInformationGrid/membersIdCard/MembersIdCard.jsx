@@ -13,7 +13,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import CoordinatorInformation from './CoordinatorInformation';
 
@@ -123,7 +123,7 @@ class MembersIdCard extends Component {
    * @return {HTML}
    */
   renderMembersIdCard({ selectedMembers }) {
-    const { appConstants, busCoordinators = {} } = this.props;
+    const { constants, busCoordinators = {} } = this.props;
     const {
       MEMBER_ID_CARD_SMALL_HEADING,
       MEMBER_ID_CARD_MAIN_HEADING,
@@ -136,7 +136,7 @@ class MembersIdCard extends Component {
       BUS_NO,
       ADDRESS,
       STUDENT_ID,
-    } = appConstants;
+    } = constants;
     const membersIdCards = selectedMembers.map((member) => {
       const memberId = getFormattedMemberId({ memberId: member.memberId });
       const name = convertFirstCharacterInUpperCase({ sentence: member.name });
@@ -499,19 +499,19 @@ class MembersIdCard extends Component {
 }
 
 MembersIdCard.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   busCoordinators: PropTypes.object,
   selectedMembers: PropTypes.array,
 };
 
 MembersIdCard.defaultProps = {
-  appConstants: {},
+  constants: {},
   busCoordinators: {},
   selectedMembers: [],
 };
 
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
   busCoordinators: getBusCoordinators(state),
 });
 

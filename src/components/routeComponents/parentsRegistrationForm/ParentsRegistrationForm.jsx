@@ -15,7 +15,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import { parentsRegistrationAction } from 'actions/parentsRegistrationAction';
 import fields from 'components/common/fields';
 import { getTransformedErrors, verifyFormDataValidations } from 'utils/form';
-import { getAppConstantsConfig } from 'reducers/constants';
+import { getConstants } from 'reducers/constants';
 
 import { schema, uiSchema, validation } from './formSchema.json';
 import CloseBrowserPopup from './CloseBrowserPopup';
@@ -148,8 +148,8 @@ class ParentsRegistration extends Component {
    * @return {Object}
    */
   validate = (formData, errors) => {
-    const { appConstants } = this.props;
-    return verifyFormDataValidations({ formData, errors, validate: validation, constants: appConstants });
+    const { constants } = this.props;
+    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
   };
 
   /**
@@ -173,8 +173,8 @@ class ParentsRegistration extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
-    const { appConstants } = this.props;
-    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
 
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -208,11 +208,11 @@ class ParentsRegistration extends Component {
 
   render() {
     const { formData, isCloseBrowserPopMessage, isSubmitTriggered } = this.state;
-    const { appConstants } = this.props;
+    const { constants } = this.props;
     const {
       EVENT_TITLE,
       SUBMIT,
-    } = appConstants;
+    } = constants;
 
     if (!isSubmitTriggered && !isCloseBrowserPopMessage) {
       return (
@@ -280,16 +280,16 @@ class ParentsRegistration extends Component {
   }
 }
 ParentsRegistration.propTypes = {
-  appConstants: PropTypes.object,
+  constants: PropTypes.object,
   parentsRegistration: PropTypes.func,
 };
 
 ParentsRegistration.defaultProps = {
-  appConstants: {},
+  constants: {},
   parentsRegistration: () => {},
 };
 const mapStateToProps = state => ({
-  appConstants: getAppConstantsConfig(state),
+  constants: getConstants(state),
 });
 
 const mapDispatchToProps = dispatch => ({
