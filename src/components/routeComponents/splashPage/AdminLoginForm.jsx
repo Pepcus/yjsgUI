@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Button from 'pepcus-core/lib/Button';
@@ -7,16 +7,15 @@ import Col from 'pepcus-core/lib/Col';
 import Form from 'pepcus-core/lib/Form';
 import Row from 'pepcus-core/lib/Row';
 
-import {
-  goBackBtnText,
-  formSubmitBtnText,
-} from 'constants/yjsg';
+import { getAppConstantsConfig } from 'reducers/constants';
+
 import {
   schema,
   uiSchema,
 } from './adminLoginFormSchema.json';
 
 /**
+ * @param {Object} appConstants
  * @param {Object} admin
  * @param {Function} handleAdminScreenRedirection
  * @param {Function} handleDisableAdminLoginButtons
@@ -28,6 +27,7 @@ import {
  * @constructor
  */
 const AdminLoginForm = ({
+  appConstants,
   admin,
   handleAdminScreenRedirection,
   handleDisableAdminLoginButtons,
@@ -36,6 +36,11 @@ const AdminLoginForm = ({
   setAdminLogin,
   transformErrors,
 }) => {
+  const {
+    BACK,
+    SUBMIT,
+  } = appConstants;
+
   if (isAdmin) {
     return (
       <Col>
@@ -58,7 +63,7 @@ const AdminLoginForm = ({
                 width="100%"
                 onClick={handleDisableAdminLoginButtons}
               >
-                {goBackBtnText}
+                {BACK}
               </Button>
             </Col>
             <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
@@ -66,7 +71,7 @@ const AdminLoginForm = ({
                 width="100%"
                 onClick={setAdminLogin}
               >
-                {formSubmitBtnText}
+                {SUBMIT}
               </Button>
             </Col>
           </Row>
@@ -78,6 +83,7 @@ const AdminLoginForm = ({
 };
 
 AdminLoginForm.propTypes = {
+  appConstants: PropTypes.object,
   admin: PropTypes.object,
   handleAdminScreenRedirection: PropTypes.func,
   handleDisableAdminLoginButtons: PropTypes.func,
@@ -88,6 +94,7 @@ AdminLoginForm.propTypes = {
 };
 
 AdminLoginForm.defaultProps = {
+  appConstants: {},
   admin: {},
   handleAdminScreenRedirection: () => {},
   handleDisableAdminLoginButtons: () => {},
@@ -96,4 +103,9 @@ AdminLoginForm.defaultProps = {
   setAdminLogin: () => {},
   transformErrors: () => {},
 };
-export default AdminLoginForm;
+
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(AdminLoginForm);

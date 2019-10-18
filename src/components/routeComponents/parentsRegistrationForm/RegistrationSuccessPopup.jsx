@@ -1,6 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Row from 'pepcus-core/lib/Row';
@@ -10,10 +10,7 @@ import Box from 'pepcus-core/lib/Box/index';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
-import {
-  REGISTRATION_SUCCESS_MESSAGE,
-  THANKS,
-} from 'constants/yjsg';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 const PopupWrapper = styled(Box)`
     background-color: ${getThemeProps('colors.WHITE')};
@@ -43,25 +40,38 @@ const PopupWrapper = styled(Box)`
 `;
 /**
  * RegistrationSuccessPopup return registration success popup
+ * @param {Object} appConstants
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isCloseBrowserPopMessage
  * @param {Function} closePopUp
  * @return {HTML}
  */
-const RegistrationSuccessPopup = ({ isSubmitTriggered, closePopUp, isCloseBrowserPopMessage }) => {
+const RegistrationSuccessPopup = ({
+  appConstants,
+  isSubmitTriggered,
+  closePopUp,
+  isCloseBrowserPopMessage,
+}) => {
+  const {
+    PARENT_REGISTRATION_SUCCESS_MESSAGE,
+    THANKS,
+    CLOSE,
+  } = appConstants;
+
   if (isSubmitTriggered && !isCloseBrowserPopMessage) {
     return (
       <PopupWrapper>
         <Popup>
           <Row display="block" width="100%" justify="center" margin="0">
-            <Typography fontSize="16px">{REGISTRATION_SUCCESS_MESSAGE}</Typography>
+            <Typography fontSize="16px">{PARENT_REGISTRATION_SUCCESS_MESSAGE}</Typography>
             <Typography fontSize="16px">{THANKS}</Typography>
             <Button
               width="170px"
               margin="10px 25px"
               onClick={closePopUp}
               color="tertiary"
-            >Close
+            >
+              {CLOSE}
             </Button>
           </Row>
         </Popup>
@@ -72,15 +82,21 @@ const RegistrationSuccessPopup = ({ isSubmitTriggered, closePopUp, isCloseBrowse
 };
 
 RegistrationSuccessPopup.propTypes = {
+  appConstants: PropTypes.object,
   closePopUp: PropTypes.func,
   isCloseBrowserPopMessage: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
 };
 
 RegistrationSuccessPopup.defaultProps = {
+  appConstants: {},
   closePopUp: () => {},
   isCloseBrowserPopMessage: false,
   isSubmitTriggered: false,
 };
 
-export default RegistrationSuccessPopup;
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(RegistrationSuccessPopup);

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -50,7 +49,7 @@ const BoxStyled = styled(Box)`
      margin: 60px auto auto auto;
      height: 75%;
      width: 97%;
- `};
+ `}
  ${({ theme }) => theme.media.down('sm')`
      margin: 60px auto;
  `}

@@ -97,9 +97,15 @@
 
   "OK_TEXT": "OK",
 
+  "NO": "No",
+
+  "YES": "Yes",
+
   "BACK": "Back",
 
   "SAVE": "Save",
+
+  "DOWNLOAD": "Download",
 
   "CLOSE": "Close",
 
@@ -107,11 +113,61 @@
 
   "SUBMIT": "Submit",
 
+  "UPLOAD": "Upload",
+
+  "EXPORT": "Export",
+
+  "NO_DATA_FOUND": "No Data Found",
+
+  "NOTHING_TO_SHOW": "Nothing to show",
+
+  "NO_FILES_AVAILABLE": "No files available",
+
+  "DEEP_SEARCH": "Deep Search",
+
+  "MULTIPLE_ID_SEARCH": "Multiple ID Search",
+
+  "PLEASE_SELECT_A_FILE_TO_VIEW": "Please select a file to view",
+
+  "UPLOAD_ATTENDANCE": "Upload Attendance",
+
+  "UPLOAD_OPT_IN": "Upload Opt In",
+
+  "PRINT_NOW": "Print Now",
+
+  "FILES": "Files",
+
+  "NAME": "Name:",
+
+  "CLASS": "Class:",
+
+  "ROOM": "Room:",
+
+  "FATHER_NAME": "Father Name:",
+
+  "MOBILE_NO": "Mobile No:",
+
+  "BUS_STOP": "Bus Stop:",
+
+  "BUS_NO": "Bus No:",
+
+  "ADDRESS": "Address:",
+
+  "STUDENT_ID": "Student Id:",
+
+  "MARK_OPT_IN_OR_OUT": "Mark Opt In / Out",
+
+  "MARK_AS_PRESENT": "Mark as Present",
+
+  "PRINT_LATER": "Print Later",
+
   "ALREADY_REGISTERED": "Already Registered",
 
   "NEW_REGISTRATION": "New Registration",
 
   "VIEW_OR_EDIT_INFO": "View/Edit Information",
+
+  "FAILED_RECORDS_ARE": "Failed Records are:",
 
   "INVALID_ID_MESSAGE": "आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है । कृपया पुनः प्रयास करे ।",
 

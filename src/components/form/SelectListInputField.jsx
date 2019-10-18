@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ErrorMessage from '../common/ErrorMessage';
-import {
-  PLEASE_SELECT_ANY_ONE_TEXT,
-} from '../../constants/text';
+
+import ErrorMessage from 'components/common/ErrorMessage';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 /*
   TODO: This component is deprecated.
@@ -40,6 +40,7 @@ class SelectListInputField extends Component {
 
   render() {
     const {
+      appConstants,
       name,
       value,
       label,
@@ -48,6 +49,9 @@ class SelectListInputField extends Component {
       disabled,
       style,
     } = this.props;
+    const {
+      PLEASE_SELECT_ANY_ONE_TEXT,
+    } = appConstants;
 
     const newLabel = isRequired ? `${label} * ` : label;
 
@@ -103,6 +107,7 @@ class SelectListInputField extends Component {
 }
 
 SelectListInputField.propTypes = {
+  appConstants: PropTypes.object,
   name: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -118,6 +123,7 @@ SelectListInputField.propTypes = {
 };
 
 SelectListInputField.defaultProps = {
+  appConstants: {},
   name: '',
   options: [],
   value: '',
@@ -129,4 +135,8 @@ SelectListInputField.defaultProps = {
   style: {},
 };
 
-export default SelectListInputField;
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(SelectListInputField);

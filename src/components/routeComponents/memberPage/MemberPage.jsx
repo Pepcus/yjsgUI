@@ -22,11 +22,6 @@ import {
 } from 'actions/appActions';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
-  eventDate,
-  eventVenue,
-  newRegistrationBtnText,
-} from 'constants/yjsg';
-import {
   USER_TYPES,
 } from 'constants/member';
 import { getParameterByName } from 'apis/http';
@@ -35,6 +30,8 @@ import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
 } from 'reducers/assetFilesReducer';
+import { getAppConstantsConfig } from 'reducers/constants';
+
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
 import RedirectToRoute from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
@@ -80,8 +77,6 @@ const ImageStyled = styled.img`
 const TypographyStyled = styled(Typography)`
    color: ${getThemeProps('colors.header')};
 `;
-
-// TODO: responsive css @media remaining
 
 /**
  * The MemberPage component for the member which will render -
@@ -157,6 +152,7 @@ class MemberPage extends Component {
 
   render() {
     const {
+      appConstants,
       tenant,
       isAlreadyRegisteredButtonEnabled,
     } = this.props;
@@ -165,7 +161,11 @@ class MemberPage extends Component {
       isMemberLogin,
       isNewRegistration,
     } = this.state;
-
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+      NEW_REGISTRATION,
+    } = appConstants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -189,14 +189,14 @@ class MemberPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'default']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'default']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -213,7 +213,7 @@ class MemberPage extends Component {
                 redirectToMemberLogin={this.redirectToMemberLogin}
               />
               <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
-                {newRegistrationBtnText}
+                {NEW_REGISTRATION}
               </ButtonStyled>
             </Row>
           </Col>
@@ -224,6 +224,7 @@ class MemberPage extends Component {
 }
 
 MemberPage.propTypes = {
+  appConstants: PropTypes.object,
   fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   setHashLinkForMemberCredential: PropTypes.func,
@@ -234,6 +235,7 @@ MemberPage.propTypes = {
 };
 
 MemberPage.defaultProps = {
+  appConstants: {},
   fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
   setHashLinkForMemberCredential: () => {},
@@ -244,6 +246,7 @@ MemberPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -28,10 +27,8 @@ import {
   isUploadAttendanceFailed,
   idNotExistErrorMessage,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import fields from 'components/common/fields';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
@@ -118,6 +115,8 @@ class UploadMembersAttendanceFile extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -157,11 +156,16 @@ class UploadMembersAttendanceFile extends Component {
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
     const {
+      appConstants,
       isUploadAttendanceSuccess,
       isAttendanceUploadFailed,
       failRecordIds,
       errorMessageOfIdNotExist,
     } = this.props;
+    const {
+      CLOSE,
+      UPLOAD,
+    } = appConstants;
 
     if (isModalOpen) {
       return (
@@ -204,7 +208,8 @@ class UploadMembersAttendanceFile extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >
+                  {CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={3}>
@@ -214,7 +219,7 @@ class UploadMembersAttendanceFile extends Component {
                   onClick={this.onFormSubmit}
                 >
                   <FaIcon height="15px" icon={faFileCsv} />
-                  Upload
+                  {UPLOAD}
                 </Button>
               </Col>
             </Row>
@@ -226,6 +231,8 @@ class UploadMembersAttendanceFile extends Component {
   };
 
   render() {
+    const { appConstants } = this.props;
+    const { UPLOAD_ATTENDANCE } = appConstants;
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -234,7 +241,7 @@ class UploadMembersAttendanceFile extends Component {
           onClick={this.openModal}
         >
           <FaIcon icon={faUpload} />
-          Upload Attendance
+          {UPLOAD_ATTENDANCE}
         </ButtonStyled>
         {this.renderModal()}
       </Row>
@@ -243,6 +250,7 @@ class UploadMembersAttendanceFile extends Component {
 }
 
 UploadMembersAttendanceFile.propTypes = {
+  appConstants: PropTypes.object,
   failRecordIds: PropTypes.string,
   errorMessageOfIdNotExist: PropTypes.string,
   isAttendanceUploadFailed: PropTypes.bool,
@@ -253,6 +261,7 @@ UploadMembersAttendanceFile.propTypes = {
 };
 
 UploadMembersAttendanceFile.defaultProps = {
+  appConstants: {},
   failRecordIds: '',
   errorMessageOfIdNotExist: '',
   isAttendanceUploadFailed: false,
@@ -263,6 +272,7 @@ UploadMembersAttendanceFile.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   failRecordIds: getFailRecordIds(state),
   errorMessageOfIdNotExist: idNotExistErrorMessage(state),
   isAttendanceUploadFailed: isUploadAttendanceFailed(state),

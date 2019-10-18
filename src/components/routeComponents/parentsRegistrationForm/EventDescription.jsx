@@ -1,19 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Box from 'pepcus-core/lib/Box';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
-import {
-  DATE,
-  EVENT_DATE,
-  TIME,
-  EVENT_TIME,
-  PLACE,
-  EVENT_PLACE,
-} from 'constants/yjsg';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 const TextFieldWrapper = styled(Box)`
     margin-bottom: 5px;
@@ -37,65 +31,88 @@ const TextFieldStyled = styled(Typography)`
  * It return the event description
  * @return {HTML}
  */
-const EventDescription = () => (
-  <Row
-    alignContent="center"
-    justify="center"
-    margin="30px 0 0 0"
-    display="block"
-  >
-    <TextFieldWrapper>
-      <TextFieldStyled
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-      >
-        {DATE}
-      </TextFieldStyled>
-      <Typography
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-        gutterLeft="5px"
-      >
-        {EVENT_DATE}
-      </Typography>
-    </TextFieldWrapper>
-    <TextFieldWrapper>
-      <TextFieldStyled
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-      >
-        {TIME}
-      </TextFieldStyled>
-      <Typography
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-        gutterLeft="5px"
-      >
-        {EVENT_TIME}
-      </Typography>
-    </TextFieldWrapper>
-    <TextFieldWrapper>
-      <TextFieldStyled
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-      >
-        {PLACE}
-      </TextFieldStyled>
-      <Typography
-        fontWeight="500"
-        fontSize="14px"
-        type="caption"
-        gutterLeft="5px"
-      >
-        {EVENT_PLACE}
-      </Typography>
-    </TextFieldWrapper>
-  </Row>
-);
+const EventDescription = ({ appConstants }) => {
+  const {
+    DATE,
+    PARENT_EVENT_DATE,
+    TIME,
+    EVENT_TIME,
+    PLACE,
+    EVENT_PLACE,
+  } = appConstants;
 
-export default EventDescription;
+  return (
+    <Row
+      alignContent="center"
+      justify="center"
+      margin="30px 0 0 0"
+      display="block"
+    >
+      <TextFieldWrapper>
+        <TextFieldStyled
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+        >
+          {DATE}
+        </TextFieldStyled>
+        <Typography
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+          gutterLeft="5px"
+        >
+          {PARENT_EVENT_DATE}
+        </Typography>
+      </TextFieldWrapper>
+      <TextFieldWrapper>
+        <TextFieldStyled
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+        >
+          {TIME}
+        </TextFieldStyled>
+        <Typography
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+          gutterLeft="5px"
+        >
+          {EVENT_TIME}
+        </Typography>
+      </TextFieldWrapper>
+      <TextFieldWrapper>
+        <TextFieldStyled
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+        >
+          {PLACE}
+        </TextFieldStyled>
+        <Typography
+          fontWeight="500"
+          fontSize="14px"
+          type="caption"
+          gutterLeft="5px"
+        >
+          {EVENT_PLACE}
+        </Typography>
+      </TextFieldWrapper>
+    </Row>
+  );
+};
+
+EventDescription.propTypes = {
+  appConstants: PropTypes.object,
+};
+
+EventDescription.defaultProps = {
+  appConstants: {},
+};
+
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(EventDescription);

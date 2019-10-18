@@ -1,19 +1,17 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import {
   Redirect,
   Switch,
 } from 'react-router-dom';
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from 'pepcus-core/lib/Button';
 import Row from 'pepcus-core/lib/Row';
 
-import {
-  adminLoginBtnText,
-  newRegistrationBtnText,
-} from 'constants/yjsg';
+import { getAppConstantsConfig } from 'reducers/constants';
+
 import AdminLoginForm from './AdminLoginForm';
 
 const ButtonStyled = styled(Button)`
@@ -28,6 +26,7 @@ const ButtonStyled = styled(Button)`
 `;
 
 /**
+ * @param {Object} appConstants
  * @param {Object} admin
  * @param {Function} enableAdminLoginButtons
  * @param {Function} handleAdminScreenRedirection
@@ -43,6 +42,7 @@ const ButtonStyled = styled(Button)`
  */
 
 const LoginForm = ({
+  appConstants,
   admin,
   enableAdminLoginButtons,
   handleAdminScreenRedirection,
@@ -54,6 +54,10 @@ const LoginForm = ({
   setAdminLogin,
   transformErrors,
 }) => {
+  const {
+    NEW_REGISTRATION,
+    ADMIN_LOGIN,
+  } = appConstants;
 
   if (isAdmin) {
     return (
@@ -78,13 +82,13 @@ const LoginForm = ({
           margin="10px 15px"
           onClick={redirectToNewRegistrationPage}
         >
-          {newRegistrationBtnText}
+          {NEW_REGISTRATION}
         </ButtonStyled>
         <ButtonStyled
           margin="10px 15px"
           onClick={enableAdminLoginButtons}
         >
-          {adminLoginBtnText}
+          {ADMIN_LOGIN}
         </ButtonStyled>
       </Row>
     );
@@ -92,6 +96,7 @@ const LoginForm = ({
 };
 
 LoginForm.propTypes = {
+  appConstants: PropTypes.object,
   admin: PropTypes.object,
   enableAdminLoginButtons: PropTypes.func,
   handleAdminScreenRedirection: PropTypes.func,
@@ -105,6 +110,7 @@ LoginForm.propTypes = {
 };
 
 LoginForm.defaultProps = {
+  appConstants: {},
   admin: {},
   enableAdminLoginButtons: () => {},
   handleAdminScreenRedirection: () => {},
@@ -117,4 +123,8 @@ LoginForm.defaultProps = {
   transformErrors: () => {},
 };
 
-export default LoginForm;
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(LoginForm);

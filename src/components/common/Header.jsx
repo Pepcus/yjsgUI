@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -23,7 +22,7 @@ import {
 } from 'actions/loginActions';
 import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import {getAppConstantsConfig} from "reducers/constants";
+import { getAppConstantsConfig } from 'reducers/constants';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;

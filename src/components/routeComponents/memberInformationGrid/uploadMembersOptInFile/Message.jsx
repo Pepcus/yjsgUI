@@ -1,17 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 
-import {
-  OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
-  OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
-} from 'constants/messages';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 /**
  * Method render success or failure message of upload optIn file
+ * @param {Object} appConstants
  * @param {String} failRecordIds
  * @param {String} errorMessageOfUnavailableId
  * @param {Boolean} isOptInUploadFailed
@@ -19,12 +17,17 @@ import {
  * @return {HTML} message
  */
 const Message = ({
+  appConstants,
   failOptIn,
   errorMessageOfUnavailableId,
   isOptInUploadFailed,
   isSuccessOptIn,
 }) => {
-
+  const {
+    OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE,
+    OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE,
+    FAILED_RECORDS_ARE,
+  } = appConstants;
   /**
    * renderFailOptIn method render failed records Ids
    * @return {HTML} failed records
@@ -33,7 +36,7 @@ const Message = ({
     if (failOptIn) {
       return (
         <Typography color="error">
-          Failed Records are:
+          {FAILED_RECORDS_ARE}
           <Typography color="black">{failOptIn}</Typography>
         </Typography>);
     }
@@ -77,6 +80,7 @@ const Message = ({
 };
 
 Message.propTypes = {
+  appConstants: PropTypes.object,
   errorMessageOfUnavailableId: PropTypes.string,
   failOptIn: PropTypes.string,
   isOptInUploadFailed: PropTypes.bool,
@@ -84,10 +88,15 @@ Message.propTypes = {
 };
 
 Message.defaultProps = {
+  appConstants: {},
   errorMessageOfUnavailableId: '',
   failOptIn: '',
   isOptInUploadFailed: false,
   isSuccessOptIn: false,
 };
 
-export default Message;
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
+export default connect(mapStateToProps, null)(Message);

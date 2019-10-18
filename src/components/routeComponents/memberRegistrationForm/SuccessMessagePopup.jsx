@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,18 +8,8 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
-import {
-  ID_CARD_SUGGESTION_MESSAGE,
-  ID_NOTE_MESSAGE,
-  REGISTRATION_SUCCESS_MESSAGE,
-} from 'constants/messages';
-import {
-  IS_THERE_TEXT,
-  YOUR_ID_TEXT,
-  YOUR_SECRET_CODE_TEXT,
-} from 'constants/text';
-import { goBackBtnText } from 'constants/yjsg';
 import { setMemberCredentialsAction } from 'actions/memberRegistrationActions';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 const TextWrapper = styled(Typography)`
     font-size: 16px !important;
@@ -28,6 +17,7 @@ const TextWrapper = styled(Typography)`
 
 /**
  * SuccessMessagePopup render success message when member registration done successfully.
+ * @param {Object} appConstants
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isMemberCreated
  * @param {Object} newMember
@@ -37,12 +27,23 @@ const TextWrapper = styled(Typography)`
  * @constructor
  */
 const SuccessMessagePopup = ({
+  appConstants,
   isSubmitTriggered,
   isMemberCreated,
   newMember,
   redirectToPreviousLocation,
   setStudentCredentials,
 }) => {
+  const {
+    REGISTRATION_SUCCESS_MESSAGE,
+    YOUR_ID_TEXT,
+    IS_THERE_TEXT,
+    YOUR_SECRET_CODE_TEXT,
+    ID_NOTE_MESSAGE,
+    ID_CARD_SUGGESTION_MESSAGE,
+    BACK,
+  } = appConstants;
+
   if (isMemberCreated && isSubmitTriggered) {
     // for pre-population on splash page
     const { id, secretKey } = newMember;
@@ -61,7 +62,7 @@ const SuccessMessagePopup = ({
             margin="10px 25px"
             onClick={redirectToPreviousLocation}
           >
-            {goBackBtnText}
+            {BACK}
           </Button>
         </Row>
       </Popup>
@@ -71,6 +72,7 @@ const SuccessMessagePopup = ({
 };
 
 SuccessMessagePopup.propTypes = {
+  appConstants: PropTypes.object,
   isSubmitTriggered: PropTypes.bool,
   isMemberCreated: PropTypes.bool,
   newMember: PropTypes.object,
@@ -79,6 +81,7 @@ SuccessMessagePopup.propTypes = {
 };
 
 SuccessMessagePopup.defaultProps = {
+  appConstants: {},
   isSubmitTriggered: false,
   isMemberCreated: false,
   newMember: {},
@@ -86,8 +89,12 @@ SuccessMessagePopup.defaultProps = {
   setStudentCredentials: () => {},
 };
 
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
+
 const mapDispatchToProps = dispatch => ({
   setStudentCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
 });
 
-export default connect(null, mapDispatchToProps)(SuccessMessagePopup);
+export default connect(mapStateToProps, mapDispatchToProps)(SuccessMessagePopup);

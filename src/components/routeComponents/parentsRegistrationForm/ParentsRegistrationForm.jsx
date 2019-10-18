@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -14,13 +13,9 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { parentsRegistrationAction } from 'actions/parentsRegistrationAction';
-import {
-  formSubmitBtnText,
-  EVENT_TITLE,
-} from 'constants/yjsg';
 import fields from 'components/common/fields';
-import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
 import { getTransformedErrors, verifyFormDataValidations } from 'utils/form';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 import { schema, uiSchema, validation } from './formSchema.json';
 import CloseBrowserPopup from './CloseBrowserPopup';
@@ -175,6 +170,9 @@ class ParentsRegistration extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -188,6 +186,7 @@ class ParentsRegistration extends Component {
   handleSubmit = () => {
     const { hasError, formData } = this.state;
     const { parentsRegistration } = this.props;
+
     if (hasError) {
       this.setState({}, () => {
         this.scrollToError();
@@ -206,6 +205,12 @@ class ParentsRegistration extends Component {
 
   render() {
     const { formData, isCloseBrowserPopMessage, isSubmitTriggered } = this.state;
+    const { appConstants } = this.props;
+    const {
+      EVENT_TITLE,
+      SUBMIT,
+    } = appConstants;
+
     if (!isSubmitTriggered && !isCloseBrowserPopMessage) {
       return (
         <ContainerStyled width="100%" ref={this.formRef}>
@@ -248,7 +253,7 @@ class ParentsRegistration extends Component {
                 margin="10px 25px"
                 onClick={this.handleSubmit}
               >
-                {formSubmitBtnText}
+                {SUBMIT}
               </SubmitButtonStyled>
             </Row>
             <EventDescription />
@@ -272,13 +277,17 @@ class ParentsRegistration extends Component {
   }
 }
 ParentsRegistration.propTypes = {
+  appConstants: PropTypes.object,
   parentsRegistration: PropTypes.func,
 };
 
 ParentsRegistration.defaultProps = {
+  appConstants: {},
   parentsRegistration: () => {},
 };
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   parentsRegistration: ({ name, members, phoneNumber }) =>

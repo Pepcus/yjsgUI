@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -14,11 +13,6 @@ import Row from 'pepcus-core/lib/Row';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
-  formSubmitBtnText,
-  goBackBtnText,
-} from 'constants/yjsg';
-import {
   USER_TYPES,
 } from 'constants/member';
 import {
@@ -27,9 +21,6 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import {
   getNewMember,
   isCreated,
@@ -44,6 +35,8 @@ import {
   verifyFormDataValidations,
 } from 'utils/form';
 import fields from 'components/common/fields';
+import { getAppConstantsConfig } from 'reducers/constants';
+
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';
 
@@ -98,7 +91,8 @@ class MemberRegistrationForm extends Component {
   }
 
   componentWillMount() {
-    const { tenant, setLoadingState } = this.props;
+    const { tenant, setLoadingState, appConstants } = this.props;
+    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = appConstants;
 
     setLoadingState(true);
     try {
@@ -160,6 +154,9 @@ class MemberRegistrationForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -226,10 +223,15 @@ class MemberRegistrationForm extends Component {
       member,
     } = this.state;
     const {
+      appConstants,
       isMemberCreated,
       newMember,
       context,
     } = this.props;
+    const {
+      BACK,
+      SUBMIT,
+    } = appConstants;
     const {
       schema,
       uiSchema,
@@ -273,7 +275,7 @@ class MemberRegistrationForm extends Component {
                   width="100%"
                   onClick={this.redirectToPreviousLocation}
                 >
-                  {goBackBtnText}
+                  {BACK}
                 </Button>
               </Col>
               <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
@@ -281,7 +283,7 @@ class MemberRegistrationForm extends Component {
                   width="100%"
                   onClick={this.handleSubmit}
                 >
-                  {formSubmitBtnText}
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -300,6 +302,7 @@ class MemberRegistrationForm extends Component {
 }
 
 MemberRegistrationForm.propTypes = {
+  appConstants: PropTypes.object,
   context: PropTypes.object,
   createStudentData: PropTypes.func,
   isMemberCreated: PropTypes.bool,
@@ -310,6 +313,7 @@ MemberRegistrationForm.propTypes = {
 };
 
 MemberRegistrationForm.defaultProps = {
+  appConstants: {},
   context: {},
   createStudentData: () => {},
   isMemberCreated: false,
@@ -319,6 +323,7 @@ MemberRegistrationForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   isMemberCreated: isCreated(state),
   newMember: getNewMember(state),
   tenant: getApplicationTenant(state),

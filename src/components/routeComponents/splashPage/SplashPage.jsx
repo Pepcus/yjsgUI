@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -38,19 +37,13 @@ import {
 } from 'reducers/memberRegistrationReducer';
 import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
-  eventDate,
-  eventVenue,
-} from 'constants/yjsg';
-import {
   USER_TYPES,
 } from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import {
-  GIVEN_INFORMATION_WRONG_MESSAGE,
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import { getTransformedErrors } from 'utils/form';
+import { getAppConstantsConfig } from 'reducers/constants';
+
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 
@@ -147,6 +140,9 @@ class SplashPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
+
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -216,7 +212,12 @@ class SplashPage extends Component {
       id,
       password,
       isAdminLogin,
+      appConstants,
     } = this.props;
+    const {
+      GIVEN_INFORMATION_WRONG_MESSAGE,
+    } = appConstants;
+
     if (!isAdminLogin) {
       // Verify admin credential
       if (adminCredentialErrorMessage) {
@@ -293,7 +294,14 @@ class SplashPage extends Component {
       isNewRegistration,
       isURLParams,
     } = this.state;
-    const { tenant } = this.props;
+    const {
+      tenant,
+      appConstants,
+    } = this.props;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+    } = appConstants;
 
     if (isURLParams) {
       return <Switch><Redirect to="/member-registration-correction" /></Switch>;
@@ -315,14 +323,14 @@ class SplashPage extends Component {
                 fontWeight="600"
                 type="title"
               >
-                {eventDate[tenant ? tenant : 'default']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 align="center"
                 fontSize="16px"
                 type="title"
               >
-                {eventVenue[tenant ? tenant : 'default']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -353,6 +361,7 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
+  appConstants: PropTypes.object,
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   id: PropTypes.string,
@@ -365,6 +374,7 @@ SplashPage.propTypes = {
 };
 
 SplashPage.defaultProps = {
+  appConstants: {},
   isAdminLogin: false,
   fetchMemberData: () => {},
   id: '',
@@ -377,6 +387,7 @@ SplashPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
   password: getAdminPassword(state),

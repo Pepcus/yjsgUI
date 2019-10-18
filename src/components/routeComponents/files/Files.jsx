@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Switch } from 'react-router-dom';
@@ -356,6 +355,7 @@ class Files extends Component {
 
   componentDidMount() {
     const { filesConfig, fetchFilesConfig } = this.props;
+    const { TXT, PDF } = SUPPORTED_FILE_TYPES;
 
     fetchFilesConfig();
     const collections = window.location.hash.split('/files/');
@@ -363,12 +363,12 @@ class Files extends Component {
       if (filesConfig.files) {
         filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
-            if (fileInfo.fileType === 'pdf') {
+            if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
                 `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
-            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : TXT}`;
             const hasFileRoute = true;
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
@@ -379,18 +379,19 @@ class Files extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { filesConfig } = this.props;
+    const { PDF, TXT } = SUPPORTED_FILE_TYPES;
 
     if (filesConfig !== nextProps.filesConfig) {
       const collections = window.location.hash.split('/files/');
       if (collections[1]) {
         nextProps.filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
-            if (fileInfo.fileType === 'pdf') {
+            if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
                 `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
-            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : TXT}`;
             const hasFileRoute = true;
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
@@ -445,6 +446,7 @@ class Files extends Component {
    */
   fetchFileData = (file) => {
     const { setLoadingState } = this.props;
+    const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
 
@@ -452,14 +454,14 @@ class Files extends Component {
       fetchFile(fileDetails)
         .then((response) => {
           if (response) {
-            if (fileDetails.fileType === 'csv') {
+            if (fileDetails.fileType === CSV) {
               fileData = csv().fromString(response).then((csvRow) => {
                 this.setState({
                   fileData: csvRow,
                 });
                 setLoadingState(false);
               });
-            } else if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+            } else if (fileDetails.fileType === XLSX || fileDetails.fileType === XLS) {
               fileData = formatXlsxToJson(response);
               this.setState({
                 fileData,
@@ -495,6 +497,7 @@ class Files extends Component {
   renderFileList = () => {
     const { hasFileRoute, activeFileId, width, showFileDetails, backPageButton } = this.state;
     const { filesConfig } = this.props;
+    const { TXT } = SUPPORTED_FILE_TYPES;
     const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton });
 
     if (hasFileRoute) {
@@ -508,7 +511,7 @@ class Files extends Component {
           >
             <FileListTitle type="headline">Available Files</FileListTitle>
             {filesConfig.files.map((file, index) => {
-                const href = `files/${file.fileName}.${file.fileType ? file.fileType : 'txt'}`;
+                const href = `files/${file.fileName}.${file.fileType ? file.fileType : TXT}`;
                 return (
                   <Row
                     display="flex"
@@ -611,7 +614,14 @@ class Files extends Component {
     } = this.state;
     const isDisplayMessage = getMessageDisplayCondition({ width, showFileDetails, backPageButton });
     const { filesConfig, appConstants } = this.props;
-    const { MESSAGE_FOR_PDF_FILE_DOWNLOAD } = appConstants;
+    const {
+      MESSAGE_FOR_PDF_FILE_DOWNLOAD,
+      DOWNLOAD,
+      NO_DATA_FOUND,
+      NOTHING_TO_SHOW,
+      PLEASE_SELECT_A_FILE_TO_VIEW,
+      NO_FILES_AVAILABLE,
+    } = appConstants;
     const isMobile = width <= 500;
 
     if (showFileDetails) {
@@ -673,7 +683,7 @@ class Files extends Component {
                       download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
                       href={otherExtensionFileDetails.href}
                     >
-                      Download
+                      {DOWNLOAD}
                       <FaIcon icon={faDownload} />
                     </DownloadFileStyle>
                   </Box>
@@ -700,7 +710,7 @@ class Files extends Component {
                     download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
                     href={otherExtensionFileDetails.href}
                   >
-                    Download
+                    {DOWNLOAD}
                     <FaIcon icon={faDownload} />
                   </DownloadFileStyle>
                 </Box>
@@ -720,7 +730,7 @@ class Files extends Component {
             {this.renderFileListViewButton()}
             <Row display="flex" alignItems="center" justify="center" height="360px">
               <TypographyStyled type="caption" fontSize="25px">
-                No Data Found.
+                {NO_DATA_FOUND}
               </TypographyStyled>
             </Row>
           </MessageBoxWrapper>
@@ -736,7 +746,7 @@ class Files extends Component {
         >
           <Row display="flex" alignItems="center" justify="center" height="360px">
             <TypographyStyled type="caption" fontSize="25px">
-              Nothing to show.
+              {NOTHING_TO_SHOW}
             </TypographyStyled>
           </Row>
         </MessageBoxWrapper>
@@ -754,7 +764,7 @@ class Files extends Component {
         >
           <Row display="flex" alignItems="center" justify="center" height="360px">
             <TypographyStyled type="caption" fontSize="25px">
-              Please select a file to view.
+              {PLEASE_SELECT_A_FILE_TO_VIEW}
             </TypographyStyled>
           </Row>
         </SelectMessageWrapper>
@@ -764,7 +774,7 @@ class Files extends Component {
       <NoFileMessageWrapper ref={this.widthRef}>
         <Row display="flex" alignItems="center" justify="center" height="360px">
           <TypographyStyled type="caption" fontSize="25px">
-            No files available.
+            {NO_FILES_AVAILABLE}
           </TypographyStyled>
         </Row>
       </NoFileMessageWrapper>

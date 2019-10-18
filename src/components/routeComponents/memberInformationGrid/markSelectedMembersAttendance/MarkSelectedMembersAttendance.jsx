@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -17,9 +16,6 @@ import Modal from 'pepcus-core/lib/Modal';
 
 import { extractMembersId } from 'utils/common';
 import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
-import {
   markSelectedMembersAttendanceAction,
   resetIsMarkAttendanceSuccessAction,
 } from 'actions/allMembersDataActions';
@@ -31,6 +27,7 @@ import {
   isMarkAttendanceFailed,
 } from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 import Message from './Message';
 import { schema, uiSchema } from './modalFormShema.json';
@@ -124,6 +121,8 @@ class MarkSelectedMembersAttendance extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { appConstants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = appConstants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -180,7 +179,8 @@ class MarkSelectedMembersAttendance extends Component {
    */
   renderModal = () => {
     const { isModalOpen, formData } = this.state;
-    const { isAttendanceMarkSuccess, isAttendanceMarkFailed } = this.props;
+    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, appConstants } = this.props;
+    const { CLOSE, SUBMIT } = appConstants;
 
     const UiSchema = {
       ...uiSchema,
@@ -248,7 +248,7 @@ class MarkSelectedMembersAttendance extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </ColStyled>
               <Col size={3}>
@@ -257,7 +257,7 @@ class MarkSelectedMembersAttendance extends Component {
                   noMinWidth
                   onClick={this.onFormSubmit}
                 >
-                  Submit
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -269,7 +269,8 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   render() {
-    const { selectedMembers } = this.props;
+    const { selectedMembers, appConstants } = this.props;
+    const { MARK_AS_PRESENT } = appConstants;
 
     return (
       <RowStyled display="inline-block" margin="0 0 0 10px">
@@ -279,7 +280,7 @@ class MarkSelectedMembersAttendance extends Component {
           noMinWidth
           onClick={this.checkOpenModalCondition}
         >
-          <FaIcon icon={faUser} />Mark as Present
+          <FaIcon icon={faUser} />{MARK_AS_PRESENT}
         </ButtonStyled>
         {this.renderModal()}
       </RowStyled>
@@ -288,6 +289,7 @@ class MarkSelectedMembersAttendance extends Component {
 }
 
 MarkSelectedMembersAttendance.propTypes = {
+  appConstants: PropTypes.object,
   isAttendanceMarkFailed: PropTypes.bool,
   isAttendanceMarkSuccess: PropTypes.bool,
   markSelectedMembersAttendance: PropTypes.func,
@@ -297,6 +299,7 @@ MarkSelectedMembersAttendance.propTypes = {
 };
 
 MarkSelectedMembersAttendance.defaultProps = {
+  appConstants: {},
   isAttendanceMarkFailed: false,
   isAttendanceMarkSuccess: false,
   markSelectedMembersAttendance: () => {},
@@ -306,6 +309,7 @@ MarkSelectedMembersAttendance.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   isAttendanceMarkFailed: isMarkAttendanceFailed(state),
   isAttendanceMarkSuccess: isMarkAttendanceSuccess(state),
   secretKey: getSecretKey(state),

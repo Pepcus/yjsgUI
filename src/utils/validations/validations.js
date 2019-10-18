@@ -2,7 +2,10 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
+import store from 'store/store';
+
+const appConstants = store.getState().constants;
+const {
   DOUBLE_QUOTE_ERROR_MESSAGE,
   FULL_ADDRESS_MESSAGE,
   INFORMATION_HELPFUL_TO_CONTACT_MESSAGE,
@@ -14,7 +17,7 @@ import {
   ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE,
   ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE,
   SINGLE_QUOTE_ERROR_MESSAGE,
-} from 'constants/messages';
+} = appConstants;
 
 /**
  * nameValidate method check validations for name field of form

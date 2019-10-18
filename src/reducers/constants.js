@@ -15,4 +15,4 @@ export const constants = (state = initialState, { type, ...actionProps }) => {
   }
 };
 
-export const getAppConstantsConfig = state => state.appConstants;
+export const getAppConstantsConfig = state => state.constants;

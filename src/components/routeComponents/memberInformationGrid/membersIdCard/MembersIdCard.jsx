@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,12 +11,9 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  MEMBER_ID_CARD_SMALL_HEADING,
-  MEMBER_ID_CARD_MAIN_HEADING,
-} from 'constants/text';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
+import { getAppConstantsConfig } from 'reducers/constants';
 
 import CoordinatorInformation from './CoordinatorInformation';
 
@@ -127,7 +123,20 @@ class MembersIdCard extends Component {
    * @return {HTML}
    */
   renderMembersIdCard({ selectedMembers }) {
-    const { busCoordinators = {} } = this.props;
+    const { appConstants, busCoordinators = {} } = this.props;
+    const {
+      MEMBER_ID_CARD_SMALL_HEADING,
+      MEMBER_ID_CARD_MAIN_HEADING,
+      NAME,
+      CLASS,
+      ROOM,
+      FATHER_NAME,
+      MOBILE_NO,
+      BUS_STOP,
+      BUS_NO,
+      ADDRESS,
+      STUDENT_ID,
+    } = appConstants;
     const membersIdCards = selectedMembers.map((member) => {
       const memberId = getFormattedMemberId({ memberId: member.memberId });
       const name = convertFirstCharacterInUpperCase({ sentence: member.name });
@@ -169,7 +178,7 @@ class MembersIdCard extends Component {
               padding="1px"
               align="center"
             >
-              { MEMBER_ID_CARD_SMALL_HEADING }
+              {MEMBER_ID_CARD_SMALL_HEADING}
             </SmallHeadingWrapper>
             <TypographyStyled
               color="dark"
@@ -180,7 +189,7 @@ class MembersIdCard extends Component {
               align="center"
               fontSize="18px"
             >
-              { MEMBER_ID_CARD_MAIN_HEADING }
+              {MEMBER_ID_CARD_MAIN_HEADING}
             </TypographyStyled>
           </Typography>
           <MemberInformationWrapper
@@ -200,7 +209,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Name:
+                  {NAME}
                 </Typography>
                 <CardTextWrapper
                   fontSize="9px"
@@ -217,7 +226,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Class:
+                  {CLASS}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -234,7 +243,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Room:
+                  {ROOM}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -257,7 +266,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Father Name:
+                  {FATHER_NAME}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -274,7 +283,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Mobile No:
+                  {MOBILE_NO}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -301,7 +310,7 @@ class MembersIdCard extends Component {
                   gutterLeft="0"
                   fontSize="9px"
                   fontWeight="bold"
-                >Bus Stop:
+                >{BUS_STOP}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -318,7 +327,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Bus No:
+                  {BUS_NO}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -346,7 +355,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Address:
+                  {ADDRESS}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -373,7 +382,7 @@ class MembersIdCard extends Component {
                   fontSize="13px"
                   fontFamily="Roboto Condensed"
                 >
-                  Student Id:
+                  {STUDENT_ID}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -490,17 +499,20 @@ class MembersIdCard extends Component {
 }
 
 MembersIdCard.propTypes = {
+  appConstants: PropTypes.object,
   busCoordinators: PropTypes.object,
   selectedMembers: PropTypes.array,
 };
 
 MembersIdCard.defaultProps = {
+  appConstants: {},
   busCoordinators: {},
   selectedMembers: [],
 };
 
 const mapStateToProps = state => ({
+  appConstants: getAppConstantsConfig(state),
   busCoordinators: getBusCoordinators(state),
 });
 
-export default connect(mapStateToProps, {})(MembersIdCard);
+export default connect(mapStateToProps, null)(MembersIdCard);

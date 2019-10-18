@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -34,7 +33,6 @@ const MobileButtonsContainerStyled = styled(Container)`
         z-index: 1;
     `};
 `;
-
 
 const MobileButtonsBoxStyled = styled(Box)`
     padding: 0px 12px
