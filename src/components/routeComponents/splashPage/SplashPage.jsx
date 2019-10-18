@@ -199,67 +199,6 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method redirect to admin page on some condition.
-   * @return {HTML}
-   */
-  handleAdminScreenRedirection = () => {
-    // IF admin initial login.
-    const {
-      adminCredentialErrorMessage,
-      redirectToRoute,
-    } = this.state;
-    const {
-      id,
-      password,
-      isAdminLogin,
-      appConstants,
-    } = this.props;
-    const {
-      GIVEN_INFORMATION_WRONG_MESSAGE,
-    } = appConstants;
-
-    if (!isAdminLogin) {
-      // Verify admin credential
-      if (adminCredentialErrorMessage) {
-        if (!isEmpty(id) || !isEmpty(password)) {
-          // If admin credential is not valid it gives the error message.
-          return (
-            <Row
-              justify="center"
-              width="100%"
-              margin="0 0 18px 0"
-            >
-              <Typography
-                type="title"
-                fontSize="14px"
-                align="center"
-                color="error"
-              >
-                {GIVEN_INFORMATION_WRONG_MESSAGE}
-              </Typography>
-            </Row>
-          );
-        }
-        // if admin credential is valid then it set admin login true in redux store
-        // and redirect to "/member-search" route
-        if (redirectToRoute) {
-          this.setRedirectToRoute('');
-          return <Switch><Redirect to={redirectToRoute} /></Switch>;
-        }
-      }
-      return null;
-    }
-    if (redirectToRoute) {
-      this.setRedirectToRoute('');
-      return <Switch><Redirect to={redirectToRoute} /></Switch>;
-    }
-    // if admin is already login then it redirect to "/member-search"
-    // without any credential.
-    return <Switch><Redirect to="/member-search" /></Switch>;
-  };
-
-
-  /**
    * Method set the admin login credential
    */
   setAdminLogin = () => {
@@ -344,7 +283,6 @@ class SplashPage extends Component {
             <LoginForm
               admin={admin}
               enableAdminLoginButtons={this.enableAdminLoginButtons}
-              handleAdminScreenRedirection={this.handleAdminScreenRedirection}
               handleDisableAdminLoginButtons={this.handleDisableAdminLoginButtons}
               isAdmin={isAdmin}
               isNewRegistration={isNewRegistration}
@@ -352,6 +290,12 @@ class SplashPage extends Component {
               redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
               setAdminLogin={this.setAdminLogin}
               transformErrors={this.transformErrors}
+              adminCredentialErrorMessage={this.state.adminCredentialErrorMessage}
+              redirectToRoute={this.state.redirectToRoute}
+              id={this.props.id}
+              password={this.props.password}
+              isAdminLogin={this.props.isAdminLogin}
+              setRedirectToRoute={this.setRedirectToRoute}
             />
           </Col>
         </BoxStyled>

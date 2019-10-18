@@ -29,7 +29,6 @@ const ButtonStyled = styled(Button)`
  * @param {Object} appConstants
  * @param {Object} admin
  * @param {Function} enableAdminLoginButtons
- * @param {Function} handleAdminScreenRedirection
  * @param {Function} handleDisableAdminLoginButtons
  * @param {Boolean} isAdmin
  * @param {Boolean} isNewRegistration
@@ -37,15 +36,18 @@ const ButtonStyled = styled(Button)`
  * @param {Function} redirectToNewRegistrationPage
  * @param {Function} setAdminLogin
  * @param {Function} transformErrors
+ * @param {Boolean} adminCredentialErrorMessage
+ * @param {String} redirectToRoute
+ * @param {String} id
+ * @param {String} password
+ * @param {Boolean} isAdminLogin
+ * @param {Function} setRedirectToRoute
  * @return {HTML}
- * @constructor
  */
-
 const LoginForm = ({
   appConstants,
   admin,
   enableAdminLoginButtons,
-  handleAdminScreenRedirection,
   handleDisableAdminLoginButtons,
   isAdmin,
   isNewRegistration,
@@ -53,6 +55,12 @@ const LoginForm = ({
   redirectToNewRegistrationPage,
   setAdminLogin,
   transformErrors,
+  adminCredentialErrorMessage,
+  redirectToRoute,
+  id,
+  password,
+  isAdminLogin,
+  setRedirectToRoute,
 }) => {
   const {
     NEW_REGISTRATION,
@@ -61,8 +69,13 @@ const LoginForm = ({
   if (isAdmin) {
     return (
       <AdminLoginForm
+        adminCredentialErrorMessage={adminCredentialErrorMessage}
+        redirectToRoute={redirectToRoute}
+        id={id}
+        password={password}
+        isAdminLogin={isAdminLogin}
+        setRedirectToRoute={setRedirectToRoute}
         admin={admin}
-        handleAdminScreenRedirection={handleAdminScreenRedirection}
         handleDisableAdminLoginButtons={handleDisableAdminLoginButtons}
         isAdmin={isAdmin}
         onChange={onChange}
@@ -98,7 +111,6 @@ LoginForm.propTypes = {
   appConstants: PropTypes.object,
   admin: PropTypes.object,
   enableAdminLoginButtons: PropTypes.func,
-  handleAdminScreenRedirection: PropTypes.func,
   handleDisableAdminLoginButtons: PropTypes.func,
   isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
@@ -106,13 +118,18 @@ LoginForm.propTypes = {
   redirectToNewRegistrationPage: PropTypes.func,
   setAdminLogin: PropTypes.func,
   transformErrors: PropTypes.func,
+  adminCredentialErrorMessage: PropTypes.bool,
+  redirectToRoute: PropTypes.string,
+  id: PropTypes.string,
+  password: PropTypes.string,
+  isAdminLogin: PropTypes.bool,
+  setRedirectToRoute: PropTypes.func,
 };
 
 LoginForm.defaultProps = {
   appConstants: {},
   admin: {},
   enableAdminLoginButtons: () => {},
-  handleAdminScreenRedirection: () => {},
   handleDisableAdminLoginButtons: () => {},
   isAdmin: false,
   isNewRegistration: false,
@@ -120,6 +137,12 @@ LoginForm.defaultProps = {
   redirectToNewRegistrationPage: () => {},
   setAdminLogin: () => {},
   transformErrors: () => {},
+  adminCredentialErrorMessage: false,
+  redirectToRoute: '',
+  id: '',
+  password: '',
+  isAdminLogin: false,
+  setRedirectToRoute: () => {},
 };
 
 const mapStateToProps = state => ({

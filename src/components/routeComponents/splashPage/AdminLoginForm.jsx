@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
+import { Redirect, Switch } from 'react-router-dom';
 
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
 import Form from 'pepcus-core/lib/Form';
 import Row from 'pepcus-core/lib/Row';
+import Typography from 'pepcus-core/lib/Typography';
 
 import { getAppConstantsConfig } from 'reducers/constants';
 
@@ -17,19 +20,28 @@ import {
 /**
  * @param {Object} appConstants
  * @param {Object} admin
- * @param {Function} handleAdminScreenRedirection
+ * @param {Boolean} adminCredentialErrorMessage
+ * @param {String} redirectToRoute
+ * @param {String} id
+ * @param {String} password
+ * @param {Boolean} isAdminLogin
+ * @param {Function} setRedirectToRoute,
  * @param {Function} handleDisableAdminLoginButtons
  * @param {Boolean} isAdmin
  * @param {Function} onChange
  * @param {Function} setAdminLogin
  * @param {Function} transformErrors
  * @return {HTML}
- * @constructor
  */
 const AdminLoginForm = ({
   appConstants,
   admin,
-  handleAdminScreenRedirection,
+  adminCredentialErrorMessage,
+  redirectToRoute,
+  id,
+  password,
+  isAdminLogin,
+  setRedirectToRoute,
   handleDisableAdminLoginButtons,
   isAdmin,
   onChange,
@@ -39,7 +51,54 @@ const AdminLoginForm = ({
   const {
     BACK,
     SUBMIT,
+    GIVEN_INFORMATION_WRONG_MESSAGE,
   } = appConstants;
+
+  /**
+   * Method redirect to admin page on some condition.
+   * @return {HTML}
+   */
+  const handleAdminScreenRedirection = () => {
+    // IF admin initial login.
+    if (!isAdminLogin) {
+      // Verify admin credential
+      if (adminCredentialErrorMessage) {
+        if (!isEmpty(id) || !isEmpty(password)) {
+          // If admin credential is not valid it gives the error message.
+          return (
+            <Row
+              justify="center"
+              width="100%"
+              margin="0 0 18px 0"
+            >
+              <Typography
+                type="title"
+                fontSize="14px"
+                align="center"
+                color="error"
+              >
+                {GIVEN_INFORMATION_WRONG_MESSAGE}
+              </Typography>
+            </Row>
+          );
+        }
+        // if admin credential is valid then it set admin login true in redux store
+        // and redirect to "/member-search" route
+        if (redirectToRoute) {
+          setRedirectToRoute('');
+          return <Switch><Redirect to={redirectToRoute} /></Switch>;
+        }
+      }
+      return null;
+    }
+    if (redirectToRoute) {
+      setRedirectToRoute('');
+      return <Switch><Redirect to={redirectToRoute} /></Switch>;
+    }
+    // if admin is already login then it redirect to "/member-search"
+    // without any credential.
+    return <Switch><Redirect to="/member-search" /></Switch>;
+  };
 
   if (isAdmin) {
     return (
@@ -85,23 +144,33 @@ const AdminLoginForm = ({
 AdminLoginForm.propTypes = {
   appConstants: PropTypes.object,
   admin: PropTypes.object,
-  handleAdminScreenRedirection: PropTypes.func,
   handleDisableAdminLoginButtons: PropTypes.func,
   isAdmin: PropTypes.bool,
   onChange: PropTypes.func,
   setAdminLogin: PropTypes.func,
   transformErrors: PropTypes.func,
+  adminCredentialErrorMessage: PropTypes.bool,
+  redirectToRoute: PropTypes.string,
+  id: PropTypes.string,
+  password: PropTypes.string,
+  isAdminLogin: PropTypes.bool,
+  setRedirectToRoute: PropTypes.func,
 };
 
 AdminLoginForm.defaultProps = {
   appConstants: {},
   admin: {},
-  handleAdminScreenRedirection: () => {},
   handleDisableAdminLoginButtons: () => {},
   isAdmin: false,
   onChange: () => {},
   setAdminLogin: () => {},
   transformErrors: () => {},
+  adminCredentialErrorMessage: false,
+  redirectToRoute: '',
+  id: '',
+  password: '',
+  isAdminLogin: false,
+  setRedirectToRoute: () => {},
 };
 
 const mapStateToProps = state => ({
