@@ -8,8 +8,8 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { routes, footerTitle } from 'config/appConfig.json';
 import { getConstants } from 'reducers/constants';
+import { getApplicationConfiguration } from 'reducers/config';
 
 const FooterWrapper = styled(Box)`
     text-align: center;
@@ -45,18 +45,22 @@ const TitleStyled = styled(Typography)`
 
 /**
  * Footer component is common footer that will be rendered in bottom of all pages
+ * @param {Object} config
  * @param {Object} constants
  * @param {String} location
  * @param {String} tenant
  * @return {HTML}
  */
 const Footer = ({
+  config,
   constants,
   location,
   tenant,
 }) => {
-  const getFooterText = () => (footerTitle[tenant] ? footerTitle[tenant] : '');
+  const { routes, footerTitle } = config;
   const { FOOTER_CONTACT_TEXT } = constants;
+
+  const getFooterText = () => (footerTitle ? footerTitle : '');
   const renderFooterName = footerObject => (
     <FooterStyled
       type="title"
@@ -86,6 +90,7 @@ const Footer = ({
 };
 
 Footer.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   location: PropTypes.string,
   routes: PropTypes.array,
@@ -94,6 +99,7 @@ Footer.propTypes = {
 };
 
 Footer.defaultProps = {
+  config: {},
   constants: {},
   location: '',
   routes: [],
@@ -102,6 +108,7 @@ Footer.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  config: getApplicationConfiguration(state),
   constants: getConstants(state),
   tenant: getApplicationTenant(state),
 });
