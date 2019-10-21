@@ -11,8 +11,8 @@ import {
   markMemberOptStatus,
   updateMemberIdCardStatus,
   registerParent,
-  callMemberAPI,
 } from 'apis/member';
+import { callAPIWithConfig } from 'apis/apis';
 import {
   createMemberFailedAction,
   createMemberSuccessAction,
@@ -58,7 +58,7 @@ export function* createMemberSaga(action) {
   try {
     const tenant = yield select(getTenantName);
     const config = { ...apiConfig, data: member };
-    const response = yield callMemberAPI(tenant, 'createMember', config);
+    const response = yield callAPIWithConfig(tenant, 'createMember', config);
 
     if (response.student) {
       yield put(createMemberSuccessAction(response.student));
