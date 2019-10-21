@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Box from 'pepcus-core/lib/Box';
 
-import { routes } from 'config/appConfig.json';
 import Header from 'components/common/Header';
 import Loader from 'components/common/Loader';
 import Footer from 'components/common/Footer';
+import { getApplicationRoutes } from 'reducers/config';
 import AppRoute from './AppRoute';
 
 import Context from '../ConfigProvider';
@@ -36,7 +37,7 @@ class Routes extends Component {
       });
     }
   }
-  renderRoutes = () => routes.map((route) => {
+  renderRoutes = () => this.props.routes.map((route) => {
     const RouteComponent = RouteComponents[route.component];
     if (route.isActive) {
       return (
@@ -57,7 +58,6 @@ class Routes extends Component {
     const { Consumer } = Context;
     const { previousLocation } = this.state;
     const { location } = this.props;
-
     return (
       <Box padding="0" backgroundColor="unset" margin="0" borderStyle="unset">
         <Context.Provider previousLocation={previousLocation}>
@@ -74,11 +74,16 @@ class Routes extends Component {
 }
 
 Routes.propTypes = {
+  routes: PropTypes.array,
   location: PropTypes.object,
 };
 
 Routes.defaultProps = {
+  routes: {},
   location: {},
 };
 
-export default Routes;
+const mapStateToProps = state => ({
+  routes: getApplicationRoutes(state),
+});
+export default connect(mapStateToProps, null)(Routes);
