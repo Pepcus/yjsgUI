@@ -20,9 +20,9 @@ import {
   resetLoginAdminStateAction,
   resetAdminCredentialsAction,
 } from 'actions/loginActions';
-import { routes, title } from 'config/appConfig.json';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
+import { getApplicationConfiguration } from 'reducers/config';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -127,6 +127,7 @@ const LinkStyled = styled(Link)`
 
 /**
  * Header render the common header for all route
+ * @param {Object} config
  * @param {Object} constants
  * @param {Object} context
  * @param {String} location
@@ -139,6 +140,7 @@ const LinkStyled = styled(Link)`
  * @return {HTML}
  */
 const Header = ({
+  config,
   constants,
   context,
   location,
@@ -148,8 +150,8 @@ const Header = ({
   resetVisibleColumnConfig,
   tenant,
 }) => {
-
   const { BACK, LOGOUT } = constants;
+  const { routes, title } = config;
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
@@ -211,7 +213,7 @@ const Header = ({
    * It return the header text
    * @return {string}
    */
-  const getHeaderText = () => (title[tenant] ? title[tenant] : '');
+  const getHeaderText = () => (title ? title : '');
 
   /**
    * Method render header name in header
@@ -347,6 +349,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  config: getApplicationConfiguration(state),
   constants: getConstants(state),
   tenant: getApplicationTenant(state),
 });

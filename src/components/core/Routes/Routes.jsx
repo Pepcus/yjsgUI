@@ -16,8 +16,8 @@ import RouteComponents from '../../routeComponents';
 /**
  * Routes component maintain all routes
  * And send all previous location path to all routes.
- *
  * @type {Class}
+ * @return {HTML}
  */
 class Routes extends Component {
   constructor(props) {
@@ -38,7 +38,6 @@ class Routes extends Component {
   }
   renderRoutes = () => routes.map((route) => {
     const RouteComponent = RouteComponents[route.component];
-
     if (route.isActive) {
       return (
         <Route

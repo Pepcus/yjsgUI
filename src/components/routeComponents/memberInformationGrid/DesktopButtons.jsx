@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
@@ -9,9 +11,9 @@ import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import FaIcon from 'pepcus-core/lib/FaIcon';
 
+import { getConstants } from 'reducers/constants';
+
 import UploadMembersAttendanceFile from './uploadMembersAttendanceFile';
-import {getConstants} from "reducers/constants";
-import {connect} from "react-redux";
 /**
  TODO: This will be use in future scope.
  */
