@@ -13,6 +13,7 @@ let persistedState = {};
 if (window.localStorage.getItem('reduxState')) {
   persistedState = JSON.parse(window.localStorage.getItem('reduxState'));
 
+  delete persistedState.api;
   delete persistedState.appConfig;
   delete persistedState.config;
 }

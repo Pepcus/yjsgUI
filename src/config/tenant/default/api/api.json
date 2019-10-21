@@ -1,0 +1,39 @@
+{
+  "config": {
+    "defaultHeaders": {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    },
+    "defaultBaseUrl": ""
+  },
+  "apis": {
+    "login": {
+      "loginAdmin": {
+        "method": "POST",
+        "url": "v1/login"
+      }
+    },
+    "member": {
+      "getMember": {
+        "method": "GET",
+        "url": "v1/students/${id}"
+      },
+      "getMembers": {
+        "method": "GET",
+        "url": "v1/students"
+      },
+      "createMember": {
+        "method": "POST",
+        "url": "v1/students"
+      },
+      "deleteMember": {},
+      "updateMember": {},
+      "uploadAttendanceFile": {},
+      "uploadOptInFile": {},
+      "markMemberAttendance": {},
+      "markMemberOptStatus": {},
+      "markMemberIdCardStatus": {},
+      "createSecondaryMember": {}
+    }
+  }
+}

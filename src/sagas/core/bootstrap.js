@@ -20,12 +20,14 @@ import {
   getAppConfig,
   getBusCoordinatorsConfig,
   getAppConstants,
+  getAPIConfig,
 } from 'apis/core';
 import { setApplicationConfigurationAction } from 'actions/config';
 import { mergeObjects } from 'utils/common/object';
 import {
   setAppConstantsAction,
 } from 'actions/appConstantsActions';
+import { setAPIConfigAction } from 'actions/api';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
@@ -39,6 +41,12 @@ function* getApplicationConstants() {
   const tenantConstantsConfig = yield getAppConstants({ tenant });
   const text = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
   yield put(setAppConstantsAction({ text }));
+}
+
+function* getAPIConfigSaga() {
+  const tenant = yield select(getTenantName);
+  const apiConfig = yield getAPIConfig({ tenant });
+  yield put(setAPIConfigAction(apiConfig));
 }
 
 export function* getAppConfigSaga() {
@@ -75,10 +83,17 @@ export function* getBusCoordinatorsConfigSaga() {
 export function* bootstrapApplication() {
   try {
     yield put(setLoadingStateAction(true));
+    // GET application ui_config file
     yield getAppConfigSaga();
+    // GET application API config file
+    yield getAPIConfigSaga();
+    // GET application theme config
     yield getAppThemeSaga();
+    // GET application tenant specific app.json
     yield getAppConfigurableDataSaga();
+    // GET application's configurable constants file
     yield getApplicationConstants();
+    // TODO by Pratik: Remove this call from bootstrap
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
   } catch (e) {

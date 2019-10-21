@@ -32,3 +32,7 @@ export const getAppConstants = ({ tenant }) => (
     url: `src/config/tenant/${tenant}/constants/text.json`,
   })
 );
+
+export const getAPIConfig = ({ tenant }) => GET({
+  url: `src/config/tenant/${tenant}/api/api.json`,
+});

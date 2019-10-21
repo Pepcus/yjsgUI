@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import api from 'reducers/api';
 import appConfig from './app';
 import config from './config';
 import { appReducer } from './appReducer';
@@ -13,6 +14,7 @@ import { parentsRegistrationReducer } from './parentsRegistrationReducer';
 import { loginReducer } from './loginReducer';
 
 const rootReducer = combineReducers({
+  api,
   appConfig,
   theme,
   appReducer,
