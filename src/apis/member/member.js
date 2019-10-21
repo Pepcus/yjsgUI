@@ -1,8 +1,16 @@
-import { PUT, POST, GET, PATCH } from 'apis/http';
+import _cloneDeep from 'lodash/cloneDeep';
+import _isEmpty from 'lodash/isEmpty';
+
+import * as HTTP from 'apis/http';
 import {
   formatUpdateMemberDataPayload,
   formatCreateMemberDataPayload,
 } from 'utils/apis';
+
+import { headerFormatters, requestFormatters, responseFormatters } from 'utils/apis/formatterUtils';
+import { stringReplace } from 'utils/common/string';
+
+const { PUT, POST, GET, PATCH } = HTTP;
 
 export const updateMember = ({ id, secretKey, member }) =>
   PUT({
@@ -14,6 +22,7 @@ export const updateMember = ({ id, secretKey, member }) =>
     },
     body: formatUpdateMemberDataPayload(member),
   });
+
 export const createMember = member =>
   POST({
     url: '/v1/students',
@@ -106,3 +115,43 @@ export const registerParent = (name, members, phoneNumber) =>
       phoneNumber,
     },
   });
+
+
+// THE MAIN CALLER
+export const callMemberAPI = (tenant, api, config) => {
+  const { baseUrl = '', method, params, urlValuesMap } = config;
+  let { data, headers, url } = config;
+
+  const headerFormatter = headerFormatters[tenant][api];
+  const requestFormatter = requestFormatters[tenant][api];
+  const responseFormatter = responseFormatters[tenant][api];
+
+  if (typeof headerFormatter === 'function') {
+    headers = headerFormatter(headers);
+  }
+
+  if (typeof requestFormatter === 'function') {
+    data = requestFormatter(data);
+  }
+
+  if (!_isEmpty(urlValuesMap)) {
+    url = stringReplace(url, urlValuesMap);
+  }
+
+  return HTTP[method]({
+    url: `${baseUrl}/${url}`,
+    headers,
+    body: data,
+    params,
+  }).then((response) => {
+    let formattedResponse = _cloneDeep(response);
+    if (typeof responseFormatter === 'function') {
+      formattedResponse = responseFormatter(formattedResponse);
+    }
+
+    return formattedResponse;
+  }).catch((error) => {
+    console.error(`Error occurred while executing the '${api}' API - `, error);
+    throw error;
+  });
+};

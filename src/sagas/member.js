@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 
 import {
   createMember,
@@ -11,6 +11,7 @@ import {
   markMemberOptStatus,
   updateMemberIdCardStatus,
   registerParent,
+  callMemberAPI,
 } from 'apis/member';
 import {
   createMemberFailedAction,
@@ -41,6 +42,8 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
+import { getAPIConfig } from 'reducers/api';
+import { getTenantName } from 'reducers/app';
 
 /**
  * createMemberSaga sage call when create a new member.
@@ -49,8 +52,14 @@ import {
 export function* createMemberSaga(action) {
   const { member } = action;
   const errorMessage = 'Error creating new member.';
+
+  const apiConfig = yield select(getAPIConfig, 'member', 'createMember');
+
   try {
-    const response = yield createMember(member);
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, data: member };
+    const response = yield callMemberAPI(tenant, 'createMember', config);
+
     if (response.student) {
       yield put(createMemberSuccessAction(response.student));
     } else {
