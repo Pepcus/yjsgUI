@@ -7,7 +7,7 @@ import {
   formatCreateMemberDataPayload,
 } from 'utils/apis';
 
-import { headerFormatters, requestFormatters, responseFormatters } from 'utils/apis/formatterUtils';
+import { headerFormatters, requestFormatters, responseFormatters } from 'utils/apis/formatters';
 import { stringReplace } from 'utils/common/string';
 
 const { PUT, POST, GET, PATCH } = HTTP;
