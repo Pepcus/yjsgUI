@@ -19,17 +19,12 @@ import {
   createMemberDataAction,
 } from 'actions/memberRegistrationActions';
 import {
-  setLoadingStateAction,
-} from 'actions/loaderActions';
-import {
   getNewMember,
   isCreated,
 } from 'reducers/memberRegistrationReducer';
 import {
   getUserType,
 } from 'reducers/appReducer';
-import { fetchFormConfig } from 'apis/core';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
   getTransformedErrors,
   verifyFormDataValidations,
@@ -83,37 +78,11 @@ class MemberRegistrationForm extends Component {
       isSubmitTriggered: false,
       member: {},
       hasError: false,
-      formConfig: {},
+      formConfig: props.config.registrationFormConfig,
       isAdminLocation: false,
       isStudentLocation: false,
       isPreviousLocation: false,
     };
-  }
-
-  componentWillMount() {
-    const { tenant, setLoadingState, constants } = this.props;
-    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = constants;
-
-    setLoadingState(true);
-    try {
-      fetchFormConfig({ tenant: tenant ? tenant : 'default', fileName: 'Registration' })
-        .then((response) => {
-          if (response) {
-            this.setState({
-              formConfig: response,
-            });
-
-          } else {
-            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-            setLoadingState(false);
-          }
-        });
-    } catch (e) {
-      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-      console.error(e);
-    } finally {
-      setLoadingState(false);
-    }
   }
 
   /**
@@ -303,23 +272,21 @@ class MemberRegistrationForm extends Component {
 }
 
 MemberRegistrationForm.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   context: PropTypes.object,
-  createStudentData: PropTypes.func,
+  createStudentData: PropTypes.func.isRequired,
   isMemberCreated: PropTypes.bool,
   newMember: PropTypes.object,
-  setLoadingState: PropTypes.func.isRequired,
-  tenant: PropTypes.string,
   userType: PropTypes.string,
 };
 
 MemberRegistrationForm.defaultProps = {
+  config: {},
   constants: {},
   context: {},
-  createStudentData: () => {},
   isMemberCreated: false,
   newMember: {},
-  tenant: '',
   userType: '',
 };
 
@@ -327,13 +294,11 @@ const mapStateToProps = state => ({
   constants: getConstants(state),
   isMemberCreated: isCreated(state),
   newMember: getNewMember(state),
-  tenant: getApplicationTenant(state),
   userType: getUserType(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   createStudentData: member => dispatch(createMemberDataAction(member)),
-  setLoadingState: flag => dispatch(setLoadingStateAction(flag)),
 });
 
 export default connect(

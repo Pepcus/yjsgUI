@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { getTenantName } from 'reducers/app';
 import { getRouteConfig } from 'apis/core';
-import { mergeObjects } from 'utils/common/object';
 
 import Context from '../ConfigProvider';
 
@@ -26,20 +25,20 @@ class AppRoute extends React.Component {
     const { config: configIdentifier } = route;
 
     if (configIdentifier) {
-      getRouteConfig('default', configIdentifier).then((defaultConfig) => {
-        if (!tenant) {
+      getRouteConfig(tenant, configIdentifier).then((tenantConfig) => {
+        this.setState({
+          loaded: true,
+          config: tenantConfig,
+        });
+      }).catch(() => {
+        getRouteConfig('default', configIdentifier).then((defaultConfig) => {
           this.setState({
             loaded: true,
             config: defaultConfig,
           });
-        } else {
-          getRouteConfig(tenant, configIdentifier).then((tenantConfig) => {
-            this.setState({
-              loaded: true,
-              config: mergeObjects(defaultConfig, tenantConfig),
-            });
-          });
-        }
+        }).catch((error) => {
+          console.error(`Failed to configuration for '${route.name}' route - `, error);
+        });
       });
     } else {
       this.setState({

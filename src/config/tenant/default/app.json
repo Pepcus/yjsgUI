@@ -67,6 +67,7 @@
       "name": "memberRegister",
       "path": "/member-register",
       "component": "MemberRegistrationForm",
+      "config": "memberRegistration",
       "isActive": true,
       "header": {
         "titleStyle": {
