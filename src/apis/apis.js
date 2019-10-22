@@ -11,7 +11,7 @@ import * as HTTP from 'apis/http';
 
 // THE MAIN CALLER
 export const callAPIWithConfig = (tenant, api, config) => {
-  const { baseUrl = '', method, params, urlValuesMap, additionalData } = config;
+  const { baseUrl = '', method, params, urlValuesMap, additionalData, responseType = null } = config;
   let { data, headers, url } = config;
 
   const headerFormatter = headerFormatters[tenant][api];
@@ -35,6 +35,7 @@ export const callAPIWithConfig = (tenant, api, config) => {
     headers,
     body: data,
     params,
+    responseType,
   }).then((response) => {
     let formattedResponse = _cloneDeep(response);
     if (typeof responseFormatter === 'function') {

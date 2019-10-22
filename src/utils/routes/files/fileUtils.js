@@ -116,3 +116,14 @@ export const getMessageDisplayCondition = ({ width, showFileDetails, backPageBut
   }
   return true;
 };
+
+export const fetchFileResponseType = (fileDetails) => {
+  let responseType = 'json';
+  if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+    responseType = 'arrayBuffer';
+  }
+  if (fileDetails.fileType === 'csv') {
+    responseType = 'text';
+  }
+  return responseType;
+};

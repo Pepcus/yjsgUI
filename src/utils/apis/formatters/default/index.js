@@ -1,7 +1,6 @@
 import {
   defaultHeaderFormatter,
   uploadCSVFileHeaderFormatter,
-  markMemberAPIHeaderFormatter,
 } from './headerFormatters';
 import {
   formatUpdateMemberDataPayload,
@@ -18,9 +17,9 @@ export default {
     getMembers: defaultHeaderFormatter,
     uploadAttendanceFile: uploadCSVFileHeaderFormatter,
     uploadOptInFile: uploadCSVFileHeaderFormatter,
-    markMemberAttendance: markMemberAPIHeaderFormatter,
-    markMemberOptStatus: markMemberAPIHeaderFormatter,
-    markMemberIdCardStatus: markMemberAPIHeaderFormatter,
+    markMemberAttendance: defaultHeaderFormatter,
+    markMemberOptStatus: defaultHeaderFormatter,
+    markMemberIdCardStatus: defaultHeaderFormatter,
   },
   request: {
     updateMember: formatUpdateMemberDataPayload,
