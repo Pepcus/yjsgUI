@@ -85,6 +85,7 @@
       "name": "registrationCorrection",
       "path": "/member-registration-correction",
       "component": "MemberRegistrationCorrectionForm",
+      "config": "memberRegistrationCorrection",
       "isActive": true,
       "header": {
         "titleStyle": {
