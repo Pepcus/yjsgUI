@@ -1,41 +1,34 @@
 import {
-  headerParamsFormatter,
+  defaultHeaderFormatter,
   uploadCSVFileHeaderFormatter,
   markMemberAPIHeaderFormatter,
 } from './headerFormatters';
 import {
-  formatCreateMemberDataPayload,
   formatUpdateMemberDataPayload,
   uploadAttendanceFileRequestFormatter,
   uploadOptInFileRequestFormatter,
-  markMemberAttendanceRequestFormatter,
   markMemberOptStatusRequestFormatter,
+  markMemberIdCardStatusRequestFormatter,
 } from './requestFormatters';
 
-export const defaultTenant = {
+export default {
   header: {
-    updateMember: headerParamsFormatter,
-    getMember: headerParamsFormatter,
-    getMembers: headerParamsFormatter,
+    updateMember: defaultHeaderFormatter,
+    getMember: defaultHeaderFormatter,
+    getMembers: defaultHeaderFormatter,
     uploadAttendanceFile: uploadCSVFileHeaderFormatter,
     uploadOptInFile: uploadCSVFileHeaderFormatter,
     markMemberAttendance: markMemberAPIHeaderFormatter,
-    markMemberOptStatus: markMemberAPIHeaderFormatter
+    markMemberOptStatus: markMemberAPIHeaderFormatter,
+    markMemberIdCardStatus: markMemberAPIHeaderFormatter,
   },
   request: {
-    createMember: formatCreateMemberDataPayload,
     updateMember: formatUpdateMemberDataPayload,
     uploadAttendanceFile: uploadAttendanceFileRequestFormatter,
     uploadOptInFile: uploadOptInFileRequestFormatter,
-    markMemberAttendance: markMemberAttendanceRequestFormatter,
     markMemberOptStatus: markMemberOptStatusRequestFormatter,
+    markMemberIdCardStatus: markMemberIdCardStatusRequestFormatter,
   },
   response: {
-    createMember: response => response,
-    updateMember: response => response,
-    getMember: response => response,
-    getMembers: response => response,
-    uploadAttendanceFile: response => response,
-    markMemberOptStatus: response => response,
   },
 };

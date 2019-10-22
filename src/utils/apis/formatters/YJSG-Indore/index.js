@@ -1,20 +1,34 @@
-import { headerParamsFormatter } from './headerFormatters';
-
 import {
-  formatCreateMemberDataPayload,
+  defaultHeaderFormatter,
+  uploadCSVFileHeaderFormatter,
+  markMemberAPIHeaderFormatter,
+} from './headerFormatters';
+import {
   formatUpdateMemberDataPayload,
+  uploadAttendanceFileRequestFormatter,
+  uploadOptInFileRequestFormatter,
+  markMemberOptStatusRequestFormatter,
+  markMemberIdCardStatusRequestFormatter,
 } from './requestFormatters';
 
-export const yjsgIndore = {
+export default {
   header: {
-    updateMember: headerParamsFormatter,
+    updateMember: defaultHeaderFormatter,
+    getMember: defaultHeaderFormatter,
+    getMembers: defaultHeaderFormatter,
+    uploadAttendanceFile: uploadCSVFileHeaderFormatter,
+    uploadOptInFile: uploadCSVFileHeaderFormatter,
+    markMemberAttendance: markMemberAPIHeaderFormatter,
+    markMemberOptStatus: markMemberAPIHeaderFormatter,
+    markMemberIdCardStatus: markMemberAPIHeaderFormatter,
   },
   request: {
-    createMember: formatCreateMemberDataPayload,
     updateMember: formatUpdateMemberDataPayload,
+    uploadAttendanceFile: uploadAttendanceFileRequestFormatter,
+    uploadOptInFile: uploadOptInFileRequestFormatter,
+    markMemberOptStatus: markMemberOptStatusRequestFormatter,
+    markMemberIdCardStatus: markMemberIdCardStatusRequestFormatter,
   },
   response: {
-    createMember: response => response,
-    updateMember: response => response,
   },
 };

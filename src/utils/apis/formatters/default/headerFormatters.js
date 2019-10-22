@@ -1,4 +1,4 @@
-export const headerParamsFormatter = (headers, additionalData) => {
+export const defaultHeaderFormatter = (headers, additionalData) => {
   const { secretKey } = additionalData;
   return ({
     ...headers,

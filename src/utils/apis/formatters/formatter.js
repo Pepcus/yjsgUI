@@ -1,7 +1,7 @@
 import { TENANT } from 'constants/yjsg';
-import { defaultTenant } from './default/index';
-import { yjsgBhopal } from './YJSG-Bhopal/index';
-import { yjsgIndore } from './YJSG-Indore/index';
+import defaultTenant from './default';
+import yjsgBhopal from './YJSG-Bhopal';
+import yjsgIndore from './YJSG-Indore';
 
 export const headerFormatters = {
   [TENANT.DEFAULT]: { ...defaultTenant.header },

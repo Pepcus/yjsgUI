@@ -258,9 +258,17 @@ export function* markSelectedMembersOptInOrOptOutSaga(action) {
 export function* updateIdCardStatusSelectedMembersSaga(action) {
   const { secretKey, selectedMembersId, IdCardStatus } = action;
   const errorMessage = 'Error getting update Id card status of selected members.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'markMemberIdCardStatus');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield updateMemberIdCardStatus({ secretKey, selectedMembersId, IdCardStatus });
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      urlValuesMap: { selectedMembersId },
+      data: IdCardStatus,
+      additionalData: { secretKey },
+    };
+    const response = yield callAPIWithConfig(tenant, 'markMemberIdCardStatus', config);
     if (response.message === 'Updated Successfully') {
       yield put(updateIdCardStatusSelectedMembersResultsSuccessAction(response));
     } else {
@@ -280,9 +288,15 @@ export function* updateIdCardStatusSelectedMembersSaga(action) {
 export function* parentsRegistrationSaga(action) {
   const { name, members, phoneNumber } = action;
   const errorMessage = 'Error getting registration.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'createSecondaryMember');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield registerParent(name, members, phoneNumber);
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      data: { name, members, phoneNumber },
+    };
+    const response = yield callAPIWithConfig(tenant, 'createSecondaryMember', config);
     if (response.message === 'Registration successful') {
       yield put(parentsRegistrationResultsSuccessAction(response));
     } else {

@@ -1,4 +1,5 @@
 {
   "environment": "production",
+  "tenant": "YJSG-Indore",
   "isRegisterCorrectionEnabled": true
 }

@@ -46,10 +46,6 @@ export const formatUpdateMemberDataPayload = (updatedMember) => {
   };
 };
 
-export const formatCreateMemberDataPayload = member => ({
-  ...member,
-});
-
 export const uploadAttendanceFileRequestFormatter = (data) => {
   const { attendanceFile, day } = data;
   const file = new window.FormData();
@@ -64,6 +60,6 @@ export const uploadOptInFileRequestFormatter = (data) => {
   return file;
 };
 
-export const markMemberAttendanceRequestFormatter = data => data;
-
 export const markMemberOptStatusRequestFormatter = data => JSON.stringify(data);
+
+export const markMemberIdCardStatusRequestFormatter = data => JSON.stringify(data);
