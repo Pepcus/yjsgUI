@@ -325,7 +325,7 @@ class MemberCredentialPage extends Component {
 }
 
 MemberCredentialPage.propTypes = {
-  constants: PropTypes,
+  constants: PropTypes.object,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,

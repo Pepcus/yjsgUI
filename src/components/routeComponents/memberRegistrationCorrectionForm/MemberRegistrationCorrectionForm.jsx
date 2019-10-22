@@ -7,19 +7,9 @@ import styled from 'styled-components';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 
-import {
-  USER_TYPES,
-} from 'constants/member';
-import {
-  FILES_NAME,
-} from 'constants/file';
-import {
-  isUpdatedResetAction,
-  updateMemberDataAction,
-} from 'actions/memberRegistrationActions';
-import {
-  setLoadingStateAction,
-} from 'actions/loaderActions';
+import { USER_TYPES } from 'constants/member';
+import { isUpdatedResetAction, updateMemberDataAction } from 'actions/memberRegistrationActions';
+import { setLoadingStateAction } from 'actions/loaderActions';
 import {
   getMember,
   getUserId,
@@ -40,7 +30,6 @@ import {
   verifyFormDataValidations,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { fetchFormConfig } from 'apis/core';
 import {
   initialMemberData,
   isObjectsEqual,
@@ -59,7 +48,7 @@ const SubmitButtonStyled = styled(Button)`
    `}
    @media (max-width: 992px) and (orientation: landscape) {
       width: 100%;
-      margin: 10px 0px 10px 0px;
+      margin: 10px 0 10px 0;
   }
 `;
 
@@ -72,9 +61,8 @@ const BackButtonStyled = styled(Button)`
        margin-right: 0;
    `}
    @media (max-width: 992px) and (orientation: landscape) {
-      margin-right: 0;
       width: 100%;
-      margin: 10px 0px 10px 0px;
+      margin: 10px 0 10px 0;
   }
 `;
 
@@ -142,66 +130,51 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Boolean} onlyOptInForm
    */
   getFormConfig = ({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm }) => {
-    const { tenant, user, setLoadingState, constants } = this.props;
-    const { ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG } = constants;
-    const { ONLY_OPT_IN_JSON, MEMBER_JSON, ADMIN_JSON } = FILES_NAME;
+    const { config, tenant, user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    let fileName = '';
+    console.log('config --- ', config);
+    let formConfig = {};
     if (isUserMember({ user }) && onlyOptInForm) {
-      fileName = ONLY_OPT_IN_JSON;
+      formConfig = config.onlyOptInFormConfig;
     } else if (isUserMember({ user })) {
-      fileName = MEMBER_JSON;
+      formConfig = config.memberFormConfig;
     } else if (user === ADMIN) {
-      fileName = ADMIN_JSON;
+      formConfig = config.adminFormConfig;
     }
-    try {
-      fetchFormConfig({ tenant: tenant ? tenant : 'default', fileName })
-        .then((response) => {
-          if (response) {
-            if (this.mounted) {
-              if (!isEmpty(prePopulateOptInMemberData)) {
-                this.setState({
-                  formData: initialMemberData({
-                    memberData: prePopulateOptInMemberData,
-                    formConfig: response,
-                  }),
-                  member: initialMemberData({
-                    memberData: prePopulateOptInMemberData,
-                    formConfig: response,
-                  }),
-                  oldMemberData: initialMemberData({
-                    memberData: registeredMemberData,
-                    formConfig: response,
-                  }),
-                  isSubmitTriggered: false,
-                  formConfig: getFormData({
-                    user,
-                    onlyOptInForm,
-                    tenant: tenant ? tenant : 'default',
-                    member: this.state.member,
-                    renderBackButton: this.renderBackButton,
-                    renderSubmitButtons: this.renderSubmitButtons,
-                    formConfig: response,
-                  }),
-                  onlyOptInForm,
-                });
-                this.prePopulateCourse2019(initialMemberData({
-                  memberData: prePopulateOptInMemberData,
-                  formConfig: response,
-                }));
-              }
-            }
-          } else {
-            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-            setLoadingState(false);
-          }
+
+    if (this.mounted) {
+      if (!isEmpty(prePopulateOptInMemberData)) {
+        this.setState({
+          formData: initialMemberData({
+            memberData: prePopulateOptInMemberData,
+            formConfig,
+          }),
+          member: initialMemberData({
+            memberData: prePopulateOptInMemberData,
+            formConfig,
+          }),
+          oldMemberData: initialMemberData({
+            memberData: registeredMemberData,
+            formConfig,
+          }),
+          isSubmitTriggered: false,
+          formConfig: getFormData({
+            user,
+            onlyOptInForm,
+            tenant: tenant ? tenant : 'default',
+            member: this.state.member,
+            renderBackButton: this.renderBackButton,
+            renderSubmitButtons: this.renderSubmitButtons,
+            formConfig,
+          }),
+          onlyOptInForm,
         });
-    } catch (e) {
-      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-      console.error(e);
-    } finally {
-      setLoadingState(false);
+        this.prePopulateCourse2019(initialMemberData({
+          memberData: prePopulateOptInMemberData,
+          formConfig,
+        }));
+      }
     }
   };
 
@@ -505,6 +478,7 @@ class MemberRegistrationCorrectionForm extends Component {
 }
 
 MemberRegistrationCorrectionForm.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   context: PropTypes.object,
   id: PropTypes.oneOfType([
@@ -523,6 +497,7 @@ MemberRegistrationCorrectionForm.propTypes = {
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
+  config: {},
   constants: {},
   context: {},
   id: '',
