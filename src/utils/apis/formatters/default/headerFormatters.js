@@ -12,11 +12,3 @@ export const uploadCSVFileHeaderFormatter = (headers, additionalData) => {
     secretKey,
   });
 };
-
-export const markMemberAPIHeaderFormatter = (header, additionalData) => {
-  const { secretKey } = additionalData;
-  return ({
-    'Content-type': 'application/json',
-    secretKey,
-  });
-};

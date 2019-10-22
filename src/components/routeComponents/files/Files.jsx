@@ -33,6 +33,7 @@ import {
 import { SUPPORTED_FILE_TYPES } from 'constants/file';
 import { manageMembersTableWidth } from 'utils/common';
 import {
+  fetchFileResponseType,
   formatXlsxToJson,
   getDataGridHeadersForFileView,
   getFileListDisplayCondition,
@@ -41,8 +42,10 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
-import { fetchFile } from 'apis/file';
 import { getConstants } from 'reducers/constants';
+import { getAPIConfig } from 'reducers/api';
+import { getTenantName } from 'reducers/app';
+import { callAPIWithConfig } from 'apis/apis';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;
@@ -445,13 +448,15 @@ class Files extends Component {
    * @param{Object} file
    */
   fetchFileData = (file) => {
-    const { setLoadingState } = this.props;
+    const { setLoadingState, apiConfig, tenant } = this.props;
     const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
-
+    const { fileName, fileType } = fileDetails;
+    const responseType = fetchFileResponseType(fileDetails);
     try {
-      fetchFile(fileDetails)
+      const config = { ...apiConfig, urlValuesMap: { fileName, fileType }, responseType };
+      callAPIWithConfig(tenant, 'fetchFile', config)
         .then((response) => {
           if (response) {
             if (fileDetails.fileType === CSV) {
@@ -838,25 +843,31 @@ class Files extends Component {
 }
 
 Files.propTypes = {
+  apiConfig: PropTypes.object,
   constants: PropTypes.object,
   fetchFilesConfig: PropTypes.func,
   setLoadingState: PropTypes.func,
   filesConfig: PropTypes.object,
   context: PropTypes.object,
+  tenant: PropTypes.string,
 };
 
 Files.defaultProps = {
+  apiConfig: {},
   constants: {},
   setLoadingState: () => {},
   fetchFilesConfig: () => {},
   filesConfig: {},
   context: {},
+  tenant: '',
 };
 
 const mapStateToProps = state => ({
+  apiConfig: getAPIConfig(state, 'file', 'fetchFile'),
   constants: getConstants(state),
   secretKey: getSecretKey(state),
   filesConfig: getFilesConfig(state),
+  tenant: getTenantName(state),
 });
 
 const mapDispatchToProps = dispatch => ({
