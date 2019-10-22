@@ -27,11 +27,26 @@
         "url": "v1/students"
       },
       "deleteMember": {},
-      "updateMember": {},
-      "uploadAttendanceFile": {},
-      "uploadOptInFile": {},
-      "markMemberAttendance": {},
-      "markMemberOptStatus": {},
+      "updateMember": {
+        "method": "PUT",
+        "url": "v1/students/${id}"
+      },
+      "uploadAttendanceFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-attendance"
+      },
+      "uploadOptInFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-optin"
+      },
+      "markMemberAttendance": {
+        "method": "PUT",
+        "url": "v1/students/attendance?id=${selectedMembersId}"
+      },
+      "markMemberOptStatus": {
+        "method": "PATCH",
+        "url": "v1/students/optin?id=${selectedMembersId}"
+      },
       "markMemberIdCardStatus": {},
       "createSecondaryMember": {}
     }

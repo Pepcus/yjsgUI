@@ -80,9 +80,12 @@ export function* createMemberSaga(action) {
 export function* fetchMemberSaga(action) {
   const { id, secretKey } = action;
   const errorMessage = 'Error fetching member details.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'getMember');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield fetchMember(id, secretKey);
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, urlValuesMap: { id }, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'getMember', config);
     if (response.student) {
       yield put(fetchMemberSuccessAction(response.student));
     } else {
@@ -103,9 +106,12 @@ export function* fetchMemberSaga(action) {
 export function* updateMemberSaga(action) {
   const { id, secretKey, member } = action;
   const errorMessage = 'Error updating member details.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'updateMember');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield updateMember({ id, secretKey, member });
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, urlValuesMap: { id }, data: member, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'updateMember', config);
     if (response) {
       yield put(updateMemberSuccessAction(response.student));
     } else {
@@ -126,9 +132,12 @@ export function* updateMemberSaga(action) {
 export function* getAllMembersSaga(action) {
   const { secretKey } = action;
   const errorMessage = 'Error getting member details.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'getMembers');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield fetchMembers(secretKey);
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'getMembers', config);
     if (response.students) {
       yield put(getAllMembersDataResultsSuccessAction(response.students));
     } else {
@@ -148,9 +157,12 @@ export function* getAllMembersSaga(action) {
 export function* uploadAttendanceFileSaga(action) {
   const { secretKey, attendanceFile, day } = action;
   const errorMessage = 'Error occurred while uploading attendance file.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'uploadAttendanceFile');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield uploadAttendance(secretKey, attendanceFile, day);
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, data: { attendanceFile, day }, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'uploadAttendanceFile', config);
     if (response.totalRecords) {
       yield put(uploadAttendanceFileResultsSuccessAction(response));
     } else {
@@ -171,9 +183,12 @@ export function* uploadAttendanceFileSaga(action) {
 export function* uploadOptInFileSaga(action) {
   const { secretKey, optInFile } = action;
   const errorMessage = 'Error occurred while uploading opt-in file.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'uploadOptInFile');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield uploadOptIn(secretKey, optInFile);
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, data: optInFile, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'uploadOptInFile', config);
     if (response.totalRecords) {
       yield put(uploadOptInFileResultsSuccessAction(response));
     } else {
@@ -193,9 +208,12 @@ export function* uploadOptInFileSaga(action) {
 export function* markSelectedMembersAttendanceSaga(action) {
   const { secretKey, selectedMembersId, day } = action;
   const errorMessage = 'Error getting mark selected members attendance.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'markMemberAttendance');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markMemberAttendance({ secretKey, selectedMembersId, day });
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, urlValuesMap: { selectedMembersId }, data: day, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'markMemberAttendance', config);
     if (response.message === 'Updated Successfully') {
       yield put(markSelectedMembersAttendanceResultsSuccessAction(response));
     } else {
@@ -215,9 +233,12 @@ export function* markSelectedMembersAttendanceSaga(action) {
 export function* markSelectedMembersOptInOrOptOutSaga(action) {
   const { secretKey, selectedMembersId, opt } = action;
   const errorMessage = 'Error getting mark selected members opt in or opt out.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'markMemberOptStatus');
   try {
     yield put(setLoadingStateAction(true));
-    const response = yield markMemberOptStatus({ secretKey, selectedMembersId, opt });
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, urlValuesMap: { selectedMembersId }, data: opt, additionalData: { secretKey } };
+    const response = yield callAPIWithConfig(tenant, 'markMemberOptStatus', config);
     if (response.message === 'Updated Successfully') {
       yield put(markSelectedMembersOptInOrOptOutResultsSuccessAction(response));
     } else {

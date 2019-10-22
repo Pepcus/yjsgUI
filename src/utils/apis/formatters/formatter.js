@@ -1,35 +1,7 @@
 import { TENANT } from 'constants/yjsg';
-import { formatCreateMemberDataPayload } from 'utils/apis/apiUtils';
-
-const defaultTenant = {
-  header: {},
-  request: {
-    createMember: formatCreateMemberDataPayload,
-  },
-  response: {
-    createMember: response => response,
-  },
-};
-
-const yjsgIndore = {
-  header: {},
-  request: {
-    createMember: payload => payload,
-  },
-  response: {
-    createMember: response => response,
-  },
-};
-
-const yjsgBhopal = {
-  header: {},
-  request: {
-    createMember: payload => payload,
-  },
-  response: {
-    createMember: response => response,
-  },
-};
+import { defaultTenant } from './default/index';
+import { yjsgBhopal } from './YJSG-Bhopal/index';
+import { yjsgIndore } from './YJSG-Indore/index';
 
 export const headerFormatters = {
   [TENANT.DEFAULT]: { ...defaultTenant.header },
