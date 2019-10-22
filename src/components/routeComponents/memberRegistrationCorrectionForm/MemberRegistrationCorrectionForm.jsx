@@ -93,17 +93,15 @@ class MemberRegistrationCorrectionForm extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { memberData, setLoadingState, user } = this.props;
-    if (isUserMember({ user })) {
-      const { onlyOptInForm } = this.state;
-      // If member data is not present in props then it will get from session store
-      // for maintain the member credential in case member get back to member correction form
-      const registeredMemberData = getRegisteredMemberData({ memberData });
-      const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
+    const { memberData, setLoadingState } = this.props;
+    const { onlyOptInForm } = this.state;
+    // If member data is not present in props then it will get from session store
+    // for maintain the member credential in case member get back to member correction form
+    const registeredMemberData = getRegisteredMemberData({ memberData });
+    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
 
-      setLoadingState(false);
-      this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
-    }
+    setLoadingState(false);
+    this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -133,7 +131,6 @@ class MemberRegistrationCorrectionForm extends Component {
     const { config, tenant, user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    console.log('config --- ', config);
     let formConfig = {};
     if (isUserMember({ user }) && onlyOptInForm) {
       formConfig = config.onlyOptInFormConfig;
@@ -429,7 +426,6 @@ class MemberRegistrationCorrectionForm extends Component {
       onlyOptInForm,
       formData,
     } = this.state;
-
     if (isFetch && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
