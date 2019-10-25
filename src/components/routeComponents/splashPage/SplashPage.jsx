@@ -35,7 +35,6 @@ import {
   getMember,
   isFetched,
 } from 'reducers/memberRegistrationReducer';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   USER_TYPES,
 } from 'constants/member';
@@ -43,6 +42,7 @@ import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/logoPathConfig';
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
@@ -236,7 +236,9 @@ class SplashPage extends Component {
     const {
       tenant,
       constants,
+      logoPathConfig,
     } = this.props;
+    const { yjsgLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -309,6 +311,7 @@ SplashPage.propTypes = {
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   id: PropTypes.string,
+  logoPathConfig: PropTypes.object,
   password: PropTypes.string,
   setAdminCredentials: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
@@ -321,6 +324,7 @@ SplashPage.defaultProps = {
   constants: {},
   isAdminLogin: false,
   fetchMemberData: () => {},
+  logoPathConfig: {},
   id: '',
   password: '',
   setAdminCredentials: () => {},
@@ -334,6 +338,7 @@ const mapStateToProps = state => ({
   constants: getConstants(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
+  logoPathConfig: getLogoPathConfig(state),
   password: getAdminPassword(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),

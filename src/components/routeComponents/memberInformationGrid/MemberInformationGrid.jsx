@@ -60,6 +60,7 @@ import {
 import {
   USER_TYPES,
 } from 'constants/member';
+import { getGridMetaData } from 'reducers/gridMetaData';
 
 import ColumnConfiguration from './columnConfig';
 import AdvanceSearch from './advanceSearch/AdvanceSearch';
@@ -162,7 +163,7 @@ class MemberInformationGrid extends Component {
       selectedMembers: [],
       selectValue: this.props.selectValue,
       members: [],
-      metaData: gridHeaderData({ color: this.props.theme.colors.header }),
+      metaData: gridHeaderData({ color: this.props.theme.colors.header, gridMetaData: this.props }),
       columnOptionIsOpen: false,
       isMemberDataSet: false,
       isAdminRoute: false,
@@ -174,11 +175,13 @@ class MemberInformationGrid extends Component {
 
   componentWillMount() {
     const { visibleColumnConfig, metaData } = this.state;
+    const { gridMetaData } = this.props;
     this.setState({
       metaData: formatMetaData({
         visibleColumnConfig,
         metaData,
         EditButton: this.EditButton,
+        gridMetaData,
       }),
     });
   }
@@ -347,7 +350,7 @@ class MemberInformationGrid extends Component {
   setValuesOfVisibleColumnConfig = ({ visibleColumnConfig, selectValue }) => {
     const changedVisibleColumnConfig = getUpdatedVisibleColumnConfig({ visibleColumnConfig });
     const { metaData } = this.state;
-    const { setVisibleColumnConfig } = this.props;
+    const { setVisibleColumnConfig, gridMetaData } = this.props;
 
     this.setState({
       visibleColumnConfig: changedVisibleColumnConfig,
@@ -355,6 +358,7 @@ class MemberInformationGrid extends Component {
         visibleColumnConfig: changedVisibleColumnConfig,
         metaData,
         EditButton: this.EditButton,
+        gridMetaData,
       }),
       selectValue,
     });
@@ -539,6 +543,7 @@ class MemberInformationGrid extends Component {
   }
 }
 MemberInformationGrid.propTypes = {
+  gridMetaData: PropTypes.array,
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   getAllMembers: PropTypes.func,
@@ -564,6 +569,7 @@ MemberInformationGrid.propTypes = {
 };
 
 MemberInformationGrid.defaultProps = {
+  gridMetaData: [],
   isAdminLogin: false,
   fetchMemberData: () => {},
   getAllMembers: () => {},
@@ -586,6 +592,7 @@ MemberInformationGrid.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  gridMetaData: getGridMetaData(state),
   isAdminLogin: getAdminLoginState(state),
   memberData: getMember(state),
   members: allMembersData(state),

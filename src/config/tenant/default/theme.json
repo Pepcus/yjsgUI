@@ -1,7 +1,7 @@
 {
   "colors": {
-    "header": "#0868ac",
-    "smallHeader": "#b6dfef"
+    "header": "#cb879a",
+    "smallHeader": "#e1aebd"
   },
   "typography": {
     "mapping": {
@@ -22,20 +22,20 @@
       "color": "#f8f8f8"
     },
     "primary": {
-      "borderColor": "#015b9a",
-      "color": "#015b9a",
+      "borderColor": "#d3a2b0",
+      "color": "#d3a2b0",
       "dark": "#010306",
-      "gradientColor": "linear-gradient(to top, #0868ac, #0868ac)",
-      "light": "#015b9a",
+      "gradientColor": "linear-gradient(to top, #cb879a, #cb879a)",
+      "light": "#d3a2b0",
       "text": "#FFFFFF"
     },
     "secondary": {
-      "borderColor": "#015b9a",
+      "borderColor": "#d3a2b0",
       "color": "#FFFFFF",
       "dark": "#010306",
       "gradientColor": "linear-gradient(to top, #FFFFFF, #FFFFFF)",
-      "light": "#015b9a",
-      "text": "#015b9a"
+      "light": "#d3a2b0",
+      "text": "#d3a2b0"
     },
     "tertiary": {
       "borderColor": "#dbd7d6",
@@ -46,12 +46,12 @@
       "text": "#010306"
     },
     "popup": {
-      "borderColor": "#0868ac",
+      "borderColor": "#cb879a",
       "color": "#dbd7d6",
       "dark": "#010306",
       "light": "#dbd7d6",
       "text": "#010306",
-      "backgroundColor": "#0868ac"
+      "backgroundColor": "#cb879a"
     },
     "transparent": {
       "color": "rgba(255, 255, 255, 0.69)"
@@ -71,15 +71,15 @@
       "borderColor": "#ebebec"
     },
     "idCard": {
-      "colors": "#087DAC"
+      "colors": "#d27d95"
     }
   },
   "effects": {
     "inputFocus": {
       "&:focus": {
         "outline": "none",
-        "borderColor": "#087DAC",
-        "boxShadow": "inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(8, 125, 172, 0.5)"
+        "borderColor": "#cb879a",
+        "boxShadow": "inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(239, 181, 197)"
       }
     }
   }

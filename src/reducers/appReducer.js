@@ -2,12 +2,24 @@ import { getInitialVisibleColumnConfig } from 'utils/common';
 
 const appReducerInitialState = {
   selectValue: true,
-  visibleColumnConfig: getInitialVisibleColumnConfig(),
+  visibleColumnConfig: [],
   pageUser: '',
 };
 
 export const appReducer = (state = appReducerInitialState, action) => {
   switch (action.type) {
+    case 'LOAD_GRID_META_DATA_SUCCESS_ACTION':
+      return {
+        ...state,
+        visibleColumnConfig: getInitialVisibleColumnConfig({ gridMetaData: action.gridMetaData }),
+        errorMessage: '',
+      };
+    case 'LOAD_GRID_META_DATA_FAILED_ACTION':
+      return {
+        ...state,
+        visibleColumnConfig: [],
+        errorMessage: action.errorMessage,
+      };
     case 'SET_REDIRECT_VALUE':
       return {
         ...state,

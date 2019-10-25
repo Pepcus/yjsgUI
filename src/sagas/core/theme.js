@@ -10,7 +10,7 @@ export function* getAppThemeSaga() {
   const errorMessage = 'Unable to fetch theme.';
   try {
     const tenant = yield select(getTenantName);
-    const appTheme = yield getAppTheme({ tenant });
+    const appTheme = yield getAppTheme({ tenant: tenant ? tenant : 'default' });
     if (appTheme) {
       yield put(loadAppThemeSuccessAction(appTheme));
     } else {

@@ -20,7 +20,6 @@ import {
   setHashLinkForNewRegistrationAction,
   setHashLinkForMemberCredentialAction,
 } from 'actions/appActions';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   USER_TYPES,
 } from 'constants/member';
@@ -35,6 +34,7 @@ import { getConstants } from 'reducers/constants';
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
 import RedirectToRoute from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
+import {getLogoPathConfig} from "reducers/logoPathConfig";
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
@@ -153,6 +153,7 @@ class MemberPage extends Component {
   render() {
     const {
       constants,
+      logoPathConfig,
       tenant,
       isAlreadyRegisteredButtonEnabled,
     } = this.props;
@@ -161,6 +162,7 @@ class MemberPage extends Component {
       isMemberLogin,
       isNewRegistration,
     } = this.state;
+    const { yjsgLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -227,6 +229,7 @@ MemberPage.propTypes = {
   constants: PropTypes.object,
   fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
+  logoPathConfig: PropTypes.object,
   setHashLinkForMemberCredential: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
@@ -238,6 +241,7 @@ MemberPage.defaultProps = {
   constants: {},
   fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
+  logoPathConfig: {},
   setHashLinkForMemberCredential: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
@@ -248,6 +252,7 @@ MemberPage.defaultProps = {
 const mapStateToProps = state => ({
   constants: getConstants(state),
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
+  logoPathConfig: getLogoPathConfig(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),
 });

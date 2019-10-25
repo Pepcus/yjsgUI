@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Edit",
+    "key": "edit",
+    "disableFilter": true,
+    "excludeFromExport": true
+  },
+  {
+    "label": "ID",
+    "key": "memberId",
+    "type": "Number",
+    "emptyCells": "NA"
+  },
+  {
+    "label": "First Name",
+    "key": "firstName",
+    "type": "string",
+    "emptyCells": "NA"
+  },
+  {
+    "label": "Last Name",
+    "key": "lastName",
+    "type": "string",
+    "emptyCells": "NA"
+  },
+  {
+    "label": "Company",
+    "key": "company",
+    "type": "Number",
+    "emptyCells": "NA"
+  },
+  {
+    "label": "Employed",
+    "key": "employed",
+    "type": "string",
+    "emptyCells": "NA"
+  }
+]

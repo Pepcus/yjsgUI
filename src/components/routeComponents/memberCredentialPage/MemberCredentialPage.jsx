@@ -27,7 +27,6 @@ import {
 import {
   getHash,
 } from 'reducers/appReducer';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
   USER_TYPES,
 } from 'constants/member';
@@ -35,6 +34,7 @@ import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
 import fields from 'components/common/fields';
+import { getLogoPathConfig } from 'reducers/logoPathConfig';
 
 import ImageWrapper from './ImageWrapper';
 import {
@@ -232,7 +232,9 @@ class MemberCredentialPage extends Component {
     const {
       context,
       constants,
+      logoPathConfig,
     } = this.props;
+    const { yjsgLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -329,6 +331,7 @@ MemberCredentialPage.propTypes = {
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
+  logoPathConfig: PropTypes.object,
   secretKey: PropTypes.string,
   setStudentCredentials: PropTypes.func,
   setUserType: PropTypes.func,
@@ -340,6 +343,7 @@ MemberCredentialPage.defaultProps = {
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
+  logoPathConfig: {},
   secretKey: '',
   setStudentCredentials: () => {},
   setUserType: () => {},
@@ -349,6 +353,7 @@ MemberCredentialPage.defaultProps = {
 const mapStateToProps = state => ({
   constants: getConstants(state),
   hashLink: getHash(state),
+  logoPathConfig: getLogoPathConfig(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
 });

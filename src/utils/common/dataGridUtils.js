@@ -4,10 +4,6 @@ import uniqWith from 'lodash/uniqWith';
 import isEqual from 'lodash/isEqual';
 import Fuse from 'fuse.js';
 
-import {
-  gridMetaData,
-} from 'constants/gridData';
-
 /**
  * manageMembersTableWidth method is called when we have to manage table width in grid page.
  * It finds a table class and take dynamic width of it and assigned to footer class after
@@ -79,7 +75,8 @@ export const manageMembersTableWidth = (widthRef) => {
  * visible that is set true value of all column
  * @return {Object} temporaryVisibleColumnConfig
  */
-export const getInitialVisibleColumnConfig = () => {
+export const getInitialVisibleColumnConfig = ({ gridMetaData }) => {
+
   const temporaryVisibleColumnConfig = {};
   gridMetaData.forEach((columnOption) => {
     temporaryVisibleColumnConfig[columnOption.key] = true;
@@ -125,7 +122,7 @@ export const getFormattedMemberId = ({ memberId }) => {
  * @param {Component} EditButton
  * @return {Object} updatedMetaData
  */
-export const formatMetaData = ({ visibleColumnConfig, metaData, EditButton }) => {
+export const formatMetaData = ({ visibleColumnConfig, metaData, EditButton, gridMetaData }) => {
   let formattedMetaData = [];
   for (const columnKey in visibleColumnConfig) {
     if (visibleColumnConfig[columnKey]) {
@@ -274,7 +271,7 @@ export const getMultipleIdSearchResult = ({ members, checkedIds, formData }) => 
   const searchResult = [];
   searchMembersIds.forEach((element) => {
     const result = members.filter(member =>
-      member.id === Number(element));
+      String(member.id) === String(element));
     searchResult.push(...result);
   });
   const uniqSearchResult = uniqWith(searchResult, isEqual);
@@ -310,4 +307,3 @@ export const getAdvanceSearchResult = ({ members, options, formData, checkedIds 
     return finalMemberObject;
   });
 };
-

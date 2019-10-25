@@ -10,6 +10,10 @@ import {
   markMemberIdCardStatusRequestFormatter,
 } from './requestFormatters';
 
+import {
+  formatMembersData,
+} from './responseFormatters';
+
 export default {
   header: {
     updateMember: defaultHeaderFormatter,
@@ -29,5 +33,6 @@ export default {
     markMemberIdCardStatus: markMemberIdCardStatusRequestFormatter,
   },
   response: {
+    getMembers: formatMembersData,
   },
 };

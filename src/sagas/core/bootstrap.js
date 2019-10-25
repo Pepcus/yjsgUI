@@ -21,6 +21,9 @@ import {
   getBusCoordinatorsConfig,
   getAppConstants,
   getAPIConfig,
+  getColumnList,
+  getLogoPathConfig,
+  getGridMetaData,
 } from 'apis/core';
 import { setApplicationConfigurationAction } from 'actions/config';
 import { mergeObjects } from 'utils/common/object';
@@ -28,24 +31,36 @@ import {
   setAppConstantsAction,
 } from 'actions/appConstantsActions';
 import { setAPIConfigAction } from 'actions/api';
+import {
+  loadColumnListFailedAction,
+  loadColumnListSuccessAction,
+} from 'actions/columnListAction';
+import {
+  loadLogoPathConfigFailedAction,
+  loadLogoPathConfigSuccessAction,
+} from 'actions/logoPathConfigAction';
+import {
+  loadGridMetaDataFailedAction,
+  loadGridMetaDataSuccessAction,
+} from 'actions/gridMetaDataAction';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
-  const appConfig = yield fetchAppConfig(tenant);
+  const appConfig = yield fetchAppConfig({ tenant: tenant ? tenant : 'default' });
   yield put(setApplicationConfigurationAction(appConfig));
 }
 
 function* getApplicationConstants() {
   const tenant = yield select(getTenantName);
   const defaultConstantsConfig = yield getAppConstants({ tenant: 'default' });
-  const tenantConstantsConfig = yield getAppConstants({ tenant });
+  const tenantConstantsConfig = yield getAppConstants({ tenant: tenant ? tenant : 'default' });
   const text = mergeObjects(defaultConstantsConfig, tenantConstantsConfig);
   yield put(setAppConstantsAction({ text }));
 }
 
 function* getAPIConfigSaga() {
   const tenant = yield select(getTenantName);
-  const apiConfig = yield getAPIConfig({ tenant });
+  const apiConfig = yield getAPIConfig({ tenant: tenant ? tenant : 'default' });
   yield put(setAPIConfigAction(apiConfig));
 }
 
@@ -65,6 +80,22 @@ export function* getAppConfigSaga() {
   }
 }
 
+export function* getGridMetaDataSaga() {
+  const errorMessage = '';
+  const tenant = yield select(getTenantName);
+  try {
+    const response = yield getGridMetaData({ tenant: tenant ? tenant : 'default' });
+    if (response) {
+      yield put(loadGridMetaDataSuccessAction(response));
+    } else {
+      yield put(loadGridMetaDataFailedAction(errorMessage));
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(loadGridMetaDataFailedAction(errorMessage));
+  }
+}
+
 export function* getBusCoordinatorsConfigSaga() {
   const errorMessage = 'Unable to fetch  bus coordinators config.';
   try {
@@ -77,6 +108,38 @@ export function* getBusCoordinatorsConfigSaga() {
   } catch (e) {
     console.error(e);
     yield put(loadBusCoordinatorsDataFailedAction(errorMessage));
+  }
+}
+
+export function* getColumnListSaga() {
+  const errorMessage = '';
+  const tenant = yield select(getTenantName);
+  try {
+    const response = yield getColumnList({ tenant: tenant ? tenant : 'default' });
+    if (response) {
+      yield put(loadColumnListSuccessAction(response));
+    } else {
+      yield put(loadColumnListFailedAction(errorMessage));
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(loadColumnListFailedAction(errorMessage));
+  }
+}
+
+export function* getLogoPathConfigSaga() {
+  const errorMessage = '';
+  const tenant = yield select(getTenantName);
+  try {
+    const response = yield getLogoPathConfig({ tenant: tenant ? tenant : 'default' });
+    if (response) {
+      yield put(loadLogoPathConfigSuccessAction(response));
+    } else {
+      yield put(loadLogoPathConfigFailedAction(errorMessage));
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(loadLogoPathConfigFailedAction(errorMessage));
   }
 }
 
@@ -93,6 +156,12 @@ export function* bootstrapApplication() {
     yield getAppConfigurableDataSaga();
     // GET application's configurable constants file
     yield getApplicationConstants();
+    // GET grid meta data
+    yield getGridMetaDataSaga();
+    // GET Column list file
+    yield getColumnListSaga();
+    // GET Logo path config
+    yield getLogoPathConfigSaga();
     // TODO by Pratik: Remove this call from bootstrap
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
