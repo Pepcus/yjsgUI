@@ -14,6 +14,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/logoPathConfig';
 
 import CoordinatorInformation from './CoordinatorInformation';
 
@@ -71,7 +72,7 @@ const MemberInformationWrapper = styled(Box)`
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url('../../LOGO.png');
+    background-image: url('${props => props.logoPath}');
     background-repeat: no-repeat;
     background-position: center top;
     background-size: contain;
@@ -123,7 +124,8 @@ class MembersIdCard extends Component {
    * @return {HTML}
    */
   renderMembersIdCard({ selectedMembers }) {
-    const { constants, busCoordinators = {} } = this.props;
+    const { constants, logoPathConfig, busCoordinators = {} } = this.props;
+    const { LOGO } = logoPathConfig;
     const {
       MEMBER_ID_CARD_SMALL_HEADING,
       MEMBER_ID_CARD_MAIN_HEADING,
@@ -165,7 +167,7 @@ class MembersIdCard extends Component {
               backgroundColor="unset"
             >
               <img
-                src="../../LOGO.png"
+                src={LOGO}
                 alt="header-logo"
                 style={{ 'maxWidth': '100%' }}
               />
@@ -193,6 +195,7 @@ class MembersIdCard extends Component {
             </TypographyStyled>
           </Typography>
           <MemberInformationWrapper
+            logoPath={LOGO}
             padding="0"
             backgroundColor="unset"
             borderStyle="none"
@@ -501,18 +504,21 @@ class MembersIdCard extends Component {
 MembersIdCard.propTypes = {
   constants: PropTypes.object,
   busCoordinators: PropTypes.object,
+  logoPathConfig: PropTypes.object,
   selectedMembers: PropTypes.array,
 };
 
 MembersIdCard.defaultProps = {
   constants: {},
   busCoordinators: {},
+  logoPathConfig: {},
   selectedMembers: [],
 };
 
 const mapStateToProps = state => ({
   constants: getConstants(state),
   busCoordinators: getBusCoordinators(state),
+  logoPathConfig: getLogoPathConfig(state),
 });
 
 export default connect(mapStateToProps, null)(MembersIdCard);

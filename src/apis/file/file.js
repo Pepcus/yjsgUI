@@ -22,5 +22,4 @@ export const fetchFileConfig = () => (
     url: 'files/filesConfig.json',
   })
 );
-
 // TODO by Pratik : Add download file API

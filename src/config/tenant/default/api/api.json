@@ -20,7 +20,7 @@
       },
       "getMembers": {
         "method": "GET",
-        "url": "v1/students"
+        "url": "src/config/tenant/default/membersData.json"
       },
       "createMember": {
         "method": "POST",

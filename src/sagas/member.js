@@ -1,17 +1,5 @@
 import { put, select } from 'redux-saga/effects';
 
-import {
-  createMember,
-  fetchMember,
-  updateMember,
-  fetchMembers,
-  uploadAttendance,
-  uploadOptIn,
-  markMemberAttendance,
-  markMemberOptStatus,
-  updateMemberIdCardStatus,
-  registerParent,
-} from 'apis/member';
 import { callAPIWithConfig } from 'apis/apis';
 import {
   createMemberFailedAction,
@@ -138,8 +126,8 @@ export function* getAllMembersSaga(action) {
     const tenant = yield select(getTenantName);
     const config = { ...apiConfig, additionalData: { secretKey } };
     const response = yield callAPIWithConfig(tenant, 'getMembers', config);
-    if (response.students) {
-      yield put(getAllMembersDataResultsSuccessAction(response.students));
+    if (response) {
+      yield put(getAllMembersDataResultsSuccessAction(response));
     } else {
       throw response;
     }

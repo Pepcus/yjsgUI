@@ -11,7 +11,6 @@ import FaIcon from 'pepcus-core/lib/FaIcon';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import headerLogo from 'assets/images/react-logo.png';
 import {
   resetVisibleColumnConfigAction,
   setRedirectValueAction,
@@ -23,6 +22,7 @@ import {
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
 import { getApplicationConfiguration } from 'reducers/config';
+import { getLogoPathConfig } from 'reducers/logoPathConfig';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -131,6 +131,7 @@ const LinkStyled = styled(Link)`
  * @param {Object} constants
  * @param {Object} context
  * @param {String} location
+ * @param {Object} logoPathConfig
  * @param {Function} resetAdminCredentials
  * @param {Function} resetLoginAdminState
  * @param {Function} setRedirectValue
@@ -144,6 +145,7 @@ const Header = ({
   constants,
   context,
   location,
+  logoPathConfig,
   resetAdminCredentials,
   resetLoginAdminState,
   setRedirectValue,
@@ -261,6 +263,7 @@ const Header = ({
    * @constructor
    */
   const renderLogo = (headerObject) => {
+    const { reactLogo } = logoPathConfig;
     if (headerObject.logo) {
       return (
         <ImageWrapper
@@ -272,7 +275,7 @@ const Header = ({
           borderStyle="none"
         >
           <ImageStyled
-            src={headerLogo}
+            src={reactLogo}
             alt="logo"
           />
         </ImageWrapper>
@@ -351,6 +354,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   config: getApplicationConfiguration(state),
   constants: getConstants(state),
+  logoPathConfig: getLogoPathConfig(state),
   tenant: getApplicationTenant(state),
 });
 

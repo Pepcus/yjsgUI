@@ -89,11 +89,11 @@
 
   "GIVEN_INFORMATION_WRONG_MESSAGE": "दी गई जानकारी गलत है |",
 
-  "FOOTER_CONTACT_TEXT": "किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:",
+  "FOOTER_CONTACT_TEXT": "",
 
-  "EVENT_DATE": "दिनांक: २८ अप्रैल २०१९, रविवार से ६ मई २०१९, रविवार तक",
+  "EVENT_DATE": "Date: 25 October 2019",
 
-  "EVENT_VENUE": "स्थान: सन्मति स्कूल, इन्दौर",
+  "EVENT_VENUE": "Event Venue: Indore",
 
   "OK_TEXT": "OK",
 
@@ -161,9 +161,9 @@
 
   "PRINT_LATER": "Print Later",
 
-  "ALREADY_REGISTERED": "Already Registered",
+  "ALREADY_REGISTERED": "Member Login",
 
-  "NEW_REGISTRATION": "New Registration",
+  "NEW_REGISTRATION": "Register Here",
 
   "VIEW_OR_EDIT_INFO": "View/Edit Information",
 
