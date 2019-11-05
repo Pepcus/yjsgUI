@@ -14,7 +14,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
-import { getLogoPathConfig } from 'reducers/logoPathConfig';
+import { getLogoPathConfig } from 'reducers/config';
 
 import CoordinatorInformation from './CoordinatorInformation';
 

@@ -22,7 +22,6 @@ import {
   getStyled,
 } from 'utils/common';
 import { getConstants } from 'reducers/constants';
-import { getColumnList } from 'reducers/columnList';
 
 import { schema, uiSchema } from './columnConfig.json';
 
@@ -148,10 +147,10 @@ class ColumnConfiguration extends Component {
    */
   renderColumnOptions = () => {
     const { formData } = this.state;
-    const { columnsList } = this.props;
-    const columnsListTemporary = cloneDeep(columnsList);
+    const { columnList } = this.props;
+    const columnsListTemporary = cloneDeep(columnList);
     let columnListChunks = [];
-    const chunkLength = Math.ceil(columnsList.length / 4);
+    const chunkLength = Math.ceil(columnList.length / 4);
 
     if (chunkLength >= 10) {
       columnListChunks = chunkArray(columnsListTemporary, chunkLength);
@@ -340,7 +339,7 @@ class ColumnConfiguration extends Component {
 
 ColumnConfiguration.propTypes = {
   constants: PropTypes.object,
-  columnsList: PropTypes.array,
+  columnList: PropTypes.array,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
   selectValue: PropTypes.bool,
@@ -350,7 +349,7 @@ ColumnConfiguration.propTypes = {
 
 ColumnConfiguration.defaultProps = {
   constants: {},
-  columnsList: [],
+  columnList: [],
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
   selectValue: true,
@@ -359,7 +358,6 @@ ColumnConfiguration.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  columnsList: getColumnList(state),
   constants: getConstants(state),
 });
 export default connect(

@@ -19,3 +19,5 @@ export default config;
 export const getApplicationConfiguration = state => state.config;
 
 export const getApplicationRoutes = state => state.config.routes;
+
+export const getLogoPathConfig = state => state.config.logoPathConfig;

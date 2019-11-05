@@ -34,7 +34,7 @@ import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
 import fields from 'components/common/fields';
-import { getLogoPathConfig } from 'reducers/logoPathConfig';
+import { getLogoPathConfig } from 'reducers/config';
 
 import ImageWrapper from './ImageWrapper';
 import {
@@ -234,7 +234,7 @@ class MemberCredentialPage extends Component {
       constants,
       logoPathConfig,
     } = this.props;
-    const { yjsgLogo } = logoPathConfig;
+    const { pageBodyLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -284,7 +284,7 @@ class MemberCredentialPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
               <Form

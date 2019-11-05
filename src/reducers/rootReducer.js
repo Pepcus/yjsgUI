@@ -12,23 +12,17 @@ import { assetFilesReducer } from './assetFilesReducer';
 import { loaderReducer } from './loaderReducer';
 import { parentsRegistrationReducer } from './parentsRegistrationReducer';
 import { loginReducer } from './loginReducer';
-import { columnListReducer } from './columnList';
-import { logoPathConfigReducer } from './logoPathConfig';
-import { gridMetaDataReducer } from './gridMetaData';
 
 const rootReducer = combineReducers({
   api,
   appConfig,
   theme,
   appReducer,
-  columnListReducer,
   config,
   constants,
-  gridMetaDataReducer,
   memberRegistrationReducer,
   allMembersDataReducer,
   loaderReducer,
-  logoPathConfigReducer,
   assetFilesReducer,
   parentsRegistrationReducer,
   loginReducer,

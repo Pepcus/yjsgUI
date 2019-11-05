@@ -45,6 +45,7 @@
       "name": "memberSearch",
       "path": "/member-search",
       "component": "MemberInformationGrid",
+      "config": "memberInformationGrid",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -155,5 +156,10 @@
         "title": ""
       }
     }
-  ]
+  ],
+  "logoPathConfig": {
+    "LOGO": "src/assets/images/default/LOGO.png",
+    "headerLogo": "src/assets/images/default/headerLogo.png",
+    "pageBodyLogo": "src/assets/images/default/pageBodyLogo.png"
+  }
 }

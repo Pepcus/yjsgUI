@@ -10,10 +10,3 @@ export const SUPPORTED_FILE_TYPES = {
   TXT: 'txt',
   PDF: 'pdf',
 };
-
-// TODO by Pratik: Remove this constants from here
-export const FILES_NAME = {
-  ONLY_OPT_IN_JSON: 'onlyEditOptIn',
-  MEMBER_JSON: 'STUDENT',
-  ADMIN_JSON: 'ADMIN',
-};

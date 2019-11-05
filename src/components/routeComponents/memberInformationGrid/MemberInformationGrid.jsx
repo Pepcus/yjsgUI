@@ -18,7 +18,7 @@ import {
   getSelectedMembers,
   manageMembersTableWidth,
   setAllMembersAsUnchecked,
-  getUpdatedVisibleColumnConfig,
+  getUpdatedVisibleColumnConfig, getInitialVisibleColumnConfig,
 } from 'utils/common';
 import 'assets/css/card-print.css';
 import { getApplicationMode } from 'reducers/assetFilesReducer';
@@ -57,10 +57,10 @@ import {
   resetLoginAdminStateAction,
   resetAdminCredentialsAction,
 } from 'actions/loginActions';
+import { setVisibleColumnOptionsConfigAction } from 'actions/gridMetaDataAction';
 import {
   USER_TYPES,
 } from 'constants/member';
-import { getGridMetaData } from 'reducers/gridMetaData';
 
 import ColumnConfiguration from './columnConfig';
 import AdvanceSearch from './advanceSearch/AdvanceSearch';
@@ -163,7 +163,7 @@ class MemberInformationGrid extends Component {
       selectedMembers: [],
       selectValue: this.props.selectValue,
       members: [],
-      metaData: gridHeaderData({ color: this.props.theme.colors.header, gridMetaData: this.props }),
+      metaData: gridHeaderData({ color: this.props.theme.colors.header, gridMetaData: this.props.config.gridMetaData }),
       columnOptionIsOpen: false,
       isMemberDataSet: false,
       isAdminRoute: false,
@@ -175,15 +175,29 @@ class MemberInformationGrid extends Component {
 
   componentWillMount() {
     const { visibleColumnConfig, metaData } = this.state;
-    const { gridMetaData } = this.props;
-    this.setState({
-      metaData: formatMetaData({
-        visibleColumnConfig,
-        metaData,
-        EditButton: this.EditButton,
-        gridMetaData,
-      }),
-    });
+    const { config, setVisibleColumnOptionsConfig, visibleColumnConfig: previousVisibleColumnConfig } = this.props;
+    const { gridMetaData } = config;
+    if (isEmpty(previousVisibleColumnConfig)) {
+      setVisibleColumnOptionsConfig({ gridMetaData });
+      this.setState({
+        visibleColumnConfig: getInitialVisibleColumnConfig({ gridMetaData }),
+        metaData: formatMetaData({
+          visibleColumnConfig: getInitialVisibleColumnConfig({ gridMetaData }),
+          metaData,
+          EditButton: this.EditButton,
+          gridMetaData,
+        }),
+      });
+    } else {
+      this.setState({
+        metaData: formatMetaData({
+          visibleColumnConfig,
+          metaData,
+          EditButton: this.EditButton,
+          gridMetaData,
+        }),
+      });
+    }
   }
 
   componentDidMount() {
@@ -350,7 +364,8 @@ class MemberInformationGrid extends Component {
   setValuesOfVisibleColumnConfig = ({ visibleColumnConfig, selectValue }) => {
     const changedVisibleColumnConfig = getUpdatedVisibleColumnConfig({ visibleColumnConfig });
     const { metaData } = this.state;
-    const { setVisibleColumnConfig, gridMetaData } = this.props;
+    const { setVisibleColumnConfig, config } = this.props;
+    const { gridMetaData } = config;
 
     this.setState({
       visibleColumnConfig: changedVisibleColumnConfig,
@@ -475,7 +490,8 @@ class MemberInformationGrid extends Component {
       fileDownloadMessage,
       members: updatedMembers,
     } = this.state;
-    const { members, isAdminLogin } = this.props;
+    const { members, isAdminLogin, config } = this.props;
+    const { columnList } = config;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -493,6 +509,7 @@ class MemberInformationGrid extends Component {
           ref={this.widthRef}
         >
           <ColumnConfiguration
+            columnList={columnList}
             columnOptionIsOpen={columnOptionIsOpen}
             closeColumnOption={this.closeColumnOption}
             visibleColumnConfig={visibleColumnConfig}
@@ -543,7 +560,7 @@ class MemberInformationGrid extends Component {
   }
 }
 MemberInformationGrid.propTypes = {
-  gridMetaData: PropTypes.array,
+  config: PropTypes.object,
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   getAllMembers: PropTypes.func,
@@ -566,10 +583,11 @@ MemberInformationGrid.propTypes = {
   updateMemberByAdmin: PropTypes.func,
   visibleColumnConfig: PropTypes.object,
   resetLoginAdminState: PropTypes.func,
+  setVisibleColumnOptionsConfig: PropTypes.func,
 };
 
 MemberInformationGrid.defaultProps = {
-  gridMetaData: [],
+  config: {},
   isAdminLogin: false,
   fetchMemberData: () => {},
   getAllMembers: () => {},
@@ -589,10 +607,10 @@ MemberInformationGrid.defaultProps = {
   updateMemberByAdmin: () => {},
   visibleColumnConfig: {},
   resetLoginAdminState: () => {},
+  setVisibleColumnOptionsConfig: () => {},
 };
 
 const mapStateToProps = state => ({
-  gridMetaData: getGridMetaData(state),
   isAdminLogin: getAdminLoginState(state),
   memberData: getMember(state),
   members: allMembersData(state),
@@ -616,6 +634,7 @@ const mapDispatchToProps = dispatch => ({
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
   updateMemberByAdmin: ({ id, secretKey }) => dispatch(updateMemberByAdminAction({ id, secretKey })),
   resetLoginAdminState: () => dispatch(resetLoginAdminStateAction()),
+  setVisibleColumnOptionsConfig: ({ gridMetaData }) => dispatch(setVisibleColumnOptionsConfigAction({ gridMetaData })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTheme(MemberInformationGrid));

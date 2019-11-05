@@ -36,15 +36,3 @@ export const getAppConstants = ({ tenant }) => (
 export const getAPIConfig = ({ tenant }) => GET({
   url: `src/config/tenant/${tenant}/api/api.json`,
 });
-
-export const getColumnList = ({ tenant }) => GET({
-  url: `src/config/tenant/${tenant}/columnList.json`,
-});
-
-export const getLogoPathConfig = ({ tenant }) => GET({
-  url: `src/config/tenant/${tenant}/logoPathConfig.json`,
-});
-
-export const getGridMetaData = ({ tenant }) => GET({
-  url: `src/config/tenant/${tenant}/gridMetaData.json`,
-});

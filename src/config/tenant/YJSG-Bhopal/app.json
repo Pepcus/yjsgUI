@@ -45,6 +45,7 @@
       "name": "memberSearch",
       "path": "/member-search",
       "component": "MemberInformationGrid",
+      "config": "memberInformationGrid",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -155,5 +156,10 @@
         "title": ""
       }
     }
-  ]
+  ],
+  "logoPathConfig": {
+    "LOGO": "src/assets/images/YJSG-Bhopal/LOGO.png",
+    "headerLogo": "src/assets/images/YJSG-Bhopal/headerLogo.png",
+    "pageBodyLogo": "src/assets/images/YJSG-Bhopal/pageBodyLogo.png"
+  }
 }

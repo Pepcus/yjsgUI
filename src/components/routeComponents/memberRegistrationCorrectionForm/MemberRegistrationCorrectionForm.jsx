@@ -86,7 +86,7 @@ class MemberRegistrationCorrectionForm extends Component {
       isPreviousLocation: false,
       member: {},
       oldMemberData: {},
-      onlyOptInForm: true,
+      onlyOptInForm: this.props.config.isOptInEnable,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
   }
@@ -194,14 +194,17 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   validate = (formData, errors) => {
     const { member, formConfig } = this.state;
-    const { constants } = this.props;
+    const { constants, config } = this.props;
+    const { isOptInEnable } = config;
     const { validation } = formConfig;
-
-    if (member.optIn2019 === 'N') {
-      return [];
-    } else if (member.optIn2019 !== 'N') {
-      return verifyFormDataValidations({ formData, errors, validate: validation, constants });
-    } return [];
+    if (isOptInEnable) {
+      if (member.optIn2019 === 'N') {
+        return [];
+      } else if (member.optIn2019 !== 'N') {
+        return verifyFormDataValidations({ formData, errors, validate: validation, constants });
+      } return [];
+    }
+    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
   };
 
   /**
@@ -283,14 +286,28 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   handleSubmit = (event) => {
     const { member, oldMemberData, hasError } = this.state;
+    const { config } = this.props;
+    const { isOptInEnable } = config;
     delete member.backButton;
     delete member.submitButton;
     event.preventDefault();
-    if (member.optIn2019 === 'N') {
-      this.setState({
-        isSubmitTriggered: true,
-      });
-      this.updateMemberData();
+    if (isOptInEnable) {
+      if (member.optIn2019 === 'N') {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateMemberData();
+      } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateMemberData();
+      } else {
+        this.setState({
+          isFormChanged: false,
+          isSubmitTriggered: true,
+        }, () => { this.scrollToError(); });
+      }
     } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
       this.setState({
         isSubmitTriggered: true,
@@ -310,12 +327,16 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   submitMemberDataForOnlyOptInCase = (event) => {
     const { member } = this.state;
+    const { config } = this.props;
+    const { isOptInEnable } = config;
     event.preventDefault();
-    if (!isEmpty(member.optIn2019)) {
-      this.setState({
-        isSubmitTriggered: true,
-      });
-      this.updateMemberData();
+    if (isOptInEnable) {
+      if (!isEmpty(member.optIn2019)) {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateMemberData();
+      }
     }
   };
   /**
@@ -325,19 +346,22 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
-    const { constants } = this.props;
+    const { constants, config } = this.props;
+    const { isOptInEnable } = config;
     const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const { member } = this.state;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
-
-    if (member.optIn2019 === 'N') {
-      return [];
-    } else if (member.optIn2019 !== 'N') {
-      return getTransformedErrors({ errors, transformErrors });
-    } return [];
+    if (isOptInEnable) {
+      if (member.optIn2019 === 'N') {
+        return [];
+      } else if (member.optIn2019 !== 'N') {
+        return getTransformedErrors({ errors, transformErrors });
+      } return [];
+    }
+    return getTransformedErrors({ errors, transformErrors });
   };
 
   /**
@@ -345,7 +369,8 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {HTML}
    */
   renderBackButton = () => {
-    const { user, constants } = this.props;
+    const { user, constants, config } = this.props;
+    const { isOptInEnable } = config;
     const { ADMIN } = USER_TYPES;
     const { BACK } = constants;
 
@@ -358,7 +383,7 @@ class MemberRegistrationCorrectionForm extends Component {
         </BackButtonStyled>
       );
 
-    } else if (isUserMember({ user })) {
+    } else if (isUserMember({ user }) && isOptInEnable) {
       return (
         <BackButtonStyled
           onClick={this.onlyOptInChanged}

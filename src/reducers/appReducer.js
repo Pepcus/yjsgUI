@@ -8,17 +8,10 @@ const appReducerInitialState = {
 
 export const appReducer = (state = appReducerInitialState, action) => {
   switch (action.type) {
-    case 'LOAD_GRID_META_DATA_SUCCESS_ACTION':
+    case 'SET_VISIBLE_COLUMN_OPTION_CONFIG_ACTION':
       return {
         ...state,
-        visibleColumnConfig: getInitialVisibleColumnConfig({ gridMetaData: action.gridMetaData }),
-        errorMessage: '',
-      };
-    case 'LOAD_GRID_META_DATA_FAILED_ACTION':
-      return {
-        ...state,
-        visibleColumnConfig: [],
-        errorMessage: action.errorMessage,
+        visibleColumnConfig: getInitialVisibleColumnConfig({ ...action.gridMetaData }),
       };
     case 'SET_REDIRECT_VALUE':
       return {
