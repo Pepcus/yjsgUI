@@ -45,6 +45,7 @@
       "name": "memberSearch",
       "path": "/member-search",
       "component": "MemberInformationGrid",
+      "config": "memberInformationGrid",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -155,5 +156,10 @@
         "title": ""
       }
     }
-  ]
+  ],
+  "logoPathConfig": {
+    "LOGO": "src/assets/images/YJSG-Indore/LOGO.png",
+    "headerLogo": "src/assets/images/YJSG-Indore/headerLogo.png",
+    "pageBodyLogo": "src/assets/images/YJSG-Indore/pageBodyLogo.png"
+  }
 }

@@ -2386,5 +2386,6 @@
         "dataType": "string"
       }
     ]
-  }
+  },
+  "isOptInEnable": true
 }

@@ -42,7 +42,7 @@ import { getParameterByName } from 'apis/http';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
-import { getLogoPathConfig } from 'reducers/logoPathConfig';
+import { getLogoPathConfig } from 'reducers/config';
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
@@ -238,7 +238,7 @@ class SplashPage extends Component {
       constants,
       logoPathConfig,
     } = this.props;
-    const { yjsgLogo } = logoPathConfig;
+    const { pageBodyLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -280,7 +280,7 @@ class SplashPage extends Component {
               tagname="div"
               width="50%"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <LoginForm
               admin={admin}

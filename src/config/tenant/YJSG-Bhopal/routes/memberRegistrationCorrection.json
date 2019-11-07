@@ -1796,5 +1796,6 @@
         "dataType": "string"
       }
     ]
-  }
+  },
+  "isOptInEnable": true
 }

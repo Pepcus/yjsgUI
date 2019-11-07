@@ -30,11 +30,11 @@ import {
   isRegisterCorrectionEnabled,
 } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/config';
 
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
 import RedirectToRoute from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
-import {getLogoPathConfig} from "reducers/logoPathConfig";
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
@@ -162,7 +162,7 @@ class MemberPage extends Component {
       isMemberLogin,
       isNewRegistration,
     } = this.state;
-    const { yjsgLogo } = logoPathConfig;
+    const { pageBodyLogo } = logoPathConfig;
     const {
       EVENT_DATE,
       EVENT_VENUE,
@@ -207,7 +207,7 @@ class MemberPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
               <AlreadyRegisteredButton

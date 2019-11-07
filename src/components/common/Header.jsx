@@ -21,8 +21,7 @@ import {
 } from 'actions/loginActions';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
-import { getApplicationConfiguration } from 'reducers/config';
-import { getLogoPathConfig } from 'reducers/logoPathConfig';
+import { getApplicationConfiguration, getLogoPathConfig } from 'reducers/config';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -263,7 +262,7 @@ const Header = ({
    * @constructor
    */
   const renderLogo = (headerObject) => {
-    const { reactLogo } = logoPathConfig;
+    const { headerLogo } = logoPathConfig;
     if (headerObject.logo) {
       return (
         <ImageWrapper
@@ -275,7 +274,7 @@ const Header = ({
           borderStyle="none"
         >
           <ImageStyled
-            src={reactLogo}
+            src={headerLogo}
             alt="logo"
           />
         </ImageWrapper>
