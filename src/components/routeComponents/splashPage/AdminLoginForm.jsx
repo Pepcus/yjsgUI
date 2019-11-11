@@ -12,12 +12,8 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import { getConstants } from 'reducers/constants';
 
-import {
-  schema,
-  uiSchema,
-} from './adminLoginFormSchema.json';
-
 /**
+ * @param {Object} config
  * @param {Object} constants
  * @param {Object} admin
  * @param {Boolean} adminCredentialErrorMessage
@@ -34,6 +30,7 @@ import {
  * @return {HTML}
  */
 const AdminLoginForm = ({
+  config,
   constants,
   admin,
   adminCredentialErrorMessage,
@@ -53,6 +50,8 @@ const AdminLoginForm = ({
     SUBMIT,
     GIVEN_INFORMATION_WRONG_MESSAGE,
   } = constants;
+  const { adminLoginFormSchema } = config;
+  const { schema, uiSchema } = adminLoginFormSchema;
 
   /**
    * Method redirect to admin page on some condition.
@@ -142,6 +141,7 @@ const AdminLoginForm = ({
 };
 
 AdminLoginForm.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   admin: PropTypes.object,
   handleDisableAdminLoginButtons: PropTypes.func,
@@ -158,6 +158,7 @@ AdminLoginForm.propTypes = {
 };
 
 AdminLoginForm.defaultProps = {
+  config: {},
   constants: {},
   admin: {},
   handleDisableAdminLoginButtons: () => {},

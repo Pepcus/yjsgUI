@@ -17,7 +17,6 @@ import fields from 'components/common/fields';
 import { getTransformedErrors, verifyFormDataValidations } from 'utils/form';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema, validation } from './formSchema.json';
 import CloseBrowserPopup from './CloseBrowserPopup';
 import RegistrationSuccessPopup from './RegistrationSuccessPopup';
 import EventDescription from './EventDescription';
@@ -148,7 +147,9 @@ class ParentsRegistration extends Component {
    * @return {Object}
    */
   validate = (formData, errors) => {
-    const { constants } = this.props;
+    const { constants, config } = this.props;
+    const { parentsRegistrationFormSchema } = config;
+    const { validation } = parentsRegistrationFormSchema;
     return verifyFormDataValidations({ formData, errors, validate: validation, constants });
   };
 
@@ -208,7 +209,9 @@ class ParentsRegistration extends Component {
 
   render() {
     const { formData, isCloseBrowserPopMessage, isSubmitTriggered } = this.state;
-    const { constants } = this.props;
+    const { constants, config } = this.props;
+    const { parentsRegistrationFormSchema } = config;
+    const { schema, uiSchema } = parentsRegistrationFormSchema;
     const {
       EVENT_TITLE,
       SUBMIT,
@@ -280,11 +283,13 @@ class ParentsRegistration extends Component {
   }
 }
 ParentsRegistration.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   parentsRegistration: PropTypes.func,
 };
 
 ParentsRegistration.defaultProps = {
+  config: {},
   constants: {},
   parentsRegistration: () => {},
 };

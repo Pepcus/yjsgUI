@@ -844,7 +844,7 @@
         "validator": "addressValidator"
       }
     ],
-    "defaultStudentDataFormat": [
+    "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
         "dataType": "string"
@@ -1547,7 +1547,7 @@
         "validator": "addressValidator"
       }
     ],
-    "defaultStudentDataFormat": [
+    "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
         "dataType": "string"
@@ -1710,7 +1710,7 @@
         "validator": "addressValidator"
       }
     ],
-    "defaultStudentDataFormat": [
+    "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
         "dataType": "string"

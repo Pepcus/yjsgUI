@@ -120,6 +120,7 @@ export const getFormattedMemberId = ({ memberId }) => {
  * @param {Object} visibleColumnConfig
  * @param {Object} metaData
  * @param {Component} EditButton
+ * @param {Array} gridMetaData
  * @return {Object} updatedMetaData
  */
 export const formatMetaData = ({ visibleColumnConfig, metaData, EditButton, gridMetaData }) => {

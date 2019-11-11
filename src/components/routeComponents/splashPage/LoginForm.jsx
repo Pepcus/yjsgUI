@@ -26,6 +26,7 @@ const ButtonStyled = styled(Button)`
 `;
 
 /**
+ * @param {Object} config
  * @param {Object} constants
  * @param {Object} admin
  * @param {Function} enableAdminLoginButtons
@@ -45,6 +46,7 @@ const ButtonStyled = styled(Button)`
  * @return {HTML}
  */
 const LoginForm = ({
+  config,
   constants,
   admin,
   enableAdminLoginButtons,
@@ -70,6 +72,7 @@ const LoginForm = ({
     return (
       <AdminLoginForm
         adminCredentialErrorMessage={adminCredentialErrorMessage}
+        config={config}
         redirectToRoute={redirectToRoute}
         id={id}
         password={password}
@@ -108,6 +111,7 @@ const LoginForm = ({
 };
 
 LoginForm.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   admin: PropTypes.object,
   enableAdminLoginButtons: PropTypes.func,
@@ -127,6 +131,7 @@ LoginForm.propTypes = {
 };
 
 LoginForm.defaultProps = {
+  config: {},
   constants: {},
   admin: {},
   enableAdminLoginButtons: () => {},

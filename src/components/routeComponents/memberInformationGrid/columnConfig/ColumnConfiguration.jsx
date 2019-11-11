@@ -23,11 +23,6 @@ import {
 } from 'utils/common';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './columnConfig.json';
-
-// TODO by Pratik: Make it passed down from the route JSON config
-
-
 const ContainerStyled = styled(Container)`
     padding: 0 10px 20px 20px;
     display: flex;
@@ -263,7 +258,8 @@ class ColumnConfiguration extends Component {
   };
 
   render() {
-    const { closeColumnOption, columnOptionIsOpen, constants } = this.props;
+    const { closeColumnOption, columnOptionIsOpen, constants, columnConfigSchema } = this.props;
+    const { schema, uiSchema } = columnConfigSchema;
     const { PLEASE_SELECT_COLUMNS_TEXT, CLOSE, SAVE } = constants;
     const UiSchema = {
       ...uiSchema,
@@ -339,6 +335,7 @@ class ColumnConfiguration extends Component {
 
 ColumnConfiguration.propTypes = {
   constants: PropTypes.object,
+  columnConfigSchema: PropTypes.object,
   columnList: PropTypes.array,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
@@ -350,6 +347,7 @@ ColumnConfiguration.propTypes = {
 ColumnConfiguration.defaultProps = {
   constants: {},
   columnList: [],
+  columnConfigSchema: {},
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
   selectValue: true,

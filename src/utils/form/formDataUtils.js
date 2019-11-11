@@ -34,7 +34,7 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
   let validation = [];
-  let defaultStudentDataFormat = [];
+  let defaultMemberDataFormat = [];
   if (isUserMember({ user }) && onlyOptInForm) {
     // eslint-disable-next-line prefer-destructuring
     schema = formConfig.schema;
@@ -47,7 +47,7 @@ export const getFormData = ({
     // eslint-disable-next-line prefer-destructuring
     validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
   } else if (tenant === INDORE || tenant === DEFAULT || !tenant) {
     if (user === ADMIN) {
@@ -75,7 +75,7 @@ export const getFormData = ({
       // eslint-disable-next-line prefer-destructuring
       validation = formConfig.validation;
       // eslint-disable-next-line prefer-destructuring
-      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     } else if (isUserMember({ user })) {
       // eslint-disable-next-line prefer-destructuring
       schema = formConfig.schema;
@@ -101,7 +101,7 @@ export const getFormData = ({
       // eslint-disable-next-line prefer-destructuring
       validation = formConfig.validation;
       // eslint-disable-next-line prefer-destructuring
-      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     }
 
   } else if (user === ADMIN) {
@@ -129,7 +129,7 @@ export const getFormData = ({
     // eslint-disable-next-line prefer-destructuring
     validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
   } else if (isUserMember({ user })) {
     // eslint-disable-next-line prefer-destructuring
@@ -156,7 +156,7 @@ export const getFormData = ({
     // eslint-disable-next-line prefer-destructuring
     validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
   } else return null;
-  return { schema, uiSchema, formData, validation, defaultStudentDataFormat };
+  return { schema, uiSchema, formData, validation, defaultMemberDataFormat };
 };

@@ -1,0 +1,58 @@
+{
+  "parentsRegistrationFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "नाम:",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "title": "फ़ोन :",
+          "type": "number"
+        },
+        "selectedCountOfMembers": {
+          "title": "आपके अलावा साथ आने वालो की संख्या : ",
+          "type": "number",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        }
+      },
+      "required": ["name", "phoneNumber"]
+    },
+    "uiSchema": {
+      "ui:order": [
+        "name",
+        "phoneNumber",
+        "selectedCountOfMembers"
+      ],
+      "name": {
+        "ui:field": "InputField"
+      },
+      "phoneNumber": {
+        "ui:field": "InputField"
+      },
+      "selectedCountOfMembers": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . ."
+      }
+    },
+    "validation":
+    [
+      {
+        "field": "name",
+        "validator": "nameValidator"
+      },
+      {
+        "field": "phoneNumber",
+        "validator": "mobileValidator"
+      }
+    ]
+  }
+}

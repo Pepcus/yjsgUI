@@ -199,5 +199,9 @@
 
   "EVENT_TITLE": "सम्मिलित होने के लिए कृपया निचे दी गई जानकारी देवें!",
 
-  "PARENT_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन संपन्न हुआ!"
+  "PARENT_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन संपन्न हुआ!",
+
+  "MEMBERS_MUST_BE_GREATER_THAN_ZERO": "सदस्य शून्य से अधिक होने चाहिए",
+
+  "MEMBERS_MUST_BE_LESS_THAN_SIX": "सदस्यों को छह से कम होना चाहिए"
 }

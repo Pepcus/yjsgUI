@@ -104,6 +104,7 @@
       "name": "memberLogin",
       "path": "/member-login",
       "component": "MemberCredentialPage",
+      "config": "memberCredentialPage",
       "isActive": true,
       "header": {
         "titleStyle": {
