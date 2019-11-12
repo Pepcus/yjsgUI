@@ -26,6 +26,7 @@
       "name": "admin",
       "path": "/admin",
       "component": "SplashPage",
+      "config": "splashPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -124,6 +125,7 @@
       "name": "event",
       "path": "/event",
       "component": "ParentsRegistration",
+      "config": "parentsRegistrationForm",
       "isActive": true,
       "header": {
         "titleStyle": {
