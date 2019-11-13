@@ -2,6 +2,26 @@
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
 
+export const numberOfPeopleValidator = (value, constants) => {
+  const { MEMBERS_MUST_BE_GREATER_THAN_ZERO, MEMBERS_MUST_BE_LESS_THAN_SIX } = constants;
+  let message = '';
+
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (Number(value) < 1) {
+    message = MEMBERS_MUST_BE_GREATER_THAN_ZERO;
+
+  } else if (Number(value) > 5) {
+    message = MEMBERS_MUST_BE_LESS_THAN_SIX;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
 /**
  * nameValidate method check validations for name field of form
  * @param {String} value
@@ -224,7 +244,7 @@ export const prePopulateOptIn = ({ memberData }) => {
  */
 export const initialMemberData = ({ memberData, formConfig }) => {
   let formattedMemberData = cloneDeep(memberData);
-  formConfig.defaultStudentDataFormat.forEach((fieldObject) => {
+  formConfig.defaultMemberDataFormat.forEach((fieldObject) => {
     if (formattedMemberData[fieldObject.formField] === null) {
       const property = [fieldObject.formField];
       delete formattedMemberData[property];

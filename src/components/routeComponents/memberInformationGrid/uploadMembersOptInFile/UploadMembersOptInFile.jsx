@@ -30,7 +30,6 @@ import {
 import fields from 'components/common/fields';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormSchema.json';
 import Message from './Message';
 import ModalHeader from './ModalHeader';
 
@@ -161,7 +160,9 @@ class UploadMembersOptInFile extends Component {
       isOptInUploadFailed,
       failOptIn,
       errorMessageOfUnavailableId,
+      optInFileModalFormSchema,
     } = this.props;
+    const { schema, uiSchema } = optInFileModalFormSchema;
     const {
       CLOSE,
       UPLOAD,
@@ -230,22 +231,24 @@ class UploadMembersOptInFile extends Component {
   };
 
   render() {
-    const { constants } = this.props;
+    const { constants, isUploadOptInFileEnable } = this.props;
     const { UPLOAD_OPT_IN } = constants;
-
-    return (
-      <Row display="inline-block" margin="0 0 0 10px">
-        <ButtonStyled
-          color="primary"
-          title="Upload Attendance"
-          onClick={this.openModal}
-        >
-          <FaIcon icon={faUpload} />
-          {UPLOAD_OPT_IN}
-        </ButtonStyled>
-        {this.renderUploadOptInModal()}
-      </Row>
-    );
+    if (isUploadOptInFileEnable) {
+      return (
+        <Row display="inline-block" margin="0 0 0 10px">
+          <ButtonStyled
+            color="primary"
+            title="Upload Attendance"
+            onClick={this.openModal}
+          >
+            <FaIcon icon={faUpload} />
+            {UPLOAD_OPT_IN}
+          </ButtonStyled>
+          {this.renderUploadOptInModal()}
+        </Row>
+      );
+    }
+    return null;
   }
 }
 
@@ -258,6 +261,8 @@ UploadMembersOptInFile.propTypes = {
   resetIsOptInSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   uploadOptInFile: PropTypes.func,
+  optInFileModalFormSchema: PropTypes.object,
+  isUploadOptInFileEnable: PropTypes.bool,
 };
 
 UploadMembersOptInFile.defaultProps = {
@@ -269,6 +274,8 @@ UploadMembersOptInFile.defaultProps = {
   resetIsOptInSuccess: () => {},
   secretKey: '',
   uploadOptInFile: () => {},
+  optInFileModalFormSchema: {},
+  isUploadOptInFileEnable: false,
 };
 
 const mapStateToProps = state => ({

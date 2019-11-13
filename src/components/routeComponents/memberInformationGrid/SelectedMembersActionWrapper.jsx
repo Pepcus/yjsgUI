@@ -21,7 +21,7 @@ import { isBusCoordinatorsDataFailed } from 'reducers/assetFilesReducer';
 import { getConstants } from 'reducers/constants';
 
 import MarkSelectedMembersAttendance from './markSelectedMembersAttendance';
-// import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
+import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
 import UpdateIdCardStatusMembersModal from './updateIdCardStatusMembersModal';
 import MembersIdCard from './membersIdCard/MembersIdCard';
 
@@ -83,6 +83,7 @@ const DisabledButtonStyled = styled(Button)`
  * SelectedMembersActionWrapper render Export, Print Now, Print Later, Mark as Present and
  * Mark optIn/optOut buttons.
  * @type {Class}
+ * @return {HTML}
  */
 class SelectedMembersActionWrapper extends Component {
   constructor(props) {
@@ -161,43 +162,41 @@ class SelectedMembersActionWrapper extends Component {
     !isEmpty(selectedMembers) ? window.print() : null;
   };
 
-  render() {
-    const {
-      metaData,
-      selectedMembers,
-      isBusCoordinatorsInformationFailed,
-      // May use in future
-      clearSelectedMembers,
-      constants,
-    } = this.props;
-    const {
-      EXPORT,
-      PRINT_NOW,
-    } = constants;
+  idCardPrintButton = () => {
+    const { isIdCardPrintEnable, constants, selectedMembers, isBusCoordinatorsInformationFailed } = this.props;
+    const { PRINT_NOW } = constants;
+    if (isIdCardPrintEnable) {
+      return (
+        <ButtonStyled
+          margin="0 0 0 10px"
+          softDisable={isEmpty(selectedMembers)}
+          color="tertiary"
+          noMinWidth
+          onClick={
+            () => {
+              isBusCoordinatorsInformationFailed
+                ? this.onClickPrintCancel(true) : this.printWindow();
+            }}
+        >
+          <FaIcon icon={faPrint} />
+          {PRINT_NOW}
+        </ButtonStyled>
+      );
+    }
+    return null;
+  };
 
+  CSVExportButton = () => {
+    const { isCSVExportEnable, selectedMembers, constants, metaData } = this.props;
+    const { EXPORT } = constants;
     const filterHeader = metaData.headerConfig.filter(obj =>
       obj.excludeFromExport !== true);
     const header = filterHeader.map(item =>
       ({ label: item.label, key: item.key, disable: item.disable }),
     );
-    return (
-      <ContainerStyled margin="5px 0" width="auto">
-        <BoxStyled
-          width="94%"
-          margin="0 0px 0 10px"
-          borderStyle="none"
-          backgroundColor="unset"
-          padding="0px"
-        >
-          <CSVLinkStyled
-            disable={isEmpty(selectedMembers) ? 'true' : 'false'}
-            headers={header}
-            data={selectedMembers}
-            filename={`StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`}
-          >
-            <FaIcon icon={faDownload} />
-            {EXPORT}
-          </CSVLinkStyled>
+    if (isCSVExportEnable) {
+      if (isEmpty(selectedMembers)) {
+        return (
           <DisabledButtonStyled
             isView={isEmpty(selectedMembers)}
             softDisable={isEmpty(selectedMembers)}
@@ -207,33 +206,65 @@ class SelectedMembersActionWrapper extends Component {
             <FaIcon icon={faDownload} />
             {EXPORT}
           </DisabledButtonStyled>
-          <ButtonStyled
-            margin="0 0 0 10px"
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-            onClick={
-                  () => {
-                    isBusCoordinatorsInformationFailed
-                      ? this.onClickPrintCancel(true) : this.printWindow();
-                  }}
-          >
-            <FaIcon icon={faPrint} />
-            {PRINT_NOW}
-          </ButtonStyled>
+        );
+      }
+      return (
+        <CSVLinkStyled
+          disable={isEmpty(selectedMembers) ? 'true' : 'false'}
+          headers={header}
+          data={selectedMembers}
+          filename={`StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`}
+        >
+          <FaIcon icon={faDownload} />
+          {EXPORT}
+        </CSVLinkStyled>
+      );
+    }
+    return null;
+  };
+  render() {
+    const {
+      selectedMembers,
+      // May use in future
+      clearSelectedMembers,
+      opInModalFormSchema,
+      attendanceModalFormSchema,
+      updateIdCardStatusModalFormSchema,
+      isUpdateOptInEnable,
+      isUpdateAttendanceEnable,
+      isUpdateIdCardStatusEnable,
+    } = this.props;
+
+    return (
+      <ContainerStyled margin="5px 0" width="auto">
+        <BoxStyled
+          width="94%"
+          margin="0 0px 0 10px"
+          borderStyle="none"
+          backgroundColor="unset"
+          padding="0px"
+        >
+          {this.CSVExportButton()}
+          {this.idCardPrintButton()}
           <UpdateIdCardStatusMembersModal
             selectedMembers={selectedMembers}
+            updateIdCardStatusModalFormSchema={updateIdCardStatusModalFormSchema}
+            isUpdateIdCardStatusEnable={isUpdateIdCardStatusEnable}
           />
           <MarkSelectedMembersAttendance
             selectedMembers={selectedMembers}
+            attendanceModalFormSchema={attendanceModalFormSchema}
+            isUpdateAttendanceEnable={isUpdateAttendanceEnable}
           />
           { /**
              TODO: May use in future
            **/ }
-          {/* <MarkOptInOrOptOutSelectedMember
+          <MarkOptInOrOptOutSelectedMember
+            isUpdateOptInEnable={isUpdateOptInEnable}
             selectedMembers={selectedMembers}
             clearSelectedMembers={clearSelectedMembers}
-          />*/}
+            opInModalFormSchema={opInModalFormSchema}
+          />
           {this.renderCoordinatorUnavailableWarningPopup()}
         </BoxStyled>
         <MembersIdCard
@@ -245,19 +276,35 @@ class SelectedMembersActionWrapper extends Component {
 }
 
 SelectedMembersActionWrapper.propTypes = {
+  attendanceModalFormSchema: PropTypes.object,
   constants: PropTypes.object,
   selectedMembers: PropTypes.array,
   metaData: PropTypes.object,
   isBusCoordinatorsInformationFailed: PropTypes.bool,
   clearSelectedMembers: PropTypes.func,
+  opInModalFormSchema: PropTypes.object,
+  updateIdCardStatusModalFormSchema: PropTypes.object,
+  isUpdateOptInEnable: PropTypes.bool,
+  isUpdateAttendanceEnable: PropTypes.bool,
+  isUpdateIdCardStatusEnable: PropTypes.bool,
+  isIdCardPrintEnable: PropTypes.bool,
+  isCSVExportEnable: PropTypes.bool,
 };
 
 SelectedMembersActionWrapper.defaultProps = {
+  attendanceModalFormSchema: {},
   constants: {},
   selectedMembers: [],
   metaData: {},
   isBusCoordinatorsInformationFailed: false,
   clearSelectedMembers: () => {},
+  opInModalFormSchema: {},
+  updateIdCardStatusModalFormSchema: {},
+  isUpdateOptInEnable: false,
+  isUpdateAttendanceEnable: false,
+  isUpdateIdCardStatusEnable: false,
+  isIdCardPrintEnable: false,
+  isCSVExportEnable: false,
 };
 const mapStateToProps = state => ({
   constants: getConstants(state),

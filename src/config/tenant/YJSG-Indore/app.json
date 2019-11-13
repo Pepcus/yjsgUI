@@ -26,6 +26,7 @@
       "name": "admin",
       "path": "/admin",
       "component": "SplashPage",
+      "config": "splashPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -104,6 +105,7 @@
       "name": "memberLogin",
       "path": "/member-login",
       "component": "MemberCredentialPage",
+      "config": "memberCredentialPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -123,6 +125,7 @@
       "name": "event",
       "path": "/event",
       "component": "ParentsRegistration",
+      "config": "parentsRegistrationForm",
       "isActive": true,
       "header": {
         "titleStyle": {

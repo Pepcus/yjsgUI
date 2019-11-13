@@ -30,7 +30,6 @@ import fields from 'components/common/fields';
 import { getConstants } from 'reducers/constants';
 
 import Message from './Message';
-import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
 
 const ButtonStyled = styled(Button)`
@@ -179,7 +178,8 @@ class MarkSelectedMembersAttendance extends Component {
    */
   renderModal = () => {
     const { isModalOpen, formData } = this.state;
-    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, constants } = this.props;
+    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, constants, attendanceModalFormSchema } = this.props;
+    const { schema, uiSchema } = attendanceModalFormSchema;
     const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
@@ -269,26 +269,29 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   render() {
-    const { selectedMembers, constants } = this.props;
+    const { selectedMembers, constants, isUpdateAttendanceEnable } = this.props;
     const { MARK_AS_PRESENT } = constants;
-
-    return (
-      <RowStyled display="inline-block" margin="0 0 0 10px">
-        <ButtonStyled
-          softDisable={isEmpty(selectedMembers)}
-          color="tertiary"
-          noMinWidth
-          onClick={this.checkOpenModalCondition}
-        >
-          <FaIcon icon={faUser} />{MARK_AS_PRESENT}
-        </ButtonStyled>
-        {this.renderModal()}
-      </RowStyled>
-    );
+    if (isUpdateAttendanceEnable) {
+      return (
+        <RowStyled display="inline-block" margin="0 0 0 10px">
+          <ButtonStyled
+            softDisable={isEmpty(selectedMembers)}
+            color="tertiary"
+            noMinWidth
+            onClick={this.checkOpenModalCondition}
+          >
+            <FaIcon icon={faUser} />{MARK_AS_PRESENT}
+          </ButtonStyled>
+          {this.renderModal()}
+        </RowStyled>
+      );
+    }
+    return null;
   }
 }
 
 MarkSelectedMembersAttendance.propTypes = {
+  attendanceModalFormSchema: PropTypes.object,
   constants: PropTypes.object,
   isAttendanceMarkFailed: PropTypes.bool,
   isAttendanceMarkSuccess: PropTypes.bool,
@@ -296,9 +299,11 @@ MarkSelectedMembersAttendance.propTypes = {
   resetIsMarkAttendanceSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
+  isUpdateAttendanceEnable: PropTypes.bool,
 };
 
 MarkSelectedMembersAttendance.defaultProps = {
+  attendanceModalFormSchema: {},
   constants: {},
   isAttendanceMarkFailed: false,
   isAttendanceMarkSuccess: false,
@@ -306,6 +311,7 @@ MarkSelectedMembersAttendance.defaultProps = {
   resetIsMarkAttendanceSuccess: () => {},
   secretKey: '',
   selectedMembers: [],
+  isUpdateAttendanceEnable: false,
 };
 
 const mapStateToProps = state => ({

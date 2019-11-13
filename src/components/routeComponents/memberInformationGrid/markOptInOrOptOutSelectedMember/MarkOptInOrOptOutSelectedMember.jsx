@@ -28,7 +28,6 @@ import {
 import { extractMembersId } from 'utils/common';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormSchema.json';
 import ModalHeader from './ModalHeader';
 import Message from './Message';
 
@@ -163,7 +162,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, constants } = this.props;
+    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, constants, opInModalFormSchema } = this.props;
+    const { schema, uiSchema } = opInModalFormSchema;
     const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
@@ -253,22 +253,24 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   render() {
-    const { selectedMembers, constants } = this.props;
+    const { selectedMembers, constants, isUpdateOptInEnable } = this.props;
     const { MARK_OPT_IN_OR_OUT } = constants;
-
-    return (
-      <Row display="inline-block" margin="0 0 0 10px">
-        <ButtonStyled
-          softDisable={isEmpty(selectedMembers)}
-          color="tertiary"
-          noMinWidth
-          onClick={this.checkOpenModalCondition}
-        >
-          <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
-        </ButtonStyled>
-        {this.renderModal()}
-      </Row>
-    );
+    if (isUpdateOptInEnable) {
+      return (
+        <Row display="inline-block" margin="0 0 0 10px">
+          <ButtonStyled
+            softDisable={isEmpty(selectedMembers)}
+            color="tertiary"
+            noMinWidth
+            onClick={this.checkOpenModalCondition}
+          >
+            <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
+          </ButtonStyled>
+          {this.renderModal()}
+        </Row>
+      );
+    }
+    return null;
   }
 }
 
@@ -278,9 +280,11 @@ MarkOptInOrOptOutSelectedMember.propTypes = {
   isMarkOptOutOrOptInFailed: PropTypes.bool,
   isMarkOptOutOrOptInSuccess: PropTypes.bool,
   markSelectedMembersOptInOrOptOut: PropTypes.func,
+  opInModalFormSchema: PropTypes.object,
   resetIsMarkOptInOrOptOutSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
+  isUpdateOptInEnable: PropTypes.bool,
 };
 
 MarkOptInOrOptOutSelectedMember.defaultProps = {
@@ -289,9 +293,11 @@ MarkOptInOrOptOutSelectedMember.defaultProps = {
   isMarkOptOutOrOptInFailed: false,
   isMarkOptOutOrOptInSuccess: false,
   markSelectedMembersOptInOrOptOut: () => {},
+  opInModalFormSchema: {},
   resetIsMarkOptInOrOptOutSuccess: () => {},
   secretKey: '',
   selectedMembers: [],
+  isUpdateOptInEnable: false,
 };
 
 const mapStateToProps = state => ({

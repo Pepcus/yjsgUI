@@ -18,7 +18,8 @@ import {
   getSelectedMembers,
   manageMembersTableWidth,
   setAllMembersAsUnchecked,
-  getUpdatedVisibleColumnConfig, getInitialVisibleColumnConfig,
+  getUpdatedVisibleColumnConfig,
+  getInitialVisibleColumnConfig,
 } from 'utils/common';
 import 'assets/css/card-print.css';
 import { getApplicationMode } from 'reducers/assetFilesReducer';
@@ -163,7 +164,10 @@ class MemberInformationGrid extends Component {
       selectedMembers: [],
       selectValue: this.props.selectValue,
       members: [],
-      metaData: gridHeaderData({ color: this.props.theme.colors.header, gridMetaData: this.props.config.gridMetaData }),
+      metaData: gridHeaderData({
+        color: this.props.theme.colors.header,
+        gridMetaData: this.props.config.gridMetaData,
+      }),
       columnOptionIsOpen: false,
       isMemberDataSet: false,
       isAdminRoute: false,
@@ -491,7 +495,24 @@ class MemberInformationGrid extends Component {
       members: updatedMembers,
     } = this.state;
     const { members, isAdminLogin, config } = this.props;
-    const { columnList } = config;
+    const {
+      columnList,
+      advanceSearchSchema = {},
+      columnConfigSchema,
+      opInModalFormSchema = {},
+      attendanceModalFormSchema = {},
+      updateIdCardStatusModalFormSchema = {},
+      attendanceFileModalFormSchema = {},
+      optInFileModalFormSchema = {},
+      isAdvanceSearchEnable,
+      isUpdateOptInEnable,
+      isUpdateAttendanceEnable,
+      isUpdateIdCardStatusEnable,
+      isUploadAttendanceFileEnable,
+      isUploadOptInFileEnable,
+      isIdCardPrintEnable,
+      isCSVExportEnable,
+    } = config;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -515,6 +536,7 @@ class MemberInformationGrid extends Component {
             visibleColumnConfig={visibleColumnConfig}
             setValuesOfVisibleColumnConfig={this.setValuesOfVisibleColumnConfig}
             selectValue={selectValue}
+            columnConfigSchema={columnConfigSchema}
           />
           <PrintMediaDisplayNoneBoxStyled borderStyle="none">
             <MobileButtons
@@ -526,12 +548,18 @@ class MemberInformationGrid extends Component {
             />
             <RowStyled margin="0 0 0 0" backgroundColor="unset" borderStyle="none" className="modal">
               <AdvanceSearch
+                isAdvanceSearchEnable={isAdvanceSearchEnable}
+                advanceSearchSchema={advanceSearchSchema}
                 metaData={metaData}
                 members={members}
                 onFilter={this.onFilter}
                 checkedIds={checkedIds}
               />
               <DesktopButtons
+                isUploadOptInFileEnable={isUploadOptInFileEnable}
+                isUploadAttendanceFileEnable={isUploadAttendanceFileEnable}
+                attendanceFileModalFormSchema={attendanceFileModalFormSchema}
+                optInFileModalFormSchema={optInFileModalFormSchema}
                 redirectToFile={this.redirectToFile}
                 openColumnOption={this.openColumnOption}
                 refreshMembersGrid={this.refreshMembersGrid}
@@ -539,6 +567,14 @@ class MemberInformationGrid extends Component {
             </RowStyled>
           </PrintMediaDisplayNoneBoxStyled>
           <SelectedMembersActionWrapper
+            isCSVExportEnable={isCSVExportEnable}
+            isIdCardPrintEnable={isIdCardPrintEnable}
+            isUpdateAttendanceEnable={isUpdateAttendanceEnable}
+            isUpdateOptInEnable={isUpdateOptInEnable}
+            isUpdateIdCardStatusEnable={isUpdateIdCardStatusEnable}
+            attendanceModalFormSchema={attendanceModalFormSchema}
+            opInModalFormSchema={opInModalFormSchema}
+            updateIdCardStatusModalFormSchema={updateIdCardStatusModalFormSchema}
             selectedMembers={selectedMembers}
             metaData={metaData}
             clearSelectedMembers={this.clearSelectedMembers}

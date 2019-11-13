@@ -39,7 +39,6 @@ import {
   USER_TYPES,
 } from 'constants/member';
 import { getParameterByName } from 'apis/http';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
 import { getLogoPathConfig } from 'reducers/config';
@@ -234,9 +233,9 @@ class SplashPage extends Component {
       isURLParams,
     } = this.state;
     const {
-      tenant,
       constants,
       logoPathConfig,
+      config,
     } = this.props;
     const { pageBodyLogo } = logoPathConfig;
     const {
@@ -284,6 +283,7 @@ class SplashPage extends Component {
             </ImageWrapper>
             <LoginForm
               admin={admin}
+              config={config}
               enableAdminLoginButtons={this.enableAdminLoginButtons}
               handleDisableAdminLoginButtons={this.handleDisableAdminLoginButtons}
               isAdmin={isAdmin}
@@ -307,6 +307,7 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
@@ -317,10 +318,10 @@ SplashPage.propTypes = {
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
   loginAdmin: PropTypes.func,
-  tenant: PropTypes.string,
 };
 
 SplashPage.defaultProps = {
+  config: {},
   constants: {},
   isAdminLogin: false,
   fetchMemberData: () => {},
@@ -331,7 +332,6 @@ SplashPage.defaultProps = {
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
   loginAdmin: () => {},
-  tenant: '',
 };
 
 const mapStateToProps = state => ({
@@ -341,7 +341,6 @@ const mapStateToProps = state => ({
   logoPathConfig: getLogoPathConfig(state),
   password: getAdminPassword(state),
   memberData: getMember(state),
-  tenant: getApplicationTenant(state),
   isAdminLogin: getAdminLoginState(state),
 });
 

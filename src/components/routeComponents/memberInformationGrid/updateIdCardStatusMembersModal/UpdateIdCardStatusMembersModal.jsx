@@ -28,7 +28,6 @@ import {
 import { extractMembersId } from 'utils/common';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormShema.json';
 import Message from './Message';
 import ModalHeader from './ModalHeader';
 
@@ -160,7 +159,13 @@ class UpdateIdCardStatusMembersModal extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isIdCardUpdateStatusSuccess, isIdCardUpdateStatusFailed, constants } = this.props;
+    const {
+      isIdCardUpdateStatusSuccess,
+      isIdCardUpdateStatusFailed,
+      constants,
+      updateIdCardStatusModalFormSchema,
+    } = this.props;
+    const { schema, uiSchema } = updateIdCardStatusModalFormSchema;
     const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
@@ -250,21 +255,24 @@ class UpdateIdCardStatusMembersModal extends Component {
   };
 
   render() {
-    const { selectedMembers, constants } = this.props;
+    const { selectedMembers, constants, isUpdateIdCardStatusEnable } = this.props;
     const { PRINT_LATER } = constants;
-    return (
-      <Row display="inline-block" margin="0 0 0 10px">
-        <ButtonStyled
-          softDisable={isEmpty(selectedMembers)}
-          color="tertiary"
-          noMinWidth
-          onClick={this.checkOpenModalCondition}
-        >
-          <FaIcon icon={faPrint} />{PRINT_LATER}
-        </ButtonStyled>
-        {this.renderModal()}
-      </Row>
-    );
+    if (isUpdateIdCardStatusEnable) {
+      return (
+        <Row display="inline-block" margin="0 0 0 10px">
+          <ButtonStyled
+            softDisable={isEmpty(selectedMembers)}
+            color="tertiary"
+            noMinWidth
+            onClick={this.checkOpenModalCondition}
+          >
+            <FaIcon icon={faPrint} />{PRINT_LATER}
+          </ButtonStyled>
+          {this.renderModal()}
+        </Row>
+      );
+    }
+    return null;
   }
 }
 
@@ -276,6 +284,8 @@ UpdateIdCardStatusMembersModal.propTypes = {
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
   updateIdCardStatusSelectedMembers: PropTypes.func,
+  updateIdCardStatusModalFormSchema: PropTypes.object,
+  isUpdateIdCardStatusEnable: PropTypes.bool,
 };
 
 UpdateIdCardStatusMembersModal.defaultProps = {
@@ -286,6 +296,8 @@ UpdateIdCardStatusMembersModal.defaultProps = {
   secretKey: '',
   selectedMembers: [],
   updateIdCardStatusSelectedMembers: () => {},
+  updateIdCardStatusModalFormSchema: {},
+  isUpdateIdCardStatusEnable: false,
 };
 
 const mapStateToProps = state => ({

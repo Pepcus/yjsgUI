@@ -30,7 +30,6 @@ import {
 import fields from 'components/common/fields';
 import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
 import Message from './Message';
 
@@ -161,7 +160,9 @@ class UploadMembersAttendanceFile extends Component {
       isAttendanceUploadFailed,
       failRecordIds,
       errorMessageOfIdNotExist,
+      attendanceFileModalFormSchema,
     } = this.props;
+    const { schema, uiSchema } = attendanceFileModalFormSchema;
     const {
       CLOSE,
       UPLOAD,
@@ -231,21 +232,24 @@ class UploadMembersAttendanceFile extends Component {
   };
 
   render() {
-    const { constants } = this.props;
+    const { constants, isUploadAttendanceFileEnable } = this.props;
     const { UPLOAD_ATTENDANCE } = constants;
-    return (
-      <Row display="inline-block" margin="0 0 0 10px">
-        <ButtonStyled
-          color="primary"
-          title="Upload Attendance"
-          onClick={this.openModal}
-        >
-          <FaIcon icon={faUpload} />
-          {UPLOAD_ATTENDANCE}
-        </ButtonStyled>
-        {this.renderModal()}
-      </Row>
-    );
+    if (isUploadAttendanceFileEnable) {
+      return (
+        <Row display="inline-block" margin="0 0 0 10px">
+          <ButtonStyled
+            color="primary"
+            title="Upload Attendance"
+            onClick={this.openModal}
+          >
+            <FaIcon icon={faUpload} />
+            {UPLOAD_ATTENDANCE}
+          </ButtonStyled>
+          {this.renderModal()}
+        </Row>
+      );
+    }
+    return null;
   }
 }
 
@@ -258,6 +262,8 @@ UploadMembersAttendanceFile.propTypes = {
   resetIsSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   uploadMembersAttendanceFile: PropTypes.func,
+  attendanceFileModalFormSchema: PropTypes.object,
+  isUploadAttendanceFileEnable: PropTypes.bool,
 };
 
 UploadMembersAttendanceFile.defaultProps = {
@@ -269,6 +275,8 @@ UploadMembersAttendanceFile.defaultProps = {
   resetIsSuccess: () => {},
   secretKey: '',
   uploadMembersAttendanceFile: () => {},
+  attendanceFileModalFormSchema: {},
+  isUploadAttendanceFileEnable: false,
 };
 
 const mapStateToProps = state => ({

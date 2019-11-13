@@ -37,10 +37,6 @@ import fields from 'components/common/fields';
 import { getLogoPathConfig } from 'reducers/config';
 
 import ImageWrapper from './ImageWrapper';
-import {
-  schema,
-  uiSchema,
-} from './memberCredentialFormSchema.json';
 import RedirectToRoute from './RedirectToRoute';
 
 const BoxStyled = styled(Box)`
@@ -233,7 +229,10 @@ class MemberCredentialPage extends Component {
       context,
       constants,
       logoPathConfig,
+      config,
     } = this.props;
+    const { memberCredentialFormConfig } = config;
+    const { schema, uiSchema } = memberCredentialFormConfig;
     const { pageBodyLogo } = logoPathConfig;
     const {
       EVENT_DATE,
@@ -328,6 +327,7 @@ class MemberCredentialPage extends Component {
 
 MemberCredentialPage.propTypes = {
   constants: PropTypes.object,
+  config: PropTypes.object,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
@@ -340,6 +340,7 @@ MemberCredentialPage.propTypes = {
 
 MemberCredentialPage.defaultProps = {
   constants: {},
+  config: {},
   context: {},
   fetchStudentData: () => {},
   hashLink: '',

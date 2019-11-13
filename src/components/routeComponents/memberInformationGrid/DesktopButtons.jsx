@@ -17,7 +17,7 @@ import UploadMembersAttendanceFile from './uploadMembersAttendanceFile';
 /**
  TODO: This will be use in future scope.
  */
-// import UploadMembersOptInFile from './uploadMembersOptInFile';
+import UploadMembersOptInFile from './uploadMembersOptInFile';
 
 const DesktopButtonsContainerStyled = styled(Box)`
     background-color: unset;
@@ -56,6 +56,10 @@ const DesktopButtons = ({
   redirectToFile,
   openColumnOption,
   refreshMembersGrid,
+  attendanceFileModalFormSchema,
+  optInFileModalFormSchema,
+  isUploadAttendanceFileEnable,
+  isUploadOptInFileEnable,
 }) => {
   const { FILES } = constants;
 
@@ -65,7 +69,10 @@ const DesktopButtons = ({
         {/**
          TODO: This will be use in future scope.
          */}
-        {/* <UploadMembersOptInFile />*/}
+        <UploadMembersOptInFile
+          optInFileModalFormSchema={optInFileModalFormSchema}
+          isUploadOptInFileEnable={isUploadOptInFileEnable}
+        />
         <FilesButtonStyled
           padding="10px"
           width="68px"
@@ -78,7 +85,10 @@ const DesktopButtons = ({
           <FaIcon icon={faFile} />
           {FILES}
         </FilesButtonStyled>
-        <UploadMembersAttendanceFile />
+        <UploadMembersAttendanceFile
+          attendanceFileModalFormSchema={attendanceFileModalFormSchema}
+          isUploadAttendanceFileEnable={isUploadAttendanceFileEnable}
+        />
         <IconButtonStyled
           width="36px"
           padding="10px"
@@ -113,6 +123,10 @@ DesktopButtons.propTypes = {
   openColumnOption: PropTypes.func,
   redirectToFile: PropTypes.func,
   refreshMembersGrid: PropTypes.func,
+  attendanceFileModalFormSchema: PropTypes.object,
+  optInFileModalFormSchema: PropTypes.object,
+  isUploadAttendanceFileEnable: PropTypes.bool,
+  isUploadOptInFileEnable: PropTypes.bool,
 };
 
 DesktopButtons.defaultProps = {
@@ -120,6 +134,10 @@ DesktopButtons.defaultProps = {
   openColumnOption: () => {},
   redirectToFile: () => {},
   refreshMembersGrid: () => {},
+  attendanceFileModalFormSchema: {},
+  optInFileModalFormSchema: {},
+  isUploadAttendanceFileEnable: false,
+  isUploadOptInFileEnable: false,
 };
 
 const mapStateToProps = state => ({
