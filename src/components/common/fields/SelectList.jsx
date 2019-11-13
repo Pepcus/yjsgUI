@@ -90,10 +90,11 @@ function SelectList(props) {
     if (enums) {
       return (
         /* This Col is used for adjust the position of field in form */
-        <Col {...fieldWrapper}>
+        <Col {...fieldWrapper} padding="0px">
           <Row width="100%" margin="0">
             <TypographyStyled type="label" style={titleStyle}>
-              {label ? title : null}{required && label ? '*' : null}
+              {label ? title : null}
+              <Typography fontSize="20px" color="error" type="separator">{required && label ? '*' : null}</Typography>
             </TypographyStyled>
           </Row>
           <Row width="100%" margin="0">

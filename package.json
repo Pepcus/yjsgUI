@@ -18,7 +18,7 @@
     "jsbarcode": "^3.11.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
-    "pepcus-core": "https://github.com/Pepcus/pepcus-core/archive/pepcus-core-0.0.3.tar.gz",
+    "pepcus-core": "https://github.com/Pepcus/pepcus-core/archive/pepcus-core-0.0.8.tar.gz",
     "polished": "^3.4.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",

@@ -92,7 +92,6 @@ class MemberRegistrationForm extends Component {
   handleSubmit = () => {
     const { hasError, member } = this.state;
     const { createStudentData } = this.props;
-
     if (hasError) {
       createStudentData(member);
       this.setState({
@@ -132,6 +131,7 @@ class MemberRegistrationForm extends Component {
     };
     return getTransformedErrors({ errors, transformErrors });
   };
+
 
   /**
    * Redirect to previous location
@@ -184,6 +184,7 @@ class MemberRegistrationForm extends Component {
   };
 
   render() {
+    const { FieldTemplate } = fields;
     const {
       formConfig,
       isAdminLocation,
@@ -228,6 +229,7 @@ class MemberRegistrationForm extends Component {
             <Form
               enableDirtyCheck
               externalSubmission
+              FieldTemplate={FieldTemplate}
               fields={fields}
               showErrorList={false}
               validate={this.validate}

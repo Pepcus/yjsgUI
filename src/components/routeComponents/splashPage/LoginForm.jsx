@@ -95,15 +95,15 @@ const LoginForm = ({
       <Row justify="center" margin="0 0 25px 0">
         <ButtonStyled
           margin="10px 15px"
-          onClick={redirectToNewRegistrationPage}
-        >
-          {NEW_REGISTRATION}
-        </ButtonStyled>
-        <ButtonStyled
-          margin="10px 15px"
           onClick={enableAdminLoginButtons}
         >
           {ADMIN_LOGIN}
+        </ButtonStyled>
+        <ButtonStyled
+          margin="10px 15px"
+          onClick={redirectToNewRegistrationPage}
+        >
+          {NEW_REGISTRATION}
         </ButtonStyled>
       </Row>
     );
