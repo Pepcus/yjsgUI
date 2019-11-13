@@ -973,6 +973,14 @@
       {
         "field": "email",
         "validator": "optionalEmailValidator"
+      },
+      {
+        "field": "age",
+        "validator": "ageValidator"
+      },
+      {
+        "field": "numberOfPeople",
+        "validator": "numberOfPeopleValidator"
       }
     ],
     "defaultMemberDataFormat": [
