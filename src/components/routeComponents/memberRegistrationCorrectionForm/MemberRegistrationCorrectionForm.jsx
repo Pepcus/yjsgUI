@@ -87,6 +87,7 @@ class MemberRegistrationCorrectionForm extends Component {
       member: {},
       oldMemberData: {},
       onlyOptInForm: this.props.config.isOptInEnable,
+      mandatoryField: false,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
   }
@@ -300,23 +301,27 @@ class MemberRegistrationCorrectionForm extends Component {
       } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
         this.setState({
           isSubmitTriggered: true,
+          mandatoryField: false,
         });
         this.updateMemberData();
       } else {
         this.setState({
           isFormChanged: false,
+          mandatoryField: true,
           isSubmitTriggered: true,
         }, () => { this.scrollToError(); });
       }
     } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
       this.setState({
         isSubmitTriggered: true,
+        mandatoryField: false,
       });
       this.updateMemberData();
     } else {
       this.setState({
         isFormChanged: false,
         isSubmitTriggered: true,
+        mandatoryField: true,
       }, () => { this.scrollToError(); });
     }
   };
@@ -349,7 +354,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const { constants, config } = this.props;
     const { isOptInEnable } = config;
     const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
-    const { member } = this.state;
+    const { member, mandatoryField } = this.state;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -358,10 +363,14 @@ class MemberRegistrationCorrectionForm extends Component {
       if (member.optIn2019 === 'N') {
         return [];
       } else if (member.optIn2019 !== 'N') {
-        return getTransformedErrors({ errors, transformErrors });
+        if (mandatoryField) {
+          return getTransformedErrors({ errors, transformErrors });
+        } return errors;
       } return [];
     }
-    return getTransformedErrors({ errors, transformErrors });
+    if (mandatoryField) {
+      return getTransformedErrors({ errors, transformErrors });
+    } return errors;
   };
 
   /**
