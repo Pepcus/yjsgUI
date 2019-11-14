@@ -82,6 +82,7 @@ class MemberRegistrationForm extends Component {
       isAdminLocation: false,
       isStudentLocation: false,
       isPreviousLocation: false,
+      mandatoryField: false,
     };
   }
 
@@ -97,9 +98,10 @@ class MemberRegistrationForm extends Component {
       this.setState({
         isSubmitTriggered: true,
         hasError: false,
+        mandatoryField: false,
       });
     } else {
-      this.setState({}, () => {
+      this.setState({ mandatoryField: true }, () => {
         this.scrollToError();
       });
     }
@@ -122,14 +124,17 @@ class MemberRegistrationForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
+    const { mandatoryField } = this.state;
     const { constants } = this.props;
     const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
-
-    const transformErrors = {
-      'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-      'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-    };
-    return getTransformedErrors({ errors, transformErrors });
+    if (mandatoryField) {
+      const transformErrors = {
+        'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+        'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+      };
+      return getTransformedErrors({ errors, transformErrors });
+    }
+    return errors;
   };
 
 
