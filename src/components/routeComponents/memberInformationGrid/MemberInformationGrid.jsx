@@ -156,6 +156,8 @@ const ButtonStyled = styled(Button)`
  */
 class MemberInformationGrid extends Component {
   constructor(props) {
+    const { theme, config } = props;
+    const { colors } = theme;
     super(props);
     this.widthRef = React.createRef();
     this.state = {
@@ -165,8 +167,8 @@ class MemberInformationGrid extends Component {
       selectValue: this.props.selectValue,
       members: [],
       metaData: gridHeaderData({
-        color: this.props.theme.colors.header,
-        gridMetaData: this.props.config.gridMetaData,
+        color: colors.header,
+        gridMetaData: config.gridMetaData,
       }),
       columnOptionIsOpen: false,
       isMemberDataSet: false,
@@ -548,7 +550,7 @@ class MemberInformationGrid extends Component {
             />
             <RowStyled margin="0 0 0 0" backgroundColor="unset" borderStyle="none" className="modal">
               <AdvanceSearch
-                isAdvanceSearchEnable={isAdvanceSearchEnable}
+                acl={isAdvanceSearchEnable}
                 advanceSearchSchema={advanceSearchSchema}
                 metaData={metaData}
                 members={members}

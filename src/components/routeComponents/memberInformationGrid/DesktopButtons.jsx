@@ -71,7 +71,7 @@ const DesktopButtons = ({
          */}
         <UploadMembersOptInFile
           optInFileModalFormSchema={optInFileModalFormSchema}
-          isUploadOptInFileEnable={isUploadOptInFileEnable}
+          acl={isUploadOptInFileEnable}
         />
         <FilesButtonStyled
           padding="10px"
@@ -87,7 +87,7 @@ const DesktopButtons = ({
         </FilesButtonStyled>
         <UploadMembersAttendanceFile
           attendanceFileModalFormSchema={attendanceFileModalFormSchema}
-          isUploadAttendanceFileEnable={isUploadAttendanceFileEnable}
+          acl={isUploadAttendanceFileEnable}
         />
         <IconButtonStyled
           width="36px"

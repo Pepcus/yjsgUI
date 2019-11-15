@@ -19,13 +19,13 @@
 
   "FILE_DOWNLOAD_MESSAGE": "File downloading started...",
 
-  "MEMBER_ID_CARD_SMALL_HEADING": "जैन बाल एवं युवा संस्कार शिक्षन शिविर - 2019",
+  "MEMBER_ID_CARD_SMALL_HEADING": "CONFERENCE PARTICIPANT'S",
 
-  "MEMBER_ID_CARD_MAIN_HEADING": "Young Jain Study Group (YJSG)",
+  "MEMBER_ID_CARD_MAIN_HEADING": "ID CARD",
 
-  "MARK_SELECTED_MEMBERS_ATTENDANCE_LABEL": "Please enter the attendance of selected students ",
+  "MARK_SELECTED_MEMBERS_ATTENDANCE_LABEL": "Please enter the attendance of selected members ",
 
-  "OPT_IN_STATUS_FOR_SELECTED_MEMBERS_LABEL": "Please enter yes or no for selected students' camp",
+  "OPT_IN_STATUS_FOR_SELECTED_MEMBERS_LABEL": "Please enter yes or no for selected members' camp",
 
   "ID_CARD_PRINT_STATUS_FOR_SELECTED_MEMBERS_LABEL": "Please select the given ID's for card print!",
 
@@ -33,13 +33,13 @@
 
   "INFORMATION_NOT_AVAILABLE_MESSAGE": "Information is not available here.",
 
-  "OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE": "Yes or no has been successfully registered for the camp of selected students.",
+  "OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE": "Yes or no has been successfully registered for the camp of selected members.",
 
-  "OPT_IN_OR_OPT_OUT_FAILED_MESSAGE": "The selected students failed to register yes or no to the camp.",
+  "OPT_IN_OR_OPT_OUT_FAILED_MESSAGE": "The selected members failed to register yes or no to the camp.",
 
-  "MARK_ATTENDANCE_SUCCESS_MESSAGE": "The attendance of the selected students has been successfully registered.",
+  "MARK_ATTENDANCE_SUCCESS_MESSAGE": "The attendance of the selected members has been successfully registered.",
 
-  "MARK_ATTENDANCE_FAILED_MESSAGE": "Failed to register the attendance of selected students.",
+  "MARK_ATTENDANCE_FAILED_MESSAGE": "Failed to register the attendance of selected members.",
 
   "ID_NOTE_MESSAGE": "Please note down your ID and secret code carefully.",
 
@@ -49,13 +49,13 @@
 
   "UPDATED_ID_CARD_STATUS_FAILED_MESSAGE": "Failed to enter the selection of card print.",
 
-  "OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE": "The optin file of the students has been uploaded successfully.",
+  "OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE": "The optin file of the members has been uploaded successfully.",
 
-  "OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE": "Students' optin file upload was completely unsuccessful.",
+  "OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE": "members' optin file upload was completely unsuccessful.",
 
-  "ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE": "Student attendance file has been uploaded successfully.",
+  "ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE": "member attendance file has been uploaded successfully.",
 
-  "ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE": "Student attendance file failed to upload.",
+  "ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE": "member attendance file failed to upload.",
 
   "THIS_INFORMATION_IS_COMPULSORY_MESSAGE": "This information is mandatory",
 
@@ -83,7 +83,7 @@
 
   "MESSAGE_FOR_PDF_FILE_DOWNLOAD": "The file format is invalid to show information, please download the file, and click on the button below to download.",
 
-  "BUS_COORDINATOR_ERROR_MESSAGE": "Information on bus coordinators is not available, do you want to continue printing the ID card of students?",
+  "BUS_COORDINATOR_ERROR_MESSAGE": "Information on bus coordinators is not available, do you want to continue printing the ID card of members?",
 
   "REGISTRATION_SUCCESS_MESSAGE": "Your registration has been done for conference.",
 
@@ -153,7 +153,7 @@
 
   "ADDRESS": "Address:",
 
-  "STUDENT_ID": "Student Id:",
+  "MEMBER_ID": "member Id:",
 
   "MARK_OPT_IN_OR_OUT": "Mark Opt In / Out",
 
@@ -181,7 +181,7 @@
 
   "CLOSE_BROWSER_MANUALLY_MESSAGE": "Please close your browser manually.",
 
-  "CUSTOM_FOOTER_INFORMATION": "For some reason your registration could not be done! Please contact Mr. Prakash Chhabra on 99260 40137!",
+  "CUSTOM_FOOTER_INFORMATION": "For some reason your registration could not be done! Please contact conference organiser coordinator!",
 
   "THANKS": "Thank you",
 
@@ -195,7 +195,7 @@
 
   "PLACE": "Place :",
 
-  "EVENT_PLACE": "Shri Chandraprabhu Digambar Jain Manglik Bhavan, Anjani Nagar",
+  "EVENT_PLACE": "Conference Indore",
 
   "EVENT_TITLE": "Please provide the information below to join!",
 

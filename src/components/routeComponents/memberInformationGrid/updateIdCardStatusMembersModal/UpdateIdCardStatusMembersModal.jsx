@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -255,24 +256,21 @@ class UpdateIdCardStatusMembersModal extends Component {
   };
 
   render() {
-    const { selectedMembers, constants, isUpdateIdCardStatusEnable } = this.props;
+    const { selectedMembers, constants } = this.props;
     const { PRINT_LATER } = constants;
-    if (isUpdateIdCardStatusEnable) {
-      return (
-        <Row display="inline-block" margin="0 0 0 10px">
-          <ButtonStyled
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-            onClick={this.checkOpenModalCondition}
-          >
-            <FaIcon icon={faPrint} />{PRINT_LATER}
-          </ButtonStyled>
-          {this.renderModal()}
-        </Row>
-      );
-    }
-    return null;
+    return (
+      <Row display="inline-block" margin="0 0 0 10px">
+        <ButtonStyled
+          softDisable={isEmpty(selectedMembers)}
+          color="tertiary"
+          noMinWidth
+          onClick={this.checkOpenModalCondition}
+        >
+          <FaIcon icon={faPrint} />{PRINT_LATER}
+        </ButtonStyled>
+        {this.renderModal()}
+      </Row>
+    );
   }
 }
 
@@ -285,7 +283,6 @@ UpdateIdCardStatusMembersModal.propTypes = {
   selectedMembers: PropTypes.array,
   updateIdCardStatusSelectedMembers: PropTypes.func,
   updateIdCardStatusModalFormSchema: PropTypes.object,
-  isUpdateIdCardStatusEnable: PropTypes.bool,
 };
 
 UpdateIdCardStatusMembersModal.defaultProps = {
@@ -297,7 +294,6 @@ UpdateIdCardStatusMembersModal.defaultProps = {
   selectedMembers: [],
   updateIdCardStatusSelectedMembers: () => {},
   updateIdCardStatusModalFormSchema: {},
-  isUpdateIdCardStatusEnable: false,
 };
 
 const mapStateToProps = state => ({
@@ -313,4 +309,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateIdCardStatusSelectedMembersAction({ secretKey, selectedMembersId, IdCardStatus })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(UpdateIdCardStatusMembersModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { pure: false },
+)(accessControl(UpdateIdCardStatusMembersModal));

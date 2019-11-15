@@ -6,6 +6,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { faFileCsv } from '@fortawesome/free-solid-svg-icons/faFileCsv';
 import styled from 'styled-components';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -232,24 +233,21 @@ class UploadMembersAttendanceFile extends Component {
   };
 
   render() {
-    const { constants, isUploadAttendanceFileEnable } = this.props;
+    const { constants } = this.props;
     const { UPLOAD_ATTENDANCE } = constants;
-    if (isUploadAttendanceFileEnable) {
-      return (
-        <Row display="inline-block" margin="0 0 0 10px">
-          <ButtonStyled
-            color="primary"
-            title="Upload Attendance"
-            onClick={this.openModal}
-          >
-            <FaIcon icon={faUpload} />
-            {UPLOAD_ATTENDANCE}
-          </ButtonStyled>
-          {this.renderModal()}
-        </Row>
-      );
-    }
-    return null;
+    return (
+      <Row display="inline-block" margin="0 0 0 10px">
+        <ButtonStyled
+          color="primary"
+          title="Upload Attendance"
+          onClick={this.openModal}
+        >
+          <FaIcon icon={faUpload} />
+          {UPLOAD_ATTENDANCE}
+        </ButtonStyled>
+        {this.renderModal()}
+      </Row>
+    );
   }
 }
 
@@ -263,7 +261,6 @@ UploadMembersAttendanceFile.propTypes = {
   secretKey: PropTypes.string,
   uploadMembersAttendanceFile: PropTypes.func,
   attendanceFileModalFormSchema: PropTypes.object,
-  isUploadAttendanceFileEnable: PropTypes.bool,
 };
 
 UploadMembersAttendanceFile.defaultProps = {
@@ -276,7 +273,6 @@ UploadMembersAttendanceFile.defaultProps = {
   secretKey: '',
   uploadMembersAttendanceFile: () => {},
   attendanceFileModalFormSchema: {},
-  isUploadAttendanceFileEnable: false,
 };
 
 const mapStateToProps = state => ({
@@ -294,4 +290,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(uploadMembersAttendanceFileAction({ secretKey, attendanceFile, day })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UploadMembersAttendanceFile);
+export default connect(mapStateToProps, mapDispatchToProps)(accessControl(UploadMembersAttendanceFile));
