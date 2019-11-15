@@ -14,7 +14,10 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { parentsRegistrationAction } from 'actions/parentsRegistrationAction';
 import fields from 'components/common/fields';
-import { getTransformedErrors, verifyFormDataValidations } from 'utils/form';
+import {
+  formValidators,
+  getTransformedErrors,
+} from 'utils/form';
 import { getConstants } from 'reducers/constants';
 
 import CloseBrowserPopup from './CloseBrowserPopup';
@@ -141,19 +144,6 @@ class ParentsRegistration extends Component {
   };
 
   /**
-   * It validate the form field
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {Object}
-   */
-  validate = (formData, errors) => {
-    const { constants, config } = this.props;
-    const { parentsRegistrationFormSchema } = config;
-    const { validation } = parentsRegistrationFormSchema;
-    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
-  };
-
-  /**
    * It is the onChange of form
    * @param {Object} event
    */
@@ -244,7 +234,7 @@ class ParentsRegistration extends Component {
               externalSubmission
               fields={fields}
               showErrorList={false}
-              validate={this.validate}
+              validate={formValidators(schema, constants)}
               liveValidate
               schema={schema}
               uiSchema={uiSchema}

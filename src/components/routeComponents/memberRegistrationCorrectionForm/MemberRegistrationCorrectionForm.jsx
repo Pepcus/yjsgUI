@@ -27,7 +27,7 @@ import {
   updateClassAttended2019InMemberData,
   getFormData,
   getTransformedErrors,
-  verifyFormDataValidations,
+  formValidators,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
@@ -185,27 +185,6 @@ class MemberRegistrationCorrectionForm extends Component {
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
-  };
-
-  /**
-   * Method check validation for only optIn is 'Y' form field and return conditional error for form field
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {Array}
-   */
-  validate = (formData, errors) => {
-    const { member, formConfig } = this.state;
-    const { constants, config } = this.props;
-    const { isOptInEnable } = config;
-    const { validation } = formConfig;
-    if (isOptInEnable) {
-      if (member.optIn2019 === 'N') {
-        return [];
-      } else if (member.optIn2019 !== 'N') {
-        return verifyFormDataValidations({ formData, errors, validate: validation, constants });
-      } return [];
-    }
-    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
   };
 
   /**
@@ -448,6 +427,7 @@ class MemberRegistrationCorrectionForm extends Component {
       memberData,
       tenant,
       user,
+      constants,
     } = this.props;
 
     const {
@@ -476,7 +456,7 @@ class MemberRegistrationCorrectionForm extends Component {
           tenant={tenant ? tenant : 'default'}
           transformErrors={this.transformErrors}
           user={user}
-          validate={this.validate}
+          validate={formValidators(formConfig.schema, constants)}
         >
           <RedirectToRoute
             context={context}

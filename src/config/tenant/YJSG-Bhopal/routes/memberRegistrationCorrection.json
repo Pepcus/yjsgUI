@@ -19,12 +19,12 @@
                 "name": {
                   "title": "नाम",
                   "type": "string",
-                  "validator": "nameValidator"
+                  "customValidation": "nameValidator"
                 },
                 "fatherName": {
                   "title": "पिता / पति का नाम",
                   "type": "string",
-                  "validator": "nameValidator"
+                  "customValidation": "nameValidator"
                 },
                 "gender": {
                   "title": "लिंग",
@@ -41,12 +41,12 @@
                 "age": {
                   "title": "उम्र",
                   "type": "number",
-                  "validator": "ageValidator"
+                  "customValidation": "ageValidator"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
                   "type": "number",
-                  "validator": "mobileValidator"
+                  "customValidation": "mobileValidator"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -59,7 +59,7 @@
                 "email": {
                   "title": "ई-मेल",
                   "type": "string",
-                  "validator": "optionalEmailValidator"
+                  "customValidation": "optionalEmailValidator"
                 },
                 "classAttended2018": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
@@ -168,7 +168,7 @@
                 "address": {
                   "title": "पूरा पता",
                   "type": "string",
-                  "validator": "addressValidator"
+                  "customValidation": "addressValidator"
                 },
                 "remark": {
                   "title": "Remark",
@@ -818,32 +818,6 @@
       }
     },
     "data": {},
-    "validation": [
-      {
-        "field": "name",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "fatherName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "mobile",
-        "validator": "mobileValidator"
-      },
-      {
-        "field": "age",
-        "validator": "ageValidator"
-      },
-      {
-        "field": "email",
-        "validator": "optionalEmailValidator"
-      },
-      {
-        "field": "address",
-        "validator": "addressValidator"
-      }
-    ],
     "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
@@ -952,12 +926,12 @@
                 "name": {
                   "title": "नाम",
                   "type": "string",
-                  "validator": "nameValidator"
+                  "customValidation": "nameValidator"
                 },
                 "fatherName": {
                   "title": "पिता / पति का नाम",
                   "type": "string",
-                  "validator": "nameValidator"
+                  "customValidation": "nameValidator"
                 },
                 "gender": {
                   "title": "लिंग",
@@ -968,12 +942,12 @@
                 "age": {
                   "title": "उम्र",
                   "type": "number",
-                  "validator": "ageValidator"
+                  "customValidation": "ageValidator"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
                   "type": "number",
-                  "validator": "mobileValidator"
+                  "customValidation": "mobileValidator"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -986,7 +960,7 @@
                 "email": {
                   "title": "ई-मेल",
                   "type": "string",
-                  "validator": "optionalEmailValidator"
+                  "customValidation": "optionalEmailValidator"
                 },
                 "classAttended2018": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
@@ -1019,7 +993,7 @@
                 "address": {
                   "title": "पूरा पता",
                   "type": "string",
-                  "validator": "addressValidator"
+                  "customValidation": "addressValidator"
                 }
               },
               "required": [
@@ -1521,32 +1495,6 @@
       }
     },
     "data": {},
-    "validation": [
-      {
-        "field": "name",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "fatherName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "mobile",
-        "validator": "mobileValidator"
-      },
-      {
-        "field": "age",
-        "validator": "ageValidator"
-      },
-      {
-        "field": "email",
-        "validator": "optionalEmailValidator"
-      },
-      {
-        "field": "address",
-        "validator": "addressValidator"
-      }
-    ],
     "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
@@ -1641,7 +1589,8 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         },
         "optIn2019": {
           "type": "string",
@@ -1684,32 +1633,6 @@
       }
     },
     "data": {},
-    "validation": [
-      {
-        "field": "name",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "fatherName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "mobile",
-        "validator": "mobileValidator"
-      },
-      {
-        "field": "age",
-        "validator": "ageValidator"
-      },
-      {
-        "field": "email",
-        "validator": "optionalEmailValidator"
-      },
-      {
-        "field": "address",
-        "validator": "addressValidator"
-      }
-    ],
     "defaultMemberDataFormat": [
       {
         "formField": "optIn2019",
