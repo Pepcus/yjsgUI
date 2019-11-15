@@ -33,7 +33,6 @@ export const getFormData = ({
   let schema = {};
   let uiSchema = {};
   let formData = {};
-  let validation = [];
   let defaultMemberDataFormat = [];
   if (isUserMember({ user }) && onlyOptInForm) {
     // eslint-disable-next-line prefer-destructuring
@@ -45,7 +44,6 @@ export const getFormData = ({
       ...member,
     };
     // eslint-disable-next-line prefer-destructuring
-    validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
     defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
@@ -73,7 +71,6 @@ export const getFormData = ({
         ...member,
       };
       // eslint-disable-next-line prefer-destructuring
-      validation = formConfig.validation;
       // eslint-disable-next-line prefer-destructuring
       defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     } else if (isUserMember({ user })) {
@@ -99,7 +96,6 @@ export const getFormData = ({
         ...member,
       };
       // eslint-disable-next-line prefer-destructuring
-      validation = formConfig.validation;
       // eslint-disable-next-line prefer-destructuring
       defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     }
@@ -127,7 +123,6 @@ export const getFormData = ({
       ...member,
     };
     // eslint-disable-next-line prefer-destructuring
-    validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
     defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
@@ -154,9 +149,8 @@ export const getFormData = ({
       ...member,
     };
     // eslint-disable-next-line prefer-destructuring
-    validation = formConfig.validation;
     // eslint-disable-next-line prefer-destructuring
     defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
   } else return null;
-  return { schema, uiSchema, formData, validation, defaultMemberDataFormat };
+  return { schema, uiSchema, formData, defaultMemberDataFormat };
 };

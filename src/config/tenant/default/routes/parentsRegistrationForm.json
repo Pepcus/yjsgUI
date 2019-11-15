@@ -5,11 +5,13 @@
       "properties": {
         "name": {
           "title": "नाम:",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         },
         "phoneNumber": {
           "title": "फ़ोन :",
-          "type": "number"
+          "type": "number",
+          "customValidation": "mobileValidator"
         },
         "selectedCountOfMembers": {
           "title": "आपके अलावा साथ आने वालो की संख्या : ",
@@ -42,17 +44,6 @@
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . ."
       }
-    },
-    "validation":
-    [
-      {
-        "field": "name",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "phoneNumber",
-        "validator": "mobileValidator"
-      }
-    ]
+    }
   }
 }

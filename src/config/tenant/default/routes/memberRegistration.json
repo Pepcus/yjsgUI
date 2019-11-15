@@ -21,17 +21,20 @@
           "properties": {
             "firstName": {
               "title": "First Name",
-              "type": "string"
+              "type": "string",
+              "customValidation": "nameValidator"
             },
             "lastName": {
               "title": "Last Name",
-              "type": "string"
+              "type": "string",
+              "customValidation": "nameValidator"
             }
           }
         },
         "email": {
           "title": "E-mail",
-          "type": "string"
+          "type": "string",
+          "customValidation": "optionalEmailValidator"
         },
         "phoneNumber": {
           "title": "Phone Number",
@@ -47,13 +50,15 @@
             },
             "phoneNumber": {
               "title": "Phone Number",
-              "type": "number"
+              "type": "number",
+              "customValidation": "mobileValidator"
             }
           }
         },
         "numberOfPeople": {
           "title": "Number of people attending",
-          "type": "number"
+          "type": "number",
+          "customValidation": "numberOfPeopleValidator"
         },
         "address": {
           "title": "Address",
@@ -392,29 +397,6 @@
           }
         }
       }
-    },
-    "validation":
-    [
-      {
-        "field": "fullName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "lastName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "age",
-        "validator": "ageValidator"
-      },
-      {
-        "field": "email",
-        "validator": "optionalEmailValidator"
-      },
-      {
-        "field": "numberOfPeople",
-        "validator": "numberOfPeopleValidator"
-      }
-    ]
+    }
   }
 }

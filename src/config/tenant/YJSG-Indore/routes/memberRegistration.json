@@ -15,11 +15,13 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         },
         "fatherName": {
           "title": "पिता / पति का नाम",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         },
         "gender": {
           "title": "लिंग",
@@ -29,11 +31,13 @@
         },
         "age": {
           "title": "उम्र",
-          "type": "number"
+          "type": "number",
+          "customValidation": "ageValidator"
         },
         "mobile": {
           "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-          "type": "number"
+          "type": "number",
+          "customValidation": "mobileValidator"
         },
         "occupation": {
           "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -45,11 +49,13 @@
         },
         "email": {
           "title": "ई-मेल",
-          "type": "string"
+          "type": "string",
+          "customValidation": "optionalEmailValidator"
         },
         "address": {
           "title": "पूरा पता",
-          "type": "string"
+          "type": "string",
+          "customValidation": "addressValidator"
         },
         "busStop": {
           "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
@@ -435,33 +441,6 @@
       "classAttended2018": "",
       "education": "",
       "occupation": ""
-    },
-    "validation":
-    [
-      {
-        "field": "name",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "fatherName",
-        "validator": "nameValidator"
-      },
-      {
-        "field": "age",
-        "validator": "ageValidator"
-      },
-      {
-        "field": "mobile",
-        "validator": "mobileValidator"
-      },
-      {
-        "field": "address",
-        "validator": "addressValidator"
-      },
-      {
-        "field": "email",
-        "validator": "optionalEmailValidator"
-      }
-    ]
+    }
   }
 }

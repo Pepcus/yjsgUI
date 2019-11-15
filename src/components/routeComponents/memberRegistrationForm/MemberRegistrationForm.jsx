@@ -26,8 +26,8 @@ import {
   getUserType,
 } from 'reducers/appReducer';
 import {
+  formValidators,
   getTransformedErrors,
-  verifyFormDataValidations,
 } from 'utils/form';
 import fields from 'components/common/fields';
 import { getConstants } from 'reducers/constants';
@@ -174,20 +174,6 @@ class MemberRegistrationForm extends Component {
     });
   };
 
-  /**
-   * Method check the validation for individual form fields
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {Object} errors
-   */
-  validate = (formData, errors) => {
-    const { formConfig } = this.state;
-    const { validation } = formConfig;
-    const { constants } = this.props;
-
-    return verifyFormDataValidations({ formData, errors, validate: validation, constants });
-  };
-
   render() {
     const { FieldTemplate } = fields;
     const {
@@ -237,7 +223,7 @@ class MemberRegistrationForm extends Component {
               FieldTemplate={FieldTemplate}
               fields={fields}
               showErrorList={false}
-              validate={this.validate}
+              validate={formValidators(schema, constants)}
               liveValidate
               schema={schema}
               uiSchema={uiSchema}
