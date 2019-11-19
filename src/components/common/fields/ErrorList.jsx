@@ -24,7 +24,7 @@ const ErrorList = ({ errors }) => {
           borderWidth="0"
           key={error}
           margin="0"
-          padding="2.5px 5px"
+          padding="0"
         >
           <Typography backgroundColor="unset" color="error" gutterBottom="0">
             {error}

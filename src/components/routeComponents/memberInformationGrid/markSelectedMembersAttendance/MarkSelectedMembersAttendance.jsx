@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -269,24 +270,21 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   render() {
-    const { selectedMembers, constants, isUpdateAttendanceEnable } = this.props;
+    const { selectedMembers, constants } = this.props;
     const { MARK_AS_PRESENT } = constants;
-    if (isUpdateAttendanceEnable) {
-      return (
-        <RowStyled display="inline-block" margin="0 0 0 10px">
-          <ButtonStyled
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-            onClick={this.checkOpenModalCondition}
-          >
-            <FaIcon icon={faUser} />{MARK_AS_PRESENT}
-          </ButtonStyled>
-          {this.renderModal()}
-        </RowStyled>
-      );
-    }
-    return null;
+    return (
+      <RowStyled display="inline-block" margin="0 0 0 10px">
+        <ButtonStyled
+          softDisable={isEmpty(selectedMembers)}
+          color="tertiary"
+          noMinWidth
+          onClick={this.checkOpenModalCondition}
+        >
+          <FaIcon icon={faUser} />{MARK_AS_PRESENT}
+        </ButtonStyled>
+        {this.renderModal()}
+      </RowStyled>
+    );
   }
 }
 
@@ -299,7 +297,6 @@ MarkSelectedMembersAttendance.propTypes = {
   resetIsMarkAttendanceSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
-  isUpdateAttendanceEnable: PropTypes.bool,
 };
 
 MarkSelectedMembersAttendance.defaultProps = {
@@ -311,7 +308,6 @@ MarkSelectedMembersAttendance.defaultProps = {
   resetIsMarkAttendanceSuccess: () => {},
   secretKey: '',
   selectedMembers: [],
-  isUpdateAttendanceEnable: false,
 };
 
 const mapStateToProps = state => ({
@@ -327,4 +323,9 @@ const mapDispatchToProps = dispatch => ({
   resetIsMarkAttendanceSuccess: () => dispatch(resetIsMarkAttendanceSuccessAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(MarkSelectedMembersAttendance);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { pure: false },
+)(accessControl(MarkSelectedMembersAttendance));

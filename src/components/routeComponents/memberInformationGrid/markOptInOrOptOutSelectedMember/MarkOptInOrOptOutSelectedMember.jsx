@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -253,24 +254,21 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   render() {
-    const { selectedMembers, constants, isUpdateOptInEnable } = this.props;
+    const { selectedMembers, constants } = this.props;
     const { MARK_OPT_IN_OR_OUT } = constants;
-    if (isUpdateOptInEnable) {
-      return (
-        <Row display="inline-block" margin="0 0 0 10px">
-          <ButtonStyled
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-            onClick={this.checkOpenModalCondition}
-          >
-            <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
-          </ButtonStyled>
-          {this.renderModal()}
-        </Row>
-      );
-    }
-    return null;
+    return (
+      <Row display="inline-block" margin="0 0 0 10px">
+        <ButtonStyled
+          softDisable={isEmpty(selectedMembers)}
+          color="tertiary"
+          noMinWidth
+          onClick={this.checkOpenModalCondition}
+        >
+          <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
+        </ButtonStyled>
+        {this.renderModal()}
+      </Row>
+    );
   }
 }
 
@@ -284,7 +282,6 @@ MarkOptInOrOptOutSelectedMember.propTypes = {
   resetIsMarkOptInOrOptOutSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
-  isUpdateOptInEnable: PropTypes.bool,
 };
 
 MarkOptInOrOptOutSelectedMember.defaultProps = {
@@ -297,7 +294,6 @@ MarkOptInOrOptOutSelectedMember.defaultProps = {
   resetIsMarkOptInOrOptOutSuccess: () => {},
   secretKey: '',
   selectedMembers: [],
-  isUpdateOptInEnable: false,
 };
 
 const mapStateToProps = state => ({
@@ -313,4 +309,8 @@ const mapDispatchToProps = dispatch => ({
   resetIsMarkOptInOrOptOutSuccess: () => dispatch(resetIsMarkOptInOrOptOutSuccessAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(MarkOptInOrOptOutSelectedMember);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null, { pure: false },
+)(accessControl(MarkOptInOrOptOutSelectedMember));

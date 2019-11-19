@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import CheckboxNew from 'pepcus-core/lib/CheckboxNew';
@@ -288,68 +289,67 @@ class AdvanceSearch extends Component {
 
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
-    const { constants, advanceSearchSchema, isAdvanceSearchEnable } = this.props;
+    const { constants, advanceSearchSchema } = this.props;
     const { schema, uiSchema } = advanceSearchSchema;
     const {
       DEEP_SEARCH,
       MULTIPLE_ID_SEARCH,
     } = constants;
-    if (isAdvanceSearchEnable) {
-      return (
-        <AdvanceSearchWrapper>
-          <BoxStyled
-            width="auto"
-            padding="20px 25px"
-            elevation={1}
-            borderRadius="4px"
-            backgroundColor="advancedSearch"
-          >
-            <Row alignItems="center">
-              <FormWrapperStyled size={10} padding="0 0 0 20px" margin="0">
-                <Form
-                  showErrorList={false}
-                  liveValidate
-                  externalSubmission
-                  schema={schema}
-                  uiSchema={uiSchema}
-                  fields={fields}
-                  onChange={this.setInputValue}
-                  formData={formData}
-                  onSubmit={this.advanceSearch}
-                />
-                {this.clearButton()}
-              </FormWrapperStyled>
-              <Col size={2} padding="0 20px 0 0">
-                <Button
-                  borderRadius="0 4px 4px 0"
-                  noMinWidth
-                  noMinHeight
-                  padding="5px"
-                  height="36px"
-                  width="100%"
-                  type="submit"
-                  form="advanceSearch"
-                  value="Submit"
-                  title="Search"
-                  onClick={this.advanceSearch}
-                >
-                  <FaIcon icon={faSearch} />
-                </Button>
-              </Col>
-            </Row>
-            {/** TODO: this button work when user want to clear a search result.
+    return (
+      <AdvanceSearchWrapper>
+        <BoxStyled
+          width="auto"
+          padding="20px 25px"
+          elevation={1}
+          borderRadius="4px"
+          backgroundColor="advancedSearch"
+        >
+          <Row alignItems="center">
+            <FormWrapperStyled size={10} padding="0 0 0 20px" margin="0">
+              <Form
+                showErrorList={false}
+                liveValidate
+                externalSubmission
+                schema={schema}
+                uiSchema={uiSchema}
+                fields={fields}
+                onChange={this.setInputValue}
+                formData={formData}
+                onSubmit={this.advanceSearch}
+              />
+              {this.clearButton()}
+            </FormWrapperStyled>
+            <Col size={2} padding="0 20px 0 0">
+              <Button
+                borderRadius="0 4px 4px 0"
+                noMinWidth
+                noMinHeight
+                padding="5px"
+                height="36px"
+                width="100%"
+                type="submit"
+                form="advanceSearch"
+                value="Submit"
+                title="Search"
+                onClick={this.advanceSearch}
+              >
+                <FaIcon icon={faSearch} />
+              </Button>
+            </Col>
+          </Row>
+          {/** TODO: this button work when user want to clear a search result.
              This may be use in future. */}
-            {/* <button
+          {/* <button
           type="reset"
           value="Reset"
           onClick={this.clearFilter}
           className = "advance-search-button display-none">
             <i className="fa fa-trash card-icon"/>Clear
           </button>*/}
-            <Row display="block" margin="0px">
-              {/** TODO: thisNormal Search search option(exact search).
+          <Row display="block" margin="0px">
+            {/** TODO: thisNormal Search search option(exact search).
                This may be use in future.*/}
-              {/* <div className="input-radio-container display-none">
+            {/* <div className="input-radio-container display-none">
               <input
               type="checkbox"
               name="thresholdValue"
@@ -357,37 +357,34 @@ class AdvanceSearch extends Component {
               defaultChecked />
               <label htmlFor = "normal_search">Normal Search</label>
             </div>*/}
-              <Row margin="2px 2px 0 15px" alignItems="center">
-                <CheckboxNew
-                  inactiveColor="checkbox"
-                  color="checkbox"
-                  name="thresholdValue"
-                  value="0.6"
-                  onChange={this.onChangeDeepSearchCheckBox}
-                  checked={isDeepSearchCheck}
-                />
-                <LabelStyled htmlFor="deep_search">{DEEP_SEARCH}</LabelStyled>
-                <CheckboxNew
-                  color="checkbox"
-                  inactiveColor="checkbox"
-                  name="thresholdValue"
-                  onChange={this.onChangeMultipleIdSearchCheckBox}
-                  checked={isMultipleIdSearchCheck}
-                />
-                <LabelStyled htmlFor="deep_search">{MULTIPLE_ID_SEARCH}</LabelStyled>
-              </Row>
+            <Row margin="2px 2px 0 15px" alignItems="center">
+              <CheckboxNew
+                inactiveColor="checkbox"
+                color="checkbox"
+                name="thresholdValue"
+                value="0.6"
+                onChange={this.onChangeDeepSearchCheckBox}
+                checked={isDeepSearchCheck}
+              />
+              <LabelStyled htmlFor="deep_search">{DEEP_SEARCH}</LabelStyled>
+              <CheckboxNew
+                color="checkbox"
+                inactiveColor="checkbox"
+                name="thresholdValue"
+                onChange={this.onChangeMultipleIdSearchCheckBox}
+                checked={isMultipleIdSearchCheck}
+              />
+              <LabelStyled htmlFor="deep_search">{MULTIPLE_ID_SEARCH}</LabelStyled>
             </Row>
-          </BoxStyled>
-        </AdvanceSearchWrapper>
-      );
-    }
-    return null;
+          </Row>
+        </BoxStyled>
+      </AdvanceSearchWrapper>
+    );
   }
 }
 
 AdvanceSearch.propTypes = {
   advanceSearchSchema: PropTypes.object,
-  isAdvanceSearchEnable: PropTypes.bool,
   constants: PropTypes.object,
   checkedIds: PropTypes.array,
   members: PropTypes.array,
@@ -397,7 +394,6 @@ AdvanceSearch.propTypes = {
 
 AdvanceSearch.defaultProps = {
   advanceSearchSchema: {},
-  isAdvanceSearchEnable: false,
   constants: {},
   checkedIds: [],
   members: [],
@@ -409,4 +405,4 @@ const mapStateToProps = state => ({
   constants: getConstants(state),
 });
 
-export default connect(mapStateToProps, null)(AdvanceSearch);
+export default connect(mapStateToProps, null)(accessControl(AdvanceSearch));

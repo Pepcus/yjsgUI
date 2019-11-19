@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { faFileCsv } from '@fortawesome/free-solid-svg-icons/faFileCsv';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -231,24 +232,21 @@ class UploadMembersOptInFile extends Component {
   };
 
   render() {
-    const { constants, isUploadOptInFileEnable } = this.props;
+    const { constants } = this.props;
     const { UPLOAD_OPT_IN } = constants;
-    if (isUploadOptInFileEnable) {
-      return (
-        <Row display="inline-block" margin="0 0 0 10px">
-          <ButtonStyled
-            color="primary"
-            title="Upload Attendance"
-            onClick={this.openModal}
-          >
-            <FaIcon icon={faUpload} />
-            {UPLOAD_OPT_IN}
-          </ButtonStyled>
-          {this.renderUploadOptInModal()}
-        </Row>
-      );
-    }
-    return null;
+    return (
+      <Row display="inline-block" margin="0 0 0 10px">
+        <ButtonStyled
+          color="primary"
+          title="Upload Attendance"
+          onClick={this.openModal}
+        >
+          <FaIcon icon={faUpload} />
+          {UPLOAD_OPT_IN}
+        </ButtonStyled>
+        {this.renderUploadOptInModal()}
+      </Row>
+    );
   }
 }
 
@@ -262,7 +260,6 @@ UploadMembersOptInFile.propTypes = {
   secretKey: PropTypes.string,
   uploadOptInFile: PropTypes.func,
   optInFileModalFormSchema: PropTypes.object,
-  isUploadOptInFileEnable: PropTypes.bool,
 };
 
 UploadMembersOptInFile.defaultProps = {
@@ -275,7 +272,6 @@ UploadMembersOptInFile.defaultProps = {
   secretKey: '',
   uploadOptInFile: () => {},
   optInFileModalFormSchema: {},
-  isUploadOptInFileEnable: false,
 };
 
 const mapStateToProps = state => ({
@@ -292,4 +288,4 @@ const mapDispatchToProps = dispatch => ({
   uploadOptInFile: ({ secretKey, optInFile }) => dispatch(uploadOptInFileAction({ secretKey, optInFile })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UploadMembersOptInFile);
+export default connect(mapStateToProps, mapDispatchToProps)(accessControl(UploadMembersOptInFile));

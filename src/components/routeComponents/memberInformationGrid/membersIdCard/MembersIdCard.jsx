@@ -137,7 +137,7 @@ class MembersIdCard extends Component {
       BUS_STOP,
       BUS_NO,
       ADDRESS,
-      STUDENT_ID,
+      MEMBER_ID,
     } = constants;
     const membersIdCards = selectedMembers.map((member) => {
       const memberId = getFormattedMemberId({ memberId: member.memberId });
@@ -385,7 +385,7 @@ class MembersIdCard extends Component {
                   fontSize="13px"
                   fontFamily="Roboto Condensed"
                 >
-                  {STUDENT_ID}
+                  {MEMBER_ID}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
