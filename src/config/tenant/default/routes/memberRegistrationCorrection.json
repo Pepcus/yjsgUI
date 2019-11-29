@@ -14,6 +14,7 @@
         "fullName": {
           "title": "Full Name",
           "type": "object",
+          "boxBorder": true,
           "required": [
             "firstName",
             "lastName"
@@ -39,6 +40,7 @@
         "phoneNumber": {
           "title": "Phone Number",
           "type": "object",
+          "boxBorder": true,
           "required": [
             "areaCode",
             "phoneNumber"
@@ -62,6 +64,7 @@
         "address": {
           "title": "Address",
           "type": "object",
+          "boxBorder": true,
           "required": [
             "streetAddress",
             "streetAddressLine2",
@@ -122,6 +125,7 @@
         "myProducts": {
           "title": "My Products",
           "type": "object",
+          "boxBorder": true,
           "properties": {
             "option1": {
               "type": "boolean",

@@ -1,0 +1,53 @@
+{
+  "gridMetaData": [
+    {
+      "label": "ID",
+      "key": "memberId",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Conference Room",
+      "key": "conferenceRoom",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "End Time",
+      "key": "endTime",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Start Time",
+      "key": "startTime",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Meeting Title",
+      "key": "meetingTitle",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Organizer",
+      "key": "organizer",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Secret Code",
+      "key": "secretCode",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Participants",
+      "key": "participants",
+      "type": "string",
+      "emptyCells": "NA"
+    }
+  ],
+  "gridDataFormatter": "meetingDataFormatter"
+}

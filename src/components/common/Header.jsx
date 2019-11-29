@@ -46,12 +46,11 @@ const HeaderWrapper = styled(Box)`
 const ImageWrapper = styled(Box)`
     z-index: 5;
     left: 10px;
-    top: -5px;
+    top: 0px;
     width: auto;
     ${({ theme }) => theme.media.down('lg')`
         left: 5px;
         top: 0;
-        width: 90px;
     `}
 `;
 

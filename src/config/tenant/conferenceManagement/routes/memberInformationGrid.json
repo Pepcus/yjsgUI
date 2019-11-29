@@ -1,0 +1,424 @@
+{
+  "gridMetaData": [
+    {
+      "label": "Edit",
+      "key": "edit",
+      "disableFilter": true,
+      "excludeFromExport": true
+    },
+    {
+      "label": "ID",
+      "key": "memberId",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Conference Room",
+      "key": "conferenceRoom",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "End Time",
+      "key": "endTime",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Start Time",
+      "key": "startTime",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Meeting Title",
+      "key": "meetingTitle",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Organizer",
+      "key": "organizer",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Secret Code",
+      "key": "secretCode",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "Participants",
+      "key": "participants",
+      "type": "string",
+      "emptyCells": "NA"
+    }
+  ],
+  "gridDataFormatter": "meetingDataFormatter",
+  "columnList": [
+    {
+      "label": "ID",
+      "key": "id"
+    },
+    {
+      "label": "Conference Room",
+      "key": "conferenceRoom"
+    },
+    {
+      "label": "End Time",
+      "key": "endTime"
+    },
+    {
+      "label": "Start Time",
+      "key": "startTime"
+    },
+    {
+      "label": "Meeting Title",
+      "key": "meetingTitle"
+    },
+    {
+      "label": "Organizer",
+      "key": "organizer"
+    },
+    {
+      "label": "Secret Code",
+      "key": "secretCode"
+    },
+    {
+      "label": "Participants",
+      "key": "participants"
+    }
+  ],
+  "advanceSearchSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "inputValue": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "inputValue": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "label": false,
+          "style": {
+            "fieldStyle": {
+              "color": "#848484",
+              "height": "35px",
+              "padding": "5px 10px 5px 5px",
+              "position": "relative",
+              "borderRadius": "4px 0 0 4px",
+              "margin": "8px 0 0 0"
+            },
+            "fieldWrapper": {
+              "padding": "0"
+            }
+          }
+        }
+      }
+
+    }
+  },
+  "columnConfigSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "selectValue": {
+          "type": "boolean",
+          "title": "Select All",
+          "default": true
+        },
+        "visibleColumnConfig": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "ui:order": [
+        "selectValue",
+        "visibleColumnConfig"
+      ],
+      "selectValue": {
+        "ui:widget": "checkbox",
+        "classNames": "label",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "visibleColumnConfig": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    }
+  },
+  "opInModalFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "membersId": {
+          "title": "Selected Students Id:",
+          "type": "string"
+        },
+        "selectedOptOption": {
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "हाँ",
+              "const": "Y"
+            },
+            {
+              "title": "ना",
+              "const": "N"
+            }
+          ]
+        }
+      },
+      "required": ["selectedOptOption"]
+    },
+    "uiSchema": {
+      "ui:order": [
+        "membersId",
+        "selectedOptOption"
+      ],
+      "membersId": {
+        "ui:disabled": true
+      },
+      "selectedOptOption": {
+        "ui:options": {
+          "label": false,
+          "inline": true,
+          "boxProps": {
+            "margin-left": "20px",
+            "padding": "10px 25px",
+            "backgroundColor": "unset"
+          }
+        },
+        "ui:widget": "radio"
+      }
+    }
+  },
+  "attendanceModalFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "membersId": {
+          "title": "Selected Members Id:",
+          "type": "string"
+        },
+        "selectedDay": {
+          "title": "Select Day:",
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "enumNames": [
+            "Day 1",
+            "Day 2",
+            "Day 3",
+            "Day 4",
+            "Day 5",
+            "Day 6",
+            "Day 7",
+            "Day 8"
+          ]
+        }
+      },
+      "required": ["selectedDay"]
+    },
+    "uiSchema": {
+      "ui:order": [
+        "membersId",
+        "selectedDay"
+      ],
+      "membersId": {
+        "ui:disabled": true
+      },
+      "selectedDay": {
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:field": "SelectList",
+        "ui:options": {
+          "label": false,
+          "col": {
+            "size": 12
+          },
+          "style": {
+            "titleStyle": {
+              "margin": "0 14px"
+            },
+            "fieldStyle": {
+              "margin": "0 14px"
+            }
+          }
+        }
+      }
+    }
+  },
+  "updateIdCardStatusModalFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "membersId": {
+          "title": "Selected Members Id:",
+          "type": "string"
+        },
+        "selectedCardOption": {
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "Reprint",
+              "const": "Y"
+            },
+            {
+              "title": "Not Print",
+              "const": "N"
+            }
+          ]
+        }
+      },
+      "required": ["selectedCardOption"]
+    },
+    "uiSchema": {
+      "ui:order": [
+        "membersId",
+        "selectedCardOption"
+      ],
+      "membersId": {
+        "ui:disabled": true
+      },
+      "selectedCardOption": {
+        "ui:options": {
+          "label": false,
+          "inline": true,
+          "boxProps": {
+            "margin-left": "20px",
+            "padding": "10px 25px",
+            "backgroundColor": "unset"
+          }
+        },
+        "ui:widget": "radio"
+      }
+    }
+  },
+  "attendanceFileModalFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "attendanceFile": {
+          "type": "string"
+        },
+        "selectedDay": {
+          "title": "Select Day:",
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "enumNames": [
+            "Day 1",
+            "Day 2",
+            "Day 3",
+            "Day 4",
+            "Day 5",
+            "Day 6",
+            "Day 7",
+            "Day 8"
+          ]
+        }
+      },
+      "required": ["attendanceFile", "selectedDay"]
+    },
+    "uiSchema": {
+      "ui:order": [
+        "attendanceFile",
+        "selectedDay"
+      ],
+      "attendanceFile": {
+        "ui:field": "UploadFileField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "width": "88%",
+              "margin-left": "30px"
+            }
+          },
+          "label": false,
+          "btnProps" : {
+            "color": "tertiary",
+            "width": "24px",
+            "margin-right": "10px"
+          }
+        }
+      },
+      "selectedDay": {
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:field": "SelectList",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "width": "75%",
+              "margin-left": "20px"
+            },
+            "titleStyle": {
+              "margin-left": "20px"
+            }
+          }
+        }
+      }
+    }
+  },
+  "optInFileModalFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "optInFile": {
+          "type": "string"
+        }
+      },
+      "required": ["optInFile"]
+    },
+    "uiSchema": {
+      "optInFile": {
+        "ui:field": "UploadFileField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "width": "88%",
+              "margin-left": "30px"
+            }
+          },
+          "label": false,
+          "btnProps" : {
+            "color": "tertiary",
+            "width": "24px",
+            "margin-right": "10px"
+          }
+        }
+      }
+    }
+  },
+  "isAdvanceSearchEnable": true,
+  "isUpdateOptInEnable": false,
+  "isUpdateAttendanceEnable": true,
+  "isUpdateIdCardStatusEnable": true,
+  "isUploadAttendanceFileEnable": true,
+  "isUploadOptInFileEnable": false,
+  "isIdCardPrintEnable": true,
+  "isCSVExportEnable": true
+}

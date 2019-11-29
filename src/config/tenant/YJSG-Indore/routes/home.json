@@ -1,3 +1,7 @@
 {
-  "name": "YJSG Indore Home"
+  "name": "YJSG Indore Home",
+  "homePageButtons": {
+    "memberLogin": true,
+    "memberCreate": true
+  }
 }

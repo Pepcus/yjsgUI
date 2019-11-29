@@ -429,7 +429,6 @@ class MemberRegistrationCorrectionForm extends Component {
       user,
       constants,
     } = this.props;
-
     const {
       formConfig,
       hasError,

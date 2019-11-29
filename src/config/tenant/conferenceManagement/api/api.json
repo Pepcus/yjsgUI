@@ -1,0 +1,79 @@
+{
+  "config": {
+    "defaultHeaders": {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    },
+    "defaultBaseUrl": ""
+  },
+  "apis": {
+    "login": {
+      "loginAdmin": {
+        "method": "POST",
+        "url": "v1/login"
+      }
+    },
+    "member": {
+      "getMember": {
+        "method": "GET",
+        "url": "v1/students/${id}"
+      },
+      "getMembers": {
+        "method": "GET",
+        "url": "src/config/tenant/default/membersData.json"
+      },
+      "createMember": {
+        "method": "POST",
+        "url": "v1/students"
+      },
+      "deleteMember": {},
+      "updateMember": {
+        "method": "PUT",
+        "url": "v1/students/${id}"
+      },
+      "uploadAttendanceFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-attendance"
+      },
+      "uploadOptInFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-optin"
+      },
+      "markMemberAttendance": {
+        "method": "PUT",
+        "url": "v1/students/attendance?id=${selectedMembersId}",
+        "headers": {
+          "Content-type": "application/json"
+        }
+      },
+      "markMemberOptStatus": {
+        "method": "PATCH",
+        "url": "v1/students/optin?id=${selectedMembersId}",
+        "headers": {
+          "Content-type": "application/json"
+        }
+      },
+      "markMemberIdCardStatus": {
+        "method": "PATCH",
+        "url": "v1/students/reprint?id=${selectedMembersId}",
+        "headers": {
+          "Content-type": "application/json"
+        }
+      },
+      "createSecondaryMember": {
+        "method": "POST",
+        "url": "v1/events"
+      }
+    },
+    "file": {
+      "fetchFile": {
+        "method": "GET",
+        "url": "files/${fileName}.${fileType}"
+      },
+      "fetchFileConfig": {
+        "method": "GET",
+        "url": "files/filesConfig.json"
+      }
+    }
+  }
+}

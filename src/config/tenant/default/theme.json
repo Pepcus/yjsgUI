@@ -1,7 +1,8 @@
 {
   "colors": {
     "header": "#cb879a",
-    "smallHeader": "#e1aebd"
+    "smallHeader": "#e1aebd",
+    "formBackground": "#fdf5f7"
   },
   "typography": {
     "mapping": {
@@ -72,6 +73,11 @@
     },
     "idCard": {
       "colors": "#d27d95"
+    }
+  },
+  "Input": {
+    "styles": {
+      "height": "auto"
     }
   },
   "effects": {

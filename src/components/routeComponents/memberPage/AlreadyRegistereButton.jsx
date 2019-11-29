@@ -20,9 +20,12 @@ const AlreadyRegisteredButton = ({
   constants,
   isAlreadyRegisteredButtonEnabled,
   redirectToMemberLogin,
+  config,
 }) => {
   const { ALREADY_REGISTERED } = constants;
-  if (isAlreadyRegisteredButtonEnabled) {
+  const { homePageButtons } = config;
+  const { memberLogin } = homePageButtons;
+  if (isAlreadyRegisteredButtonEnabled && memberLogin) {
     return (
       <ButtonStyled margin="10px" onClick={redirectToMemberLogin}>
         {ALREADY_REGISTERED}
@@ -32,12 +35,14 @@ const AlreadyRegisteredButton = ({
 };
 
 AlreadyRegisteredButton.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   redirectToMemberLogin: PropTypes.func,
 };
 
 AlreadyRegisteredButton.defaultProps = {
+  config: {},
   constants: {},
   isAlreadyRegisteredButtonEnabled: false,
   redirectToMemberLogin: () => {},

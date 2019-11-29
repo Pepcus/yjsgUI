@@ -58,3 +58,26 @@ export const getStyles = () => ({
     'width': 'auto',
   },
 });
+
+export const gridHeaderDataForMemberView = ({ gridMetaData }) => ({
+  headerConfig: gridMetaData,
+  topDrawer: {
+    'pagination': false,
+    'globalSearch': false,
+    'clearButton': true,
+    'exportButton': true,
+    'totalRecords': false,
+  },
+  bottomDrawer: {
+    'pagination': true,
+    'globalSearch': false,
+    'clearButton': false,
+    'exportButton': false,
+    'totalRecords': true,
+  },
+  recordsPerPage: 25,
+  drawerPosition: 'top',
+  includeAllInGlobalFilter: false,
+  includeGlobalFilter: true,
+  exportFileName: `StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`,
+});

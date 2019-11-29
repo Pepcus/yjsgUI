@@ -13,6 +13,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import { getStyles } from 'constants/gridData';
 import { getConstants } from 'reducers/constants';
+import * as DataFormatter from 'utils/common/gridDataFormatter/index';
 
 const MessageBoxStyled = styled(Box)`
     margin: 20px 10px;
@@ -48,6 +49,7 @@ const GridWrapperStyled = styled(Box)`
  * @return {HTML}
  */
 const MemberDataGrid = ({
+  gridDataFormatter,
   constants,
   metaData,
   members,
@@ -58,7 +60,10 @@ const MemberDataGrid = ({
     NO_COLUMNS_SELECTED_MESSAGE,
     INFORMATION_NOT_AVAILABLE_MESSAGE,
   } = constants;
-
+  let membersData = members;
+  if (gridDataFormatter) {
+    membersData = DataFormatter[gridDataFormatter]({ members: membersData });
+  }
   if (isEmpty(metaData.headerConfig)) {
     return (
       <MessageBoxStyled>
@@ -68,7 +73,7 @@ const MemberDataGrid = ({
         {NO_COLUMNS_SELECTED_MESSAGE}
       </MessageBoxStyled>
     );
-  } else if (isEmpty(members)) {
+  } else if (isEmpty(membersData)) {
     return (
       <MessageBoxStyled>
         <Typography type="caption" padding="0 15px 0 0">
@@ -82,7 +87,7 @@ const MemberDataGrid = ({
     <GridWrapperStyled padding="0" borderStyle="none" backgroundColor="unset">
       <DataGrid
         getSelectedRow={getSelectedRow}
-        data={members}
+        data={membersData}
         metaData={metaData}
         styles={getStyles()}
         onClickAllExport={onClickAllExport}
