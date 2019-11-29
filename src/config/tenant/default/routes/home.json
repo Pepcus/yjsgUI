@@ -1,3 +1,7 @@
 {
-  "name": "Default HOME"
+  "name": "Default HOME",
+  "homePageButtons": {
+    "memberLogin": true,
+    "memberCreate": true
+  }
 }

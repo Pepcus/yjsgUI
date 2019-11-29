@@ -150,12 +150,26 @@ class MemberPage extends Component {
     setHashLinkForNewRegistration(MEMBER);
   };
 
+  renderRegistrationButton = () => {
+    const { constants, config } = this.props;
+    const { homePageButtons } = config;
+    const { memberCreate } = homePageButtons;
+    const { NEW_REGISTRATION } = constants;
+    if (memberCreate) {
+      return (
+        <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
+          {NEW_REGISTRATION}
+        </ButtonStyled>
+      );
+    } return null;
+  };
+
   render() {
     const {
       constants,
       logoPathConfig,
-      tenant,
       isAlreadyRegisteredButtonEnabled,
+      config,
     } = this.props;
     const {
       isURLParams,
@@ -166,7 +180,6 @@ class MemberPage extends Component {
     const {
       EVENT_DATE,
       EVENT_VENUE,
-      NEW_REGISTRATION,
     } = constants;
     return (
       <ContainerStyled width="100%">
@@ -211,12 +224,11 @@ class MemberPage extends Component {
             </ImageWrapper>
             <Row justify="center">
               <AlreadyRegisteredButton
+                config={config}
                 isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
                 redirectToMemberLogin={this.redirectToMemberLogin}
               />
-              <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
-                {NEW_REGISTRATION}
-              </ButtonStyled>
+              {this.renderRegistrationButton()}
             </Row>
           </Col>
         </BoxStyled>
@@ -226,6 +238,7 @@ class MemberPage extends Component {
 }
 
 MemberPage.propTypes = {
+  config: PropTypes.object,
   constants: PropTypes.object,
   fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
@@ -238,6 +251,7 @@ MemberPage.propTypes = {
 };
 
 MemberPage.defaultProps = {
+  config: {},
   constants: {},
   fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,

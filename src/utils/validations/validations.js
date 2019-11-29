@@ -1,6 +1,8 @@
 /* eslint-disable no-useless-escape,security/detect-unsafe-regex */
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
+import FaIcon from "pepcus-core/lib/FaIcon";
+import React from "react";
 
 export const numberOfPeopleValidator = (value, constants) => {
   const { MEMBERS_MUST_BE_GREATER_THAN_ZERO, MEMBERS_MUST_BE_LESS_THAN_SIX } = constants;
@@ -131,6 +133,7 @@ export const optionalMobileValidator = (value, constants) => {
   return message;
 };
 
+
 /**
  * optionalEmailValidator method check validations for email field of form
  * @param {String} value
@@ -147,6 +150,24 @@ export const optionalEmailValidator = (value, constants) => {
 
   } else if (!emailRegExp.test(value)) {
     message = INVALID_EMAIL_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+export const optionalEmailValidator2 = (value, constants) => {
+  const { INVALID_EMAIL_MESSAGE, MEMBER_WILL_NOT_BE_ADDING } = constants;
+  let message = '';
+  const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (!emailRegExp.test(value)) {
+    message = INVALID_EMAIL_MESSAGE + MEMBER_WILL_NOT_BE_ADDING;
 
   } else {
     message = '';
@@ -244,22 +265,24 @@ export const prePopulateOptIn = ({ memberData }) => {
  */
 export const initialMemberData = ({ memberData, formConfig }) => {
   let formattedMemberData = cloneDeep(memberData);
-  formConfig.defaultMemberDataFormat.forEach((fieldObject) => {
-    if (formattedMemberData[fieldObject.formField] === null) {
-      const property = [fieldObject.formField];
-      delete formattedMemberData[property];
+  if (formConfig.defaultMemberDataFormat) {
+    formConfig.defaultMemberDataFormat.forEach((fieldObject) => {
+      if (formattedMemberData[fieldObject.formField] === null) {
+        const property = [fieldObject.formField];
+        delete formattedMemberData[property];
 
-    } else if (fieldObject.dataType === 'string' && formattedMemberData[fieldObject.formField] !== undefined) {
-      formattedMemberData = {
-        ...formattedMemberData,
-        [fieldObject.formField]: String(formattedMemberData[fieldObject.formField]) };
+      } else if (fieldObject.dataType === 'string' && formattedMemberData[fieldObject.formField] !== undefined) {
+        formattedMemberData = {
+          ...formattedMemberData,
+          [fieldObject.formField]: String(formattedMemberData[fieldObject.formField]) };
 
-    } else if (fieldObject.dataType === 'number' && formattedMemberData[fieldObject.formField] !== undefined) {
-      formattedMemberData = {
-        ...formattedMemberData,
-        [fieldObject.formField]: Number(formattedMemberData[fieldObject.formField]) };
-    }
-  });
+      } else if (fieldObject.dataType === 'number' && formattedMemberData[fieldObject.formField] !== undefined) {
+        formattedMemberData = {
+          ...formattedMemberData,
+          [fieldObject.formField]: Number(formattedMemberData[fieldObject.formField]) };
+      }
+    });
+  }
   return formattedMemberData;
 };
 

@@ -1,0 +1,510 @@
+{
+  "adminFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "meetingTitle",
+        "conferenceRoom",
+        "duration",
+        "organizer"
+      ],
+      "properties": {
+        "meetingTitle": {
+          "title": "Meeting Title",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "organizer": {
+          "title": "Organizer",
+          "type": "string"
+        },
+        "conferenceRoom": {
+          "title": "Conference Room ",
+          "type": "string",
+          "enum": ["001", "003", "004", "005"],
+          "enumNames": ["Room 1", "Room 2", "Room 3", "Room 4"]
+        },
+        "duration":{
+          "title": "Duration",
+          "type": "object",
+          "required": [
+            "startTime",
+            "endTime"
+          ],
+          "properties": {
+            "startTime": {
+              "title": "Start Time",
+              "type": "string",
+              "format": "date-time"
+            },
+            "endTime": {
+              "title": "End Time",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "participants": {
+          "type": "array",
+          "title": "Participants",
+          "customValidation": "optionalEmailValidator2",
+          "inputFieldTitle": "Add Participants",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secretCode": {
+          "title": "Secret Code",
+          "type": "string"
+        },
+        "backButton": {
+          "type": "string"
+        },
+        "submitButton": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "meetingTitle": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "description": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "organizer": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "conferenceRoom": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "please select . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "duration": {
+        "startTime": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "endTime": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "participants": {
+        "ui:field": "ArrayList",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 12
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "secretCode": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "backButton": {
+        "ui:options": {
+          "label": false,
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "submitButton": {
+        "ui:options": {
+          "label": false,
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    }
+  },
+  "memberFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "meetingTitle",
+        "conferenceRoom",
+        "duration",
+        "organizer"
+      ],
+      "properties": {
+        "meetingTitle": {
+          "title": "Meeting Title",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "organizer": {
+          "title": "Organizer",
+          "type": "string"
+        },
+        "conferenceRoom": {
+          "title": "Conference Room ",
+          "type": "string",
+          "enum": ["001", "003", "004", "005"],
+          "enumNames": ["Room 1", "Room 2", "Room 3", "Room 4"]
+        },
+        "duration":{
+          "title": "Duration",
+          "type": "object",
+          "required": [
+            "startTime",
+            "endTime"
+          ],
+          "properties": {
+            "startTime": {
+              "title": "Start Time",
+              "type": "string",
+              "format": "date-time"
+            },
+            "endTime": {
+              "title": "End Time",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "participants": {
+          "type": "string",
+          "title": "Add Participants",
+          "customValidation": "optionalEmailValidator2",
+          "inputFieldTitle": "Add Participants",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secretCode": {
+          "title": "Secret Code",
+          "type": "string"
+        },
+        "backButton": {
+          "type": "string"
+        },
+        "submitButton": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "meetingTitle": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "description": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "organizer": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "conferenceRoom": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "please select . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "duration": {
+        "startTime": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "endTime": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "participants": {
+        "ui:field": "ArrayList",
+        "ui:placeholder": "enter email . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 12
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "secretCode": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "backButton": {
+        "ui:options": {
+          "label": false,
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "submitButton": {
+        "ui:options": {
+          "label": false,
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    }
+  },
+  "isOptInEnable": false
+}

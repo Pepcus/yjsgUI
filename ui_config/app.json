@@ -1,5 +1,5 @@
 {
   "environment": "production",
   "isRegisterCorrectionEnabled": true,
-  "tenant": "YJSG-Indore"
+  "tenant": "conferenceManagement"
 }

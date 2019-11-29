@@ -18,12 +18,18 @@ const FormGroupTitleStyled = styled(Typography)`
     font-weight: 400;
     justify-content: space-between;
     margin: 0 !important;
-    padding: 0 5px 7.5px 5px;
+    padding: 0 5px 7.5px 0px;
     /**
      * Add all of the remaining styles from theme
      */
     ${getThemeProps('FormGroupTitle.styles')};
 `;
+
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('typography.titleFieldColor.color')}
+   font-weight: bold !important;
+   display: block;
+  `;
 
 const FormGroupTitle = ({ id, required, title, helpText }) => {
   const { icon = {}, ...tooltip } = helpText;
@@ -32,7 +38,7 @@ const FormGroupTitle = ({ id, required, title, helpText }) => {
     title && (
     <FormGroupTitleStyled type="separator" htmlFor={id}>
       <Row alignItems="flex-start" gutter={false} margin="0" wrap="nowrap">
-        <Typography type="separator" style={{ marginRight: 5 }}>{title}</Typography>
+        <TypographyStyled type="separator" style={{ marginRight: 5 }}>{title}</TypographyStyled>
         {typeof helpText === 'object'
                         && !_isEmpty(helpText) && (
                         <Tooltip {...tooltip}>

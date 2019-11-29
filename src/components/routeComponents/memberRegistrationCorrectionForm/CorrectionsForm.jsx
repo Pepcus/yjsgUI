@@ -21,7 +21,7 @@ const BoxStyled = styled(Box)`
   margin: ${props => (props.onlyOptInForm && props.user !== ADMIN ? '190px auto' : '80px auto 70px auto')};
   width: ${props => (props.onlyOptInForm && props.user !== ADMIN ? '30%' : 'auto')};
   align-items: center;
-  background-color: ${getThemeProps('palette.policyMuted.color')};
+  background-color: ${getThemeProps('colors.formBackground')};
   overflow-x: hidden;
   overflow-y: auto;
   ${({ theme }) => theme.media.down('xl')`
@@ -87,6 +87,7 @@ const CorrectionsForm = ({
   validate,
 }) => {
   if (formConfig) {
+    const { FieldTemplate } = fields;
     return (
       <ContainerStyled width="100%" ref={formRef}>
         <BoxStyled
@@ -100,6 +101,7 @@ const CorrectionsForm = ({
         >
           { children }
           <Form
+            FieldTemplate={FieldTemplate}
             externalSubmission
             fields={fields}
             formData={formData}

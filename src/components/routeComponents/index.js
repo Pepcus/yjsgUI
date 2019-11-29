@@ -6,8 +6,13 @@ import MemberCredentialPage from './memberCredentialPage';
 import Files from './files';
 import MemberPage from './memberPage';
 import ParentsRegistration from './parentsRegistrationForm';
+import DefaultMemberCredentialPage from './defaultMemberCredentialPage';
+import DefaultSplashPage from './defaultSplashPage';
+import MembersView from './membersView';
 
 export default {
+  DefaultSplashPage,
+  DefaultMemberCredentialPage,
   MemberPage,
   SplashPage,
   MemberRegistrationForm,
@@ -16,4 +21,5 @@ export default {
   MemberCredentialPage,
   ParentsRegistration,
   Files,
+  MembersView,
 };

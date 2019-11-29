@@ -39,7 +39,7 @@ const BoxStyled = styled(Box)`
  align-items: center;
  overflow-x: hidden;
  overflow-y: auto;
- background-color: ${getThemeProps('palette.policyMuted.color')};
+ background-color: ${getThemeProps('colors.formBackground')};
  ${({ theme }) => theme.media.down('lg')`
      margin: auto; 
      height: 100%;
@@ -125,6 +125,7 @@ class MemberRegistrationForm extends Component {
    */
   transformErrors = (errors) => {
     const { mandatoryField } = this.state;
+
     const { constants } = this.props;
     const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     if (mandatoryField) {
@@ -175,7 +176,7 @@ class MemberRegistrationForm extends Component {
   };
 
   render() {
-    const { FieldTemplate } = fields;
+    const { FieldTemplate, ObjectFieldTemplate } = fields;
     const {
       formConfig,
       isAdminLocation,
@@ -221,6 +222,7 @@ class MemberRegistrationForm extends Component {
               enableDirtyCheck
               externalSubmission
               FieldTemplate={FieldTemplate}
+              ObjectFieldTemplate={ObjectFieldTemplate}
               fields={fields}
               showErrorList={false}
               validate={formValidators(schema, constants)}

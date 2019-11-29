@@ -1,3 +1,7 @@
 {
-  "name": "YJSG Bhopal Home"
+  "name": "YJSG Bhopal Home",
+  "homePageButtons": {
+    "memberLogin": true,
+    "memberCreate": true
+  }
 }

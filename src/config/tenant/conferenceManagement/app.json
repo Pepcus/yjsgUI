@@ -1,0 +1,189 @@
+{
+  "title": "CONFERENCE MANAGEMENT",
+  "footerTitle": "“ A true dreamer is one who knows how to navigate in the dark ”",
+  "routes": [
+    {
+      "name": "default",
+      "path": "/",
+      "component": "MemberPage",
+      "config": "home",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "admin",
+      "path": "/admin",
+      "component": "DefaultSplashPage",
+      "config": "splashPage",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "membersView",
+      "path": "/members-view",
+      "component": "MembersView",
+      "config": "membersView",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "logo": true,
+        "hasButtons": true,
+        "backButton": true,
+        "backButtonRedirectTo": "/member-login"
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "memberSearch",
+      "path": "/member-search",
+      "component": "MemberInformationGrid",
+      "config": "memberInformationGrid",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "logo": true,
+        "hasButtons": true,
+        "backButton": true,
+        "backButtonRedirectTo": "/admin",
+        "logoutButton": true,
+        "logoutButtonRedirectTo": "/admin"
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "memberRegister",
+      "path": "/member-register",
+      "component": "MemberRegistrationForm",
+      "config": "memberRegistration",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "registrationCorrection",
+      "path": "/member-registration-correction",
+      "component": "MemberRegistrationCorrectionForm",
+      "config": "memberRegistrationCorrection",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "memberLogin",
+      "path": "/member-login",
+      "component": "DefaultMemberCredentialPage",
+      "config": "memberCredentialPage",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "event",
+      "path": "/event",
+      "component": "ParentsRegistration",
+      "config": "parentsRegistrationForm",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "title": "अभिभावक सम्मलेन (Parents' Convention)",
+        "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": "प्रकाश छाबड़ा (99260 40137)"
+      }
+    },
+    {
+      "name": "files",
+      "path": "/files*",
+      "component": "Files",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 60px"
+        },
+        "logo": true,
+        "hasButtons": true,
+        "backButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    }
+  ],
+  "logoPathConfig": {
+    "LOGO": "src/assets/images/conferenceManagement/LOGO.png",
+    "headerLogo": "src/assets/images/conferenceManagement/headerLogo.png",
+    "pageBodyLogo": "src/assets/images/conferenceManagement/pageBodyLogo.png"
+  }
+}

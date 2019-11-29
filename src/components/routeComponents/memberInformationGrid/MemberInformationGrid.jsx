@@ -514,6 +514,7 @@ class MemberInformationGrid extends Component {
       isUploadOptInFileEnable,
       isIdCardPrintEnable,
       isCSVExportEnable,
+      gridDataFormatter = '',
     } = config;
     return (
       <ContainerStyled width="100%">
@@ -582,6 +583,7 @@ class MemberInformationGrid extends Component {
             clearSelectedMembers={this.clearSelectedMembers}
           />
           <MemberDataGrid
+            gridDataFormatter={gridDataFormatter}
             metaData={metaData}
             members={updatedMembers}
             getSelectedRow={this.getSelectedRow}

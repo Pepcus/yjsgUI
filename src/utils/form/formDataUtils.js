@@ -45,7 +45,7 @@ export const getFormData = ({
     };
     // eslint-disable-next-line prefer-destructuring
     // eslint-disable-next-line prefer-destructuring
-    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat ? formConfig.defaultMemberDataFormat : [];
 
   } else if (tenant === INDORE || tenant === DEFAULT || !tenant) {
     if (user === ADMIN) {
@@ -72,7 +72,7 @@ export const getFormData = ({
       };
       // eslint-disable-next-line prefer-destructuring
       // eslint-disable-next-line prefer-destructuring
-      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat ? formConfig.defaultMemberDataFormat : [];
     } else if (isUserMember({ user })) {
       // eslint-disable-next-line prefer-destructuring
       schema = formConfig.schema;
@@ -97,7 +97,7 @@ export const getFormData = ({
       };
       // eslint-disable-next-line prefer-destructuring
       // eslint-disable-next-line prefer-destructuring
-      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat ? formConfig.defaultMemberDataFormat : [];
     }
 
   } else if (user === ADMIN) {
@@ -124,7 +124,7 @@ export const getFormData = ({
     };
     // eslint-disable-next-line prefer-destructuring
     // eslint-disable-next-line prefer-destructuring
-    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat ? formConfig.defaultMemberDataFormat : [];
 
   } else if (isUserMember({ user })) {
     // eslint-disable-next-line prefer-destructuring
@@ -150,7 +150,7 @@ export const getFormData = ({
     };
     // eslint-disable-next-line prefer-destructuring
     // eslint-disable-next-line prefer-destructuring
-    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat ? formConfig.defaultMemberDataFormat : [];
   } else return null;
   return { schema, uiSchema, formData, defaultMemberDataFormat };
 };
