@@ -85,6 +85,24 @@
       }
     },
     {
+      "name": "coordinatorRegister",
+      "path": "/coordinator-register",
+      "component": "CoordinatorRegistrationForm",
+      "config": "coordinatorRegistration",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
+        "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
       "name": "registrationCorrection",
       "path": "/member-registration-correction",
       "component": "MemberRegistrationCorrectionForm",
@@ -103,10 +121,48 @@
       }
     },
     {
+      "name": "coordinatorRegistrationCorrection",
+      "path": "/coordinator-registration-correction",
+      "component": "CoordinatorRegistrationCorrectionForm",
+      "config": "coordinatorRegistration",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
+        "logo": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
       "name": "memberLogin",
       "path": "/member-login",
       "component": "MemberCredentialPage",
       "config": "memberCredentialPage",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "coordinatorLogin",
+      "path": "/coordinator-login",
+      "component": "CoordinatorCredentialPage",
+      "config": "coordinatorCredentialPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -173,6 +229,32 @@
         "headerWrapperStyle": {
           "height": "auto"
         }
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "coordinatorInfoGridView",
+      "path": "/coordinator-info-grid",
+      "component": "CoordinatorInfoGridView",
+      "config": "coordinatorInfoGridView",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        },
+        "logo": true,
+        "hasButtons": true,
+        "backButton": true,
+        "backButtonRedirectTo": "/admin",
+        "logoutButton": true,
+        "logoutButtonRedirectTo": "/admin"
       },
       "footer": {
         "titleStyle": {},

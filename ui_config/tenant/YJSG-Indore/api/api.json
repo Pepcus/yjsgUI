@@ -72,6 +72,35 @@
         }
       }
     },
+    "coordinator": {
+      "getCoordinator": {
+        "method": "GET",
+        "url": "v1/coordinators/${id}"
+      },
+      "getCoordinators": {
+        "method": "GET",
+        "url": "v1/coordinators",
+        "headers": {
+          "secretKey": 451725
+        }
+      },
+      "createCoordinator": {
+        "method": "POST",
+        "url": "v1/coordinators"
+      },
+      "deleteCoordinator": {},
+      "updateCoordinator": {
+        "method": "PUT",
+        "url": "v1/coordinators/${id}"
+      },
+      "fetchCoordinatorDepartments": {
+        "method": "GET",
+        "url": "v1/departments",
+        "headers": {
+          "secretKey": 451725
+        }
+      }
+    },
     "file": {
       "fetchFile": {
         "method": "GET",

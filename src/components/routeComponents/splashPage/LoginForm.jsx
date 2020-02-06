@@ -33,8 +33,12 @@ const ButtonStyled = styled(Button)`
  * @param {Function} handleDisableAdminLoginButtons
  * @param {Boolean} isAdmin
  * @param {Boolean} isNewRegistration
+ * @param {Boolean} isNewCoordinator
+ * @param {Boolean} isEditCoordinator
  * @param {Function} onChange
  * @param {Function} redirectToNewRegistrationPage
+ * @param {Function} redirectToNewCoordinatorPage
+ * @param {Function} redirectToEditCoordinatorPage
  * @param {Function} setAdminLogin
  * @param {Function} transformErrors
  * @param {Boolean} adminCredentialErrorMessage
@@ -53,8 +57,12 @@ const LoginForm = ({
   handleDisableAdminLoginButtons,
   isAdmin,
   isNewRegistration,
+  isNewCoordinator,
+  isEditCoordinator,
   onChange,
   redirectToNewRegistrationPage,
+  redirectToNewCoordinatorPage,
+  redirectToEditCoordinatorPage,
   setAdminLogin,
   transformErrors,
   adminCredentialErrorMessage,
@@ -65,7 +73,9 @@ const LoginForm = ({
   setRedirectToRoute,
 }) => {
   const {
-    NEW_REGISTRATION,
+    NEW_STUDENT_REGISTRATION,
+    NEW_COORDINATOR,
+    EDIT_COORDINATOR,
     ADMIN_LOGIN,
   } = constants;
   if (isAdmin) {
@@ -87,10 +97,18 @@ const LoginForm = ({
       />
     );
 
-  } else if (isNewRegistration) {
-    return <Switch><Redirect to="/member-register" /></Switch>;
+  }
 
-  } else if (!isAdmin) {
+  else if (isNewRegistration) {
+    return <Switch><Redirect to="/member-register" /></Switch>;
+  }
+  else if (isNewCoordinator) {
+    return <Switch><Redirect to="/coordinator-register" /></Switch>;
+  }
+  else if (isEditCoordinator) {
+    return <Switch><Redirect to="/coordinator-login" /></Switch>;
+  }
+  else if (!isAdmin) {
     return (
       <Row justify="center" margin="0 0 25px 0">
         <ButtonStyled
@@ -103,7 +121,19 @@ const LoginForm = ({
           margin="10px 15px"
           onClick={redirectToNewRegistrationPage}
         >
-          {NEW_REGISTRATION}
+          {NEW_STUDENT_REGISTRATION}
+        </ButtonStyled>
+        <ButtonStyled
+          margin="10px 15px"
+          onClick={redirectToNewCoordinatorPage}
+        >
+          {NEW_COORDINATOR}
+        </ButtonStyled>
+        <ButtonStyled
+          margin="10px 15px"
+          onClick={redirectToEditCoordinatorPage}
+        >
+          {EDIT_COORDINATOR}
         </ButtonStyled>
       </Row>
     );
@@ -118,8 +148,12 @@ LoginForm.propTypes = {
   handleDisableAdminLoginButtons: PropTypes.func,
   isAdmin: PropTypes.bool,
   isNewRegistration: PropTypes.bool,
+  isNewCoordinator: PropTypes.bool,
+  isEditCoordinator: PropTypes.bool,
   onChange: PropTypes.func,
   redirectToNewRegistrationPage: PropTypes.func,
+  redirectToNewCoordinatorPage: PropTypes.func,
+  redirectToEditCoordinatorPage: PropTypes.func,
   setAdminLogin: PropTypes.func,
   transformErrors: PropTypes.func,
   adminCredentialErrorMessage: PropTypes.bool,
@@ -138,8 +172,12 @@ LoginForm.defaultProps = {
   handleDisableAdminLoginButtons: () => {},
   isAdmin: false,
   isNewRegistration: false,
+  isNewCoordinator: false,
+  isEditCoordinator: false,
   onChange: () => {},
   redirectToNewRegistrationPage: () => {},
+  redirectToNewCoordinatorPage: () => {},
+  redirectToEditCoordinatorPage: () => {},
   setAdminLogin: () => {},
   transformErrors: () => {},
   adminCredentialErrorMessage: false,

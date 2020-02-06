@@ -7,6 +7,7 @@ import { appReducer } from './appReducer';
 import { constants } from './constants';
 import { theme } from './themeReducer';
 import { memberRegistrationReducer } from './memberRegistrationReducer';
+import { coordinatorRegistrationReducer } from './coordinatorRegistrationReducer';
 import { allMembersDataReducer } from './allMembersDataReducer';
 import { assetFilesReducer } from './assetFilesReducer';
 import { loaderReducer } from './loaderReducer';
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   config,
   constants,
   memberRegistrationReducer,
+  coordinatorRegistrationReducer,
   allMembersDataReducer,
   loaderReducer,
   assetFilesReducer,

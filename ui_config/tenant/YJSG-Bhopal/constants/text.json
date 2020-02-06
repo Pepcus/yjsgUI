@@ -59,12 +59,14 @@
 
   "THIS_INFORMATION_IS_COMPULSORY_MESSAGE": "यह जानकारी अनिवार्य है",
 
+  "THIS_INFORMATION_IS_MANDATORY_MESSAGE": "This information is mandatory",
+
   "INVALID_EMAIL_MESSAGE": "यह ई-मेल मान्य नहीं है",
 
   "INVALID_NAME_MESSAGE": "अमान्य नाम",
 
   "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "नाम ३ अक्षर से कम का मान्य नहीं",
-
+  
   "FULL_ADDRESS_MESSAGE": "कृपया पूरा पता देंवे!",
 
   "SINGLE_QUOTE_ERROR_MESSAGE": "पते में (') नहीं होनी चाहिए",
@@ -78,7 +80,7 @@
   "ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE": "केवल ५ - ६६ वर्ष तक ही मान्य",
 
   "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. केवल १० अंको का ही मान्य",
-
+  
   "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. में केवल नंबर ही मान्य",
 
   "MESSAGE_FOR_PDF_FILE_DOWNLOAD": " जानकारी दिखाने के लिए फ़ाइल का स्वरूप अमान्य है, कृपया फ़ाइल को डाउनलोड करें, तथा डाउनलोड करने के लिए नीचे दिए गए बटन पर क्लिक करें |",
@@ -163,7 +165,7 @@
 
   "ALREADY_REGISTERED": "Already Registered",
 
-  "NEW_REGISTRATION": "New Registration",
+  "NEW_REGISTRATION": "New Student Registration",
 
   "VIEW_OR_EDIT_INFO": "View/Edit Information",
 

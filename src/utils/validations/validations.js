@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape,security/detect-unsafe-regex */
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
+import moment from 'moment';
 import { convertAgeToNumeric } from 'utils/common/string';
 
 export const numberOfPeopleValidator = (value, constants) => {
@@ -54,6 +55,34 @@ export const nameValidator = (value, constants) => {
   return message;
 };
 
+/**
+ * nameCoordinatorValidate method check validations for name field of form
+ * @param {String} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const nameCoordinatorValidator = (value, constants) => {
+  const { INVALID_NAME_MESSAGE_COORDINATOR, NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE_COORDINATOR } = constants;
+  const nameRegExp = /^[a-zA-Z\s\.]+$/;
+  let message = '';
+
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (!nameRegExp.test(value)) {
+    message = INVALID_NAME_MESSAGE_COORDINATOR;
+
+  } else if (value.length < 3) {
+    message = NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE_COORDINATOR;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
 /**
  * cityValidate method check validations for name field of form
  * @param {String} value
@@ -139,6 +168,63 @@ export const mobileValidator = (value, constants) => {
 };
 
 /**
+ * mobileCoordinatorValidator method check validations for mobile field of form
+ * @param {Number} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const mobileCoordinatorValidator = (value, constants) => {
+  const {
+    ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR,
+    ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR,
+  } = constants;
+  const temporaryValue = !value ? null : String(value);
+  let message = '';
+  const mobileRegExp = /^[0-9]+$/;
+
+  if (isEmpty(temporaryValue)) {
+    message = '';
+
+  } else if (temporaryValue.length !== 10) {
+    message = ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR;
+
+  } else if (!mobileRegExp.test(temporaryValue)) {
+    message = ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
+ * dobCoordinatorValidator method check validations for dob field of form
+ * @param {Number} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const dobCoordinatorValidator = (value, constants) => {
+  const {
+    ENTER_A_VALID_DOB_MESSAGE,
+  } = constants;
+  const temporaryValue = !value ? null : String(value);
+  let message = '';
+
+  if (isEmpty(temporaryValue)) {
+    message = '';
+
+  } else if (moment(temporaryValue).isAfter(new Date())) {
+    message = ENTER_A_VALID_DOB_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
  * optionalMobileValidator method check validations for optional mobile field of form
  * @param {Number} value
  * @param {Object} constants
@@ -165,6 +251,7 @@ export const optionalMobileValidator = (value, constants) => {
   return message;
 };
 
+
 /**
  * optionalEmailValidator method check validations for email field of form
  * @param {String} value
@@ -181,6 +268,30 @@ export const optionalEmailValidator = (value, constants) => {
 
   } else if (!emailRegExp.test(value)) {
     message = INVALID_EMAIL_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
+ * optionalEmailCoordinatorValidator method check validations for email field of form
+ * @param {String} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const optionalEmailCoordinatorValidator = (value, constants) => {
+  const { INVALID_EMAIL_MESSAGE_COORDINATOR } = constants;
+  let message = '';
+  const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (!emailRegExp.test(value)) {
+    message = INVALID_EMAIL_MESSAGE_COORDINATOR;
 
   } else {
     message = '';
@@ -215,6 +326,40 @@ export const addressValidator = (value, constants) => {
 
   } else if (value.length < 15) {
     message = FULL_ADDRESS_MESSAGE + INFORMATION_HELPFUL_TO_CONTACT_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
+ * addressCoordinatorValidator method check validations for address field of form
+ * @param {String} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const addressCoordinatorValidator = (value, constants) => {
+  const {
+    SINGLE_QUOTE_ERROR_MESSAGE_COORDINATOR,
+    DOUBLE_QUOTE_ERROR_MESSAGE_COORDINATOR,
+    FULL_ADDRESS_MESSAGE_COORDINATOR,
+    INFORMATION_HELPFUL_TO_CONTACT_MESSAGE_COORDINATOR,
+  } = constants;
+  let message = '';
+
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (value.includes("'")) {
+    message = SINGLE_QUOTE_ERROR_MESSAGE_COORDINATOR;
+
+  } else if (value.includes('"')) {
+    message = DOUBLE_QUOTE_ERROR_MESSAGE_COORDINATOR;
+
+  } else if (value.length < 15) {
+    message = FULL_ADDRESS_MESSAGE_COORDINATOR + INFORMATION_HELPFUL_TO_CONTACT_MESSAGE_COORDINATOR;
 
   } else {
     message = '';

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getStyles } from 'constants/gridData';
 import DataGrid from 'simple-react-data-grid';
 
 /**
- * It return success message popup
- * @return {HTML} successMessagePopup
+ * It return a grid for member marks
+ * @return {HTML} MemberMarksDataGrid
  * @constructor
  */
 const MemberMarksDataGrid = ({
@@ -19,6 +20,16 @@ const MemberMarksDataGrid = ({
       styles={getStyles()}
     />
   )
+};
+
+MemberMarksDataGrid.propTypes = {
+  metaData: PropTypes.object,
+  gridData: PropTypes.array,
+};
+
+MemberMarksDataGrid.defaultProps = {
+  metaData: {},
+  gridData: [],
 };
 
 

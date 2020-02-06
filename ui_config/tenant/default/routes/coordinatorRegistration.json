@@ -1,0 +1,1154 @@
+{
+    "coordinatorFormConfig": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "gender",
+          "whatsappNumber",
+          "dob",
+          "area",
+          "address"
+        ],
+        "properties": {
+          "firstName": {
+            "title": "First Name",
+            "type": "string",
+            "customValidation": "nameCoordinatorValidator"
+          },
+          "lastName": {
+            "title": "Last Name",
+            "type": "string",
+            "customValidation": "nameCoordinatorValidator"
+          },
+          "gender": {
+            "title": "Gender",
+            "type": ["string","null"],
+            "enum": ["Male", "Female"],
+            "enumNames": ["Male", "Female"]
+          },
+          "whatsappNumber": {
+            "title": "Contact No.",
+            "type": "string",
+            "customValidation": "mobileCoordinatorValidator"
+          },
+          "alternateNumber": {
+            "title": "Alternate No.",
+            "type": "string",
+            "customValidation": "mobileCoordinatorValidator"
+          },
+          "dob": {
+            "title": "Date of Birth:",
+            "format": "date",
+            "type": "string",
+            "customValidation": "dobCoordinatorValidator"
+          },
+          "email": {
+            "title": "Email ID:",
+            "type": "string",
+            "customValidation": "optionalEmailCoordinatorValidator"
+          },
+          "address": {
+            "title": "Address:",
+            "type": "string",
+            "customValidation": "addressCoordinatorValidator"
+          },
+          "area": {
+            "title": "Area:",
+            "type": "string",
+            "enum": [
+              "Gandhi Nagar Mandir",
+              "Kalani Mandir Gali Main Road",
+              "Kaalani Nagar Mandir Gali Main Road - 2",
+              "Sadhna Nagar Mandir Gali Main Road",
+              "Anjani Nagar (60 Ft Road)",
+              "Smarati Nagar Mandir Gali Bangarda Road",
+              "Palhar Nagar Bangada Road (Pani Ki Tanki)",
+              "Indore Wire Factory (Sangam Nagar)",
+              "Ramchand Nagar Circle (Areodrum Rd)",
+              "Chatrapati Nagar Main Road (Mahavir Bag)",
+              "Bada Ganpati",
+              "Raj Mohalla Opp. Chetyalaya",
+              "Ramashah Mandir Main Road",
+              "Kanch Mandir Main Road (Narsign Bajar)",
+              "Ram Bag Choraha Kusum Takiz Road",
+              "Chikmanglur Chauraha",
+              "GSITS Circle",
+              "Clerk Colony ITI Main Road",
+              "Bajrang/Nanda Nagar Main Road (Mandir)",
+              "Sukhaliya MR10 Mandir Gali",
+              "Vijay Nagar - Krishna Milk Centre",
+              "78 Scheme (Mandir)",
+              "Satya Sai Square(Paanch Baalyati Mandir)",
+              "Tulsi Nagar Main Road(Mahalaxmi Mandir)",
+              "Jawrawala Mandir",
+              "Samavsharan Mandir",
+              "Geeta Bhawan",
+              "Palasia Circle",
+              "Kanadiya Road/ Patrakar Square",
+              "Tilak Nagar Mandir",
+              "Goyal Nagar Mandir",
+              "Bangali Choraha (Wine Shop)",
+              "Sukh Shanti/Uday Nagar Mandir",
+              "Vaibhav Nagar (Sharma Sweets)",
+              "Brajeshwari Mandir IDA 140 JMB",
+              "Milan Heights",
+              "Bhanwarkuwa BCM",
+              "Sapna Sangeeta Tower Circle",
+              "Jain Colony Ahinsa Gate",
+              "Ranjit Hanuman (Gumashta Nagar)",
+              "Mahavir Gate(Sudama Nagar)",
+              "Parivahan Nagar (Nitin Traders Gali)",
+              "Vaishali Nagar Gopur Choraha",
+              "Choithram Circle",
+              "Rajendra Nagar D-Mart Choraha",
+              "Other Bus Stop",
+              "Self Vehicle"
+            ],
+            "enumNames": [
+              "गाँधी नगर मंदिर",
+              "कालानी मंदिर गली मेन रोड",
+              "कालानी नगर मंदिर गली मेन रोड - 2",
+              "साधना नगर मंदिर गली मेन रोड",
+              "अंजनी नगर (60 फुट रोड)",
+              "स्मृति नगर मंदिर गली (बांगड़दा रोड)",
+              "पल्हर नगर बांगड़दा रोड (पानी की टंकी)",
+              "इंदौर तार फैक्टरी (संगम नगर)",
+              "रामचंद नगर सर्किल (एरोड्रम रोड)",
+              "छात्रपति नगर मेन रोड (महावीर बाग)",
+              "बड़ा गणपति",
+              "राजमोहल्ला (OPP चैत्यालय)",
+              "रामशाह मंदिर मेन रोड",
+              "कांच मंदिर मेन रोड (नरसिंह बाजार)",
+              "रामबाग चौराहा (कुसुम टाकीज़)",
+              "चिकमंगलूर चौराहा",
+              "जीएसआईटीएस सर्किल",
+              "क्लर्क कॉलोनी  ITI मेन रोड",
+              "बजरंग/नंदा नगर मेन रोड (मंदिर)",
+              "सुखलिया MR10 मंदिर गली",
+              "विजय नगर-कृष्णा मिल्क सेंटर",
+              "78 Scheme (मंदिर)",
+              "सत्य साई चौराहा (पांच बालयति मदिर)",
+              "तुलसी नगर मेन रोड (महालक्ष्मी मंदिर)",
+              "जावरवाला मंदिर",
+              "समवशरण मंदिर",
+              "गीता भवन",
+              "पलासिया सर्किल",
+              "कनाड़िया रोड /पत्रकार चौराहा",
+              "तिलक नगर  मंदिर",
+              "गोयल नगर मंदिर",
+              "बंगाली चौराहा (वाइन शॉप)",
+              "सुख शांति/उदय नगर मंदिर",
+              "वैभव नगर (शर्मा  स्वीट्स)",
+              "ब्रजेशवरी मंदिर IDA 140 JMB",
+              "मिलन हाईट्स",
+              "भॅवरकुआ बीसीएम",
+              "सपना संगीता टॉवर सर्किल",
+              "जैन कोलोनी (अहिंसा  गेट)",
+              "रंजीत हनुमान (गुमाश्ता नगर)",
+              "महावीर गेट (सुदामा नगर )",
+              "परिवहन नगर (नितिन ट्रेडर्स गली)",
+              "वैशाली  नगर गोपुर चौराहा",
+              "चोइथराम सर्किल",
+              "राजेंद्र नगर D-MART चौराहा",
+              "अन्य बस स्टॉप",
+              "निजी वाहन से"
+            ]
+          },
+          "interestedDepartments": {
+            "title": "Interested Departments:",
+            "enum": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ],
+            "enumNames": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ]
+          },
+          "remarks": {
+            "title": "Additional Comment/Remarks:",
+            "type": "string"    
+          }
+        }
+      },
+      "uiSchema": {
+        "firstName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 10px"
+            }
+          }
+        },
+        "lastName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "alternateNumber": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "dob": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "address": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "text",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "email": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "area": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "Please choose one . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "whatsappNumber": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "gender": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "Please choose one . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "interestedDepartments": {
+          "ui:widget": "MultiSelect",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "remarks": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "data": {
+        "remarks": "",
+        "email": "",
+        "alternateNumber": ""
+      }
+    },
+    "adminCoordinatorFormConfig": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "gender",
+          "whatsappNumber",
+          "dob",
+          "area",
+          "address"
+        ],
+        "properties": {
+          "firstName": {
+            "title": "First Name",
+            "type": "string",
+            "customValidation": "nameCoordinatorValidator"
+          },
+          "lastName": {
+            "title": "Last Name",
+            "type": "string",
+            "customValidation": "nameCoordinatorValidator"
+          },
+          "gender": {
+            "title": "Gender",
+            "type": ["string","null"],
+            "enum": ["Male", "Female"],
+            "enumNames": ["Male", "Female"]
+          },
+          "whatsappNumber": {
+            "title": "Contact No.",
+            "type": "string",
+            "customValidation": "mobileCoordinatorValidator"
+          },
+          "alternateNumber": {
+            "title": "Alternate No.",
+            "type": "string",
+            "customValidation": "mobileCoordinatorValidator"
+          },
+          "dob": {
+            "title": "Date of Birth:",
+            "format": "date",
+            "type": "string",
+            "customValidation": "dobCoordinatorValidator"
+          },
+          "email": {
+            "title": "Email ID:",
+            "type": "string",
+            "customValidation": "optionalEmailCoordinatorValidator"
+          },
+          "address": {
+            "title": "Address:",
+            "type": "string",
+            "customValidation": "addressCoordinatorValidator"
+          },
+          "area": {
+            "title": "Area:",
+            "type": "string",
+            "enum": [
+              "Gandhi Nagar Mandir",
+              "Kalani Mandir Gali Main Road",
+              "Kaalani Nagar Mandir Gali Main Road - 2",
+              "Sadhna Nagar Mandir Gali Main Road",
+              "Anjani Nagar (60 Ft Road)",
+              "Smarati Nagar Mandir Gali Bangarda Road",
+              "Palhar Nagar Bangada Road (Pani Ki Tanki)",
+              "Indore Wire Factory (Sangam Nagar)",
+              "Ramchand Nagar Circle (Areodrum Rd)",
+              "Chatrapati Nagar Main Road (Mahavir Bag)",
+              "Bada Ganpati",
+              "Raj Mohalla Opp. Chetyalaya",
+              "Ramashah Mandir Main Road",
+              "Kanch Mandir Main Road (Narsign Bajar)",
+              "Ram Bag Choraha Kusum Takiz Road",
+              "Chikmanglur Chauraha",
+              "GSITS Circle",
+              "Clerk Colony ITI Main Road",
+              "Bajrang/Nanda Nagar Main Road (Mandir)",
+              "Sukhaliya MR10 Mandir Gali",
+              "Vijay Nagar - Krishna Milk Centre",
+              "78 Scheme (Mandir)",
+              "Satya Sai Square(Paanch Baalyati Mandir)",
+              "Tulsi Nagar Main Road(Mahalaxmi Mandir)",
+              "Jawrawala Mandir",
+              "Samavsharan Mandir",
+              "Geeta Bhawan",
+              "Palasia Circle",
+              "Kanadiya Road/ Patrakar Square",
+              "Tilak Nagar Mandir",
+              "Goyal Nagar Mandir",
+              "Bangali Choraha (Wine Shop)",
+              "Sukh Shanti/Uday Nagar Mandir",
+              "Vaibhav Nagar (Sharma Sweets)",
+              "Brajeshwari Mandir IDA 140 JMB",
+              "Milan Heights",
+              "Bhanwarkuwa BCM",
+              "Sapna Sangeeta Tower Circle",
+              "Jain Colony Ahinsa Gate",
+              "Ranjit Hanuman (Gumashta Nagar)",
+              "Mahavir Gate(Sudama Nagar)",
+              "Parivahan Nagar (Nitin Traders Gali)",
+              "Vaishali Nagar Gopur Choraha",
+              "Choithram Circle",
+              "Rajendra Nagar D-Mart Choraha",
+              "Other Bus Stop",
+              "Self Vehicle"
+            ],
+            "enumNames": [
+              "गाँधी नगर मंदिर",
+              "कालानी मंदिर गली मेन रोड",
+              "कालानी नगर मंदिर गली मेन रोड - 2",
+              "साधना नगर मंदिर गली मेन रोड",
+              "अंजनी नगर (60 फुट रोड)",
+              "स्मृति नगर मंदिर गली (बांगड़दा रोड)",
+              "पल्हर नगर बांगड़दा रोड (पानी की टंकी)",
+              "इंदौर तार फैक्टरी (संगम नगर)",
+              "रामचंद नगर सर्किल (एरोड्रम रोड)",
+              "छात्रपति नगर मेन रोड (महावीर बाग)",
+              "बड़ा गणपति",
+              "राजमोहल्ला (OPP चैत्यालय)",
+              "रामशाह मंदिर मेन रोड",
+              "कांच मंदिर मेन रोड (नरसिंह बाजार)",
+              "रामबाग चौराहा (कुसुम टाकीज़)",
+              "चिकमंगलूर चौराहा",
+              "जीएसआईटीएस सर्किल",
+              "क्लर्क कॉलोनी  ITI मेन रोड",
+              "बजरंग/नंदा नगर मेन रोड (मंदिर)",
+              "सुखलिया MR10 मंदिर गली",
+              "विजय नगर-कृष्णा मिल्क सेंटर",
+              "78 Scheme (मंदिर)",
+              "सत्य साई चौराहा (पांच बालयति मदिर)",
+              "तुलसी नगर मेन रोड (महालक्ष्मी मंदिर)",
+              "जावरवाला मंदिर",
+              "समवशरण मंदिर",
+              "गीता भवन",
+              "पलासिया सर्किल",
+              "कनाड़िया रोड /पत्रकार चौराहा",
+              "तिलक नगर  मंदिर",
+              "गोयल नगर मंदिर",
+              "बंगाली चौराहा (वाइन शॉप)",
+              "सुख शांति/उदय नगर मंदिर",
+              "वैभव नगर (शर्मा  स्वीट्स)",
+              "ब्रजेशवरी मंदिर IDA 140 JMB",
+              "मिलन हाईट्स",
+              "भॅवरकुआ बीसीएम",
+              "सपना संगीता टॉवर सर्किल",
+              "जैन कोलोनी (अहिंसा  गेट)",
+              "रंजीत हनुमान (गुमाश्ता नगर)",
+              "महावीर गेट (सुदामा नगर )",
+              "परिवहन नगर (नितिन ट्रेडर्स गली)",
+              "वैशाली  नगर गोपुर चौराहा",
+              "चोइथराम सर्किल",
+              "राजेंद्र नगर D-MART चौराहा",
+              "अन्य बस स्टॉप",
+              "निजी वाहन से"
+            ]
+          },
+          "interestedDepartments": {
+            "title": "Interested Departments:",
+            "enum": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ],
+            "enumNames": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ]
+          },
+          "assignedDepartments": {
+            "title": "Assign Departments:",
+            "enum": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ],
+            "enumNames": [
+              "Bus Coordination",
+              "Class Coordination",
+              "Teaching",
+              "Poojan",
+              "Food",
+              "Food Serving",
+              "Information Technology",
+              "Books & Study Material making",
+              "Kit Distribution",
+              "Book Stall",
+              "Exam",
+              "Gift Distribution",
+              "Floor Coordination",
+              "IT System",
+              "Discipline",
+              "Media",
+              "Guest’s Welcoming",
+              "Teachers’ Residence Management",
+              "Finance",
+              "Other"
+            ]
+          },
+          "busNumber": {
+            "title": "Bus",
+            "type": "string",
+            "enum": [
+              "SELF",
+              "B0",
+              "B1",
+              "B2",
+              "B3",
+              "B4",
+              "B5",
+              "B6",
+              "B7",
+              "B8",
+              "B9",
+              "B10",
+              "B11",
+              "B12",
+              "B13",
+              "B14",
+              "B15",
+              "B16",
+              "B17",
+              "B18",
+              "B19",
+              "B20",
+              "B21",
+              "B22",
+              "B23",
+              "B24",
+              "B25",
+              "B26",
+              "B27"
+            ],
+            "enumNames": [
+              "Self",
+              "B0",
+              "B1",
+              "B2",
+              "B3",
+              "B4",
+              "B5",
+              "B6",
+              "B7",
+              "B8",
+              "B9",
+              "B10",
+              "B11",
+              "B12",
+              "B13",
+              "B14",
+              "B15",
+              "B16",
+              "B17",
+              "B18",
+              "B19",
+              "B20",
+              "B21",
+              "B22",
+              "B23",
+              "B24",
+              "B25",
+              "B26",
+              "B27"
+            ]
+          },
+          "classNumber": {
+            "title": "Room",
+            "type": "string",
+            "enum": [
+              "105",
+              "106",
+              "107",
+              "108",
+              "109",
+              "110",
+              "111",
+              "112",
+              "218",
+              "219",
+              "220",
+              "224",
+              "225",
+              "227",
+              "330",
+              "334",
+              "337",
+              "340",
+              "341",
+              "401",
+              "402",
+              "403",
+              "501",
+              "502",
+              "503",
+              "504",
+              "507",
+              "509",
+              "601",
+              "603",
+              "607"
+            ],
+            "enumNames": [
+              "105",
+              "106",
+              "107",
+              "108",
+              "109",
+              "110",
+              "111",
+              "112",
+              "218",
+              "219",
+              "220",
+              "224",
+              "225",
+              "227",
+              "330",
+              "334",
+              "337",
+              "340",
+              "341",
+              "401",
+              "402",
+              "403",
+              "501",
+              "502",
+              "503",
+              "504",
+              "507",
+              "509",
+              "601",
+              "603",
+              "607"
+            ]
+          },
+          "isActive": {
+            "type": "boolean",
+            "title": "Is Active Coordinator"
+          },
+          "remarks": {
+            "title": "Additional Comment/Remarks:",
+            "type": "string"
+          }
+        }
+      },
+      "uiSchema": {
+        "firstName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 10px"
+            }
+          }
+        },
+        "lastName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "alternateNumber": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }, 
+        "dob": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "address": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "text",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "email": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "area": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "Please choose one . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "whatsappNumber": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "gender": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "Please choose one . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "interestedDepartments": {
+          "ui:widget": "MultiSelect",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "assignedDepartments": {
+          "ui:widget": "MultiSelect",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "busNumber": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "कृपया एक चुनिए . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },  
+        "classNumber": {
+          "ui:field": "SelectList",
+          "ui:placeholder": "कृपया एक चुनिए . . .",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "isActive": {
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "boolean",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "remarks": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 4
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "data": {
+        "isActive": false,
+        "busNumber": "",
+        "classNumber": "",
+        "email": "",
+        "remarks": "",
+        "alternateNumber": ""
+      }
+    }
+  }
+  
+  

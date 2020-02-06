@@ -73,3 +73,25 @@ export const setHashLinkForNewRegistrationAction = userType => ({
   type: 'SET_HASH_LINK_FOR_NEW_REGISTRATION',
   userType,
 });
+
+/**
+ * setHashLinkForNewCoordinatorAction action will
+ * call to set user type when redirect to new registration route
+ * @param {String} userType
+ * @return {{userType: String, type: String}}
+ */
+export const setHashLinkForNewCoordinatorAction = userType => ({
+  type: 'SET_HASH_LINK_FOR_NEW_COORDINATOR',
+  userType,
+});
+
+/**
+ * setHashLinkForEditCoordinatorAction action will
+ * call to set user type when redirect to edit registration route
+ * @param {String} userType
+ * @return {{userType: String, type: String}}
+ */
+export const setHashLinkForEditCoordinatorAction = userType => ({
+  type: 'SET_HASH_LINK_FOR_EDIT_COORDINATOR',
+  userType,
+});

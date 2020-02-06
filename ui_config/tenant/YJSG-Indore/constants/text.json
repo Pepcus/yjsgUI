@@ -1,4 +1,6 @@
 {
+  "MANDATORY_FIELD_MUST_BE_NON_EMPTY_COORDINATOR": "कृपया एक चुनिए|",
+
   "YES_HINDI": "हाँ",
 
   "NO_HINDI": "नहीं",
@@ -11,13 +13,19 @@
 
   "YOUR_ID_TEXT": "आपका ID: ",
 
+  "YOUR_ID_TEXT_COORDINATOR": "Your ID number is : ",
+
   "YOUR_SECRET_CODE_TEXT": "आपका सीक्रेट कोड: ",
+
+  "YOUR_SECRET_CODE_TEXT_COORDINATOR": "Your Secret Code is : ",
 
   "PLEASE_SELECT_COLUMNS_TEXT": "कृपया स्तंभों का चयन करे",
 
   "UPLOAD_FILE_TEXT": "कृपिया फाइल को अपलोड करे",
 
   "IS_THERE_TEXT": " है |",
+
+  "IS_THERE_TEXT_COORDINATOR": " Is ",
 
   "ERROR_MESSAGE_OF_LOAD_APP_DATA": "Error occurred to load application data.",
 
@@ -47,6 +55,8 @@
 
   "ID_NOTE_MESSAGE": "कृपया अपना ID और सीक्रेट कोड ध्यानपूर्वक नोट कर लेवे |",
 
+  "ID_NOTE_MESSAGE_COORDINATOR": "Please note your ID number and Secret Code carefully.",
+
   "ID_CARD_SUGGESTION_MESSAGE": "शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |",
 
   "UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE": "कार्ड प्रिंट का चयन सफलतापूर्वक दर्ज किया गया |",
@@ -63,21 +73,45 @@
 
   "THIS_INFORMATION_IS_COMPULSORY_MESSAGE": "यह जानकारी अनिवार्य है",
 
+  "THIS_INFORMATION_IS_COMPULSORY_MESSAGE_COORDINATOR": "This information is mandatory",
+
+  "THIS_INFORMATION_IS_MANDATORY_MESSAGE": "This information is mandatory",
+
+  "INFORMATION_HELPFUL_TO_CONTACT_MESSAGE_COORDINATOR": "This information is useful in contacting you!",
+
   "INVALID_EMAIL_MESSAGE": "यह ई-मेल मान्य नहीं है",
+
+  "INVALID_EMAIL_MESSAGE_COORDINATOR": "This Email is not valid",
 
   "INVALID_NAME_MESSAGE": "अमान्य नाम",
 
+  "INVALID_NAME_MESSAGE_COORDINATOR": "Invalid Name",
+
   "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "नाम ३ अक्षर से कम का मान्य नहीं",
+
+  "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE_COORDINATOR": "Name Less than 3 Character Not Valid",
+
+  "ENTER_A_VALID_DOB_MESSAGE": "Please enter a valid Date of birth.",
 
   "FULL_ADDRESS_MESSAGE": "कृपया पूरा पता देंवे!",
 
+  "FULL_ADDRESS_MESSAGE_COORDINATOR": "Please provide the full address!",
+
   "SINGLE_QUOTE_ERROR_MESSAGE": "पते में (') नहीं होनी चाहिए",
 
+  "SINGLE_QUOTE_ERROR_MESSAGE_COORDINATOR": "Address must not contain (')",
+
   "DOUBLE_QUOTE_ERROR_MESSAGE": "पते में (\") नहीं होनी चाहिए",
+
+  "DOUBLE_QUOTE_ERROR_MESSAGE_COORDINATOR": "Address must not contain (\")",
 
   "INFORMATION_HELPFUL_TO_CONTACT_MESSAGE": "यह जानकारी आपसे संपर्क करने में उपयोगी है !",
 
   "ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE": "केवल ८ - ४५ वर्ष तक ही मान्य",
+
+  "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR": "Mobile No. Valid for 10 digits only",
+
+  "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE_COORDINATOR": "Only No. is Valid in Mobile No.",
 
   "ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE": "केवल ५ - ६६ वर्ष तक ही मान्य",
 
@@ -103,6 +137,8 @@
 
   "REGISTRATION_FOUND_FOR_MOBILE_MESSAGE": "निचे दी गयी लिस्ट में 2020 शिविर के रजिस्ट्रेशन के लिए हर स्टूडेंट का हाँ अथवा नहीं चुने एवं Submit पर क्लिक करें !",
 
+  "REGISTRATION_SUCCESS_MESSAGE_COORDINATOR": "Your registration is complete ! ",
+
   "GIVEN_INFORMATION_WRONG_MESSAGE": "दी गई जानकारी गलत है |",
 
   "FOOTER_CONTACT_TEXT": "किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:",
@@ -110,6 +146,8 @@
   "EVENT_DATE": "दिनांक: 04 मई 2020, सोमवार से 12 मई 2020, मंगलवार तक",
 
   "EVENT_VENUE": "स्थान: सन्मति स्कूल, इन्दौर",
+
+  "ASSIGN_DEPARTMENTS_TEXT": "Assign Departments",
 
   "OK_TEXT": "OK",
 
@@ -151,7 +189,13 @@
 
   "PRINT_NOW": "Print Now",
 
+  "COORDINATOR_VIEW": "Coordinator View",
+
+  "MEMBER_VIEW": "Member View",
+
   "FILES": "Files",
+
+  "COORDINATOR": "Coordinator",
 
   "NAME": "Name:",
 
@@ -181,7 +225,13 @@
 
   "NEW_REGISTRATION": "New Registration",
 
+  "NEW_STUDENT_REGISTRATION": "New Student Registration",
+
   "REGISTER_NOW": "Register now !",
+
+  "NEW_COORDINATOR": "New Coordinator Registration",
+
+  "EDIT_COORDINATOR": "Edit Coordinator Registration",
 
   "VIEW_OR_EDIT_INFO": "View/Edit Information",
 
@@ -193,7 +243,11 @@
 
   "NO_INFO_CHANGE_MESSAGE": "जानकारी में कोई बदलाव नहीं ",
 
+  "NO_INFO_CHANGE_TEXT": "No change in information.",
+
   "INFO_UPDATE_SUCCESS_MESSAGE": "आपकी जानकारी सफलतापूवर्क अपडेट कर दी गई है |",
+
+  "INFO_UPDATE_SUCCESS_MESSAGE_TEXT": "Information successfully updated.",
 
   "ADMIN_LOGIN": "Admin Login",
 

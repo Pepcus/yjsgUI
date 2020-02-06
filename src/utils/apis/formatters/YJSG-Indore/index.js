@@ -8,13 +8,20 @@ import {
   uploadOptInFileRequestFormatter,
   markMemberOptStatusRequestFormatter,
   markMemberIdCardStatusRequestFormatter,
+  updateCoordinatorRequestFormatter,
 } from './requestFormatters';
-import { formatMembersData, fetchUserFromPhoneFormatter } from './responseFormatters';
+import {
+  formatMembersData,
+  updateCoordinatorResponseFormatter,
+  fetchUserFromPhoneFormatter,
+} from './responseFormatters';
 
 export default {
   header: {
     updateMember: defaultHeaderFormatter,
+    updateCoordinator: defaultHeaderFormatter,
     getMember: defaultHeaderFormatter,
+    getCoordinator: defaultHeaderFormatter,
     getMembers: defaultHeaderFormatter,
     uploadAttendanceFile: uploadCSVFileHeaderFormatter,
     uploadOptInFile: uploadCSVFileHeaderFormatter,
@@ -24,6 +31,8 @@ export default {
   },
   request: {
     updateMember: formatUpdateMemberDataPayload,
+    updateCoordinator: updateCoordinatorRequestFormatter,
+    createCoordinator: updateCoordinatorRequestFormatter,
     uploadAttendanceFile: uploadAttendanceFileRequestFormatter,
     uploadOptInFile: uploadOptInFileRequestFormatter,
     markMemberOptStatus: markMemberOptStatusRequestFormatter,
@@ -31,6 +40,7 @@ export default {
   },
   response: {
     getMembers: formatMembersData,
+    getCoordinator: updateCoordinatorResponseFormatter,
     fetchUserFromPhone: fetchUserFromPhoneFormatter,
   },
 };

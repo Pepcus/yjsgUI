@@ -1,5 +1,5 @@
-import { put, select } from 'redux-saga/effects';
 
+import { put, select } from 'redux-saga/effects';
 import { callAPIWithConfig } from 'apis/apis';
 import {
   createMemberFailedAction,
@@ -92,6 +92,7 @@ export function* fetchMemberSaga(action) {
     const tenant = yield select(getTenantName);
     const config = { ...apiConfig, urlValuesMap: { id }, additionalData: { secretKey } };
     const response = yield callAPIWithConfig(tenant, 'getMember', config);
+
     if (response.student) {
       yield put(fetchMemberSuccessAction(response.student));
     } else {
@@ -143,7 +144,7 @@ export function* getAllMembersSaga(action) {
     const tenant = yield select(getTenantName);
     const config = { ...apiConfig, additionalData: { secretKey } };
     const response = yield callAPIWithConfig(tenant, 'getMembers', config);
-    if (response) {
+    if (response.length) {
       yield put(getAllMembersDataResultsSuccessAction(response));
     } else {
       throw response;
