@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,12 +11,10 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  MEMBER_ID_CARD_SMALL_HEADING,
-  MEMBER_ID_CARD_MAIN_HEADING,
-} from 'constants/text';
 import { getFormattedMemberId, convertFirstCharacterInUpperCase } from 'utils/common';
 import { getBusCoordinators } from 'reducers/assetFilesReducer';
+import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/config';
 
 import CoordinatorInformation from './CoordinatorInformation';
 
@@ -34,6 +31,10 @@ const RowStyled = styled(Row)`
    z-index: 1;
    font-size: 9px;
    align-items: end;
+`;
+
+const CardFieldWrapper = styled(RowStyled)`
+   display: unset !important;
 `;
 
 const TwoIdCardWrapperStyled = styled(Box)`
@@ -71,7 +72,7 @@ const MemberInformationWrapper = styled(Box)`
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url('../../LOGO.png');
+    background-image: url('${props => props.logoPath}');
     background-repeat: no-repeat;
     background-position: center top;
     background-size: contain;
@@ -123,7 +124,21 @@ class MembersIdCard extends Component {
    * @return {HTML}
    */
   renderMembersIdCard({ selectedMembers }) {
-    const { busCoordinators = {} } = this.props;
+    const { constants, logoPathConfig, busCoordinators = {} } = this.props;
+    const { LOGO } = logoPathConfig;
+    const {
+      MEMBER_ID_CARD_SMALL_HEADING,
+      MEMBER_ID_CARD_MAIN_HEADING,
+      NAME,
+      CLASS,
+      ROOM,
+      FATHER_NAME,
+      MOBILE_NO,
+      BUS_STOP,
+      BUS_NO,
+      ADDRESS,
+      MEMBER_ID,
+    } = constants;
     const membersIdCards = selectedMembers.map((member) => {
       const memberId = getFormattedMemberId({ memberId: member.memberId });
       const name = convertFirstCharacterInUpperCase({ sentence: member.name });
@@ -152,9 +167,9 @@ class MembersIdCard extends Component {
               backgroundColor="unset"
             >
               <img
-                src="../../LOGO.png"
+                src={LOGO}
                 alt="header-logo"
-                style={{ 'max-width': '100%' }}
+                style={{ 'maxWidth': '100%' }}
               />
             </BoxStyled>
             <SmallHeadingWrapper
@@ -165,7 +180,7 @@ class MembersIdCard extends Component {
               padding="1px"
               align="center"
             >
-              { MEMBER_ID_CARD_SMALL_HEADING }
+              {MEMBER_ID_CARD_SMALL_HEADING}
             </SmallHeadingWrapper>
             <TypographyStyled
               color="dark"
@@ -176,10 +191,11 @@ class MembersIdCard extends Component {
               align="center"
               fontSize="18px"
             >
-              { MEMBER_ID_CARD_MAIN_HEADING }
+              {MEMBER_ID_CARD_MAIN_HEADING}
             </TypographyStyled>
           </Typography>
           <MemberInformationWrapper
+            logoPath={LOGO}
             padding="0"
             backgroundColor="unset"
             borderStyle="none"
@@ -196,7 +212,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Name:
+                  {NAME}
                 </Typography>
                 <CardTextWrapper
                   fontSize="9px"
@@ -213,7 +229,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Class:
+                  {CLASS}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -230,7 +246,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Room:
+                  {ROOM}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -253,7 +269,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Father Name:
+                  {FATHER_NAME}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -270,7 +286,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Mobile No:
+                  {MOBILE_NO}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -286,9 +302,8 @@ class MembersIdCard extends Component {
               display="flex"
               padding="0"
             >
-              <RowStyled
+              <CardFieldWrapper
                 gutter={false}
-                display="unset"
                 height="10px"
                 flex="1"
                 margin="0 0 0 3px"
@@ -298,7 +313,7 @@ class MembersIdCard extends Component {
                   gutterLeft="0"
                   fontSize="9px"
                   fontWeight="bold"
-                >Bus Stop:
+                >{BUS_STOP}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -307,7 +322,7 @@ class MembersIdCard extends Component {
                 >
                   {member.busStop}
                 </CardTextWrapper>
-              </RowStyled>
+              </CardFieldWrapper>
               <RowStyled flex="0.5 0 0" margin="0 0 0 3px">
                 <Typography
                   type="caption"
@@ -315,7 +330,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Bus No:
+                  {BUS_NO}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -331,9 +346,8 @@ class MembersIdCard extends Component {
               padding="0"
               display="flex"
             >
-              <RowStyled
+              <CardFieldWrapper
                 gutter={false}
-                display="unset"
                 height="10px"
                 flex="1"
                 margin="0 0 0 4px"
@@ -344,7 +358,7 @@ class MembersIdCard extends Component {
                   fontSize="9px"
                   fontWeight="bold"
                 >
-                  Address:
+                  {ADDRESS}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -353,7 +367,7 @@ class MembersIdCard extends Component {
                 >
                   {address}
                 </CardTextWrapper>
-              </RowStyled>
+              </CardFieldWrapper>
             </Row>
             <Row
               padding="0"
@@ -371,7 +385,7 @@ class MembersIdCard extends Component {
                   fontSize="13px"
                   fontFamily="Roboto Condensed"
                 >
-                  Student Id:
+                  {MEMBER_ID}
                 </Typography>
                 <CardTextWrapper
                   type="caption"
@@ -488,17 +502,23 @@ class MembersIdCard extends Component {
 }
 
 MembersIdCard.propTypes = {
+  constants: PropTypes.object,
   busCoordinators: PropTypes.object,
+  logoPathConfig: PropTypes.object,
   selectedMembers: PropTypes.array,
 };
 
 MembersIdCard.defaultProps = {
+  constants: {},
   busCoordinators: {},
+  logoPathConfig: {},
   selectedMembers: [],
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   busCoordinators: getBusCoordinators(state),
+  logoPathConfig: getLogoPathConfig(state),
 });
 
-export default connect(mapStateToProps, {})(MembersIdCard);
+export default connect(mapStateToProps, null)(MembersIdCard);

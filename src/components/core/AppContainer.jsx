@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { connect } from 'react-redux';
 import {
   HashRouter,
   Route,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
@@ -15,20 +14,14 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  loadAppDataAction,
-  loadBusCoordinatorsDataAction,
-} from 'actions/assetFilesActions';
-import {
   isAppLoaded,
   getIsAppLoadedError,
 } from 'reducers/assetFilesReducer';
 import {
-  ERROR_MESSAGE_OF_LOAD_APP_DATA,
-} from 'constants/text';
-import {
-  setLoadingStateAction,
-} from 'actions/loaderActions';
-import Routes from './Routes';
+  isBootstrapComplete,
+} from 'reducers/app';
+import Routes from 'components/core/Routes';
+import { getConstants } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     height: auto !important;
@@ -52,71 +45,60 @@ const MessageBoxStyled = styled(Box)`
 
 /**
  * AppContainer is the wrapper of application.
+ * @param {Object} constants
+ * @param {Boolean} isLoaded
+ * @param {Boolean} isAppLoadingFailed
+ * @param {Boolean} bootstrapFlag
+ * @return {HTML}
  */
-class AppContainer extends Component {
-
-  componentDidMount() {
-    const {
-      loadBusCoordinatorsData,
-      loadAppData,
-      setLoadingState,
-    } = this.props;
-
-    loadBusCoordinatorsData();
-    loadAppData();
-    setLoadingState(false);
+const AppContainer = ({
+  constants,
+  isLoaded,
+  isAppLoadingFailed,
+  bootstrapFlag,
+}) => {
+  const { ERROR_MESSAGE_OF_LOAD_APP_DATA } = constants;
+  if (isLoaded && !isAppLoadingFailed) {
+    return (
+      <HashRouter>
+        <Route path="/" component={Routes} />
+      </HashRouter>
+    );
+  } else if (isAppLoadingFailed || !bootstrapFlag) {
+    return (
+      <MessageBoxStyled>
+        <Typography type="caption" padding="0 15px 0 0">
+          <FaIcon icon={faExclamationTriangle} />
+        </Typography>
+        {ERROR_MESSAGE_OF_LOAD_APP_DATA}
+      </MessageBoxStyled>
+    );
   }
-
-  render() {
-    const {
-      isLoaded,
-      isAppLoadingFailed,
-    } = this.props;
-
-    if (isLoaded && !isAppLoadingFailed) {
-      return (
-        <HashRouter>
-          <Route path="/" component={Routes} />
-        </HashRouter>
-      );
-    } else if (isAppLoadingFailed) {
-      return (
-        <MessageBoxStyled>
-          <Typography type="caption" padding="0 15px 0 0">
-            <FaIcon icon={faExclamationTriangle} />
-          </Typography>
-          {ERROR_MESSAGE_OF_LOAD_APP_DATA}
-        </MessageBoxStyled>
-      );
-    }
-    return null;
-  }
-}
+  return null;
+};
 
 AppContainer.propTypes = {
+  constants: PropTypes.object,
   isAppLoadingFailed: PropTypes.bool,
   isLoaded: PropTypes.bool,
-  loadAppData: PropTypes.func,
-  loadBusCoordinatorsData: PropTypes.func,
-  setLoadingState: PropTypes.func.isRequired,
+  bootstrapFlag: PropTypes.bool,
 };
 
 AppContainer.defaultProps = {
+  constants: {},
   isAppLoadingFailed: false,
   isLoaded: false,
-  loadAppData: () => {},
-  loadBusCoordinatorsData: () => {},
+  bootstrapFlag: false,
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
   isLoaded: isAppLoaded(state),
+  bootstrapFlag: isBootstrapComplete(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadAppData: () => dispatch(loadAppDataAction()),
-  loadBusCoordinatorsData: () => dispatch(loadBusCoordinatorsDataAction()),
-  setLoadingState: () => dispatch(setLoadingStateAction()),
+const mapDispatchToProps = () => ({
 });
 
 export default connect(

@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Button from 'pepcus-core/lib/Button';
@@ -7,39 +7,53 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
-import {
-  goBackBtnText,
-  invalidIdMessage,
-} from 'constants/yjsg';
+import { getConstants } from 'reducers/constants';
 
 /**
  * Method return back button
+ * @param {Object} constants
  * @param {Function} redirectToPreviousLocation
  * @return {HTML} Button
  * @constructor
  */
-const InvalidMemberPopUp = ({ redirectToPreviousLocation }) => (
-  <Popup>
-    <Row width="100%" justify="center" margin="0">
-      <Typography align="center" type="body" fontSize="16px">{invalidIdMessage}</Typography>
-      <Button
-        color="tertiary"
-        width="170px"
-        margin="10px 25px"
-        onClick={redirectToPreviousLocation}
-      >
-        {goBackBtnText}
-      </Button>
-    </Row>
-  </Popup>
-);
+const InvalidMemberPopUp = ({
+  constants,
+  redirectToPreviousLocation,
+}) => {
+  const {
+    INVALID_ID_MESSAGE,
+    BACK,
+  } = constants;
+
+  return (
+    <Popup>
+      <Row width="100%" justify="center" margin="0">
+        <Typography align="center" type="body" fontSize="16px">{INVALID_ID_MESSAGE}</Typography>
+        <Button
+          color="tertiary"
+          width="170px"
+          margin="10px 25px"
+          onClick={redirectToPreviousLocation}
+        >
+          {BACK}
+        </Button>
+      </Row>
+    </Popup>
+  );
+};
 
 InvalidMemberPopUp.propTypes = {
+  constants: PropTypes.object,
   redirectToPreviousLocation: PropTypes.func,
 };
 
 InvalidMemberPopUp.defaultProps = {
+  constants: {},
   redirectToPreviousLocation: () => {},
 };
 
-export default InvalidMemberPopUp;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(InvalidMemberPopUp);

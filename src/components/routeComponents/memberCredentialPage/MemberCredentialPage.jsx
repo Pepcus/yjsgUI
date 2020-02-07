@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -22,33 +21,22 @@ import {
   setUserTypeAction,
 } from 'actions/appActions';
 import {
-  getAdminId,
-  getAdminPassword,
   getUserId,
   getUserSecretKey,
 } from 'reducers/memberRegistrationReducer';
 import {
   getHash,
 } from 'reducers/appReducer';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
-  eventDate,
-  eventVenue,
-  goBackBtnText,
-  viewEditInfoBtnText,
   USER_TYPES,
-} from 'constants/yjsg';
-import { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } from 'constants/messages';
+} from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
+import { getConstants } from 'reducers/constants';
 import fields from 'components/common/fields';
+import { getLogoPathConfig } from 'reducers/config';
 
 import ImageWrapper from './ImageWrapper';
-import {
-  schema,
-  uiSchema,
-} from './memberCredentialFormSchema.json';
 import RedirectToRoute from './RedirectToRoute';
 
 const BoxStyled = styled(Box)`
@@ -57,7 +45,7 @@ const BoxStyled = styled(Box)`
      margin: 60px auto auto auto;
      height: 75%;
      width: 97%;
- `};
+ `}
  ${({ theme }) => theme.media.down('sm')`
      margin: 60px auto;
  `}
@@ -193,6 +181,8 @@ class MemberCredentialPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -236,9 +226,20 @@ class MemberCredentialPage extends Component {
       isPreviousLocation,
     } = this.state;
     const {
-      tenant,
       context,
+      constants,
+      logoPathConfig,
+      config,
     } = this.props;
+    const { memberCredentialFormConfig } = config;
+    const { schema, uiSchema } = memberCredentialFormConfig;
+    const { pageBodyLogo } = logoPathConfig;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+      BACK,
+      VIEW_OR_EDIT_INFO,
+    } = constants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -266,14 +267,14 @@ class MemberCredentialPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -282,7 +283,7 @@ class MemberCredentialPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
               <Form
@@ -304,7 +305,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.redirectToPreviousLocation}
                   >
-                    {goBackBtnText}
+                    {BACK}
                   </Button>
                 </Col>
                 <Col size={{ xs: 12, sm: 12, md: 5, lg: 5 }} padding="10px 20px 10px 20px">
@@ -312,7 +313,7 @@ class MemberCredentialPage extends Component {
                     width="100%"
                     onClick={this.fetchStudentById}
                   >
-                    {viewEditInfoBtnText}
+                    {VIEW_OR_EDIT_INFO}
                   </Button>
                 </Col>
               </Row>
@@ -325,34 +326,37 @@ class MemberCredentialPage extends Component {
 }
 
 MemberCredentialPage.propTypes = {
+  constants: PropTypes.object,
+  config: PropTypes.object,
   context: PropTypes.object,
   fetchStudentData: PropTypes.func,
   hashLink: PropTypes.string,
+  logoPathConfig: PropTypes.object,
   secretKey: PropTypes.string,
   setStudentCredentials: PropTypes.func,
   setUserType: PropTypes.func,
   memberId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  tenant: PropTypes.string,
 };
 
 MemberCredentialPage.defaultProps = {
+  constants: {},
+  config: {},
   context: {},
   fetchStudentData: () => {},
   hashLink: '',
+  logoPathConfig: {},
   secretKey: '',
   setStudentCredentials: () => {},
   setUserType: () => {},
   memberId: '',
-  tenant: '',
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   hashLink: getHash(state),
-  id: getAdminId(state),
-  password: getAdminPassword(state),
+  logoPathConfig: getLogoPathConfig(state),
   secretKey: getUserSecretKey(state),
   memberId: getUserId(state),
-  tenant: getApplicationTenant(state),
 });
 
 const mapDispatchToProps = dispatch => ({

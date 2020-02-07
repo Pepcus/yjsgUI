@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -12,18 +11,17 @@ import FaIcon from 'pepcus-core/lib/FaIcon';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import headerLogo from 'assets/images/react-logo.png';
-import {
-  resetAdminCredentialsAction,
-} from 'actions/memberRegistrationActions';
 import {
   resetVisibleColumnConfigAction,
   setRedirectValueAction,
-  setAdminLoginStateAction,
 } from 'actions/appActions';
-import { routes, title } from 'config/appConfig.json';
+import {
+  resetLoginAdminStateAction,
+  resetAdminCredentialsAction,
+} from 'actions/loginActions';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { DEFAULT_HEADER_TEXT } from 'constants/yjsg';
+import { getConstants } from 'reducers/constants';
+import { getApplicationConfiguration, getLogoPathConfig } from 'reducers/config';
 
 const HeaderWrapper = styled(Box)`
     position: fixed;
@@ -111,6 +109,7 @@ const LinkStyled = styled(Link)`
     &:hover {
         background-color: ${getThemeProps('palette.primary.color')};
         transition: 0.3s all;
+        border: 1px solid ${getThemeProps('palette.primary.color')};
     }
     ${({ theme }) => theme.media.down('lg')`
         background-color: ${getThemeProps('colors.header')};
@@ -127,10 +126,13 @@ const LinkStyled = styled(Link)`
 
 /**
  * Header render the common header for all route
+ * @param {Object} config
+ * @param {Object} constants
  * @param {Object} context
  * @param {String} location
+ * @param {Object} logoPathConfig
  * @param {Function} resetAdminCredentials
- * @param {Function} setAdminLoginState
+ * @param {Function} resetLoginAdminState
  * @param {Function} setRedirectValue
  * @param {Function} resetVisibleColumnConfig
  * @param {String} tenant
@@ -138,26 +140,30 @@ const LinkStyled = styled(Link)`
  * @return {HTML}
  */
 const Header = ({
+  config,
+  constants,
   context,
   location,
+  logoPathConfig,
   resetAdminCredentials,
-  setAdminLoginState,
+  resetLoginAdminState,
   setRedirectValue,
   resetVisibleColumnConfig,
   tenant,
 }) => {
-
+  const { BACK, LOGOUT } = constants;
+  const { routes, title } = config;
   /**
    * Method will call when click on logout button
    * It reset the admin credentials to false by calling action resetAdminCredentialsAction()
-   * It reset the admin login state to false by calling action setAdminLoginStateAction()
+   * It reset the admin login state to false by calling action resetLoginAdminStateAction()
    * It reset the visibleColumnConfig to initial
    * state by calling action resetVisibleColumnConfigAction()
    * And clear local store.
    */
   const performLogout = () => {
     resetAdminCredentials();
-    setAdminLoginState({ adminLoginState: false });
+    resetLoginAdminState();
     setRedirectValue({ redirect: false });
     resetVisibleColumnConfig();
     localStorage.clear();
@@ -177,7 +183,7 @@ const Header = ({
             headerObject.backButtonRedirectTo
               ? headerObject.backButtonRedirectTo : context.previousLocation}
         >
-          <FaIcon margin="0 5px 0 0" icon={faArrowLeft} />Back
+          <FaIcon margin="0 5px 0 0" icon={faArrowLeft} />{BACK}
         </LinkStyled>
       );
     } return null;
@@ -198,7 +204,7 @@ const Header = ({
               ? headerObject.logoutButtonRedirectTo : context.previousLocation}
           onClick={performLogout}
         >
-          <FaIcon margin="0 5px 0 0" icon={faPowerOff} />Logout
+          <FaIcon margin="0 5px 0 0" icon={faPowerOff} />{LOGOUT}
         </LinkStyled>
       );
     } return null;
@@ -208,7 +214,7 @@ const Header = ({
    * It return the header text
    * @return {string}
    */
-  const getHeaderText = () => (title[tenant] ? title[tenant] : DEFAULT_HEADER_TEXT);
+  const getHeaderText = () => (title ? title : '');
 
   /**
    * Method render header name in header
@@ -256,6 +262,7 @@ const Header = ({
    * @constructor
    */
   const renderLogo = (headerObject) => {
+    const { headerLogo } = logoPathConfig;
     if (headerObject.logo) {
       return (
         <ImageWrapper
@@ -311,24 +318,26 @@ const Header = ({
 };
 
 Header.propTypes = {
+  constants: PropTypes.object,
   context: PropTypes.object,
   location: PropTypes.string,
   resetAdminCredentials: PropTypes.func,
   resetVisibleColumnConfig: PropTypes.func,
   routes: PropTypes.array,
-  setAdminLoginState: PropTypes.func,
+  resetLoginAdminState: PropTypes.func,
   setRedirectValue: PropTypes.func,
   tenant: PropTypes.string,
   title: PropTypes.object,
 };
 
 Header.defaultProps = {
+  constants: {},
   context: {},
   location: '',
   resetAdminCredentials: () => {},
   resetVisibleColumnConfig: () => {},
   routes: [],
-  setAdminLoginState: () => {},
+  resetLoginAdminState: () => {},
   setRedirectValue: () => {},
   tenant: '',
   title: {},
@@ -337,11 +346,14 @@ Header.defaultProps = {
 const mapDispatchToProps = dispatch => ({
   resetAdminCredentials: () => dispatch(resetAdminCredentialsAction()),
   resetVisibleColumnConfig: () => dispatch(resetVisibleColumnConfigAction()),
-  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
+  resetLoginAdminState: () => dispatch(resetLoginAdminStateAction()),
   setRedirectValue: ({ redirect }) => dispatch(setRedirectValueAction({ redirect })),
 });
 
 const mapStateToProps = state => ({
+  config: getApplicationConfiguration(state),
+  constants: getConstants(state),
+  logoPathConfig: getLogoPathConfig(state),
   tenant: getApplicationTenant(state),
 });
 

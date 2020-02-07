@@ -1,5 +1,5 @@
 import * as XLSX from 'xlsx';
-import { FILE_PRESENTATION_TYPE } from 'constants/yjsg';
+import { FILE_PRESENTATION_TYPE } from 'constants/file';
 
 export const formatXlsxToJson = (response) => {
   const data = new Uint8Array(response);
@@ -115,4 +115,15 @@ export const getMessageDisplayCondition = ({ width, showFileDetails, backPageBut
     return true;
   }
   return true;
+};
+
+export const fetchFileResponseType = (fileDetails) => {
+  let responseType = 'json';
+  if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+    responseType = 'arrayBuffer';
+  }
+  if (fileDetails.fileType === 'csv') {
+    responseType = 'text';
+  }
+  return responseType;
 };

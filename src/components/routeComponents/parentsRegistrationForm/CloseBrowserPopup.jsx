@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,8 +7,8 @@ import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import { CLOSE_BROWSER_MANUALLY_MESSAGE } from 'constants/yjsg';
 import Popup from 'components/common/Popup';
+import { getConstants } from 'reducers/constants';
 
 const PopupWrapper = styled(Box)`
     background-color: ${getThemeProps('colors.WHITE')};
@@ -40,7 +40,11 @@ const PopupWrapper = styled(Box)`
  * Method return close browser message
  * @return {HTML}
  */
-const CloseBrowserPopup = ({ isCloseBrowserPopMessage }) => {
+const CloseBrowserPopup = ({
+  constants,
+  isCloseBrowserPopMessage,
+}) => {
+  const { CLOSE_BROWSER_MANUALLY_MESSAGE } = constants;
   if (isCloseBrowserPopMessage) {
     return (
       <PopupWrapper>
@@ -54,11 +58,17 @@ const CloseBrowserPopup = ({ isCloseBrowserPopMessage }) => {
 };
 
 CloseBrowserPopup.propTypes = {
+  constants: PropTypes.object,
   isCloseBrowserPopMessage: PropTypes.bool,
 };
 
 CloseBrowserPopup.defaultProps = {
+  constants: {},
   isCloseBrowserPopMessage: false,
 };
 
-export default CloseBrowserPopup;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(CloseBrowserPopup);

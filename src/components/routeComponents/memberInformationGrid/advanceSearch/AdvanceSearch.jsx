@@ -1,11 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import CheckboxNew from 'pepcus-core/lib/CheckboxNew';
@@ -22,7 +23,7 @@ import {
   getAdvanceSearchResult,
 } from 'utils/common';
 import fields from 'components/common/fields';
-import { schema, uiSchema } from './advanceSearchShema.json';
+import { getConstants } from 'reducers/constants';
 
 const AdvanceSearchWrapper = styled(Box)`
     background-color: unset;
@@ -88,7 +89,7 @@ const LabelStyled = styled.label`
     }
 `;
 
-const FormWroperrStyled = styled(Col)`
+const FormWrapperStyled = styled(Col)`
   position: relative;
 `;
 
@@ -288,6 +289,12 @@ class AdvanceSearch extends Component {
 
   render() {
     const { isDeepSearchCheck, isMultipleIdSearchCheck, formData } = this.state;
+    const { constants, advanceSearchSchema } = this.props;
+    const { schema, uiSchema } = advanceSearchSchema;
+    const {
+      DEEP_SEARCH,
+      MULTIPLE_ID_SEARCH,
+    } = constants;
     return (
       <AdvanceSearchWrapper>
         <BoxStyled
@@ -298,7 +305,7 @@ class AdvanceSearch extends Component {
           backgroundColor="advancedSearch"
         >
           <Row alignItems="center">
-            <FormWroperrStyled size={10} padding="0 0 0 20px" margin="0">
+            <FormWrapperStyled size={10} padding="0 0 0 20px" margin="0">
               <Form
                 showErrorList={false}
                 liveValidate
@@ -311,7 +318,7 @@ class AdvanceSearch extends Component {
                 onSubmit={this.advanceSearch}
               />
               {this.clearButton()}
-            </FormWroperrStyled>
+            </FormWrapperStyled>
             <Col size={2} padding="0 20px 0 0">
               <Button
                 borderRadius="0 4px 4px 0"
@@ -359,7 +366,7 @@ class AdvanceSearch extends Component {
                 onChange={this.onChangeDeepSearchCheckBox}
                 checked={isDeepSearchCheck}
               />
-              <LabelStyled htmlFor="deep_search">Deep Search</LabelStyled>
+              <LabelStyled htmlFor="deep_search">{DEEP_SEARCH}</LabelStyled>
               <CheckboxNew
                 color="checkbox"
                 inactiveColor="checkbox"
@@ -367,7 +374,7 @@ class AdvanceSearch extends Component {
                 onChange={this.onChangeMultipleIdSearchCheckBox}
                 checked={isMultipleIdSearchCheck}
               />
-              <LabelStyled htmlFor="deep_search">Multiple ID Search</LabelStyled>
+              <LabelStyled htmlFor="deep_search">{MULTIPLE_ID_SEARCH}</LabelStyled>
             </Row>
           </Row>
         </BoxStyled>
@@ -377,6 +384,8 @@ class AdvanceSearch extends Component {
 }
 
 AdvanceSearch.propTypes = {
+  advanceSearchSchema: PropTypes.object,
+  constants: PropTypes.object,
   checkedIds: PropTypes.array,
   members: PropTypes.array,
   metaData: PropTypes.object,
@@ -384,10 +393,16 @@ AdvanceSearch.propTypes = {
 };
 
 AdvanceSearch.defaultProps = {
+  advanceSearchSchema: {},
+  constants: {},
   checkedIds: [],
   members: [],
   metaData: {},
   onFilter: () => {},
 };
 
-export default AdvanceSearch;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(accessControl(AdvanceSearch));

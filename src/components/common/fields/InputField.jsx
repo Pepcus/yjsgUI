@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
@@ -65,10 +64,11 @@ function InputField(props) {
   }
   return (
     /* This Col is used for adjust the position of field in form */
-    <Col {...fieldWrapper} >
+    <Col {...fieldWrapper} padding="0px">
       <Row width="100%" margin="0" >
         <TypographyStyled type="label" style={titleStyle}>
-          {label ? title : null}{required && label ? '*' : null}
+          {label ? title : null}
+          <Typography fontSize="20px" color="error" type="separator">{required && label ? '*' : null}</Typography>
         </TypographyStyled>
       </Row>
       <Row width="100%" margin="0">
@@ -103,7 +103,7 @@ InputField.propTypes = {
   /**
    * The field data.
    */
-  formData: PropTypes.string,
+  formData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * The schema object for identifying the field.
    */

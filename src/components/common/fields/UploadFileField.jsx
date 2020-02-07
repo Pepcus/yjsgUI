@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import get from 'lodash/get';
@@ -138,7 +137,8 @@ class UploadFileField extends Component {
       <Row width="auto">
         <Col size={12}>
           <TypographyStyled type="label" style={titleStyle}>
-            {label ? title : null}{required && label ? '*' : null}
+            {label ? title : null}
+            <Typography fontSize="20px" color="error" type="separator">{required && label ? '*' : null}</Typography>
           </TypographyStyled>
         </Col>
         <Row width="100%">

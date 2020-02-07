@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { faFileCsv } from '@fortawesome/free-solid-svg-icons/faFileCsv';
 import styled from 'styled-components';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -21,19 +21,16 @@ import {
 } from 'actions/allMembersDataActions';
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   getSuccess,
   getFailRecordIds,
   isUploadAttendanceFailed,
   idNotExistErrorMessage,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import fields from 'components/common/fields';
+import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
 import Message from './Message';
 
@@ -118,6 +115,8 @@ class UploadMembersAttendanceFile extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -157,11 +156,18 @@ class UploadMembersAttendanceFile extends Component {
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
     const {
+      constants,
       isUploadAttendanceSuccess,
       isAttendanceUploadFailed,
       failRecordIds,
       errorMessageOfIdNotExist,
+      attendanceFileModalFormSchema,
     } = this.props;
+    const { schema, uiSchema } = attendanceFileModalFormSchema;
+    const {
+      CLOSE,
+      UPLOAD,
+    } = constants;
 
     if (isModalOpen) {
       return (
@@ -204,7 +210,8 @@ class UploadMembersAttendanceFile extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >
+                  {CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={3}>
@@ -214,7 +221,7 @@ class UploadMembersAttendanceFile extends Component {
                   onClick={this.onFormSubmit}
                 >
                   <FaIcon height="15px" icon={faFileCsv} />
-                  Upload
+                  {UPLOAD}
                 </Button>
               </Col>
             </Row>
@@ -226,6 +233,8 @@ class UploadMembersAttendanceFile extends Component {
   };
 
   render() {
+    const { constants } = this.props;
+    const { UPLOAD_ATTENDANCE } = constants;
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -234,7 +243,7 @@ class UploadMembersAttendanceFile extends Component {
           onClick={this.openModal}
         >
           <FaIcon icon={faUpload} />
-          Upload Attendance
+          {UPLOAD_ATTENDANCE}
         </ButtonStyled>
         {this.renderModal()}
       </Row>
@@ -243,6 +252,7 @@ class UploadMembersAttendanceFile extends Component {
 }
 
 UploadMembersAttendanceFile.propTypes = {
+  constants: PropTypes.object,
   failRecordIds: PropTypes.string,
   errorMessageOfIdNotExist: PropTypes.string,
   isAttendanceUploadFailed: PropTypes.bool,
@@ -250,9 +260,11 @@ UploadMembersAttendanceFile.propTypes = {
   resetIsSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   uploadMembersAttendanceFile: PropTypes.func,
+  attendanceFileModalFormSchema: PropTypes.object,
 };
 
 UploadMembersAttendanceFile.defaultProps = {
+  constants: {},
   failRecordIds: '',
   errorMessageOfIdNotExist: '',
   isAttendanceUploadFailed: false,
@@ -260,9 +272,11 @@ UploadMembersAttendanceFile.defaultProps = {
   resetIsSuccess: () => {},
   secretKey: '',
   uploadMembersAttendanceFile: () => {},
+  attendanceFileModalFormSchema: {},
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   failRecordIds: getFailRecordIds(state),
   errorMessageOfIdNotExist: idNotExistErrorMessage(state),
   isAttendanceUploadFailed: isUploadAttendanceFailed(state),
@@ -276,4 +290,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(uploadMembersAttendanceFileAction({ secretKey, attendanceFile, day })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UploadMembersAttendanceFile);
+export default connect(mapStateToProps, mapDispatchToProps)(accessControl(UploadMembersAttendanceFile));

@@ -1,12 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-// import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -22,17 +21,14 @@ import {
 } from 'actions/allMembersDataActions';
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   isMarkOptInOrOptOutSuccess,
   isMarkOptInOrOptOutFailed,
 } from 'reducers/allMembersDataReducer';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import { extractMembersId } from 'utils/common';
+import { getConstants } from 'reducers/constants';
 
-import { schema, uiSchema } from './modalFormSchema.json';
 import ModalHeader from './ModalHeader';
 import Message from './Message';
 
@@ -108,6 +104,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -165,7 +163,9 @@ class MarkOptInOrOptOutSelectedMember extends Component {
    */
   renderModal = () => {
     const { formData, isModalOpen } = this.state;
-    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed } = this.props;
+    const { isMarkOptOutOrOptInSuccess, isMarkOptOutOrOptInFailed, constants, opInModalFormSchema } = this.props;
+    const { schema, uiSchema } = opInModalFormSchema;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -233,7 +233,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </Col>
               <Col size={3}>
@@ -242,7 +242,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
                   noMinWidth
                   onClick={this.onFormSubmit}
                 >
-                  Submit
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -254,8 +254,8 @@ class MarkOptInOrOptOutSelectedMember extends Component {
   };
 
   render() {
-    const { selectedMembers } = this.props;
-
+    const { selectedMembers, constants } = this.props;
+    const { MARK_OPT_IN_OR_OUT } = constants;
     return (
       <Row display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -264,7 +264,7 @@ class MarkOptInOrOptOutSelectedMember extends Component {
           noMinWidth
           onClick={this.checkOpenModalCondition}
         >
-          <FaIcon icon={faInfoCircle} />Mark Opt In / Out
+          <FaIcon icon={faInfoCircle} />{MARK_OPT_IN_OR_OUT}
         </ButtonStyled>
         {this.renderModal()}
       </Row>
@@ -273,26 +273,31 @@ class MarkOptInOrOptOutSelectedMember extends Component {
 }
 
 MarkOptInOrOptOutSelectedMember.propTypes = {
+  constants: PropTypes.object,
   clearSelectedMembers: PropTypes.func,
   isMarkOptOutOrOptInFailed: PropTypes.bool,
   isMarkOptOutOrOptInSuccess: PropTypes.bool,
   markSelectedMembersOptInOrOptOut: PropTypes.func,
+  opInModalFormSchema: PropTypes.object,
   resetIsMarkOptInOrOptOutSuccess: PropTypes.func,
   secretKey: PropTypes.string,
   selectedMembers: PropTypes.array,
 };
 
 MarkOptInOrOptOutSelectedMember.defaultProps = {
+  constants: {},
   clearSelectedMembers: () => {},
   isMarkOptOutOrOptInFailed: false,
   isMarkOptOutOrOptInSuccess: false,
   markSelectedMembersOptInOrOptOut: () => {},
+  opInModalFormSchema: {},
   resetIsMarkOptInOrOptOutSuccess: () => {},
   secretKey: '',
   selectedMembers: [],
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isMarkOptOutOrOptInFailed: isMarkOptInOrOptOutFailed(state),
   isMarkOptOutOrOptInSuccess: isMarkOptInOrOptOutSuccess(state),
   secretKey: getSecretKey(state),
@@ -304,4 +309,8 @@ const mapDispatchToProps = dispatch => ({
   resetIsMarkOptInOrOptOutSuccess: () => dispatch(resetIsMarkOptInOrOptOutSuccessAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(MarkOptInOrOptOutSelectedMember);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null, { pure: false },
+)(accessControl(MarkOptInOrOptOutSelectedMember));

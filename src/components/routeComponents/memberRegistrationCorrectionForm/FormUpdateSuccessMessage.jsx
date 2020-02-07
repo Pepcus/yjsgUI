@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,15 +7,12 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
-import {
-  goBackBtnText,
-  infoUpdateSuccessMessage,
-  noInfoChangeMessage,
-} from 'constants/yjsg';
 import { isUpdatedResetAction } from 'actions/memberRegistrationActions';
+import { getConstants } from 'reducers/constants';
 
 /**
  * It return success message popup
+ * @param {Object} constants
  * @param {Boolean} hasError
  * @param {Boolean} isFormChanged
  * @param {Boolean} isMemberUpdated
@@ -27,6 +23,7 @@ import { isUpdatedResetAction } from 'actions/memberRegistrationActions';
  * @constructor
  */
 const FormUpdateSuccessMessage = ({
+  constants,
   hasError,
   isFormChanged,
   isMemberUpdated,
@@ -34,6 +31,12 @@ const FormUpdateSuccessMessage = ({
   isUpdatedReset,
   redirectToPreviousLocation,
 }) => {
+  const {
+    INFO_UPDATE_SUCCESS_MESSAGE,
+    BACK,
+    NO_INFO_CHANGE_MESSAGE,
+  } = constants;
+
   // if form data is update and valid and submitted successfully.
   if (isMemberUpdated) {
     const onClick = () => {
@@ -44,14 +47,14 @@ const FormUpdateSuccessMessage = ({
     return (
       <Popup>
         <Row display="inline-block" width="100%" justify="center" margin="0">
-          <Typography type="body" fontSize="16px">{infoUpdateSuccessMessage}</Typography>
+          <Typography type="body" fontSize="16px">{INFO_UPDATE_SUCCESS_MESSAGE}</Typography>
           <Button
             color="tertiary"
             margin="10px 25px"
             onClick={onClick}
             width="170px"
           >
-            {goBackBtnText}
+            {BACK}
           </Button>
         </Row>
       </Popup>
@@ -61,14 +64,14 @@ const FormUpdateSuccessMessage = ({
     return (
       <Popup>
         <Row display="inline-block" width="100%" justify="center" margin="0">
-          <Typography fullWidth noWrapWidth type="body" fontSize="16px">{noInfoChangeMessage}</Typography>
+          <Typography fullWidth type="body" fontSize="16px">{NO_INFO_CHANGE_MESSAGE}</Typography>
           <Button
             color="tertiary"
             margin="10px 25px"
             onClick={redirectToPreviousLocation}
             width="170px"
           >
-            {goBackBtnText}
+            {BACK}
           </Button>
         </Row>
       </Popup>
@@ -77,6 +80,7 @@ const FormUpdateSuccessMessage = ({
 };
 
 FormUpdateSuccessMessage.propTypes = {
+  constants: PropTypes.object,
   hasError: PropTypes.bool,
   isFormChanged: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
@@ -86,6 +90,7 @@ FormUpdateSuccessMessage.propTypes = {
 };
 
 FormUpdateSuccessMessage.defaultProps = {
+  constants: {},
   hasError: false,
   isFormChanged: false,
   isMemberUpdated: false,
@@ -94,8 +99,12 @@ FormUpdateSuccessMessage.defaultProps = {
   redirectToPreviousLocation: () => {},
 };
 
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
 const mapDispatchToProps = dispatch => ({
   isUpdatedReset: props => dispatch(isUpdatedResetAction(props)),
 });
 
-export default connect(null, mapDispatchToProps)(FormUpdateSuccessMessage);
+export default connect(mapStateToProps, mapDispatchToProps)(FormUpdateSuccessMessage);

@@ -1,6 +1,8 @@
 import isEmpty from 'lodash/isEmpty';
+import cloneDeep from 'lodash/cloneDeep';
 
-import * as validationTypes from 'utils/validations';
+import * as customValidators from 'utils/validations';
+import deepmerge from 'deepmerge';
 
 /**
  * Method return transformErrors function
@@ -26,28 +28,40 @@ export const getTransformedErrors = ({ errors, transformErrors }) => {
   return errors;
 };
 
-/**
- * Handle form data validation
- * @param {Object} formData
- * @param {Object} errors
- * @param {Function} validate
- * @param {Object} validations
- * @return {Object} errors
- */
-export const verifyFormDataValidations = ({ formData, errors, validate }) => {
-  const validation = validate;
-  if (!isEmpty(validation) && formData) {
-    validation.forEach((valid) => {
-      const {
-        validator,
-        field,
-      } = valid;
-      const error = validationTypes[validator](formData[field]);
-
-      if (!isEmpty(error)) {
-        errors[field].addError(error);
+const applyValidators = (schemaItem, formData, errors, constants) => {
+  Object.keys(schemaItem).forEach((key) => {
+    // The top level form objects will have a properties key
+    if (key === 'properties') {
+      applyValidators(schemaItem.properties, formData, errors, constants);
+      // If it has properties, it means the schemaItem contains nested fields
+      // (because it is a nested form)
+    } else if (typeof schemaItem[key] === 'object' && 'properties' in schemaItem[key]) {
+      applyValidators(schemaItem[key].properties, formData[key], errors[key], constants);
+      // It is a fieldObject, which would contain the customValidation rules.
+    } else if (typeof schemaItem[key] === 'object' && 'customValidation' in schemaItem[key]) {
+      const validationFunction = schemaItem[key].customValidation;
+      const test = customValidators[validationFunction](formData[key], constants);
+      // If a test object is returned and valid, then
+      // add an error message to the requested form field.
+      if (test) {
+        errors[key].addError(test);
       }
-    });
-  }
-  return errors;
+    }
+  });
+};
+export const formValidators = (formSchema, constants) => {
+  // The custom validate function must always return the errors
+  // object received as second argument.
+  return (formData, errors) => {
+    // Make a copy of the 'errors' Object since we are going to mutate it in
+    // applyValidators()
+    const customErrors = cloneDeep(errors);
+    // This recurses through the schema object, looking for custom validation
+    // rules and running them and updating the errors object if any are
+    // found invalid.
+    applyValidators(formSchema, formData, customErrors, constants);
+    // TODO: cloneDeep + deepMerge is probably more inefficient than it
+    // needs to be. Consider refactoring if there are performance issues.
+    return deepmerge(errors, customErrors);
+  };
 };

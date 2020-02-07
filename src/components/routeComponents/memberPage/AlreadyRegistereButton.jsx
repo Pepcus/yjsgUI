@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from 'pepcus-core/lib/Button';
 
-import { alreadyRegisteredBtnText } from 'constants/yjsg';
+import { getConstants } from 'reducers/constants';
 
 const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
@@ -17,26 +17,34 @@ const ButtonStyled = styled(Button)`
 `;
 
 const AlreadyRegisteredButton = ({
+  constants,
   isAlreadyRegisteredButtonEnabled,
   redirectToMemberLogin,
 }) => {
+  const { ALREADY_REGISTERED } = constants;
   if (isAlreadyRegisteredButtonEnabled) {
     return (
       <ButtonStyled margin="10px" onClick={redirectToMemberLogin}>
-        {alreadyRegisteredBtnText}
+        {ALREADY_REGISTERED}
       </ButtonStyled>
     );
   } return null;
 };
 
 AlreadyRegisteredButton.propTypes = {
+  constants: PropTypes.object,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   redirectToMemberLogin: PropTypes.func,
 };
 
 AlreadyRegisteredButton.defaultProps = {
+  constants: {},
   isAlreadyRegisteredButtonEnabled: false,
   redirectToMemberLogin: () => {},
 };
 
-export default AlreadyRegisteredButton;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(AlreadyRegisteredButton);

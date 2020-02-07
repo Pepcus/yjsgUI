@@ -1,30 +1,25 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-import { CSVLink } from 'react-csv';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
-import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
 
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Container from 'pepcus-core/lib/Container';
-import FaIcon from 'pepcus-core/lib/FaIcon';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
-import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import Popup from 'components/common/Popup';
 import { isBusCoordinatorsDataFailed } from 'reducers/assetFilesReducer';
-import { BUS_COORDINATOR_ERROR_MESSAGE } from 'constants/messages';
+import { getConstants } from 'reducers/constants';
 
 import MarkSelectedMembersAttendance from './markSelectedMembersAttendance';
-// import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
+import MarkOptInOrOptOutSelectedMember from './markOptInOrOptOutSelectedMember';
 import UpdateIdCardStatusMembersModal from './updateIdCardStatusMembersModal';
 import MembersIdCard from './membersIdCard/MembersIdCard';
+import IdCardPrintButton from './IdCardPrintButton';
+import CSVExportButton from './CSVExportButton';
 
 const ContainerStyled = styled(Container)`
   position: unset;
@@ -40,42 +35,6 @@ const BoxStyled = styled(Box)`
 
 const PopupButtonStyled = styled(Button)`
      width: 100px;
-`;
-const CSVLinkStyled = styled(CSVLink)`
-    display: ${props => (props.disable ? 'none' : 'all')};
-    cursor: ${props => (props.disable ? 'not-allowed' : null)};
-    font-size: 14px;
-    border-radius: 4px;
-    background-color: ${getThemeProps('palette.action.hover')};
-    color: ${props => (props.disable ? getThemeProps('palette.common.placeholder') : getThemeProps('palette.common.darker'))};
-    padding: 8px 11px;
-    position: relative;
-    text-decoration: none;
-    box-shadow: ${props => (props.disable ? null : getThemeProps('palette.action.disabled'))};
-    &:hover {
-        background-color: ${props => (props.disable ? getThemeProps('palette.action.hover') : getThemeProps('palette.action.selected'))};
-    }
-    &:active {
-        box-shadow: none;
-    }
-    ${({ theme }) => theme.media.down('lg')`
-     display: none;
-    `};
-`;
-
-const ButtonStyled = styled(Button)`
-   ${({ theme }) => theme.media.down('lg')`
-     display: none;
-   `};
-`;
-
-const DisabledButtonStyled = styled(Button)`
-   margin: 0;
-   padding: 5px 10px;
-   display: ${props => (props.isView ? 'unset' : 'none')};
-   ${({ theme }) => theme.media.down('lg')`
-     display: none;
-   `};
 `;
 
 /**
@@ -106,7 +65,12 @@ class SelectedMembersActionWrapper extends Component {
    */
   renderCoordinatorUnavailableWarningPopup = () => {
     const { isBusCoordinatorsError } = this.state;
-    const { isBusCoordinatorsInformationFailed } = this.props;
+    const { isBusCoordinatorsInformationFailed, constants } = this.props;
+    const {
+      BUS_COORDINATOR_ERROR_MESSAGE,
+      NO,
+      YES,
+    } = constants;
 
     if (isBusCoordinatorsInformationFailed && isBusCoordinatorsError) {
       return (
@@ -119,7 +83,7 @@ class SelectedMembersActionWrapper extends Component {
               margin="5px"
               onClick={() => { this.onClickPrintCancel(false); }}
             >
-              No
+              {NO}
             </PopupButtonStyled>
             <PopupButtonStyled
               color="tertiary"
@@ -127,7 +91,7 @@ class SelectedMembersActionWrapper extends Component {
               noMinWidth
               onClick={this.printCards}
             >
-              Yes
+              {YES}
             </PopupButtonStyled>
           </Row>
         </Popup>
@@ -147,6 +111,15 @@ class SelectedMembersActionWrapper extends Component {
     });
   };
 
+  checkCoordinators = () => {
+    const { isBusCoordinatorsInformationFailed } = this.props;
+    if (isBusCoordinatorsInformationFailed) {
+      this.onClickPrintCancel(true);
+    } else {
+      this.printWindow();
+    }
+  };
+
   /**
    * Print the ID cards of members.
    */
@@ -157,18 +130,21 @@ class SelectedMembersActionWrapper extends Component {
 
   render() {
     const {
-      metaData,
       selectedMembers,
-      isBusCoordinatorsInformationFailed,
       // May use in future
       clearSelectedMembers,
+      opInModalFormSchema,
+      attendanceModalFormSchema,
+      updateIdCardStatusModalFormSchema,
+      isUpdateOptInEnable,
+      isUpdateAttendanceEnable,
+      isUpdateIdCardStatusEnable,
+      constants,
+      isIdCardPrintEnable,
+      isCSVExportEnable,
+      metaData,
     } = this.props;
 
-    const filterHeader = metaData.headerConfig.filter(obj =>
-      obj.excludeFromExport !== true);
-    const header = filterHeader.map(item =>
-      ({ label: item.label, key: item.key, disable: item.disable }),
-    );
     return (
       <ContainerStyled margin="5px 0" width="auto">
         <BoxStyled
@@ -178,50 +154,37 @@ class SelectedMembersActionWrapper extends Component {
           backgroundColor="unset"
           padding="0px"
         >
-          <CSVLinkStyled
-            disable={isEmpty(selectedMembers)}
-            headers={header}
-            data={selectedMembers}
-            filename={`StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`}
-          >
-            <FaIcon icon={faDownload} />
-            Export
-          </CSVLinkStyled>
-          <DisabledButtonStyled
-            isView={isEmpty(selectedMembers)}
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-          >
-            <FaIcon icon={faDownload} />
-            Export
-          </DisabledButtonStyled>
-          <ButtonStyled
-            margin="0 0 0 10px"
-            softDisable={isEmpty(selectedMembers)}
-            color="tertiary"
-            noMinWidth
-            onClick={
-                  () => {
-                    isBusCoordinatorsInformationFailed
-                      ? this.onClickPrintCancel(true) : this.printWindow();
-                  }}
-          >
-            <FaIcon icon={faPrint} />Print Now
-          </ButtonStyled>
+          <CSVExportButton
+            acl={isCSVExportEnable}
+            selectedMembers={selectedMembers}
+            constants={constants}
+            metaData={metaData}
+          />
+          <IdCardPrintButton
+            acl={isIdCardPrintEnable}
+            constants={constants}
+            selectedMembers={selectedMembers}
+            checkCoordinators={this.checkCoordinators}
+          />
           <UpdateIdCardStatusMembersModal
             selectedMembers={selectedMembers}
+            updateIdCardStatusModalFormSchema={updateIdCardStatusModalFormSchema}
+            acl={isUpdateIdCardStatusEnable}
           />
           <MarkSelectedMembersAttendance
             selectedMembers={selectedMembers}
+            attendanceModalFormSchema={attendanceModalFormSchema}
+            acl={isUpdateAttendanceEnable}
           />
           { /**
              TODO: May use in future
            **/ }
-          {/* <MarkOptInOrOptOutSelectedMember
+          <MarkOptInOrOptOutSelectedMember
+            acl={isUpdateOptInEnable}
             selectedMembers={selectedMembers}
             clearSelectedMembers={clearSelectedMembers}
-          />*/}
+            opInModalFormSchema={opInModalFormSchema}
+          />
           {this.renderCoordinatorUnavailableWarningPopup()}
         </BoxStyled>
         <MembersIdCard
@@ -233,20 +196,39 @@ class SelectedMembersActionWrapper extends Component {
 }
 
 SelectedMembersActionWrapper.propTypes = {
+  attendanceModalFormSchema: PropTypes.object,
+  constants: PropTypes.object,
   selectedMembers: PropTypes.array,
   metaData: PropTypes.object,
   isBusCoordinatorsInformationFailed: PropTypes.bool,
   clearSelectedMembers: PropTypes.func,
+  opInModalFormSchema: PropTypes.object,
+  updateIdCardStatusModalFormSchema: PropTypes.object,
+  isUpdateOptInEnable: PropTypes.bool,
+  isUpdateAttendanceEnable: PropTypes.bool,
+  isUpdateIdCardStatusEnable: PropTypes.bool,
+  isIdCardPrintEnable: PropTypes.bool,
+  isCSVExportEnable: PropTypes.bool,
 };
 
 SelectedMembersActionWrapper.defaultProps = {
+  attendanceModalFormSchema: {},
+  constants: {},
   selectedMembers: [],
   metaData: {},
   isBusCoordinatorsInformationFailed: false,
   clearSelectedMembers: () => {},
+  opInModalFormSchema: {},
+  updateIdCardStatusModalFormSchema: {},
+  isUpdateOptInEnable: false,
+  isUpdateAttendanceEnable: false,
+  isUpdateIdCardStatusEnable: false,
+  isIdCardPrintEnable: false,
+  isCSVExportEnable: false,
 };
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isBusCoordinatorsInformationFailed: isBusCoordinatorsDataFailed(state),
 });
 
-export default connect(mapStateToProps, {})(SelectedMembersActionWrapper);
+export default connect(mapStateToProps, null)(SelectedMembersActionWrapper);

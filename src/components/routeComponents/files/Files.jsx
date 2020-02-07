@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Switch } from 'react-router-dom';
@@ -24,17 +23,17 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   getFilesConfig,
 } from 'reducers/assetFilesReducer';
 import {
   fetchFilesConfigAction,
 } from 'actions/assetFilesActions';
-import { SUPPORTED_FILE_TYPES } from 'constants/yjsg';
-import { MESSAGE_FOR_PDF_FILE_DOWNLOAD } from 'constants/messages';
+import { SUPPORTED_FILE_TYPES } from 'constants/file';
 import { manageMembersTableWidth } from 'utils/common';
 import {
+  fetchFileResponseType,
   formatXlsxToJson,
   getDataGridHeadersForFileView,
   getFileListDisplayCondition,
@@ -43,13 +42,20 @@ import {
 import {
   setLoadingStateAction,
 } from 'actions/loaderActions';
-import { fetchFile } from 'apis/assetFilesAPI';
+import { getConstants } from 'reducers/constants';
+import { getAPIConfig } from 'reducers/api';
+import { getTenantName } from 'reducers/app';
+import { callAPIWithConfig } from 'apis/apis';
 
 const FileWrapper = styled(Box)`
     min-height: 100%;
     padding-bottom: 35px;
     padding-top: 100px;
     ${({ theme }) => theme.media.down('xl')`
+        padding-top: 0;
+        margin-top: 100px;
+    `}
+    ${({ theme }) => theme.media.down('lg')`
         padding-top: 0;
         margin-top: 0;
     `}
@@ -187,8 +193,8 @@ const ListElementWrapper = styled(Col)`
 const FaIconStyled = styled(FaIcon)`
      margin-right: 10px;
      font-size: 14px;
-     color: ${props => (props.isView ? getThemeProps('colors.header') : 'unset')};
-     cursor: ${props => (props.isView ? 'unset' : 'text')};
+     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : 'unset')};
+     cursor: ${props => (props.isview === 'true' ? 'unset' : 'text')};
 `;
 
 const ListElementStyle = styled(Typography)`
@@ -198,13 +204,13 @@ const ListElementStyle = styled(Typography)`
      max-width: 100%;
      white-space: nowrap;
      display: inline-block;
-     color: ${props => (props.isView ? getThemeProps('colors.header') : 'unset')};  
+     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : 'unset')};  
 `;
 
 const FileDownloadIcon = styled('a')`
     cursor: pointer;
     margin-left: 10px;
-    color: ${props => (props.isView ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
+    color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
     transition: 0.3s all;
     &:hover{
         color: ${getThemeProps('palette.primary.borderColor')};
@@ -352,6 +358,7 @@ class Files extends Component {
 
   componentDidMount() {
     const { filesConfig, fetchFilesConfig } = this.props;
+    const { TXT, PDF } = SUPPORTED_FILE_TYPES;
 
     fetchFilesConfig();
     const collections = window.location.hash.split('/files/');
@@ -359,12 +366,12 @@ class Files extends Component {
       if (filesConfig.files) {
         filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
-            if (fileInfo.fileType === 'pdf') {
+            if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
                 `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
-            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : TXT}`;
             const hasFileRoute = true;
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
@@ -375,18 +382,19 @@ class Files extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { filesConfig } = this.props;
+    const { PDF, TXT } = SUPPORTED_FILE_TYPES;
 
     if (filesConfig !== nextProps.filesConfig) {
       const collections = window.location.hash.split('/files/');
       if (collections[1]) {
         nextProps.filesConfig.files.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
-            if (fileInfo.fileType === 'pdf') {
+            if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
                 `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
               window.open(`${url}`, '_self');
             }
-            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : 'txt'}`;
+            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : TXT}`;
             const hasFileRoute = true;
             this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
           }
@@ -440,22 +448,25 @@ class Files extends Component {
    * @param{Object} file
    */
   fetchFileData = (file) => {
-    const { setLoadingState } = this.props;
+    const { setLoadingState, apiConfig, tenant } = this.props;
+    const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
-
+    const { fileName, fileType } = fileDetails;
+    const responseType = fetchFileResponseType(fileDetails);
     try {
-      fetchFile(fileDetails)
+      const config = { ...apiConfig, urlValuesMap: { fileName, fileType }, responseType };
+      callAPIWithConfig(tenant, 'fetchFile', config)
         .then((response) => {
           if (response) {
-            if (fileDetails.fileType === 'csv') {
+            if (fileDetails.fileType === CSV) {
               fileData = csv().fromString(response).then((csvRow) => {
                 this.setState({
                   fileData: csvRow,
                 });
                 setLoadingState(false);
               });
-            } else if (fileDetails.fileType === 'xlsx' || fileDetails.fileType === 'xls') {
+            } else if (fileDetails.fileType === XLSX || fileDetails.fileType === XLS) {
               fileData = formatXlsxToJson(response);
               this.setState({
                 fileData,
@@ -491,6 +502,7 @@ class Files extends Component {
   renderFileList = () => {
     const { hasFileRoute, activeFileId, width, showFileDetails, backPageButton } = this.state;
     const { filesConfig } = this.props;
+    const { TXT } = SUPPORTED_FILE_TYPES;
     const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton });
 
     if (hasFileRoute) {
@@ -504,7 +516,7 @@ class Files extends Component {
           >
             <FileListTitle type="headline">Available Files</FileListTitle>
             {filesConfig.files.map((file, index) => {
-                const href = `files/${file.fileName}.${file.fileType ? file.fileType : 'txt'}`;
+                const href = `files/${file.fileName}.${file.fileType ? file.fileType : TXT}`;
                 return (
                   <Row
                     display="flex"
@@ -514,14 +526,14 @@ class Files extends Component {
                     <ListElementWrapper
                       onClick={() => this.onClickViewFile(file, index, href, file.isViewable)}
                     >
-                      <Row display="flex" wrap="normal">
+                      <Row display="flex" wrap="nowrap">
                         <FaIconStyled
                           icon={faFile}
-                          isView={activeFileId === index}
+                          isview={toString(activeFileId === index)}
                         />
                         <ListElementStyle
                           type="caption"
-                          isView={activeFileId === index}
+                          isview={toString(activeFileId === index)}
                           title={file.fileLabel}
                         >
                           {file.fileLabel}
@@ -531,7 +543,7 @@ class Files extends Component {
                     <FileDownloadIcon
                       download={`${file.fileLabel}.${file.fileType}`}
                       href={href}
-                      isView={activeFileId === index}
+                      isview={toString(activeFileId === index)}
                     >
                       <FaIcon icon={faDownload} />
                     </FileDownloadIcon>
@@ -606,7 +618,15 @@ class Files extends Component {
       backPageButton,
     } = this.state;
     const isDisplayMessage = getMessageDisplayCondition({ width, showFileDetails, backPageButton });
-    const { filesConfig } = this.props;
+    const { filesConfig, constants } = this.props;
+    const {
+      MESSAGE_FOR_PDF_FILE_DOWNLOAD,
+      DOWNLOAD,
+      NO_DATA_FOUND,
+      NOTHING_TO_SHOW,
+      PLEASE_SELECT_A_FILE_TO_VIEW,
+      NO_FILES_AVAILABLE,
+    } = constants;
     const isMobile = width <= 500;
 
     if (showFileDetails) {
@@ -668,7 +688,7 @@ class Files extends Component {
                       download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
                       href={otherExtensionFileDetails.href}
                     >
-                      Download
+                      {DOWNLOAD}
                       <FaIcon icon={faDownload} />
                     </DownloadFileStyle>
                   </Box>
@@ -695,7 +715,7 @@ class Files extends Component {
                     download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
                     href={otherExtensionFileDetails.href}
                   >
-                    Download
+                    {DOWNLOAD}
                     <FaIcon icon={faDownload} />
                   </DownloadFileStyle>
                 </Box>
@@ -715,7 +735,7 @@ class Files extends Component {
             {this.renderFileListViewButton()}
             <Row display="flex" alignItems="center" justify="center" height="360px">
               <TypographyStyled type="caption" fontSize="25px">
-                No Data Found.
+                {NO_DATA_FOUND}
               </TypographyStyled>
             </Row>
           </MessageBoxWrapper>
@@ -731,7 +751,7 @@ class Files extends Component {
         >
           <Row display="flex" alignItems="center" justify="center" height="360px">
             <TypographyStyled type="caption" fontSize="25px">
-              Nothing to show.
+              {NOTHING_TO_SHOW}
             </TypographyStyled>
           </Row>
         </MessageBoxWrapper>
@@ -749,7 +769,7 @@ class Files extends Component {
         >
           <Row display="flex" alignItems="center" justify="center" height="360px">
             <TypographyStyled type="caption" fontSize="25px">
-              Please select a file to view.
+              {PLEASE_SELECT_A_FILE_TO_VIEW}
             </TypographyStyled>
           </Row>
         </SelectMessageWrapper>
@@ -759,7 +779,7 @@ class Files extends Component {
       <NoFileMessageWrapper ref={this.widthRef}>
         <Row display="flex" alignItems="center" justify="center" height="360px">
           <TypographyStyled type="caption" fontSize="25px">
-            No files available.
+            {NO_FILES_AVAILABLE}
           </TypographyStyled>
         </Row>
       </NoFileMessageWrapper>
@@ -823,22 +843,31 @@ class Files extends Component {
 }
 
 Files.propTypes = {
+  apiConfig: PropTypes.object,
+  constants: PropTypes.object,
   fetchFilesConfig: PropTypes.func,
   setLoadingState: PropTypes.func,
   filesConfig: PropTypes.object,
   context: PropTypes.object,
+  tenant: PropTypes.string,
 };
 
 Files.defaultProps = {
+  apiConfig: {},
+  constants: {},
   setLoadingState: () => {},
   fetchFilesConfig: () => {},
   filesConfig: {},
   context: {},
+  tenant: '',
 };
 
 const mapStateToProps = state => ({
+  apiConfig: getAPIConfig(state, 'file', 'fetchFile'),
+  constants: getConstants(state),
   secretKey: getSecretKey(state),
   filesConfig: getFilesConfig(state),
+  tenant: getTenantName(state),
 });
 
 const mapDispatchToProps = dispatch => ({

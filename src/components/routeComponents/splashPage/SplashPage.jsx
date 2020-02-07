@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -18,37 +17,32 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,
-  setAdminCredentialsAction,
   setMemberCredentialsAction,
 } from 'actions/memberRegistrationActions';
 import {
   setHashLinkForNewRegistrationAction,
-  setAdminLoginStateAction,
 } from 'actions/appActions';
 import {
+  loginAdminAction,
+  setAdminCredentialsAction,
+} from 'actions/loginActions';
+import {
+  getAdminLoginState,
   getAdminId,
   getAdminPassword,
+} from 'reducers/loginReducer';
+import {
   getMember,
   isFetched,
 } from 'reducers/memberRegistrationReducer';
 import {
-  stateOfAdminLogin,
-} from 'reducers/appReducer';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
-import {
-  adminId,
-  adminPassword,
-  eventDate,
-  eventVenue,
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 import { getParameterByName } from 'apis/http';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import {
-  GIVEN_INFORMATION_WRONG_MESSAGE,
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import { getTransformedErrors } from 'utils/form';
+import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/config';
+
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
 
@@ -101,7 +95,7 @@ class SplashPage extends Component {
     this.state = {
       admin: {},
       adminCredentialErrorMessage: false,
-      hasError: true,
+      hasError: false,
       isAdmin: false,
       isNewRegistration: false,
       isURLParams: false,
@@ -145,6 +139,9 @@ class SplashPage extends Component {
    * @return {Array}
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
+
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
@@ -201,77 +198,17 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method redirect to admin page on some condition.
-   * @return {HTML}
-   */
-  handleAdminScreenRedirection = () => {
-    // IF admin initial login.
-    const {
-      adminCredentialErrorMessage,
-      redirectToRoute,
-    } = this.state;
-    const {
-      adminLoginState,
-      id,
-      password,
-      setAdminLoginState,
-    } = this.props;
-
-    if (!adminLoginState) {
-      // Verify admin credential
-      if (adminCredentialErrorMessage) {
-        if (id !== adminId || password !== adminPassword) {
-          // If admin credential is not valid it gives the error message.
-          return (
-            <Row
-              justify="center"
-              width="100%"
-              margin="0 0 18px 0"
-            >
-              <Typography
-                type="title"
-                fontSize="14px"
-                align="center"
-                color="error"
-              >
-                {GIVEN_INFORMATION_WRONG_MESSAGE}
-              </Typography>
-            </Row>
-          );
-        }
-        // if admin credential is valid then it set admin login true in redux store
-        // and redirect to "/member-search" route
-        setAdminLoginState({ adminLoginState: true });
-        if (redirectToRoute) {
-          this.setRedirectToRoute('');
-          return <Switch><Redirect to={redirectToRoute} /></Switch>;
-        }
-        return <Switch><Redirect to="/member-search" /></Switch>;
-      }
-      return null;
-    }
-    if (redirectToRoute) {
-      this.setRedirectToRoute('');
-      return <Switch><Redirect to={redirectToRoute} /></Switch>;
-    }
-    // if admin is already login then it redirect to "/member-search"
-    // without any credential.
-    return <Switch><Redirect to="/member-search" /></Switch>;
-  };
-
-
-  /**
    * Method set the admin login credential
    */
   setAdminLogin = () => {
-    const { admin } = this.state;
-    const { setAdminCredentials } = this.props;
-
-    if (this.state.hasError) {
+    const { admin, hasError } = this.state;
+    const { setAdminCredentials, loginAdmin } = this.props;
+    if (hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
       });
       setAdminCredentials({ id: admin.adminId, password: admin.adminPassword });
+      loginAdmin({ adminId: admin.adminId, adminPassword: admin.adminPassword });
     }
   };
 
@@ -295,7 +232,16 @@ class SplashPage extends Component {
       isNewRegistration,
       isURLParams,
     } = this.state;
-    const { tenant } = this.props;
+    const {
+      constants,
+      logoPathConfig,
+      config,
+    } = this.props;
+    const { pageBodyLogo } = logoPathConfig;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+    } = constants;
 
     if (isURLParams) {
       return <Switch><Redirect to="/member-registration-correction" /></Switch>;
@@ -317,14 +263,14 @@ class SplashPage extends Component {
                 fontWeight="600"
                 type="title"
               >
-                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 align="center"
                 fontSize="16px"
                 type="title"
               >
-                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -333,12 +279,12 @@ class SplashPage extends Component {
               tagname="div"
               width="50%"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <LoginForm
               admin={admin}
+              config={config}
               enableAdminLoginButtons={this.enableAdminLoginButtons}
-              handleAdminScreenRedirection={this.handleAdminScreenRedirection}
               handleDisableAdminLoginButtons={this.handleDisableAdminLoginButtons}
               isAdmin={isAdmin}
               isNewRegistration={isNewRegistration}
@@ -346,6 +292,12 @@ class SplashPage extends Component {
               redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
               setAdminLogin={this.setAdminLogin}
               transformErrors={this.transformErrors}
+              adminCredentialErrorMessage={this.state.adminCredentialErrorMessage}
+              redirectToRoute={this.state.redirectToRoute}
+              id={this.props.id}
+              password={this.props.password}
+              isAdminLogin={this.props.isAdminLogin}
+              setRedirectToRoute={this.setRedirectToRoute}
             />
           </Col>
         </BoxStyled>
@@ -355,44 +307,49 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
-  adminLoginState: PropTypes.bool,
+  config: PropTypes.object,
+  constants: PropTypes.object,
+  isAdminLogin: PropTypes.bool,
   fetchMemberData: PropTypes.func,
   id: PropTypes.string,
+  logoPathConfig: PropTypes.object,
   password: PropTypes.string,
   setAdminCredentials: PropTypes.func,
-  setAdminLoginState: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
-  tenant: PropTypes.string,
+  loginAdmin: PropTypes.func,
 };
 
 SplashPage.defaultProps = {
-  adminLoginState: false,
+  config: {},
+  constants: {},
+  isAdminLogin: false,
   fetchMemberData: () => {},
+  logoPathConfig: {},
   id: '',
   password: '',
   setAdminCredentials: () => {},
-  setAdminLoginState: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
-  tenant: '',
+  loginAdmin: () => {},
 };
 
 const mapStateToProps = state => ({
-  adminLoginState: stateOfAdminLogin(state),
+  constants: getConstants(state),
   id: getAdminId(state),
   isFetched: isFetched(state),
+  logoPathConfig: getLogoPathConfig(state),
   password: getAdminPassword(state),
   memberData: getMember(state),
-  tenant: getApplicationTenant(state),
+  isAdminLogin: getAdminLoginState(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
-  setAdminLoginState: ({ adminLoginState }) => dispatch(setAdminLoginStateAction({ adminLoginState })),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
+  loginAdmin: ({ adminId, adminPassword }) => dispatch(loginAdminAction({ adminId, adminPassword })),
 });
 
 export default connect(

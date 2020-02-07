@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -14,20 +13,11 @@ import Row from 'pepcus-core/lib/Row';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
-  formSubmitBtnText,
-  goBackBtnText,
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 import {
   createMemberDataAction,
 } from 'actions/memberRegistrationActions';
-import {
-  setLoadingStateAction,
-} from 'actions/loaderActions';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
 import {
   getNewMember,
   isCreated,
@@ -35,13 +25,13 @@ import {
 import {
   getUserType,
 } from 'reducers/appReducer';
-import { fetchFormConfig } from 'apis/formConfigAPI';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
 import {
+  formValidators,
   getTransformedErrors,
-  verifyFormDataValidations,
 } from 'utils/form';
 import fields from 'components/common/fields';
+import { getConstants } from 'reducers/constants';
+
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';
 
@@ -88,36 +78,12 @@ class MemberRegistrationForm extends Component {
       isSubmitTriggered: false,
       member: {},
       hasError: false,
-      formConfig: {},
+      formConfig: props.config.registrationFormConfig,
       isAdminLocation: false,
       isStudentLocation: false,
       isPreviousLocation: false,
+      mandatoryField: false,
     };
-  }
-
-  componentWillMount() {
-    const { tenant, setLoadingState } = this.props;
-
-    setLoadingState(true);
-    try {
-      fetchFormConfig({ tenant, fileName: 'Registration' })
-        .then((response) => {
-          if (response) {
-            this.setState({
-              formConfig: response,
-            });
-
-          } else {
-            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-            setLoadingState(false);
-          }
-        });
-    } catch (e) {
-      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-      console.error(e);
-    } finally {
-      setLoadingState(false);
-    }
   }
 
   /**
@@ -127,16 +93,16 @@ class MemberRegistrationForm extends Component {
   handleSubmit = () => {
     const { hasError, member } = this.state;
     const { createStudentData } = this.props;
-
     if (hasError) {
-      this.setState({}, () => {
-        this.scrollToError();
-      });
-    } else {
       createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
         hasError: false,
+        mandatoryField: false,
+      });
+    } else {
+      this.setState({ mandatoryField: true }, () => {
+        this.scrollToError();
       });
     }
   };
@@ -158,12 +124,19 @@ class MemberRegistrationForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
-    const transformErrors = {
-      'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-      'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-    };
-    return getTransformedErrors({ errors, transformErrors });
+    const { mandatoryField } = this.state;
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
+    if (mandatoryField) {
+      const transformErrors = {
+        'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+        'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
+      };
+      return getTransformedErrors({ errors, transformErrors });
+    }
+    return errors;
   };
+
 
   /**
    * Redirect to previous location
@@ -197,24 +170,12 @@ class MemberRegistrationForm extends Component {
         ...member,
         ...event.formData,
       },
-      hasError: !isEmpty(event.errors),
+      hasError: isEmpty(event.errors),
     });
   };
 
-  /**
-   * Method check the validation for individual form fields
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {Object} errors
-   */
-  validate = (formData, errors) => {
-    const { formConfig } = this.state;
-    const { validation } = formConfig;
-
-    return verifyFormDataValidations({ formData, errors, validate: validation });
-  };
-
   render() {
+    const { FieldTemplate } = fields;
     const {
       formConfig,
       isAdminLocation,
@@ -224,10 +185,15 @@ class MemberRegistrationForm extends Component {
       member,
     } = this.state;
     const {
+      constants,
       isMemberCreated,
       newMember,
       context,
     } = this.props;
+    const {
+      BACK,
+      SUBMIT,
+    } = constants;
     const {
       schema,
       uiSchema,
@@ -254,9 +220,10 @@ class MemberRegistrationForm extends Component {
             <Form
               enableDirtyCheck
               externalSubmission
+              FieldTemplate={FieldTemplate}
               fields={fields}
               showErrorList={false}
-              validate={this.validate}
+              validate={formValidators(schema, constants)}
               liveValidate
               schema={schema}
               uiSchema={uiSchema}
@@ -271,7 +238,7 @@ class MemberRegistrationForm extends Component {
                   width="100%"
                   onClick={this.redirectToPreviousLocation}
                 >
-                  {goBackBtnText}
+                  {BACK}
                 </Button>
               </Col>
               <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
@@ -279,7 +246,7 @@ class MemberRegistrationForm extends Component {
                   width="100%"
                   onClick={this.handleSubmit}
                 >
-                  {formSubmitBtnText}
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -298,34 +265,33 @@ class MemberRegistrationForm extends Component {
 }
 
 MemberRegistrationForm.propTypes = {
+  config: PropTypes.object,
+  constants: PropTypes.object,
   context: PropTypes.object,
-  createStudentData: PropTypes.func,
+  createStudentData: PropTypes.func.isRequired,
   isMemberCreated: PropTypes.bool,
   newMember: PropTypes.object,
-  setLoadingState: PropTypes.func.isRequired,
-  tenant: PropTypes.string,
   userType: PropTypes.string,
 };
 
 MemberRegistrationForm.defaultProps = {
+  config: {},
+  constants: {},
   context: {},
-  createStudentData: () => {},
   isMemberCreated: false,
   newMember: {},
-  tenant: '',
   userType: '',
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isMemberCreated: isCreated(state),
   newMember: getNewMember(state),
-  tenant: getApplicationTenant(state),
   userType: getUserType(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   createStudentData: member => dispatch(createMemberDataAction(member)),
-  setLoadingState: flag => dispatch(setLoadingStateAction(flag)),
 });
 
 export default connect(

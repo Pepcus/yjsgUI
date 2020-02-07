@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,11 +7,8 @@ import Link from 'pepcus-core/lib/Link';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  CLICK_HERE_TEXT,
-  UPDATE_FURTHER_INFORMATION_TEXT,
-} from 'constants/text';
 import { isUserMember } from 'utils/form';
+import { getConstants } from 'reducers/constants';
 
 const LinkStyled = styled(Link)`
   &:hover {
@@ -22,6 +19,7 @@ const LinkStyled = styled(Link)`
 
 /**
  * Render link of update other information conditionally
+ * @param {Object} constants
  * @param {Function} changeIsOnlyOptIn
  * @param {Boolean} onlyOptInForm
  * @param {String} user
@@ -29,10 +27,15 @@ const LinkStyled = styled(Link)`
  * @constructor
  */
 const OtherInformationEditLink = ({
+  constants,
   changeIsOnlyOptIn,
   onlyOptInForm,
   user,
 }) => {
+  const {
+    UPDATE_FURTHER_INFORMATION_TEXT,
+    CLICK_HERE_TEXT,
+  } = constants;
 
   const onlyOptInChanged = () => {
     changeIsOnlyOptIn(false);
@@ -50,15 +53,21 @@ const OtherInformationEditLink = ({
 };
 
 OtherInformationEditLink.propTypes = {
+  constants: PropTypes.object,
   changeIsOnlyOptIn: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
   user: PropTypes.string,
 };
 
 OtherInformationEditLink.defaultProps = {
+  constants: {},
   changeIsOnlyOptIn: () => {},
   onlyOptInForm: false,
   user: '',
 };
 
-export default OtherInformationEditLink;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(OtherInformationEditLink);

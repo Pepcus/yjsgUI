@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -6,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 
+import { accessControl } from 'pepcus-core/utils';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 import Col from 'pepcus-core/lib/Col';
@@ -17,23 +17,20 @@ import Modal from 'pepcus-core/lib/Modal';
 
 import { extractMembersId } from 'utils/common';
 import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
-import {
   markSelectedMembersAttendanceAction,
   resetIsMarkAttendanceSuccessAction,
 } from 'actions/allMembersDataActions';
 import {
   getSecretKey,
-} from 'reducers/memberRegistrationReducer';
+} from 'reducers/loginReducer';
 import {
   isMarkAttendanceSuccess,
   isMarkAttendanceFailed,
 } from 'reducers/allMembersDataReducer';
 import fields from 'components/common/fields';
+import { getConstants } from 'reducers/constants';
 
 import Message from './Message';
-import { schema, uiSchema } from './modalFormShema.json';
 import ModalHeader from './ModalHeader';
 
 const ButtonStyled = styled(Button)`
@@ -124,6 +121,8 @@ class MarkSelectedMembersAttendance extends Component {
    * @return {Array} error message object
    */
   transformErrors = (errors) => {
+    const { constants } = this.props;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
@@ -180,7 +179,9 @@ class MarkSelectedMembersAttendance extends Component {
    */
   renderModal = () => {
     const { isModalOpen, formData } = this.state;
-    const { isAttendanceMarkSuccess, isAttendanceMarkFailed } = this.props;
+    const { isAttendanceMarkSuccess, isAttendanceMarkFailed, constants, attendanceModalFormSchema } = this.props;
+    const { schema, uiSchema } = attendanceModalFormSchema;
+    const { CLOSE, SUBMIT } = constants;
 
     const UiSchema = {
       ...uiSchema,
@@ -248,7 +249,7 @@ class MarkSelectedMembersAttendance extends Component {
                   noMinWidth
                   margin="0 0 20px 0"
                   onClick={this.closeModal}
-                >Close
+                >{CLOSE}
                 </CloseButtonStyled>
               </ColStyled>
               <Col size={3}>
@@ -257,7 +258,7 @@ class MarkSelectedMembersAttendance extends Component {
                   noMinWidth
                   onClick={this.onFormSubmit}
                 >
-                  Submit
+                  {SUBMIT}
                 </Button>
               </Col>
             </Row>
@@ -269,8 +270,8 @@ class MarkSelectedMembersAttendance extends Component {
   };
 
   render() {
-    const { selectedMembers } = this.props;
-
+    const { selectedMembers, constants } = this.props;
+    const { MARK_AS_PRESENT } = constants;
     return (
       <RowStyled display="inline-block" margin="0 0 0 10px">
         <ButtonStyled
@@ -279,7 +280,7 @@ class MarkSelectedMembersAttendance extends Component {
           noMinWidth
           onClick={this.checkOpenModalCondition}
         >
-          <FaIcon icon={faUser} />Mark as Present
+          <FaIcon icon={faUser} />{MARK_AS_PRESENT}
         </ButtonStyled>
         {this.renderModal()}
       </RowStyled>
@@ -288,6 +289,8 @@ class MarkSelectedMembersAttendance extends Component {
 }
 
 MarkSelectedMembersAttendance.propTypes = {
+  attendanceModalFormSchema: PropTypes.object,
+  constants: PropTypes.object,
   isAttendanceMarkFailed: PropTypes.bool,
   isAttendanceMarkSuccess: PropTypes.bool,
   markSelectedMembersAttendance: PropTypes.func,
@@ -297,6 +300,8 @@ MarkSelectedMembersAttendance.propTypes = {
 };
 
 MarkSelectedMembersAttendance.defaultProps = {
+  attendanceModalFormSchema: {},
+  constants: {},
   isAttendanceMarkFailed: false,
   isAttendanceMarkSuccess: false,
   markSelectedMembersAttendance: () => {},
@@ -306,6 +311,7 @@ MarkSelectedMembersAttendance.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isAttendanceMarkFailed: isMarkAttendanceFailed(state),
   isAttendanceMarkSuccess: isMarkAttendanceSuccess(state),
   secretKey: getSecretKey(state),
@@ -317,4 +323,9 @@ const mapDispatchToProps = dispatch => ({
   resetIsMarkAttendanceSuccess: () => dispatch(resetIsMarkAttendanceSuccessAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(MarkSelectedMembersAttendance);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { pure: false },
+)(accessControl(MarkSelectedMembersAttendance));

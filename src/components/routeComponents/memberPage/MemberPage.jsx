@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -21,19 +20,18 @@ import {
   setHashLinkForNewRegistrationAction,
   setHashLinkForMemberCredentialAction,
 } from 'actions/appActions';
-import yjsgLogo from 'assets/images/yjsgLogo.png';
 import {
-  eventDate,
-  eventVenue,
-  newRegistrationBtnText,
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 import { getParameterByName } from 'apis/http';
 import { getMember } from 'reducers/memberRegistrationReducer';
 import {
   getApplicationTenant,
   isRegisterCorrectionEnabled,
 } from 'reducers/assetFilesReducer';
+import { getConstants } from 'reducers/constants';
+import { getLogoPathConfig } from 'reducers/config';
+
 import AlreadyRegisteredButton from './AlreadyRegistereButton';
 import RedirectToRoute from './RedirectToRoute';
 import ImageWrapper from './ImageWrapper';
@@ -51,7 +49,8 @@ const ContainerStyled = styled(Container)`
 const ButtonStyled = styled(Button)`
    ${({ theme }) => theme.media.down('sm')`
        width: 100%;
-   `}
+   `};
+   
    @media (max-width: 992px) and (orientation: landscape) {
         width: 60%
     } 
@@ -78,8 +77,6 @@ const ImageStyled = styled.img`
 const TypographyStyled = styled(Typography)`
    color: ${getThemeProps('colors.header')};
 `;
-
-// TODO: responsive css @media remaining
 
 /**
  * The MemberPage component for the member which will render -
@@ -155,6 +152,8 @@ class MemberPage extends Component {
 
   render() {
     const {
+      constants,
+      logoPathConfig,
       tenant,
       isAlreadyRegisteredButtonEnabled,
     } = this.props;
@@ -163,7 +162,12 @@ class MemberPage extends Component {
       isMemberLogin,
       isNewRegistration,
     } = this.state;
-
+    const { pageBodyLogo } = logoPathConfig;
+    const {
+      EVENT_DATE,
+      EVENT_VENUE,
+      NEW_REGISTRATION,
+    } = constants;
     return (
       <ContainerStyled width="100%">
         <RedirectToRoute
@@ -187,14 +191,14 @@ class MemberPage extends Component {
                 fontSize="18px"
                 align="center"
               >
-                {eventDate[tenant ? tenant : 'DEFAULT_EVENT_DATE']}
+                {EVENT_DATE}
               </TypographyStyled>
               <Typography
                 type="title"
                 fontSize="16px"
                 align="center"
               >
-                {eventVenue[tenant ? tenant : 'DEFAULT_EVENT_VENUE']}
+                {EVENT_VENUE}
               </Typography>
             </Row>
             <ImageWrapper
@@ -203,7 +207,7 @@ class MemberPage extends Component {
               margin="auto"
               padding="20px"
             >
-              <ImageStyled src={yjsgLogo} alt="yjsg logo" />
+              <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
               <AlreadyRegisteredButton
@@ -211,7 +215,7 @@ class MemberPage extends Component {
                 redirectToMemberLogin={this.redirectToMemberLogin}
               />
               <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
-                {newRegistrationBtnText}
+                {NEW_REGISTRATION}
               </ButtonStyled>
             </Row>
           </Col>
@@ -222,8 +226,10 @@ class MemberPage extends Component {
 }
 
 MemberPage.propTypes = {
+  constants: PropTypes.object,
   fetchMemberData: PropTypes.func,
   isAlreadyRegisteredButtonEnabled: PropTypes.bool,
+  logoPathConfig: PropTypes.object,
   setHashLinkForMemberCredential: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
@@ -232,8 +238,10 @@ MemberPage.propTypes = {
 };
 
 MemberPage.defaultProps = {
+  constants: {},
   fetchMemberData: () => {},
   isAlreadyRegisteredButtonEnabled: false,
+  logoPathConfig: {},
   setHashLinkForMemberCredential: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
@@ -242,7 +250,9 @@ MemberPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   isAlreadyRegisteredButtonEnabled: isRegisterCorrectionEnabled(state),
+  logoPathConfig: getLogoPathConfig(state),
   memberData: getMember(state),
   tenant: getApplicationTenant(state),
 });

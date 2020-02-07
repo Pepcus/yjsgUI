@@ -1,0 +1,207 @@
+{
+  "PLEASE_SELECT_ANY_ONE_TEXT": "Please choose one . . .",
+
+  "UPDATE_FURTHER_INFORMATION_TEXT": "Please change other information here",
+
+  "CLICK_HERE_TEXT": "Click",
+
+  "YOUR_ID_TEXT": "Your ID:",
+
+  "YOUR_SECRET_CODE_TEXT": "Your secret code:",
+
+  "PLEASE_SELECT_COLUMNS_TEXT": "Please select columns",
+
+  "UPLOAD_FILE_TEXT": "Please upload the file",
+
+  "IS_THERE_TEXT": "Is",
+
+  "ERROR_MESSAGE_OF_LOAD_APP_DATA": "Error occurred to load application data.",
+
+  "FILE_DOWNLOAD_MESSAGE": "File downloading started...",
+
+  "MEMBER_ID_CARD_SMALL_HEADING": "CONFERENCE PARTICIPANT'S",
+
+  "MEMBER_ID_CARD_MAIN_HEADING": "ID CARD",
+
+  "MARK_SELECTED_MEMBERS_ATTENDANCE_LABEL": "Please enter the attendance of selected members ",
+
+  "OPT_IN_STATUS_FOR_SELECTED_MEMBERS_LABEL": "Please enter yes or no for selected members' camp",
+
+  "ID_CARD_PRINT_STATUS_FOR_SELECTED_MEMBERS_LABEL": "Please select the given ID's for card print!",
+
+  "NO_COLUMNS_SELECTED_MESSAGE": "You have selected zero columns so information is not available there.",
+
+  "INFORMATION_NOT_AVAILABLE_MESSAGE": "Information is not available here.",
+
+  "OPT_IN_OR_OPT_OUT_SUCCESS_MESSAGE": "Yes or no has been successfully registered for the camp of selected members.",
+
+  "OPT_IN_OR_OPT_OUT_FAILED_MESSAGE": "The selected members failed to register yes or no to the camp.",
+
+  "MARK_ATTENDANCE_SUCCESS_MESSAGE": "The attendance of the selected members has been successfully registered.",
+
+  "MARK_ATTENDANCE_FAILED_MESSAGE": "Failed to register the attendance of selected members.",
+
+  "ID_NOTE_MESSAGE": "Please note down your ID and secret code carefully.",
+
+  "ID_CARD_SUGGESTION_MESSAGE": "Soon your ID card will be sent by your regional convenor.",
+
+  "UPDATED_ID_CARD_STATUS_SUCCESS_MESSAGE": "Card print selection was successfully entered.",
+
+  "UPDATED_ID_CARD_STATUS_FAILED_MESSAGE": "Failed to enter the selection of card print.",
+
+  "OPT_IN_FILE_UPLOAD_SUCCESS_MESSAGE": "The optin file of the members has been uploaded successfully.",
+
+  "OPT_IN_FILE_UPLOAD_FAILURE_MESSAGE": "members' optin file upload was completely unsuccessful.",
+
+  "ATTENDANCE_FILE_UPLOAD_SUCCESS_MESSAGE": "member attendance file has been uploaded successfully.",
+
+  "ATTENDANCE_FILE_UPLOAD_FAILURE_MESSAGE": "member attendance file failed to upload.",
+
+  "THIS_INFORMATION_IS_COMPULSORY_MESSAGE": "This information is mandatory",
+
+  "INVALID_EMAIL_MESSAGE": "This email is not valid",
+
+  "INVALID_NAME_MESSAGE": "invalid Name",
+
+  "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "Name not less than 3 characters",
+
+  "FULL_ADDRESS_MESSAGE": "Please provide the full address!",
+
+  "SINGLE_QUOTE_ERROR_MESSAGE": "Address must not contain (')",
+
+  "DOUBLE_QUOTE_ERROR_MESSAGE": "Address must not contain (\")",
+
+  "INFORMATION_HELPFUL_TO_CONTACT_MESSAGE": "This information is useful in contacting you!",
+
+  "ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE": "Only valid for 8 - 45 years",
+
+  "ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE": "Valid for 5 - 66 years only",
+
+  "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "Mobile no. Valid for only 10 digits",
+
+  "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE": "Mobile no. Only valid number in",
+
+  "MESSAGE_FOR_PDF_FILE_DOWNLOAD": "The file format is invalid to show information, please download the file, and click on the button below to download.",
+
+  "BUS_COORDINATOR_ERROR_MESSAGE": "Information on bus coordinators is not available, do you want to continue printing the ID card of members?",
+
+  "REGISTRATION_SUCCESS_MESSAGE": "Your registration has been done for conference.",
+
+  "GIVEN_INFORMATION_WRONG_MESSAGE": "The information given is incorrect.",
+
+  "FOOTER_CONTACT_TEXT": "",
+
+  "EVENT_DATE": "Date: 25 October 2019",
+
+  "EVENT_VENUE": "Event Venue: Indore",
+
+  "OK_TEXT": "OK",
+
+  "NO": "No",
+
+  "YES": "Yes",
+
+  "BACK": "Back",
+
+  "CLOSE": "Close",
+
+  "SAVE": "Save",
+
+  "DOWNLOAD": "Download",
+
+  "LOGOUT": "Logout",
+
+  "SUBMIT": "Submit",
+
+  "UPLOAD": "Upload",
+
+  "EXPORT": "Export",
+
+  "NO_DATA_FOUND": "No Data Found",
+
+  "NOTHING_TO_SHOW": "Nothing to show",
+
+  "NO_FILES_AVAILABLE": "No files available",
+
+  "DEEP_SEARCH": "Deep Search",
+
+  "MULTIPLE_ID_SEARCH": "Multiple ID Search",
+
+  "PLEASE_SELECT_A_FILE_TO_VIEW": "Please select a file to view",
+
+  "UPLOAD_ATTENDANCE": "Upload Attendance",
+
+  "UPLOAD_OPT_IN": "Upload Opt In",
+
+  "PRINT_NOW": "Print Now",
+
+  "FILES": "Files",
+
+  "NAME": "Name:",
+
+  "CLASS": "Class:",
+
+  "ROOM": "Room:",
+
+  "FATHER_NAME": "Father Name:",
+
+  "MOBILE_NO": "Mobile No:",
+
+  "BUS_STOP": "Bus Stop:",
+
+  "BUS_NO": "Bus No:",
+
+  "ADDRESS": "Address:",
+
+  "MEMBER_ID": "member Id:",
+
+  "MARK_OPT_IN_OR_OUT": "Mark Opt In / Out",
+
+  "MARK_AS_PRESENT": "Mark as Present",
+
+  "PRINT_LATER": "Print Later",
+
+  "ALREADY_REGISTERED": "Member Login",
+
+  "NEW_REGISTRATION": "Register Here",
+
+  "VIEW_OR_EDIT_INFO": "View/Edit Information",
+
+  "FAILED_RECORDS_ARE": "Failed Records are:",
+
+  "INVALID_ID_MESSAGE": "The ID number Or the secret code, that you have entered is incorrect. Please try again.",
+
+  "NO_INFO_CHANGE_MESSAGE": "No change in information",
+
+  "INFO_UPDATE_SUCCESS_MESSAGE": "Your information has been successfully updated.",
+
+  "ADMIN_LOGIN": "Admin Login",
+
+  "ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG": "Error occurred to load form config.",
+
+  "CLOSE_BROWSER_MANUALLY_MESSAGE": "Please close your browser manually.",
+
+  "CUSTOM_FOOTER_INFORMATION": "For some reason your registration could not be done! Please contact conference organiser coordinator!",
+
+  "THANKS": "Thank you",
+
+  "DATE": "Date :",
+
+  "PARENT_EVENT_DATE": "Sunday 17 February",
+
+  "TIME": "Time :",
+
+  "EVENT_TIME": "4 AM to 1 AM",
+
+  "PLACE": "Place :",
+
+  "EVENT_PLACE": "Conference Indore",
+
+  "EVENT_TITLE": "Please provide the information below to join!",
+
+  "PARENT_REGISTRATION_SUCCESS_MESSAGE": "Your registration is complete!",
+
+  "MEMBERS_MUST_BE_GREATER_THAN_ZERO": "Members must be greater than zero",
+
+  "MEMBERS_MUST_BE_LESS_THAN_SIX": "Members must be under 6"
+}

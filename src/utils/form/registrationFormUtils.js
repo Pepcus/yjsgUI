@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import {
   USER_TYPES,
-} from 'constants/yjsg';
+} from 'constants/member';
 
 const {
   MEMBER_WITH_URL,
@@ -61,7 +61,7 @@ export const updateClassAttended2019InMemberData = (memberData) => {
 
 export const getRegisteredMemberData = ({ memberData }) => {
   // get student data from session if present
-  const memberDataFromSession = JSON.parse(sessionStorage.getItem('studentData'));
+  const memberDataFromSession = JSON.parse(sessionStorage.getItem('memberData'));
   return !isEmpty(memberData) ? memberData : memberDataFromSession;
 };
 

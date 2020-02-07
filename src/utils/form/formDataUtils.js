@@ -1,10 +1,14 @@
 import {
   TENANT,
-  USER_TYPES,
 } from 'constants/yjsg';
+import {
+  USER_TYPES,
+} from 'constants/member';
 import { isUserMember } from './registrationFormUtils';
-
+// TODO: remove tenant check condition
 /**
+ * TODO by Pratik: Need to be refactored
+ *
  * getFormData method return the form data for json form schema
  * @param {String} user
  * @param {Boolean} onlyOptInForm
@@ -25,24 +29,27 @@ export const getFormData = ({
   formConfig,
 }) => {
   const { ADMIN } = USER_TYPES;
-  const { INDORE } = TENANT;
+  const { INDORE, DEFAULT } = TENANT;
   let schema = {};
   let uiSchema = {};
   let formData = {};
-  let validation = [];
-  let defaultStudentDataFormat = [];
+  let defaultMemberDataFormat = [];
   if (isUserMember({ user }) && onlyOptInForm) {
+    // eslint-disable-next-line prefer-destructuring
     schema = formConfig.schema;
+    // eslint-disable-next-line prefer-destructuring
     uiSchema = formConfig.uiSchema;
     formData = {
       ...formConfig.data,
       ...member,
     };
-    validation = formConfig.validation;
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    // eslint-disable-next-line prefer-destructuring
+    // eslint-disable-next-line prefer-destructuring
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
-  } else if (tenant === INDORE) {
+  } else if (tenant === INDORE || tenant === DEFAULT || !tenant) {
     if (user === ADMIN) {
+      // eslint-disable-next-line prefer-destructuring
       schema = formConfig.schema;
       uiSchema = {
         ...formConfig.uiSchema,
@@ -63,9 +70,11 @@ export const getFormData = ({
         ...formConfig.data,
         ...member,
       };
-      validation = formConfig.validation;
-      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+      // eslint-disable-next-line prefer-destructuring
+      // eslint-disable-next-line prefer-destructuring
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     } else if (isUserMember({ user })) {
+      // eslint-disable-next-line prefer-destructuring
       schema = formConfig.schema;
       uiSchema = {
         ...formConfig.uiSchema,
@@ -86,11 +95,13 @@ export const getFormData = ({
         ...formConfig.data,
         ...member,
       };
-      validation = formConfig.validation;
-      defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+      // eslint-disable-next-line prefer-destructuring
+      // eslint-disable-next-line prefer-destructuring
+      defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
     }
 
   } else if (user === ADMIN) {
+    // eslint-disable-next-line prefer-destructuring
     schema = formConfig.schema;
     uiSchema = {
       ...formConfig.uiSchema,
@@ -111,10 +122,12 @@ export const getFormData = ({
       ...formConfig.data,
       ...member,
     };
-    validation = formConfig.validation;
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    // eslint-disable-next-line prefer-destructuring
+    // eslint-disable-next-line prefer-destructuring
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
 
   } else if (isUserMember({ user })) {
+    // eslint-disable-next-line prefer-destructuring
     schema = formConfig.schema;
     uiSchema = {
       ...formConfig.uiSchema,
@@ -135,8 +148,9 @@ export const getFormData = ({
       ...formConfig.data,
       ...member,
     };
-    validation = formConfig.validation;
-    defaultStudentDataFormat = formConfig.defaultStudentDataFormat;
+    // eslint-disable-next-line prefer-destructuring
+    // eslint-disable-next-line prefer-destructuring
+    defaultMemberDataFormat = formConfig.defaultMemberDataFormat;
   } else return null;
-  return { schema, uiSchema, formData, validation, defaultStudentDataFormat };
+  return { schema, uiSchema, formData, defaultMemberDataFormat };
 };

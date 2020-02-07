@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -8,23 +7,9 @@ import styled from 'styled-components';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 
-import {
-  ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG,
-  formSubmitBtnText,
-  FILES_NAME,
-  goBackBtnText,
-  USER_TYPES,
-} from 'constants/yjsg';
-import {
-  isUpdatedResetAction,
-  updateMemberDataAction,
-} from 'actions/memberRegistrationActions';
-import {
-  setLoadingStateAction,
-} from 'actions/loaderActions';
-import {
-  THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
-} from 'constants/messages';
+import { USER_TYPES } from 'constants/member';
+import { isUpdatedResetAction, updateMemberDataAction } from 'actions/memberRegistrationActions';
+import { setLoadingStateAction } from 'actions/loaderActions';
 import {
   getMember,
   getUserId,
@@ -41,18 +26,16 @@ import {
   isUserMember,
   updateClassAttended2019InMemberData,
   getFormData,
+  getTransformedErrors,
+  formValidators,
 } from 'utils/form';
 import { getApplicationTenant } from 'reducers/assetFilesReducer';
-import { fetchFormConfig } from 'apis/formConfigAPI';
 import {
   initialMemberData,
   isObjectsEqual,
   prePopulateOptIn,
 } from 'utils/validations';
-import {
-  getTransformedErrors,
-  verifyFormDataValidations,
-} from 'utils/form';
+import { getConstants } from 'reducers/constants';
 
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
@@ -65,7 +48,7 @@ const SubmitButtonStyled = styled(Button)`
    `}
    @media (max-width: 992px) and (orientation: landscape) {
       width: 100%;
-      margin: 10px 0px 10px 0px;
+      margin: 10px 0 10px 0;
   }
 `;
 
@@ -78,9 +61,8 @@ const BackButtonStyled = styled(Button)`
        margin-right: 0;
    `}
    @media (max-width: 992px) and (orientation: landscape) {
-      margin-right: 0;
       width: 100%;
-      margin: 10px 0px 10px 0px;
+      margin: 10px 0 10px 0;
   }
 `;
 
@@ -98,30 +80,29 @@ class MemberRegistrationCorrectionForm extends Component {
     this.state = {
       formData: {},
       formConfig: {},
-      hasError: false,
+      hasError: true,
       isFormChanged: false,
       isSubmitTriggered: false,
       isPreviousLocation: false,
       member: {},
       oldMemberData: {},
-      onlyOptInForm: true,
+      onlyOptInForm: this.props.config.isOptInEnable,
+      mandatoryField: false,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
   }
 
   componentDidMount() {
     this.mounted = true;
-    const { memberData, setLoadingState, user } = this.props;
-    if (isUserMember({ user })) {
-      const { onlyOptInForm } = this.state;
-      // If member data is not present in props then it will get from session store
-      // for maintain the member credential in case member get back to member correction form
-      const registeredMemberData = getRegisteredMemberData({ memberData });
-      const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
+    const { memberData, setLoadingState } = this.props;
+    const { onlyOptInForm } = this.state;
+    // If member data is not present in props then it will get from session store
+    // for maintain the member credential in case member get back to member correction form
+    const registeredMemberData = getRegisteredMemberData({ memberData });
+    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
 
-      setLoadingState(false);
-      this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
-    }
+    setLoadingState(false);
+    this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -148,65 +129,50 @@ class MemberRegistrationCorrectionForm extends Component {
    * @param {Boolean} onlyOptInForm
    */
   getFormConfig = ({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm }) => {
-    const { tenant, user, setLoadingState } = this.props;
-    const { ONLY_OPT_IN_JSON, MEMBER_JSON, ADMIN_JSON } = FILES_NAME;
+    const { config, tenant, user } = this.props;
     const { ADMIN } = USER_TYPES;
 
-    let fileName = '';
+    let formConfig = {};
     if (isUserMember({ user }) && onlyOptInForm) {
-      fileName = ONLY_OPT_IN_JSON;
+      formConfig = config.onlyOptInFormConfig;
     } else if (isUserMember({ user })) {
-      fileName = MEMBER_JSON;
+      formConfig = config.memberFormConfig;
     } else if (user === ADMIN) {
-      fileName = ADMIN_JSON;
+      formConfig = config.adminFormConfig;
     }
-    try {
-      fetchFormConfig({ tenant, fileName })
-        .then((response) => {
-          if (response) {
-            if (this.mounted) {
-              if (!isEmpty(prePopulateOptInMemberData)) {
-                this.setState({
-                  formData: initialMemberData({
-                    memberData: prePopulateOptInMemberData,
-                    formConfig: response,
-                  }),
-                  member: initialMemberData({
-                    memberData: prePopulateOptInMemberData,
-                    formConfig: response,
-                  }),
-                  oldMemberData: initialMemberData({
-                    memberData: registeredMemberData,
-                    formConfig: response,
-                  }),
-                  isSubmitTriggered: false,
-                  formConfig: getFormData({
-                    user,
-                    onlyOptInForm,
-                    tenant,
-                    member: this.state.member,
-                    renderBackButton: this.renderBackButton,
-                    renderSubmitButtons: this.renderSubmitButtons,
-                    formConfig: response,
-                  }),
-                  onlyOptInForm,
-                });
-                this.prePopulateCourse2019(initialMemberData({
-                  memberData: prePopulateOptInMemberData,
-                  formConfig: response,
-                }));
-              }
-            }
-          } else {
-            console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-            setLoadingState(false);
-          }
+
+    if (this.mounted) {
+      if (!isEmpty(prePopulateOptInMemberData)) {
+        this.setState({
+          formData: initialMemberData({
+            memberData: prePopulateOptInMemberData,
+            formConfig,
+          }),
+          member: initialMemberData({
+            memberData: prePopulateOptInMemberData,
+            formConfig,
+          }),
+          oldMemberData: initialMemberData({
+            memberData: registeredMemberData,
+            formConfig,
+          }),
+          isSubmitTriggered: false,
+          formConfig: getFormData({
+            user,
+            onlyOptInForm,
+            tenant: tenant ? tenant : 'default',
+            member: this.state.member,
+            renderBackButton: this.renderBackButton,
+            renderSubmitButtons: this.renderSubmitButtons,
+            formConfig,
+          }),
+          onlyOptInForm,
         });
-    } catch (e) {
-      console.error(ERROR_MESSAGE_OF_LOAD_APP_FORM_CONFIG);
-      console.error(e);
-    } finally {
-      setLoadingState(false);
+        this.prePopulateCourse2019(initialMemberData({
+          memberData: prePopulateOptInMemberData,
+          formConfig,
+        }));
+      }
     }
   };
 
@@ -219,23 +185,6 @@ class MemberRegistrationCorrectionForm extends Component {
     if (errorNode) {
       window.scrollTo(0, errorNode.offsetTop);
     }
-  };
-
-  /**
-   * Method check validation for only optIn is 'Y' form field and return conditional error for form field
-   * @param {Object} formData
-   * @param {Object} errors
-   * @return {Array}
-   */
-  validate = (formData, errors) => {
-    const { member, formConfig } = this.state;
-    const { validation } = formConfig;
-
-    if (member.optIn2019 === 'N') {
-      return [];
-    } else if (member.optIn2019 !== 'N') {
-      return verifyFormDataValidations({ formData, errors, validate: validation });
-    } return [];
   };
 
   /**
@@ -301,11 +250,15 @@ class MemberRegistrationCorrectionForm extends Component {
    * Method render submit button
    * @return {HTML} submit button
    */
-  renderSubmitButtons = () => (
-    <SubmitButtonStyled onClick={this.handleSubmit}>
-      {formSubmitBtnText}
-    </SubmitButtonStyled>
-  );
+  renderSubmitButtons = () => {
+    const { constants } = this.props;
+    const { SUBMIT } = constants;
+    return (
+      <SubmitButtonStyled onClick={this.handleSubmit}>
+        {SUBMIT}
+      </SubmitButtonStyled>
+    );
+  };
 
   /**
    * Method submit updated form data on conditional
@@ -313,24 +266,41 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   handleSubmit = (event) => {
     const { member, oldMemberData, hasError } = this.state;
+    const { config } = this.props;
+    const { isOptInEnable } = config;
     delete member.backButton;
     delete member.submitButton;
     event.preventDefault();
-    if (member.optIn2019 === 'N') {
-      this.setState({
-        isSubmitTriggered: true,
-      });
-      this.updateMemberData();
+    if (isOptInEnable) {
+      if (member.optIn2019 === 'N') {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateMemberData();
+      } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
+        this.setState({
+          isSubmitTriggered: true,
+          mandatoryField: false,
+        });
+        this.updateMemberData();
+      } else {
+        this.setState({
+          isFormChanged: false,
+          mandatoryField: true,
+          isSubmitTriggered: true,
+        }, () => { this.scrollToError(); });
+      }
     } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
       this.setState({
         isSubmitTriggered: true,
+        mandatoryField: false,
       });
       this.updateMemberData();
-
     } else {
       this.setState({
         isFormChanged: false,
         isSubmitTriggered: true,
+        mandatoryField: true,
       }, () => { this.scrollToError(); });
     }
   };
@@ -341,12 +311,16 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   submitMemberDataForOnlyOptInCase = (event) => {
     const { member } = this.state;
+    const { config } = this.props;
+    const { isOptInEnable } = config;
     event.preventDefault();
-    if (!isEmpty(member.optIn2019)) {
-      this.setState({
-        isSubmitTriggered: true,
-      });
-      this.updateMemberData();
+    if (isOptInEnable) {
+      if (!isEmpty(member.optIn2019)) {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateMemberData();
+      }
     }
   };
   /**
@@ -356,17 +330,26 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {Array} errors
    */
   transformErrors = (errors) => {
-    const { member } = this.state;
+    const { constants, config } = this.props;
+    const { isOptInEnable } = config;
+    const { THIS_INFORMATION_IS_COMPULSORY_MESSAGE } = constants;
+    const { member, mandatoryField } = this.state;
     const transformErrors = {
       'required': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
-
-    if (member.optIn2019 === 'N') {
-      return [];
-    } else if (member.optIn2019 !== 'N') {
+    if (isOptInEnable) {
+      if (member.optIn2019 === 'N') {
+        return [];
+      } else if (member.optIn2019 !== 'N') {
+        if (mandatoryField) {
+          return getTransformedErrors({ errors, transformErrors });
+        } return errors;
+      } return [];
+    }
+    if (mandatoryField) {
       return getTransformedErrors({ errors, transformErrors });
-    } return [];
+    } return errors;
   };
 
   /**
@@ -374,24 +357,26 @@ class MemberRegistrationCorrectionForm extends Component {
    * @return {HTML}
    */
   renderBackButton = () => {
-    const { user } = this.props;
+    const { user, constants, config } = this.props;
+    const { isOptInEnable } = config;
     const { ADMIN } = USER_TYPES;
+    const { BACK } = constants;
 
     if (user === ADMIN) {
       return (
         <BackButtonStyled
           onClick={this.redirectToPreviousLocation}
         >
-          {goBackBtnText}
+          {BACK}
         </BackButtonStyled>
       );
 
-    } else if (isUserMember({ user })) {
+    } else if (isUserMember({ user }) && isOptInEnable) {
       return (
         <BackButtonStyled
           onClick={this.onlyOptInChanged}
         >
-          {goBackBtnText}
+          {BACK}
         </BackButtonStyled>
       );
     }
@@ -400,7 +385,7 @@ class MemberRegistrationCorrectionForm extends Component {
       <BackButtonStyled
         onClick={this.redirectToPreviousLocation}
       >
-        {goBackBtnText}
+        {BACK}
       </BackButtonStyled>
     );
   };
@@ -442,6 +427,7 @@ class MemberRegistrationCorrectionForm extends Component {
       memberData,
       tenant,
       user,
+      constants,
     } = this.props;
 
     const {
@@ -454,7 +440,6 @@ class MemberRegistrationCorrectionForm extends Component {
       onlyOptInForm,
       formData,
     } = this.state;
-
     if (isFetch && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
@@ -468,10 +453,10 @@ class MemberRegistrationCorrectionForm extends Component {
           renderBackButton={this.renderBackButton}
           renderSubmitButtons={this.renderSubmitButtons}
           submitMemberDataForOnlyOptInCase={this.submitMemberDataForOnlyOptInCase}
-          tenant={tenant}
+          tenant={tenant ? tenant : 'default'}
           transformErrors={this.transformErrors}
           user={user}
-          validate={this.validate}
+          validate={formValidators(formConfig.schema, constants)}
         >
           <RedirectToRoute
             context={context}
@@ -503,8 +488,13 @@ class MemberRegistrationCorrectionForm extends Component {
 }
 
 MemberRegistrationCorrectionForm.propTypes = {
+  config: PropTypes.object,
+  constants: PropTypes.object,
   context: PropTypes.object,
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   isFetch: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
   isUpdatedReset: PropTypes.func,
@@ -517,6 +507,8 @@ MemberRegistrationCorrectionForm.propTypes = {
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
+  config: {},
+  constants: {},
   context: {},
   id: '',
   isFetch: false,
@@ -530,6 +522,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  constants: getConstants(state),
   id: getUserId(state),
   isFetch: isFetched(state),
   isMemberUpdated: isUpdated(state),

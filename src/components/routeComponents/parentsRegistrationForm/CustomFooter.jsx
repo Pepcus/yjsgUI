@@ -1,15 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Box from 'pepcus-core/lib/Box';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
-import {
-  CUSTOM_FOOTER_INFORMATION,
-  THANKS,
-} from 'constants/yjsg';
+import { getConstants } from 'reducers/constants';
 
 const FooterStyled = styled(Box)`
     z-index: 1000;
@@ -64,19 +62,38 @@ const FooterTextStyled = styled(Typography)`
  * It return the custom footer
  * @return {HTML}
  */
-const CustomFooter = () => (
-  <FooterStyled>
-    <FooterTextWrapper>
-      <FooterTextStyled>
-        {CUSTOM_FOOTER_INFORMATION}
-      </FooterTextStyled>
-    </FooterTextWrapper>
-    <FooterTextWrapper>
-      <FooterTextStyled>
-        {THANKS}
-      </FooterTextStyled>
-    </FooterTextWrapper>
-  </FooterStyled>
-);
+const CustomFooter = ({ constants }) => {
+  const {
+    CUSTOM_FOOTER_INFORMATION,
+    THANKS,
+  } = constants;
 
-export default CustomFooter;
+  return (
+    <FooterStyled>
+      <FooterTextWrapper>
+        <FooterTextStyled>
+          {CUSTOM_FOOTER_INFORMATION}
+        </FooterTextStyled>
+      </FooterTextWrapper>
+      <FooterTextWrapper>
+        <FooterTextStyled>
+          {THANKS}
+        </FooterTextStyled>
+      </FooterTextWrapper>
+    </FooterStyled>
+  );
+};
+
+CustomFooter.propTypes = {
+  constants: PropTypes.object,
+};
+
+CustomFooter.defaultProps = {
+  constants: {},
+};
+
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(CustomFooter);

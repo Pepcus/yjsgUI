@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from 'prop-types';
 import * as shortId from 'shortid';
@@ -17,16 +17,11 @@ import Row from 'pepcus-core/lib/Row';
 import { getThemeProps } from 'pepcus-core/utils/theme';
 
 import {
-  columnsList,
-} from 'config/appConfig.json';
-import {
   chunkArray,
   getChangedVisibleColumnConfig,
   getStyled,
 } from 'utils/common';
-import { PLEASE_SELECT_COLUMNS_TEXT } from 'constants/text';
-
-import { schema, uiSchema } from './columnConfig.json';
+import { getConstants } from 'reducers/constants';
 
 const ContainerStyled = styled(Container)`
     padding: 0 10px 20px 20px;
@@ -147,9 +142,10 @@ class ColumnConfiguration extends Component {
    */
   renderColumnOptions = () => {
     const { formData } = this.state;
-    const columnsListTemporary = cloneDeep(columnsList);
+    const { columnList } = this.props;
+    const columnsListTemporary = cloneDeep(columnList);
     let columnListChunks = [];
-    const chunkLength = Math.ceil(columnsList.length / 4);
+    const chunkLength = Math.ceil(columnList.length / 4);
 
     if (chunkLength >= 10) {
       columnListChunks = chunkArray(columnsListTemporary, chunkLength);
@@ -262,7 +258,9 @@ class ColumnConfiguration extends Component {
   };
 
   render() {
-    const { closeColumnOption, columnOptionIsOpen } = this.props;
+    const { closeColumnOption, columnOptionIsOpen, constants, columnConfigSchema } = this.props;
+    const { schema, uiSchema } = columnConfigSchema;
+    const { PLEASE_SELECT_COLUMNS_TEXT, CLOSE, SAVE } = constants;
     const UiSchema = {
       ...uiSchema,
       visibleColumnConfig: {
@@ -316,7 +314,7 @@ class ColumnConfiguration extends Component {
                 noMinWidth
                 onClick={closeColumnOption}
               >
-                Close
+                { CLOSE }
               </ButtonStyled>
             </CloseButtonWrapperStyled>
             <SaveButtonWrapperStyled padding="0" size={2}>
@@ -325,7 +323,7 @@ class ColumnConfiguration extends Component {
                 noMinWidth
                 onClick={this.setValuesOfVisibleColumnConfig}
               >
-                Save
+                { SAVE }
               </Button>
             </SaveButtonWrapperStyled>
           </Row>
@@ -336,6 +334,9 @@ class ColumnConfiguration extends Component {
 }
 
 ColumnConfiguration.propTypes = {
+  constants: PropTypes.object,
+  columnConfigSchema: PropTypes.object,
+  columnList: PropTypes.array,
   closeColumnOption: PropTypes.func,
   columnOptionIsOpen: PropTypes.bool,
   selectValue: PropTypes.bool,
@@ -344,6 +345,9 @@ ColumnConfiguration.propTypes = {
 };
 
 ColumnConfiguration.defaultProps = {
+  constants: {},
+  columnList: [],
+  columnConfigSchema: {},
   closeColumnOption: () => {},
   columnOptionIsOpen: false,
   selectValue: true,
@@ -351,4 +355,10 @@ ColumnConfiguration.defaultProps = {
   visibleColumnConfig: {},
 };
 
-export default ColumnConfiguration;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+export default connect(
+  mapStateToProps,
+  null,
+)(ColumnConfiguration);

@@ -1,1 +1,1 @@
-export { default } from './UpdateIdCardStatusMembersModal.jsx';
+export { default } from './UpdateIdCardStatusMembersModal';
