@@ -1,6 +1,13 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 const webpack = require('webpack');
+var fs = require('fs');
+
+var appDirectory = fs.realpathSync(process.cwd());
+function resolveApp(relativePath) {
+  return path.resolve(appDirectory, relativePath);
+}
 
 module.exports = {
   watch: true,
@@ -14,7 +21,7 @@ module.exports = {
     port: 9000,
     proxy: {
       '/v1': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8081',
       },
     },
   },
@@ -35,6 +42,14 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.json$/,
+        exclude: /(node_modules)/,
+        include: [resolveApp('./src')],
+        use: [{
+          loader: 'json-loader',
+        }],
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -57,6 +72,19 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name(file) {
+            if (process.env.NODE_ENV === 'development') {
+              return '[path][name].[ext]';
+            }
+
+            return '[contenthash].[ext]';
+          },
+        },
+      }
     ],
   },
   plugins: [
@@ -65,5 +93,11 @@ module.exports = {
       filename: './index.html',
       favicon: './src/assets/images/LOGO.png',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets',
+        to: 'assets',
+      },
+    ]),
   ],
 };

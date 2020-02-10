@@ -4,7 +4,6 @@ import { Redirect, Switch } from 'react-router-dom';
 import * as shortId from 'shortid';
 import isEmpty from 'lodash/isEmpty';
 import hasIn from 'lodash/hasIn';
-import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
 import DataGrid from 'simple-react-data-grid';
 import csv from 'csvtojson';
@@ -21,7 +20,6 @@ import FaIcon from 'pepcus-core/lib/FaIcon';
 import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 import { getThemeProps } from 'pepcus-core/utils/theme';
-import { Modal } from 'pepcus-core';
 
 import {
   getSecretKey,
@@ -150,18 +148,18 @@ const FilesListStyled = styled(Box)`
 
 const MessageBoxWrapper = styled(Box)`
     width: 100%;
-    max-width: 100%
+    max-width: 78%
     padding-top: 10px;
     margin: 0 0 0 300px;
     overflow-x: hidden;
     ${({ theme }) => theme.media.down('lg')`
         display:  ${props => (props.isDisplayMessage ? 'unset' : 'none')}
-        max-width: ${props => (props.isMobile ? '100%' : '100%')}
+        max-width: ${props => (props.isMobile ? '100%' : '64%')}
         margin: ${props => (props.isMobile ? '0' : '0 0 0 270px')};
     `}
     ${({ theme }) => theme.media.down('md')`
         padding: 0;
-        max-width: ${props => (props.isMobile ? '100%' : '100%')}
+        max-width: ${props => (props.isMobile ? '100%' : '64%')}
         margin: ${props => (props.isMobile ? '0' : 'unset')};
         width: 100%;
     `}
@@ -355,8 +353,6 @@ class Files extends Component {
       fileData: [],
       hasFileRoute: false,
       isGoBack: false,
-      isEditable: false,
-      addColumnModal: false,
     };
   }
 
@@ -461,7 +457,7 @@ class Files extends Component {
     try {
       const config = { ...apiConfig, urlValuesMap: { fileName, fileType }, responseType };
       callAPIWithConfig(tenant, 'fetchFile', config)
-        .then((response) => {
+      .then((response) => {
           if (response) {
             if (fileDetails.fileType === CSV) {
               fileData = csv().fromString(response).then((csvRow) => {
@@ -518,7 +514,6 @@ class Files extends Component {
           <FilesListStyled
             isDisplayCondition={isDisplayCondition}
           >
-            <input type="file" />
             <FileListTitle type="headline">Available Files</FileListTitle>
             {filesConfig.files.map((file, index) => {
                 const href = `files/${file.fileName}.${file.fileType ? file.fileType : TXT}`;
@@ -608,67 +603,6 @@ class Files extends Component {
     return null;
   };
 
-  onAddColumn = () => {
-    this.setState({
-      addColumnModal: true,
-    });
-  };
-
-  onAddRow = () => {
-    const { fileData } = this.state;
-    const newRow = {};
-
-    Object.keys(fileData[0]).forEach((key) => {
-      newRow[key] = '';
-    });
-    fileData.splice(0, 0, newRow);
-
-    this.setState({
-      fileData: fileData.map(row => omit(row, 'id')),
-    });
-  };
-
-  onSave = () => {
-    console.log('save data -- ')
-  };
-
-  onSwitchEditable = (e) => {
-    this.setState({
-      isEditable: e.target.checked,
-    });
-  };
-
-  renderAddEditColumn = () => {
-    const { isEditable } = this.state;
-    return (
-      <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <Col size={9}>
-          <Button disabled={!isEditable} style={{ marginRight: '2px' }} onClick={this.onAddColumn}>Add Column</Button>
-          <Button disabled={!isEditable} style={{ marginRight: '2px' }} onClick={this.onAddRow}>Add Row</Button>
-          <Button disabled={!isEditable} onClick={this.onSave}>Save</Button>
-        </Col>
-        <Col size={3}>
-          <Row style={{ padding: '4px 10px', display: 'flex', float: 'right' }}>
-            <span style={{ padding: '3px', fontWeight: '600' }}>Edit </span>
-            <label className="switch">
-              <input type="checkbox" checked={this.state.isEditable} onChange={this.onSwitchEditable} />
-              <span className="slider round" />
-            </label>
-          </Row>
-        </Col>
-      </Row>
-    );
-  };
-
-  handleRowEdit = (gridId, cellId, event) => {
-    const { fileData } = this.state;
-    fileData[gridId] = { ...fileData[gridId], [cellId]: event.target.value };
-
-    this.setState({
-      fileData,
-    });
-  };
-
   /**
    * It return file details
    * @return {HTML}
@@ -682,7 +616,6 @@ class Files extends Component {
       currentFileDetails,
       otherExtensionFileDetails,
       backPageButton,
-      isEditable,
     } = this.state;
     const isDisplayMessage = getMessageDisplayCondition({ width, showFileDetails, backPageButton });
     const { filesConfig, constants } = this.props;
@@ -709,11 +642,10 @@ class Files extends Component {
             >
               {this.renderFileListViewButton()}
               {this.renderFileDescription()}
-              {this.renderAddEditColumn()}
               <DataGrid
                 data={fileData}
-                metaData={{ ...getDataGridHeadersForFileView(fileData, currentFileDetails), isEditable }}
-                handleRowEdit={this.handleRowEdit}
+                metaData={
+                  getDataGridHeadersForFileView(fileData, currentFileDetails)}
               />
             </MessageBoxWrapper>
           );
@@ -727,11 +659,12 @@ class Files extends Component {
             style={hasFileRoute ? { margin: 'auto' } : null}
           >
             {this.renderFileDescription()}
-            {this.renderAddEditColumn()}
             <DataGrid
               data={fileData}
-              metaData={{ ...getDataGridHeadersForFileView(fileData, currentFileDetails), isEditable }}
-              handleRowEdit={this.handleRowEdit}
+              metaData={getDataGridHeadersForFileView(
+                fileData,
+                currentFileDetails)
+              }
             />
           </MessageBoxWrapper>);
       } else if (!isEmpty(otherExtensionFileDetails)) {
@@ -886,56 +819,6 @@ class Files extends Component {
     } return null;
   };
 
-  addColumn = (newColumnName) => {
-    console.log('newColumnName -- ', newColumnName, [newColumnName])
-    if (!isEmpty(newColumnName)) {
-      const newData = this.state.fileData.map((data) => {
-        return { ...data, [newColumnName]: '' };
-      });
-      this.setState({
-        fileData: newData,
-        addColumnModal: false,
-      });
-    }
-  };
-
-  renderAddColumnModal =() => {
-    const { addColumnModal } = this.state;
-    let newColumnName = '';
-
-    return (
-      <Modal open={addColumnModal} onClose={() => this.setState({ addColumnModal: false })}>
-        <Box>
-          <Row style={{ paddingBottom: '10px' }}>
-            <Col>
-              <label>
-                Column Name:
-              </label>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                onChange={(event) => { newColumnName = event.target.value; }}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button onClick={() => this.addColumn(newColumnName)}>
-                Add
-              </Button>
-            </Col>
-            <Col>
-              <Button onClick={() => this.setState({ addColumnModal: false })}>
-                Cancel
-              </Button>
-            </Col>
-          </Row>
-        </Box>
-      </Modal>
-    );
-  };
-
   render() {
     const { context } = this.props;
     const { isGoBack } = this.state;
@@ -951,7 +834,6 @@ class Files extends Component {
           </BackButtonWrapper>
         </BackButtonContainer>
         <FileListWrapper>
-          {this.renderAddColumnModal()}
           {this.renderFileList()}
           {this.renderFileDetails()}
         </FileListWrapper>

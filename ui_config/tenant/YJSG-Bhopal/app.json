@@ -1,6 +1,6 @@
 {
-  "title": "CONFERENCE REGISTRATION",
-  "footerTitle": "“ A true dreamer is one who knows how to navigate in the dark ”",
+  "title": "श्री दि. जैन बाल एवं युवा संस्कार शिक्षण शिविर ( १३ वॉं )",
+  "footerTitle": "अनुभव जैन, मो. 9179834281, 9303131737",
   "routes": [
     {
       "name": "default",
@@ -161,8 +161,8 @@
     }
   ],
   "logoPathConfig": {
-    "LOGO": "src/assets/images/default/LOGO.png",
-    "headerLogo": "src/assets/images/default/headerLogo.png",
-    "pageBodyLogo": "src/assets/images/default/pageBodyLogo.png"
+    "LOGO": "assets/images/YJSG-Bhopal/LOGO.png",
+    "headerLogo": "assets/images/YJSG-Bhopal/headerLogo.png",
+    "pageBodyLogo": "assets/images/YJSG-Bhopal/pageBodyLogo.png"
   }
 }
