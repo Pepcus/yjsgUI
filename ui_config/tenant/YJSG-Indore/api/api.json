@@ -63,7 +63,10 @@
       },
       "fetchFileConfig": {
         "method": "GET",
-        "url": "files/filesConfig.json"
+        "url": "v1/documents",
+        "headers": {
+          "secretKey": 451727
+        }
       }
     }
   }

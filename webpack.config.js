@@ -2,12 +2,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 const webpack = require('webpack');
-var fs = require('fs');
 
-var appDirectory = fs.realpathSync(process.cwd());
-function resolveApp(relativePath) {
-  return path.resolve(appDirectory, relativePath);
-}
 
 module.exports = {
   watch: true,
@@ -42,14 +37,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.json$/,
-        exclude: /(node_modules)/,
-        include: [resolveApp('./src')],
-        use: [{
-          loader: 'json-loader',
-        }],
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

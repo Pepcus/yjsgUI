@@ -365,10 +365,10 @@ class Files extends Component {
     const { TXT, PDF } = SUPPORTED_FILE_TYPES;
 
     fetchFilesConfig();
-    const collections = window.location.hash.split('/files/');
+    /* const collections = window.location.hash.split('/files/');
     if (collections[1]) {
-      if (filesConfig.files) {
-        filesConfig.files.forEach((fileInfo, index) => {
+      if (filesConfig) {
+        filesConfig.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
             if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
@@ -381,7 +381,7 @@ class Files extends Component {
           }
         });
       }
-    }
+    }*/
   }
 
   componentWillReceiveProps(nextProps) {
@@ -391,7 +391,7 @@ class Files extends Component {
     if (filesConfig !== nextProps.filesConfig) {
       const collections = window.location.hash.split('/files/');
       if (collections[1]) {
-        nextProps.filesConfig.files.forEach((fileInfo, index) => {
+        nextProps.filesConfig.forEach((fileInfo, index) => {
           if (fileInfo.routeName === collections[1]) {
             if (fileInfo.fileType === PDF) {
               const url = window.location.href.replace(fileInfo.routeName,
@@ -456,10 +456,21 @@ class Files extends Component {
     const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
-    const { fileName, fileType } = fileDetails;
+    const { url, displayName } = fileDetails;
+    const fileType = url.slice((Math.max(0, url.lastIndexOf('.')) || Infinity) + 1);
+    fileDetails.fileType = fileType;
     const responseType = fetchFileResponseType(fileDetails);
     try {
-      const config = { ...apiConfig, urlValuesMap: { fileName, fileType }, responseType };
+      // const config = { ...apiConfig, urlValuesMap: { fileName, fileType }, responseType };
+      const config = {
+        url: `v1/documents/${file.id}/file`,
+        method: 'GET',
+        headers: {
+          secretKey: 451727,
+        },
+        urlValuesMap: { displayName, fileType },
+        responseType,
+      };
       callAPIWithConfig(tenant, 'fetchFile', config)
         .then((response) => {
           if (response) {
@@ -513,15 +524,16 @@ class Files extends Component {
       return null;
     }
     if (!isEmpty(filesConfig)) {
-      if (hasIn(filesConfig, 'files')) {
-        return (
-          <FilesListStyled
-            isDisplayCondition={isDisplayCondition}
-          >
-            <input type="file" />
-            <FileListTitle type="headline">Available Files</FileListTitle>
-            {filesConfig.files.map((file, index) => {
-                const href = `files/${file.fileName}.${file.fileType ? file.fileType : TXT}`;
+      return (
+        <FilesListStyled
+          isDisplayCondition={isDisplayCondition}
+        >
+          <form id="uploadForm">
+            <input type="file" id="fileUpload" />
+          </form>
+          <FileListTitle type="headline">Available Files</FileListTitle>
+          {filesConfig.map((file, index) => {
+                const href = file.url;
                 return (
                   <Row
                     display="flex"
@@ -539,14 +551,14 @@ class Files extends Component {
                         <ListElementStyle
                           type="caption"
                           isview={toString(activeFileId === index)}
-                          title={file.fileLabel}
+                          title={file.displayName}
                         >
-                          {file.fileLabel}
+                          {file.displayName}
                         </ListElementStyle>
                       </Row>
                     </ListElementWrapper>
                     <FileDownloadIcon
-                      download={`${file.fileLabel}.${file.fileType}`}
+                      download={`${file.displayName}`}
                       href={href}
                       isview={toString(activeFileId === index)}
                     >
@@ -556,10 +568,8 @@ class Files extends Component {
                 );
               },
             )}
-          </FilesListStyled>
-        );
-      }
-      return null;
+        </FilesListStyled>
+      );
     }
     return null;
   };
@@ -629,7 +639,31 @@ class Files extends Component {
   };
 
   onSave = () => {
-    console.log('save data -- ')
+    const { url, id, displayName } = this.state.currentFileDetails;
+    const fileType = url.slice((Math.max(0, url.lastIndexOf('.')) || Infinity) + 1);
+    const filename = url.substring(url.lastIndexOf('/')+1);
+    const blob = new Blob([JSON.stringify(this.state.fileData)], {
+      type: 'application/octet-stream',
+      fileName: filename,
+    })
+    const formData = new FormData();
+    formData.append('file', blob)
+    formData.set('fileName', filename)
+    formData.set('displayName', displayName)
+    formData.set('id', id)
+
+    const config = {
+      url: `v1/documents`,
+      method: 'PUT',
+      headers: {
+        secretKey: 451727,
+      },
+      data: formData,
+    };
+    callAPIWithConfig(this.props.tenant, 'file', config)
+      .then((response) => {
+        console.log('response -- ', response)
+      });
   };
 
   onSwitchEditable = (e) => {
@@ -887,11 +921,8 @@ class Files extends Component {
   };
 
   addColumn = (newColumnName) => {
-    console.log('newColumnName -- ', newColumnName, [newColumnName])
     if (!isEmpty(newColumnName)) {
-      const newData = this.state.fileData.map((data) => {
-        return { ...data, [newColumnName]: '' };
-      });
+      const newData = this.state.fileData.map(data => ({ ...data, [newColumnName]: '' }));
       this.setState({
         fileData: newData,
         addColumnModal: false,
