@@ -20,7 +20,7 @@
       },
       "getMembers": {
         "method": "GET",
-        "url": "src/config/tenant/default/membersData.json"
+        "url": "v1/students"
       },
       "createMember": {
         "method": "POST",
@@ -41,24 +41,15 @@
       },
       "markMemberAttendance": {
         "method": "PUT",
-        "url": "v1/students/attendance?id=${selectedMembersId}",
-        "headers": {
-          "Content-type": "application/json"
-        }
+        "url": "v1/students/attendance?id=${selectedMembersId}"
       },
       "markMemberOptStatus": {
         "method": "PATCH",
-        "url": "v1/students/optin?id=${selectedMembersId}",
-        "headers": {
-          "Content-type": "application/json"
-        }
+        "url": "v1/students/optin?id=${selectedMembersId}"
       },
       "markMemberIdCardStatus": {
         "method": "PATCH",
-        "url": "v1/students/reprint?id=${selectedMembersId}",
-        "headers": {
-          "Content-type": "application/json"
-        }
+        "url": "v1/students/reprint?id=${selectedMembersId}"
       },
       "createSecondaryMember": {
         "method": "POST",
@@ -72,7 +63,10 @@
       },
       "fetchFileConfig": {
         "method": "GET",
-        "url": "files/filesConfig.json"
+        "url": "v1/documents",
+        "headers": {
+          "secretKey": 451727
+        }
       }
     }
   }

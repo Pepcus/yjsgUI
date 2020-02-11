@@ -21,7 +21,6 @@ export const callAPIWithConfig = (tenant, api, config) => {
   if (typeof headerFormatter === 'function') {
     headers = headerFormatter(headers, additionalData);
   }
-
   if (typeof requestFormatter === 'function') {
     data = requestFormatter(data);
   }
@@ -38,6 +37,10 @@ export const callAPIWithConfig = (tenant, api, config) => {
     responseType,
   }).then((response) => {
     let formattedResponse = _cloneDeep(response);
+
+    if (method.toUpperCase() === 'PUT') {
+      return response;
+    }
     if (typeof responseFormatter === 'function') {
       formattedResponse = responseFormatter(formattedResponse);
     }

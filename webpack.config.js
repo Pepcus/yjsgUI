@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 const webpack = require('webpack');
+
 
 module.exports = {
   watch: true,
@@ -14,7 +16,7 @@ module.exports = {
     port: 9000,
     proxy: {
       '/v1': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8081',
       },
     },
   },
@@ -57,6 +59,19 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name(file) {
+            if (process.env.NODE_ENV === 'development') {
+              return '[path][name].[ext]';
+            }
+
+            return '[contenthash].[ext]';
+          },
+        },
+      }
     ],
   },
   plugins: [
@@ -65,5 +80,11 @@ module.exports = {
       filename: './index.html',
       favicon: './src/assets/images/LOGO.png',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets',
+        to: 'assets',
+      },
+    ]),
   ],
 };
