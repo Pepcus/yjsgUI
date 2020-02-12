@@ -22,11 +22,13 @@ export const formatXlsxToJson = (response) => {
 export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   const headerConfig = [];
   for (const key in fileData[0]) {
-    headerConfig.push({
-      label: key,
-      key,
-      'type': 'string',
-    });
+    if (key !== 'gridId') {
+      headerConfig.push({
+        label: key,
+        key,
+        'type': 'string',
+      });
+    }
   }
   let metaData = {
     headerConfig,
@@ -35,15 +37,18 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
       'pagination': true,
     },
     drawerPosition: 'top',
+    resizeColumnWidth: true,
   };
   if (fileDetails.presentationType) {
     if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.NORMAL_TABULAR) {
       let normalHeader = [];
       for (const key in fileData[0]) {
-        normalHeader.push({
-          key,
-          'disableFilter': true,
-        });
+        if (key !== 'gridId') {
+          normalHeader.push({
+            key,
+            'disableFilter': true,
+          });
+        }
       }
       metaData = {
         headerConfig: normalHeader,
@@ -51,15 +56,17 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
     } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
       let complexHeader = [];
       for (const key in fileData[0]) {
-        complexHeader.push({
-          label: key,
-          key,
-          'type': 'string',
-        });
+        if (key !== 'gridId') {
+          complexHeader.push({
+            label: key,
+            key,
+            'type': 'string',
+          });
+        }
       }
       metaData = {
         headerConfig: complexHeader,
-        recordsPerPage: 100,
+        recordsPerPage: 150,
         bottomDrawer: {
           'pagination': true,
           'globalSearch': false,
@@ -68,6 +75,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
           'totalRecords': true,
         },
         drawerPosition: 'top',
+        resizeColumnWidth: true,
       };
     }
   }

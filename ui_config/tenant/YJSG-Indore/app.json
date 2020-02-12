@@ -1,6 +1,6 @@
 {
-  "title": "श्री दि. जैन बाल एवं युवा संस्कार शिक्षण शिविर ( १३ वॉं )",
-  "footerTitle": "अनुभव जैन, मो. 9179834281, 9303131737",
+  "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
+  "footerTitle": "74470-56789",
   "routes": [
     {
       "name": "default",
@@ -161,8 +161,8 @@
     }
   ],
   "logoPathConfig": {
-    "LOGO": "src/assets/images/YJSG-Bhopal/LOGO.png",
-    "headerLogo": "src/assets/images/YJSG-Bhopal/headerLogo.png",
-    "pageBodyLogo": "src/assets/images/YJSG-Bhopal/pageBodyLogo.png"
+    "LOGO": "./assets/images/YJSG-Indore/LOGO.png",
+    "headerLogo": "./assets/images/YJSG-Indore/headerLogo.png",
+    "pageBodyLogo": "./assets/images/YJSG-Indore/pageBodyLogo.png"
   }
 }

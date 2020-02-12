@@ -7,5 +7,5 @@ import { GET } from 'apis/http';
  */
 export const fetchFormConfig = ({ tenant, fileName }) => (
   GET({
-    url: `src/config/tenant/${tenant}/${fileName}.json`,
+    url: `ui_config/tenant/${tenant}/${fileName}.json`,
   }));

@@ -1,6 +1,6 @@
 {
-  "title": "जैन बाल एवं युवा संस्कार शिक्षण शिविर (चतुर्थ वर्ष)",
-  "footerTitle": "74470-56789",
+  "title": "CONFERENCE REGISTRATION",
+  "footerTitle": "“ A true dreamer is one who knows how to navigate in the dark ”",
   "routes": [
     {
       "name": "default",
@@ -161,8 +161,8 @@
     }
   ],
   "logoPathConfig": {
-    "LOGO": "src/assets/images/YJSG-Indore/LOGO.png",
-    "headerLogo": "src/assets/images/YJSG-Indore/headerLogo.png",
-    "pageBodyLogo": "src/assets/images/YJSG-Indore/pageBodyLogo.png"
+    "LOGO": "assets/images/default/LOGO.png",
+    "headerLogo": "assets/images/default/headerLogo.png",
+    "pageBodyLogo": "assets/images/default/pageBodyLogo.png"
   }
 }

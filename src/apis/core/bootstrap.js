@@ -7,7 +7,7 @@ import { GET } from 'apis/http';
  * @return  {Promise}
  */
 export const fetchAppConfig = ({ tenant }) => GET({
-  url: `src/config/tenant/${tenant}/app.json`,
+  url: `ui_config/tenant/${tenant}/app.json`,
 });
 
 export const getAppConfig = () => (
@@ -24,15 +24,15 @@ export const getBusCoordinatorsConfig = () => (
 
 export const getAppTheme = ({ tenant }) => (
   GET({
-    url: `src/config/tenant/${tenant}/theme.json`,
+    url: `ui_config/tenant/${tenant}/theme.json`,
   }));
 
 export const getAppConstants = ({ tenant }) => (
   GET({
-    url: `src/config/tenant/${tenant}/constants/text.json`,
+    url: `ui_config/tenant/${tenant}/constants/text.json`,
   })
 );
 
 export const getAPIConfig = ({ tenant }) => GET({
-  url: `src/config/tenant/${tenant}/api/api.json`,
+  url: `ui_config/tenant/${tenant}/api/api.json`,
 });
