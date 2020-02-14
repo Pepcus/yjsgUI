@@ -447,7 +447,7 @@ class Files extends Component {
 
     const config = {
       url: 'v1/documents',
-      method: 'PUT',
+      method: 'FILE_UPLOAD',
       headers: {
         secretKey: 451727,
       },
@@ -485,7 +485,7 @@ class Files extends Component {
 
     const config = {
       url: 'v1/documents',
-      method: 'PUT',
+      method: 'FILE_UPLOAD',
       headers: {
         secretKey: 451727,
       },
