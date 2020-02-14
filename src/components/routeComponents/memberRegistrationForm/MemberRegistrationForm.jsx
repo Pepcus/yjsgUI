@@ -93,7 +93,7 @@ class MemberRegistrationForm extends Component {
   handleSubmit = () => {
     const { hasError, member } = this.state;
     const { createStudentData } = this.props;
-    if (!hasError) {
+    if (hasError) {
       createStudentData(member);
       this.setState({
         isSubmitTriggered: true,

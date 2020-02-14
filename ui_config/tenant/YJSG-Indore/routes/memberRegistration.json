@@ -10,7 +10,7 @@
         "mobile",
         "busStop",
         "address",
-        "classAttended2019"
+        "classAttended2020"
       ],
       "properties": {
         "name": {
@@ -159,7 +159,7 @@
             "निजी वाहन से"
           ]
         },
-        "classAttended2019": {
+        "classAttended2020": {
           "title": "आप क्या अध्ययन करना चाहते हैं ?",
           "type": "string",
           "enum": [
@@ -183,7 +183,7 @@
             "Level 8 : छहढाला-ढाल 4-5"
           ]
         },
-        "classAttended2018": {
+        "classAttended2019": {
           "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
           "type": "string"
         }
@@ -394,7 +394,7 @@
           }
         }
       },
-      "classAttended2019": {
+      "classAttended2020": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -415,7 +415,7 @@
           }
         }
       },
-      "classAttended2018": {
+      "classAttended2019": {
         "ui:field": "InputField",
         "ui:options": {
           "style": {
@@ -437,8 +437,8 @@
       }
     },
     "data": {
-      "optIn2019": "Y",
-      "classAttended2018": "",
+      "optIn2020": "Y",
+      "classAttended2019": "",
       "education": "",
       "occupation": ""
     }

@@ -226,12 +226,12 @@ export const prePopulateOptIn = ({ memberData }) => {
   if (memberData) {
 
     const {
-      optIn2019,
+      optIn2020,
     } = memberData;
 
     updatedMemberData = {
       ...memberData,
-      optIn2019: !optIn2019 ? 'Y' : optIn2019,
+      optIn2020: !optIn2020 ? 'Y' : optIn2020,
     };
   }
   return updatedMemberData;

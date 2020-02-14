@@ -24,7 +24,7 @@ import {
 import {
   getRegisteredMemberData,
   isUserMember,
-  updateClassAttended2019InMemberData,
+  updateClassAttended2020InMemberData,
   getFormData,
   getTransformedErrors,
   formValidators,
@@ -168,7 +168,7 @@ class MemberRegistrationCorrectionForm extends Component {
           }),
           onlyOptInForm,
         });
-        this.prePopulateCourse2019(initialMemberData({
+        this.prePopulateCourse2020(initialMemberData({
           memberData: prePopulateOptInMemberData,
           formConfig,
         }));
@@ -207,11 +207,11 @@ class MemberRegistrationCorrectionForm extends Component {
   };
 
   /**
-   * Method pre populate course (level) of year 2019
+   * Method pre populate course (level) of year 2020
    * @param {Object} memberData
    */
-  prePopulateCourse2019 = (memberData) => {
-    const updatedData = updateClassAttended2019InMemberData(memberData);
+  prePopulateCourse2020 = (memberData) => {
+    const updatedData = updateClassAttended2020InMemberData(memberData);
     this.setState({
       member: updatedData,
     });

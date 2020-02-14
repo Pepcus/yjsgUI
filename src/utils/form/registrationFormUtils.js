@@ -28,32 +28,32 @@ export const checkLevelValue = (value) => {
  * @param {Object} memberData
  * @return {Object} studentData
  */
-export const updateClassAttended2019InMemberData = (memberData) => {
+export const updateClassAttended2020InMemberData = (memberData) => {
 
-  const { classAttended2018, classAttended2019 } = memberData;
+  const { classAttended2019, classAttended2020 } = memberData;
 
-  if (classAttended2019) {
+  if (classAttended2020) {
     return memberData;
   }
 
-  const lastCourse = classAttended2018;
+  const lastCourse = classAttended2019;
   const level = checkLevelValue(lastCourse);
 
-  /* In classAttended2018 Level is greater than 0 (level > 0) condition will satisfied.*/
+  /* In classAttended2019 Level is greater than 0 (level > 0) condition will satisfied.*/
   if (level > 0) {
-    // In classAttended2018 Level is greater than 7 like 'Level 8'
+    // In classAttended2019 Level is greater than 7 like 'Level 8'
     // in that condition will pre populate
-    // the value of classAttended2019 is 'Level 8'.
+    // the value of classAttended2020 is 'Level 8'.
     if (level > 7) {
-      return extend(cloneDeep(memberData), { classAttended2019: 'Level 8' });
+      return extend(cloneDeep(memberData), { classAttended2020: 'Level 8' });
     }
-    // In classAttended2018 Level is greater than 0 and less than 8 in that condition
-    // pre populate value of classAttended2019 will be classAttended2018 incremented by 1.
-    return extend(cloneDeep(memberData), { classAttended2019: `Level ${level + 1}` });
+    // In classAttended2019 Level is greater than 0 and less than 8 in that condition
+    // pre populate value of classAttended2020 will be classAttended2019 incremented by 1.
+    return extend(cloneDeep(memberData), { classAttended2020: `Level ${level + 1}` });
 
   } else if (!isEmpty(lastCourse)) {
-    // If classAttended2018 value is anything else then Level classAttended2019 will be Level 1.
-    return extend(cloneDeep(memberData), { classAttended2019: 'Level 1' });
+    // If classAttended2019 value is anything else then Level classAttended2020 will be Level 1.
+    return extend(cloneDeep(memberData), { classAttended2020: 'Level 1' });
   }
 
   return memberData;

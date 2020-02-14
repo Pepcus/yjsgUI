@@ -73,7 +73,7 @@ export const PUT = ({ url, headers, body }) => {
       'Content-type': 'application/json',
       'Accept': 'application/json',
     },
-    body,
+    body: JSON.stringify(body),
     mode: 'cors',
     cache: 'default',
   };

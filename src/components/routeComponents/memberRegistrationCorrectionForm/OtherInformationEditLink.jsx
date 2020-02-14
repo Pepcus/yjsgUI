@@ -15,6 +15,7 @@ const LinkStyled = styled(Link)`
      color: ${getThemeProps('colors.PRIMARY')};
      text-decoration: underline;
   }
+  color: ${getThemeProps('colors.PRIMARY')};
 `;
 
 /**
