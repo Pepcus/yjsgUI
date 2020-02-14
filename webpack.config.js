@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, './build'),
     filename: 'main.js',
   },
+  node: { fs: 'empty' },
   devtool: 'source-map',
   devServer: {
     port: 9000,
@@ -59,19 +60,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          name(file) {
-            if (process.env.NODE_ENV === 'development') {
-              return '[path][name].[ext]';
-            }
-
-            return '[contenthash].[ext]';
-          },
-        },
-      }
     ],
   },
   plugins: [
