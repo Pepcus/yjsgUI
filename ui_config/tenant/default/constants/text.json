@@ -77,6 +77,8 @@
 
   "ONLY_VALID_FOR_5_TO_66_YEARS_MESSAGE": "Valid for 5 - 66 years only",
 
+  "ONLY_NUMBERS_ALLOWED_MESSAGE": "Only numbers are allowed.",
+
   "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "Mobile no. Valid for only 10 digits",
 
   "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE": "Mobile no. Only valid number in",
