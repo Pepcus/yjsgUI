@@ -31,12 +31,12 @@
         },
         "age": {
           "title": "उम्र",
-          "type": "number",
+          "type": "string",
           "customValidation": "ageValidator"
         },
         "mobile": {
           "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-          "type": "number",
+          "type": "string",
           "customValidation": "mobileValidator"
         },
         "occupation": {

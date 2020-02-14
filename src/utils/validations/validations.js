@@ -56,7 +56,7 @@ export const nameValidator = (value, constants) => {
  * @return {string} message
  */
 export const ageValidator = (value, constants) => {
-  const { ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE } = constants;
+  const { ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE, ONLY_NUMBERS_ALLOWED_MESSAGE } = constants;
   const temporaryValue = !value ? null : String(value);
   let message = '';
 
@@ -66,6 +66,8 @@ export const ageValidator = (value, constants) => {
   } else if (temporaryValue > 45 || temporaryValue < 8) {
     message = ONLY_VALID_FOR_8_TO_45_YEARS_MESSAGE;
 
+  } else if (isNaN(temporaryValue)) {
+    message = ONLY_NUMBERS_ALLOWED_MESSAGE;
   } else {
     message = '';
   }
@@ -91,11 +93,11 @@ export const mobileValidator = (value, constants) => {
   if (isEmpty(temporaryValue)) {
     message = '';
 
-  } else if (temporaryValue.length !== 10) {
-    message = ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE;
-
   } else if (!mobileRegExp.test(temporaryValue)) {
     message = ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE;
+
+  } else if (temporaryValue.length !== 10) {
+    message = ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE;
 
   } else {
     message = '';
