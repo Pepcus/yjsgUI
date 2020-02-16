@@ -9,12 +9,14 @@ import PropTypes from 'prop-types';
 import DataGrid from 'simple-react-data-grid';
 import csv from 'csvtojson';
 import { Parser } from 'json2csv';
-import json2xls from 'json2xls';
 import { json2excel, excel2json } from 'js2excel';
 import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 import { faList } from '@fortawesome/free-solid-svg-icons/faList';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
+import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+
 
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
@@ -40,10 +42,11 @@ import { getTenantName } from 'reducers/app';
 import { callAPIWithConfig } from 'apis/apis';
 import {
   BackButtonContainer, BackButtonWrapper, DownloadFileStyle, FaIconStyled, FileDescriptionStyled,
-  FileDownloadIcon, FileListTitle, FileListWrapper, FilesListStyled, FileWrapper, ListElementStyle,
+  FileDownloadIcon, FileListTitle, FileListWrapper, FilesListStyled, FileUploadIcon, FileWrapper, ListElementStyle,
   ListElementWrapper, MessageBoxWrapper, MessageWrapper, MobileFileListButtonStyle, NoFileMessageWrapper,
   SelectMessageWrapper, TypographyStyled,
 } from 'components/routeComponents/files/FilesStyled';
+import FileViewFrame from 'components/routeComponents/files/FileViewFrame';
 
 /**
  * Files component render files list and file data table.
@@ -102,6 +105,38 @@ class Files extends Component {
     manageMembersTableWidth(this.widthRef);
   }
 
+  APICallWithConfig = ({ config }) => {
+    this.props.setLoadingState(true);
+    callAPIWithConfig(this.props.tenant, 'file', config)
+      .then((response) => {
+        this.props.setLoadingState(false);
+        if (response === 'ACCEPTED') {
+          this.setState({
+            notificationMessage: 'Data successfully updated.',
+            isEditable: false,
+            notificationType: 'success',
+            notificationModal: true,
+          }, this.closeNotificationModal());
+        } else {
+          this.setState({
+            notificationMessage: response.message,
+            isEditable: false,
+            notificationType: 'error',
+            notificationModal: true,
+          });
+        }
+      })
+      .catch((error) => {
+        this.props.setLoadingState(false);
+        this.setState({
+          notificationMessage: `Error: ${error}`,
+          isEditable: true,
+          notificationType: 'error',
+          notificationModal: true,
+        }, this.closeNotificationModal());
+      });
+  };
+
   /**
    * Method call the fetch file Data method
    * @param {Object} file
@@ -126,7 +161,7 @@ class Files extends Component {
       this.setState({
         otherExtensionFileDetails: {
           file,
-          href,
+          href: file.url,
           fileView,
         },
       });
@@ -213,6 +248,7 @@ class Files extends Component {
               oldFileData: csvRow,
               showFileDetails: true,
               currentFileDetails: file,
+              showUploadIcon: true,
             });
           }).finally(() => setLoadingState(false));
         };
@@ -229,16 +265,23 @@ class Files extends Component {
           excelSheetsNames: sheets,
           uploadedExcelData: data,
           currentFileDetails: file,
+          showUploadIcon: true,
         });
       }, 'excel2json');
     } else if (fileType !== CSV || fileType !== XLSX || fileType !== XLS) {
       setLoadingState(true);
-      this.setState({
-        notificationMessage: 'File type cannot be displayed on grid.',
-        isEditable: false,
-        notificationModal: true,
-        showUploadUnsupportedFileButton: true,
-      });
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setLoadingState(false);
+        this.setState({
+          showFileDetails: false,
+          showFileViewFrame: true,
+          frameSrc: e.target.result,
+          showUploadIcon: true,
+        });
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
@@ -256,10 +299,9 @@ class Files extends Component {
    * @return {HTML}
    */
   renderFileList = () => {
-    const { hasFileRoute, activeFileId, width, showFileDetails, backPageButton } = this.state;
+    const { hasFileRoute, activeFileId, width, showFileDetails, showFileViewFrame, backPageButton, showUploadIcon } = this.state;
     const { filesConfig } = this.props;
-    const { TXT } = SUPPORTED_FILE_TYPES;
-    const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton });
+    const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton, showFileViewFrame });
 
     if (hasFileRoute) {
       return null;
@@ -269,12 +311,24 @@ class Files extends Component {
         <FilesListStyled
           isDisplayCondition={isDisplayCondition}
         >
-          <form id="uploadForm">
+          <form
+            id="uploadForm"
+            style={{
+              display: 'flex',
+              borderBottom: '1px solid #a29e9e',
+              paddingBottom: '10px',
+            }}
+          >
             <input
+              style={{ width: '80%' }}
               type="file"
               id="fileUpload"
               onChange={(event) => { this.loadFileData(event.target.files[0]); }}
             />
+            { showUploadIcon
+              ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}>
+                <FaIcon icon={faUpload} />
+                </FileUploadIcon> : null }
           </form>
           <FileListTitle type="headline">Available Files</FileListTitle>
           {filesConfig.map((file, index) => {
@@ -397,6 +451,7 @@ class Files extends Component {
       this.setState({
         notificationModal: false,
         notificationMessage: '',
+        notificationType: '',
       });
     }, 3000);
   };
@@ -408,43 +463,25 @@ class Files extends Component {
       uploadedExcelData,
       selectedSheet,
     } = this.state;
-    const fileType = url
-      ? url.slice((Math.max(0, url.lastIndexOf('.')) || Infinity) + 1) : name.split('.').pop();
     const filename = url ? url.substring(url.lastIndexOf('/') + 1) : name;
     let rawData;
 
-    if (fileType === 'csv') {
-      const fields = Object.keys(fileData[0]);
-      const index = fields.indexOf('gridId');
-      if (index > -1) {
-        fields.splice(index, 1);
-      }
-      const json2csvParser = new Parser({ fields });
-      rawData = json2csvParser.parse(fileData);
+    const fields = Object.keys(fileData[0]);
+    const index = fields.indexOf('gridId');
+    if (index > -1) {
+      fields.splice(index, 1);
     }
-    if (fileType === 'xls' || fileType === 'xlsx') {
-      rawData = json2xls(fileData);
-    }
-   /* if (fileType === 'xlsx') {
-      const data = uploadedExcelData.length ? { ...uploadedExcelData, [selectedSheet]: fileData } : fileData;
-      rawData = json2excel({
-        data,
-        name: filename,
-        formateDate: 'dd/mm/yyyy',
-      }).then(exceldata => {
-        console.log('data -then- ', exceldata) });
-      console.log('rawData -- ', rawData)
-    }*/
+    const json2csvParser = new Parser({ fields });
+    rawData = json2csvParser.parse(fileData);
 
     const blob = new Blob([rawData], { type: 'application/octet-stream' });
     const formData = new FormData();
 
-    formData.append('file', blob, filename);
+    formData.append('file', blob, `${filename.split('.')[0]}.csv`);
     formData.append('displayName', displayName ? displayName : filename);
     if (id) {
       formData.append('id', id);
     }
-
     const config = {
       url: 'v1/documents',
       method: 'FILE_UPLOAD',
@@ -453,29 +490,13 @@ class Files extends Component {
       },
       data: formData,
     };
+
     this.props.setLoadingState(true);
-    callAPIWithConfig(this.props.tenant, 'file', config)
-      .then((response) => {
-        this.props.setLoadingState(false);
-        if (response === 'ACCEPTED') {
-          this.setState({
-            notificationMessage: 'Data successfully updated.',
-            isEditable: false,
-            notificationModal: true,
-          }, this.closeNotificationModal());
-        }
-      })
-      .catch((error) => {
-        this.props.setLoadingState(false);
-        this.setState({
-          notificationMessage: `Error: ${error}`,
-          isEditable: true,
-          notificationModal: true,
-        }, this.closeNotificationModal());
-      });
+    this.APICallWithConfig({ config });
   };
 
   onUnSupportedFileUpload = () => {
+    this.props.setLoadingState(true);
     const form = document.getElementById('uploadForm');
     const file = document.getElementById('fileUpload').files[0];
     const formData = new FormData(form);
@@ -491,23 +512,27 @@ class Files extends Component {
       },
       data: formData,
     };
-    callAPIWithConfig(this.props.tenant, 'file', config)
-      .then((response) => {
-        if (response === 'ACCEPTED') {
-          this.setState({
-            notificationMessage: 'Uploaded successfully.',
-            isEditable: false,
-            notificationModal: true,
-          }, this.closeNotificationModal());
-        }
-        console.log('response -- ', response);
-      });
-  }
+    this.APICallWithConfig({ config });
+  };
 
   onSwitchEditable = (e) => {
     this.setState({
       isEditable: e.target.checked,
+      showUploadIcon: !e.target.checked,
     });
+  };
+
+  addColumn = (newColumnName) => {
+    if (!isEmpty(newColumnName)) {
+      const { fileData } = this.state;
+      const newData = fileData.map(data => ({ ...data, [newColumnName]: '' }));
+
+      this.setState({
+        oldFileData: fileData,
+        fileData: newData,
+        addColumnModal: false,
+      });
+    }
   };
 
   renderAddEditColumn = () => {
@@ -522,7 +547,7 @@ class Files extends Component {
         </Col>
         <Col size={3}>
           <Row style={{ padding: '4px 10px', display: 'flex', float: 'right' }}>
-            <span style={{ padding: '3px', fontWeight: '600' }}>Edit </span>
+            <span style={{ padding: '3px', fontWeight: '600' }}><FaIcon icon={faEdit} /></span>
             <label className="switch">
               <input type="checkbox" checked={this.state.isEditable} onChange={this.onSwitchEditable} />
               <span className="slider round" />
@@ -558,6 +583,8 @@ class Files extends Component {
       otherExtensionFileDetails,
       backPageButton,
       isEditable,
+      showFileViewFrame,
+      frameSrc,
     } = this.state;
     const isDisplayMessage = getMessageDisplayCondition({ width, showFileDetails, backPageButton });
     const { filesConfig, constants } = this.props;
@@ -717,6 +744,33 @@ class Files extends Component {
         </SelectMessageWrapper>
       );
     }
+    if (showFileViewFrame) {
+      if (isMobile) {
+        return (
+          <MessageBoxWrapper
+            borderStyle="none"
+            isMobile={isMobile}
+            isDisplayMessage={isDisplayMessage}
+            ref={this.widthRef}
+            style={hasFileRoute ? { margin: 'auto' } : null}
+          >
+            <FileViewFrame frameSrc={frameSrc} />
+          </MessageBoxWrapper>
+        );
+      }
+      return (
+        <MessageBoxWrapper
+          borderStyle="none"
+          isMobile={isMobile}
+          isDisplayMessage={isDisplayMessage}
+          ref={this.widthRef}
+          style={hasFileRoute ? { margin: 'auto' } : null}
+        >
+          {this.renderFileListViewButton()}
+          {this.renderFileDescription()}
+          <FileViewFrame frameSrc={frameSrc} />
+        </MessageBoxWrapper>);
+    }
     return (
       <NoFileMessageWrapper ref={this.widthRef}>
         <Row display="flex" alignItems="center" justify="center" height="360px">
@@ -761,19 +815,6 @@ class Files extends Component {
     } return null;
   };
 
-  addColumn = (newColumnName) => {
-    if (!isEmpty(newColumnName)) {
-      const { fileData } = this.state;
-      const newData = fileData.map(data => ({ ...data, [newColumnName]: '' }));
-
-      this.setState({
-        oldFileData: fileData,
-        fileData: newData,
-        addColumnModal: false,
-      });
-    }
-  };
-
   renderAddColumnModal = () => {
     const { addColumnModal } = this.state;
     let newColumnName = '';
@@ -812,20 +853,20 @@ class Files extends Component {
   };
 
   renderNotificationModal = () => {
-    const { notificationModal, notificationMessage, showUploadUnsupportedFileButton } = this.state;
+    const { notificationType, notificationModal, notificationMessage, showUploadUnsupportedFileButton } = this.state;
 
     return (
       <Modal open={notificationModal} onClose={() => this.setState({ notificationModal: false })}>
-        <Box>
+        <Box margin="0px">
           <Row style={{ paddingBottom: '10px' }}>
             <Col>
-              <Row>
-                <label>
+              <Row padding="0px">
+                <Typography color={notificationType}>
                   {notificationMessage}
-                </label>
+                </Typography>
               </Row>
               <Row>
-                { showUploadUnsupportedFileButton && <button onClick={this.onUnSupportedFileUpload}>Upload</button>}
+                { showUploadUnsupportedFileButton && <Button onClick={this.onUnSupportedFileUpload}>Upload</Button>}
               </Row>
             </Col>
           </Row>
@@ -861,10 +902,12 @@ class Files extends Component {
                   oldFileData: uploadedExcelData[event.target.value],
                   showFileDetails: true,
                 });
-              }}>
+              }}
+              >
                 <option />
                 {excelSheetsNames.length
-                && excelSheetsNames.map(sheetName => (<option value={sheetName}>{sheetName}</option>))}
+                && excelSheetsNames.map(sheetName =>
+                  (<option key={shortId.generate()} value={sheetName}>{sheetName}</option>))}
               </select>
             </Col>
           </Row>
