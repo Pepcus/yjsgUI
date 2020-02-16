@@ -87,11 +87,12 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
  * @param {Number} width
  * @param {Boolean} showFileDetails
  * @param {Boolean} backPageButton
+ * @param {Boolean} showFileViewFrame
  * @return {boolean}
  */
-export const getFileListDisplayCondition = ({ width, showFileDetails, backPageButton }) => {
+export const getFileListDisplayCondition = ({ width, showFileDetails, backPageButton, showFileViewFrame }) => {
   const isMobile = width <= 600;
-  if (showFileDetails) {
+  if (showFileDetails || showFileViewFrame) {
     if (isMobile) {
       if (backPageButton) {
         return true;

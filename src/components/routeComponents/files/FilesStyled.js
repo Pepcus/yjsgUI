@@ -57,6 +57,8 @@ export const BackButtonWrapper = styled(Col)`
 export const FileListWrapper = styled(Row)`
     display: flex;
     height: 100%;
+    position: absolute;
+    width: 100%;
     ${({ theme }) => theme.media.down('lg')`
         padding-top: 30px;
     `}
@@ -167,6 +169,17 @@ export const ListElementStyle = styled(Typography)`
 `;
 
 export const FileDownloadIcon = styled('a')`
+    cursor: pointer;
+    margin-left: 10px;
+    color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
+    transition: 0.3s all;
+    &:hover{
+        color: ${getThemeProps('palette.primary.borderColor')};
+        transition: 0.3s all;
+    }
+`;
+
+export const FileUploadIcon = styled('button')`
     cursor: pointer;
     margin-left: 10px;
     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
