@@ -41,7 +41,7 @@ import {
 import { getParameterByName } from 'apis/http';
 import { getTransformedErrors } from 'utils/form';
 import { getConstants } from 'reducers/constants';
-import { getLogoPathConfig } from 'reducers/config';
+import { getApplicationConfiguration, getLogoPathConfig } from 'reducers/config';
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
@@ -202,13 +202,17 @@ class SplashPage extends Component {
    */
   setAdminLogin = () => {
     const { admin, hasError } = this.state;
-    const { setAdminCredentials, loginAdmin } = this.props;
+    const { setAdminCredentials, loginAdmin, appConfig } = this.props;
     if (hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
       });
       setAdminCredentials({ id: admin.adminId, password: admin.adminPassword });
-      loginAdmin({ adminId: admin.adminId, adminPassword: admin.adminPassword });
+      loginAdmin({
+        adminId: admin.adminId,
+        adminPassword: admin.adminPassword,
+        preStoredAdminCredentials: appConfig.adminCredentials,
+      });
     }
   };
 
@@ -342,6 +346,7 @@ const mapStateToProps = state => ({
   password: getAdminPassword(state),
   memberData: getMember(state),
   isAdminLogin: getAdminLoginState(state),
+  appConfig: getApplicationConfiguration(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -349,7 +354,7 @@ const mapDispatchToProps = dispatch => ({
   setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
-  loginAdmin: ({ adminId, adminPassword }) => dispatch(loginAdminAction({ adminId, adminPassword })),
+  loginAdmin: ({ adminId, adminPassword, preStoredAdminCredentials }) => dispatch(loginAdminAction({ adminId, adminPassword, preStoredAdminCredentials })),
 });
 
 export default connect(

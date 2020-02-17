@@ -26,7 +26,7 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 import { Modal } from 'pepcus-core';
 
-import { getSecretKey } from 'reducers/loginReducer';
+import { getAdminLoginState, getSecretKey } from 'reducers/loginReducer';
 import { getFilesConfig } from 'reducers/assetFilesReducer';
 import { fetchFilesConfigAction } from 'actions/assetFilesActions';
 import { SUPPORTED_FILE_TYPES } from 'constants/file';
@@ -178,7 +178,7 @@ class Files extends Component {
    * @param{Object} file
    */
   fetchFileData = (file) => {
-    const { setLoadingState, tenant } = this.props;
+    const { setLoadingState, tenant, secretKey } = this.props;
     const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
@@ -192,7 +192,7 @@ class Files extends Component {
         url: `v1/documents/${file.id}/file`,
         method: 'GET',
         headers: {
-          secretKey: 451727,
+          secretKey: parseInt(secretKey, 10),
         },
         urlValuesMap: { displayName, fileType },
         responseType,
@@ -300,7 +300,7 @@ class Files extends Component {
    */
   renderFileList = () => {
     const { hasFileRoute, activeFileId, width, showFileDetails, showFileViewFrame, backPageButton, showUploadIcon } = this.state;
-    const { filesConfig } = this.props;
+    const { filesConfig, adminLoginState } = this.props;
     const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton, showFileViewFrame });
 
     if (hasFileRoute) {
@@ -311,25 +311,23 @@ class Files extends Component {
         <FilesListStyled
           isDisplayCondition={isDisplayCondition}
         >
-          <form
-            id="uploadForm"
-            style={{
-              display: 'flex',
-              borderBottom: '1px solid #a29e9e',
-              paddingBottom: '10px',
-            }}
-          >
-            <input
-              style={{ width: '80%' }}
-              type="file"
-              id="fileUpload"
-              onChange={(event) => { this.loadFileData(event.target.files[0]); }}
-            />
-            { showUploadIcon
-              ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}>
-                <FaIcon icon={faUpload} />
-                </FileUploadIcon> : null }
-          </form>
+          { adminLoginState
+            ? <form
+              id="uploadForm"
+              style={{
+                display: 'flex',
+                borderBottom: '1px solid #a29e9e',
+                paddingBottom: '10px',
+              }}
+              >
+              <input
+                style={{ width: '80%' }}
+                type="file"
+                id="fileUpload"
+                onChange={(event) => { this.loadFileData(event.target.files[0]); }}
+              />
+              { showUploadIcon ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}><FaIcon icon={faUpload} /></FileUploadIcon> : null }
+            </form> : null }
           <FileListTitle type="headline">Available Files</FileListTitle>
           {filesConfig.map((file, index) => {
                 const href = file.url;
@@ -457,6 +455,7 @@ class Files extends Component {
   };
 
   onSave = () => {
+    const { secretKey } = this.props;
     const {
       currentFileDetails: { url, id, displayName, name },
       fileData,
@@ -486,7 +485,7 @@ class Files extends Component {
       url: 'v1/documents',
       method: 'FILE_UPLOAD',
       headers: {
-        secretKey: 451727,
+        secretKey: parseInt(secretKey, 10),
       },
       data: formData,
     };
@@ -496,6 +495,7 @@ class Files extends Component {
   };
 
   onUnSupportedFileUpload = () => {
+    const { secretKey } = this.props;
     this.props.setLoadingState(true);
     const form = document.getElementById('uploadForm');
     const file = document.getElementById('fileUpload').files[0];
@@ -508,7 +508,7 @@ class Files extends Component {
       url: 'v1/documents',
       method: 'FILE_UPLOAD',
       headers: {
-        secretKey: 451727,
+        secretKey: parseInt(secretKey, 10),
       },
       data: formData,
     };
@@ -537,6 +537,10 @@ class Files extends Component {
 
   renderAddEditColumn = () => {
     const { isEditable } = this.state;
+    const { adminLoginState } = this.props;
+    if (!adminLoginState) {
+      return null;
+    }
     return (
       <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <Col size={9}>
@@ -968,6 +972,7 @@ const mapStateToProps = state => ({
   secretKey: getSecretKey(state),
   filesConfig: getFilesConfig(state),
   tenant: getTenantName(state),
+  adminLoginState: getAdminLoginState(state),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,7 @@
 {
   "title": "CONFERENCE REGISTRATION",
   "footerTitle": "“ A true dreamer is one who knows how to navigate in the dark ”",
+  "adminCredentials": 123456,
   "routes": [
     {
       "name": "default",
