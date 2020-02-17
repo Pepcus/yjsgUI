@@ -12,11 +12,11 @@ import {
  * @param {Object} action
  */
 export function* loginAdminSaga(action) {
-  const { adminId, adminPassword } = action;
+  const { adminId, adminPassword, preStoredAdminCredentials } = action;
   const errorMessage = 'Error getting login.';
   try {
     yield put(setLoadingStateAction(true));
-    yield loginAdmin({ adminId, adminPassword });
+    yield loginAdmin({ adminId, adminPassword, preStoredAdminCredentials });
     yield put(loginAdminSuccessAction());
     yield put(setLoadingStateAction(false));
   } catch (e) {

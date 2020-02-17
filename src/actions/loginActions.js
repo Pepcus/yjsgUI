@@ -1,7 +1,8 @@
-export const loginAdminAction = ({ adminId, adminPassword }) => ({
+export const loginAdminAction = ({ adminId, adminPassword, preStoredAdminCredentials }) => ({
   type: 'ADMIN_LOGIN',
   adminId,
   adminPassword,
+  preStoredAdminCredentials,
 });
 
 export const loginAdminSuccessAction = () => ({

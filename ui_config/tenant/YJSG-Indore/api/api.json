@@ -65,7 +65,7 @@
         "method": "GET",
         "url": "v1/documents",
         "headers": {
-          "secretKey": 451727
+          "secretKey": 123456
         }
       }
     }

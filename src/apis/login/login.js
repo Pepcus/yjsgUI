@@ -1,5 +1,5 @@
-export const loginAdmin = ({ adminId, adminPassword }) => new Promise((resolve, reject) => {
-  if (adminId === 'yjsgadmin' && adminPassword === '123456') {
+export const loginAdmin = ({ adminId, adminPassword, preStoredAdminCredentials }) => new Promise((resolve, reject) => {
+  if (adminId === 'yjsgadmin' && adminPassword.toString() === preStoredAdminCredentials.toString()) {
     resolve();
   } else {
     reject();
