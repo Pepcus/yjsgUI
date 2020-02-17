@@ -43,6 +43,14 @@ export const createMemberFailedAction = message => ({
   message,
 });
 
+export const partialMemberAlreadyRegisteredAction = () => ({
+  type: 'PARTIAL_MEMBER_ALREADY_REGISTERED'
+});
+
+export const exactMemberAlreadyRegisteredAction = () => ({
+  type: 'EXACT_MEMBER_ALREADY_REGISTERED'
+});
+
 /**
  * fetchMemberDataAction action will call when
  * member data will fetched

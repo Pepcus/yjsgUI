@@ -21,6 +21,8 @@ import {
 import {
   getNewMember,
   isCreated,
+  isExactMemberAlreadyRegistered,
+  isPartialMemberAlreadyRegistered,
 } from 'reducers/memberRegistrationReducer';
 import {
   getUserType,
@@ -34,6 +36,8 @@ import { getConstants } from 'reducers/constants';
 
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';
+import MemberAlreadyRegisteredMessagePopup
+  from 'components/routeComponents/memberRegistrationForm/MemberAlreadyRegisteredMessagePopup';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -187,6 +191,8 @@ class MemberRegistrationForm extends Component {
     const {
       constants,
       isMemberCreated,
+      isPartialMemberMatchFound,
+      isExactMemberMatchFound,
       newMember,
       context,
     } = this.props;
@@ -256,6 +262,12 @@ class MemberRegistrationForm extends Component {
               newMember={newMember}
               redirectToPreviousLocation={this.redirectToPreviousLocation}
             />
+            <MemberAlreadyRegisteredMessagePopup
+              isSubmitTriggered={isSubmitTriggered}
+              isExactMemberMatchFound={isExactMemberMatchFound}
+              isPartialMemberMatchFound={isPartialMemberMatchFound}
+              redirectToPreviousLocation={this.redirectToPreviousLocation}
+            />
           </BoxStyled>
         </ContainerStyled>
       );
@@ -270,6 +282,8 @@ MemberRegistrationForm.propTypes = {
   context: PropTypes.object,
   createStudentData: PropTypes.func.isRequired,
   isMemberCreated: PropTypes.bool,
+  isPartialMemberMatchFound: PropTypes.bool,
+  isExactMemberMatchFound: PropTypes.bool,
   newMember: PropTypes.object,
   userType: PropTypes.string,
 };
@@ -279,6 +293,8 @@ MemberRegistrationForm.defaultProps = {
   constants: {},
   context: {},
   isMemberCreated: false,
+  isPartialMemberMatchFound: false,
+  isExactMemberMatchFound: false,
   newMember: {},
   userType: '',
 };
@@ -288,6 +304,8 @@ const mapStateToProps = state => ({
   isMemberCreated: isCreated(state),
   newMember: getNewMember(state),
   userType: getUserType(state),
+  isPartialMemberMatchFound: isPartialMemberAlreadyRegistered(state),
+  isExactMemberMatchFound: isExactMemberAlreadyRegistered(state),
 });
 
 const mapDispatchToProps = dispatch => ({

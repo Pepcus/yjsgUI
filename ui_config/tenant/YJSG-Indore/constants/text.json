@@ -201,5 +201,15 @@
 
   "EVENT_TITLE": "सम्मिलित होने के लिए कृपया निचे दी गई जानकारी देवें!",
 
-  "PARENT_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन संपन्न हुआ!"
+  "PARENT_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन संपन्न हुआ!",
+
+  "PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन शायद हमारे पास पहले से ही है !",
+
+  "EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन हमारे पास पहले से ही है !",
+
+  "WE_WILL_CONTACT_VIA_SMS_SHORTLY_MESSAGE": "हम आपसे जल्द ही SMS पर संपर्क करेंगे। ",
+
+  "LOGIN_INFO_CONVEYED_VIA_SMS_MESSAGE": "लॉगइन करने के लिए आपको अपने पंजीकृत फोन नंबर पर एसएमएस प्राप्त होगा। ",
+
+  "CONTACT_YJSG_HELPLINE_MESSAGE": "आप भी YJSG Helpline (7447-0-56789) पर संपर्क कर सकते हैं !"
 }

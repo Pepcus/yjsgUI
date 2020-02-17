@@ -8,6 +8,8 @@ import {
   fetchMemberSuccessAction,
   updateMemberFailedAction,
   updateMemberSuccessAction,
+  partialMemberAlreadyRegisteredAction,
+  exactMemberAlreadyRegisteredAction,
 } from 'actions/memberRegistrationActions';
 import {
   getAllMembersDataResultsSuccessAction,
@@ -44,20 +46,31 @@ export function* createMemberSaga(action) {
   const apiConfig = yield select(getAPIConfig, 'member', 'createMember');
 
   try {
+    yield put(setLoadingStateAction(true));
     const tenant = yield select(getTenantName);
     const config = { ...apiConfig, data: member };
     const response = yield callAPIWithConfig(tenant, 'createMember', config);
 
     if (response.student) {
       yield put(createMemberSuccessAction(response.student));
+    } else if (response.errorCode === 1001) {
+      yield put(partialMemberAlreadyRegisteredAction())
+    } else if (response.errorCode === 1000) {
+      yield put(exactMemberAlreadyRegisteredAction())
     } else {
       yield put(createMemberFailedAction(errorMessage));
     }
     yield put(setLoadingStateAction(false));
   } catch (e) {
-    yield put(createMemberFailedAction(errorMessage));
-    yield put(setLoadingStateAction(false));
-    throw e;
+    if (e.errorCode === 1001) {
+      yield put(partialMemberAlreadyRegisteredAction())
+    } else if (e.errorCode === 1000) {
+      yield put(exactMemberAlreadyRegisteredAction())
+    } else {
+      yield put(createMemberFailedAction(errorMessage));
+      yield put(setLoadingStateAction(false));
+      throw e;
+    }
   }
 }
 

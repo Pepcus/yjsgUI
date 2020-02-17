@@ -4,6 +4,8 @@ const initialState = {
   isFetched: false,
   isUpdated: false,
   isCreated: false,
+  isPartialMatchFound: false,
+  isExactMatchFound: false,
   id: '',
   secretKey: '',
   updateMessage: '',
@@ -81,6 +83,22 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isCreated: false,
       };
 
+    case 'PARTIAL_MEMBER_ALREADY_REGISTERED':
+      return {
+        ...state,
+        isLoading: false,
+        isPartialMatchFound: true,
+        isCreated: false,
+      };
+
+    case 'EXACT_MEMBER_ALREADY_REGISTERED':
+      return {
+        ...state,
+        isLoading: false,
+        isExactMatchFound: true,
+        isCreated: false,
+      };
+
     case 'UPDATE_MEMBER_FAILED':
       return {
         ...state,
@@ -136,3 +154,7 @@ export const isFetched = state => state.memberRegistrationReducer.isFetched;
 export const getUserId = state => state.memberRegistrationReducer.id;
 
 export const getUserSecretKey = state => state.memberRegistrationReducer.secretKey;
+
+export const isPartialMemberAlreadyRegistered = state => state.memberRegistrationReducer.isPartialMatchFound;
+
+export const isExactMemberAlreadyRegistered = state => state.memberRegistrationReducer.isExactMatchFound;
