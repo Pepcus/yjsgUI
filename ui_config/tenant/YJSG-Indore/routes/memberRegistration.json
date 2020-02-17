@@ -238,7 +238,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -361,7 +361,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,

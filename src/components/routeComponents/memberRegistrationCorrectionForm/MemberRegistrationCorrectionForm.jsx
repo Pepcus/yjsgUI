@@ -272,36 +272,26 @@ class MemberRegistrationCorrectionForm extends Component {
     delete member.submitButton;
     event.preventDefault();
     if (isOptInEnable) {
-      if (member.optIn2019 === 'N') {
+      if (member.optIn2020 === 'N') {
         this.setState({
           isSubmitTriggered: true,
-        });
-        this.updateMemberData();
-      } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
-        this.setState({
-          isSubmitTriggered: true,
-          mandatoryField: false,
         });
         this.updateMemberData();
       } else {
-        this.setState({
-          isFormChanged: false,
-          mandatoryField: true,
-          isSubmitTriggered: true,
-        }, () => { this.scrollToError(); });
+        if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && !hasError) {
+          this.setState({
+            isSubmitTriggered: true,
+            mandatoryField: false,
+          });
+          this.updateMemberData();
+        } else {
+          this.setState({
+            isFormChanged: false,
+            mandatoryField: true,
+            isSubmitTriggered: true,
+          }, () => { this.scrollToError(); });
+        }
       }
-    } else if (!isObjectsEqual({ object1: oldMemberData, object2: member }) && hasError) {
-      this.setState({
-        isSubmitTriggered: true,
-        mandatoryField: false,
-      });
-      this.updateMemberData();
-    } else {
-      this.setState({
-        isFormChanged: false,
-        isSubmitTriggered: true,
-        mandatoryField: true,
-      }, () => { this.scrollToError(); });
     }
   };
 
@@ -315,7 +305,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const { isOptInEnable } = config;
     event.preventDefault();
     if (isOptInEnable) {
-      if (!isEmpty(member.optIn2019)) {
+      if (!isEmpty(member.optIn2020)) {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -339,17 +329,14 @@ class MemberRegistrationCorrectionForm extends Component {
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
     if (isOptInEnable) {
-      if (member.optIn2019 === 'N') {
+      if (member.optIn2020 === 'N') {
         return [];
-      } else if (member.optIn2019 !== 'N') {
-        if (mandatoryField) {
-          return getTransformedErrors({ errors, transformErrors });
-        } return errors;
-      } return [];
+      }
+      if (mandatoryField) {
+        return getTransformedErrors({ errors, transformErrors });
+      }
+      return errors;
     }
-    if (mandatoryField) {
-      return getTransformedErrors({ errors, transformErrors });
-    } return errors;
   };
 
   /**
@@ -414,7 +401,7 @@ class MemberRegistrationCorrectionForm extends Component {
       },
       isFormChanged: true,
       isSubmitTriggered: false,
-      hasError: isEmpty(errors),
+      hasError: !isEmpty(errors),
     });
   };
 

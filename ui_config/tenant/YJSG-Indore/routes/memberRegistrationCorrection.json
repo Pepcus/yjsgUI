@@ -34,12 +34,12 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number",
+                  "type": "string",
                   "customValidation": "ageValidator"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number",
+                  "type": "string",
                   "customValidation": "mobileValidator"
                 },
                 "occupation": {
@@ -373,11 +373,11 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number"
+                  "type": "string"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number"
+                  "type": "string"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -795,7 +795,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -952,7 +952,6 @@
         }
       },
       "age": {
-        "ui:widget": "updown",
         "ui:field": "InputField",
         "ui:options": {
           "style": {
@@ -960,7 +959,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -1205,11 +1204,11 @@
       },
       {
         "formField": "age",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "mobile",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "occupation",
@@ -1305,12 +1304,12 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number",
+                  "type": "string",
                   "customValidation": "ageValidator"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number",
+                  "type": "string",
                   "customValidation": "mobileValidator"
                 },
                 "occupation": {
@@ -1501,11 +1500,11 @@
                 },
                 "age": {
                   "title": "उम्र",
-                  "type": "number"
+                  "type": "string"
                 },
                 "mobile": {
                   "title": "मोबाइल नं",
-                  "type": "number"
+                  "type": "string"
                 },
                 "occupation": {
                   "title": "व्यवसाय (युवा वर्ग हेतु)",
@@ -1815,7 +1814,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -1960,7 +1959,6 @@
         }
       },
       "age": {
-        "ui:widget": "updown",
         "ui:field": "InputField",
         "ui:options": {
           "style": {
@@ -1968,7 +1966,7 @@
               "height": "auto"
             }
           },
-          "type": "number",
+          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -2128,11 +2126,11 @@
       },
       {
         "formField": "age",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "mobile",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "occupation",
@@ -2266,11 +2264,11 @@
       },
       {
         "formField": "age",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "mobile",
-        "dataType": "number"
+        "dataType": "string"
       },
       {
         "formField": "occupation",

@@ -77,7 +77,7 @@ class MemberRegistrationForm extends Component {
     this.state = {
       isSubmitTriggered: false,
       member: {},
-      hasError: false,
+      hasError: true,
       formConfig: props.config.registrationFormConfig,
       isAdminLocation: false,
       isStudentLocation: false,
@@ -93,7 +93,7 @@ class MemberRegistrationForm extends Component {
   handleSubmit = () => {
     const { hasError, member } = this.state;
     const { createStudentData } = this.props;
-    if (hasError) {
+    if (!hasError) {
       createStudentData(member);
       this.setState({
         isSubmitTriggered: true,
@@ -170,7 +170,7 @@ class MemberRegistrationForm extends Component {
         ...member,
         ...event.formData,
       },
-      hasError: isEmpty(event.errors),
+      hasError: !isEmpty(event.errors),
     });
   };
 

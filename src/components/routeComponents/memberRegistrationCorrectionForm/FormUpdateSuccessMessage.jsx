@@ -59,7 +59,7 @@ const FormUpdateSuccessMessage = ({
         </Row>
       </Popup>
     );
-  } else if (isSubmitTriggered && !isFormChanged && hasError) {
+  } else if (isSubmitTriggered && !isFormChanged && !hasError) {
     // if form data is not update and valid.
     return (
       <Popup>

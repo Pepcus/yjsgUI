@@ -11,7 +11,7 @@ import deepmerge from 'deepmerge';
  * @return {Array} errors
  */
 
-export const getTransformedErrors = ({ errors, transformErrors }) => {
+export const getTransformedErrors = ({ errors = [], transformErrors }) => {
   const transformErrorObject = transformErrors;
   const transformedErrors = [];
 
@@ -29,6 +29,17 @@ export const getTransformedErrors = ({ errors, transformErrors }) => {
 };
 
 const applyValidators = (schemaItem, formData, errors, constants) => {
+  if (schemaItem.dependencies) {
+    Object.keys(schemaItem.dependencies).forEach((key) => {
+      if (schemaItem.dependencies[key].oneOf) {
+        schemaItem.dependencies[key].oneOf.forEach((oneOfKey) => {
+          applyValidators(oneOfKey.properties, formData, errors, constants);
+        })
+      } else {
+        applyValidators(schemaItem.dependencies[key].properties, formData, errors, constants);
+      }
+    });
+  }
   Object.keys(schemaItem).forEach((key) => {
     // The top level form objects will have a properties key
     if (key === 'properties') {
