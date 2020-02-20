@@ -51,6 +51,10 @@ export const exactMemberAlreadyRegisteredAction = () => ({
   type: 'EXACT_MEMBER_ALREADY_REGISTERED'
 });
 
+export const clearAlreadyRegisteredMemberFlagsAction = () => ({
+  type: 'CLEAR_ALREADY_REGISTERED_MEMBER_FLAGS'
+});
+
 /**
  * fetchMemberDataAction action will call when
  * member data will fetched

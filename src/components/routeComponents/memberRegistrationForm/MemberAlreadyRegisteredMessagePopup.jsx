@@ -9,6 +9,7 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
 import { getConstants } from 'reducers/constants';
+import { clearAlreadyRegisteredMemberFlagsAction } from 'actions/memberRegistrationActions';
 
 const TextWrapper = styled(Typography)`
     font-size: 16px !important;
@@ -21,6 +22,7 @@ const TextWrapper = styled(Typography)`
  * @param {Boolean} isPartialMemberMatchFound
  * @param {Boolean} isExactMemberMatchFound
  * @param {Function} redirectToPreviousLocation
+ * @param {Function} clearAlreadyRegisteredMemberFlagsAction
  * @return {HTML}
  */
 const MemberAlreadyRegisteredMessagePopup = ({
@@ -29,6 +31,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
                                isPartialMemberMatchFound,
                                isExactMemberMatchFound,
                                redirectToPreviousLocation,
+                               clearAlreadyRegisteredMemberFlagsAction,
                              }) => {
   const {
     PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE,
@@ -38,6 +41,11 @@ const MemberAlreadyRegisteredMessagePopup = ({
     CONTACT_YJSG_HELPLINE_MESSAGE,
     BACK,
   } = constants;
+
+  const handleBackButtonClick = () => {
+    clearAlreadyRegisteredMemberFlagsAction();
+    redirectToPreviousLocation();
+  };
 
   if (isSubmitTriggered && isPartialMemberMatchFound) {
     return (
@@ -50,7 +58,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
             color="tertiary"
             width="170px"
             margin="10px 25px"
-            onClick={redirectToPreviousLocation}
+            onClick={handleBackButtonClick}
           >
             {BACK}
           </Button>
@@ -67,7 +75,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
             color="tertiary"
             width="170px"
             margin="10px 25px"
-            onClick={redirectToPreviousLocation}
+            onClick={handleBackButtonClick}
           >
             {BACK}
           </Button>
@@ -84,6 +92,7 @@ MemberAlreadyRegisteredMessagePopup.propTypes = {
   isExactMemberMatchFound: PropTypes.bool,
   isPartialMemberMatchFound: PropTypes.bool,
   redirectToPreviousLocation: PropTypes.func,
+  clearAlreadyRegisteredMemberFlagsAction: PropTypes.func,
 };
 
 MemberAlreadyRegisteredMessagePopup.defaultProps = {
@@ -92,10 +101,13 @@ MemberAlreadyRegisteredMessagePopup.defaultProps = {
   isExactMemberMatchFound: false,
   isPartialMemberMatchFound: false,
   redirectToPreviousLocation: () => {},
+  clearAlreadyRegisteredMemberFlagsAction: () => {},
 };
 
 const mapStateToProps = state => ({
   constants: getConstants(state),
 });
 
-export default connect(mapStateToProps, {})(MemberAlreadyRegisteredMessagePopup);
+export default connect(mapStateToProps, {
+  clearAlreadyRegisteredMemberFlagsAction,
+})(MemberAlreadyRegisteredMessagePopup);

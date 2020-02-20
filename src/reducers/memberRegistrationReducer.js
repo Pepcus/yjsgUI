@@ -99,6 +99,13 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isCreated: false,
       };
 
+    case 'CLEAR_ALREADY_REGISTERED_MEMBER_FLAGS':
+      return {
+        ...state,
+        isExactMatchFound: false,
+        isPartialMatchFound: false,
+      };
+
     case 'UPDATE_MEMBER_FAILED':
       return {
         ...state,
