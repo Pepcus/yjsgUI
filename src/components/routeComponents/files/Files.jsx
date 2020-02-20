@@ -16,7 +16,10 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
-
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faUndo } from '@fortawesome/free-solid-svg-icons/faUndo';
+import omit from 'lodash/omit';
 
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
@@ -41,7 +44,7 @@ import { getAPIConfig } from 'reducers/api';
 import { getTenantName } from 'reducers/app';
 import { callAPIWithConfig } from 'apis/apis';
 import {
-  BackButtonContainer, BackButtonWrapper, DownloadFileStyle, FaIconStyled, FileDescriptionStyled,
+  BackButtonContainer, BackButtonWrapper, DownloadFileStyle, FaIconStyled, FileDeleteIcon, FileDescriptionStyled,
   FileDownloadIcon, FileListTitle, FileListWrapper, FilesListStyled, FileUploadIcon, FileWrapper, ListElementStyle,
   ListElementWrapper, MessageBoxWrapper, MessageWrapper, MobileFileListButtonStyle, NoFileMessageWrapper,
   SelectMessageWrapper, TypographyStyled,
@@ -78,35 +81,14 @@ class Files extends Component {
     fetchFilesConfig();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { filesConfig } = this.props;
-    const { PDF, TXT } = SUPPORTED_FILE_TYPES;
-
-    if (filesConfig !== nextProps.filesConfig) {
-      const collections = window.location.hash.split('/files/');
-      if (collections[1]) {
-        nextProps.filesConfig.forEach((fileInfo, index) => {
-          if (fileInfo.routeName === collections[1]) {
-            if (fileInfo.fileType === PDF) {
-              const url = window.location.href.replace(fileInfo.routeName,
-                `${fileInfo.fileName}.${fileInfo.fileType}`).replace('/#', '');
-              window.open(`${url}`, '_self');
-            }
-            const href = `files/${fileInfo.fileName}.${fileInfo.fileType ? fileInfo.fileType : TXT}`;
-            const hasFileRoute = true;
-            this.onClickViewFile(fileInfo, index, href, fileInfo.isViewable, hasFileRoute);
-          }
-        });
-      }
-    }
-  }
-
   componentDidUpdate() {
     manageMembersTableWidth(this.widthRef);
   }
 
   APICallWithConfig = ({ config }) => {
     this.props.setLoadingState(true);
+    const uploadForm = document.getElementById('uploadForm');
+
     callAPIWithConfig(this.props.tenant, 'file', config)
       .then((response) => {
         this.props.setLoadingState(false);
@@ -116,14 +98,22 @@ class Files extends Component {
             isEditable: false,
             notificationType: 'success',
             notificationModal: true,
+            showFileDetails: false,
+            showUploadIcon: false,
+            showFileViewFrame: false,
           }, this.closeNotificationModal());
+          uploadForm.reset();
         } else {
           this.setState({
             notificationMessage: response.message,
             isEditable: false,
             notificationType: 'error',
+            showFileDetails: false,
             notificationModal: true,
+            showUploadIcon: false,
+            showFileViewFrame: false,
           });
+          uploadForm.reset();
         }
       })
       .catch((error) => {
@@ -133,7 +123,65 @@ class Files extends Component {
           isEditable: true,
           notificationType: 'error',
           notificationModal: true,
+          showFileDetails: false,
+          showUploadIcon: false,
+          showFileViewFrame: false,
         }, this.closeNotificationModal());
+        uploadForm.reset();
+      })
+      .finally(() => {
+        const { fetchFilesConfig } = this.props;
+        fetchFilesConfig();
+      });
+  };
+
+  deleteFile = (fileId) => {
+    this.props.setLoadingState(true);
+    const config = {
+      url: `v1/documents/${fileId}`,
+      method: 'DELETE',
+      headers: {
+        secretKey: parseInt(this.props.secretKey, 10),
+      },
+    };
+    callAPIWithConfig(this.props.tenant, 'file', config)
+      .then((response) => {
+        this.props.setLoadingState(false);
+        if (response === 'ACCEPTED') {
+          this.setState({
+            notificationMessage: 'File successfully deleted.',
+            isEditable: false,
+            notificationType: 'success',
+            notificationModal: true,
+            showConfirmationModal: false,
+            deleteType: '',
+            showFileDetails: false,
+          }, this.closeNotificationModal());
+        } else {
+          this.setState({
+            notificationMessage: response.message,
+            notificationType: 'error',
+            notificationModal: true,
+            showConfirmationModal: false,
+            deleteType: '',
+            showFileDetails: false,
+          });
+        }
+      })
+      .catch((error) => {
+        this.props.setLoadingState(false);
+        this.setState({
+          notificationMessage: `Error: ${error}`,
+          notificationType: 'error',
+          notificationModal: true,
+          showConfirmationModal: false,
+          deleteType: '',
+          showFileDetails: false,
+        }, this.closeNotificationModal());
+      })
+      .finally(() => {
+        const { fetchFilesConfig } = this.props;
+        fetchFilesConfig();
       });
   };
 
@@ -156,6 +204,8 @@ class Files extends Component {
       backPageButton: false,
       fileData: [],
       hasFileRoute,
+      showFileViewFrame: false,
+      showUploadIcon: false,
     });
     if (!fileView) {
       this.setState({
@@ -197,31 +247,47 @@ class Files extends Component {
         urlValuesMap: { displayName, fileType },
         responseType,
       };
-      callAPIWithConfig(tenant, 'fetchFile', config)
-        .then((response) => {
-          if (response) {
-            if (fileDetails.fileType === CSV) {
-              fileData = csv().fromString(response).then((csvRow) => {
+
+      // If file type is not convertible to json data;
+      if (![CSV, XLSX, XLS].includes(fileType) && url) {
+        let frameSrc = url;
+        if (fileType === 'docx') {
+          frameSrc = `https://docs.google.com/gview?url=${url}&embedded=true`;
+        }
+        this.setState({
+          showFileDetails: false,
+          showFileViewFrame: true,
+          frameSrc,
+          showUploadIcon: false,
+        });
+        setLoadingState(false);
+      } else {
+        callAPIWithConfig(tenant, 'fetchFile', config)
+          .then((response) => {
+            if (response) {
+              if (fileDetails.fileType === CSV) {
+                fileData = csv().fromString(response).then((csvRow) => {
+                  this.setState({
+                    oldFileData: csvRow,
+                    fileData: csvRow,
+                  });
+                  setLoadingState(false);
+                });
+              } else if (fileDetails.fileType === XLSX || fileDetails.fileType === XLS) {
+                fileData = formatXlsxToJson(response);
                 this.setState({
-                  oldFileData: csvRow,
-                  fileData: csvRow,
+                  fileData,
                 });
                 setLoadingState(false);
-              });
-            } else if (fileDetails.fileType === XLSX || fileDetails.fileType === XLS) {
-              fileData = formatXlsxToJson(response);
-              this.setState({
-                fileData,
-              });
+              }
+            } else {
               setLoadingState(false);
             }
-          } else {
+          },
+          (error) => {
             setLoadingState(false);
-          }
-        },
-        (error) => {
-          setLoadingState(false);
-        });
+          });
+      }
     } catch (e) {
       setLoadingState(false);
       console.error(e);
@@ -356,11 +422,19 @@ class Files extends Component {
                     </ListElementWrapper>
                     <FileDownloadIcon
                       download={`${file.displayName}`}
-                      href={href}
+                      href="/"
                       isview={toString(activeFileId === index)}
                     >
                       <FaIcon icon={faDownload} />
                     </FileDownloadIcon>
+                    <FileDeleteIcon onClick={() => this.setState({
+                      showConfirmationModal: true,
+                      deleteKey: file.id,
+                      deleteType: 'deleteFile',
+                    })}
+                    >
+                      <FaIcon icon={faTrash} />
+                    </FileDeleteIcon>
                   </Row>
                 );
               },
@@ -444,6 +518,24 @@ class Files extends Component {
     });
   };
 
+  onDeleteRows = () => {
+    const { fileData } = this.state;
+    const updatedFileData = [];
+    const fileDataClone = cloneDeep(fileData);
+
+    fileData.forEach((data) => {
+      if (!data.isChecked) {
+        updatedFileData.push(data);
+      }
+    });
+    this.setState({
+      selectedRows: [],
+      oldFileData: fileDataClone,
+      fileData: updatedFileData,
+    });
+
+  };
+
   closeNotificationModal = () => {
     setTimeout(() => {
       this.setState({
@@ -525,29 +617,52 @@ class Files extends Component {
   addColumn = (newColumnName) => {
     if (!isEmpty(newColumnName)) {
       const { fileData } = this.state;
-      const newData = fileData.map(data => ({ ...data, [newColumnName]: '' }));
-
-      this.setState({
-        oldFileData: fileData,
-        fileData: newData,
-        addColumnModal: false,
-      });
+      if (Object.keys(fileData[0]).includes(newColumnName)) {
+        this.setState({
+          notificationType: 'warning',
+          notificationModal: true,
+          notificationMessage: 'Column already exists',
+        });
+      } else {
+        const newData = fileData.map(data => ({ ...data, [newColumnName]: '' }));
+        this.setState({
+          oldFileData: fileData,
+          fileData: newData,
+          addColumnModal: false,
+        });
+      }
     }
   };
 
   renderAddEditColumn = () => {
-    const { isEditable } = this.state;
+    const { isEditable, selectedRows } = this.state;
     const { adminLoginState } = this.props;
+    const buttonStyle = {
+      minWidth: '40px',
+      margin: '2px',
+    };
     if (!adminLoginState) {
       return null;
     }
+    const showDeleteRowButton = selectedRows && selectedRows.length;
     return (
       <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <Col size={9}>
-          <Button disabled={!isEditable} style={{ margin: '2px' }} onClick={this.onAddColumn}>Add Column</Button>
-          <Button disabled={!isEditable} style={{ margin: '2px' }} onClick={this.onAddRow}>Add Row</Button>
-          <Button disabled={!isEditable} style={{ margin: '2px' }} onClick={this.onUndo}>Undo</Button>
-          <Button disabled={!isEditable} style={{ margin: '2px' }} onClick={this.onSave}>Save</Button>
+          <Button disabled={!isEditable} style={buttonStyle} onClick={this.onAddColumn}>
+            <FaIcon icon={faPlus} />Column
+          </Button>
+          <Button disabled={!isEditable} style={buttonStyle} onClick={this.onAddRow}>
+            <FaIcon icon={faPlus} />Row
+          </Button>
+          <Button disabled={!isEditable} style={buttonStyle} onClick={this.onUndo}>
+            <FaIcon icon={faUndo} />
+          </Button>
+          <Button disabled={!isEditable} style={buttonStyle} onClick={this.onSave}>Save & Upload</Button>
+          {showDeleteRowButton
+            ? <Button style={buttonStyle} onClick={this.onDeleteRows}>
+              <FaIcon icon={faTrash} />
+              </Button>
+            : null }
         </Col>
         <Col size={3}>
           <Row style={{ padding: '4px 10px', display: 'flex', float: 'right' }}>
@@ -572,6 +687,51 @@ class Files extends Component {
       fileData,
     });
   };
+
+  deleteColumnIcon = key => (
+    () => (
+      <div style={{ position: 'absolute', right: '2px', top: '5px', color: '#898787' }}>
+        <FaIcon
+          height="15px"
+          width="15px"
+          icon={faTrash}
+          onClick={() => {
+            this.setState({
+              showConfirmationModal: true,
+              deleteKey: key,
+              deleteType: 'deleteColumn',
+            });
+          }}
+        />
+      </div>)
+  );
+
+  deleteColumn = (key) => {
+    const { fileData } = this.state;
+    const newData = cloneDeep(fileData);
+
+    this.setState({
+      showConfirmationModal: false,
+      deleteKey: '',
+      fileData: newData.map(data => omit(data, [key])),
+    });
+  };
+
+  getSelectedRow = (selectedRows) => {
+    const temporaryTableData = this.state.fileData.map((tableDataObject) => {
+      let temporaryObject = tableDataObject;
+      selectedRows.forEach((selectedRowObject) => {
+        if (selectedRowObject.gridId === tableDataObject.gridId) {
+          temporaryObject = selectedRowObject;
+        }
+      });
+      return temporaryObject;
+    });
+    this.setState({
+      selectedRows,
+      fileData: temporaryTableData,
+    });
+  }
 
   /**
    * It return file details
@@ -601,6 +761,16 @@ class Files extends Component {
       NO_FILES_AVAILABLE,
     } = constants;
     const isMobile = width <= 500;
+    let gridMetaData = getDataGridHeadersForFileView(fileData, currentFileDetails);
+    gridMetaData = {
+      ...gridMetaData,
+      enableRowSelection: isEditable,
+      enableAllRowSelection: isEditable,
+    };
+    const gridHeaderConfig = gridMetaData.headerConfig.map(column => ({
+      ...column,
+      headerCustomComponent: isEditable ? this.deleteColumnIcon(column.key) : null,
+    }));
 
     if (showFileDetails) {
       if (!isEmpty(fileData)) {
@@ -618,7 +788,8 @@ class Files extends Component {
               {this.renderAddEditColumn()}
               <DataGrid
                 data={fileData}
-                metaData={{ ...getDataGridHeadersForFileView(fileData, currentFileDetails), isEditable }}
+                getSelectedRow={this.getSelectedRow}
+                metaData={{ ...gridMetaData, gridHeaderConfig, isEditable }}
                 handleRowEdit={this.handleRowEdit}
               />
             </MessageBoxWrapper>
@@ -636,7 +807,8 @@ class Files extends Component {
             {this.renderAddEditColumn()}
             <DataGrid
               data={fileData}
-              metaData={{ ...getDataGridHeadersForFileView(fileData, currentFileDetails), isEditable }}
+              getSelectedRow={this.getSelectedRow}
+              metaData={{ ...gridMetaData, headerConfig: gridHeaderConfig, isEditable }}
               handleRowEdit={this.handleRowEdit}
             />
           </MessageBoxWrapper>);
@@ -658,8 +830,8 @@ class Files extends Component {
                   </Typography>
                   <Box padding="0" backgroundColor="unset" borderStyle="none" margin="15px 0 0 0">
                     <DownloadFileStyle
-                      download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
-                      href={otherExtensionFileDetails.href}
+                      download={`${otherExtensionFileDetails.file.displayName}.${otherExtensionFileDetails.file.fileType}`}
+                      href="/"
                     >
                       {DOWNLOAD}
                       <FaIcon icon={faDownload} />
@@ -685,8 +857,8 @@ class Files extends Component {
                 </Typography>
                 <Box padding="0" backgroundColor="unset" borderStyle="none" margin="15px 0 0 0">
                   <DownloadFileStyle
-                    download={`${otherExtensionFileDetails.file.fileName}.${otherExtensionFileDetails.file.fileType}`}
-                    href={otherExtensionFileDetails.href}
+                    download={`${otherExtensionFileDetails.file.displayName}.${otherExtensionFileDetails.file.fileType}`}
+                    href="/"
                   >
                     {DOWNLOAD}
                     <FaIcon icon={faDownload} />
@@ -857,10 +1029,16 @@ class Files extends Component {
   };
 
   renderNotificationModal = () => {
-    const { notificationType, notificationModal, notificationMessage, showUploadUnsupportedFileButton } = this.state;
-
+    const { notificationType, notificationModal, notificationMessage } = this.state;
+    const closeModal = () => {
+      this.setState({ notificationModal: false });
+    };
     return (
-      <Modal open={notificationModal} onClose={() => this.setState({ notificationModal: false })}>
+      <Modal
+        open={notificationModal}
+        onClose={closeModal}
+        onEscKeyDown={closeModal}
+      >
         <Box margin="0px">
           <Row style={{ paddingBottom: '10px' }}>
             <Col>
@@ -868,9 +1046,6 @@ class Files extends Component {
                 <Typography color={notificationType}>
                   {notificationMessage}
                 </Typography>
-              </Row>
-              <Row>
-                { showUploadUnsupportedFileButton && <Button onClick={this.onUnSupportedFileUpload}>Upload</Button>}
               </Row>
             </Col>
           </Row>
@@ -920,6 +1095,43 @@ class Files extends Component {
     );
   };
 
+  renderConfirmationModal = () => {
+    const { showConfirmationModal, deleteKey, deleteType } = this.state;
+
+    return (
+      <Modal
+        open={showConfirmationModal}
+        onClose={() => this.setState({
+          deleteType: '',
+          deleteKey: '',
+          showConfirmationModal: false,
+        })}
+      >
+        <Box>
+          <Row style={{ paddingBottom: '10px' }}>
+            <Col>
+              <label>
+                Please confirm to delete.
+              </label>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button onClick={() => { this[deleteType](deleteKey); }}>
+                Confirm
+              </Button>
+            </Col>
+            <Col>
+              <Button onClick={() => this.setState({ deleteType: '', deleteKey: '', showConfirmationModal: false })}>
+                Cancel
+              </Button>
+            </Col>
+          </Row>
+        </Box>
+      </Modal>
+    );
+  };
+
   render() {
     const { context } = this.props;
     const { isGoBack } = this.state;
@@ -935,6 +1147,7 @@ class Files extends Component {
           </BackButtonWrapper>
         </BackButtonContainer>
         <FileListWrapper>
+          {this.renderConfirmationModal()}
           {this.renderSelectExcelSheetModal()}
           {this.renderNotificationModal()}
           {this.renderAddColumnModal()}
