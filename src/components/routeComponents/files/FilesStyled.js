@@ -72,11 +72,12 @@ export const FileListWrapper = styled(Row)`
 
 export const FilesListStyled = styled(Box)`
         max-height: 523px;
-        height: 100%;
-        overflow-y: scroll;
+        height: 450px;
         width: 300px;
         position: fixed;
         left: 0;
+        resize: both;
+        overflow: auto;
         background-color: ${getThemeProps('palette.advancedSearch.color')};
     ${({ theme }) => theme.media.down('lg')`
         max-height: ${props => (props.isDisplayCondition ? 'initial' : 'none')};;
@@ -169,6 +170,17 @@ export const ListElementStyle = styled(Typography)`
 `;
 
 export const FileDownloadIcon = styled('a')`
+    cursor: pointer;
+    margin-left: 10px;
+    color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};
+    transition: 0.3s all;
+    &:hover{
+        color: ${getThemeProps('palette.primary.borderColor')};
+        transition: 0.3s all;
+    }
+`;
+
+export const FileDeleteIcon = styled('a')`
     cursor: pointer;
     margin-left: 10px;
     color: ${props => (props.isview === 'true' ? getThemeProps('colors.header') : getThemeProps('palette.checkbox.color'))};

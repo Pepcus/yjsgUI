@@ -22,7 +22,7 @@ export const formatXlsxToJson = (response) => {
 export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
   const headerConfig = [];
   for (const key in fileData[0]) {
-    if (key !== 'gridId') {
+    if (key !== 'gridId' && key !== 'isChecked') {
       headerConfig.push({
         label: key,
         key,
@@ -38,10 +38,11 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
     },
     drawerPosition: 'top',
     resizeColumnWidth: true,
+    loaderColor: '#f9570a',
   };
   if (fileDetails.presentationType) {
     if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.NORMAL_TABULAR) {
-      let normalHeader = [];
+      const normalHeader = [];
       for (const key in fileData[0]) {
         if (key !== 'gridId') {
           normalHeader.push({
@@ -54,7 +55,7 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
         headerConfig: normalHeader,
       };
     } else if (fileDetails.presentationType === FILE_PRESENTATION_TYPE.COMPLEX_GRID) {
-      let complexHeader = [];
+      const complexHeader = [];
       for (const key in fileData[0]) {
         if (key !== 'gridId') {
           complexHeader.push({
@@ -76,6 +77,8 @@ export const getDataGridHeadersForFileView = (fileData, fileDetails) => {
         },
         drawerPosition: 'top',
         resizeColumnWidth: true,
+        enableRowSelection: true,
+        enableAllRowSelection: true,
       };
     }
   }
@@ -133,6 +136,9 @@ export const fetchFileResponseType = (fileDetails) => {
   }
   if (fileDetails.fileType === 'csv') {
     responseType = 'text';
+  }
+  if (fileDetails.fileType === 'pdf') {
+    responseType = 'document';
   }
   return responseType;
 };

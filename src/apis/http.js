@@ -111,6 +111,29 @@ export const FILE_UPLOAD = ({ url, headers, body }) => {
   });
 };
 
+export const DELETE = ({ url, headers, body }) => {
+
+  const config = {
+    method: 'DELETE',
+    headers: headers || {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body,
+    mode: 'cors',
+    cache: 'default',
+  };
+  return new Promise((resolve, reject) => {
+    fetch(url, config).then(
+      (response) => {
+        resolve(response.json());
+      },
+      (error) => {
+        reject(error);
+      });
+  });
+};
+
 export const PATCH = ({ url, headers, body }) => {
   const config = {
     method: 'PATCH',

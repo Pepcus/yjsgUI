@@ -26,6 +26,7 @@ const CustomLoader = () => {
       margin: 0,
       display: 'inline',
       transform: 'translate(-50%, -50%)',
+      zIndex: 99999,
     },
   };
   return (
