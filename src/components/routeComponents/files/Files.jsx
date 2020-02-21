@@ -378,25 +378,25 @@ class Files extends Component {
           isDisplayCondition={isDisplayCondition}
         >
           { adminLoginState
-            ? <form
-              id="uploadForm"
-              style={{
-                display: 'flex',
-                borderBottom: '1px solid #a29e9e',
-                paddingBottom: '10px',
-              }}
-              >
-              <input
-                style={{ width: '80%' }}
-                type="file"
-                id="fileUpload"
-                onChange={(event) => { this.loadFileData(event.target.files[0]); }}
-              />
-              { showUploadIcon ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}><FaIcon icon={faUpload} /></FileUploadIcon> : null }
-            </form> : null }
+            ? <div style={{
+              display: 'flex',
+              borderBottom: '1px solid #a29e9e',
+              paddingBottom: '10px',
+            }}>
+                <form id="uploadForm">
+                  <input
+                    style={{ width: '80%' }}
+                    type="file"
+                    id="fileUpload"
+                    onChange={(event) => { this.loadFileData(event.target.files[0]); }}
+                  />
+                </form>
+                { showUploadIcon ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}><FaIcon icon={faUpload} /></FileUploadIcon> : null }
+              </div> : null }
           <FileListTitle type="headline">Available Files</FileListTitle>
           {filesConfig.map((file, index) => {
                 const href = file.url;
+                const fileType = file.url.slice((Math.max(0, file.url.lastIndexOf('.')) || Infinity) + 1);
                 return (
                   <Row
                     display="flex"
@@ -1117,7 +1117,7 @@ class Files extends Component {
           </Row>
           <Row>
             <Col>
-              <Button onClick={() => { this[deleteType](deleteKey); }}>
+              <Button onClick={() => { this.setState({ showConfirmationModal: false }); this[deleteType](deleteKey); }}>
                 Confirm
               </Button>
             </Col>
