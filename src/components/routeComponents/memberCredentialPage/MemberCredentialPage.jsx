@@ -164,7 +164,6 @@ class MemberCredentialPage extends Component {
     } = this.state;
     const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
     const { MEMBER } = USER_TYPES;
-
     if (hasError) {
       setStudentCredentials({ id: credentials.memberId, secretKey: credentials.secretKey });
       fetchStudentData({ id: credentials.memberId, secretKey: credentials.secretKey });

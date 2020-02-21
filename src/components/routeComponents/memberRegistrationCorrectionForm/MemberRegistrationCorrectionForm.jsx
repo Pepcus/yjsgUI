@@ -41,6 +41,7 @@ import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
 import InvalidMemberPopUp from './InvalidMemberPopUp';
 import RedirectToRoute from './RedirectToRoute';
+import Loader from 'components/common/Loader';
 
 const SubmitButtonStyled = styled(Button)`
     ${({ theme }) => theme.media.down('lg')`
@@ -460,17 +461,22 @@ class MemberRegistrationCorrectionForm extends Component {
         </CorrectionsForm>
       );
     }
+    if (isFetch && isEmpty(memberData)) {
+      return (
+        <Box>
+          <InvalidMemberPopUp
+            redirectToPreviousLocation={this.redirectToPreviousLocation}
+          />
+          <RedirectToRoute
+            context={context}
+            isPreviousLocation={isPreviousLocation}
+          />
+        </Box>
+      );
+    }
     return (
-      <Box>
-        <InvalidMemberPopUp
-          redirectToPreviousLocation={this.redirectToPreviousLocation}
-        />
-        <RedirectToRoute
-          context={context}
-          isPreviousLocation={isPreviousLocation}
-        />
-      </Box>
-    );
+      <Loader isLoading />
+    )
   }
 }
 

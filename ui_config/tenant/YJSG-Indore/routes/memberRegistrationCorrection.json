@@ -2000,6 +2000,7 @@
         }
       },
       "classAttended2020": {
+        "ui:disabled": true,
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {

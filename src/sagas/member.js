@@ -96,7 +96,6 @@ export function* fetchMemberSaga(action) {
   } catch (e) {
     yield put(fetchMemberFailedAction(errorMessage));
     yield put(setLoadingStateAction(false));
-    throw e;
   }
 }
 

@@ -17,6 +17,7 @@ import * as shortId from 'shortid';
  * @return {HTML}
  * @constructor
  */
+
 const RedirectToRoute = ({
   context,
   hasError,
@@ -50,7 +51,10 @@ const RedirectToRoute = ({
     if (routeName) {
       return <Switch key={shortId.generate()}><Redirect to={routeName} /></Switch>;
     }
-    return <Switch key={shortId.generate()}><Redirect to={context.previousLocation} /></Switch>;
+    if (context.previousLocation) {
+      return <Switch key={shortId.generate()}><Redirect to={context.previousLocation} /></Switch>;
+    }
+    return <Switch key={shortId.generate()}><Redirect to="/" /></Switch>;
   }
   return null;
 };

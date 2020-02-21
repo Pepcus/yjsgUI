@@ -114,10 +114,12 @@ export const memberRegistrationReducer = (state = initialState, action) => {
       };
 
     case 'FETCH_MEMBER_FAILED':
+      sessionStorage.setItem('memberData', null);
       return {
         ...state,
         isLoading: false,
-        isFetched: false,
+        isFetched: true,
+        member: {},
       };
 
     case 'SET_MEMBER_DATA':
