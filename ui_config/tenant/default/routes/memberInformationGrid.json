@@ -389,5 +389,6 @@
   "isUploadAttendanceFileEnable": true,
   "isUploadOptInFileEnable": false,
   "isIdCardPrintEnable": true,
-  "isCSVExportEnable": true
+  "isCSVExportEnable": true,
+  "resizeColumnWidth": true
 }

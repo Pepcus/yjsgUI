@@ -50,6 +50,9 @@ import {
   SelectMessageWrapper, TypographyStyled,
 } from 'components/routeComponents/files/FilesStyled';
 import FileViewFrame from 'components/routeComponents/files/FileViewFrame';
+import { TrashIconButton } from 'components/routeComponents/files/TrashIconButton';
+import { csvFileToJson } from 'components/routeComponents/files/csv';
+import FilesListView from 'components/routeComponents/files/FilesListView';
 
 /**
  * Files component render files list and file data table.
@@ -77,12 +80,7 @@ class Files extends Component {
   }
 
   componentDidMount() {
-    const { fetchFilesConfig } = this.props;
-    fetchFilesConfig();
-  }
-
-  componentDidUpdate() {
-    manageMembersTableWidth(this.widthRef);
+    this.props.fetchFilesConfig();
   }
 
   APICallWithConfig = ({ config }) => {
@@ -130,8 +128,7 @@ class Files extends Component {
         uploadForm.reset();
       })
       .finally(() => {
-        const { fetchFilesConfig } = this.props;
-        fetchFilesConfig();
+        this.props.fetchFilesConfig();
       });
   };
 
@@ -180,8 +177,7 @@ class Files extends Component {
         }, this.closeNotificationModal());
       })
       .finally(() => {
-        const { fetchFilesConfig } = this.props;
-        fetchFilesConfig();
+        this.props.fetchFilesConfig();
       });
   };
 
@@ -305,20 +301,15 @@ class Files extends Component {
 
     if (fileType === CSV) {
       try {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const csvText = event.target.result;
-          csv().fromString(csvText).then((csvRow) => {
-            this.setState({
-              fileData: csvRow,
-              oldFileData: csvRow,
-              showFileDetails: true,
-              currentFileDetails: file,
-              showUploadIcon: true,
-            });
-          }).finally(() => setLoadingState(false));
-        };
-        reader.readAsText(file);
+        csvFileToJson(file).then((csvRow) => {
+          this.setState({
+            fileData: csvRow,
+            oldFileData: csvRow,
+            showFileDetails: true,
+            currentFileDetails: file,
+            showUploadIcon: true,
+          });
+        }).finally(() => setLoadingState(false));
       } catch (e) {
         setLoadingState(false);
       }
@@ -358,91 +349,6 @@ class Files extends Component {
     this.setState({
       backPageButton: true,
     });
-  };
-
-  /**
-   * Method return file list
-   * @return {HTML}
-   */
-  renderFileList = () => {
-    const { hasFileRoute, activeFileId, width, showFileDetails, showFileViewFrame, backPageButton, showUploadIcon } = this.state;
-    const { filesConfig, adminLoginState } = this.props;
-    const isDisplayCondition = getFileListDisplayCondition({ width, showFileDetails, backPageButton, showFileViewFrame });
-
-    if (hasFileRoute) {
-      return null;
-    }
-    if (!isEmpty(filesConfig)) {
-      return (
-        <FilesListStyled
-          isDisplayCondition={isDisplayCondition}
-        >
-          { adminLoginState
-            ? <div style={{
-              display: 'flex',
-              borderBottom: '1px solid #a29e9e',
-              paddingBottom: '10px',
-            }}>
-                <form id="uploadForm">
-                  <input
-                    style={{ width: '80%' }}
-                    type="file"
-                    id="fileUpload"
-                    onChange={(event) => { this.loadFileData(event.target.files[0]); }}
-                  />
-                </form>
-                { showUploadIcon ? <FileUploadIcon onClick={this.onUnSupportedFileUpload}><FaIcon icon={faUpload} /></FileUploadIcon> : null }
-              </div> : null }
-          <FileListTitle type="headline">Available Files</FileListTitle>
-          {filesConfig.map((file, index) => {
-                const href = file.url;
-                const fileType = file.url.slice((Math.max(0, file.url.lastIndexOf('.')) || Infinity) + 1);
-                return (
-                  <Row
-                    display="flex"
-                    margin="19px 20px"
-                    key={shortId.generate()}
-                  >
-                    <ListElementWrapper
-                      onClick={() => this.onClickViewFile(file, index, href, file.isViewable)}
-                    >
-                      <Row display="flex" wrap="nowrap">
-                        <FaIconStyled
-                          icon={faFile}
-                          isview={toString(activeFileId === index)}
-                        />
-                        <ListElementStyle
-                          type="caption"
-                          isview={toString(activeFileId === index)}
-                          title={file.displayName}
-                        >
-                          {file.displayName}
-                        </ListElementStyle>
-                      </Row>
-                    </ListElementWrapper>
-                    <FileDownloadIcon
-                      download={`${file.displayName}`}
-                      href="/"
-                      isview={toString(activeFileId === index)}
-                    >
-                      <FaIcon icon={faDownload} />
-                    </FileDownloadIcon>
-                    <FileDeleteIcon onClick={() => this.setState({
-                      showConfirmationModal: true,
-                      deleteKey: file.id,
-                      deleteType: 'deleteFile',
-                    })}
-                    >
-                      <FaIcon icon={faTrash} />
-                    </FileDeleteIcon>
-                  </Row>
-                );
-              },
-            )}
-        </FilesListStyled>
-      );
-    }
-    return null;
   };
 
   /**
@@ -658,11 +564,11 @@ class Files extends Component {
             <FaIcon icon={faUndo} />
           </Button>
           <Button disabled={!isEditable} style={buttonStyle} onClick={this.onSave}>Save & Upload</Button>
-          {showDeleteRowButton
-            ? <Button style={buttonStyle} onClick={this.onDeleteRows}>
-              <FaIcon icon={faTrash} />
-              </Button>
-            : null }
+          <TrashIconButton
+            buttonStyle={buttonStyle}
+            onClickHandler={this.onDeleteRows}
+            isVisible={showDeleteRowButton}
+          />
         </Col>
         <Col size={3}>
           <Row style={{ padding: '4px 10px', display: 'flex', float: 'right' }}>
@@ -732,6 +638,21 @@ class Files extends Component {
       fileData: temporaryTableData,
     });
   }
+
+  changeState = (stateObj) => {
+    this.setState(stateObj);
+  };
+
+  renderFileListView = () => (
+    <FilesListView
+      loadFileData={this.loadFileData}
+      onUnSupportedFileUpload={this.onUnSupportedFileUpload}
+      onClickViewFile={this.onClickViewFile}
+      changeState={this.changeState}
+      {...this.props}
+      {...this.state}
+    />
+  );
 
   /**
    * It return file details
@@ -1151,7 +1072,7 @@ class Files extends Component {
           {this.renderSelectExcelSheetModal()}
           {this.renderNotificationModal()}
           {this.renderAddColumnModal()}
-          {this.renderFileList()}
+          {this.renderFileListView()}
           {this.renderFileDetails()}
         </FileListWrapper>
       </FileWrapper>
