@@ -51,6 +51,7 @@ export const gridHeaderData = ({ color, gridMetaData }) => ({
   includeGlobalFilter: true,
   exportFileName: `StudentData-${moment().format('DD-MM-YYYY-LT')}.csv`,
   loaderColor: color,
+  resizeColumnWidth: true,
 });
 
 export const getStyles = () => ({

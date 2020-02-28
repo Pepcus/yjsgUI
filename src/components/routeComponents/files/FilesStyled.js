@@ -75,6 +75,8 @@ export const FilesListStyled = styled(Box)`
         height: 450px;
         width: 300px;
         position: fixed;
+        padding: 12px 3px;
+        z-index: 99;
         left: 0;
         resize: both;
         overflow: auto;
@@ -128,7 +130,7 @@ export const MessageBoxWrapper = styled(Box)`
 `;
 
 export const FileListTitle = styled(Typography)`
-    font-size: 21px !important;
+    font-size: 12px !important;
     color: ${getThemeProps('typography.titleFieldColor.color')};
     padding: 10px 20px 8px;
     ${({ theme }) => theme.media.down('lg')`
