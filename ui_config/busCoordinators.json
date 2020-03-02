@@ -1,118 +1,147 @@
 {
   "B0": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B1": {
     "coordinatorName": "Shweta Bandi",
-    "contactNumber": "9098521320"
+    "contactNumber": "9098521320",
+    "busStop": "Choithram Circle"
   },
   "B2": {
     "coordinatorName": "Kamal Ved",
-    "contactNumber": "9826029062"
+    "contactNumber": "9826029062",
+    "busStop": "Choithram Circle"
   },
   "B3": {
     "coordinatorName": "Akhilesh Jain",
-    "contactNumber": "7000526089"
+    "contactNumber": "7000526089",
+    "busStop": "Choithram Circle"
   },
   "B4": {
     "coordinatorName": "Pragati Ji / Swapnil Ji",
-    "contactNumber": "9981722975/7000211153"
+    "contactNumber": "9981722975/7000211153",
+    "busStop": "Choithram Circle"
   },
   "B5": {
     "coordinatorName": "Dr. Bahubali Jain",
-    "contactNumber": "9827622779"
+    "contactNumber": "9827622779",
+    "busStop": "Choithram Circle"
   },
   "B6": {
     "coordinatorName": "Rupali Ajmera",
-    "contactNumber": "9425480983"
+    "contactNumber": "9425480983",
+    "busStop": "Choithram Circle"
   },
   "B7": {
     "coordinatorName": "Rajul JI / Nilesh JI",
-    "contactNumber": "9425959469"
+    "contactNumber": "9425959469",
+    "busStop": "Choithram Circle"
   },
   "B8": {
     "coordinatorName": "Rohit Patni / Vidhi",
-    "contactNumber": "8224000012"
+    "contactNumber": "8224000012",
+    "busStop": "Choithram Circle"
   },
   "B9": {
     "coordinatorName": "Poorvi Jain",
-    "contactNumber": "9098268521"
+    "contactNumber": "9098268521",
+    "busStop": "Choithram Circle"
   },
   "B10": {
     "coordinatorName": "Archesh / Ankit",
-    "contactNumber": "9425353721"
+    "contactNumber": "9425353721",
+    "busStop": "Choithram Circle"
   },
   "B11": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B12": {
     "coordinatorName": "Monika Ajmera",
-    "contactNumber": "9926793624"
+    "contactNumber": "9926793624",
+    "busStop": "Choithram Circle"
   },
   "B13": {
     "coordinatorName": "Kushagra",
-    "contactNumber": "9907573845"
+    "contactNumber": "9907573845",
+    "busStop": "Choithram Circle"
   },
   "B14": {
     "coordinatorName": "Virendra Jain",
-    "contactNumber": "9826024105"
+    "contactNumber": "9826024105",
+    "busStop": "Choithram Circle"
   },
   "B15": {
     "coordinatorName": "Nutan Jain",
-    "contactNumber": "9826999090"
+    "contactNumber": "9826999090",
+    "busStop": "Choithram Circle"
   },
   "B16": {
     "coordinatorName": "Ayush Jhanjhri",
-    "contactNumber": "9907523746"
+    "contactNumber": "9907523746",
+    "busStop": "Choithram Circle"
   },
   "B17": {
     "coordinatorName": "Nilesh Aruna Jain",
-    "contactNumber": "7389314415"
+    "contactNumber": "7389314415",
+    "busStop": "Choithram Circle"
   },
   "B18": {
     "coordinatorName": "Shailesh Jain",
-    "contactNumber": "9424081546"
+    "contactNumber": "9424081546",
+    "busStop": "Choithram Circle"
   },
   "B19": {
     "coordinatorName": "Neelam Badjatya",
-    "contactNumber": "8770661844"
+    "contactNumber": "8770661844",
+    "busStop": "Choithram Circle"
   },
   "B20": {
     "coordinatorName": "Dr. Bahubali Jain",
-    "contactNumber": "9827622779"
+    "contactNumber": "9827622779",
+    "busStop": "Choithram Circle"
   },
   "B21": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B22": {
     "coordinatorName": "Rachna Jain",
-    "contactNumber": "8319140105"
+    "contactNumber": "8319140105",
+    "busStop": "Choithram Circle"
   },
   "B23": {
     "coordinatorName": "Anchal Jain",
-    "contactNumber": "8889998846"
+    "contactNumber": "8889998846",
+    "busStop": "Choithram Circle"
   },
   "B24": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B25": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B26": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "B27": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Choithram Circle"
   },
   "SELF": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": ""
   }
 }

@@ -66,3 +66,13 @@ export const getRegisteredMemberData = ({ memberData }) => {
 };
 
 export const isUserMember = ({ user }) => user === MEMBER_WITH_URL || user === MEMBER;
+
+export const getBusNumberFromBusStop = ({ busDetails = {}, busStop = '' }) => {
+  let requiredBusNumber = '';
+  Object.entries(busDetails).map(([busNumber, busData]) => {
+    if (busData.busStop === busStop) {
+      requiredBusNumber = busNumber;
+    }
+  });
+  return requiredBusNumber;
+};

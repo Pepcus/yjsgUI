@@ -29,8 +29,9 @@ import {
   getFormData,
   getTransformedErrors,
   formValidators,
+  getBusNumberFromBusStop,
 } from 'utils/form';
-import { getApplicationTenant } from 'reducers/assetFilesReducer';
+import { getApplicationTenant, getBusCoordinators } from 'reducers/assetFilesReducer';
 import {
   initialMemberData,
   isObjectsEqual,
@@ -43,6 +44,8 @@ import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
 import InvalidMemberPopUp from './InvalidMemberPopUp';
 import RedirectToRoute from './RedirectToRoute';
 import Loader from 'components/common/Loader';
+import BusStopChangeWarningPopUp
+  from 'components/routeComponents/memberRegistrationCorrectionForm/BusStopChangeWarningPopUp';
 
 const SubmitButtonStyled = styled(Button)`
     ${({ theme }) => theme.media.down('lg')`
@@ -90,6 +93,8 @@ class MemberRegistrationCorrectionForm extends Component {
       oldMemberData: {},
       onlyOptInForm: (props.config.isOptInEnable && props.isMemberFetchedFromUrlParams),
       mandatoryField: false,
+      isBusStopChangeMessagePopupVisible: false,
+      hasUserSeenBusStopChangeWarning: false,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
   }
@@ -370,6 +375,44 @@ class MemberRegistrationCorrectionForm extends Component {
     );
   };
 
+  handleMemberBusStopChange = (busStopValue) => {
+    const { ADMIN, MEMBER } = USER_TYPES;
+    const { user } = this.props;
+    // If user is not coming from self vehicle.
+    if ( busStopValue !== 'Self Vehicle') {
+      // Then display a warning for the member for only once.
+      if (!this.state.hasUserSeenBusStopChangeWarning && user === MEMBER) {
+        this.setState({
+          isBusStopChangeWarningPopupVisible: true,
+        });
+      }
+      // if user is admin then prepopulate the designated busNumber on change of busStop.
+      if (user === ADMIN) {
+        const busNumber = getBusNumberFromBusStop({
+          busDetails: this.props.busCoordinators,
+          busStop: busStopValue,
+        });
+        this.setState({
+          formData: {
+            ...this.state.formData,
+            busNumber,
+          },
+          member: {
+            ...this.state.member,
+            busNumber,
+          },
+        })
+      }
+    }
+  };
+
+  onConfirmBusStopChangeWarning = () => {
+    this.setState({
+      hasUserSeenBusStopChangeWarning: true,
+      isBusStopChangeWarningPopupVisible: false,
+    });
+  };
+
   /**
    * Method handle onChange of form
    * @param {Object} event
@@ -396,6 +439,9 @@ class MemberRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
       hasError: !isEmpty(errors),
     });
+    if (previousFormData.busStop !== formData.busStop) {
+      this.handleMemberBusStopChange(formData.busStop);
+    }
   };
 
   render() {
@@ -419,8 +465,10 @@ class MemberRegistrationCorrectionForm extends Component {
       member,
       onlyOptInForm,
       formData,
+      hasUserSeenBusStopChangeWarning,
+      isBusStopChangeWarningPopupVisible,
     } = this.state;
-    if (isFetch && memberData && !isEmpty(formConfig)) {
+    if (isFetch && memberData && !isEmpty(formConfig) && !isBusStopChangeWarningPopupVisible) {
       return (
         <CorrectionsForm
           formData={formData}
@@ -465,6 +513,15 @@ class MemberRegistrationCorrectionForm extends Component {
           />
         </Box>
       );
+    }
+    if (isBusStopChangeWarningPopupVisible && !hasUserSeenBusStopChangeWarning) {
+      return (
+        <Box>
+          <BusStopChangeWarningPopUp
+            onConfirmation={this.onConfirmBusStopChangeWarning}
+          />
+        </Box>
+      )
     }
     return (
       <Loader isLoading />
@@ -519,6 +576,7 @@ const mapStateToProps = state => ({
   user: getPageUserType(state),
   userType: getUserType(state),
   isMemberFetchedFromUrlParams: getIsMemberFetchedFromUrlParams(state),
+  busCoordinators: getBusCoordinators(state),
 });
 
 const mapDispatchToProps = dispatch => ({
