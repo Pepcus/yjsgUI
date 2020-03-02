@@ -162,3 +162,11 @@ export const isUpdatedResetAction = () => ({
   secretKey: '',
   member: '',
 });
+
+export const setMemberFetchedFromUrlParamsAction = () => ({
+  type: 'SET_MEMBER_FETCHED_FROM_URL_PARAMS',
+});
+
+export const resetMemberFetchedFromUrlParamsAction = () => ({
+  type: 'RESET_MEMBER_FETCHED_FROM_URL_PARAMS',
+});

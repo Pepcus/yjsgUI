@@ -6,6 +6,7 @@ const initialState = {
   isCreated: false,
   isPartialMatchFound: false,
   isExactMatchFound: false,
+  isMemberFetchedFromUrlParams: false,
   id: '',
   secretKey: '',
   updateMessage: '',
@@ -142,6 +143,16 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         secretKey: '',
         member: {},
       };
+    case 'SET_MEMBER_FETCHED_FROM_URL_PARAMS':
+      return {
+        ...state,
+        isMemberFetchedFromUrlParams: true,
+      };
+    case 'RESET_MEMBER_FETCHED_FROM_URL_PARAMS':
+      return {
+        ...state,
+        isMemberFetchedFromUrlParams: false,
+      };
     default: {
       return {
         ...state,
@@ -167,3 +178,5 @@ export const getUserSecretKey = state => state.memberRegistrationReducer.secretK
 export const isPartialMemberAlreadyRegistered = state => state.memberRegistrationReducer.isPartialMatchFound;
 
 export const isExactMemberAlreadyRegistered = state => state.memberRegistrationReducer.isExactMatchFound;
+
+export const getIsMemberFetchedFromUrlParams = state => state.memberRegistrationReducer.isMemberFetchedFromUrlParams;

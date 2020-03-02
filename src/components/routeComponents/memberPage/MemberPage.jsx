@@ -13,7 +13,9 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,
+  resetMemberFetchedFromUrlParamsAction,
   setMemberCredentialsAction,
+  setMemberFetchedFromUrlParamsAction,
 } from 'actions/memberRegistrationActions';
 import {
   setUserTypeAction,
@@ -109,9 +111,9 @@ class MemberPage extends Component {
    * @param {String} secretCode
    */
   fetchMemberByURLParams(id, secretCode) {
-    const { fetchMemberData, setMemberCredentials, setUserType } = this.props;
+    const { fetchMemberData, setMemberCredentials, setUserType, setMemberFetchedFromUrlParams } = this.props;
     const { MEMBER_WITH_URL } = USER_TYPES;
-
+    setMemberFetchedFromUrlParams();
     setMemberCredentials({ id, secretKey: secretCode });
     fetchMemberData({ id, secretKey: secretCode });
     setUserType({ pageUser: MEMBER_WITH_URL });
@@ -126,12 +128,12 @@ class MemberPage extends Component {
    * And set user is member in reducer through setHashLinkForMemberCredential action.
    */
   redirectToMemberLogin = () => {
-    const { setHashLinkForMemberCredential } = this.props;
+    const { setHashLinkForMemberCredential, resetMemberFetchedFromUrlParams } = this.props;
     const { MEMBER } = USER_TYPES;
-
     this.setState({
       isMemberLogin: true,
     });
+    resetMemberFetchedFromUrlParams();
     setHashLinkForMemberCredential(MEMBER);
   };
 
@@ -141,12 +143,13 @@ class MemberPage extends Component {
    * And set user is member in reducer through setHashLinkForNewRegistration action.
    */
   redirectToNewRegistrationPage = () => {
-    const { setHashLinkForNewRegistration } = this.props;
+    const { setHashLinkForNewRegistration, resetMemberFetchedFromUrlParams } = this.props;
     const { MEMBER } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
+    resetMemberFetchedFromUrlParams();
     setHashLinkForNewRegistration(MEMBER);
   };
 
@@ -234,6 +237,8 @@ MemberPage.propTypes = {
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
   setUserType: PropTypes.func,
+  setMemberFetchedFromUrlParams: PropTypes.func,
+  resetMemberFetchedFromUrlParams: PropTypes.func,
   tenant: PropTypes.string,
 };
 
@@ -246,6 +251,8 @@ MemberPage.defaultProps = {
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
   setUserType: () => {},
+  setMemberFetchedFromUrlParams: () => {},
+  resetMemberFetchedFromUrlParams: () => {},
   tenant: '',
 };
 
@@ -263,6 +270,8 @@ const mapDispatchToProps = dispatch => ({
   setHashLinkForMemberCredential: userType => dispatch(setHashLinkForMemberCredentialAction(userType)),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
+  setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
+  resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
 });
 
 export default connect(

@@ -15,7 +15,9 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,
+  setMemberFetchedFromUrlParamsAction,
   setMemberCredentialsAction,
+  resetMemberFetchedFromUrlParamsAction,
 } from 'actions/memberRegistrationActions';
 import {
   setUserTypeAction,
@@ -129,7 +131,8 @@ class MemberCredentialPage extends Component {
    * @param {String} secretCode
    */
   fetchStudentByURLParams = (id, secretCode) => {
-    const { fetchStudentData, setStudentCredentials } = this.props;
+    const { fetchStudentData, setStudentCredentials, setMemberFetchedFromUrlParams } = this.props;
+    setMemberFetchedFromUrlParams();
     setStudentCredentials({ id, secretKey: secretCode });
     fetchStudentData({ id, secretKey: secretCode });
     this.setState({
@@ -162,9 +165,10 @@ class MemberCredentialPage extends Component {
       credentials,
       hasError,
     } = this.state;
-    const { fetchStudentData, setStudentCredentials, setUserType } = this.props;
+    const { fetchStudentData, setStudentCredentials, setUserType, resetMemberFetchedFromUrlParams } = this.props;
     const { MEMBER } = USER_TYPES;
     if (hasError) {
+      resetMemberFetchedFromUrlParams();
       setStudentCredentials({ id: credentials.memberId, secretKey: credentials.secretKey });
       fetchStudentData({ id: credentials.memberId, secretKey: credentials.secretKey });
       setUserType({ pageUser: MEMBER });
@@ -333,6 +337,8 @@ MemberCredentialPage.propTypes = {
   logoPathConfig: PropTypes.object,
   secretKey: PropTypes.string,
   setStudentCredentials: PropTypes.func,
+  setMemberFetchedFromUrlParams: PropTypes.func,
+  resetMemberFetchedFromUrlParams: PropTypes.func,
   setUserType: PropTypes.func,
   memberId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
@@ -346,6 +352,8 @@ MemberCredentialPage.defaultProps = {
   logoPathConfig: {},
   secretKey: '',
   setStudentCredentials: () => {},
+  setMemberFetchedFromUrlParams: () => {},
+  resetMemberFetchedFromUrlParams: () => {},
   setUserType: () => {},
   memberId: '',
 };
@@ -362,6 +370,8 @@ const mapDispatchToProps = dispatch => ({
   fetchStudentData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setStudentCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
+  setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
+  resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
 });
 
 export default connect(

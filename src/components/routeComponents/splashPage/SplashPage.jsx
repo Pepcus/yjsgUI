@@ -17,7 +17,9 @@ import Typography from 'pepcus-core/lib/Typography';
 
 import {
   fetchMemberDataAction,
+  resetMemberFetchedFromUrlParamsAction,
   setMemberCredentialsAction,
+  setMemberFetchedFromUrlParamsAction,
 } from 'actions/memberRegistrationActions';
 import {
   setHashLinkForNewRegistrationAction,
@@ -168,7 +170,8 @@ class SplashPage extends Component {
    * @param {String} secretCode
    */
   fetchMemberByURLParams = (id, secretCode) => {
-    const { setMemberCredentials, fetchMemberData } = this.props;
+    const { setMemberCredentials, fetchMemberData, setMemberFetchedFromUrlParams } = this.props;
+    setMemberFetchedFromUrlParams();
     setMemberCredentials({ id, secretKey: secretCode });
     fetchMemberData({ id, secretKey: secretCode });
     this.setState({
@@ -202,11 +205,12 @@ class SplashPage extends Component {
    */
   setAdminLogin = () => {
     const { admin, hasError } = this.state;
-    const { setAdminCredentials, loginAdmin, appConfig } = this.props;
+    const { setAdminCredentials, loginAdmin, appConfig, resetMemberFetchedFromUrlParams } = this.props;
     if (hasError) {
       this.setState({
         adminCredentialErrorMessage: true,
       });
+      resetMemberFetchedFromUrlParams();
       setAdminCredentials({ id: admin.adminId, password: admin.adminPassword });
       loginAdmin({
         adminId: admin.adminId,
@@ -220,12 +224,13 @@ class SplashPage extends Component {
    * Method set the value of isNewRegistration true on Onclick of new registration button.
    */
   redirectToNewRegistrationPage = () => {
-    const { setHashLinkForNewRegistration } = this.props;
+    const { setHashLinkForNewRegistration, resetMemberFetchedFromUrlParams } = this.props;
     const { ADMIN } = USER_TYPES;
 
     this.setState({
       isNewRegistration: true,
     });
+    resetMemberFetchedFromUrlParams();
     setHashLinkForNewRegistration(ADMIN);
   };
 
@@ -321,6 +326,8 @@ SplashPage.propTypes = {
   setAdminCredentials: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
+  setMemberFetchedFromUrlParams: PropTypes.func,
+  resetMemberFetchedFromUrlParams: PropTypes.func,
   loginAdmin: PropTypes.func,
 };
 
@@ -335,6 +342,8 @@ SplashPage.defaultProps = {
   setAdminCredentials: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
+  setMemberFetchedFromUrlParams: () => {},
+  resetMemberFetchedFromUrlParams: () => {},
   loginAdmin: () => {},
 };
 
@@ -355,6 +364,8 @@ const mapDispatchToProps = dispatch => ({
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
   loginAdmin: ({ adminId, adminPassword, preStoredAdminCredentials }) => dispatch(loginAdminAction({ adminId, adminPassword, preStoredAdminCredentials })),
+  setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
+  resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
 });
 
 export default connect(

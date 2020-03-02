@@ -38,7 +38,7 @@
                   "customValidation": "ageValidator"
                 },
                 "mobile": {
-                  "title": "मोबाइल नं",
+                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
                   "type": "string",
                   "customValidation": "mobileValidator"
                 },
@@ -376,7 +376,7 @@
                   "type": "string"
                 },
                 "mobile": {
-                  "title": "मोबाइल नं",
+                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
                   "type": "string"
                 },
                 "occupation": {
@@ -1308,7 +1308,7 @@
                   "customValidation": "ageValidator"
                 },
                 "mobile": {
-                  "title": "मोबाइल नं",
+                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
                   "type": "string",
                   "customValidation": "mobileValidator"
                 },
@@ -1503,7 +1503,7 @@
                   "type": "string"
                 },
                 "mobile": {
-                  "title": "मोबाइल नं",
+                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
                   "type": "string"
                 },
                 "occupation": {

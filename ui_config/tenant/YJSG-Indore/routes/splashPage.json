@@ -5,7 +5,8 @@
       "properties": {
         "adminId": {
           "title": "Admin ID",
-          "type": "string"
+          "type": "string",
+          "default": "yjsgadmin"
         },
         "adminPassword": {
           "title": "Admin Password",

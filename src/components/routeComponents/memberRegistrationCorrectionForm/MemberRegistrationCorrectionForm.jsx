@@ -11,6 +11,7 @@ import { USER_TYPES } from 'constants/member';
 import { isUpdatedResetAction, updateMemberDataAction } from 'actions/memberRegistrationActions';
 import { setLoadingStateAction } from 'actions/loaderActions';
 import {
+  getIsMemberFetchedFromUrlParams,
   getMember,
   getUserId,
   getUserSecretKey,
@@ -87,7 +88,7 @@ class MemberRegistrationCorrectionForm extends Component {
       isPreviousLocation: false,
       member: {},
       oldMemberData: {},
-      onlyOptInForm: this.props.config.isOptInEnable,
+      onlyOptInForm: (props.config.isOptInEnable && props.isMemberFetchedFromUrlParams),
       mandatoryField: false,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
@@ -346,20 +347,11 @@ class MemberRegistrationCorrectionForm extends Component {
    */
   renderBackButton = () => {
     const { user, constants, config } = this.props;
-    const { isOptInEnable } = config;
+    const { onlyOptInForm } = this.state;
     const { ADMIN } = USER_TYPES;
     const { BACK } = constants;
 
-    if (user === ADMIN) {
-      return (
-        <BackButtonStyled
-          onClick={this.redirectToPreviousLocation}
-        >
-          {BACK}
-        </BackButtonStyled>
-      );
-
-    } else if (isUserMember({ user }) && isOptInEnable) {
+    if (isUserMember({ user }) && onlyOptInForm) {
       return (
         <BackButtonStyled
           onClick={this.onlyOptInChanged}
@@ -490,6 +482,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   ]),
   isFetch: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
+  isMemberFetchedFromUrlParams: PropTypes.bool,
   isUpdatedReset: PropTypes.func,
   memberData: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   secretKey: PropTypes.string,
@@ -506,6 +499,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   id: '',
   isFetch: false,
   isMemberUpdated: false,
+  isMemberFetchedFromUrlParams: false,
   isUpdatedReset: () => {},
   memberData: {},
   secretKey: '',
@@ -524,6 +518,7 @@ const mapStateToProps = state => ({
   tenant: getApplicationTenant(state),
   user: getPageUserType(state),
   userType: getUserType(state),
+  isMemberFetchedFromUrlParams: getIsMemberFetchedFromUrlParams(state),
 });
 
 const mapDispatchToProps = dispatch => ({
