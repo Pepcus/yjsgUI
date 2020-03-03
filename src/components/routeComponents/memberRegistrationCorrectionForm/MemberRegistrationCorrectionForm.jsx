@@ -386,6 +386,8 @@ class MemberRegistrationCorrectionForm extends Component {
           isBusStopChangeWarningPopupVisible: true,
         });
       }
+      /*
+      // TODO: This requirement is currently not been finalized. Waiting for the approval.
       // if user is admin then prepopulate the designated busNumber on change of busStop.
       if (user === ADMIN) {
         const busNumber = getBusNumberFromBusStop({
@@ -403,6 +405,7 @@ class MemberRegistrationCorrectionForm extends Component {
           },
         })
       }
+      */
     }
   };
 
