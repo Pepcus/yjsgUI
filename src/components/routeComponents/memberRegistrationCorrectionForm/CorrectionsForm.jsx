@@ -14,6 +14,7 @@ import {
 
 import OtherInformationEditLink from './OtherInformationEditLink';
 import OnlyOptInSubmitButton from './OnlyOptInSubmitButton';
+import MemberMarksDataGrid from 'components/routeComponents/memberRegistrationCorrectionForm/MemberMarksDataGrid';
 
 const { ADMIN } = USER_TYPES;
 
@@ -85,6 +86,7 @@ const CorrectionsForm = ({
   transformErrors,
   user,
   validate,
+  memberMarksGridMetaData,
 }) => {
   if (formConfig) {
     return (
@@ -110,6 +112,10 @@ const CorrectionsForm = ({
             transformErrors={transformErrors}
             validate={validate}
             uiSchema={formConfig.uiSchema}
+          />
+          <MemberMarksDataGrid
+            gridData={[formData]}
+            metaData={memberMarksGridMetaData}
           />
           <OnlyOptInSubmitButton
             onlyOptInForm={onlyOptInForm}

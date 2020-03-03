@@ -457,6 +457,7 @@ class MemberRegistrationCorrectionForm extends Component {
       tenant,
       user,
       constants,
+      config
     } = this.props;
 
     const {
@@ -488,6 +489,7 @@ class MemberRegistrationCorrectionForm extends Component {
           transformErrors={this.transformErrors}
           user={user}
           validate={formValidators(formConfig.schema, constants)}
+          memberMarksGridMetaData={config.memberMarksGridMetaData}
         >
           <RedirectToRoute
             context={context}

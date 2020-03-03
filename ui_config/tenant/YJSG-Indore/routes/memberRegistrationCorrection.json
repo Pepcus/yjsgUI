@@ -185,10 +185,6 @@
                     "Level 8 : छहढाला-ढाल 4-5"
                   ]
                 },
-                "marks2019": {
-                  "title": "Marks 2019",
-                  "type": "string"
-                },
                 "busNumber": {
                   "title": "Bus#",
                   "type": "string",
@@ -521,10 +517,6 @@
                     "Level 8 : छहढाला-ढाल 4-5"
                   ]
                 },
-                "marks2019": {
-                  "title": "Marks 2019",
-                  "type": "string"
-                },
                 "busNumber": {
                   "title": "Bus#",
                   "type": "string",
@@ -693,22 +685,6 @@
         },
         "submitButton": {
           "type": "string"
-        },
-        "marks2019": {
-          "title": "Marks 2018:",
-          "type": "string"
-        },
-        "marks2018": {
-          "title": "Marks 2018:",
-          "type": "string"
-        },
-        "marks2017": {
-          "title": "Marks 2017:",
-          "type": "string"
-        },
-        "marks2016": {
-          "title": "Marks 2016:",
-          "type": "string"
         }
       }
     },
@@ -732,11 +708,7 @@
         "address",
         "remark",
         "backButton",
-        "submitButton",
-        "marks2019",
-        "marks2018",
-        "marks2017",
-        "marks2016"
+        "submitButton"
       ],
       "backButton": {
         "ui:options": {
@@ -1054,66 +1026,6 @@
           }
         }
       },
-      "marks2019": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2018": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2017": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2016": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
       "busNumber": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
@@ -1232,22 +1144,6 @@
       },
       {
         "formField": "classAttended2020",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2019",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2018",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2017",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2016",
         "dataType": "string"
       },
       {
@@ -1676,22 +1572,6 @@
         },
         "submitButton": {
           "type": "string"
-        },
-        "marks2019": {
-          "title": "Marks 2019:",
-          "type": "string"
-        },
-        "marks2018": {
-          "title": "Marks 2018:",
-          "type": "string"
-        },
-        "marks2017": {
-          "title": "Marks 2017:",
-          "type": "string"
-        },
-        "marks2016": {
-          "title": "Marks 2016:",
-          "type": "string"
         }
       }
     },
@@ -1711,11 +1591,7 @@
         "classAttended2020",
         "address",
         "backButton",
-        "submitButton",
-        "marks2019",
-        "marks2018",
-        "marks2017",
-        "marks2016"
+        "submitButton"
       ],
       "backButton": {
         "ui:options": {
@@ -2041,66 +1917,6 @@
             "padding": "0 10px 0 10px"
           }
         }
-      },
-      "marks2019": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2018": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2017": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "marks2016": {
-        "ui:placeholder": "N.A.",
-        "ui:disabled": true,
-        "ui:options": {
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
       }
     },
     "data": {},
@@ -2155,22 +1971,6 @@
       },
       {
         "formField": "classAttended2020",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2019",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2018",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2017",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2016",
         "dataType": "string"
       },
       {
@@ -2296,22 +2096,6 @@
         "dataType": "string"
       },
       {
-        "formField": "marks2019",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2018",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2017",
-        "dataType": "string"
-      },
-      {
-        "formField": "marks2016",
-        "dataType": "string"
-      },
-      {
         "formField": "busNumber",
         "dataType": "string"
       },
@@ -2329,5 +2113,33 @@
       }
     ]
   },
-  "isOptInEnable": true
+  "isOptInEnable": true,
+  "memberMarksGridMetaData": {
+    "headerConfig": [
+      {
+        "label": "Marks 2019",
+        "key": "marks2019",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Marks 2018",
+        "key": "marks2018",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Marks 2017",
+        "key": "marks2017",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Marks 2016",
+        "key": "marks2016",
+        "emptyCells": "NA",
+        "disableFilter": true
+      }
+    ]
+  }
 }
