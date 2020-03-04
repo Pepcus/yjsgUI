@@ -93,7 +93,7 @@ class MemberRegistrationCorrectionForm extends Component {
       oldMemberData: {},
       onlyOptInForm: (props.config.isOptInEnable && props.isMemberFetchedFromUrlParams),
       mandatoryField: false,
-      isBusStopChangeMessagePopupVisible: false,
+      isBusStopChangeWarningPopupVisible: false,
       hasUserSeenBusStopChangeWarning: false,
     };
     this.changeIsOnlyOptIn = this.changeIsOnlyOptIn.bind(this);
@@ -381,7 +381,7 @@ class MemberRegistrationCorrectionForm extends Component {
     // If user is not coming from self vehicle.
     if ( busStopValue !== 'Self Vehicle') {
       // Then display a warning for the member for only once.
-      if (!this.state.hasUserSeenBusStopChangeWarning && user === MEMBER) {
+      if (!this.state.hasUserSeenBusStopChangeWarning && user !== ADMIN) {
         this.setState({
           isBusStopChangeWarningPopupVisible: true,
         });
