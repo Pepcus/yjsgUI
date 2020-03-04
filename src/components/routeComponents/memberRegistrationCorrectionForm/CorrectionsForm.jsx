@@ -88,6 +88,19 @@ const CorrectionsForm = ({
   validate,
   memberMarksGridMetaData,
 }) => {
+
+  const renderMemberMarksDataGrid = () => {
+    if (onlyOptInForm) {
+      return null;
+    }
+    return (
+      <MemberMarksDataGrid
+        gridData={[formData]}
+        metaData={memberMarksGridMetaData}
+      />
+    );
+  };
+
   if (formConfig) {
     return (
       <ContainerStyled width="100%" ref={formRef}>
@@ -113,10 +126,9 @@ const CorrectionsForm = ({
             validate={validate}
             uiSchema={formConfig.uiSchema}
           />
-          <MemberMarksDataGrid
-            gridData={[formData]}
-            metaData={memberMarksGridMetaData}
-          />
+          {
+            renderMemberMarksDataGrid()
+          }
           <OnlyOptInSubmitButton
             onlyOptInForm={onlyOptInForm}
             submitMemberDataForOnlyOptInCase={submitMemberDataForOnlyOptInCase}
