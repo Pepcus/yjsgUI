@@ -523,7 +523,13 @@ class Files extends Component {
   addColumn = (newColumnName) => {
     if (!isEmpty(newColumnName)) {
       const { fileData } = this.state;
-      if (Object.keys(fileData[0]).includes(newColumnName)) {
+      const columnNamesArray = Object.keys(fileData[0])
+        .map((column) =>
+          column.toLowerCase().replace(/\s+/g, ''),
+        );
+      const newColumnNameWithoutSpace = newColumnName.toLowerCase()
+        .replace(/\s+/g, '');
+      if (columnNamesArray.includes(newColumnNameWithoutSpace)) {
         this.setState({
           notificationType: 'warning',
           notificationModal: true,

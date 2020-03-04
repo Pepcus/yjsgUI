@@ -268,7 +268,8 @@ export const getUpdatedVisibleColumnConfig = ({ visibleColumnConfig }) => {
 
 export const getMultipleIdSearchResult = ({ members, checkedIds, formData }) => {
   // isMultipleIdSearchCheck is check it do the search result according to search Ids.
-  const searchMembersIds = formData.inputValue.split(',');
+  const searchMembersIds = formData.inputValue.split(',')
+    .map(memberId => memberId.replace(/\s+/g, ''));
   const searchResult = [];
   searchMembersIds.forEach((element) => {
     const result = members.filter(member =>

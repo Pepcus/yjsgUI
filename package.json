@@ -48,8 +48,8 @@
     "xlsx": "^0.14.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "npm i && webpack",
+    "start": "webpack-dev-server --open --mode development" ,
+    "build": "npm i && webpack --mode production",
     "test": "mocha \"src/**/*.spec.js\" --require babel-register"
   },
   "devDependencies": {
