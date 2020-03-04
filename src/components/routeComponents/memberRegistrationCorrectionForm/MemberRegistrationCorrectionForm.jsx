@@ -447,6 +447,23 @@ class MemberRegistrationCorrectionForm extends Component {
     }
   };
 
+  renderBusStopChangeWarningPopup = () => {
+    const {
+      hasUserSeenBusStopChangeWarning,
+      isBusStopChangeWarningPopupVisible,
+    } = this.state;
+    if (isBusStopChangeWarningPopupVisible && !hasUserSeenBusStopChangeWarning) {
+      return (
+        <Box>
+          <BusStopChangeWarningPopUp
+            onConfirmation={this.onConfirmBusStopChangeWarning}
+          />
+        </Box>
+      )
+    }
+    return null;
+  }
+
   render() {
     const {
       context,
@@ -469,10 +486,8 @@ class MemberRegistrationCorrectionForm extends Component {
       member,
       onlyOptInForm,
       formData,
-      hasUserSeenBusStopChangeWarning,
-      isBusStopChangeWarningPopupVisible,
     } = this.state;
-    if (isFetch && memberData && !isEmpty(formConfig) && !isBusStopChangeWarningPopupVisible) {
+    if (isFetch && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
           formData={formData}
@@ -503,6 +518,9 @@ class MemberRegistrationCorrectionForm extends Component {
             isUpdatedReset={isUpdatedReset}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
           />
+          {
+            this.renderBusStopChangeWarningPopup()
+          }
         </CorrectionsForm>
       );
     }
@@ -518,15 +536,6 @@ class MemberRegistrationCorrectionForm extends Component {
           />
         </Box>
       );
-    }
-    if (isBusStopChangeWarningPopupVisible && !hasUserSeenBusStopChangeWarning) {
-      return (
-        <Box>
-          <BusStopChangeWarningPopUp
-            onConfirmation={this.onConfirmBusStopChangeWarning}
-          />
-        </Box>
-      )
     }
     return (
       <Loader isLoading />
