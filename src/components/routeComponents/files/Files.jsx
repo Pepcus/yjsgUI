@@ -225,7 +225,7 @@ class Files extends Component {
    */
   fetchFileData = (file) => {
     const { setLoadingState, tenant, secretKey } = this.props;
-    const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
+    const { CSV, XLSX, XLS, DOCX } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     let fileData = [];
     const { url, displayName } = fileDetails;
@@ -247,7 +247,7 @@ class Files extends Component {
       // If file type is not convertible to json data;
       if (![CSV, XLSX, XLS].includes(fileType) && url) {
         let frameSrc = url;
-        if (fileType === 'docx') {
+        if (fileType === DOCX) {
           frameSrc = `https://docs.google.com/gview?url=${url}&embedded=true`;
         }
         this.setState({
@@ -292,7 +292,7 @@ class Files extends Component {
 
   loadFileData = (file) => {
     const { setLoadingState } = this.props;
-    const { CSV, XLSX, XLS } = SUPPORTED_FILE_TYPES;
+    const { CSV, XLSX, XLS, DOCX } = SUPPORTED_FILE_TYPES;
     const fileDetails = file;
     const { name } = fileDetails;
     const fileType = name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
