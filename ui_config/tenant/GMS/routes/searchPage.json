@@ -1,0 +1,155 @@
+{
+  "searchFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "city",
+        "mobile"
+      ],
+      "properties": {
+        "city": {
+          "title": "शहर",
+          "type": "string",
+          "enum": [
+            "Indore",
+            "Other"
+          ],
+          "enumNames": [
+            "इंदौर",
+            "कोई और शहर"
+          ]
+        },
+        "mobile": {
+          "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
+          "type": "string",
+          "customValidation": "mobileValidator"
+        }
+      },
+      "dependencies": {
+        "city": {
+          "oneOf": [{
+            "properties": {
+              "city": {
+                "title": "शहर",
+                "type": "string",
+                "enum": [
+                  "Other"
+                ],
+                "enumNames": [
+                  "कोई और शहर"
+                ]
+              },
+              "cityName": {
+                "title": "शहर का नाम",
+                "type": "string"
+              }
+            },
+            "required": [
+              "cityName"
+            ]
+          }]
+        }
+      }
+    },
+    "uiSchema": {
+      "city": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "cityName": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "mobile": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "partialUserSchema": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "title": "नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        }
+      }
+    },
+    "partialUserUISchema": {
+      "type": "object",
+      "name": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "data": {}
+  }
+}

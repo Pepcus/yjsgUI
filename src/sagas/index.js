@@ -13,6 +13,13 @@ import {
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
 } from './member';
+
+import {
+  createUserSaga,
+  fetchUserFromPhoneSaga,
+  editUserSaga,
+  patchUserSaga,
+} from './user';
 import {
   fetchFilesConfigSaga,
 } from './file';
@@ -36,5 +43,9 @@ const sagas = [
   takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga),
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
   takeLatest(['ADMIN_LOGIN'], loginAdminSaga),
+  takeLatest(['CREATE_USER_ACTION'], createUserSaga),
+  takeLatest(['UPDATE_USER_ACTION'], editUserSaga),
+  takeLatest(['PATCH_USER_ACTION'], patchUserSaga),
+  takeLatest(['FETCH_USER_FROM_PHONE_ACTION'], fetchUserFromPhoneSaga),
 ];
 export default sagas;

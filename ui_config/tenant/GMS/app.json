@@ -1,0 +1,58 @@
+{
+  "title": "गोम्मटसार शिविर 2020",
+  "footerTitle": "74470-56789",
+  "adminCredentials": 123456,
+  "routes": [
+    {
+      "name": "searchPage",
+      "path": "/gms",
+      "component": "SearchPage",
+      "config": "searchPage",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        },
+        "logo": true,
+        "hasButtons": false,
+        "backButton": false
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "userRegistration",
+      "path": "/user-registration",
+      "component": "UserRegistration",
+      "config": "userRegistration",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0px 10px 80px"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        },
+        "logo": true,
+        "hasButtons": false,
+        "backButton": false
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    }
+  ],
+  "logoPathConfig": {
+    "LOGO": "./assets/images/YJSG-Indore/LOGO.png",
+    "headerLogo": "./assets/images/YJSG-Indore/headerLogo.png",
+    "pageBodyLogo": "./assets/images/YJSG-Indore/pageBodyLogo.png"
+  }
+}

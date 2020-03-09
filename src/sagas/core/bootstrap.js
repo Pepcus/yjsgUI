@@ -28,6 +28,8 @@ import {
   setAppConstantsAction,
 } from 'actions/appConstantsActions';
 import { setAPIConfigAction } from 'actions/api';
+import { setDefaultUserData } from 'actions/userActions';
+import { getUpdatedAppConfig } from 'utils/core/coreUtils';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
@@ -54,8 +56,8 @@ export function* getAppConfigSaga() {
   try {
     const appConfig = yield getAppConfig();
     if (appConfig) {
-      yield put(loadedAppDataSuccessAction(appConfig));
-      yield put(setAppConfigAction({ ...appConfig }));
+      yield put(loadedAppDataSuccessAction(getUpdatedAppConfig(appConfig)));
+      yield put(setAppConfigAction(getUpdatedAppConfig({ ...appConfig })));
     } else {
       yield put(loadAppDataFailedAction(errorMessage));
     }
@@ -96,6 +98,8 @@ export function* bootstrapApplication() {
     // TODO by Pratik: Remove this call from bootstrap
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
+    // For resetting the user data after page refresh.
+    yield put(setDefaultUserData());
   } catch (e) {
     console.error('Error - ', e);
     yield put(setBootstrappedFlag(false));

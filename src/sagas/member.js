@@ -34,6 +34,7 @@ import {
 } from 'actions/loaderActions';
 import { getAPIConfig } from 'reducers/api';
 import { getTenantName } from 'reducers/app';
+import { fetchUserFromPhoneSuccess, userCreateSuccessAction } from 'actions/userActions';
 
 /**
  * createMemberSaga sage call when create a new member.
