@@ -55,6 +55,7 @@ class SearchPage extends Component {
     super(props);
 
     this.state = {
+      continueClicked: false,
       formConfig: props.config.searchFormConfig,
       formData: {},
       hasError: true,
@@ -104,7 +105,6 @@ class SearchPage extends Component {
 
   renderUserList = () => {
     if ((this.props.users).length > 0) {
-      console.log(this.state.selectedUser);
       return (this.props.users).map(user => (
         <div className="radio">
           <label>
@@ -128,8 +128,18 @@ class SearchPage extends Component {
       selectedUser: this.state.selectedUser,
       mode: 'Edit',
     };
-    this.props.storeSearchPageData(formData);
-    window.location.href = '#/user-registration';
+    (this.props.users).forEach((user) => {
+      if (user.id === this.state.selectedUser) {
+        if ((user.paymentStatus).toLowerCase() === this.props.constants.PENDING) {
+          this.setState({
+            continueClicked: true,
+          });
+        } else {
+          this.props.storeSearchPageData(formData);
+          window.location.href = '#/user-registration';
+        }
+      }
+    });
   };
 
   renderContinueAndNewUserButton = () => {
@@ -203,6 +213,9 @@ class SearchPage extends Component {
       ...this.state.partialFormData,
       paymentStatus: 'Pending',
     };
+    if (data.city === this.props.constants.OTHER_CITY) {
+      data.city = this.state.formData.cityName;
+    }
     // Create New Student
     this.props.createUserAction(data);
     this.setState({
@@ -264,6 +277,7 @@ class SearchPage extends Component {
   closePopup = () => {
     this.props.setDefaultUserData();
     this.setState({
+      continueClicked: false,
       formData: {},
       hasError: true,
       isNewRegistrationClicked: false,
@@ -312,6 +326,7 @@ class SearchPage extends Component {
           <SuccessPopup
             isSubmitTriggered={this.state.isPartialRegistrationSubmitClicked}
             isUserCreated={this.props.isUserCreated}
+            isFromPartialContinue={this.state.continueClicked}
             redirectToPreviousLocation={this.closePopup}
             message={this.props.constants.PARTIAL_REGISTRATION_MESSAGE}
           />
