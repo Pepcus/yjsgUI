@@ -27,6 +27,7 @@ const TextWrapper = styled(Typography)`
  */
 const SuccessPopup = ({
   constants,
+  isFromPartialContinue,
   isSubmitTriggered,
   isUserCreated,
   redirectToPreviousLocation,
@@ -36,7 +37,8 @@ const SuccessPopup = ({
     BACK,
   } = constants;
 
-  if (isUserCreated && isSubmitTriggered) {
+  if ((isUserCreated && isSubmitTriggered)
+    || isFromPartialContinue) {
     return (
       <Popup>
         <Row width="100%" justify="center" margin="0">
@@ -58,6 +60,7 @@ const SuccessPopup = ({
 
 SuccessPopup.propTypes = {
   constants: PropTypes.object,
+  isFromPartialContinue: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
   isUserCreated: PropTypes.bool,
   message: PropTypes.string,
@@ -66,6 +69,7 @@ SuccessPopup.propTypes = {
 
 SuccessPopup.defaultProps = {
   constants: {},
+  isFromPartialContinue: false,
   isSubmitTriggered: false,
   isUserCreated: false,
   message: '',

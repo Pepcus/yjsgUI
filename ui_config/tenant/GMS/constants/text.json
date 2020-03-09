@@ -5,5 +5,7 @@
 
   "REGISTRATION_COMPLETE_MESSAGE": "Your Registration has been done. You will receive SMS once confirmed.",
 
-  "PARTIAL_REGISTRATION_MESSAGE": "Your Registration is not done. You need to do payment of INR 100 on following mentioned details. Once Payment is received you will be notified to complete your registration."
+  "PARTIAL_REGISTRATION_MESSAGE": "Your Registration is not done. You need to do payment of INR 100 on following mentioned details. Once Payment is received you will be notified to complete your registration.",
+
+  "PENDING": "pending"
 }
