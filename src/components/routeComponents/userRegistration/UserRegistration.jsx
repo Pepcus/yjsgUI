@@ -52,7 +52,7 @@ class UserRegistration extends Component {
     this.state = {
       formConfig: props.config.registrationFormConfig,
       formData: {
-        city: props.searchData.city === 'other' ? props.searchData.cityName : props.searchData.city,
+        city: props.searchData.city === props.constants.OTHER_CITY ? props.searchData.cityName : props.searchData.city,
         mobile: props.searchData.mobile,
       },
       hasError: props.searchData.mode !== 'Edit',
@@ -196,7 +196,7 @@ class UserRegistration extends Component {
             isSubmitTriggered={this.state.isSubmitTriggered}
             isUserCreated={this.props.isUserCreated}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
-            message="Your Registration has been done. You will receive SMS once confirmed."
+            message={this.props.constants.REGISTRATION_COMPLETE_MESSAGE}
           />
         </BoxStyled>
       </ContainerStyled>

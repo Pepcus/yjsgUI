@@ -1,6 +1,7 @@
 
 export const getUpdatedAppConfig = (appConfig) => {
-  if (window.location.hash === '#/gms') {
+  if (window.location.hash === '#/gms'
+    || window.location.hash === '#/user-registration') {
     appConfig.tenant = 'GMS';
     return appConfig;
   }

@@ -180,10 +180,10 @@ class SearchPage extends Component {
   }
 
   handleNewRegistration = () => {
-    if (this.state.formData.city === 'Indore') {
+    if (this.state.formData.city === this.props.constants.INDORE_CITY) {
       this.handleSubmit();
       window.location.href = '#/user-registration';
-    } else if (this.state.formData.city === 'Other') {
+    } else if (this.state.formData.city === this.props.constants.OTHER_CITY) {
       this.setState({
         isNewRegistrationClicked: true,
       });
@@ -224,7 +224,7 @@ class SearchPage extends Component {
       partialUserSchema,
       partialUserUISchema,
     } = this.state.formConfig;
-    if ((this.state.formData.city === 'Other'
+    if ((this.state.formData.city === this.props.constants.OTHER_CITY
       && (this.props.users).length === 0
       && this.state.isSubmitClicked)
       || this.state.isNewRegistrationClicked) {
@@ -313,7 +313,7 @@ class SearchPage extends Component {
             isSubmitTriggered={this.state.isPartialRegistrationSubmitClicked}
             isUserCreated={this.props.isUserCreated}
             redirectToPreviousLocation={this.closePopup}
-            message="Your Registration is not done. You need to do payment of INR 100 on following mentioned details. Once Payment is received you will be notified to complete your registration."
+            message={this.props.constants.PARTIAL_REGISTRATION_MESSAGE}
           />
         </BoxStyled>
       </ContainerStyled>
