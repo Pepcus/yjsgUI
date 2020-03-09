@@ -28,6 +28,7 @@ import {
   setAppConstantsAction,
 } from 'actions/appConstantsActions';
 import { setAPIConfigAction } from 'actions/api';
+import { setDefaultUserData } from 'actions/userActions';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
@@ -96,6 +97,7 @@ export function* bootstrapApplication() {
     // TODO by Pratik: Remove this call from bootstrap
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
+    yield put(setDefaultUserData());
   } catch (e) {
     console.error('Error - ', e);
     yield put(setBootstrappedFlag(false));

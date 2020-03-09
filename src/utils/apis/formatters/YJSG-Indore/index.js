@@ -9,7 +9,7 @@ import {
   markMemberOptStatusRequestFormatter,
   markMemberIdCardStatusRequestFormatter,
 } from './requestFormatters';
-import { formatMembersData } from './responseFormatters';
+import { formatMembersData, fetchUserFromPhoneFormatter } from './responseFormatters';
 
 export default {
   header: {
@@ -31,5 +31,6 @@ export default {
   },
   response: {
     getMembers: formatMembersData,
+    fetchUserFromPhone: fetchUserFromPhoneFormatter,
   },
 };

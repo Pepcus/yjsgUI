@@ -1,0 +1,211 @@
+{
+  "registrationFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "name",
+        "age",
+        "mobile",
+        "city",
+        "foodOpt",
+        "isWhatsApp"
+      ],
+      "properties": {
+        "name": {
+          "title": "नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        },
+        "age": {
+          "title": "उम्र",
+          "type": "string",
+          "customValidation": "ageValidator"
+        },
+        "mobile": {
+          "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
+          "type": "string",
+          "customValidation": "mobileValidator"
+        },
+        "address": {
+          "title": "पूरा पता",
+          "type": "string",
+          "customValidation": "addressValidator"
+        },
+        "city": {
+          "title": "शहर",
+          "type": "string"
+        },
+        "isWhatsApp": {
+          "title": "WhatsApp उपयोग",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "enumNames": [
+            "हाँ",
+            "नहीं"
+          ]
+        },
+        "foodOpt": {
+          "title": "भोजन",
+          "type": "string",
+          "enum": [
+            "Y",
+            "N"
+          ],
+          "enumNames": [
+            "हाँ",
+            "नहीं"
+          ]
+        }
+      }
+    },
+    "uiSchema": {
+      "name": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "age": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "mobile": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "address": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "titleStyle": {
+            },
+            "fieldStyle": {
+              "height": "35px"
+            }
+          },
+          "type": "text",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "city": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "isWhatsApp": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "foodOpt": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    }
+  }
+}

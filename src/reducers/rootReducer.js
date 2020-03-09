@@ -12,6 +12,7 @@ import { assetFilesReducer } from './assetFilesReducer';
 import { loaderReducer } from './loaderReducer';
 import { parentsRegistrationReducer } from './parentsRegistrationReducer';
 import { loginReducer } from './loginReducer';
+import { userReducer } from './userReducer';
 
 const rootReducer = combineReducers({
   api,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   assetFilesReducer,
   parentsRegistrationReducer,
   loginReducer,
+  userReducer,
 });
 
 export default rootReducer;

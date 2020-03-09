@@ -11,6 +11,8 @@ import Col from 'pepcus-core/lib/Col';
 import Form from 'pepcus-core/lib/Form';
 import Row from 'pepcus-core/lib/Row';
 import { getThemeProps } from 'pepcus-core/utils/theme';
+import MemberAlreadyRegisteredMessagePopup
+  from 'components/routeComponents/memberRegistrationForm/MemberAlreadyRegisteredMessagePopup';
 
 import {
   USER_TYPES,
@@ -36,8 +38,6 @@ import { getConstants } from 'reducers/constants';
 
 import RedirectToRoute from './RedirectToRoute';
 import SuccessMessagePopup from './SuccessMessagePopup';
-import MemberAlreadyRegisteredMessagePopup
-  from 'components/routeComponents/memberRegistrationForm/MemberAlreadyRegisteredMessagePopup';
 
 const BoxStyled = styled(Box)`
  align-items: center;
