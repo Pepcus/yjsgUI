@@ -12,11 +12,14 @@ import {
   updateMemberSaga,
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
+} from './member';
+
+import {
   createUserSaga,
   fetchUserFromPhoneSaga,
   editUserSaga,
   patchUserSaga,
-} from './member';
+} from './user';
 import {
   fetchFilesConfigSaga,
 } from './file';

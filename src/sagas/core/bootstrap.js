@@ -98,6 +98,7 @@ export function* bootstrapApplication() {
     // TODO by Pratik: Remove this call from bootstrap
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
+    // For resetting the user data after page refresh.
     yield put(setDefaultUserData());
   } catch (e) {
     console.error('Error - ', e);
