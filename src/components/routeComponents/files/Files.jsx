@@ -325,7 +325,20 @@ class Files extends Component {
           showUploadIcon: true,
         });
       }, 'excel2json');
-    } else if (fileType !== CSV || fileType !== XLSX || fileType !== XLS) {
+    } else if (fileType === DOCX) {
+      setLoadingState(true);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setLoadingState(false);
+        this.setState({
+          showFileDetails: false,
+          showFileViewFrame: true,
+          showUploadIcon: true,
+        });
+      };
+
+      reader.readAsDataURL(file);
+    } else {
       setLoadingState(true);
       const reader = new FileReader();
       reader.onload = (e) => {
