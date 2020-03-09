@@ -159,52 +159,6 @@
         "footerWrapperStyle": {},
         "title": ""
       }
-    },
-    {
-      "name": "searchPage",
-      "path": "/gms*",
-      "component": "SearchPage",
-      "config": "searchPage",
-      "isActive": true,
-      "header": {
-        "titleStyle": {
-          "padding": "10px 0px 10px 80px"
-        },
-        "headerWrapperStyle": {
-          "height": "auto"
-        },
-        "logo": true,
-        "hasButtons": true,
-        "backButton": true
-      },
-      "footer": {
-        "titleStyle": {},
-        "footerWrapperStyle": {},
-        "title": ""
-      }
-    },
-    {
-      "name": "userRegistration",
-      "path": "/user-registration*",
-      "component": "UserRegistration",
-      "config": "userRegistration",
-      "isActive": true,
-      "header": {
-        "titleStyle": {
-          "padding": "10px 0px 10px 80px"
-        },
-        "headerWrapperStyle": {
-          "height": "auto"
-        },
-        "logo": true,
-        "hasButtons": true,
-        "backButton": true
-      },
-      "footer": {
-        "titleStyle": {},
-        "footerWrapperStyle": {},
-        "title": ""
-      }
     }
   ],
   "logoPathConfig": {

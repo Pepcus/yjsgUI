@@ -312,7 +312,7 @@ export function* parentsRegistrationSaga(action) {
 
 export function* createUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'member', 'createUser');
+  const apiConfig = yield select(getAPIConfig, 'user', 'createUser');
   const tenant = yield select(getTenantName);
   const config = {
     ...apiConfig,
@@ -327,7 +327,7 @@ export function* createUserSaga(action) {
 
 export function* editUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'member', 'editUser');
+  const apiConfig = yield select(getAPIConfig, 'user', 'editUser');
   const tenant = yield select(getTenantName);
   const config = {
     ...apiConfig,
@@ -343,7 +343,7 @@ export function* editUserSaga(action) {
 
 export function* patchUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'member', 'patchUser');
+  const apiConfig = yield select(getAPIConfig, 'user', 'patchUser');
   const tenant = yield select(getTenantName);
   const config = {
     ...apiConfig,
@@ -358,7 +358,7 @@ export function* patchUserSaga(action) {
 }
 
 export function* fetchUserFromPhoneSaga(action) {
-  const apiConfig = yield select(getAPIConfig, 'member', 'fetchUserFromPhone');
+  const apiConfig = yield select(getAPIConfig, 'user', 'fetchUserFromPhone');
   const tenant = yield select(getTenantName);
   const config = {
     ...apiConfig,
