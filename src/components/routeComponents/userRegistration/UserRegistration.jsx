@@ -14,8 +14,9 @@ import Button from 'pepcus-core/lib/Button';
 import { getConstants } from 'reducers/constants';
 import { isEmpty } from 'pepcus-core';
 import { createUserAction, editUserAction, patchUserAction } from 'actions/userActions';
-import { getIsUserCreated, getSearchData, getUsers } from 'reducers/userReducer';
+import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers } from 'reducers/userReducer';
 import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
+import ErrorPopup from 'components/routeComponents/userRegistration/ErrorPopup';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -129,7 +130,9 @@ class UserRegistration extends Component {
 
   onChange = (data) => {
     this.setState({
-      formData: data.formData,
+      formData: {
+        ...data.formData,
+      },
       hasError: !isEmpty(data.errors),
     });
   };
@@ -140,6 +143,18 @@ class UserRegistration extends Component {
       return false;
     }
     return true;
+  };
+
+  renderErrorPopup = () => {
+    if (this.state.isSubmitTriggered && this.props.isUserFailed) {
+      return (
+        <ErrorPopup
+          redirectToPreviousLocation={this.redirectToPreviousLocation}
+          message={this.props.constants.REGISTRATION_FAILED_MESSAGE}
+        />
+      );
+    }
+    return null;
   };
 
   render() {
@@ -198,6 +213,7 @@ class UserRegistration extends Component {
             redirectToPreviousLocation={this.redirectToPreviousLocation}
             message={this.props.constants.REGISTRATION_COMPLETE_MESSAGE}
           />
+          {this.renderErrorPopup()}
         </BoxStyled>
       </ContainerStyled>
     );
@@ -210,6 +226,7 @@ UserRegistration.propTypes = {
   createUserAction: PropTypes.func,
   editUserAction: PropTypes.func,
   isUserCreated: PropTypes.bool,
+  isUserFailed: PropTypes.bool,
   patchUserAction: PropTypes.func,
   searchData: PropTypes.object,
   users: PropTypes.array,
@@ -221,6 +238,7 @@ UserRegistration.defaultProps = {
   createUserAction: () => {},
   editUserAction: () => {},
   isUserCreated: false,
+  isUserFailed: false,
   patchUserAction: () => {},
   searchData: {},
   users: [],
@@ -231,6 +249,7 @@ const mapStateToProps = state => ({
   searchData: getSearchData(state),
   users: getUsers(state),
   isUserCreated: getIsUserCreated(state),
+  isUserFailed: getIsUserFailed(state),
 });
 
 const mapDispatchToProps = dispatch => ({
