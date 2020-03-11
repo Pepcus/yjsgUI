@@ -32,15 +32,46 @@ export const nameValidator = (value, constants) => {
   const { INVALID_NAME_MESSAGE, NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE } = constants;
   const nameRegExp = /^[a-zA-Z\s\.]+$/;
   let message = '';
+  let updatedValue = '';
 
+  if (value) {
+    updatedValue = value.trim();
+  }
   if (isEmpty(value)) {
     message = '';
 
-  } else if (!nameRegExp.test(value)) {
+  } else if (!nameRegExp.test(updatedValue)) {
     message = INVALID_NAME_MESSAGE;
 
-  } else if (value.length < 3) {
+  } else if (updatedValue.length < 3) {
     message = NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+/**
+ * cityValidate method check validations for name field of form
+ * @param {String} value
+ * @param {Object} constants
+ * @return {string} message
+ */
+export const cityValidator = (value, constants) => {
+  const { INVALID_CITY_MESSAGE } = constants;
+  let message = '';
+  let updatedValue = '';
+
+  if (value) {
+    updatedValue = value.trim();
+  }
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (updatedValue.length < 2) {
+    message = INVALID_CITY_MESSAGE;
 
   } else {
     message = '';

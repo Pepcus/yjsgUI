@@ -19,8 +19,9 @@ import {
   setDefaultUserData,
   storeSearchPageData,
 } from 'actions/userActions';
-import { getIsUserCreated, getUsers } from 'reducers/userReducer';
-import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
+import { getIsUserCreated, getIsUserFailed, getUsers } from 'reducers/userReducer';
+import SuccessPopup from '../userRegistration/SuccessPopup';
+import ErrorPopup from '../userRegistration/ErrorPopup';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -160,7 +161,7 @@ class SearchPage extends Component {
               width="100%"
               onClick={this.handleNewRegistration}
             >
-              New Registration
+              {this.props.constants.NEW_REGISTRATION}
             </Button>
           </Col>
         </Row>
@@ -289,6 +290,18 @@ class SearchPage extends Component {
     });
   };
 
+  renderErrorPopup = () => {
+    if (this.state.isPartialRegistrationSubmitClicked && this.props.isUserFailed) {
+      return (
+        <ErrorPopup
+          redirectToPreviousLocation={this.closePopup}
+          message={this.props.constants.REGISTRATION_FAILED_MESSAGE}
+        />
+      );
+    }
+    return null;
+  };
+
   render() {
     const { FieldTemplate } = fields;
     const {
@@ -330,6 +343,7 @@ class SearchPage extends Component {
             redirectToPreviousLocation={this.closePopup}
             message={this.props.constants.PARTIAL_REGISTRATION_MESSAGE}
           />
+          {this.renderErrorPopup()}
         </BoxStyled>
       </ContainerStyled>
     );
@@ -342,6 +356,7 @@ SearchPage.propTypes = {
   createUserAction: PropTypes.func,
   fetchUserFromPhoneAction: PropTypes.func,
   isUserCreated: PropTypes.bool,
+  isUserFailed: PropTypes.bool,
   setDefaultUserData: PropTypes.func,
   storeSearchPageData: PropTypes.func,
   users: PropTypes.array,
@@ -353,6 +368,7 @@ SearchPage.defaultProps = {
   createUserAction: () => {},
   fetchUserFromPhoneAction: () => {},
   isUserCreated: false,
+  isUserFailed: false,
   setDefaultUserData: () => {},
   storeSearchPageData: () => {},
   users: [],
@@ -361,6 +377,7 @@ SearchPage.defaultProps = {
 const mapStateToProps = state => ({
   constants: getConstants(state),
   isUserCreated: getIsUserCreated(state),
+  isUserFailed: getIsUserFailed(state),
   users: getUsers(state),
 });
 

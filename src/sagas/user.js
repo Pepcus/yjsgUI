@@ -4,53 +4,74 @@ import { setLoadingStateAction } from 'actions/loaderActions';
 import { getAPIConfig } from 'reducers/api';
 import { getTenantName } from 'reducers/app';
 import { callAPIWithConfig } from 'apis/apis';
-import { fetchUserFromPhoneSuccess, userCreateSuccessAction } from 'actions/userActions';
+import { fetchUserFromPhoneSuccess, userCreateFailAction, userCreateSuccessAction } from 'actions/userActions';
 
 export function* createUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'user', 'createUser');
-  const tenant = yield select(getTenantName);
-  const config = {
-    ...apiConfig,
-    data: action.payload,
-  };
-  const response = yield callAPIWithConfig(tenant, 'createUser', config);
-  if (response.id) {
-    yield put(userCreateSuccessAction());
+  try {
+    const apiConfig = yield select(getAPIConfig, 'user', 'createUser');
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      data: action.payload,
+    };
+    const response = yield callAPIWithConfig(tenant, 'createUser', config);
+    if (response.id) {
+      yield put(userCreateSuccessAction());
+    } else {
+      yield put(userCreateFailAction());
+    }
+  } catch (e) {
+    yield put(userCreateFailAction());
+  } finally {
+    yield put(setLoadingStateAction(false));
   }
-  yield put(setLoadingStateAction(false));
 }
 
 export function* editUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'user', 'editUser');
-  const tenant = yield select(getTenantName);
-  const config = {
-    ...apiConfig,
-    data: action.payload,
-    urlValuesMap: { id: action.id },
-  };
-  const response = yield callAPIWithConfig(tenant, 'editUser', config);
-  if (response.id) {
-    yield put(userCreateSuccessAction());
+  try {
+    const apiConfig = yield select(getAPIConfig, 'user', 'editUser');
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      data: action.payload,
+      urlValuesMap: { id: action.id },
+    };
+    const response = yield callAPIWithConfig(tenant, 'editUser', config);
+    if (response.id) {
+      yield put(userCreateSuccessAction());
+    } else {
+      yield put(userCreateFailAction());
+    }
+  } catch (e) {
+    yield put(userCreateFailAction());
+  } finally {
+    yield put(setLoadingStateAction(false));
   }
-  yield put(setLoadingStateAction(false));
 }
 
 export function* patchUserSaga(action) {
   yield put(setLoadingStateAction(true));
-  const apiConfig = yield select(getAPIConfig, 'user', 'patchUser');
-  const tenant = yield select(getTenantName);
-  const config = {
-    ...apiConfig,
-    data: JSON.stringify(action.payload),
-    urlValuesMap: { id: action.id },
-  };
-  const response = yield callAPIWithConfig(tenant, 'patchUser', config);
-  if (response.id) {
-    yield put(userCreateSuccessAction());
+  try {
+    const apiConfig = yield select(getAPIConfig, 'user', 'patchUser');
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      data: JSON.stringify(action.payload),
+      urlValuesMap: { id: action.id },
+    };
+    const response = yield callAPIWithConfig(tenant, 'patchUser', config);
+    if (response.id) {
+      yield put(userCreateSuccessAction());
+    } else {
+      yield put(userCreateFailAction());
+    }
+  } catch (e) {
+    yield put(userCreateFailAction());
+  } finally {
+    yield put(setLoadingStateAction(false));
   }
-  yield put(setLoadingStateAction(false));
 }
 
 export function* fetchUserFromPhoneSaga(action) {
