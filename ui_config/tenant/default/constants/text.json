@@ -61,7 +61,7 @@
 
   "INVALID_EMAIL_MESSAGE": "This email is not valid",
 
-  "INVALID_NAME_MESSAGE": "invalid Name",
+  "INVALID_NAME_MESSAGE": "Invalid Name",
 
   "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "Name not less than 3 characters",
 
@@ -205,5 +205,7 @@
 
   "MEMBERS_MUST_BE_GREATER_THAN_ZERO": "Members must be greater than zero",
 
-  "MEMBERS_MUST_BE_LESS_THAN_SIX": "Members must be under 6"
+  "MEMBERS_MUST_BE_LESS_THAN_SIX": "Members must be under 6",
+
+  "INVALID_CITY_MESSAGE": "Invalid City"
 }

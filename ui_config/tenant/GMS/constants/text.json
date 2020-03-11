@@ -7,5 +7,9 @@
 
   "PARTIAL_REGISTRATION_MESSAGE": "Your Registration is not done. You need to do payment of INR 100 on following mentioned details. Once Payment is received you will be notified to complete your registration.",
 
-  "PENDING": "pending"
+  "PENDING": "pending",
+
+  "REGISTRATION_FAILED_MESSAGE": "Some Error Occurred while registering the student. Please contact Administrator.",
+
+  "NEW_REGISTRATION": "Register another person with this number"
 }

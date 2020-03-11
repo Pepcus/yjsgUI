@@ -33,10 +33,11 @@
         },
         "city": {
           "title": "शहर",
-          "type": "string"
+          "type": "string",
+          "customValidation": "cityValidator"
         },
         "isWhatsApp": {
-          "title": "WhatsApp उपयोग",
+          "title": "दीये गए नंबर पर WhatsApp उपयोग",
           "type": "string",
           "enum": [
             "true",

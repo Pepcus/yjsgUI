@@ -28,6 +28,11 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         isUserCreated: true,
       };
+    case 'USER_CREATED_FAILED_ACTION':
+      return {
+        ...state,
+        isUserFailed: true,
+      };
     default: {
       return {
         ...state,
@@ -41,3 +46,5 @@ export const getUsers = state => state.userReducer.users;
 export const getSearchData = state => state.userReducer.searchData;
 
 export const getIsUserCreated = state => state.userReducer.isUserCreated;
+
+export const getIsUserFailed = state => state.userReducer.isUserFailed;
