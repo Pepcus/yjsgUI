@@ -25,7 +25,6 @@ import { Accordion, AccordionContent, AccordionHeader } from 'pepcus-core';
  * @return {HTML}
  */
 const FilesListView = (props) => {
-  console.log('props -- ', props);
   const {
     hasFileRoute,
     activeFileId,
@@ -287,15 +286,13 @@ const FilesListView = (props) => {
   if (hasFileRoute) {
     return null;
   }
-  if (!isEmpty(filesConfig)) {
-    return (
-      <FilesListStyled isDisplayCondition={isDisplayCondition} >
-        {renderUploadForm()}
-        {renderFilesList()}
-      </FilesListStyled>
-    );
-  }
-  return null;
+
+  return (
+    <FilesListStyled isDisplayCondition={isDisplayCondition} >
+      {renderUploadForm()}
+      {renderFilesList()}
+    </FilesListStyled>
+  );
 };
 
 

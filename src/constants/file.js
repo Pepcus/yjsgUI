@@ -9,4 +9,5 @@ export const SUPPORTED_FILE_TYPES = {
   XLS: 'xls',
   TXT: 'txt',
   PDF: 'pdf',
+  DOCX: 'docx',
 };
