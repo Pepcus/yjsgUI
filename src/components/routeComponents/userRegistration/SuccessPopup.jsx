@@ -15,13 +15,27 @@ const TextWrapper = styled(Typography)`
     font-size: 16px !important;
 `;
 
+const renderMessage3 = (message) => {
+  if (message) {
+    return (
+      <div>
+        {message}<a href="https://www.youtube.com/c/jainkosh" target="_blank">www.youtube.com/c/jainkosh</a>
+      </div>
+    );
+  }
+  return null;
+};``
+
 /**
  * SuccessPopup render success message when member registration done successfully.
  * @param {Object} constants
+ * @param {Boolean} isFromPartialContinue
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isUserCreated
  * @param {Function} redirectToPreviousLocation
- * @param {String} message
+ * @param {String} message1
+ * @param {String} message2
+ * @param {String} message3
  * @return {HTML}
  * @constructor
  */
@@ -31,7 +45,9 @@ const SuccessPopup = ({
   isSubmitTriggered,
   isUserCreated,
   redirectToPreviousLocation,
-  message,
+  message1,
+  message2,
+  message3,
 }) => {
   const {
     BACK,
@@ -42,9 +58,11 @@ const SuccessPopup = ({
     return (
       <Popup>
         <Row width="100%" justify="center" margin="0">
-          <TextWrapper>{message}</TextWrapper>
+          <TextWrapper>{message1}</TextWrapper>
+          <TextWrapper>{message2}</TextWrapper>
+          {renderMessage3(message3)}
           <Button
-            color="modal"
+            color="tertiary"
             width="170px"
             margin="10px 10px"
             onClick={redirectToPreviousLocation}
@@ -63,7 +81,9 @@ SuccessPopup.propTypes = {
   isFromPartialContinue: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
   isUserCreated: PropTypes.bool,
-  message: PropTypes.string,
+  message1: PropTypes.string,
+  message2: PropTypes.string,
+  message3: PropTypes.string,
   redirectToPreviousLocation: PropTypes.func,
 };
 
@@ -72,7 +92,9 @@ SuccessPopup.defaultProps = {
   isFromPartialContinue: false,
   isSubmitTriggered: false,
   isUserCreated: false,
-  message: '',
+  message1: '',
+  message2: '',
+  message3: '',
   redirectToPreviousLocation: () => {},
 };
 

@@ -341,7 +341,7 @@ class SearchPage extends Component {
             isUserCreated={this.props.isUserCreated}
             isFromPartialContinue={this.state.continueClicked}
             redirectToPreviousLocation={this.closePopup}
-            message={this.props.constants.PARTIAL_REGISTRATION_MESSAGE}
+            message1={this.props.constants.PARTIAL_REGISTRATION_MESSAGE}
           />
           {this.renderErrorPopup()}
         </BoxStyled>
