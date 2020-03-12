@@ -211,7 +211,7 @@ class UserRegistration extends Component {
             isSubmitTriggered={this.state.isSubmitTriggered}
             isUserCreated={this.props.isUserCreated}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
-            message={this.props.constants.REGISTRATION_COMPLETE_MESSAGE}
+            messageOf={this.props.constants.COMPLETE}
           />
           {this.renderErrorPopup()}
         </BoxStyled>

@@ -15,13 +15,26 @@ const TextWrapper = styled(Typography)`
     font-size: 16px !important;
 `;
 
+const renderMessage3 = (message, VIDEO_LINK) => {
+  if (message) {
+    const link = `https://${VIDEO_LINK}`;
+    return (
+      <div>
+        {message}<a href={link} target="_blank">{VIDEO_LINK}</a>
+      </div>
+    );
+  }
+  return null;
+};
+
 /**
  * SuccessPopup render success message when member registration done successfully.
  * @param {Object} constants
+ * @param {Boolean} isFromPartialContinue
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isUserCreated
  * @param {Function} redirectToPreviousLocation
- * @param {String} message
+ * @param {String} messageOf
  * @return {HTML}
  * @constructor
  */
@@ -31,29 +44,50 @@ const SuccessPopup = ({
   isSubmitTriggered,
   isUserCreated,
   redirectToPreviousLocation,
-  message,
+  messageOf,
 }) => {
   const {
     BACK,
+    VIDEO_LINK,
   } = constants;
 
   if ((isUserCreated && isSubmitTriggered)
     || isFromPartialContinue) {
-    return (
-      <Popup>
-        <Row width="100%" justify="center" margin="0">
-          <TextWrapper>{message}</TextWrapper>
-          <Button
-            color="modal"
-            width="170px"
-            margin="10px 10px"
-            onClick={redirectToPreviousLocation}
-          >
-            {BACK}
-          </Button>
-        </Row>
-      </Popup>
-    );
+    if (messageOf === constants.PARTIAL) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 10px"
+              onClick={redirectToPreviousLocation}
+            >
+              {BACK}
+            </Button>
+          </Row>
+        </Popup>
+      );
+    } else if (messageOf === constants.COMPLETE) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_1}</TextWrapper>
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_2}</TextWrapper>
+            <TextWrapper>{renderMessage3(constants.REGISTRATION_COMPLETE_MESSAGE_3, VIDEO_LINK)}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 10px"
+              onClick={redirectToPreviousLocation}
+            >
+              {BACK}
+            </Button>
+          </Row>
+        </Popup>
+      );
+    }
   }
   return null;
 };
@@ -63,7 +97,7 @@ SuccessPopup.propTypes = {
   isFromPartialContinue: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
   isUserCreated: PropTypes.bool,
-  message: PropTypes.string,
+  messageOf: PropTypes.string,
   redirectToPreviousLocation: PropTypes.func,
 };
 
@@ -72,7 +106,7 @@ SuccessPopup.defaultProps = {
   isFromPartialContinue: false,
   isSubmitTriggered: false,
   isUserCreated: false,
-  message: '',
+  messageOf: '',
   redirectToPreviousLocation: () => {},
 };
 
