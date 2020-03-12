@@ -390,12 +390,12 @@ html, body {
     margin: 0 auto;
 }
 
-html,
-body,
-#root,
-#root > div {
-    height: 100%;
-}
+/*html,*/
+/*body,*/
+/*#root,*/
+/*#root > div {*/
+/*    height: 100%;*/
+/*}*/
 
 .wrapper-pagination-search div:first-child {
     display: inline-block;

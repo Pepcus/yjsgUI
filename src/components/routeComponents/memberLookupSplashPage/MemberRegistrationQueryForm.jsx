@@ -28,8 +28,8 @@ const BoxStyled = styled(Box)`
   `}
   ${({ theme }) => theme.media.down('sm')`
       height: auto;
-      margin: 0 auto 0 auto;
-      width: auto;
+       margin: 0 auto 0 auto;
+       width: auto;
   `};
   @media (max-width: 1200px) and (orientation: landscape) {
       margin: '80px auto 70px auto';

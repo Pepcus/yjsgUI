@@ -184,11 +184,13 @@ class MemberLookupSplashPage extends Component {
     const { NEW_REGISTRATION } = constants;
     if (formData.isMemberAlreadyRegistered === 'N') {
       return (
-        <SubmitButtonStyled
-          onClick={this.redirectToNewRegistrationPage}
-        >
-          {NEW_REGISTRATION}
-        </SubmitButtonStyled>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <SubmitButtonStyled
+            onClick={this.redirectToNewRegistrationPage}
+          >
+            {NEW_REGISTRATION}
+          </SubmitButtonStyled>
+        </div>
       );
     }
     return null;
@@ -200,12 +202,14 @@ class MemberLookupSplashPage extends Component {
     const { SUBMIT } = constants;
     if ((formData.isMemberAlreadyRegistered === 'Y') && !isFetched) {
       return (
-        <SubmitButtonStyled
-          onClick={this.handleSubmit}
-          disabled={!((formData.mobile) && !hasError)}
-        >
-          {SUBMIT}
-        </SubmitButtonStyled>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <SubmitButtonStyled
+            onClick={this.handleSubmit}
+            disabled={!((formData.mobile) && !hasError)}
+          >
+            {SUBMIT}
+          </SubmitButtonStyled>
+        </div>
       );
     }
     return null;
@@ -256,12 +260,14 @@ class MemberLookupSplashPage extends Component {
             gridData={this.state.membersFetchedFromMobile}
             onChangeGridOptIn={this.handleOnChangeGridOptIn}
           />
-          <SubmitButtonStyled
-            onClick={this.handleOptInGridSubmit}
-            disabled={!(this.state.isOptInGridSubmitButtonEnabled)}
-          >
-            {SUBMIT}
-          </SubmitButtonStyled>
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <SubmitButtonStyled
+              onClick={this.handleOptInGridSubmit}
+              disabled={!(this.state.isOptInGridSubmitButtonEnabled)}
+            >
+              {SUBMIT}
+            </SubmitButtonStyled>
+          </div>
         </div>
       )
     } else if (isFetched && !membersFetchedFromMobile.length && formData.isMemberAlreadyRegistered === 'Y') {
@@ -274,11 +280,13 @@ class MemberLookupSplashPage extends Component {
           >
             {NO_REGISTRATION_FOUND_FOR_MOBILE_MESSAGE}
           </TypographyStyled>
-          <SubmitButtonStyled
-            onClick={this.redirectToNewRegistrationPage}
-          >
-            {NEW_REGISTRATION}
-          </SubmitButtonStyled>
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <SubmitButtonStyled
+              onClick={this.redirectToNewRegistrationPage}
+            >
+              {NEW_REGISTRATION}
+            </SubmitButtonStyled>
+          </div>
         </div>
       )
     }
@@ -328,7 +336,7 @@ class MemberLookupSplashPage extends Component {
       EVENT_VENUE,
     } = constants;
     return (
-      <ContainerStyled width="100%">
+      <ContainerStyled width="100%" id="root1">
         <RedirectToRoute
           isURLParams={isURLParams}
           isMemberLogin={isMemberLogin}
@@ -376,9 +384,9 @@ class MemberLookupSplashPage extends Component {
                 onChange={this.onChange}
                 validate={formValidators(formConfig.schema, constants)}
               >
-                {
-                  this.renderMobileNumberSubmitButton()
-                }
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                  {this.renderMobileNumberSubmitButton()}
+                </div>
                 {
                   this.renderAddNewRegistrationButton()
                 }

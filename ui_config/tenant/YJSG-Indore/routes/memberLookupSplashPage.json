@@ -57,7 +57,10 @@
         "ui:options": {
           "inline": true,
           "col": {
-            "padding": "15px 50px 5px 50px"
+            "padding": "0 10px 0 10px"
+          },
+          "boxProps": {
+            "backgroundColor": "unset"
           }
         }
       },
@@ -74,8 +77,8 @@
             "size": {
               "xs": 12,
               "sm": 12,
-              "md": 6,
-              "lg": 4
+              "md": 12,
+              "lg": 12
             },
             "padding": "0 10px 0 10px"
           }
