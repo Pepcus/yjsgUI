@@ -52,6 +52,11 @@
     min-width: 163px;
     max-width:100%;
 }
+
+.cell__optIn {
+    min-width: 150px;
+    max-width:100%;
+}
 .cell__mobile> div.table-cell {
    font-family: sans-serif;
 }
