@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import { getStyles } from 'constants/gridData';
 import DataGrid from 'simple-react-data-grid';
+import { getConstants } from 'reducers/constants';
 
 
 /**
@@ -13,6 +15,7 @@ const MemberOptInDataGrid = ({
   metaData,
   gridData,
   onChangeGridOptIn,
+  constants,
 }) => {
 
   const updateGridData = (rowData) => {
@@ -33,6 +36,7 @@ const MemberOptInDataGrid = ({
    */
   const MemberOptInGridSelectionRadio = (props) => {
     const { rowData: { id, optIn2020 } } = props;
+    const { YES_HINDI, NO_HINDI } = constants;
     const [optIn, setOptIn] = useState(optIn2020);
 
     const onChangeOptIn = (event) => {
@@ -46,9 +50,9 @@ const MemberOptInDataGrid = ({
       <form>
         <fieldset id={id}>
           <input type="radio" value="Y" id="Y" name={id} onChange={onChangeOptIn} checked={optIn === 'Y'}/>
-          <label htmlFor="Y">Y</label>
+          <label htmlFor="Y">{YES_HINDI}</label>
           <input type="radio" value="N" id="N" name={id} onChange={onChangeOptIn} checked={optIn === 'N'}/>
-          <label htmlFor="N">N</label>
+          <label htmlFor="N">{NO_HINDI}</label>
         </fieldset>
       </form>
     );
@@ -81,5 +85,8 @@ const MemberOptInDataGrid = ({
   )
 };
 
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
 
-export default (MemberOptInDataGrid);
+export default connect(mapStateToProps)(MemberOptInDataGrid);

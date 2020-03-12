@@ -243,10 +243,17 @@ class MemberLookupSplashPage extends Component {
       config,
     } = this.props;
     const { formData, membersFetchedFromMobile } = this.state;
-    const { SUBMIT } = this.props.constants;
+    const { SUBMIT, REGISTRATION_FOUND_FOR_MOBILE_MESSAGE } = this.props.constants;
     if (isFetched && membersFetchedFromMobile.length && formData.isMemberAlreadyRegistered === 'Y') {
       return (
         <div>
+          <TypographyStyled
+            type="title"
+            fontSize="16px"
+            align="center"
+          >
+            {REGISTRATION_FOUND_FOR_MOBILE_MESSAGE}
+          </TypographyStyled>
           <MemberOptInDataGrid
             metaData={config.memberOptInGridMetaData}
             gridData={this.state.membersFetchedFromMobile}
