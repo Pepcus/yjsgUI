@@ -60,13 +60,17 @@
               "height": "auto"
             }
           },
+          "boxProps": {
+            "backgroundColor": "unset"
+          },
+          "inline": true,
           "type": "string",
           "col": {
             "size": {
-              "xs": 12,
-              "sm": 12,
+              "xs": 6,
+              "sm": 6,
               "md": 6,
-              "lg": 4
+              "lg": 6
             },
             "padding": "0 10px 0 10px"
           }
@@ -85,8 +89,8 @@
             "size": {
               "xs": 12,
               "sm": 12,
-              "md": 6,
-              "lg": 4
+              "md": 12,
+              "lg": 12
             },
             "padding": "0 10px 0 10px"
           }
@@ -105,8 +109,8 @@
             "size": {
               "xs": 12,
               "sm": 12,
-              "md": 6,
-              "lg": 4
+              "md": 12,
+              "lg": 12
             },
             "padding": "0 10px 0 10px"
           }
@@ -141,8 +145,8 @@
             "size": {
               "xs": 12,
               "sm": 12,
-              "md": 6,
-              "lg": 4
+              "md": 12,
+              "lg": 12
             },
             "padding": "0 10px 0 10px"
           }
