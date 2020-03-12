@@ -28,7 +28,7 @@ const BoxStyled = styled(Box)`
  overflow-x: hidden;
  overflow-y: auto;
  background-color: ${getThemeProps('palette.policyMuted.color')};
- ${({ theme }) => theme.media.down('lg')`
+ ${({theme}) => theme.media.down('lg')`
      margin: auto; 
      height: 100%;
  `}
@@ -40,10 +40,10 @@ const BoxStyled = styled(Box)`
 const ContainerStyled = styled(Container)`
   height: max-content;
   display: flex;
-  ${({ theme }) => theme.media.down('lg')`
+  ${({theme}) => theme.media.down('lg')`
      height: 100%; 
  `}
- ${({ theme }) => theme.media.down('md')`
+ ${({theme}) => theme.media.down('md')`
      height: auto; 
  `}
  @media (max-width: 992px) and (orientation: landscape) {
@@ -105,20 +105,35 @@ class SearchPage extends Component {
   };
 
   renderUserList = () => {
-    if ((this.props.users).length > 0) {
-      return (this.props.users).map(user => (
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value={user.id}
-              checked={this.state.selectedUser === user.id}
-              onChange={this.handleOptionChange}
-            />
-            {user.name}
-          </label>
+    return (
+      this.props.users).map(user => (
+        <div>
+          <div className="radio" style={{padding: '0 10px 0 10px', marginBottom: '10px'}}>
+            <label>
+              <input
+                type="radio"
+                value={user.id}
+                checked={this.state.selectedUser === user.id}
+                onChange={this.handleOptionChange}
+              />
+              {user.name}
+            </label>
+          </div>
         </div>
-      ));
+      )
+    )
+  }
+
+  renderUserListContainer = () => {
+    if ((this.props.users).length > 0) {
+      return (
+        <div>
+          <div style={{ display: 'block', padding: '0 10px 0 10px', width: '100%', marginBottom: '10px', fontWeight: 'bold', color: '#4c4c4c' }}>
+            <label>{this.props.constants.USER_LIST_HEADING}</label>
+          </div>
+          {this.renderUserList()}
+        </div>
+      );
     }
     return null;
   };
@@ -147,7 +162,7 @@ class SearchPage extends Component {
     if ((this.props.users).length > 0) {
       return (
         <Row justify="center" margin="0 0 25px 0">
-          <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+          <Col size={{xs: 12, sm: 12, md: 6, lg: 6}} padding="10px 15px 10px 15px">
             <Button
               width="100%"
               onClick={this.handleContinue}
@@ -156,7 +171,7 @@ class SearchPage extends Component {
               Continue
             </Button>
           </Col>
-          <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+          <Col size={{xs: 12, sm: 12, md: 6, lg: 6}} padding="10px 15px 10px 15px">
             <Button
               width="100%"
               onClick={this.handleNewRegistration}
@@ -177,14 +192,16 @@ class SearchPage extends Component {
     }
     return (
       <Row justify="center" margin="0 0 25px 0">
-        <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
-          <Button
-            width="100%"
-            onClick={this.handleSubmit}
-            disabled={this.isSubmitButtonDisabled()}
-          >
-            {this.props.constants.SUBMIT}
-          </Button>
+        <Col size={{xs: 12, sm: 12, md: 12, lg: 12}} padding="10px 15px 10px 15px">
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <Button
+              width="200px"
+              onClick={this.handleSubmit}
+              disabled={this.isSubmitButtonDisabled()}
+            >
+              {this.props.constants.SUBMIT}
+            </Button>
+          </div>
         </Col>
       </Row>
     );
@@ -233,7 +250,7 @@ class SearchPage extends Component {
   };
 
   renderPartialUserForm = () => {
-    const { FieldTemplate } = fields;
+    const {FieldTemplate} = fields;
     const {
       partialUserSchema,
       partialUserUISchema,
@@ -259,14 +276,16 @@ class SearchPage extends Component {
             onSubmit={this.handlePartialFormSubmit}
           />
           <Row justify="center" margin="0 0 25px 0">
-            <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
-              <Button
-                width="100%"
-                onClick={this.handlePartialFormSubmit}
-                disabled={this.isPartialSubmitButtonDisabled()}
-              >
-                {this.props.constants.SUBMIT}
-              </Button>
+            <Col size={{xs: 12, sm: 12, md: 12, lg: 12}} padding="10px 15px 10px 15px">
+              <div style={{display: 'flex', justifyContent: 'center'}}>
+                <Button
+                  width="200px"
+                  onClick={this.handlePartialFormSubmit}
+                  disabled={this.isPartialSubmitButtonDisabled()}
+                >
+                  {this.props.constants.SUBMIT}
+                </Button>
+              </div>
             </Col>
           </Row>
         </div>
@@ -303,7 +322,7 @@ class SearchPage extends Component {
   };
 
   render() {
-    const { FieldTemplate } = fields;
+    const {FieldTemplate} = fields;
     const {
       schema,
       uiSchema,
@@ -311,7 +330,7 @@ class SearchPage extends Component {
     return (
       <ContainerStyled width="100%" ref={this.formRef}>
         <BoxStyled
-          maxWidth="1170px"
+          maxWidth="500px"
           maxHeight="100%"
           borderStyle="none"
           elevation={5}
@@ -333,7 +352,7 @@ class SearchPage extends Component {
             onSubmit={this.handleSubmit}
           />
           {this.renderSubmitButton()}
-          <div>{this.renderUserList()}</div>
+          <div>{this.renderUserListContainer()}</div>
           {this.renderContinueAndNewUserButton()}
           {this.renderPartialUserForm()}
           <SuccessPopup
@@ -365,12 +384,16 @@ SearchPage.propTypes = {
 SearchPage.defaultProps = {
   config: {},
   constants: {},
-  createUserAction: () => {},
-  fetchUserFromPhoneAction: () => {},
+  createUserAction: () => {
+  },
+  fetchUserFromPhoneAction: () => {
+  },
   isUserCreated: false,
   isUserFailed: false,
-  setDefaultUserData: () => {},
-  storeSearchPageData: () => {},
+  setDefaultUserData: () => {
+  },
+  storeSearchPageData: () => {
+  },
   users: [],
 };
 
