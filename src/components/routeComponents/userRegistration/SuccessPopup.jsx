@@ -15,16 +15,17 @@ const TextWrapper = styled(Typography)`
     font-size: 16px !important;
 `;
 
-const renderMessage3 = (message) => {
+const renderMessage3 = (message, VIDEO_LINK) => {
   if (message) {
+    const link = `https://${VIDEO_LINK}`;
     return (
       <div>
-        {message}<a href="https://www.youtube.com/c/jainkosh" target="_blank">www.youtube.com/c/jainkosh</a>
+        {message}<a href={link} target="_blank">{VIDEO_LINK}</a>
       </div>
     );
   }
   return null;
-};``
+};
 
 /**
  * SuccessPopup render success message when member registration done successfully.
@@ -51,6 +52,7 @@ const SuccessPopup = ({
 }) => {
   const {
     BACK,
+    VIDEO_LINK,
   } = constants;
 
   if ((isUserCreated && isSubmitTriggered)
@@ -60,7 +62,7 @@ const SuccessPopup = ({
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{message1}</TextWrapper>
           <TextWrapper>{message2}</TextWrapper>
-          {renderMessage3(message3)}
+          {renderMessage3(message3, VIDEO_LINK)}
           <Button
             color="tertiary"
             width="170px"

@@ -3,13 +3,19 @@
 
   "OTHER_CITY": "Other",
 
-  "REGISTRATION_COMPLETE_MESSAGE": "Your Registration has been done. You will receive SMS once confirmed.",
+  "REGISTRATION_COMPLETE_MESSAGE_1": "गोम्मटसार कर्मकांड शिविर - II के लिए रजिस्ट्रेशन कराने के लिए धन्यवाद | आपका फॉर्म चयन समिति को भेज दिया गया है | हम कुछ दिनों में आपको सूचित करेंगे कि शिविर हेतु आपका चयन हुआ है अथवा नहीं |",
 
-  "PARTIAL_REGISTRATION_MESSAGE": "Your Registration is not done. You need to do payment of INR 100 on following mentioned details. Once Payment is received you will be notified to complete your registration.",
+  "REGISTRATION_COMPLETE_MESSAGE_2": "यदि आप का चयन नहीं होता है और आपने रजिस्ट्रेशन शुल्क ₹100 जमा किया है तो वह आपके नंबर पर लौटा दिया जाएगा।",
+
+  "REGISTRATION_COMPLETE_MESSAGE_3": "तब तक आप कर्मों के नाम और बंध व्युच्छित्ति को याद करें | इनके विडियो देखने के लिए ओपन करें - ",
+
+  "PARTIAL_REGISTRATION_MESSAGE": "रजिस्ट्रेशन शुल्क ₹100 है। कृपया यह शुल्क paytm नंबर 09893951912 पर भेजें। शुल्क भरने के बाद इसी नंबर पर अपना नाम और फोन नंबर WhatsApp पर भेजें। शुल्क प्राप्त होने के बाद आप इसी वेबसाइट पर रजिस्ट्रेशन कर सकेंगे।",
 
   "PENDING": "pending",
 
   "REGISTRATION_FAILED_MESSAGE": "Some Error Occurred while registering the student. Please contact Administrator.",
 
-  "NEW_REGISTRATION": "Register another person with this number"
+  "NEW_REGISTRATION": "Register another person with this number",
+
+  "VIDEO_LINK": "www.youtube.com/c/jainkosh"
 }
