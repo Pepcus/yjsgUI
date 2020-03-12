@@ -34,9 +34,7 @@ const renderMessage3 = (message, VIDEO_LINK) => {
  * @param {Boolean} isSubmitTriggered
  * @param {Boolean} isUserCreated
  * @param {Function} redirectToPreviousLocation
- * @param {String} message1
- * @param {String} message2
- * @param {String} message3
+ * @param {String} messageOf
  * @return {HTML}
  * @constructor
  */
@@ -46,9 +44,7 @@ const SuccessPopup = ({
   isSubmitTriggered,
   isUserCreated,
   redirectToPreviousLocation,
-  message1,
-  message2,
-  message3,
+  messageOf,
 }) => {
   const {
     BACK,
@@ -57,23 +53,41 @@ const SuccessPopup = ({
 
   if ((isUserCreated && isSubmitTriggered)
     || isFromPartialContinue) {
-    return (
-      <Popup>
-        <Row width="100%" justify="center" margin="0">
-          <TextWrapper>{message1}</TextWrapper>
-          <TextWrapper>{message2}</TextWrapper>
-          {renderMessage3(message3, VIDEO_LINK)}
-          <Button
-            color="tertiary"
-            width="170px"
-            margin="10px 10px"
-            onClick={redirectToPreviousLocation}
-          >
-            {BACK}
-          </Button>
-        </Row>
-      </Popup>
-    );
+    if (messageOf === constants.PARTIAL) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 10px"
+              onClick={redirectToPreviousLocation}
+            >
+              {BACK}
+            </Button>
+          </Row>
+        </Popup>
+      );
+    } else if (messageOf === constants.COMPLETE) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_1}</TextWrapper>
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_2}</TextWrapper>
+            <TextWrapper>{renderMessage3(constants.REGISTRATION_COMPLETE_MESSAGE_3, VIDEO_LINK)}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 10px"
+              onClick={redirectToPreviousLocation}
+            >
+              {BACK}
+            </Button>
+          </Row>
+        </Popup>
+      );
+    }
   }
   return null;
 };
@@ -83,9 +97,7 @@ SuccessPopup.propTypes = {
   isFromPartialContinue: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
   isUserCreated: PropTypes.bool,
-  message1: PropTypes.string,
-  message2: PropTypes.string,
-  message3: PropTypes.string,
+  messageOf: PropTypes.string,
   redirectToPreviousLocation: PropTypes.func,
 };
 
@@ -94,9 +106,7 @@ SuccessPopup.defaultProps = {
   isFromPartialContinue: false,
   isSubmitTriggered: false,
   isUserCreated: false,
-  message1: '',
-  message2: '',
-  message3: '',
+  messageOf: '',
   redirectToPreviousLocation: () => {},
 };
 

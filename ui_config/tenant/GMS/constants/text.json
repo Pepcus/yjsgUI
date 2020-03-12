@@ -17,5 +17,9 @@
 
   "NEW_REGISTRATION": "Register another person with this number",
 
-  "VIDEO_LINK": "www.youtube.com/c/jainkosh"
+  "VIDEO_LINK": "www.youtube.com/c/jainkosh",
+
+  "PARTIAL": "Partial",
+
+  "COMPLETE": "Complete"
 }

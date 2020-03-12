@@ -53,8 +53,7 @@
     },
     "uiSchema": {
       "city": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:widget": "RadioWidget",
         "ui:options": {
           "style": {
             "fieldStyle": {
