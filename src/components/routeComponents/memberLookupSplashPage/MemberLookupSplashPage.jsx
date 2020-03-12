@@ -25,7 +25,6 @@ import {
 import {
   setUserTypeAction,
   setHashLinkForNewRegistrationAction,
-  setHashLinkForMemberCredentialAction,
 } from 'actions/appActions';
 import {
   USER_TYPES,
@@ -50,6 +49,7 @@ import { formValidators, getMembersIds, getNotOptedInMembers, getOptInMembers } 
 import MemberOptInDataGrid from 'components/routeComponents/memberLookupSplashPage/MemberOptInDataGrid';
 import MembersOptInUpdateStatusPopup
   from 'components/routeComponents/memberLookupSplashPage/MembersOptInUpdateStatusPopup';
+import Popup from 'components/common/Popup';
 
 
 const SubmitButtonStyled = styled(Button)`
@@ -92,6 +92,10 @@ const ImageStyled = styled.img`
 
 const TypographyStyled = styled(Typography)`
    color: ${getThemeProps('colors.header')};
+`;
+
+const TextWrapper = styled(Typography)`
+    font-size: 16px !important;
 `;
 
 /**
@@ -236,6 +240,7 @@ class MemberLookupSplashPage extends Component {
     } = this.props;
     const { formData, membersFetchedFromMobile } = this.state;
     const {
+      BACK,
       SUBMIT,
       NEW_REGISTRATION,
       REGISTRATION_FOUND_FOR_MOBILE_MESSAGE,
@@ -266,20 +271,27 @@ class MemberLookupSplashPage extends Component {
       )
     } else if (isFetched && !membersFetchedFromMobile.length && formData.isMemberAlreadyRegistered === 'Y') {
       return (
-        <div>
-          <TypographyStyled
-            type="title"
-            fontSize="16px"
-            align="center"
-          >
-            {NO_REGISTRATION_FOUND_FOR_MOBILE_MESSAGE}
-          </TypographyStyled>
-          <SubmitButtonStyled
-            onClick={this.redirectToNewRegistrationPage}
-          >
-            {NEW_REGISTRATION}
-          </SubmitButtonStyled>
-        </div>
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{NO_REGISTRATION_FOUND_FOR_MOBILE_MESSAGE}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 25px"
+              onClick={() => { this.props.resetMemberOptInStatusData(); }}
+            >
+              {BACK}
+            </Button>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 25px"
+              onClick={this.redirectToNewRegistrationPage}
+            >
+              {NEW_REGISTRATION}
+            </Button>
+          </Row>
+        </Popup>
       )
     }
     return null;
@@ -401,9 +413,7 @@ MemberLookupSplashPage.propTypes = {
   config: PropTypes.object,
   constants: PropTypes.object,
   fetchMemberData: PropTypes.func,
-  isAlreadyRegisteredButtonEnabled: PropTypes.bool,
   logoPathConfig: PropTypes.object,
-  setHashLinkForMemberCredential: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
   setMemberCredentials: PropTypes.func,
   setUserType: PropTypes.func,
@@ -420,10 +430,8 @@ MemberLookupSplashPage.defaultProps = {
   config: {},
   constants: {},
   fetchMemberData: () => {},
-  isAlreadyRegisteredButtonEnabled: false,
   logoPathConfig: {},
   membersFetchedFromMobile: [],
-  setHashLinkForMemberCredential: () => {},
   setHashLinkForNewRegistration: () => {},
   setMemberCredentials: () => {},
   setUserType: () => {},
@@ -448,7 +456,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
-  setHashLinkForMemberCredential: userType => dispatch(setHashLinkForMemberCredentialAction(userType)),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
   setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),

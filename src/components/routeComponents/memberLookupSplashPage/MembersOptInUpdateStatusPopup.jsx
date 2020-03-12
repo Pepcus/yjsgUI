@@ -19,17 +19,16 @@ const TextWrapper = styled(Typography)`
  * MembersOptInUpdateStatusPopup render success message when member registration done successfully.
  * @param {Object} constants
  * @param {Boolean} isMembersOptInStatusUpdated
- * @param {Function} redirectToPreviousLocation
  * @param {Function} resetMemberOptInStatusData
  * @return {HTML}
  * @constructor
  */
 const MembersOptInUpdateStatusPopup = ({
  constants,
- redirectToPreviousLocation,
  resetMemberOptInStatusData,
  isMembersOptInStatusUpdated,
 }) => {
+
   const {
     OPT_IN_MEMBERS_REGISTRATION_SUCCESS_MESSAGE,
     OPT_IN_MEMBERS_REGISTRATION_FAILED_MESSAGE,
@@ -37,7 +36,6 @@ const MembersOptInUpdateStatusPopup = ({
 
   const handleOnOkButtonClick = () => {
     resetMemberOptInStatusData();
-    redirectToPreviousLocation();
   };
 
   if (isMembersOptInStatusUpdated) {
