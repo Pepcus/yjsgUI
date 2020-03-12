@@ -8,10 +8,12 @@ import MemberPage from './memberPage';
 import ParentsRegistration from './parentsRegistrationForm';
 import SearchPage from './searchPage';
 import UserRegistration from './userRegistration';
+import MemberLookupSplashPage from 'components/routeComponents/memberLookupSplashPage';
 
 export default {
   MemberPage,
   SplashPage,
+  MemberLookupSplashPage,
   MemberRegistrationForm,
   MemberRegistrationCorrectionForm,
   MemberInformationGrid,

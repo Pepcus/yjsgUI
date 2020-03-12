@@ -76,3 +76,15 @@ export const getBusNumberFromBusStop = ({ busDetails = {}, busStop = '' }) => {
   });
   return requiredBusNumber;
 };
+
+export const getOptInMembers = ({ members = [] }) => {
+  return members.filter(member => member.optIn2020 === 'Y')
+};
+
+export const getNotOptedInMembers = ({ members = [] }) => {
+  return members.filter(member => member.optIn2020 === 'N')
+};
+
+export const getMembersIds = ({members = []}) => {
+  return members.map(member => member.id).join();
+};

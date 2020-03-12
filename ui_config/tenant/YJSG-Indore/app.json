@@ -6,8 +6,8 @@
     {
       "name": "default",
       "path": "/",
-      "component": "MemberPage",
-      "config": "home",
+      "component": "MemberLookupSplashPage",
+      "config": "memberLookupSplashPage",
       "isActive": true,
       "header": {
         "titleStyle": {
@@ -153,6 +153,26 @@
         "logo": true,
         "hasButtons": true,
         "backButton": true
+      },
+      "footer": {
+        "titleStyle": {},
+        "footerWrapperStyle": {},
+        "title": ""
+      }
+    },
+    {
+      "name": "memberLookupSplashPage",
+      "path": "/member-lookup-splash",
+      "component": "MemberLookupSplashPage",
+      "config": "memberLookupSplashPage",
+      "isActive": true,
+      "header": {
+        "titleStyle": {
+          "padding": "10px 0"
+        },
+        "headerWrapperStyle": {
+          "height": "auto"
+        }
       },
       "footer": {
         "titleStyle": {},

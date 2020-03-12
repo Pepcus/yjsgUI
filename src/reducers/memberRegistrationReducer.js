@@ -1,12 +1,15 @@
 const initialState = {
   member: {},
+  membersFetchedFromMobile: [],
   isLoading: false,
   isFetched: false,
   isUpdated: false,
   isCreated: false,
+  isOptInUpdatePerformed: false,
   isPartialMatchFound: false,
   isExactMatchFound: false,
   isMemberFetchedFromUrlParams: false,
+  isMembersOptInStatusUpdated: false,
   id: '',
   secretKey: '',
   updateMessage: '',
@@ -153,6 +156,44 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         ...state,
         isMemberFetchedFromUrlParams: false,
       };
+
+    case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_SUCCESS':
+      return {
+        ...state,
+        membersFetchedFromMobile: action.members,
+        isFetched: true,
+      };
+
+    case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_FAILED':
+      return {
+        ...state,
+        membersFetchedFromMobile: [],
+        isFetched: true,
+      };
+
+    case 'UPDATE_MEMBERS_OPT_IN_STATUS_SUCCESS':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: true,
+        isOptInUpdatePerformed: true,
+      };
+
+    case 'UPDATE_MEMBERS_OPT_IN_STATUS_FAILED':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: false,
+        isOptInUpdatePerformed: true,
+      };
+
+    case 'RESET_MEMBER_OPT_IN_STATUS_DATA':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: false,
+        membersFetchedFromMobile: [],
+        isFetched: false,
+        isOptInUpdatePerformed: false,
+      };
+
     default: {
       return {
         ...state,
@@ -180,3 +221,9 @@ export const isPartialMemberAlreadyRegistered = state => state.memberRegistratio
 export const isExactMemberAlreadyRegistered = state => state.memberRegistrationReducer.isExactMatchFound;
 
 export const getIsMemberFetchedFromUrlParams = state => state.memberRegistrationReducer.isMemberFetchedFromUrlParams;
+
+export const getMembersFetchedFromMobile = state => state.memberRegistrationReducer.membersFetchedFromMobile;
+
+export const getMembersOptInStatusUpdated = state => state.memberRegistrationReducer.isMembersOptInStatusUpdated;
+
+export const getMembersOptInUpdatePerformed = state => state.memberRegistrationReducer.isOptInUpdatePerformed;
