@@ -5,6 +5,7 @@ const initialState = {
   isFetched: false,
   isUpdated: false,
   isCreated: false,
+  isOptInUpdatePerformed: false,
   isPartialMatchFound: false,
   isExactMatchFound: false,
   isMemberFetchedFromUrlParams: false,
@@ -174,12 +175,14 @@ export const memberRegistrationReducer = (state = initialState, action) => {
       return {
         ...state,
         isMembersOptInStatusUpdated: true,
+        isOptInUpdatePerformed: true,
       };
 
     case 'UPDATE_MEMBERS_OPT_IN_STATUS_FAILED':
       return {
         ...state,
         isMembersOptInStatusUpdated: false,
+        isOptInUpdatePerformed: true,
       };
 
     case 'RESET_MEMBER_OPT_IN_STATUS_DATA':
@@ -188,6 +191,7 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isMembersOptInStatusUpdated: false,
         membersFetchedFromMobile: [],
         isFetched: false,
+        isOptInUpdatePerformed: false,
       };
 
     default: {
@@ -221,3 +225,5 @@ export const getIsMemberFetchedFromUrlParams = state => state.memberRegistration
 export const getMembersFetchedFromMobile = state => state.memberRegistrationReducer.membersFetchedFromMobile;
 
 export const getMembersOptInStatusUpdated = state => state.memberRegistrationReducer.isMembersOptInStatusUpdated;
+
+export const getMembersOptInUpdatePerformed = state => state.memberRegistrationReducer.isOptInUpdatePerformed;

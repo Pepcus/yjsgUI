@@ -34,6 +34,7 @@ import { getParameterByName } from 'apis/http';
 import {
   getMembersFetchedFromMobile,
   getMembersOptInStatusUpdated,
+  getMembersOptInUpdatePerformed,
   isFetched
 } from 'reducers/memberRegistrationReducer';
 import {
@@ -69,16 +70,6 @@ const ContainerStyled = styled(Container)`
      width: auto;
      height: auto;
     }
-`;
-
-const ButtonStyled = styled(Button)`
-   ${({ theme }) => theme.media.down('sm')`
-       width: 100%;
-   `};
-   
-   @media (max-width: 992px) and (orientation: landscape) {
-        width: 60%
-    } 
 `;
 
 const BoxStyled = styled(Box)`
@@ -190,13 +181,13 @@ class MemberLookupSplashPage extends Component {
   renderAddNewRegistrationButton = () => {
     const { constants } = this.props;
     const { formData } = this.state;
-    const { REGISTER_NOW } = constants;
+    const { NEW_REGISTRATION } = constants;
     if (formData.isMemberAlreadyRegistered === 'N') {
       return (
         <SubmitButtonStyled
           onClick={this.redirectToNewRegistrationPage}
         >
-          {REGISTER_NOW}
+          {NEW_REGISTRATION}
         </SubmitButtonStyled>
       );
     }
@@ -241,9 +232,15 @@ class MemberLookupSplashPage extends Component {
     const {
       isFetched,
       config,
+      constants,
     } = this.props;
     const { formData, membersFetchedFromMobile } = this.state;
-    const { SUBMIT, REGISTRATION_FOUND_FOR_MOBILE_MESSAGE } = this.props.constants;
+    const {
+      SUBMIT,
+      NEW_REGISTRATION,
+      REGISTRATION_FOUND_FOR_MOBILE_MESSAGE,
+      NO_REGISTRATION_FOUND_FOR_MOBILE_MESSAGE,
+    } = constants;
     if (isFetched && membersFetchedFromMobile.length && formData.isMemberAlreadyRegistered === 'Y') {
       return (
         <div>
@@ -267,14 +264,34 @@ class MemberLookupSplashPage extends Component {
           </SubmitButtonStyled>
         </div>
       )
+    } else if (isFetched && !membersFetchedFromMobile.length && formData.isMemberAlreadyRegistered === 'Y') {
+      return (
+        <div>
+          <TypographyStyled
+            type="title"
+            fontSize="16px"
+            align="center"
+          >
+            {NO_REGISTRATION_FOUND_FOR_MOBILE_MESSAGE}
+          </TypographyStyled>
+          <SubmitButtonStyled
+            onClick={this.redirectToNewRegistrationPage}
+          >
+            {NEW_REGISTRATION}
+          </SubmitButtonStyled>
+        </div>
+      )
     }
     return null;
   };
 
   renderMemberOptInStatusPopup = () => {
-    if (this.props.isMembersOptInStatusUpdated) {
+    const { isOptInUpdatePerformed, isMembersOptInStatusUpdated } = this.props;
+    if (isOptInUpdatePerformed) {
       return (
-        <MembersOptInUpdateStatusPopup />
+        <MembersOptInUpdateStatusPopup
+          isMembersOptInStatusUpdated={isMembersOptInStatusUpdated}
+        />
       )
     }
   };
@@ -309,7 +326,6 @@ class MemberLookupSplashPage extends Component {
     const {
       EVENT_DATE,
       EVENT_VENUE,
-      NEW_REGISTRATION,
     } = constants;
     return (
       <ContainerStyled width="100%">
@@ -426,6 +442,7 @@ const mapStateToProps = state => ({
   isFetched: isFetched(state),
   membersFetchedFromMobile: getMembersFetchedFromMobile(state),
   isMembersOptInStatusUpdated: getMembersOptInStatusUpdated(state),
+  isOptInUpdatePerformed: getMembersOptInUpdatePerformed(state),
 });
 
 const mapDispatchToProps = dispatch => ({

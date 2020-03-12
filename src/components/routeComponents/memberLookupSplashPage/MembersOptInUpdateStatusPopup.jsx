@@ -8,7 +8,7 @@ import Row from 'pepcus-core/lib/Row';
 import Typography from 'pepcus-core/lib/Typography';
 
 import Popup from 'components/common/Popup';
-import { resetMemberOptInStatusDataAction, setMemberCredentialsAction } from 'actions/memberRegistrationActions';
+import { resetMemberOptInStatusDataAction } from 'actions/memberRegistrationActions';
 import { getConstants } from 'reducers/constants';
 
 const TextWrapper = styled(Typography)`
@@ -18,21 +18,21 @@ const TextWrapper = styled(Typography)`
 /**
  * MembersOptInUpdateStatusPopup render success message when member registration done successfully.
  * @param {Object} constants
- * @param {Boolean} isSubmitTriggered
- * @param {Boolean} isMemberCreated
- * @param {Object} newMember
+ * @param {Boolean} isMembersOptInStatusUpdated
  * @param {Function} redirectToPreviousLocation
- * @param {Function} setStudentCredentials
+ * @param {Function} resetMemberOptInStatusData
  * @return {HTML}
  * @constructor
  */
 const MembersOptInUpdateStatusPopup = ({
-                               constants,
-                               redirectToPreviousLocation,
-                               resetMemberOptInStatusData,
-                             }) => {
+ constants,
+ redirectToPreviousLocation,
+ resetMemberOptInStatusData,
+ isMembersOptInStatusUpdated,
+}) => {
   const {
     OPT_IN_MEMBERS_REGISTRATION_SUCCESS_MESSAGE,
+    OPT_IN_MEMBERS_REGISTRATION_FAILED_MESSAGE,
   } = constants;
 
   const handleOnOkButtonClick = () => {
@@ -40,7 +40,7 @@ const MembersOptInUpdateStatusPopup = ({
     redirectToPreviousLocation();
   };
 
-    // for pre-population on splash page
+  if (isMembersOptInStatusUpdated) {
     return (
       <Popup>
         <Row width="100%" justify="center" margin="0">
@@ -56,6 +56,23 @@ const MembersOptInUpdateStatusPopup = ({
         </Row>
       </Popup>
     );
+  }
+  return (
+    <Popup>
+      <Row width="100%" justify="center" margin="0">
+        <TextWrapper>{OPT_IN_MEMBERS_REGISTRATION_FAILED_MESSAGE}</TextWrapper>
+        <Button
+          color="tertiary"
+          width="170px"
+          margin="10px 25px"
+          onClick={handleOnOkButtonClick}
+        >
+          OK
+        </Button>
+      </Row>
+    </Popup>
+  )
+
 };
 
 MembersOptInUpdateStatusPopup.propTypes = {
