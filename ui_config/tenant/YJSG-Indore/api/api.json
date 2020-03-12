@@ -54,6 +54,22 @@
       "createSecondaryMember": {
         "method": "POST",
         "url": "v1/events"
+      },
+      "getMembersByMobileNumber": {
+        "method": "GET",
+        "url": "v1/students/phone/${mobile}",
+        "headers": {
+          "secretKey": 123456
+        }
+      },
+      "updateMembersOptIn": {
+        "method": "PATCH",
+        "url": "v1/students/optin?id=${selectedMembersId}",
+        "headers": {
+          "secretKey": 123456,
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
       }
     },
     "file": {

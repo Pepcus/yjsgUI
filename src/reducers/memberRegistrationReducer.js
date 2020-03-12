@@ -1,5 +1,6 @@
 const initialState = {
   member: {},
+  membersFetchedFromMobile: [],
   isLoading: false,
   isFetched: false,
   isUpdated: false,
@@ -7,6 +8,7 @@ const initialState = {
   isPartialMatchFound: false,
   isExactMatchFound: false,
   isMemberFetchedFromUrlParams: false,
+  isMembersOptInStatusUpdated: false,
   id: '',
   secretKey: '',
   updateMessage: '',
@@ -153,6 +155,41 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         ...state,
         isMemberFetchedFromUrlParams: false,
       };
+
+    case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_SUCCESS':
+      return {
+        ...state,
+        membersFetchedFromMobile: action.members,
+        isFetched: true,
+      };
+
+    case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_FAILED':
+      return {
+        ...state,
+        membersFetchedFromMobile: [],
+        isFetched: true,
+      };
+
+    case 'UPDATE_MEMBERS_OPT_IN_STATUS_SUCCESS':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: true,
+      };
+
+    case 'UPDATE_MEMBERS_OPT_IN_STATUS_FAILED':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: false,
+      };
+
+    case 'RESET_MEMBER_OPT_IN_STATUS_DATA':
+      return {
+        ...state,
+        isMembersOptInStatusUpdated: false,
+        membersFetchedFromMobile: [],
+        isFetched: false,
+      };
+
     default: {
       return {
         ...state,
@@ -180,3 +217,7 @@ export const isPartialMemberAlreadyRegistered = state => state.memberRegistratio
 export const isExactMemberAlreadyRegistered = state => state.memberRegistrationReducer.isExactMatchFound;
 
 export const getIsMemberFetchedFromUrlParams = state => state.memberRegistrationReducer.isMemberFetchedFromUrlParams;
+
+export const getMembersFetchedFromMobile = state => state.memberRegistrationReducer.membersFetchedFromMobile;
+
+export const getMembersOptInStatusUpdated = state => state.memberRegistrationReducer.isMembersOptInStatusUpdated;

@@ -1,0 +1,126 @@
+{
+  "memberRegistrationQueryFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": ["isMemberAlreadyRegistered"],
+      "properties": {
+        "isMemberAlreadyRegistered": {
+          "type": "string",
+          "title": "क्या आपने पिछले ५ सालो में रजिस्ट्रेशन किया है ?",
+          "enum": [
+            "Y",
+            "N"
+          ],
+          "enumNames": [
+            "हाँ",
+            "नहीं"
+          ]
+        }
+      },
+      "dependencies": {
+        "isMemberAlreadyRegistered": {
+          "oneOf": [
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "Y"
+                  ]
+                },
+                "helpText": {
+                  "title": "कृपया मोबाइल नंबर अथवा आई.डी. दीजिये !",
+                  "type": "object"
+                },
+                "mobile": {
+                  "title": "मोबाइल नं",
+                  "type": "string",
+                  "customValidation": "mobileValidator"
+                }
+              }
+            },
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "N"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "uiSchema": {
+      "isMemberAlreadyRegistered": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true,
+          "col": {
+            "padding": "15px 50px 5px 50px"
+          }
+        }
+      },
+      "mobile": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "data": {},
+    "defaultMemberDataFormat": [
+      {
+        "formField": "isMemberAlreadyRegistered",
+        "dataType": "string"
+      },
+      {
+        "formField": "mobile",
+        "dataType": "string"
+      }
+    ]
+  },
+  "memberOptInGridMetaData": {
+    "headerConfig": [
+      {
+        "label": "ID",
+        "key": "id",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Name",
+        "key": "name",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Father Name",
+        "key": "fatherName",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "Opt In 2020",
+        "key": "optIn",
+        "disableFilter": true,
+        "customComponent": "MemberOptInGridSelectionRadio",
+        "excludeFromExport": true
+      }
+    ]
+  }
+}

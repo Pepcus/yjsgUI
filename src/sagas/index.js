@@ -12,6 +12,7 @@ import {
   updateMemberSaga,
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
+  fetchMembersByMobileNumberSaga,
 } from './member';
 
 import {
@@ -24,6 +25,7 @@ import {
   fetchFilesConfigSaga,
 } from './file';
 import { loginAdminSaga } from './login';
+import { updateMembersOptInStatusSaga } from 'sagas/member';
 
 const coreSagas = [
   takeLatest('BOOTSTRAP_APPLICATION', bootstrapApplication),
@@ -43,6 +45,8 @@ const sagas = [
   takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga),
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
   takeLatest(['ADMIN_LOGIN'], loginAdminSaga),
+  takeLatest(['FETCH_MEMBERS_BY_MOBILE_NUMBER'], fetchMembersByMobileNumberSaga),
+  takeLatest(['UPDATE_MEMBERS_OPT_IN_STATUS'], updateMembersOptInStatusSaga),
   takeLatest(['CREATE_USER_ACTION'], createUserSaga),
   takeLatest(['UPDATE_USER_ACTION'], editUserSaga),
   takeLatest(['PATCH_USER_ACTION'], patchUserSaga),

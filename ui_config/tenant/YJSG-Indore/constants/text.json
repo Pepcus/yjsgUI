@@ -89,6 +89,10 @@
 
   "REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन जैन बाल एवं युवा शिविर के लिए हो चूका है |",
 
+  "NO_REGISTRATION_FOUND_FOR_MOBILE": "दिए गए मोबाइल नंबर से कोई भी रजिस्ट्रेशन उपलब्ध नहीं है ! कृपया कोई और मोबाइल नंबर ट्राई कीजिये अथवा \"New Registration\" पर क्लिक कीजिये!",
+
+  "OPT_IN_MEMBERS_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन जैन बाल एवं युवा शिविर के लिए हो चूका है |",
+
   "GIVEN_INFORMATION_WRONG_MESSAGE": "दी गई जानकारी गलत है |",
 
   "FOOTER_CONTACT_TEXT": "किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र:",
@@ -166,6 +170,8 @@
   "ALREADY_REGISTERED": "Already Registered",
 
   "NEW_REGISTRATION": "New Registration",
+
+  "REGISTER_NOW": "Register now !",
 
   "VIEW_OR_EDIT_INFO": "View/Edit Information",
 

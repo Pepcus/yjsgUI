@@ -170,3 +170,37 @@ export const setMemberFetchedFromUrlParamsAction = () => ({
 export const resetMemberFetchedFromUrlParamsAction = () => ({
   type: 'RESET_MEMBER_FETCHED_FROM_URL_PARAMS',
 });
+
+export const fetchMembersByMobileNumberAction = ({ mobile }) => ({
+  type: 'FETCH_MEMBERS_BY_MOBILE_NUMBER',
+  mobile,
+});
+
+export const fetchMembersByMobileNumberSuccessAction = ({ members }) => ({
+  type: 'FETCH_MEMBERS_BY_MOBILE_NUMBER_SUCCESS',
+  members,
+});
+
+export const fetchMembersByMobileNumberFailedAction = ({ errorMessage }) => ({
+  type: 'FETCH_MEMBERS_BY_MOBILE_NUMBER_FAILED',
+  errorMessage,
+});
+
+export const updateMembersOptInStatusAction = ({ optedInMembersIds, notOptedInMembersIds }) => ({
+  type: 'UPDATE_MEMBERS_OPT_IN_STATUS',
+  optedInMembersIds,
+  notOptedInMembersIds,
+});
+
+export const updateMembersOptInStatusSuccessAction = () => ({
+  type: 'UPDATE_MEMBERS_OPT_IN_STATUS_SUCCESS',
+});
+
+export const updateMembersOptInStatusFailedAction = ({ errorMessage }) => ({
+  type: 'UPDATE_MEMBERS_OPT_IN_STATUS_FAILED',
+  errorMessage,
+});
+
+export const resetMemberOptInStatusDataAction = () => ({
+  type: 'RESET_MEMBER_OPT_IN_STATUS_DATA',
+});

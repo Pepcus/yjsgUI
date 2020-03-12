@@ -10,6 +10,10 @@ import {
   updateMemberSuccessAction,
   partialMemberAlreadyRegisteredAction,
   exactMemberAlreadyRegisteredAction,
+  fetchMembersByMobileNumberSuccessAction,
+  fetchMembersByMobileNumberFailedAction,
+  updateMembersOptInStatusSuccessAction,
+  updateMembersOptInStatusFailedAction,
 } from 'actions/memberRegistrationActions';
 import {
   getAllMembersDataResultsSuccessAction,
@@ -306,6 +310,63 @@ export function* parentsRegistrationSaga(action) {
     yield put(setLoadingStateAction(false));
   } catch (e) {
     yield put(parentsRegistrationResultsFailureAction(errorMessage));
+    yield put(setLoadingStateAction(false));
+  }
+}
+
+export function* fetchMembersByMobileNumberSaga(action) {
+  const { mobile } = action;
+  const errorMessage = 'Error fetching member details.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'getMembersByMobileNumber');
+  try {
+    yield put(setLoadingStateAction(true));
+    const tenant = yield select(getTenantName);
+    const config = { ...apiConfig, urlValuesMap: { mobile } };
+    const response = yield callAPIWithConfig(tenant, 'getMembersByMobileNumber', config);
+    if (response.students) {
+      yield put(fetchMembersByMobileNumberSuccessAction({ members: response.students }));
+    } else {
+      yield put(fetchMembersByMobileNumberFailedAction({ errorMessage }));
+    }
+    yield put(setLoadingStateAction(false));
+  } catch (e) {
+    yield put(fetchMembersByMobileNumberFailedAction({ errorMessage }));
+    yield put(setLoadingStateAction(false));
+  }
+}
+
+export function* updateMembersOptInStatusSaga(action) {
+  const { optedInMembersIds, notOptedInMembersIds } = action;
+  const errorMessage = 'Error updating member details.';
+  const apiConfig = yield select(getAPIConfig, 'member', 'updateMembersOptIn');
+  let optInMembersResponse = null;
+  let notOptedInMembersResponse = null;
+  try {
+    yield put(setLoadingStateAction(true));
+    const tenant = yield select(getTenantName);
+    const optInMembersConfig = { ...apiConfig, urlValuesMap: { selectedMembersId: optedInMembersIds }, data: JSON.stringify(
+        {
+          optIn2020: 'Y'
+        })};
+    const notOptedInMembersConfig = { ...apiConfig, urlValuesMap: { selectedMembersId: notOptedInMembersIds }, data: JSON.stringify(
+        {
+          optIn2020: 'N'
+        }
+      ) };
+    if (optedInMembersIds) {
+      optInMembersResponse = yield callAPIWithConfig(tenant, 'updateMembersOptIn', optInMembersConfig);
+    }
+    if (notOptedInMembersIds) {
+      notOptedInMembersResponse = yield callAPIWithConfig(tenant, 'updateMembersOptIn', notOptedInMembersConfig);
+    }
+    if (optInMembersResponse || notOptedInMembersResponse) {
+      yield put(updateMembersOptInStatusSuccessAction());
+    } else {
+      yield put(updateMembersOptInStatusFailedAction({ errorMessage }));
+    }
+    yield put(setLoadingStateAction(false));
+  } catch (e) {
+    yield put(updateMembersOptInStatusFailedAction({ errorMessage }));
     yield put(setLoadingStateAction(false));
   }
 }
