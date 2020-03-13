@@ -10,6 +10,7 @@ import {
   markMemberIdCardStatusRequestFormatter,
 } from './requestFormatters';
 import { formatMembersData, fetchUserFromPhoneFormatter } from './responseFormatters';
+import { formatMemberData } from 'utils/apis/formatters/YJSG-Indore/responseFormatters';
 
 export default {
   header: {
@@ -32,5 +33,6 @@ export default {
   response: {
     getMembers: formatMembersData,
     fetchUserFromPhone: fetchUserFromPhoneFormatter,
+    getMember: formatMemberData,
   },
 };

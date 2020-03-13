@@ -33,17 +33,16 @@ const FormUpdateSuccessMessage = ({
 }) => {
   const {
     INFO_UPDATE_SUCCESS_MESSAGE,
-    BACK,
+    OK_TEXT,
     NO_INFO_CHANGE_MESSAGE,
   } = constants;
 
+  const onClick = () => {
+    isUpdatedReset();
+    redirectToPreviousLocation();
+  };
   // if form data is update and valid and submitted successfully.
   if (isMemberUpdated) {
-    const onClick = () => {
-      isUpdatedReset();
-      redirectToPreviousLocation();
-    };
-
     return (
       <Popup>
         <Row display="inline-block" width="100%" justify="center" margin="0">
@@ -54,7 +53,7 @@ const FormUpdateSuccessMessage = ({
             onClick={onClick}
             width="170px"
           >
-            {BACK}
+            {OK_TEXT}
           </Button>
         </Row>
       </Popup>
@@ -71,12 +70,13 @@ const FormUpdateSuccessMessage = ({
             onClick={redirectToPreviousLocation}
             width="170px"
           >
-            {BACK}
+            {OK_TEXT}
           </Button>
         </Row>
       </Popup>
     );
-  } return null;
+  }
+  return null;
 };
 
 FormUpdateSuccessMessage.propTypes = {

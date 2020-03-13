@@ -162,7 +162,7 @@
                   "type": "string"
                 },
                 "classAttended2020": {
-                  "title": "Class",
+                  "title": "Class 2020",
                   "type": "string",
                   "enum": [
                     "Level 1",
@@ -251,8 +251,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2019": {
-                  "title": "Room",
+                "classRoomNo2020": {
+                  "title": "Classroom 2020",
                   "type": "string",
                   "enum": [
                     "105",
@@ -494,7 +494,7 @@
                   "type": "string"
                 },
                 "classAttended2020": {
-                  "title": "Class",
+                  "title": "Class 2020",
                   "type": "string",
                   "enum": [
                     "Level 1",
@@ -583,8 +583,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2019": {
-                  "title": "Room",
+                "classRoomNo2020": {
+                  "title": "Classroom 2020",
                   "type": "string",
                   "enum": [
                     "105",
@@ -705,7 +705,7 @@
         "classAttended2020",
         "marks2019",
         "busNumber",
-        "classRoomNo2019",
+        "classRoomNo2020",
         "address",
         "remark",
         "backButton",
@@ -1048,7 +1048,7 @@
           }
         }
       },
-      "classRoomNo2019": {
+      "classRoomNo2020": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -2119,6 +2119,12 @@
   "isOptInEnable": true,
   "memberMarksGridMetaData": {
     "headerConfig": [
+      {
+        "label": "Marks 2020",
+        "key": "marks2020",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
       {
         "label": "Marks 2019",
         "key": "marks2019",

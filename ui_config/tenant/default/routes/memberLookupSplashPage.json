@@ -6,7 +6,7 @@
       "properties": {
         "isMemberAlreadyRegistered": {
           "type": "string",
-          "title": "क्या आपने पिछले ५ सालो में रजिस्ट्रेशन किया है ?",
+          "title": "क्या आपने पिछले वर्षो में सन्मति स्कूल YJSG शिविर में रजिस्ट्रेशन किया है ?",
           "enum": [
             "Y",
             "N"

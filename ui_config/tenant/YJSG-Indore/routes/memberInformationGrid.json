@@ -121,6 +121,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2020 Class Attended",
+      "key": "classAttended2020",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2016 Class Room No.",
       "key": "classRoomNo2016",
       "type": "Number",
@@ -141,6 +147,12 @@
     {
       "label": "2019 Class Room No.",
       "key": "classRoomNo2019",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2020 Class Room No.",
+      "key": "classRoomNo2020",
       "type": "Number",
       "emptyCells": "NA"
     },
@@ -169,6 +181,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2020 Attendance",
+      "key": "attendance2020",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2016 Marks",
       "key": "marks2016",
       "type": "Number",
@@ -189,6 +207,12 @@
     {
       "label": "2019 Marks",
       "key": "marks2019",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2020 Marks",
+      "key": "marks2020",
       "type": "Number",
       "emptyCells": "NA"
     },
@@ -349,6 +373,10 @@
       "key": "classAttended2019"
     },
     {
+      "label": "2020 Class Attended",
+      "key": "classAttended2020"
+    },
+    {
       "label": "2016 Class Room No.",
       "key": "classRoomNo2016"
     },
@@ -363,6 +391,10 @@
     {
       "label": "2019 Class Room No.",
       "key": "classRoomNo2019"
+    },
+    {
+      "label": "2020 Class Room No.",
+      "key": "classRoomNo2020"
     },
     {
       "label": "2016 Attendance",
@@ -381,6 +413,10 @@
       "key": "attendance2019"
     },
     {
+      "label": "2020 Attendance",
+      "key": "attendance2020"
+    },
+    {
       "label": "2016 Marks",
       "key": "marks2016"
     },
@@ -396,6 +432,10 @@
     {
       "label": "2019 Marks",
       "key": "marks2019"
+    },
+    {
+      "label": "2020 Marks",
+      "key": "marks2020"
     },
     {
       "label": "2018 Opt In",

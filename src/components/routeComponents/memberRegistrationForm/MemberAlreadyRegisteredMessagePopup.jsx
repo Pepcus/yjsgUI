@@ -71,6 +71,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE}</TextWrapper>
           <TextWrapper>{LOGIN_INFO_CONVEYED_VIA_SMS_MESSAGE}</TextWrapper>
+          <TextWrapper>{CONTACT_YJSG_HELPLINE_MESSAGE}</TextWrapper>
           <Button
             color="tertiary"
             width="170px"

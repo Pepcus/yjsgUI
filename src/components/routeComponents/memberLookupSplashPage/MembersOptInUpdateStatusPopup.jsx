@@ -20,6 +20,7 @@ const TextWrapper = styled(Typography)`
  * @param {Object} constants
  * @param {Boolean} isMembersOptInStatusUpdated
  * @param {Function} resetMemberOptInStatusData
+ * @param {Function} onConfirmOptInUpdateStatusPopup
  * @return {HTML}
  * @constructor
  */
@@ -27,6 +28,7 @@ const MembersOptInUpdateStatusPopup = ({
  constants,
  resetMemberOptInStatusData,
  isMembersOptInStatusUpdated,
+ onConfirmOptInUpdateStatusPopup,
 }) => {
 
   const {
@@ -36,6 +38,7 @@ const MembersOptInUpdateStatusPopup = ({
 
   const handleOnOkButtonClick = () => {
     resetMemberOptInStatusData();
+    onConfirmOptInUpdateStatusPopup();
   };
 
   if (isMembersOptInStatusUpdated) {
@@ -79,6 +82,7 @@ MembersOptInUpdateStatusPopup.propTypes = {
   isMemberCreated: PropTypes.bool,
   newMember: PropTypes.object,
   redirectToPreviousLocation: PropTypes.func,
+  onConfirmOptInUpdateStatusPopup: PropTypes.func,
   setStudentCredentials: PropTypes.func,
 };
 
@@ -88,6 +92,7 @@ MembersOptInUpdateStatusPopup.defaultProps = {
   isMemberCreated: false,
   newMember: {},
   redirectToPreviousLocation: () => {},
+  onConfirmOptInUpdateStatusPopup: () => {},
   setStudentCredentials: () => {},
 };
 

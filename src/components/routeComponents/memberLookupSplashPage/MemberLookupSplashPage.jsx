@@ -112,12 +112,13 @@ class MemberLookupSplashPage extends Component {
       isMemberLogin: false,
       isNewRegistration: false,
       hasError: true,
-      isOptInGridSubmitButtonEnabled: false,
       membersFetchedFromMobile: [],
       formData: {
         ...props.config.memberRegistrationQueryFormConfig.data,
       },
       formConfig: props.config.memberRegistrationQueryFormConfig,
+      isOptInValueChanged: false,
+      isSubmitButtonTriggered: false,
     };
     this.formRef = React.createRef();
   }
@@ -221,19 +222,24 @@ class MemberLookupSplashPage extends Component {
 
   handleOnChangeGridOptIn = (gridData) => {
     this.setState({
-      isOptInGridSubmitButtonEnabled: true,
       membersFetchedFromMobile: gridData,
+      isOptInValueChanged: true,
     });
   };
 
   handleOptInGridSubmit = () => {
-    const { membersFetchedFromMobile = [] } = this.state;
-    const optedInMembers = getOptInMembers({members: membersFetchedFromMobile});
-    const notOptedInMembers = getNotOptedInMembers({members: membersFetchedFromMobile});
-    this.props.updateMembersOptInStatus({
-      optedInMembersIds: getMembersIds({ members: optedInMembers }),
-      notOptedInMembersIds: getMembersIds({ members: notOptedInMembers }),
-    });
+    const { membersFetchedFromMobile = [], isOptInValueChanged } = this.state;
+    if (isOptInValueChanged) {
+      const optedInMembers = getOptInMembers({members: membersFetchedFromMobile});
+      const notOptedInMembers = getNotOptedInMembers({members: membersFetchedFromMobile});
+      this.props.updateMembersOptInStatus({
+        optedInMembersIds: getMembersIds({ members: optedInMembers }),
+        notOptedInMembersIds: getMembersIds({ members: notOptedInMembers }),
+      });
+    }
+    this.setState({
+      isSubmitButtonTriggered: true,
+    })
   };
 
   renderMemberOptInDataGrid = () => {
@@ -268,7 +274,6 @@ class MemberLookupSplashPage extends Component {
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <SubmitButtonStyled
               onClick={this.handleOptInGridSubmit}
-              disabled={!(this.state.isOptInGridSubmitButtonEnabled)}
             >
               {SUBMIT}
             </SubmitButtonStyled>
@@ -303,12 +308,21 @@ class MemberLookupSplashPage extends Component {
     return null;
   };
 
+  onConfirmOptInUpdateStatusPopup = () => {
+    // Resetting OptIn value change and submit button flags
+    this.setState({
+      isOptInValueChanged: false,
+      isSubmitButtonTriggered: false,
+    })
+  };
+
   renderMemberOptInStatusPopup = () => {
     const { isOptInUpdatePerformed, isMembersOptInStatusUpdated } = this.props;
     if (isOptInUpdatePerformed) {
       return (
         <MembersOptInUpdateStatusPopup
           isMembersOptInStatusUpdated={isMembersOptInStatusUpdated}
+          onConfirmOptInUpdateStatusPopup={this.onConfirmOptInUpdateStatusPopup}
         />
       )
     }
@@ -327,6 +341,32 @@ class MemberLookupSplashPage extends Component {
       },
       hasError: !isEmpty(errors),
     });
+  };
+
+  renderNoInformationUpdatedPopup = () => {
+    const { isOptInValueChanged, isSubmitButtonTriggered } = this.state;
+    const { NO_CHANGE_IN_OPT_IN_STATUS_MESSAGE, BACK } = this.props.constants;
+    if (!isOptInValueChanged && isSubmitButtonTriggered) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{NO_CHANGE_IN_OPT_IN_STATUS_MESSAGE}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 25px"
+              onClick={() => {
+                this.setState({
+                  isSubmitButtonTriggered: false,
+                })
+              }}
+            >
+              {BACK}
+            </Button>
+          </Row>
+        </Popup>
+      )
+    }
   };
 
   render() {
@@ -405,6 +445,9 @@ class MemberLookupSplashPage extends Component {
                 }
                 {
                   this.renderMemberOptInStatusPopup()
+                }
+                {
+                  this.renderNoInformationUpdatedPopup()
                 }
               </MemberRegistrationQueryForm>
             </Row>

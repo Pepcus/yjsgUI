@@ -85,7 +85,6 @@ class MemberRegistrationCorrectionForm extends Component {
     this.state = {
       formData: {},
       formConfig: {},
-      hasError: true,
       isFormChanged: false,
       isSubmitTriggered: false,
       isPreviousLocation: false,

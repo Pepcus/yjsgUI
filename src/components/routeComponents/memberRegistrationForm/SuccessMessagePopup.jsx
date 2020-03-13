@@ -41,7 +41,7 @@ const SuccessMessagePopup = ({
     YOUR_SECRET_CODE_TEXT,
     ID_NOTE_MESSAGE,
     ID_CARD_SUGGESTION_MESSAGE,
-    BACK,
+    OK_TEXT,
   } = constants;
 
   if (isMemberCreated && isSubmitTriggered) {
@@ -62,7 +62,7 @@ const SuccessMessagePopup = ({
             margin="10px 25px"
             onClick={redirectToPreviousLocation}
           >
-            {BACK}
+            {OK_TEXT}
           </Button>
         </Row>
       </Popup>
