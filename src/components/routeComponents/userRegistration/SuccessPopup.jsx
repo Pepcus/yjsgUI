@@ -57,7 +57,9 @@ const SuccessPopup = ({
       return (
         <Popup>
           <Row width="100%" justify="center" margin="0">
-            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE}</TextWrapper>
+            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE_1}</TextWrapper>
+            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE_2}</TextWrapper>
+            <TextWrapper>{constants.PARTIAL_REGISTRATION_MESSAGE_3}</TextWrapper>
             <Button
               color="tertiary"
               width="170px"

@@ -1,6 +1,6 @@
 {
   "searchFormConfig": {
-    "schema": {
+    "schemaWithMobile": {
       "type": "object",
       "required": [
         "city",
@@ -41,7 +41,8 @@
               },
               "cityName": {
                 "title": "शहर का नाम",
-                "type": "string"
+                "type": "string",
+                "customValidation": "cityValidator"
               }
             },
             "required": [
@@ -51,7 +52,7 @@
         }
       }
     },
-    "uiSchema": {
+    "uiSchemaWithMobile": {
       "city": {
         "ui:widget": "RadioWidget",
         "ui:options": {
@@ -111,6 +112,53 @@
               "sm": 12,
               "md": 12,
               "lg": 12
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "schema": {
+      "type": "object",
+      "required": [
+        "city",
+        "mobile"
+      ],
+      "properties": {
+        "city": {
+          "title": "शहर",
+          "type": "string",
+          "enum": [
+            "Indore",
+            "Other"
+          ],
+          "enumNames": [
+            "इंदौर",
+            "कोई और शहर"
+          ]
+        }
+      }
+    },
+    "uiSchema": {
+      "city": {
+        "ui:widget": "RadioWidget",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "boxProps": {
+            "backgroundColor": "unset"
+          },
+          "inline": true,
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 6,
+              "sm": 6,
+              "md": 6,
+              "lg": 6
             },
             "padding": "0 10px 0 10px"
           }

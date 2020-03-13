@@ -28,7 +28,7 @@ const BoxStyled = styled(Box)`
  overflow-x: hidden;
  overflow-y: auto;
  background-color: ${getThemeProps('palette.policyMuted.color')};
- ${({theme}) => theme.media.down('lg')`
+ ${({ theme }) => theme.media.down('lg')`
      margin: auto; 
      height: 100%;
  `}
@@ -40,10 +40,10 @@ const BoxStyled = styled(Box)`
 const ContainerStyled = styled(Container)`
   height: max-content;
   display: flex;
-  ${({theme}) => theme.media.down('lg')`
+  ${({ theme }) => theme.media.down('lg')`
      height: 100%; 
  `}
- ${({theme}) => theme.media.down('md')`
+ ${({ theme }) => theme.media.down('md')`
      height: auto; 
  `}
  @media (max-width: 992px) and (orientation: landscape) {
@@ -66,6 +66,8 @@ class SearchPage extends Component {
       partialFormData: {},
       partialFormHasError: true,
       selectedUser: '',
+      schema: props.config.searchFormConfig.schema,
+      uiSchema: props.config.searchFormConfig.uiSchema,
     };
   }
 
@@ -83,10 +85,18 @@ class SearchPage extends Component {
 
   onChange = (data) => {
     this.props.setDefaultUserData();
+    let schema = this.state.formConfig.schema;
+    let uiSchema = this.state.formConfig.uiSchema;
+    if (data.formData.city) {
+      schema = this.state.formConfig.schemaWithMobile;
+      uiSchema = this.state.formConfig.uiSchemaWithMobile;
+    }
     this.setState({
       formData: data.formData,
       hasError: !isEmpty(data.errors),
       isSubmitClicked: false,
+      schema,
+      uiSchema,
     });
   };
 
@@ -104,25 +114,23 @@ class SearchPage extends Component {
     });
   };
 
-  renderUserList = () => {
-    return (
-      this.props.users).map(user => (
-        <div>
-          <div className="radio" style={{padding: '0 10px 0 10px', marginBottom: '10px'}}>
-            <label>
-              <input
-                type="radio"
-                value={user.id}
-                checked={this.state.selectedUser === user.id}
-                onChange={this.handleOptionChange}
-              />
-              {user.name}
-            </label>
-          </div>
+  renderUserList = () => (
+    this.props.users).map(user => (
+      <div>
+        <div className="radio" style={{ padding: '0 10px 0 10px', marginBottom: '10px' }}>
+          <label>
+            <input
+              type="radio"
+              value={user.id}
+              checked={this.state.selectedUser === user.id}
+              onChange={this.handleOptionChange}
+            />
+            {user.name}
+          </label>
         </div>
-      )
-    )
-  }
+      </div>
+  ),
+  );
 
   renderUserListContainer = () => {
     if ((this.props.users).length > 0) {
@@ -162,7 +170,7 @@ class SearchPage extends Component {
     if ((this.props.users).length > 0) {
       return (
         <Row justify="center" margin="0 0 25px 0">
-          <Col size={{xs: 12, sm: 12, md: 6, lg: 6}} padding="10px 15px 10px 15px">
+          <Col size={{ xs: 12, sm: 12, md: 6, lg: 6 }} padding="10px 15px 10px 15px">
             <Button
               width="100%"
               onClick={this.handleContinue}
@@ -171,7 +179,7 @@ class SearchPage extends Component {
               Continue
             </Button>
           </Col>
-          <Col size={{xs: 12, sm: 12, md: 6, lg: 6}} padding="10px 15px 10px 15px">
+          <Col size={{ xs: 12, sm: 12, md: 6, lg: 6 }} padding="10px 15px 10px 15px">
             <Button
               width="100%"
               onClick={this.handleNewRegistration}
@@ -187,13 +195,14 @@ class SearchPage extends Component {
 
   renderSubmitButton() {
     if ((this.props.users).length > 0
-      || this.state.isSubmitClicked) {
+      || this.state.isSubmitClicked
+      || !this.state.formData.city) {
       return null;
     }
     return (
       <Row justify="center" margin="0 0 25px 0">
-        <Col size={{xs: 12, sm: 12, md: 12, lg: 12}} padding="10px 15px 10px 15px">
-          <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Col size={{ xs: 12, sm: 12, md: 12, lg: 12 }} padding="10px 15px 10px 15px">
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               width="200px"
               onClick={this.handleSubmit}
@@ -250,7 +259,7 @@ class SearchPage extends Component {
   };
 
   renderPartialUserForm = () => {
-    const {FieldTemplate} = fields;
+    const { FieldTemplate } = fields;
     const {
       partialUserSchema,
       partialUserUISchema,
@@ -276,8 +285,8 @@ class SearchPage extends Component {
             onSubmit={this.handlePartialFormSubmit}
           />
           <Row justify="center" margin="0 0 25px 0">
-            <Col size={{xs: 12, sm: 12, md: 12, lg: 12}} padding="10px 15px 10px 15px">
-              <div style={{display: 'flex', justifyContent: 'center'}}>
+            <Col size={{ xs: 12, sm: 12, md: 12, lg: 12 }} padding="10px 15px 10px 15px">
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button
                   width="200px"
                   onClick={this.handlePartialFormSubmit}
@@ -306,6 +315,8 @@ class SearchPage extends Component {
       partialFormData: {},
       partialFormHasError: true,
       selectedUser: '',
+      schema: this.state.formConfig.schema,
+      uiSchema: this.state.formConfig.uiSchema,
     });
   };
 
@@ -322,11 +333,7 @@ class SearchPage extends Component {
   };
 
   render() {
-    const {FieldTemplate} = fields;
-    const {
-      schema,
-      uiSchema,
-    } = this.state.formConfig;
+    const { FieldTemplate } = fields;
     return (
       <ContainerStyled width="100%" ref={this.formRef}>
         <BoxStyled
@@ -344,10 +351,10 @@ class SearchPage extends Component {
             fields={fields}
             formData={this.state.formData}
             showErrorList={false}
-            validate={formValidators(schema, this.props.constants)}
+            validate={formValidators(this.state.schema, this.props.constants)}
             liveValidate
-            schema={schema}
-            uiSchema={uiSchema}
+            schema={this.state.schema}
+            uiSchema={this.state.uiSchema}
             onChange={this.onChange}
             onSubmit={this.handleSubmit}
           />
