@@ -8,7 +8,7 @@
       ],
       "properties": {
         "city": {
-          "title": "शहर",
+          "title": "अपना शहर चुनें",
           "type": "string",
           "enum": [
             "Indore",
@@ -30,7 +30,7 @@
           "oneOf": [{
             "properties": {
               "city": {
-                "title": "शहर",
+                "title": "अपना शहर चुनें",
                 "type": "string",
                 "enum": [
                   "Other"
@@ -126,7 +126,7 @@
       ],
       "properties": {
         "city": {
-          "title": "शहर",
+          "title": "अपना शहर चुनें",
           "type": "string",
           "enum": [
             "Indore",
@@ -173,8 +173,7 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string",
-          "customValidation": "nameValidator"
+          "type": "string"
         }
       }
     },
