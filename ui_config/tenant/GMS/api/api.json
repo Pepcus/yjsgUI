@@ -26,7 +26,7 @@
       },
       "patchUser": {
         "method": "PATCH",
-        "url": "api/gms/students/${id}",
+        "url": "api/gms/students/registration-status/${id}",
         "headers": {
           "Content-type": "application/json",
           "Accept": "application/json"
