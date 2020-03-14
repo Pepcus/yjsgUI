@@ -100,29 +100,29 @@
   "memberOptInGridMetaData": {
     "headerConfig": [
       {
-        "label": "ID",
+        "label": "इस वर्ष",
+        "key": "optIn",
+        "disableFilter": true,
+        "customComponent": "MemberOptInGridSelectionRadio",
+        "excludeFromExport": true
+      },
+      {
+        "label": "आई.डी.",
         "key": "id",
         "emptyCells": "NA",
         "disableFilter": true
       },
       {
-        "label": "Name",
+        "label": "नाम",
         "key": "name",
         "emptyCells": "NA",
         "disableFilter": true
       },
       {
-        "label": "Father Name",
+        "label": "पिता",
         "key": "fatherName",
         "emptyCells": "NA",
         "disableFilter": true
-      },
-      {
-        "label": "Opt In 2020",
-        "key": "optIn",
-        "disableFilter": true,
-        "customComponent": "MemberOptInGridSelectionRadio",
-        "excludeFromExport": true
       }
     ]
   }

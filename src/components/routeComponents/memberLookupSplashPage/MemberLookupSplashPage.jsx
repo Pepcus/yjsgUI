@@ -60,6 +60,10 @@ const SubmitButtonStyled = styled(Button)`
       width: 100%;
       margin: 10px 0 10px 0;
   }
+   @media (max-width: 480px) and (orientation: portrait) {
+      width: 100%;
+      margin: 10px;
+  }
 `;
 
 const ContainerStyled = styled(Container)`
@@ -242,6 +246,10 @@ class MemberLookupSplashPage extends Component {
     })
   };
 
+  handleOptInGridBackButtonClick = () => {
+    this.props.resetMemberOptInStatusData();
+  };
+
   renderMemberOptInDataGrid = () => {
     const {
       isFetched,
@@ -271,7 +279,12 @@ class MemberLookupSplashPage extends Component {
             gridData={this.state.membersFetchedFromMobile}
             onChangeGridOptIn={this.handleOnChangeGridOptIn}
           />
-          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+            <SubmitButtonStyled
+              onClick={this.handleOptInGridBackButtonClick}
+            >
+              {BACK}
+            </SubmitButtonStyled>
             <SubmitButtonStyled
               onClick={this.handleOptInGridSubmit}
             >

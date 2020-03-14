@@ -45,7 +45,7 @@
     max-width: 100%;
 }
 .cell__fatherName {
-    min-width: 155px;
+    min-width: 100px;
     max-width: 100%;
 }
 .cell__Father {
@@ -54,13 +54,18 @@
 }
 
 .cell__optIn {
-    min-width: 150px;
+    min-width: 110px;
     max-width:100%;
 }
 .cell__id {
-    min-width: 65px;
+    min-width: 50px;
     max-width:100%;
 }
+.cell__marks2020 {
+    min-width: 105px;
+    max-width:100%;
+}
+
 .cell__mobile> div.table-cell {
    font-family: sans-serif;
 }

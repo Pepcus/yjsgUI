@@ -41,24 +41,7 @@ const FormUpdateSuccessMessage = ({
     isUpdatedReset();
     redirectToPreviousLocation();
   };
-  // if form data is update and valid and submitted successfully.
-  if (isMemberUpdated) {
-    return (
-      <Popup>
-        <Row display="inline-block" width="100%" justify="center" margin="0">
-          <Typography type="body" fontSize="16px">{INFO_UPDATE_SUCCESS_MESSAGE}</Typography>
-          <Button
-            color="tertiary"
-            margin="10px 25px"
-            onClick={onClick}
-            width="170px"
-          >
-            {OK_TEXT}
-          </Button>
-        </Row>
-      </Popup>
-    );
-  } else if (isSubmitTriggered && !isFormChanged && !hasError) {
+  if (isSubmitTriggered && !isFormChanged && !hasError) {
     // if form data is not update and valid.
     return (
       <Popup>
@@ -68,6 +51,24 @@ const FormUpdateSuccessMessage = ({
             color="tertiary"
             margin="10px 25px"
             onClick={redirectToPreviousLocation}
+            width="170px"
+          >
+            {OK_TEXT}
+          </Button>
+        </Row>
+      </Popup>
+    );
+  }
+  // if form data is update and valid and submitted successfully.
+   else if (isMemberUpdated) {
+    return (
+      <Popup>
+        <Row display="inline-block" width="100%" justify="center" margin="0">
+          <Typography type="body" fontSize="16px">{INFO_UPDATE_SUCCESS_MESSAGE}</Typography>
+          <Button
+            color="tertiary"
+            margin="10px 25px"
+            onClick={onClick}
             width="170px"
           >
             {OK_TEXT}
