@@ -124,6 +124,9 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isLoading: false,
         isFetched: true,
         member: {},
+        id: '',
+        secretKey: '',
+        updatedMember: {},
       };
 
     case 'SET_MEMBER_DATA':
