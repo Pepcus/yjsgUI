@@ -15,7 +15,7 @@ const TextWrapper = styled(Typography)`
     font-size: 16px !important;
 `;
 
-const renderMessage3 = (message, VIDEO_LINK) => {
+const renderMessage = (message, VIDEO_LINK) => {
   if (message) {
     const link = `https://${VIDEO_LINK}`;
     return (
@@ -35,6 +35,7 @@ const renderMessage3 = (message, VIDEO_LINK) => {
  * @param {Boolean} isUserCreated
  * @param {Function} redirectToPreviousLocation
  * @param {String} messageOf
+ * @param {Object} data
  * @return {HTML}
  * @constructor
  */
@@ -45,9 +46,11 @@ const SuccessPopup = ({
   isUserCreated,
   redirectToPreviousLocation,
   messageOf,
+  data,
 }) => {
   const {
-    BACK,
+    INDORE_CITY,
+    POPUP_BUTTON_TEXT,
     VIDEO_LINK,
   } = constants;
 
@@ -66,7 +69,25 @@ const SuccessPopup = ({
               margin="10px 10px"
               onClick={redirectToPreviousLocation}
             >
-              {BACK}
+              {POPUP_BUTTON_TEXT}
+            </Button>
+          </Row>
+        </Popup>
+      );
+    } else if (messageOf === constants.COMPLETE && data.city === INDORE_CITY) {
+      return (
+        <Popup>
+          <Row width="100%" justify="center" margin="0">
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_1}</TextWrapper>
+            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_2, VIDEO_LINK)}</TextWrapper>
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_3}</TextWrapper>
+            <Button
+              color="tertiary"
+              width="170px"
+              margin="10px 10px"
+              onClick={redirectToPreviousLocation}
+            >
+              {POPUP_BUTTON_TEXT}
             </Button>
           </Row>
         </Popup>
@@ -77,14 +98,14 @@ const SuccessPopup = ({
           <Row width="100%" justify="center" margin="0">
             <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_1}</TextWrapper>
             <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_2}</TextWrapper>
-            <TextWrapper>{renderMessage3(constants.REGISTRATION_COMPLETE_MESSAGE_3, VIDEO_LINK)}</TextWrapper>
+            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_MESSAGE_3, VIDEO_LINK)}</TextWrapper>
             <Button
               color="tertiary"
               width="170px"
               margin="10px 10px"
               onClick={redirectToPreviousLocation}
             >
-              {BACK}
+              {POPUP_BUTTON_TEXT}
             </Button>
           </Row>
         </Popup>
@@ -96,6 +117,7 @@ const SuccessPopup = ({
 
 SuccessPopup.propTypes = {
   constants: PropTypes.object,
+  data: PropTypes.object,
   isFromPartialContinue: PropTypes.bool,
   isSubmitTriggered: PropTypes.bool,
   isUserCreated: PropTypes.bool,
@@ -105,6 +127,7 @@ SuccessPopup.propTypes = {
 
 SuccessPopup.defaultProps = {
   constants: {},
+  data: {},
   isFromPartialContinue: false,
   isSubmitTriggered: false,
   isUserCreated: false,

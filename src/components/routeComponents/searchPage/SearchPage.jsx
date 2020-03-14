@@ -11,6 +11,7 @@ import { formValidators } from 'utils/form';
 import Row from 'pepcus-core/lib/Row';
 import Col from 'pepcus-core/lib/Col';
 import Button from 'pepcus-core/lib/Button';
+import Typography from 'pepcus-core/lib/Typography';
 import { getConstants } from 'reducers/constants';
 import { isEmpty } from 'pepcus-core';
 import {
@@ -37,6 +38,7 @@ const BoxStyled = styled(Box)`
     }
 `;
 
+
 const ContainerStyled = styled(Container)`
   height: max-content;
   display: flex;
@@ -49,6 +51,14 @@ const ContainerStyled = styled(Container)`
  @media (max-width: 992px) and (orientation: landscape) {
         height: auto;
     }
+`;
+
+const TypographyStyled = styled(Typography)`
+   color: ${getThemeProps('colors.header')};
+`;
+
+const TypographyHeadingStyled = styled(Typography)`
+   margin-top: 25px;
 `;
 
 class SearchPage extends Component {
@@ -335,33 +345,67 @@ class SearchPage extends Component {
   render() {
     const { FieldTemplate } = fields;
     return (
-      <ContainerStyled width="100%" ref={this.formRef}>
+      <ContainerStyled width="100%" style={{ backgroundColor: 'rgba(244,233,227,0.21176470588235294)', height: '100vh' }} ref={this.formRef}>
         <BoxStyled
           maxWidth="500px"
-          maxHeight="100%"
+          height="max-content"
           borderStyle="none"
           elevation={5}
-          padding="40px 20px 0 20px"
+          padding="10px 20px 0 20px"
           margin="100px auto 70px auto"
+          backgroundColor="#FFFFFF !important"
         >
-          <Form
-            enableDirtyCheck
-            externalSubmission
-            FieldTemplate={FieldTemplate}
-            fields={fields}
-            formData={this.state.formData}
-            showErrorList={false}
-            validate={formValidators(this.state.schema, this.props.constants)}
-            liveValidate
-            schema={this.state.schema}
-            uiSchema={this.state.uiSchema}
-            onChange={this.onChange}
-            onSubmit={this.handleSubmit}
-          />
-          {this.renderSubmitButton()}
-          <div>{this.renderUserListContainer()}</div>
-          {this.renderContinueAndNewUserButton()}
-          {this.renderPartialUserForm()}
+          <Row width="100%" display="inline-block">
+            <TypographyStyled
+              type="title"
+              fontWeight="600"
+              fontSize="18px"
+              align="center"
+            >
+              {this.props.constants.EVENT_DATE}
+            </TypographyStyled>
+            <Typography
+              type="title"
+              fontSize="16px"
+              align="center"
+            >
+              {this.props.constants.EVENT_VENUE}
+            </Typography>
+            <TypographyHeadingStyled
+              type="title"
+              fontSize="16px"
+              align="center"
+              marginTop="10px"
+            >
+              {this.props.constants.SEARCH_PAGE_HEADING}
+            </TypographyHeadingStyled>
+          </Row>
+          <div
+            style={{
+              marginBottom: '10px',
+              backgroundColor: 'rgb(248, 248, 248)',
+              padding: '10px 0px 1px 0px',
+            }}
+          >
+            <Form
+              enableDirtyCheck
+              externalSubmission
+              FieldTemplate={FieldTemplate}
+              fields={fields}
+              formData={this.state.formData}
+              showErrorList={false}
+              validate={formValidators(this.state.schema, this.props.constants)}
+              liveValidate
+              schema={this.state.schema}
+              uiSchema={this.state.uiSchema}
+              onChange={this.onChange}
+              onSubmit={this.handleSubmit}
+            />
+            {this.renderSubmitButton()}
+            <div>{this.renderUserListContainer()}</div>
+            {this.renderContinueAndNewUserButton()}
+            {this.renderPartialUserForm()}
+          </div>
           <SuccessPopup
             isSubmitTriggered={this.state.isPartialRegistrationSubmitClicked}
             isUserCreated={this.props.isUserCreated}

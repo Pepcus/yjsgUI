@@ -139,7 +139,13 @@ class UserRegistration extends Component {
 
   isSubmitButtonDisabled = () => {
     if (!isEmpty(this.state.formData)
-      && !this.state.hasError) {
+      && !this.state.hasError
+      && this.state.formData.name
+      && this.state.formData.age
+      && this.state.formData.mobile
+      && this.state.formData.city
+      && this.state.formData.isWhatsApp
+      && this.state.formData.foodOpt) {
       return false;
     }
     return true;
@@ -165,14 +171,15 @@ class UserRegistration extends Component {
     } = this.state.formConfig;
 
     return (
-      <ContainerStyled width="100%" ref={this.formRef}>
+      <ContainerStyled width="100%" style={{ backgroundColor: 'rgba(244,233,227,0.21176470588235294)', height: '100vh' }} ref={this.formRef}>
         <BoxStyled
           maxWidth="1170px"
-          maxHeight="100%"
+          height="max-content"
           borderStyle="none"
           elevation={5}
           padding="40px 20px 0 20px"
           margin="100px auto 70px auto"
+          backgroundColor="#FFFFFF !important"
         >
           <Form
             enableDirtyCheck
@@ -212,6 +219,7 @@ class UserRegistration extends Component {
             isUserCreated={this.props.isUserCreated}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
             messageOf={this.props.constants.COMPLETE}
+            data={this.state.formData}
           />
           {this.renderErrorPopup()}
         </BoxStyled>

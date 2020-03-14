@@ -13,8 +13,7 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string",
-          "customValidation": "nameValidator"
+          "type": "string"
         },
         "age": {
           "title": "उम्र",
@@ -28,8 +27,7 @@
         },
         "address": {
           "title": "पूरा पता",
-          "type": "string",
-          "customValidation": "addressValidator"
+          "type": "string"
         },
         "city": {
           "title": "शहर",
@@ -105,6 +103,7 @@
       },
       "mobile": {
         "ui:field": "InputField",
+        "ui:disabled": true,
         "ui:options": {
           "style": {
             "fieldStyle": {
@@ -147,6 +146,7 @@
       },
       "city": {
         "ui:field": "InputField",
+        "ui:disabled": true,
         "ui:options": {
           "style": {
             "fieldStyle": {
