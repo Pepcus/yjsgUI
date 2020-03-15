@@ -9,9 +9,11 @@ import Typography from 'pepcus-core/lib/Typography';
 import Popup from 'components/common/Popup';
 import { isUpdatedResetAction } from 'actions/memberRegistrationActions';
 import { getConstants } from 'reducers/constants';
+import { USER_TYPES } from 'constants/member';
 
 /**
  * It return success message popup
+ * @param {String} user
  * @param {Object} constants
  * @param {Boolean} hasError
  * @param {Boolean} isFormChanged
@@ -23,6 +25,7 @@ import { getConstants } from 'reducers/constants';
  * @constructor
  */
 const FormUpdateSuccessMessage = ({
+  user,
   constants,
   hasError,
   isFormChanged,
@@ -38,9 +41,15 @@ const FormUpdateSuccessMessage = ({
   } = constants;
 
   const onClick = () => {
+    const { ADMIN } = USER_TYPES;
     isUpdatedReset();
-    redirectToPreviousLocation();
+    if (user !== ADMIN) {
+      window.location.href = window.location.origin
+    } else {
+      redirectToPreviousLocation();
+    }
   };
+
   if (isSubmitTriggered && !isFormChanged && !hasError) {
     // if form data is not update and valid.
     return (
@@ -50,7 +59,7 @@ const FormUpdateSuccessMessage = ({
           <Button
             color="tertiary"
             margin="10px 25px"
-            onClick={redirectToPreviousLocation}
+            onClick={onClick}
             width="170px"
           >
             {OK_TEXT}
@@ -88,6 +97,7 @@ FormUpdateSuccessMessage.propTypes = {
   isSubmitTriggered: PropTypes.bool,
   isUpdatedReset: PropTypes.func,
   redirectToPreviousLocation: PropTypes.func,
+  user: PropTypes.string,
 };
 
 FormUpdateSuccessMessage.defaultProps = {
@@ -98,6 +108,7 @@ FormUpdateSuccessMessage.defaultProps = {
   isSubmitTriggered: false,
   isUpdatedReset: () => {},
   redirectToPreviousLocation: () => {},
+  user: ''
 };
 
 const mapStateToProps = state => ({

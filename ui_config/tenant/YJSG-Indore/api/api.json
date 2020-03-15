@@ -59,14 +59,14 @@
         "method": "GET",
         "url": "v1/students/phone/${mobile}",
         "headers": {
-          "secretKey": 123456
+          "secretKey": 451725
         }
       },
       "updateMembersOptIn": {
         "method": "PATCH",
         "url": "v1/students/optin?id=${selectedMembersId}",
         "headers": {
-          "secretKey": 123456,
+          "secretKey": 451725,
           "Content-type": "application/json",
           "Accept": "application/json"
         }
@@ -81,7 +81,7 @@
         "method": "GET",
         "url": "v1/documents",
         "headers": {
-          "secretKey": 123456
+          "secretKey": 451725
         }
       }
     }

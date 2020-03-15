@@ -221,13 +221,15 @@
 
   "PARENT_REGISTRATION_SUCCESS_MESSAGE": "आपका रजिस्ट्रेशन संपन्न हुआ!",
 
-  "PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन शायद हमारे पास पहले से ही है !",
+  "PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन हमारे पास पहले से ही है ! ",
 
-  "EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन DATA हमारे पास पहले से ही है !",
+  "EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE": "आपका रजिस्ट्रेशन हमारे पास पहले से ही है ! ",
 
   "WE_WILL_CONTACT_VIA_SMS_SHORTLY_MESSAGE": "2020 शिविर के रजिस्ट्रेशन के लिए हम आपसे शीघ्र ही संपर्क करेंगे !",
 
+  "INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE": "शिविर की जानकारी के लिए आपको शीघ्र ही अपने रजिस्टर्ड फोन नंबर पर SMS प्राप्त होगा ।",
+
   "LOGIN_INFO_CONVEYED_VIA_SMS_MESSAGE": "लॉगइन करने के लिए आपको अपने पंजीकृत फोन नंबर पर एसएमएस प्राप्त होगा ।",
 
-  "CONTACT_YJSG_HELPLINE_MESSAGE": "आप भी YJSG हेल्पलाइन (74470-56789) पर संपर्क करके अपना रजिस्ट्रेशन कन्फर्म कर सकते है !"
+  "CONTACT_YJSG_HELPLINE_MESSAGE": "आप भी YJSG हेल्पलाइन (74470-56789) पर संपर्क करके अपना रजिस्ट्रेशन कन्फर्म कर सकते है ! "
 }

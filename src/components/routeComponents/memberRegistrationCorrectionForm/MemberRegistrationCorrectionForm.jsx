@@ -90,7 +90,7 @@ class MemberRegistrationCorrectionForm extends Component {
       isPreviousLocation: false,
       member: {},
       oldMemberData: {},
-      onlyOptInForm: (props.config.isOptInEnable && props.isMemberFetchedFromUrlParams),
+      onlyOptInForm: false,
       mandatoryField: false,
       isBusStopChangeWarningPopupVisible: false,
       hasUserSeenBusStopChangeWarning: false,
@@ -510,6 +510,7 @@ class MemberRegistrationCorrectionForm extends Component {
             isPreviousLocation={isPreviousLocation}
           />
           <FormUpdateSuccessMessage
+            user={user}
             hasError={hasError}
             isFormChanged={isFormChanged}
             isMemberUpdated={isMemberUpdated}

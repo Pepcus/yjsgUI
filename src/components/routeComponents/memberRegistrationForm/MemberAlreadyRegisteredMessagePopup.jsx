@@ -36,8 +36,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
   const {
     PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE,
     EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE,
-    WE_WILL_CONTACT_VIA_SMS_SHORTLY_MESSAGE,
-    LOGIN_INFO_CONVEYED_VIA_SMS_MESSAGE,
+    INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE,
     CONTACT_YJSG_HELPLINE_MESSAGE,
     BACK,
   } = constants;
@@ -52,7 +51,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
       <Popup>
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE}</TextWrapper>
-          <TextWrapper>{WE_WILL_CONTACT_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>
+          <TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>
           <TextWrapper>{CONTACT_YJSG_HELPLINE_MESSAGE}</TextWrapper>
           <Button
             color="tertiary"
@@ -70,7 +69,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
       <Popup>
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE}</TextWrapper>
-          <TextWrapper>{LOGIN_INFO_CONVEYED_VIA_SMS_MESSAGE}</TextWrapper>
+          <TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>
           <TextWrapper>{CONTACT_YJSG_HELPLINE_MESSAGE}</TextWrapper>
           <Button
             color="tertiary"
