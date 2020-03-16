@@ -1,4 +1,5 @@
 import templateRegex from 'es6-template-regex';
+import { ENGLISH_DIGIT } from 'constants/yjsg';
 
 /**
  * String Replacement via a provided Dictionary of keys and values.
@@ -34,3 +35,5 @@ import templateRegex from 'es6-template-regex';
 export const stringReplace = (theString, replacementDictionary) => theString.replace(templateRegex(), (noop, key) =>
   replacementDictionary[key] || '',
 );
+
+export const convertAgeToNumeric = value => value.replace(/[०१२३४५६७८९]/g, s => ENGLISH_DIGIT[s]);

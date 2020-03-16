@@ -7,7 +7,6 @@
         "age",
         "mobile",
         "city",
-        "foodOpt",
         "isWhatsApp"
       ],
       "properties": {
@@ -18,7 +17,7 @@
         "age": {
           "title": "उम्र",
           "type": "string",
-          "customValidation": "ageValidator"
+          "customValidation": "ageValidatorWithNoUpperLimit"
         },
         "mobile": {
           "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
@@ -40,18 +39,6 @@
           "enum": [
             "true",
             "false"
-          ],
-          "enumNames": [
-            "हाँ",
-            "नहीं"
-          ]
-        },
-        "foodOpt": {
-          "title": "भोजन",
-          "type": "string",
-          "enum": [
-            "Y",
-            "N"
           ],
           "enumNames": [
             "हाँ",
@@ -166,27 +153,6 @@
         }
       },
       "isWhatsApp": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "foodOpt": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
