@@ -12,7 +12,8 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         },
         "age": {
           "title": "उम्र",
