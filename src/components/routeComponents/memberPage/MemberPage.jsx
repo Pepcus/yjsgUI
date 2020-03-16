@@ -16,6 +16,7 @@ import {
   resetMemberFetchedFromUrlParamsAction,
   setMemberCredentialsAction,
   setMemberFetchedFromUrlParamsAction,
+  setMemberRegistrationCorrectionModeAction,
 } from 'actions/memberRegistrationActions';
 import {
   setUserTypeAction,
@@ -100,21 +101,23 @@ class MemberPage extends Component {
   componentWillMount() {
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
-
+    const mode = getParameterByName('mode');
     if (id && secretCode) {
-      this.fetchMemberByURLParams(id, secretCode);
+      this.fetchMemberByURLParams({ id, secretCode, mode });
     }
   }
 
   /** If member login through URL fetchMemberByURLParams method will call.
    * @param {String} id
    * @param {String} secretCode
+   * @param {String} mode
    */
-  fetchMemberByURLParams(id, secretCode) {
+  fetchMemberByURLParams({id, secretCode, mode}) {
     const { fetchMemberData, setMemberCredentials, setUserType, setMemberFetchedFromUrlParams } = this.props;
     const { MEMBER_WITH_URL } = USER_TYPES;
     setMemberFetchedFromUrlParams();
     setMemberCredentials({ id, secretKey: secretCode });
+    this.props.setMemberRegistrationCorrectionMode({ mode });
     fetchMemberData({ id, secretKey: secretCode });
     setUserType({ pageUser: MEMBER_WITH_URL });
     this.setState({
@@ -272,6 +275,7 @@ const mapDispatchToProps = dispatch => ({
   setUserType: ({ pageUser }) => dispatch(setUserTypeAction({ pageUser })),
   setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
   resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
+  setMemberRegistrationCorrectionMode: ({ mode }) => dispatch(setMemberRegistrationCorrectionModeAction({ mode })),
 });
 
 export default connect(

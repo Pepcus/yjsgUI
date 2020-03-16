@@ -14,6 +14,7 @@ const initialState = {
   secretKey: '',
   updateMessage: '',
   updatedMember: {},
+  registrationCorrectionMode: '',
 };
 
 export const memberRegistrationReducer = (state = initialState, action) => {
@@ -159,6 +160,7 @@ export const memberRegistrationReducer = (state = initialState, action) => {
       return {
         ...state,
         isMemberFetchedFromUrlParams: false,
+        registrationCorrectionMode: '',
       };
 
     case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_SUCCESS':
@@ -198,6 +200,12 @@ export const memberRegistrationReducer = (state = initialState, action) => {
         isOptInUpdatePerformed: false,
       };
 
+    case 'SET_MEMBER_REGISTRATION_CORRECTION_MODE':
+      return {
+        ...state,
+        registrationCorrectionMode: action.mode,
+      };
+
     default: {
       return {
         ...state,
@@ -231,3 +239,5 @@ export const getMembersFetchedFromMobile = state => state.memberRegistrationRedu
 export const getMembersOptInStatusUpdated = state => state.memberRegistrationReducer.isMembersOptInStatusUpdated;
 
 export const getMembersOptInUpdatePerformed = state => state.memberRegistrationReducer.isOptInUpdatePerformed;
+
+export const getRegistrationCorrectionMode = state => state.memberRegistrationReducer.registrationCorrectionMode;

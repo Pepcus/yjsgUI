@@ -7,12 +7,12 @@ import styled from 'styled-components';
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
 
-import { USER_TYPES } from 'constants/member';
+import { CORRECTION_MODE, USER_TYPES } from 'constants/member';
 import { isUpdatedResetAction, updateMemberDataAction } from 'actions/memberRegistrationActions';
 import { setLoadingStateAction } from 'actions/loaderActions';
 import {
   getIsMemberFetchedFromUrlParams,
-  getMember,
+  getMember, getRegistrationCorrectionMode,
   getUserId,
   getUserSecretKey,
   isFetched,
@@ -90,7 +90,10 @@ class MemberRegistrationCorrectionForm extends Component {
       isPreviousLocation: false,
       member: {},
       oldMemberData: {},
-      onlyOptInForm: false,
+      onlyOptInForm: (props.config.isOptInEnable
+        && props.isMemberFetchedFromUrlParams
+        && props.registrationCorrectionMode !== CORRECTION_MODE.EDIT
+      ),
       mandatoryField: false,
       isBusStopChangeWarningPopupVisible: false,
       hasUserSeenBusStopChangeWarning: false,
@@ -561,6 +564,7 @@ MemberRegistrationCorrectionForm.propTypes = {
   tenant: PropTypes.string,
   updateMemberData: PropTypes.func,
   user: PropTypes.string,
+  registrationCorrectionMode: PropTypes.string,
 };
 
 MemberRegistrationCorrectionForm.defaultProps = {
@@ -577,6 +581,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   tenant: '',
   updateMemberData: () => {},
   user: '',
+  registrationCorrectionMode: '',
 };
 
 const mapStateToProps = state => ({
@@ -591,6 +596,7 @@ const mapStateToProps = state => ({
   userType: getUserType(state),
   isMemberFetchedFromUrlParams: getIsMemberFetchedFromUrlParams(state),
   busCoordinators: getBusCoordinators(state),
+  registrationCorrectionMode: getRegistrationCorrectionMode(state),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -204,3 +204,8 @@ export const updateMembersOptInStatusFailedAction = ({ errorMessage }) => ({
 export const resetMemberOptInStatusDataAction = () => ({
   type: 'RESET_MEMBER_OPT_IN_STATUS_DATA',
 });
+
+export const setMemberRegistrationCorrectionModeAction = ({ mode }) => ({
+  type: 'SET_MEMBER_REGISTRATION_CORRECTION_MODE',
+  mode,
+});

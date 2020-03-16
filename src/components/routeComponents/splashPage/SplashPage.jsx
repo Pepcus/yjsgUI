@@ -20,6 +20,7 @@ import {
   resetMemberFetchedFromUrlParamsAction,
   setMemberCredentialsAction,
   setMemberFetchedFromUrlParamsAction,
+  setMemberRegistrationCorrectionModeAction,
 } from 'actions/memberRegistrationActions';
 import {
   setHashLinkForNewRegistrationAction,
@@ -113,12 +114,12 @@ class SplashPage extends Component {
     const id = getParameterByName('id');
     const secretCode = getParameterByName('secretCode');
     const redirectToRoute = getParameterByName('fromRoute');
-
+    const mode = getParameterByName('mode');
     if (redirectToRoute) {
       this.setRedirectToRoute(redirectToRoute);
     }
     if (id && secretCode) {
-      this.fetchMemberByURLParams(id, secretCode);
+      this.fetchMemberByURLParams({ id, secretCode, mode});
     }
   }
 
@@ -169,10 +170,11 @@ class SplashPage extends Component {
    * @param {String} id
    * @param {String} secretCode
    */
-  fetchMemberByURLParams = (id, secretCode) => {
+  fetchMemberByURLParams = ({ id, secretCode, mode}) => {
     const { setMemberCredentials, fetchMemberData, setMemberFetchedFromUrlParams } = this.props;
     setMemberFetchedFromUrlParams();
     setMemberCredentials({ id, secretKey: secretCode });
+    this.props.setMemberRegistrationCorrectionMode({ mode });
     fetchMemberData({ id, secretKey: secretCode });
     this.setState({
       isURLParams: true,
@@ -366,6 +368,7 @@ const mapDispatchToProps = dispatch => ({
   loginAdmin: ({ adminId, adminPassword, preStoredAdminCredentials }) => dispatch(loginAdminAction({ adminId, adminPassword, preStoredAdminCredentials })),
   setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
   resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
+  setMemberRegistrationCorrectionMode: ({ mode }) => dispatch(setMemberRegistrationCorrectionModeAction({ mode })),
 });
 
 export default connect(
