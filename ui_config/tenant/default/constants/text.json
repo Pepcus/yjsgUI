@@ -207,5 +207,7 @@
 
   "MEMBERS_MUST_BE_LESS_THAN_SIX": "Members must be under 6",
 
-  "INVALID_CITY_MESSAGE": "Invalid City"
+  "INVALID_CITY_MESSAGE": "Invalid City",
+
+  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य"
 }

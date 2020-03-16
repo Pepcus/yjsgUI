@@ -17,6 +17,7 @@ import { createUserAction, editUserAction, patchUserAction } from 'actions/userA
 import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers } from 'reducers/userReducer';
 import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
 import ErrorPopup from 'components/routeComponents/userRegistration/ErrorPopup';
+import { convertAgeToNumeric } from 'utils/common/string';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -71,7 +72,6 @@ class UserRegistration extends Component {
             mobile: user.mobile,
             age: user.age,
             isWhatsApp: user.isWhatsApp,
-            foodOpt: user.foodOpt,
           };
         }
       });
@@ -85,16 +85,14 @@ class UserRegistration extends Component {
       city,
       mobile,
       age,
-      isWhatApp,
-      foodOpt,
+      isWhatsApp,
     } = this.state.formData;
     if (this.state.userSelected.name === name
       && this.state.userSelected.address === address
       && this.state.userSelected.city === city
       && this.state.userSelected.mobile === mobile
       && this.state.userSelected.age === age
-      && this.state.userSelected.isWhatApp === isWhatApp
-      && this.state.userSelected.foodOpt === foodOpt) {
+      && this.state.userSelected.isWhatsApp === isWhatsApp) {
       return false;
     }
     return true;
@@ -132,6 +130,7 @@ class UserRegistration extends Component {
     this.setState({
       formData: {
         ...data.formData,
+        age: data.formData.age ? convertAgeToNumeric(data.formData.age) : undefined,
       },
       hasError: !isEmpty(data.errors),
     });
@@ -144,8 +143,7 @@ class UserRegistration extends Component {
       && this.state.formData.age
       && this.state.formData.mobile
       && this.state.formData.city
-      && this.state.formData.isWhatsApp
-      && this.state.formData.foodOpt) {
+      && this.state.formData.isWhatsApp) {
       return false;
     }
     return true;

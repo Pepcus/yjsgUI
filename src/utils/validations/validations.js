@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape,security/detect-unsafe-regex */
 import isEmpty from 'lodash/isEmpty';
 import cloneDeep from 'lodash/cloneDeep';
+import { convertAgeToNumeric } from 'utils/common/string';
 
 export const numberOfPeopleValidator = (value, constants) => {
   const { MEMBERS_MUST_BE_GREATER_THAN_ZERO, MEMBERS_MUST_BE_LESS_THAN_SIX } = constants;
@@ -312,4 +313,29 @@ export const isObjectsEqual = ({ object1, object2 }) => {
     }
   }
   return isEqualObject;
+};
+
+export const ageValidatorWithNoUpperLimit = (value, constants) => {
+  const { ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE, ONLY_NUMBERS_ALLOWED_MESSAGE } = constants;
+  let temporaryValue = !value ? null : String(value);
+  let message = '';
+
+  if (!isEmpty(temporaryValue)) {
+    temporaryValue = convertAgeToNumeric(temporaryValue);
+  }
+
+  if (isEmpty(temporaryValue)) {
+    message = '';
+
+  } else if (temporaryValue < 8) {
+    message = ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE;
+
+  } else if (isNaN(temporaryValue)) {
+    message = ONLY_NUMBERS_ALLOWED_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
 };
