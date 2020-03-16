@@ -43,5 +43,13 @@
 
   "SEARCH_PAGE_HEADING": "कर्मकांड शिविर के रजिस्ट्रेशन में आपका स्वागत है",
 
-  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य"
+  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य",
+
+  "INVALID_NAME_MESSAGE": "अमान्य नाम",
+
+  "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "नाम ३ अक्षर से कम का मान्य नहीं",
+
+  "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. में केवल नंबर ही मान्य",
+
+  "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. केवल १० अंको का ही मान्य"
 }

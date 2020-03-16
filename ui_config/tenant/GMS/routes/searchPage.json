@@ -173,7 +173,8 @@
       "properties": {
         "name": {
           "title": "नाम",
-          "type": "string"
+          "type": "string",
+          "customValidation": "nameValidator"
         }
       }
     },
