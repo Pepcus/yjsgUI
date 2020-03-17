@@ -1,0 +1,55 @@
+{
+  "INDORE_CITY": "Indore",
+
+  "OTHER_CITY": "Other",
+
+  "REGISTRATION_COMPLETE_MESSAGE_1": "गोम्मटसार कर्मकांड शिविर - II के लिए रजिस्ट्रेशन कराने के लिए धन्यवाद | आपका फॉर्म चयन समिति को भेज दिया गया है | हम कुछ दिनों में आपको सूचित करेंगे कि शिविर हेतु आपका चयन हुआ है अथवा नहीं |",
+
+  "REGISTRATION_COMPLETE_MESSAGE_2": "यदि आप का चयन नहीं होता है और आपने रजिस्ट्रेशन शुल्क ₹100 जमा किया है तो वह आपके नंबर पर लौटा दिया जाएगा।",
+
+  "REGISTRATION_COMPLETE_MESSAGE_3": "तब तक आप कर्मों के नाम और बंध व्युच्छित्ति को याद करें | इनके विडियो देखने के लिए ओपन करें - ",
+
+  "PARTIAL_REGISTRATION_MESSAGE_1": "शिविर का रजिस्ट्रेशन शुल्क ₹100 है।",
+
+  "PARTIAL_REGISTRATION_MESSAGE_2": "कृपया यह शुल्क paytm नंबर 09893951912 पर भेजें। शुल्क भरने के बाद इसी नंबर पर अपना नाम और फोन नंबर WhatsApp पर भेजें।",
+
+  "PARTIAL_REGISTRATION_MESSAGE_3": "शुल्क प्राप्त होने के बाद आप इसी वेबसाइट पर रजिस्ट्रेशन कर सकेंगे।",
+
+  "PENDING": "pending",
+
+  "REGISTRATION_FAILED_MESSAGE": "Some Error Occurred while registering the student. Please contact Administrator.",
+
+  "NEW_REGISTRATION": "Register A New Person",
+
+  "VIDEO_LINK": "www.youtube.com/c/jainkosh",
+
+  "PARTIAL": "Partial",
+
+  "COMPLETE": "Complete",
+
+  "USER_LIST_HEADING": "नीचे दी गयी सूचि में से चुनें अथवा नए व्यक्ति का रजिस्ट्रेशन करें |",
+
+  "POPUP_BUTTON_TEXT": "Finish",
+
+  "REGISTRATION_COMPLETE_INDORE_MESSAGE_1": "गोम्मटसार कर्मकांड शिविर - II के लिए रजिस्ट्रेशन कराने के लिए धन्यवाद | आपका फॉर्म हमें प्राप्त हो गया है|",
+
+  "REGISTRATION_COMPLETE_INDORE_MESSAGE_2": "शिविर की तैयारी के लिए आप कर्मों के नाम और बंध व्युच्छित्ति को याद करें | इनके विडियो देखने के लिए ओपन करें - ",
+
+  "REGISTRATION_COMPLETE_INDORE_MESSAGE_3": "अधिक जानकारी के लिए आप श्री विमलचंदजी छाबड़ा को 94244-14796 पर संपर्क कर सकते हैं|",
+
+  "EVENT_DATE": "दिनांक: 23 मई 2020, शनिवार से 31 मई 2020, रविवार तक",
+
+  "EVENT_VENUE": "स्थान: मोदीजी की नसिया, इंदौर (म.प्र.)",
+
+  "SEARCH_PAGE_HEADING": "कर्मकांड शिविर के रजिस्ट्रेशन में आपका स्वागत है",
+
+  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य",
+
+  "INVALID_NAME_MESSAGE": "अमान्य नाम",
+
+  "NAME_LESS_THAN_THREE_CHARACTERS_NOT_VALID_MESSAGE": "नाम ३ अक्षर से कम का मान्य नहीं",
+
+  "ONLY_NUMBER_IS_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. में केवल नंबर ही मान्य",
+
+  "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. केवल १० अंको का ही मान्य"
+}

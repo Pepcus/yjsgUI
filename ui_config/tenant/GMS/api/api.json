@@ -1,0 +1,45 @@
+{
+  "config": {
+    "defaultHeaders": {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    },
+    "defaultBaseUrl": ""
+  },
+  "apis": {
+    "user": {
+      "createUser": {
+        "method": "POST",
+        "url": "api/gms/students",
+        "headers": {
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
+      },
+      "editUser": {
+        "method": "PUT",
+        "url": "api/gms/students/${id}",
+        "headers": {
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
+      },
+      "patchUser": {
+        "method": "PATCH",
+        "url": "api/gms/students/registration-status/${id}",
+        "headers": {
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
+      },
+      "fetchUserFromPhone": {
+        "method": "GET",
+        "url": "api/gms/students/phone/${phoneNumber}",
+        "headers": {
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
+      }
+    }
+  }
+}

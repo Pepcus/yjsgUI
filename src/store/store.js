@@ -8,10 +8,17 @@ import rootReducer from '../reducers/rootReducer';
 import sagas from '../sagas/index';
 
 
-const persistedState = (
-  localStorage.getItem('reduxState')
-    ? JSON.parse(localStorage.getItem('reduxState')) : {}
-);
+let persistedState = {};
+
+if (window.localStorage.getItem('reduxState')) {
+  persistedState = JSON.parse(window.localStorage.getItem('reduxState'));
+
+  delete persistedState.api;
+  delete persistedState.appConfig;
+  delete persistedState.config;
+}
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
@@ -31,7 +38,7 @@ store.subscribe(() => {
   // Make a clone, don't accidentally mutate the store
   const stateCopy = cloneDeep(state);
   // Make sure to never persist Workflow navigation or UI state
-  localStorage.setItem('reduxState', JSON.stringify(stateCopy));
+  window.localStorage.setItem('reduxState', JSON.stringify(stateCopy));
 });
 
 sagaMiddleware.run(sagaWatchers);

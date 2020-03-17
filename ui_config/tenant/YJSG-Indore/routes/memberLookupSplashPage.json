@@ -1,0 +1,129 @@
+{
+  "memberRegistrationQueryFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": ["isMemberAlreadyRegistered"],
+      "properties": {
+        "isMemberAlreadyRegistered": {
+          "type": "string",
+          "title": "क्या आपने पिछले वर्षो में सन्मति स्कूल YJSG शिविर में रजिस्ट्रेशन किया है ?",
+          "enum": [
+            "Y",
+            "N"
+          ],
+          "enumNames": [
+            "हाँ",
+            "नहीं"
+          ]
+        }
+      },
+      "dependencies": {
+        "isMemberAlreadyRegistered": {
+          "oneOf": [
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "Y"
+                  ]
+                },
+                "helpText": {
+                  "title": "आपका रजिस्टर्ड मोबाइल नंबर*",
+                  "type": "object"
+                },
+                "mobile": {
+                  "title": "मोबाइल नं",
+                  "type": "string",
+                  "customValidation": "mobileValidator"
+                }
+              }
+            },
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "N"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "uiSchema": {
+      "isMemberAlreadyRegistered": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true,
+          "col": {
+            "padding": "0 10px 0 10px"
+          },
+          "boxProps": {
+            "backgroundColor": "unset"
+          }
+        }
+      },
+      "mobile": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 12
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "data": {},
+    "defaultMemberDataFormat": [
+      {
+        "formField": "isMemberAlreadyRegistered",
+        "dataType": "string"
+      },
+      {
+        "formField": "mobile",
+        "dataType": "string"
+      }
+    ]
+  },
+  "memberOptInGridMetaData": {
+    "headerConfig": [
+      {
+        "label": "इस वर्ष",
+        "key": "optIn",
+        "disableFilter": true,
+        "customComponent": "MemberOptInGridSelectionRadio",
+        "excludeFromExport": true
+      },
+      {
+        "label": "आई.डी.",
+        "key": "id",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "नाम",
+        "key": "name",
+        "emptyCells": "NA",
+        "disableFilter": true
+      },
+      {
+        "label": "पिता",
+        "key": "fatherName",
+        "emptyCells": "NA",
+        "disableFilter": true
+      }
+    ]
+  }
+}

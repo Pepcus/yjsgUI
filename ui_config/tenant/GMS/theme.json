@@ -1,0 +1,86 @@
+{
+  "colors": {
+    "header": "#5864FB",
+    "smallHeader": "#f6c458"
+  },
+  "typography": {
+    "mapping": {
+      "heading": "h5"
+    },
+    "root": {
+      "fontFamily": "'Poppins', sans-serif"
+    },
+    "titleFieldColor": {
+      "color": "#4c4c4c"
+    }
+  },
+  "home": {
+    "backgroundColor": "rgba(244, 233, 227, 0.21176470588235294)"
+  },
+  "palette": {
+    "advancedSearch": {
+      "color": "#f8f8f8"
+    },
+    "primary": {
+      "borderColor": "#d24c0c",
+      "color": "#d24c0c",
+      "dark": "#010306",
+      "gradientColor": "linear-gradient(to top, #f9570a, #f9570a)",
+      "light": "#d24c0c",
+      "text": "#FFFFFF"
+    },
+    "secondary": {
+      "borderColor": "#d24c0c",
+      "color": "#FFFFFF",
+      "dark": "#010306",
+      "gradientColor": "linear-gradient(to top, #FFFFFF, #FFFFFF)",
+      "light": "#d24c0c",
+      "text": "#d24c0c"
+    },
+    "tertiary": {
+      "borderColor": "#dbd7d6",
+      "color": "#dbd7d6",
+      "dark": "#010306",
+      "gradientColor": "linear-gradient(to top, #ebebec, #ebebec)",
+      "light": "#dbd7d6",
+      "text": "#010306"
+    },
+    "popup": {
+      "borderColor": "#f9570a",
+      "color": "#dbd7d6",
+      "dark": "#010306",
+      "light": "#dbd7d6",
+      "text": "#010306",
+      "backgroundColor": "#f9570a"
+    },
+    "transparent": {
+      "color": "rgba(255, 255, 255, 0.69)"
+    },
+    "modal": {
+      "borderColor": "#898787",
+      "color": "#f8f8f8",
+      "dark": "#010306",
+      "light": "#f8f8f8"
+    },
+    "checkbox": {
+      "color": "#898787"
+    },
+    "footer": {
+      "color": "#898787",
+      "backgroundColor": "#ebebec",
+      "borderColor": "#ebebec"
+    },
+    "idCard": {
+      "colors": "#F57F17"
+    }
+  },
+  "effects": {
+    "inputFocus": {
+      "&:focus": {
+        "outline": "none",
+        "borderColor": "#F57F17",
+        "boxShadow": "inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(246, 196, 88, 0.5)"
+      }
+    }
+  }
+}

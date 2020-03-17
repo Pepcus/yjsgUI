@@ -1,118 +1,147 @@
 {
   "B0": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Gandhi Nagar Mandir"
   },
   "B1": {
     "coordinatorName": "Shweta Bandi",
-    "contactNumber": "9098521320"
+    "contactNumber": "9098521320",
+    "busStop": "Kalani Mandir Gali Main Road"
   },
   "B2": {
     "coordinatorName": "Kamal Ved",
-    "contactNumber": "9826029062"
+    "contactNumber": "9826029062",
+    "busStop": "Kaalani Nagar Mandir Gali Main Road - 2"
   },
   "B3": {
     "coordinatorName": "Akhilesh Jain",
-    "contactNumber": "7000526089"
+    "contactNumber": "7000526089",
+    "busStop": "Sadhna Nagar Mandir Gali Main Road"
   },
   "B4": {
     "coordinatorName": "Pragati Ji / Swapnil Ji",
-    "contactNumber": "9981722975/7000211153"
+    "contactNumber": "9981722975/7000211153",
+    "busStop": "Anjani Nagar (60 Ft Road)"
   },
   "B5": {
     "coordinatorName": "Dr. Bahubali Jain",
-    "contactNumber": "9827622779"
+    "contactNumber": "9827622779",
+    "busStop": "Smarati Nagar Mandir Gali Bangarda Road"
   },
   "B6": {
     "coordinatorName": "Rupali Ajmera",
-    "contactNumber": "9425480983"
+    "contactNumber": "9425480983",
+    "busStop": "Palhar Nagar Bangada Road (Pani Ki Tanki)"
   },
   "B7": {
     "coordinatorName": "Rajul JI / Nilesh JI",
-    "contactNumber": "9425959469"
+    "contactNumber": "9425959469",
+    "busStop": "Indore Wire Factory (Sangam Nagar)"
   },
   "B8": {
     "coordinatorName": "Rohit Patni / Vidhi",
-    "contactNumber": "8224000012"
+    "contactNumber": "8224000012",
+    "busStop": "Ramchand Nagar Circle (Areodrum Rd)"
   },
   "B9": {
     "coordinatorName": "Poorvi Jain",
-    "contactNumber": "9098268521"
+    "contactNumber": "9098268521",
+    "busStop": "Chatrapati Nagar Main Road (Mahavir Bag)"
   },
   "B10": {
     "coordinatorName": "Archesh / Ankit",
-    "contactNumber": "9425353721"
+    "contactNumber": "9425353721",
+    "busStop": "Bada Ganpati"
   },
   "B11": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Raj Mohalla Opp. Chetyalaya"
   },
   "B12": {
     "coordinatorName": "Monika Ajmera",
-    "contactNumber": "9926793624"
+    "contactNumber": "9926793624",
+    "busStop": "Ramashah Mandir Main Road"
   },
   "B13": {
     "coordinatorName": "Kushagra",
-    "contactNumber": "9907573845"
+    "contactNumber": "9907573845",
+    "busStop": "Kanch Mandir Main Road (Narsign Bajar)"
   },
   "B14": {
     "coordinatorName": "Virendra Jain",
-    "contactNumber": "9826024105"
+    "contactNumber": "9826024105",
+    "busStop": "Ram Bag Choraha Kusum Takiz Road"
   },
   "B15": {
     "coordinatorName": "Nutan Jain",
-    "contactNumber": "9826999090"
+    "contactNumber": "9826999090",
+    "busStop": "Chikmanglur Chauraha"
   },
   "B16": {
     "coordinatorName": "Ayush Jhanjhri",
-    "contactNumber": "9907523746"
+    "contactNumber": "9907523746",
+    "busStop": "GSITS Circle"
   },
   "B17": {
     "coordinatorName": "Nilesh Aruna Jain",
-    "contactNumber": "7389314415"
+    "contactNumber": "7389314415",
+    "busStop": "Clerk Colony ITI Main Road"
   },
   "B18": {
     "coordinatorName": "Shailesh Jain",
-    "contactNumber": "9424081546"
+    "contactNumber": "9424081546",
+    "busStop": "Bajrang/Nanda Nagar Main Road (Mandir)"
   },
   "B19": {
     "coordinatorName": "Neelam Badjatya",
-    "contactNumber": "8770661844"
+    "contactNumber": "8770661844",
+    "busStop": "Sukhaliya MR10 Mandir Gali"
   },
   "B20": {
     "coordinatorName": "Dr. Bahubali Jain",
-    "contactNumber": "9827622779"
+    "contactNumber": "9827622779",
+    "busStop": "Vijay Nagar - Krishna Milk Centre"
   },
   "B21": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "78 Scheme (Mandir)"
   },
   "B22": {
     "coordinatorName": "Rachna Jain",
-    "contactNumber": "8319140105"
+    "contactNumber": "8319140105",
+    "busStop": "Satya Sai Square(Paanch Baalyati Mandir)"
   },
   "B23": {
     "coordinatorName": "Anchal Jain",
-    "contactNumber": "8889998846"
+    "contactNumber": "8889998846",
+    "busStop": "Tulsi Nagar Main Road(Mahalaxmi Mandir)"
   },
   "B24": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Jawrawala Mandir"
   },
   "B25": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Samavsharan Mandir"
   },
   "B26": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": "Geeta Bhawan"
   },
   "B27": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop":  "Palasia Circle"
   },
   "SELF": {
     "coordinatorName": "",
-    "contactNumber": ""
+    "contactNumber": "",
+    "busStop": ""
   }
 }

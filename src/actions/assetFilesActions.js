@@ -1,4 +1,3 @@
-
 export const fetchFilesConfigAction = () => ({
   type: 'FETCH_FILES_CONFIG_ACTION',
 });
@@ -13,13 +12,6 @@ export const fetchFileConfigFailedAction = errorMessage => ({
   errorMessage,
 });
 
-export const loadAppDataAction = () => ({
-  type: 'LOAD_APP_DATA_ACTION',
-});
-export const loadBusCoordinatorsDataAction = () => ({
-  type: 'LOAD_BUS_COORDINATORS_DATA_ACTION',
-});
-
 export const loadBusCoordinatorsDataSuccessAction = busCoordinators => ({
   type: 'LOAD_BUS_COORDINATORS_DATA_SUCCESS_ACTION',
   busCoordinators,
@@ -29,6 +21,7 @@ export const loadBusCoordinatorsDataFailedAction = errorMessage => ({
   type: 'LOAD_BUS_COORDINATORS_DATA_FAILED_ACTION',
   errorMessage,
 });
+
 export const loadedAppDataSuccessAction = modeVariable => ({
   type: 'LOADED_APP_DATA_SUCCESS_ACTION',
   modeVariable,
@@ -38,4 +31,3 @@ export const loadAppDataFailedAction = errorMessage => ({
   type: 'LOAD_APP_DATA_FAILED_ACTION',
   errorMessage,
 });
-

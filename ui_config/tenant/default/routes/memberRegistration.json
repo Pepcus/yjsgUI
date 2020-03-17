@@ -1,0 +1,402 @@
+{
+  "registrationFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "fullName",
+        "email",
+        "phoneNumber",
+        "numberOfPeople",
+        "address",
+        "myProducts"
+      ],
+      "properties": {
+        "fullName": {
+          "title": "Full Name",
+          "type": "object",
+          "required": [
+            "firstName",
+            "lastName"
+          ],
+          "properties": {
+            "firstName": {
+              "title": "First Name",
+              "type": "string",
+              "customValidation": "nameValidator"
+            },
+            "lastName": {
+              "title": "Last Name",
+              "type": "string",
+              "customValidation": "nameValidator"
+            }
+          }
+        },
+        "email": {
+          "title": "E-mail",
+          "type": "string",
+          "customValidation": "optionalEmailValidator"
+        },
+        "phoneNumber": {
+          "title": "Phone Number",
+          "type": "object",
+          "required": [
+            "areaCode",
+            "phoneNumber"
+          ],
+          "properties": {
+            "areaCode": {
+              "title": "Area Code",
+              "type": "number"
+            },
+            "phoneNumber": {
+              "title": "Phone Number",
+              "type": "number",
+              "customValidation": "mobileValidator"
+            }
+          }
+        },
+        "numberOfPeople": {
+          "title": "Number of people attending",
+          "type": "number",
+          "customValidation": "numberOfPeopleValidator"
+        },
+        "address": {
+          "title": "Address",
+          "type": "object",
+          "required": [
+            "streetAddress",
+            "streetAddressLine2",
+            "city",
+            "stateOrProvince",
+            "postalOrZipCode",
+            "country"
+          ],
+          "properties": {
+            "streetAddress": {
+              "title": "Street Address",
+              "type": "string"
+            },
+            "streetAddressLine2": {
+              "title": "Street Address Line 2",
+              "type": "string"
+            },
+            "city": {
+              "title": "City",
+              "type": "string"
+            },
+            "stateOrProvince": {
+              "title": "State / Province",
+              "type": "string"
+            },
+            "postalOrZipCode": {
+              "title": "Postal / Zip Code",
+              "type": "string"
+            },
+            "country": {
+              "title": "Country",
+              "type": ["string","null"],
+              "enum": [
+                "United States",
+                "Afghanistan",
+                "Albania",
+                "Algeria",
+                "American Samoa",
+                "Andorra",
+                "Angola",
+                "Anguilla",
+                "Antigua and Barbuda",
+                "Argentina",
+                "Armenia",
+                "Aruba",
+                "Australia",
+                "Austria",
+                "Azerbaijan",
+                "The Bahamas",
+                "Bahrain",
+                "Bangladesh",
+                "India",
+                "Indonesia"
+              ]
+            }
+          }
+        },
+        "myProducts": {
+          "title": "My Products",
+          "type": "object",
+          "properties": {
+            "option1": {
+              "type": "boolean",
+              "title": "Conference Full-Access w/ Dinner (member) $ 125.00",
+              "default": false
+            },
+            "option2": {
+              "type": "boolean",
+              "title": " Conference Full-Access w/ Dinner (non-member) $ 150.00",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "uiSchema": {
+      "fullName": {
+        "firstName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "lastName": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "email": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 12,
+              "lg": 12
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "phoneNumber": {
+        "areaCode": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "number",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "phoneNumber": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "fieldStyle": {
+                "height": "auto"
+              }
+            },
+            "type": "number",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "address": {
+        "streetAddress": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 12,
+                "lg": 12
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "streetAddressLine2": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 12,
+                "lg": 12
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "city": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "stateOrProvince": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "postalOrZipCode": {
+          "ui:field": "InputField",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        },
+        "country":  {
+          "ui:field": "SelectList",
+          "ui:options": {
+            "style": {
+              "titleStyle": {
+              },
+              "fieldStyle": {
+                "height": "35px"
+              }
+            },
+            "type": "string",
+            "col": {
+              "size": {
+                "xs": 12,
+                "sm": 12,
+                "md": 6,
+                "lg": 6
+              },
+              "padding": "0 10px 0 10px"
+            }
+          }
+        }
+      },
+      "numberOfPeople": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    }
+  }
+}

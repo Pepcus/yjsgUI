@@ -1,0 +1,121 @@
+{
+  "memberRegistrationQueryFormConfig": {
+    "schema": {
+      "type": "object",
+      "required": ["isMemberAlreadyRegistered"],
+      "properties": {
+        "isMemberAlreadyRegistered": {
+          "type": "string",
+          "title": "क्या आपने पिछले वर्षो में सन्मति स्कूल YJSG शिविर में रजिस्ट्रेशन किया है ?",
+          "enum": [
+            "Y",
+            "N"
+          ],
+          "enumNames": [
+            "हाँ",
+            "नहीं"
+          ]
+        }
+      },
+      "dependencies": {
+        "isMemberAlreadyRegistered": {
+          "oneOf": [
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "Y"
+                  ]
+                },
+                "id": {
+                  "title": "आई.डी.",
+                  "type": "string"
+                },
+                "mobile": {
+                  "title": "मोबाइल नं",
+                  "type": "string",
+                  "customValidation": "mobileValidator"
+                }
+              }
+            },
+            {
+              "properties": {
+                "isMemberAlreadyRegistered": {
+                  "enum": [
+                    "N"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "uiSchema": {
+      "isMemberAlreadyRegistered": {
+        "ui:widget": "radio",
+        "ui:options": {
+          "inline": true,
+          "col": {
+            "padding": "15px 50px 5px 50px"
+          }
+        }
+      },
+      "mobile": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "id": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "data": {},
+    "defaultMemberDataFormat": [
+      {
+        "formField": "isMemberAlreadyRegistered",
+        "dataType": "string"
+      },
+      {
+        "formField": "id",
+        "dataType": "string"
+      },
+      {
+        "formField": "mobile",
+        "dataType": "string"
+      }
+    ]
+  }
+}

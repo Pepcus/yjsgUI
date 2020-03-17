@@ -1,103 +1,43 @@
-:root {
-    --tableGrid-row-border-bottom: 1px solid #cf4707;
-}
-
-.table-head {
-    background-color: #f2f2f4;
-}
-.data-grid div.content .table {
-    text-align: center !important;
-    padding:0 10px;
-    margin-bottom: 20px;
-}
-.data-grid div.content .table {
-    width: auto;
-    max-width: 100%;
-}
-.render-table {
-    padding: 0 !important;
-    margin: 16px 0 0 !important;
-    width: auto;
-    max-width: 100%;
-    text-align: left;
-    display: inline-grid !important;
-}
-.header-column {
-    border-right: 0px solid #c2c1bf !important;
-    border-left: 1px solid #c2c1bf !important;
-    border-bottom: 0.7px solid #e8e8ea !important;
-    cursor:pointer;
-    border-top: 0px !important;
-    width: 100% !important;
-    overflow: hidden !important;
-    background-color: rgb(242, 242, 244) !important;
-}
-.filter-column {
-    margin: 0px 0px 0 0 !important;
-    padding:5px;
-    clear: both !important;
-    overflow: hidden !important;
-    height:auto !important;
-    width: auto !important;
-}
-.table-cell {
-    font-size: 14px;
-    color: rgb(76, 76, 76) !important;
-    /*padding:5px 10px !important;*/
-    height:auto !important;
-    border-right: 0px;
-    border-top: 0px;
-    border: none !important;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    width: auto;
-}
-.row {
-
-    overflow: hidden;
-    width: 100%;
-    /*min-width:50px;*/
-    display: flex;
-    align-items: center;
-    /*border: 1px solid #9e4200 !important;*/
-    border-bottom: var(--tableGrid-row-border-bottom);
-    /*border-top: 0px solid #c2c1bf !important;*/
-    /*border-right: 0px solid #c2c1bf !important;*/
-    border-left: 1px solid #c2c1bf !important;
-    /* height: auto; */
-}
+/*  class added for table css */
 .wrapper-pagination-column-small-width {
     text-align:center;
     display:block !important;
 }
-.wrapper-pagination-column-large-width {
-    text-align:left;
-    display:inline-block;
-}
+
 .table-drawer-bottom-small-width {
     width:100% !important;
 }
+
 .table-drawer-bottom-large-width {
     width: auto !important;
 }
+
 .table-footer-cell-small-width {
     display:block !important;
     float:none;
     text-align:center !important;
     padding: 10px 0 8px !important;
 }
+
 .table-footer-cell-large-width {
     display:inline-block !important;
     float:right;
     text-align:right;
     padding: 13px 0 8px !important;
 }
+
 .render-table-column-mobile-width {
     display: grid !important;
 }
+
+.wrapper-pagination-column-large-width {
+    text-align:left;
+    display:inline-block;
+}
+
+/* Dynamic classes generated as per table cell label */
 .cell__name {
-    min-width:100px;
+    min-width:125px;
     max-width: 100%;
 }
 .cell__NAME {
@@ -105,13 +45,27 @@
     max-width: 100%;
 }
 .cell__fatherName {
-    min-width: 145px;
+    min-width: 100px;
     max-width: 100%;
 }
 .cell__Father {
     min-width: 163px;
     max-width:100%;
 }
+
+.cell__optIn {
+    min-width: 110px;
+    max-width:100%;
+}
+.cell__id {
+    min-width: 65px;
+    max-width:100%;
+}
+.cell__marks2020 {
+    min-width: 105px;
+    max-width:100%;
+}
+
 .cell__mobile> div.table-cell {
    font-family: sans-serif;
 }
@@ -121,15 +75,19 @@
 }
 .cell__gender {
     max-width: 75px;
+    min-width: 74px;
 }
 .cell__GENDER {
-    max-width: 88px;
+    max-width: 89px;
+    min-width: 88px;
 }
 .cell__age {
     max-width: 50px;
+    min-width: 49px;
 }
 .cell__AGE {
-    max-width: 60px;
+    max-width: 61px;
+    min-width: 60px;
 }
 .cell__age> div.table-cell {
      font-family: sans-serif;
@@ -140,58 +98,78 @@
 }
 .cell__education, .cell__EDUCATION {
     max-width: 120px;
+    min-width: 119px;
 }
-.cell__classAttended2016, .cell__classAttended2017 , .cell__attendance2016{
-    min-width:110px;
+.cell__classAttended2016, .cell__classAttended2017,
+.cell__classAttended2018, .cell__classAttended2019 ,
+.cell__attendance2016{
+    min-width:125px;
     max-width:100%;
 }
 .cell__edit {
-    max-width: 54px;
-}
-.cell__studentId, .cell__ID {
     max-width: 55px;
+    min-width: 54px;
 }
-.cell__studentId> div.table-cell {
+.cell__memberId, .cell__ID {
+    max-width: 55px;
+    min-width: 54px;
+}
+.cell__memberId> div.table-cell {
     font-family: sans-serif;
 }
 .cell__grid__select-column {
-    max-width: 50px;
+    max-width: 51px;
+    min-width: 50px;
 }
-.cell__marks2016, .cell__marks2017,.cell__marks2018, .cell__marks2019, .cell__optIn2018, .cell__optIn2019 {
-    min-width: 85px;
+.cell__marks2016, .cell__marks2017,
+.cell__marks2018, .cell__marks2019,
+.cell__optIn2018, .cell__optIn2019 {
+    min-width: 100px;
     max-width: 100%;
 }
-.cell__day1, .cell__day2, .cell__day3, .cell__day4, .cell__day5, .cell__day6, .cell__day7,  .cell__day8 {
-    max-width: 60px;
+.cell__day1, .cell__day2,
+.cell__day3, .cell__day4,
+.cell__day5, .cell__day6,
+.cell__day7,  .cell__day8 {
+    max-width: 61px;
+    min-width: 60px;
 }
 .cell__createdDate {
-    min-width: 96px;
+    min-width: 124px;
     max-width:100%;
 }
-.cell__lastModifiedDate, .cell__attendance2016, .cell__attendance2017, .cell__attendance2018,
-.cell__attendance2019, .cell__motherMobile, .cell__mobile {
+.cell__lastModifiedDate, .cell__attendance2016,
+.cell__attendance2017, .cell__attendance2018,
+.cell__attendance2019, .cell__motherMobile,
+.cell__mobile {
     max-width: 100px;
+    min-width: 99px;
 }
-.cell__classRoomNo2016, .cell__classRoomNo2017, .cell__classRoomNo2018, .cell__classRoomNo2019 {
-    max-width:140px;
+.cell__classRoomNo2016, .cell__classRoomNo2017,
+.cell__classRoomNo2018, .cell__classRoomNo2019 {
+    max-width:141px;
+    min-width:140px;
 }
-.cell__grid__select-column input[type = "checkbox"] {
-    height: 20px;
-    width: 20px;
+.cell__grid__select-column input[type = "checkbox"], input[type = "checkbox"] {
+    height: 19px;
+    width: 19px;
     cursor:pointer;
     box-shadow: none;
 }
 .cell__secretKey, .cell__remark, .cell__printStatus {
-    max-width: 88px;
+    max-width: 107px;
+    min-width: 105px;
 }
 .cell__busNumber {
-    max-width: 65px;
+    max-width: 66px;
+    min-width: 65px;
 }
 .cell__busStop {
     min-width: 250px;
 }
 .cell__occupation {
-    max-width: 108px;
+    max-width: 110px;
+    min-width: 108px;
 }
 .cell__field1, .cell__field2 {
     min-width: 100px;
@@ -202,14 +180,10 @@
 .cell__Employed {
     min-width: 110px;
 }
-.file-component .header-column, .file-component .row {
-    padding: 4px;
-}
+
 @media (max-width:990px) {
-    .btn-block input[type = "checkbox"] {
-        width:25px;
-    }
     .cell__edit {
         max-width: 52px;
+        min-width: 51px;
     }
 }

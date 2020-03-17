@@ -1,0 +1,89 @@
+{
+  "config": {
+    "defaultHeaders": {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    },
+    "defaultBaseUrl": ""
+  },
+  "apis": {
+    "login": {
+      "loginAdmin": {
+        "method": "POST",
+        "url": "v1/login"
+      }
+    },
+    "member": {
+      "getMember": {
+        "method": "GET",
+        "url": "v1/students/${id}"
+      },
+      "getMembers": {
+        "method": "GET",
+        "url": "v1/students"
+      },
+      "createMember": {
+        "method": "POST",
+        "url": "v1/students"
+      },
+      "deleteMember": {},
+      "updateMember": {
+        "method": "PUT",
+        "url": "v1/students/${id}"
+      },
+      "uploadAttendanceFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-attendance"
+      },
+      "uploadOptInFile": {
+        "method": "PATCH",
+        "url": "v1/students/bulk-optin"
+      },
+      "markMemberAttendance": {
+        "method": "PUT",
+        "url": "v1/students/attendance?id=${selectedMembersId}"
+      },
+      "markMemberOptStatus": {
+        "method": "PATCH",
+        "url": "v1/students/optin?id=${selectedMembersId}"
+      },
+      "markMemberIdCardStatus": {
+        "method": "PATCH",
+        "url": "v1/students/reprint?id=${selectedMembersId}"
+      },
+      "createSecondaryMember": {
+        "method": "POST",
+        "url": "v1/events"
+      },
+      "getMembersByMobileNumber": {
+        "method": "GET",
+        "url": "v1/students/phone/${mobile}",
+        "headers": {
+          "secretKey": 451725
+        }
+      },
+      "updateMembersOptIn": {
+        "method": "PATCH",
+        "url": "v1/students/optin?id=${selectedMembersId}",
+        "headers": {
+          "secretKey": 451725,
+          "Content-type": "application/json",
+          "Accept": "application/json"
+        }
+      }
+    },
+    "file": {
+      "fetchFile": {
+        "method": "GET",
+        "url": "files/${fileName}.${fileType}"
+      },
+      "fetchFileConfig": {
+        "method": "GET",
+        "url": "v1/documents",
+        "headers": {
+          "secretKey": 451725
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ErrorMessage from '../common/ErrorMessage';
-import {
-  PLEASE_SELECT_ANY_ONE_TEXT,
-} from '../../constants/text';
 
+import ErrorMessage from 'components/common/ErrorMessage';
+import { getConstants } from 'reducers/constants';
+
+/*
+  TODO: This component is deprecated.
+ */
 /**
  * SelectListInputField render dropdown list.
  * @type {Class}
@@ -37,6 +40,7 @@ class SelectListInputField extends Component {
 
   render() {
     const {
+      constants,
       name,
       value,
       label,
@@ -45,6 +49,9 @@ class SelectListInputField extends Component {
       disabled,
       style,
     } = this.props;
+    const {
+      PLEASE_SELECT_ANY_ONE_TEXT,
+    } = constants;
 
     const newLabel = isRequired ? `${label} * ` : label;
 
@@ -100,6 +107,7 @@ class SelectListInputField extends Component {
 }
 
 SelectListInputField.propTypes = {
+  constants: PropTypes.object,
   name: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -115,6 +123,7 @@ SelectListInputField.propTypes = {
 };
 
 SelectListInputField.defaultProps = {
+  constants: {},
   name: '',
   options: [],
   value: '',
@@ -126,4 +135,8 @@ SelectListInputField.defaultProps = {
   style: {},
 };
 
-export default SelectListInputField;
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
+
+export default connect(mapStateToProps, null)(SelectListInputField);

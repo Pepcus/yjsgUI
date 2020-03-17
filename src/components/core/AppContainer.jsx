@@ -1,85 +1,107 @@
-import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
+import {
+  HashRouter,
+  Route,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
-import Routes from './Routes';
-import { loadAppDataAction, loadBusCoordinatorsDataAction } from '../../actions/assetFilesActions';
-import { getApplicationMode, isAppLoaded, getIsAppLoadedError } from '../../reducers/assetFilesReducer';
-import { setAppColor } from '../../utils/dataGridUtils';
-import { ERROR_MESSAGE_OF_LOAD_APP_DATA } from '../../constants/text';
-import cssJSON from '../../config/cssVariables.json';
-import { setLoadingStateAction } from '../../actions/studentRegistrationActions';
+import Box from 'pepcus-core/lib/Box/index';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+import Typography from 'pepcus-core/lib/Typography';
+import { getThemeProps } from 'pepcus-core/utils/theme';
 
-const { development, production } = cssJSON;
+import {
+  isAppLoaded,
+  getIsAppLoadedError,
+} from 'reducers/assetFilesReducer';
+import {
+  isBootstrapComplete,
+} from 'reducers/app';
+import Routes from 'components/core/Routes';
+import { getConstants } from 'reducers/constants';
+
+const MessageBoxStyled = styled(Box)`
+    height: auto !important;
+    margin: 20px 10px;
+    color: ${getThemeProps('palette.text.color')};
+    padding: 15px 20px;
+    border: 1px solid ${getThemeProps('palette.action.disabledBackground')};
+    animation-name: column-message;
+    animation-duration: 0.7s;
+    transition: 0.3s all;
+    background: ${getThemeProps('palette.action.hover')};
+    width: 98%
+    ${({ theme }) => theme.media.down('lg')`
+        width: 95%
+    `}
+    ${({ theme }) => theme.media.down('md')`
+        line-height: 22px;
+        display: flex;
+    `}
+`;
 
 /**
  * AppContainer is the wrapper of application.
+ * @param {Object} constants
+ * @param {Boolean} isLoaded
+ * @param {Boolean} isAppLoadingFailed
+ * @param {Boolean} bootstrapFlag
+ * @return {HTML}
  */
-class AppContainer extends Component {
-  componentDidMount() {
-    this.props.loadBusCoordinatorsDataAction();
-    this.props.loadAppDataAction();
-    this.props.setLoadingStateAction(false);
-    if (this.props.isAppLoaded) {
-      setAppColor(this.props.mode === 'production' ? production : development);
-    }
+const AppContainer = ({
+  constants,
+  isLoaded,
+  isAppLoadingFailed,
+  bootstrapFlag,
+}) => {
+  const { ERROR_MESSAGE_OF_LOAD_APP_DATA } = constants;
+  if (isLoaded && !isAppLoadingFailed) {
+    return (
+      <HashRouter>
+        <Route path="/" component={Routes} />
+      </HashRouter>
+    );
+  } else if (isAppLoadingFailed || !bootstrapFlag) {
+    return (
+      <MessageBoxStyled>
+        <Typography type="caption" padding="0 15px 0 0">
+          <FaIcon icon={faExclamationTriangle} />
+        </Typography>
+        {ERROR_MESSAGE_OF_LOAD_APP_DATA}
+      </MessageBoxStyled>
+    );
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isAppLoaded) {
-      setAppColor(nextProps.mode === 'production' ? production : development);
-    }
-  }
-
-  render() {
-    if (this.props.isAppLoaded && !this.props.isAppLoadingFailed) {
-      return (
-        <HashRouter>
-          <Route path="/" component={Routes} />
-        </HashRouter>
-      );
-    } else if (this.props.isAppLoadingFailed) {
-      return (
-        <div>
-          <div className="empty-column-message">
-            <span className="circle-icon">
-              <i className="fa fa-exclamation-triangle" />
-            </span>
-            {ERROR_MESSAGE_OF_LOAD_APP_DATA}
-          </div>
-        </div>
-      );
-    }
-    return null;
-  }
-}
+  return null;
+};
 
 AppContainer.propTypes = {
-  loadAppDataAction: PropTypes.func,
-  setLoadingStateAction: PropTypes.func.isRequired,
-  loadBusCoordinatorsDataAction: PropTypes.func,
-  isAppLoaded: PropTypes.bool,
+  constants: PropTypes.object,
   isAppLoadingFailed: PropTypes.bool,
-  mode: PropTypes.string,
+  isLoaded: PropTypes.bool,
+  bootstrapFlag: PropTypes.bool,
 };
 
 AppContainer.defaultProps = {
-  loadAppDataAction: () => {},
-  loadBusCoordinatorsDataAction: () => {},
-  isAppLoaded: false,
+  constants: {},
   isAppLoadingFailed: false,
-  mode: '',
+  isLoaded: false,
+  bootstrapFlag: false,
 };
 
 const mapStateToProps = state => ({
-  mode: getApplicationMode(state),
-  isAppLoaded: isAppLoaded(state),
+  constants: getConstants(state),
   isAppLoadingFailed: getIsAppLoadedError(state),
+  isLoaded: isAppLoaded(state),
+  bootstrapFlag: isBootstrapComplete(state),
 });
 
-export default connect(mapStateToProps, {
-  loadAppDataAction,
-  loadBusCoordinatorsDataAction,
-  setLoadingStateAction,
-})(AppContainer);
+const mapDispatchToProps = () => ({
+});
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AppContainer);

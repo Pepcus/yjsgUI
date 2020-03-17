@@ -1,33 +1,55 @@
 import { takeLatest } from 'redux-saga/effects';
+
+import { bootstrapApplication } from './core/bootstrap';
 import {
-  createStudentSaga,
-  fetchStudentSaga,
-  getAllStudentsSaga,
-  markSelectedStudentsAttendanceSaga,
-  markSelectedStudentsOptInOrOptOutSaga,
+  createMemberSaga,
+  fetchMemberSaga,
+  getAllMembersSaga,
+  markSelectedMembersAttendanceSaga,
+  markSelectedMembersOptInOrOptOutSaga,
   parentsRegistrationSaga,
-  searchStudentSaga,
-  updateIdCardStatusSelectedStudentsSaga,
-  updateStudentSaga,
+  updateIdCardStatusSelectedMembersSaga,
+  updateMemberSaga,
   uploadAttendanceFileSaga,
   uploadOptInFileSaga,
-} from './rootSaga';
-import { fetchFilesConfigSaga, getAppConfigSaga, getBusCoordinatorsConfigSaga } from './assetFilesSaga';
+  fetchMembersByMobileNumberSaga,
+} from './member';
+
+import {
+  createUserSaga,
+  fetchUserFromPhoneSaga,
+  editUserSaga,
+  patchUserSaga,
+} from './user';
+import {
+  fetchFilesConfigSaga,
+} from './file';
+import { loginAdminSaga } from './login';
+import { updateMembersOptInStatusSaga } from 'sagas/member';
+
+const coreSagas = [
+  takeLatest('BOOTSTRAP_APPLICATION', bootstrapApplication),
+];
 
 const sagas = [
-  takeLatest(['CREATE_STUDENT'], createStudentSaga),
-  takeLatest(['FETCH_STUDENT'], fetchStudentSaga),
-  takeLatest(['UPDATE_STUDENT'], updateStudentSaga),
-  takeLatest(['FETCH_SEARCH_RESULTS'], searchStudentSaga),
-  takeLatest(['GET_ALL_STUDENTS'], getAllStudentsSaga),
+  ...coreSagas,
+  takeLatest(['CREATE_MEMBER'], createMemberSaga),
+  takeLatest(['FETCH_MEMBER'], fetchMemberSaga),
+  takeLatest(['UPDATE_MEMBER'], updateMemberSaga),
+  takeLatest(['GET_ALL_MEMBERS'], getAllMembersSaga),
   takeLatest(['UPLOAD_ATTENDANCE_FILE'], uploadAttendanceFileSaga),
   takeLatest(['UPLOAD_OPT_IN_FILE'], uploadOptInFileSaga),
-  takeLatest(['MARK_SELECTED_STUDENTS_ATTENDANCE'], markSelectedStudentsAttendanceSaga),
-  takeLatest(['MARK_SELECTED_STUDENTS_OPT_IN_OR_OPT_OUT'], markSelectedStudentsOptInOrOptOutSaga),
-  takeLatest(['UPDATE_ID_CARD_STATUS_OF_SELECTED_STUDENTS'], updateIdCardStatusSelectedStudentsSaga),
+  takeLatest(['MARK_SELECTED_MEMBERS_ATTENDANCE'], markSelectedMembersAttendanceSaga),
+  takeLatest(['MARK_SELECTED_MEMBERS_OPT_IN_OR_OPT_OUT'], markSelectedMembersOptInOrOptOutSaga),
+  takeLatest(['UPDATE_ID_CARD_STATUS_OF_SELECTED_MEMBERS'], updateIdCardStatusSelectedMembersSaga),
   takeLatest(['PARENTS_REGISTRATION'], parentsRegistrationSaga),
   takeLatest(['FETCH_FILES_CONFIG_ACTION'], fetchFilesConfigSaga),
-  takeLatest(['LOAD_APP_DATA_ACTION'], getAppConfigSaga),
-  takeLatest(['LOAD_BUS_COORDINATORS_DATA_ACTION'], getBusCoordinatorsConfigSaga),
+  takeLatest(['ADMIN_LOGIN'], loginAdminSaga),
+  takeLatest(['FETCH_MEMBERS_BY_MOBILE_NUMBER'], fetchMembersByMobileNumberSaga),
+  takeLatest(['UPDATE_MEMBERS_OPT_IN_STATUS'], updateMembersOptInStatusSaga),
+  takeLatest(['CREATE_USER_ACTION'], createUserSaga),
+  takeLatest(['UPDATE_USER_ACTION'], editUserSaga),
+  takeLatest(['PATCH_USER_ACTION'], patchUserSaga),
+  takeLatest(['FETCH_USER_FROM_PHONE_ACTION'], fetchUserFromPhoneSaga),
 ];
 export default sagas;

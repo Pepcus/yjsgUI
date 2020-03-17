@@ -1,0 +1,54 @@
+{
+  "adminLoginFormSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adminId": {
+          "title": "Admin ID",
+          "type": "string",
+          "default": "yjsgadmin"
+        },
+        "adminPassword": {
+          "title": "Admin Password",
+          "type": "string"
+        }
+      },
+      "required": ["adminId", "adminPassword"]
+    },
+    "uiSchema": {
+      "adminId": {
+        "ui:autofocus": true,
+        "ui:field": "InputField",
+        "ui:placeholder": "Enter Admin ID",
+        "ui:options": {
+          "type": "number",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "adminPassword": {
+        "ui:field": "InputField",
+        "ui:placeholder": "Enter Admin Password",
+        "ui:options": {
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 6
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      }
+    },
+    "data": {}
+  }
+}
