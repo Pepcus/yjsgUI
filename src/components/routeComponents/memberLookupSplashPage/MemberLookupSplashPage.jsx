@@ -69,12 +69,18 @@ const SubmitButtonStyled = styled(Button)`
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
-  height: 100%;
+  min-height: 100%;
   display: flex;
+  padding-top: 80px;
+  padding-bottom: 20px;
   @media (max-width: 992px) and (orientation: landscape) {
      width: auto;
      height: auto;
+     padding: unset;
     }
+  @media (max-width: 767.98px) {
+    padding: unset;
+  }
 `;
 
 const BoxStyled = styled(Box)`
@@ -412,7 +418,6 @@ class MemberLookupSplashPage extends Component {
         <BoxStyled
           width="600px"
           maxWidth="97%"
-          maxHeight="100%"
           margin="auto"
           borderStyle="none"
           elevation={5}

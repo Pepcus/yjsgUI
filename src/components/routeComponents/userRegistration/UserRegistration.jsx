@@ -54,7 +54,6 @@ class UserRegistration extends Component {
     this.state = {
       formConfig: props.config.registrationFormConfig,
       formData: {
-        city: props.searchData.city === props.constants.OTHER_CITY ? props.searchData.cityName : props.searchData.city,
         mobile: props.searchData.mobile,
       },
       hasError: props.searchData.mode !== 'Edit',
