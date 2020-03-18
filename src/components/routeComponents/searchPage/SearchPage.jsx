@@ -154,18 +154,8 @@ class SearchPage extends Component {
       selectedUser: this.state.selectedUser,
       mode: 'Edit',
     };
-    (this.props.users).forEach((user) => {
-      if (user.id === this.state.selectedUser) {
-        if ((user.paymentStatus).toLowerCase() === this.props.constants.PENDING) {
-          this.setState({
-            continueClicked: true,
-          });
-        } else {
-          this.props.storeSearchPageData(formData);
-          window.location.href = '#/user-registration';
-        }
-      }
-    });
+    this.props.storeSearchPageData(formData);
+    window.location.href = '#/user-registration';
   };
 
   renderContinueAndNewUserButton = () => {
