@@ -27,14 +27,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
-html, body, #root{
+html, body, #root, #root > div{
     height: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
-#root>div {
-    font-family: 'Poppins', sans-serif;
-}
 body {
     line-height: 1;
 }
@@ -91,9 +88,4 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-#root1 {
-    padding-bottom: 100px;
-    padding-top: 100px;
 }
