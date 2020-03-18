@@ -134,7 +134,6 @@
       },
       "city": {
         "ui:field": "InputField",
-        "ui:disabled": true,
         "ui:options": {
           "style": {
             "fieldStyle": {
