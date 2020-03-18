@@ -15,7 +15,6 @@ import Typography from 'pepcus-core/lib/Typography';
 import { getConstants } from 'reducers/constants';
 import { isEmpty } from 'pepcus-core';
 import {
-  createUserAction,
   fetchUserFromPhoneAction,
   setDefaultUserData,
   storeSearchPageData,
@@ -61,6 +60,10 @@ const TypographyHeadingStyled = styled(Typography)`
    margin-top: 25px;
 `;
 
+const TypographyFormHeadingStyled = styled(Typography)`
+   padding-left: 8px;
+`;
+
 class SearchPage extends Component {
   constructor(props) {
     super(props);
@@ -70,11 +73,8 @@ class SearchPage extends Component {
       formConfig: props.config.searchFormConfig,
       formData: {},
       hasError: true,
-      isNewRegistrationClicked: false,
       isPartialRegistrationSubmitClicked: false,
       isSubmitClicked: false,
-      partialFormData: {},
-      partialFormHasError: true,
       selectedUser: '',
       schema: props.config.searchFormConfig.schema,
       uiSchema: props.config.searchFormConfig.uiSchema,
@@ -95,18 +95,10 @@ class SearchPage extends Component {
 
   onChange = (data) => {
     this.props.setDefaultUserData();
-    let schema = this.state.formConfig.schema;
-    let uiSchema = this.state.formConfig.uiSchema;
-    if (data.formData.city) {
-      schema = this.state.formConfig.schemaWithMobile;
-      uiSchema = this.state.formConfig.uiSchemaWithMobile;
-    }
     this.setState({
       formData: data.formData,
       hasError: !isEmpty(data.errors),
       isSubmitClicked: false,
-      schema,
-      uiSchema,
     });
   };
 
@@ -205,8 +197,7 @@ class SearchPage extends Component {
 
   renderSubmitButton() {
     if ((this.props.users).length > 0
-      || this.state.isSubmitClicked
-      || !this.state.formData.city) {
+      || this.state.isSubmitClicked) {
       return null;
     }
     return (
@@ -227,90 +218,8 @@ class SearchPage extends Component {
   }
 
   handleNewRegistration = () => {
-    if (this.state.formData.city === this.props.constants.INDORE_CITY) {
-      this.handleSubmit();
-      window.location.href = '#/user-registration';
-    } else if (this.state.formData.city === this.props.constants.OTHER_CITY) {
-      this.setState({
-        isNewRegistrationClicked: true,
-      });
-    }
-  };
-
-  onChangePartialForm = (data) => {
-    this.setState({
-      partialFormData: data.formData,
-      partialFormHasError: !isEmpty(data.errors),
-    });
-  };
-
-  handlePartialFormSubmit = () => {
-    const data = {
-      ...this.state.formData,
-      ...this.state.partialFormData,
-      paymentStatus: 'Pending',
-    };
-    if (data.city === this.props.constants.OTHER_CITY) {
-      data.city = this.state.formData.cityName;
-    }
-    // Create New Student
-    this.props.createUserAction(data);
-    this.setState({
-      isPartialRegistrationSubmitClicked: true,
-    });
-  };
-
-  isPartialSubmitButtonDisabled = () => {
-    if (!isEmpty(this.state.partialFormData)
-      && !this.state.partialFormHasError) {
-      return false;
-    }
-    return true;
-  };
-
-  renderPartialUserForm = () => {
-    const { FieldTemplate } = fields;
-    const {
-      partialUserSchema,
-      partialUserUISchema,
-    } = this.state.formConfig;
-    if ((this.state.formData.city === this.props.constants.OTHER_CITY
-      && (this.props.users).length === 0
-      && this.state.isSubmitClicked)
-      || this.state.isNewRegistrationClicked) {
-      return (
-        <div>
-          <Form
-            enableDirtyCheck
-            externalSubmission
-            FieldTemplate={FieldTemplate}
-            fields={fields}
-            formData={this.state.partialFormData}
-            showErrorList={false}
-            validate={formValidators(partialUserSchema, this.props.constants)}
-            liveValidate
-            schema={partialUserSchema}
-            uiSchema={partialUserUISchema}
-            onChange={this.onChangePartialForm}
-            onSubmit={this.handlePartialFormSubmit}
-          />
-          <Row justify="center" margin="0 0 25px 0">
-            <Col size={{ xs: 12, sm: 12, md: 12, lg: 12 }} padding="10px 15px 10px 15px">
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button
-                  width="200px"
-                  onClick={this.handlePartialFormSubmit}
-                  disabled={this.isPartialSubmitButtonDisabled()}
-                >
-                  {this.props.constants.SUBMIT}
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      );
-    }
-    return null;
+    this.handleSubmit();
+    window.location.href = '#/user-registration';
   };
 
   closePopup = () => {
@@ -319,11 +228,8 @@ class SearchPage extends Component {
       continueClicked: false,
       formData: {},
       hasError: true,
-      isNewRegistrationClicked: false,
       isPartialRegistrationSubmitClicked: false,
       isSubmitClicked: false,
-      partialFormData: {},
-      partialFormHasError: true,
       selectedUser: '',
       schema: this.state.formConfig.schema,
       uiSchema: this.state.formConfig.uiSchema,
@@ -383,10 +289,17 @@ class SearchPage extends Component {
           <div
             style={{
               marginBottom: '10px',
+              marginTop: '10px',
               backgroundColor: 'rgb(248, 248, 248)',
               padding: '10px 0px 1px 0px',
             }}
           >
+            <TypographyFormHeadingStyled
+              type="title"
+              fontSize="16px"
+            >
+              {this.props.constants.SEARCH_PAGE_FORM_HEADING}
+            </TypographyFormHeadingStyled>
             <Form
               enableDirtyCheck
               externalSubmission
@@ -404,7 +317,6 @@ class SearchPage extends Component {
             {this.renderSubmitButton()}
             <div>{this.renderUserListContainer()}</div>
             {this.renderContinueAndNewUserButton()}
-            {this.renderPartialUserForm()}
           </div>
           <SuccessPopup
             isSubmitTriggered={this.state.isPartialRegistrationSubmitClicked}
@@ -423,7 +335,6 @@ class SearchPage extends Component {
 SearchPage.propTypes = {
   config: PropTypes.object,
   constants: PropTypes.object,
-  createUserAction: PropTypes.func,
   fetchUserFromPhoneAction: PropTypes.func,
   isUserCreated: PropTypes.bool,
   isUserFailed: PropTypes.bool,
@@ -435,8 +346,6 @@ SearchPage.propTypes = {
 SearchPage.defaultProps = {
   config: {},
   constants: {},
-  createUserAction: () => {
-  },
   fetchUserFromPhoneAction: () => {
   },
   isUserCreated: false,
@@ -456,7 +365,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createUserAction: formData => dispatch(createUserAction(formData)),
   fetchUserFromPhoneAction: formData => dispatch(fetchUserFromPhoneAction(formData)),
   storeSearchPageData: formData => dispatch(storeSearchPageData(formData)),
   setDefaultUserData: () => dispatch(setDefaultUserData()),

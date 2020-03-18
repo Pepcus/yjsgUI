@@ -74,31 +74,13 @@ const SuccessPopup = ({
           </Row>
         </Popup>
       );
-    } else if (messageOf === constants.COMPLETE && data.city === INDORE_CITY) {
-      return (
-        <Popup>
-          <Row width="100%" justify="center" margin="0">
-            <TextWrapper>{constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_1}</TextWrapper>
-            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_2, VIDEO_LINK)}</TextWrapper>
-            <TextWrapper>{constants.REGISTRATION_COMPLETE_INDORE_MESSAGE_3}</TextWrapper>
-            <Button
-              color="tertiary"
-              width="170px"
-              margin="10px 10px"
-              onClick={redirectToPreviousLocation}
-            >
-              {POPUP_BUTTON_TEXT}
-            </Button>
-          </Row>
-        </Popup>
-      );
     } else if (messageOf === constants.COMPLETE) {
       return (
         <Popup>
           <Row width="100%" justify="center" margin="0">
             <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_1}</TextWrapper>
-            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_2}</TextWrapper>
-            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_MESSAGE_3, VIDEO_LINK)}</TextWrapper>
+            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_MESSAGE_2, VIDEO_LINK)}</TextWrapper>
+            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_3}</TextWrapper>
             <Button
               color="tertiary"
               width="170px"

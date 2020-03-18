@@ -85,8 +85,7 @@ export function* fetchUserFromPhoneSaga(action) {
   const response = yield callAPIWithConfig(tenant, 'fetchUserFromPhone', config);
   yield put(fetchUserFromPhoneSuccess(response));
   yield put(setLoadingStateAction(false));
-  if (action.formData.city === 'Indore'
-    && response.length === 0) {
+  if (response.length === 0) {
     window.location.href = '#/user-registration';
   }
 }
