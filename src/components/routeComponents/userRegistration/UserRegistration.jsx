@@ -60,8 +60,8 @@ class UserRegistration extends Component {
       isSubmitTriggered: false,
       userSelected: {},
     };
-    if (this.props.searchData.selectedUser) {
-      (this.props.users).forEach((user) => {
+    if (props.searchData.selectedUser) {
+      (props.users).forEach((user) => {
         if (user.id === this.props.searchData.selectedUser) {
           this.state.userSelected = user;
           this.state.formData = {
@@ -75,6 +75,9 @@ class UserRegistration extends Component {
           };
         }
       });
+    }
+    if (!this.state.formData.mobile) {
+      this.redirectToPreviousLocation();
     }
   }
 
