@@ -49,5 +49,7 @@
 
   "ONLY_TEN_DIGITS_ARE_VALID_IN_MOBILE_NUMBER_MESSAGE": "मोबाइल नं. केवल १० अंको का ही मान्य",
 
-  "SEARCH_PAGE_FORM_HEADING": "कृपया रजिस्ट्रेशन करने के लिए अपना मोबाइल नंबर दीजिये!"
+  "SEARCH_PAGE_FORM_HEADING": "कृपया रजिस्ट्रेशन करने के लिए अपना मोबाइल नंबर दीजिये!",
+
+  "INVALID_CITY_MESSAGE": "अमान्य शहर"
 }
