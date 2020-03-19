@@ -70,7 +70,8 @@
               },
               "cityName": {
                 "title": "शहर का नाम",
-                "type": "string"
+                "type": "string",
+                "customValidation": "cityValidator"
               }
             },
             "required": [
