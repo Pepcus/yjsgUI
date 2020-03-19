@@ -15,7 +15,7 @@ const TextWrapper = styled(Typography)`
     font-size: 16px !important;
 `;
 
-const renderMessage = (message, VIDEO_LINK) => {
+const renderMessageWithVideoLink = (message, VIDEO_LINK) => {
   if (message) {
     const link = `https://${VIDEO_LINK}`;
     return (
@@ -25,6 +25,13 @@ const renderMessage = (message, VIDEO_LINK) => {
     );
   }
   return null;
+};
+
+const renderMessageBasedOnCity = (message, additionalMessage, data, cityName) => {
+  if (data.city !== cityName) {
+    return `${message} ${additionalMessage}`;
+  }
+  return message;
 };
 
 /**
@@ -52,6 +59,7 @@ const SuccessPopup = ({
     INDORE_CITY,
     POPUP_BUTTON_TEXT,
     VIDEO_LINK,
+    REGISTRATION_COMPLETE_ADDITIONAL_MESSAGE,
   } = constants;
 
   if ((isUserCreated && isSubmitTriggered)
@@ -78,8 +86,13 @@ const SuccessPopup = ({
       return (
         <Popup>
           <Row width="100%" justify="center" margin="0">
-            <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_1}</TextWrapper>
-            <TextWrapper>{renderMessage(constants.REGISTRATION_COMPLETE_MESSAGE_2, VIDEO_LINK)}</TextWrapper>
+            <TextWrapper>
+              {renderMessageBasedOnCity(constants.REGISTRATION_COMPLETE_MESSAGE_1,
+                REGISTRATION_COMPLETE_ADDITIONAL_MESSAGE, data, INDORE_CITY)}
+            </TextWrapper>
+            <TextWrapper>
+              {renderMessageWithVideoLink(constants.REGISTRATION_COMPLETE_MESSAGE_2, VIDEO_LINK)}
+            </TextWrapper>
             <TextWrapper>{constants.REGISTRATION_COMPLETE_MESSAGE_3}</TextWrapper>
             <Button
               color="tertiary"

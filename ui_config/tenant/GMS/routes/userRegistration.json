@@ -32,7 +32,14 @@
         "city": {
           "title": "शहर",
           "type": "string",
-          "customValidation": "cityValidator"
+          "enum": [
+            "Indore",
+            "Other"
+          ],
+          "enumNames": [
+            "इंदौर",
+            "कोई और शहर"
+          ]
         },
         "isWhatsApp": {
           "title": "दीये गए नंबर पर WhatsApp उपयोग",
@@ -46,9 +53,44 @@
             "नहीं"
           ]
         }
+      },
+      "dependencies": {
+        "city": {
+          "oneOf": [{
+            "properties": {
+              "city": {
+                "title": "शहर",
+                "type": "string",
+                "enum": [
+                  "Other"
+                ],
+                "enumNames": [
+                  "कोई और शहर"
+                ]
+              },
+              "cityName": {
+                "title": "शहर का नाम",
+                "type": "string",
+                "customValidation": "cityValidator"
+              }
+            },
+            "required": [
+              "cityName"
+            ]
+          }]
+        }
       }
     },
     "uiSchema": {
+      "ui:order": [
+        "name",
+        "age",
+        "mobile",
+        "address",
+        "city",
+        "cityName",
+        "isWhatsApp"
+      ],
       "name": {
         "ui:field": "InputField",
         "ui:options": {
@@ -133,6 +175,27 @@
         }
       },
       "city": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "cityName": {
         "ui:field": "InputField",
         "ui:options": {
           "style": {

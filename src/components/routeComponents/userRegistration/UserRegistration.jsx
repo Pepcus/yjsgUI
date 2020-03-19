@@ -60,20 +60,24 @@ class UserRegistration extends Component {
       isSubmitTriggered: false,
       userSelected: {},
     };
-    if (this.props.searchData.selectedUser) {
-      (this.props.users).forEach((user) => {
+    if (props.searchData.selectedUser) {
+      (props.users).forEach((user) => {
         if (user.id === this.props.searchData.selectedUser) {
           this.state.userSelected = user;
           this.state.formData = {
             name: user.name,
             address: user.address,
-            city: user.city,
+            city: user.city !== props.constants.INDORE_CITY ? this.props.constants.OTHER_CITY : user.city,
+            cityName: user.city !== props.constants.INDORE_CITY ? user.city : undefined,
             mobile: user.mobile,
             age: user.age,
             isWhatsApp: user.isWhatsApp,
           };
         }
       });
+    }
+    if (!this.state.formData.mobile) {
+      this.redirectToPreviousLocation();
     }
   }
 
@@ -85,10 +89,15 @@ class UserRegistration extends Component {
       mobile,
       age,
       isWhatsApp,
+      cityName,
     } = this.state.formData;
+    let cityString = city;
+    if (city === this.props.constants.OTHER_CITY) {
+      cityString = cityName;
+    }
     if (this.state.userSelected.name === name
       && this.state.userSelected.address === address
-      && this.state.userSelected.city === city
+      && this.state.userSelected.city === cityString
       && this.state.userSelected.mobile === mobile
       && this.state.userSelected.age === age
       && this.state.userSelected.isWhatsApp === isWhatsApp) {
@@ -102,6 +111,9 @@ class UserRegistration extends Component {
       const data = {
         ...this.state.formData,
         registrationStatus: 'REG',
+        city: this.state.formData.city === this.props.constants.OTHER_CITY
+          ? this.state.formData.cityName : this.state.formData.city,
+        cityName: undefined,
       };
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
