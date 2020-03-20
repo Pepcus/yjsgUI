@@ -177,10 +177,6 @@ class MemberRegistrationCorrectionForm extends Component {
           }),
           onlyOptInForm,
         });
-        this.prePopulateCourse2020(initialMemberData({
-          memberData: prePopulateOptInMemberData,
-          formConfig,
-        }));
       }
     }
   };
@@ -215,16 +211,6 @@ class MemberRegistrationCorrectionForm extends Component {
     });
   };
 
-  /**
-   * Method pre populate course (level) of year 2020
-   * @param {Object} memberData
-   */
-  prePopulateCourse2020 = (memberData) => {
-    const updatedData = updateClassAttended2020InMemberData(memberData);
-    this.setState({
-      member: updatedData,
-    });
-  };
 
   /**
    * Method set only optIn file form

@@ -2,31 +2,8 @@ import isEmpty from 'lodash/isEmpty';
 
 export const formatMembersData = (response = {}) => {
   const { students = [] } = response;
-  if (!isEmpty(response.students)) {
-    return students.map((student = {}) => {
-      return {
-        ...student,
-        classAttended2020: (student.classAttended2020 && student.classAttended2020.trim()) ? student.classAttended2020 : '',
-        marks2020: (student.marks2020 && student.marks2020.trim()) ? student.marks2020 : '',
-        classRoomNo2020: (student.classRoomNo2020 && student.classRoomNo2020.trim()) ? student.classRoomNo2020 : '',
-      }
-    });
-  }
-  return response;
-};
-
-export const formatMemberData = (response = {}) => {
-  const { student = {} } = response;
-  if (!isEmpty(student)) {
-    return {
-      ...response,
-      student: {
-        ...student,
-        classAttended2020: (student.classAttended2020 && student.classAttended2020.trim()) ? student.classAttended2020 : '',
-        marks2020: (student.marks2020 && student.marks2020.trim()) ? student.marks2020 : '',
-        classRoomNo2020: (student.classRoomNo2020 && student.classRoomNo2020.trim()) ? student.classRoomNo2020 : '',
-      },
-    }
+  if (!isEmpty(students)) {
+    return students;
   }
   return response;
 };
