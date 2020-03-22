@@ -1949,6 +1949,9 @@
           "inline": true,
           "col": {
             "padding": "15px 50px 5px 50px"
+          },
+          "boxProps": {
+            "backgroundColor": "unset"
           }
         }
       },
