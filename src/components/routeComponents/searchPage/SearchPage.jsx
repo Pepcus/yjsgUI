@@ -19,7 +19,7 @@ import {
   setDefaultUserData,
   storeSearchPageData,
 } from 'actions/userActions';
-import { getIsUserCreated, getIsUserFailed, getUsers } from 'reducers/userReducer';
+import { getIsSearchFailed, getIsUserCreated, getIsUserFailed, getUsers } from 'reducers/userReducer';
 import SuccessPopup from '../userRegistration/SuccessPopup';
 import ErrorPopup from '../userRegistration/ErrorPopup';
 
@@ -227,11 +227,11 @@ class SearchPage extends Component {
   };
 
   renderErrorPopup = () => {
-    if (this.state.isPartialRegistrationSubmitClicked && this.props.isUserFailed) {
+    if (this.props.isSearchFailed) {
       return (
         <ErrorPopup
           redirectToPreviousLocation={this.closePopup}
-          message={this.props.constants.REGISTRATION_FAILED_MESSAGE}
+          message={this.props.constants.SEARCH_FAILED_MESSAGE}
         />
       );
     }
@@ -326,6 +326,7 @@ SearchPage.propTypes = {
   config: PropTypes.object,
   constants: PropTypes.object,
   fetchUserFromPhoneAction: PropTypes.func,
+  isSearchFailed: PropTypes.bool,
   isUserCreated: PropTypes.bool,
   isUserFailed: PropTypes.bool,
   setDefaultUserData: PropTypes.func,
@@ -338,6 +339,7 @@ SearchPage.defaultProps = {
   constants: {},
   fetchUserFromPhoneAction: () => {
   },
+  isSearchFailed: false,
   isUserCreated: false,
   isUserFailed: false,
   setDefaultUserData: () => {
@@ -349,6 +351,7 @@ SearchPage.defaultProps = {
 
 const mapStateToProps = state => ({
   constants: getConstants(state),
+  isSearchFailed: getIsSearchFailed(state),
   isUserCreated: getIsUserCreated(state),
   isUserFailed: getIsUserFailed(state),
   users: getUsers(state),

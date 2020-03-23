@@ -110,7 +110,7 @@ class UserRegistration extends Component {
     if (!this.state.hasError) {
       const data = {
         ...this.state.formData,
-        registrationStatus: 'REG',
+        registrationStatus: this.props.constants.REGISTERED,
         city: this.state.formData.city === this.props.constants.OTHER_CITY
           ? this.state.formData.cityName : this.state.formData.city,
         cityName: undefined,
@@ -118,10 +118,15 @@ class UserRegistration extends Component {
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
           // Edit User
-          this.props.editUserAction(data, this.state.userSelected.id);
+          this.props.editUserAction({
+            ...data,
+            registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
+              ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED,
+          }, this.state.userSelected.id);
         } else {
           // Patch
-          this.props.patchUserAction({ registrationStatus: 'REG' }, this.state.userSelected.id);
+          this.props.patchUserAction({ registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
+            ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED }, this.state.userSelected.id);
         }
       } else {
         // Create New Student
@@ -154,7 +159,8 @@ class UserRegistration extends Component {
       && this.state.formData.age
       && this.state.formData.mobile
       && this.state.formData.city
-      && this.state.formData.isWhatsApp) {
+      && this.state.formData.isWhatsApp
+      && this.state.formData.address) {
       return false;
     }
     return true;

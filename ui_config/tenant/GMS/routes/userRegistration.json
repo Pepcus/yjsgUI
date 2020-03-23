@@ -7,7 +7,8 @@
         "age",
         "mobile",
         "city",
-        "isWhatsApp"
+        "isWhatsApp",
+        "address"
       ],
       "properties": {
         "name": {
@@ -27,7 +28,8 @@
         },
         "address": {
           "title": "पूरा पता",
-          "type": "string"
+          "type": "string",
+          "customValidation": "blankValidator"
         },
         "city": {
           "title": "शहर",

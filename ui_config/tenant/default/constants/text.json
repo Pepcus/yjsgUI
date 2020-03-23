@@ -209,5 +209,7 @@
 
   "INVALID_CITY_MESSAGE": "Invalid City",
 
-  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य"
+  "ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE": "केवल ८ वर्ष से ऊपर ही मान्य",
+
+  "INVALID_ADDRESS_MESSAGE": "अमान्य पता"
 }
