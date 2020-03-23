@@ -159,7 +159,8 @@ class UserRegistration extends Component {
       && this.state.formData.age
       && this.state.formData.mobile
       && this.state.formData.city
-      && this.state.formData.isWhatsApp) {
+      && this.state.formData.isWhatsApp
+      && this.state.formData.address) {
       return false;
     }
     return true;
