@@ -339,3 +339,24 @@ export const ageValidatorWithNoUpperLimit = (value, constants) => {
 
   return message;
 };
+
+export const blankValidator = (value, constants) => {
+  const { INVALID_ADDRESS_MESSAGE } = constants;
+  let message = '';
+  let updatedValue = '';
+
+  if (value) {
+    updatedValue = value.trim();
+  }
+  if (isEmpty(value)) {
+    message = '';
+
+  } else if (updatedValue.length < 5) {
+    message = INVALID_ADDRESS_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};

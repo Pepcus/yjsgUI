@@ -114,7 +114,6 @@ class UserRegistration extends Component {
         city: this.state.formData.city === this.props.constants.OTHER_CITY
           ? this.state.formData.cityName : this.state.formData.city,
         cityName: undefined,
-        address: !this.state.formData.address ? '' : this.state.formData.address,
       };
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
