@@ -1,6 +1,7 @@
 const initialState = {
   users: [],
   isUserCreated: false,
+  searchFailed: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -9,6 +10,12 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.users,
+        searchFailed: false,
+      };
+    case 'FETCH_USER_FROM_PHONE_FAILED':
+      return {
+        ...state,
+        searchFailed: true,
       };
     case 'FETCH_USER_FROM_PHONE_FAILURE':
       return {
@@ -48,3 +55,5 @@ export const getSearchData = state => state.userReducer.searchData;
 export const getIsUserCreated = state => state.userReducer.isUserCreated;
 
 export const getIsUserFailed = state => state.userReducer.isUserFailed;
+
+export const getIsSearchFailed = state => state.userReducer.searchFailed;

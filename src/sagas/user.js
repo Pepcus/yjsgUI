@@ -4,7 +4,12 @@ import { setLoadingStateAction } from 'actions/loaderActions';
 import { getAPIConfig } from 'reducers/api';
 import { getTenantName } from 'reducers/app';
 import { callAPIWithConfig } from 'apis/apis';
-import { fetchUserFromPhoneSuccess, userCreateFailAction, userCreateSuccessAction } from 'actions/userActions';
+import {
+  fetchUserFromPhoneFailed,
+  fetchUserFromPhoneSuccess,
+  userCreateFailAction,
+  userCreateSuccessAction
+} from 'actions/userActions';
 
 export function* createUserSaga(action) {
   yield put(setLoadingStateAction(true));
@@ -75,17 +80,22 @@ export function* patchUserSaga(action) {
 }
 
 export function* fetchUserFromPhoneSaga(action) {
-  const apiConfig = yield select(getAPIConfig, 'user', 'fetchUserFromPhone');
-  const tenant = yield select(getTenantName);
-  const config = {
-    ...apiConfig,
-    urlValuesMap: { phoneNumber: action.formData.mobile },
-  };
-  yield put(setLoadingStateAction(true));
-  const response = yield callAPIWithConfig(tenant, 'fetchUserFromPhone', config);
-  yield put(fetchUserFromPhoneSuccess(response));
-  yield put(setLoadingStateAction(false));
-  if (response.length === 0) {
-    window.location.href = '#/user-registration';
+  try {
+    const apiConfig = yield select(getAPIConfig, 'user', 'fetchUserFromPhone');
+    const tenant = yield select(getTenantName);
+    const config = {
+      ...apiConfig,
+      urlValuesMap: { phoneNumber: action.formData.mobile },
+    };
+    yield put(setLoadingStateAction(true));
+    const response = yield callAPIWithConfig(tenant, 'fetchUserFromPhone', config);
+    yield put(setLoadingStateAction(false));
+    yield put(fetchUserFromPhoneSuccess(response));
+    if (response.length === 0) {
+      window.location.href = '#/user-registration';
+    }
+  } catch (e) {
+    yield put(setLoadingStateAction(false));
+    yield put(fetchUserFromPhoneFailed());
   }
 }

@@ -3,6 +3,10 @@ export const fetchUserFromPhoneSuccess = users => ({
   users,
 });
 
+export const fetchUserFromPhoneFailed = () => ({
+  type: 'FETCH_USER_FROM_PHONE_FAILED',
+});
+
 export const fetchUserFromPhoneAction = formData => ({
   type: 'FETCH_USER_FROM_PHONE_ACTION',
   formData,

@@ -13,6 +13,8 @@
 
   "REGISTRATION_FAILED_MESSAGE": "Some Error Occurred while registering the student. Please contact Administrator.",
 
+  "SEARCH_FAILED_MESSAGE": "Some Error Occurred while fetching student data. Please contact Administrator.",
+
   "NEW_REGISTRATION": "Register A New Person",
 
   "VIDEO_LINK": "www.youtube.com/c/jainkosh",
