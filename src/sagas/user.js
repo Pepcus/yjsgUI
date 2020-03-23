@@ -91,7 +91,7 @@ export function* fetchUserFromPhoneSaga(action) {
     const response = yield callAPIWithConfig(tenant, 'fetchUserFromPhone', config);
     yield put(setLoadingStateAction(false));
     yield put(fetchUserFromPhoneSuccess(response));
-    if (response.length === 0) {
+    if (!response.length) {
       window.location.href = '#/user-registration';
     }
   } catch (e) {
