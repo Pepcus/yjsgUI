@@ -25,14 +25,15 @@ const FormGroupTitleStyled = styled(Typography)`
     ${getThemeProps('FormGroupTitle.styles')};
 `;
 
-const FormGroupTitle = ({ id, required, title, helpText }) => {
+const FormGroupTitle = (props) => {
+  const { id, required, title, helpText } = props;
   const { icon = {}, ...tooltip } = helpText;
 
   return (
     title && (
     <FormGroupTitleStyled type="separator" htmlFor={id}>
       <Row alignItems="flex-start" gutter={false} margin="0" wrap="nowrap">
-        <Typography type="separator" style={{ marginRight: 5 }}>{title}</Typography>
+        <Typography type="separator" style={{ marginRight: 5, fontWeight: 'bold' }}>{title}</Typography>
         {typeof helpText === 'object'
                         && !_isEmpty(helpText) && (
                         <Tooltip {...tooltip}>

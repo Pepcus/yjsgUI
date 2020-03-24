@@ -1,7 +1,7 @@
-import ReactWidget from './ReactWidget';
+import MultipleSelectWidget from './MultipleSelectWidget';
 
 const widgets = {
-  ReactWidget,
+  MultipleSelectWidget: MultipleSelectWidget,
 };
 
 export default widgets;

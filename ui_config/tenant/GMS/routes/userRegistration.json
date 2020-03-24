@@ -9,7 +9,7 @@
         "city",
         "isWhatsApp",
         "address",
-        "previousShivir"
+        "email"
       ],
       "properties": {
         "name": {
@@ -57,17 +57,27 @@
           ]
         },
         "previousShivir": {
+          "type": "array",
           "title": "क्या आपने हमारे पूर्व शिविरों में भाग लिया है?",
+          "items": {
+            "type": "string",
+            "enum": [
+              "GMS JIVKAND SHIVIR",
+              "DHYAN SHIVIR",
+              "GMS KARMKAND SHIVIR"
+            ],
+            "enumNames": [
+              "गोम्मटसार जीवकाण्ड शिविर",
+              "ध्यान शिविर",
+              "गोम्मटसार कर्मकांड शिविर"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "email": {
+          "title": "Email",
           "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "enumNames": [
-            "गोम्मटसार जीवकाण्ड शिविर",
-            "ध्यान शिविर",
-            "गोम्मटसार कर्मकांड शिविर"
-          ]
+          "customValidation": "optionalEmailValidator"
         }
       },
       "dependencies": {
@@ -102,6 +112,7 @@
         "name",
         "age",
         "mobile",
+        "email",
         "address",
         "city",
         "cityName",
@@ -254,9 +265,28 @@
         }
       },
       "previousShivir": {
-        "ui:widget": "ReactWidget",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:multiple": true,
+        "ui:widget": "MultipleSelectWidget",
+        "ui:placeholder": "कृपया चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "email": {
+        "ui:field": "InputField",
         "ui:options": {
           "style": {
             "fieldStyle": {

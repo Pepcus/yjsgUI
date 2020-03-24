@@ -73,6 +73,8 @@ class UserRegistration extends Component {
             mobile: user.mobile,
             age: user.age,
             isWhatsApp: user.isWhatsApp,
+            email: user.email,
+            previousShivir: user.previousShivir ? this.deformatShivirData(user.previousShivir, props) : undefined,
           };
         }
       });
@@ -81,6 +83,19 @@ class UserRegistration extends Component {
       this.redirectToPreviousLocation();
     }
   }
+
+  deformatShivirData = (data, props) => {
+    const shivir = data.split(',');
+    const shivirData = [];
+    shivir.forEach((str) => {
+      (props.config.registrationFormConfig.schema.properties.previousShivir.items.enum).forEach((name) => {
+        if (str === name) {
+          shivirData.push(name);
+        }
+      });
+    });
+    return shivirData;
+  };
 
   isDataChanged = () => {
     const {
@@ -91,20 +106,40 @@ class UserRegistration extends Component {
       age,
       isWhatsApp,
       cityName,
+      email,
+      previousShivir,
     } = this.state.formData;
     let cityString = city;
     if (city === this.props.constants.OTHER_CITY) {
       cityString = cityName;
+    }
+    let shivir;
+    if (previousShivir) {
+      shivir = this.formatShivirData(this.state.formData);
     }
     if (this.state.userSelected.name === name
       && this.state.userSelected.address === address
       && this.state.userSelected.city === cityString
       && this.state.userSelected.mobile === mobile
       && this.state.userSelected.age === age
-      && this.state.userSelected.isWhatsApp === isWhatsApp) {
+      && this.state.userSelected.isWhatsApp === isWhatsApp
+      && this.state.userSelected.email === email
+      && this.state.userSelected.previousShivir === shivir) {
       return false;
     }
     return true;
+  };
+
+  formatShivirData = (formData) => {
+    let data = '';
+    (formData.previousShivir).forEach((shivir, index) => {
+      if (index + 1 === (formData.previousShivir).length) {
+        data = `${data}${shivir}`;
+      } else {
+        data = `${data}${shivir},`;
+      }
+    });
+    return data;
   };
 
   handleSubmit = () => {
@@ -115,6 +150,7 @@ class UserRegistration extends Component {
         city: this.state.formData.city === this.props.constants.OTHER_CITY
           ? this.state.formData.cityName : this.state.formData.city,
         cityName: undefined,
+        previousShivir: this.state.formData.previousShivir ? this.formatShivirData(this.state.formData) : undefined,
       };
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
@@ -144,7 +180,6 @@ class UserRegistration extends Component {
   };
 
   onChange = (data) => {
-    console.log(data);
     this.setState({
       formData: {
         ...data.formData,
@@ -163,7 +198,7 @@ class UserRegistration extends Component {
       && this.state.formData.city
       && this.state.formData.isWhatsApp
       && this.state.formData.address
-      && this.state.formData.previousShivir) {
+      && this.state.formData.email) {
       return false;
     }
     return true;
