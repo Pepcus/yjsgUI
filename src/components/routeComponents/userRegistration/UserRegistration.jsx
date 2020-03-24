@@ -18,6 +18,7 @@ import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers } from 'redu
 import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
 import ErrorPopup from 'components/routeComponents/userRegistration/ErrorPopup';
 import { convertAgeToNumeric } from 'utils/common/string';
+import widgets from 'components/common/widgets';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -143,6 +144,7 @@ class UserRegistration extends Component {
   };
 
   onChange = (data) => {
+    console.log(data);
     this.setState({
       formData: {
         ...data.formData,
@@ -160,7 +162,8 @@ class UserRegistration extends Component {
       && this.state.formData.mobile
       && this.state.formData.city
       && this.state.formData.isWhatsApp
-      && this.state.formData.address) {
+      && this.state.formData.address
+      && this.state.formData.previousShivir) {
       return false;
     }
     return true;
@@ -209,6 +212,7 @@ class UserRegistration extends Component {
             uiSchema={uiSchema}
             onChange={this.onChange}
             onSubmit={this.handleSubmit}
+            widgets={widgets}
           />
           <Row justify="center" margin="0 0 25px 0">
             <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">

@@ -8,7 +8,8 @@
         "mobile",
         "city",
         "isWhatsApp",
-        "address"
+        "address",
+        "previousShivir"
       ],
       "properties": {
         "name": {
@@ -54,6 +55,19 @@
             "हाँ",
             "नहीं"
           ]
+        },
+        "previousShivir": {
+          "title": "क्या आपने हमारे पूर्व शिविरों में भाग लिया है?",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "enumNames": [
+            "गोम्मटसार जीवकाण्ड शिविर",
+            "ध्यान शिविर",
+            "गोम्मटसार कर्मकांड शिविर"
+          ]
         }
       },
       "dependencies": {
@@ -91,7 +105,8 @@
         "address",
         "city",
         "cityName",
-        "isWhatsApp"
+        "isWhatsApp",
+        "previousShivir"
       ],
       "name": {
         "ui:field": "InputField",
@@ -178,7 +193,7 @@
       },
       "city": {
         "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:placeholder": "कृपया चुनिए . . .",
         "ui:options": {
           "style": {
             "fieldStyle": {
@@ -220,6 +235,28 @@
       "isWhatsApp": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "previousShivir": {
+        "ui:widget": "ReactWidget",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:multiple": true,
         "ui:options": {
           "style": {
             "fieldStyle": {
