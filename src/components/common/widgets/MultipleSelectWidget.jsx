@@ -14,9 +14,11 @@ export default function MultipleSelectWidget(props) {
 
   const handleOnChange = (values) => {
     const data = [];
-    values.forEach((obj) => {
-      data.push(obj.value);
-    });
+    if (values && values.length) {
+      values.forEach((obj) => {
+        data.push(obj.value);
+      });
+    }
     return onChange(data);
   };
 
