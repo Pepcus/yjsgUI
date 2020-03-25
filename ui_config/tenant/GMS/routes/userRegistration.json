@@ -113,11 +113,11 @@
         "age",
         "mobile",
         "email",
-        "previousShivir",
         "address",
         "city",
         "cityName",
-        "isWhatsApp"
+        "isWhatsApp",
+        "previousShivir"
       ],
       "name": {
         "ui:field": "InputField",
