@@ -150,7 +150,8 @@ class UserRegistration extends Component {
         city: this.state.formData.city === this.props.constants.OTHER_CITY
           ? this.state.formData.cityName : this.state.formData.city,
         cityName: undefined,
-        previousShivir: this.state.formData.previousShivir ? this.formatShivirData(this.state.formData) : undefined,
+        previousShivir: this.state.formData.previousShivir
+          && (this.state.formData.previousShivir).length ? this.formatShivirData(this.state.formData) : undefined,
       };
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
@@ -159,6 +160,7 @@ class UserRegistration extends Component {
             ...data,
             registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
               ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED,
+            previousShivir: !data.previousShivir && this.state.userSelected.previousShivir ? '' : data.previousShivir,
           }, this.state.userSelected.id);
         } else {
           // Patch
