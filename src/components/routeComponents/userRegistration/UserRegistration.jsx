@@ -249,7 +249,7 @@ class UserRegistration extends Component {
             onSubmit={this.handleSubmit}
             widgets={widgets}
           />
-          <Row justify="center" margin="0 0 25px 0">
+          <Row justify="center" margin="0 0 25px 0" style={{minHeight: '70px'}}>
             <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
               <Button
                 width="100%"

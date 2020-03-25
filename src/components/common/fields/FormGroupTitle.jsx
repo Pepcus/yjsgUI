@@ -12,13 +12,13 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 
 const FormGroupTitleStyled = styled(Typography)`
     align-items: baseline;
-    color: #15191d;
+    color: #4c4c4c;
     display: flex;
     font-size: 14px;
     font-weight: 400;
     justify-content: space-between;
     margin: 0 !important;
-    padding: 0 5px 7.5px 5px;
+    padding: 0 5px 4px 0px;
     /**
      * Add all of the remaining styles from theme
      */
