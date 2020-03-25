@@ -18,6 +18,7 @@ import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers } from 'redu
 import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
 import ErrorPopup from 'components/routeComponents/userRegistration/ErrorPopup';
 import { convertAgeToNumeric } from 'utils/common/string';
+import widgets from 'components/common/widgets';
 
 const BoxStyled = styled(Box)`
  align-items: center;
@@ -72,6 +73,8 @@ class UserRegistration extends Component {
             mobile: user.mobile,
             age: user.age,
             isWhatsApp: user.isWhatsApp,
+            email: user.email,
+            previousShivir: user.previousShivir ? this.deformatShivirData(user.previousShivir, props) : undefined,
           };
         }
       });
@@ -80,6 +83,19 @@ class UserRegistration extends Component {
       this.redirectToPreviousLocation();
     }
   }
+
+  deformatShivirData = (data, props) => {
+    const shivir = data.split(',');
+    const shivirData = [];
+    shivir.forEach((str) => {
+      (props.config.registrationFormConfig.schema.properties.previousShivir.items.enum).forEach((name) => {
+        if (str === name) {
+          shivirData.push(name);
+        }
+      });
+    });
+    return shivirData;
+  };
 
   isDataChanged = () => {
     const {
@@ -90,20 +106,40 @@ class UserRegistration extends Component {
       age,
       isWhatsApp,
       cityName,
+      email,
+      previousShivir,
     } = this.state.formData;
     let cityString = city;
     if (city === this.props.constants.OTHER_CITY) {
       cityString = cityName;
+    }
+    let shivir;
+    if (previousShivir) {
+      shivir = this.formatShivirData(this.state.formData);
     }
     if (this.state.userSelected.name === name
       && this.state.userSelected.address === address
       && this.state.userSelected.city === cityString
       && this.state.userSelected.mobile === mobile
       && this.state.userSelected.age === age
-      && this.state.userSelected.isWhatsApp === isWhatsApp) {
+      && this.state.userSelected.isWhatsApp === isWhatsApp
+      && this.state.userSelected.email === email
+      && this.state.userSelected.previousShivir === shivir) {
       return false;
     }
     return true;
+  };
+
+  formatShivirData = (formData) => {
+    let data = '';
+    (formData.previousShivir).forEach((shivir, index) => {
+      if (index + 1 === (formData.previousShivir).length) {
+        data = `${data}${shivir}`;
+      } else {
+        data = `${data}${shivir},`;
+      }
+    });
+    return data;
   };
 
   handleSubmit = () => {
@@ -114,6 +150,8 @@ class UserRegistration extends Component {
         city: this.state.formData.city === this.props.constants.OTHER_CITY
           ? this.state.formData.cityName : this.state.formData.city,
         cityName: undefined,
+        previousShivir: this.state.formData.previousShivir
+          && (this.state.formData.previousShivir).length ? this.formatShivirData(this.state.formData) : undefined,
       };
       if (this.props.searchData.mode === 'Edit') {
         if (this.isDataChanged()) {
@@ -122,6 +160,7 @@ class UserRegistration extends Component {
             ...data,
             registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
               ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED,
+            previousShivir: !data.previousShivir && this.state.userSelected.previousShivir ? '' : data.previousShivir,
           }, this.state.userSelected.id);
         } else {
           // Patch
@@ -160,7 +199,8 @@ class UserRegistration extends Component {
       && this.state.formData.mobile
       && this.state.formData.city
       && this.state.formData.isWhatsApp
-      && this.state.formData.address) {
+      && this.state.formData.address
+      && this.state.formData.email) {
       return false;
     }
     return true;
@@ -209,8 +249,9 @@ class UserRegistration extends Component {
             uiSchema={uiSchema}
             onChange={this.onChange}
             onSubmit={this.handleSubmit}
+            widgets={widgets}
           />
-          <Row justify="center" margin="0 0 25px 0">
+          <Row justify="center" margin="0 0 25px 0" style={{minHeight: '70px'}}>
             <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
               <Button
                 width="100%"

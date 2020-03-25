@@ -55,5 +55,7 @@
 
   "SEARCH_PAGE_FORM_HEADING": "कृपया रजिस्ट्रेशन करने के लिए अपना मोबाइल नंबर दीजिये!",
 
-  "INVALID_CITY_MESSAGE": "अमान्य शहर"
+  "INVALID_CITY_MESSAGE": "अमान्य शहर",
+
+  "INVALID_EMAIL_MESSAGE": "यह ई-मेल मान्य नहीं है"
 }
