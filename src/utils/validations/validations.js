@@ -174,7 +174,7 @@ export const optionalMobileValidator = (value, constants) => {
 export const optionalEmailValidator = (value, constants) => {
   const { INVALID_EMAIL_MESSAGE } = constants;
   let message = '';
-  const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  const emailRegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z]{2,4})+$/;
 
   if (isEmpty(value)) {
     message = '';
