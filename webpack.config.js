@@ -20,7 +20,7 @@ module.exports = {
         target: 'http://localhost:8081',
       },
 	  '/api/gms': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8081',
       },
     },
   },
