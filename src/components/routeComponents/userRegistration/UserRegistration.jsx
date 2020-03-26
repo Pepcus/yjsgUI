@@ -160,7 +160,7 @@ class UserRegistration extends Component {
             ...data,
             registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
               ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED,
-            previousShivir: !data.previousShivir && this.state.userSelected.previousShivir ? '' : data.previousShivir,
+            email: !data.email && this.state.userSelected.email ? '' : data.email,
           }, this.state.userSelected.id);
         } else {
           // Patch
