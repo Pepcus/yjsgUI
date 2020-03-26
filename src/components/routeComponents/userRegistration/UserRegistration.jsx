@@ -181,11 +181,32 @@ class UserRegistration extends Component {
     window.location.href = '#/gms';
   };
 
+  previousShivirDataFormat = (shivirData) => {
+    if (shivirData && shivirData.length) {
+      if (shivirData.indexOf('0') > -1
+        && this.state.formData.previousShivir
+        && (this.state.formData.previousShivir).indexOf('0') === -1) {
+        return ['0'];
+      }
+      if (shivirData.length > 1) {
+        const noneIndex = shivirData.indexOf('0');
+        if (noneIndex > -1) {
+          shivirData.splice(noneIndex, 1);
+          return shivirData;
+        }
+      }
+      return shivirData;
+    }
+    return undefined;
+  };
+
   onChange = (data) => {
+    const previousShivir = this.previousShivirDataFormat(data.formData.previousShivir);
     this.setState({
       formData: {
         ...data.formData,
         age: data.formData.age ? convertAgeToNumeric(data.formData.age) : undefined,
+        previousShivir,
       },
       hasError: !isEmpty(data.errors),
     });
@@ -200,7 +221,8 @@ class UserRegistration extends Component {
       && this.state.formData.city
       && this.state.formData.isWhatsApp
       && this.state.formData.address
-      && this.state.formData.email) {
+      && this.state.formData.previousShivir
+      && (this.state.formData.previousShivir).length) {
       return false;
     }
     return true;

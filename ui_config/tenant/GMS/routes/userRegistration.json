@@ -9,7 +9,7 @@
         "city",
         "isWhatsApp",
         "address",
-        "email"
+        "previousShivir"
       ],
       "properties": {
         "name": {
@@ -62,14 +62,16 @@
           "items": {
             "type": "string",
             "enum": [
-              "GMS JIVKAND SHIVIR",
-              "DHYAN SHIVIR",
-              "GMS KARMKAND SHIVIR"
+              "1",
+              "2",
+              "3",
+              "0"
             ],
             "enumNames": [
               "गोम्मटसार जीवकाण्ड शिविर",
               "ध्यान शिविर",
-              "गोम्मटसार कर्मकांड शिविर"
+              "गोम्मटसार कर्मकांड शिविर",
+              "किसी में भी नहीं"
             ]
           },
           "uniqueItems": true
@@ -265,7 +267,7 @@
         }
       },
       "previousShivir": {
-        "ui:widget": "MultipleSelectWidget",
+        "ui:widget": "checkboxes",
         "ui:placeholder": "कृपया चुनिए . . .",
         "ui:options": {
           "style": {
