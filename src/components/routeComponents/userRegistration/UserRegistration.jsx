@@ -165,7 +165,7 @@ class UserRegistration extends Component {
           }, this.state.userSelected.id);
         } else {
           // Patch
-          this.props.patchUserAction({ registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
+          this.props.patchUserAction({ registrationStatus: this.state.userSelected.registrationStatus === this.props.constants.REGISTERED
             || this.state.userSelected.registrationStatus === this.props.constants.CONFIRMED
             ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED }, this.state.userSelected.id);
         }
