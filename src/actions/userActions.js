@@ -42,6 +42,7 @@ export const userCreateSuccessAction = () => ({
   type: 'USER_CREATED_SUCCESS_ACTION',
 });
 
-export const userCreateFailAction = () => ({
+export const userCreateFailAction = (error) => ({
   type: 'USER_CREATED_FAILED_ACTION',
+  error,
 });
