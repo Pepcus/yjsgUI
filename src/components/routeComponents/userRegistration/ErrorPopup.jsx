@@ -9,6 +9,14 @@ import Typography from 'pepcus-core/lib/Typography';
 import Popup from 'components/common/Popup';
 import { getConstants } from 'reducers/constants';
 
+const renderErrorMessage = (errorMessage) => {
+  if (errorMessage) {
+    const message = `Error - ${errorMessage}`;
+    return <Typography align="center" type="body" fontSize="16px" style={{ width: '100%' }}>{message}</Typography>;
+  }
+  return null;
+};
+
 /**
  * Method return back button
  * @param {Object} constants
@@ -21,6 +29,7 @@ const ErrorPopup = ({
   constants,
   message,
   redirectToPreviousLocation,
+  errorMessage,
 }) => {
   const {
     BACK,
@@ -30,6 +39,7 @@ const ErrorPopup = ({
     <Popup>
       <Row width="100%" justify="center" margin="0">
         <Typography align="center" type="body" fontSize="16px">{message}</Typography>
+        {renderErrorMessage(errorMessage)}
         <Button
           color="tertiary"
           width="170px"
@@ -45,12 +55,14 @@ const ErrorPopup = ({
 
 ErrorPopup.propTypes = {
   constants: PropTypes.object,
+  errorMessage: PropTypes.string,
   message: PropTypes.string,
   redirectToPreviousLocation: PropTypes.func,
 };
 
 ErrorPopup.defaultProps = {
   constants: {},
+  errorMessage: '',
   message: '',
   redirectToPreviousLocation: () => {},
 };
