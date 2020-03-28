@@ -24,7 +24,7 @@ const sagaMiddleware = createSagaMiddleware();
 const appliedMiddleware = process.env.NODE_ENV === 'development' ?
   applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware);
 
-const store = store = createStore(
+const store = createStore(
   rootReducer,
   persistedState,
   appliedMiddleware,
