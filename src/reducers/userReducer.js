@@ -39,6 +39,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isUserFailed: true,
+        errorMessage: action.error ? action.error.message : undefined,
       };
     default: {
       return {
@@ -57,3 +58,5 @@ export const getIsUserCreated = state => state.userReducer.isUserCreated;
 export const getIsUserFailed = state => state.userReducer.isUserFailed;
 
 export const getIsSearchFailed = state => state.userReducer.searchFailed;
+
+export const getErrorMessage = state => state.userReducer.errorMessage;

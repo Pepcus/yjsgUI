@@ -8,7 +8,7 @@ import {
   fetchUserFromPhoneFailed,
   fetchUserFromPhoneSuccess,
   userCreateFailAction,
-  userCreateSuccessAction
+  userCreateSuccessAction,
 } from 'actions/userActions';
 
 export function* createUserSaga(action) {
@@ -24,7 +24,7 @@ export function* createUserSaga(action) {
     if (response.id) {
       yield put(userCreateSuccessAction());
     } else {
-      yield put(userCreateFailAction());
+      yield put(userCreateFailAction(response));
     }
   } catch (e) {
     yield put(userCreateFailAction());
@@ -47,7 +47,7 @@ export function* editUserSaga(action) {
     if (response.id) {
       yield put(userCreateSuccessAction());
     } else {
-      yield put(userCreateFailAction());
+      yield put(userCreateFailAction(response));
     }
   } catch (e) {
     yield put(userCreateFailAction());
@@ -70,7 +70,7 @@ export function* patchUserSaga(action) {
     if (response.id) {
       yield put(userCreateSuccessAction());
     } else {
-      yield put(userCreateFailAction());
+      yield put(userCreateFailAction(response));
     }
   } catch (e) {
     yield put(userCreateFailAction());
