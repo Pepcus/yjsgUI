@@ -14,7 +14,7 @@ import Button from 'pepcus-core/lib/Button';
 import { getConstants } from 'reducers/constants';
 import { isEmpty } from 'pepcus-core';
 import { createUserAction, editUserAction, patchUserAction } from 'actions/userActions';
-import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers } from 'reducers/userReducer';
+import { getIsUserCreated, getIsUserFailed, getSearchData, getUsers, getErrorMessage } from 'reducers/userReducer';
 import SuccessPopup from 'components/routeComponents/userRegistration/SuccessPopup';
 import ErrorPopup from 'components/routeComponents/userRegistration/ErrorPopup';
 import { convertAgeToNumeric } from 'utils/common/string';
@@ -158,13 +158,15 @@ class UserRegistration extends Component {
           // Edit User
           this.props.editUserAction({
             ...data,
-            registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
+            registrationStatus: this.state.userSelected.registrationStatus === this.props.constants.REGISTERED
+              || this.state.userSelected.registrationStatus === this.props.constants.CONFIRMED
               ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED,
             email: !data.email && this.state.userSelected.email ? '' : data.email,
           }, this.state.userSelected.id);
         } else {
           // Patch
-          this.props.patchUserAction({ registrationStatus: this.state.userSelected.registrationStatus !== this.props.constants.REGISTERED
+          this.props.patchUserAction({ registrationStatus: this.state.userSelected.registrationStatus === this.props.constants.REGISTERED
+            || this.state.userSelected.registrationStatus === this.props.constants.CONFIRMED
             ? this.state.userSelected.registrationStatus : this.props.constants.REGISTERED }, this.state.userSelected.id);
         }
       } else {
@@ -234,6 +236,7 @@ class UserRegistration extends Component {
         <ErrorPopup
           redirectToPreviousLocation={this.redirectToPreviousLocation}
           message={this.props.constants.REGISTRATION_FAILED_MESSAGE}
+          errorMessage={this.props.errorMessage}
         />
       );
     }
@@ -316,6 +319,7 @@ UserRegistration.propTypes = {
   patchUserAction: PropTypes.func,
   searchData: PropTypes.object,
   users: PropTypes.array,
+  errorMessage: PropTypes.string,
 };
 
 UserRegistration.defaultProps = {
@@ -328,6 +332,7 @@ UserRegistration.defaultProps = {
   patchUserAction: () => {},
   searchData: {},
   users: [],
+  errorMessage: '',
 };
 
 const mapStateToProps = state => ({
@@ -336,6 +341,7 @@ const mapStateToProps = state => ({
   users: getUsers(state),
   isUserCreated: getIsUserCreated(state),
   isUserFailed: getIsUserFailed(state),
+  errorMessage: getErrorMessage(state),
 });
 
 const mapDispatchToProps = dispatch => ({
