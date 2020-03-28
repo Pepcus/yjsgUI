@@ -6,6 +6,7 @@ import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons/faPowerOff';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
+import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 
 import Box from 'pepcus-core/lib/Box';
 import Container from 'pepcus-core/lib/Container';
@@ -96,12 +97,16 @@ const MobileButtons = ({
   performLogout,
   refreshMembersGrid,
   setIsAdminRouteFlag,
+  redirectToCoordinatorView,
   redirectToFile,
 }) => (
   <MobileButtonsContainerStyled width="auto">
     <MobileButtonsBoxStyled borderStyle="none" backgroundColor="unset">
       <LinkStyled onClick={setIsAdminRouteFlag}>
         <FaIcon icon={faArrowLeft} />
+      </LinkStyled>
+      <LinkStyled onClick={redirectToCoordinatorView}>
+        <FaIcon icon={faUsers} />
       </LinkStyled>
       <LinkStyled onClick={redirectToFile}>
         <FaIcon icon={faFile} />
@@ -125,6 +130,7 @@ MobileButtons.propTypes = {
   redirectToFile: PropTypes.func,
   refreshMembersGrid: PropTypes.func,
   setIsAdminRouteFlag: PropTypes.func,
+  redirectToCoordinatorView: PropTypes.func,
 };
 
 MobileButtons.defaultProps = {
@@ -133,5 +139,6 @@ MobileButtons.defaultProps = {
   redirectToFile: () => {},
   refreshMembersGrid: () => {},
   setIsAdminRouteFlag: () => {},
+  redirectToCoordinatorView: () => {},
 };
 export default MobileButtons;

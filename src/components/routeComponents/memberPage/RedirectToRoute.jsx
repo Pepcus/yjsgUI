@@ -15,6 +15,7 @@ const RedirectToRoute = ({
   isNewRegistration,
   isMemberLogin,
   isURLParams,
+  isNewCoordinator,
 }) => {
   const routes = {
     isURLParams: '/member-registration-correction',

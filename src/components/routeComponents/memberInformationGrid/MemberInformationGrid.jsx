@@ -173,17 +173,22 @@ class MemberInformationGrid extends Component {
       columnOptionIsOpen: false,
       isMemberDataSet: false,
       isAdminRoute: false,
-      visibleColumnConfig: this.props.visibleColumnConfig,
+      visibleColumnConfig: {},
       refresh: false,
       fileRedirection: false,
+      coordinatorRedirection: false,
     };
+  }
+
+  componentWillUnmount() {
+    this.props.resetVisibleColumnConfig();
   }
 
   componentWillMount() {
     const { visibleColumnConfig, metaData } = this.state;
     const { config, setVisibleColumnOptionsConfig, visibleColumnConfig: previousVisibleColumnConfig } = this.props;
     const { gridMetaData } = config;
-    if (isEmpty(previousVisibleColumnConfig)) {
+    if (isEmpty(visibleColumnConfig)) {
       setVisibleColumnOptionsConfig({ gridMetaData });
       this.setState({
         visibleColumnConfig: getInitialVisibleColumnConfig({ gridMetaData }),
@@ -470,6 +475,12 @@ class MemberInformationGrid extends Component {
     });
   };
 
+  redirectToCoordinatorView = () => {
+    this.setState({
+      coordinatorRedirection: true,
+    });
+  };
+
   /**
    * Method will clear all selected records".
    */
@@ -485,6 +496,7 @@ class MemberInformationGrid extends Component {
   render() {
     const {
       fileRedirection,
+      coordinatorRedirection,
       isMemberDataSet,
       isAdminRoute,
       columnOptionIsOpen,
@@ -519,6 +531,7 @@ class MemberInformationGrid extends Component {
       <ContainerStyled width="100%">
         <RedirectToRoute
           fileRedirection={fileRedirection}
+          coordinatorRedirection={coordinatorRedirection}
           isAdminLogin={isAdminLogin}
           isMemberDataSet={isMemberDataSet}
           isAdminRoute={isAdminRoute}
@@ -547,6 +560,7 @@ class MemberInformationGrid extends Component {
               refreshMembersGrid={this.refreshMembersGrid}
               setIsAdminRouteFlag={this.setIsAdminRouteFlag}
               redirectToFile={this.redirectToFile}
+              redirectToCoordinatorView={this.redirectToCoordinatorView}
             />
             <RowStyled margin="0 0 0 0" backgroundColor="unset" borderStyle="none" className="modal">
               <AdvanceSearch
@@ -563,6 +577,7 @@ class MemberInformationGrid extends Component {
                 attendanceFileModalFormSchema={attendanceFileModalFormSchema}
                 optInFileModalFormSchema={optInFileModalFormSchema}
                 redirectToFile={this.redirectToFile}
+                redirectToCoordinatorView={this.redirectToCoordinatorView}
                 openColumnOption={this.openColumnOption}
                 refreshMembersGrid={this.refreshMembersGrid}
               />

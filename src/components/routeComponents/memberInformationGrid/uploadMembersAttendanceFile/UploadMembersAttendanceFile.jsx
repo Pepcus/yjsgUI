@@ -39,6 +39,7 @@ const CloseButtonStyled = styled(Button)`
 `;
 
 const ButtonStyled = styled(Button)`
+    margin: 5px;
    ${({ theme }) => theme.media.down('xl')`
        min-height: 36px;
        padding: 5px;

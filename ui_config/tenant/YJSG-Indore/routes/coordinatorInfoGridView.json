@@ -1,0 +1,208 @@
+{
+  "gridMetaData": [
+    {
+      "label": "Edit",
+      "key": "edit",
+      "disableFilter": true,
+      "excludeFromExport": true
+    },
+    {
+      "label": "ID",
+      "key": "id",
+      "emptyCells": "NA",
+      "type": "number"
+    },
+    {
+      "label": "First Name",
+      "key": "firstName",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Last Name",
+      "key": "lastName",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Gender",
+      "key": "gender",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Mobile/ Whatsapp",
+      "key": "whatsappNumber",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Alternate No.",
+      "key": "alternateNumber",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Assigned Department",
+      "key": "assignedDepartmentName",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Date of Birth",
+      "key": "dob",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Email",
+      "key": "email",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Address",
+      "key": "address",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Area",
+      "key": "area",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "isActive",
+      "key": "isActive",
+      "emptyCells": "NA",
+      "type": "boolean"
+    },
+    {
+      "label": "Remarks",
+      "key": "remarks",
+      "emptyCells": "NA",
+      "type": "string"
+    }
+  ],
+  "columnList": [
+    {
+      "label": "ID",
+      "key": "id"
+    },
+    {
+      "label": "First Name",
+      "key": "firstName"
+    },
+    {
+      "label": "Last Name",
+      "key": "lastName"
+    },
+    {
+      "label": "Gender",
+      "key": "gender"
+    },
+    {
+      "label": "Mobile/ Whatsapp",
+      "key": "whatsappNumber"
+    },
+    {
+      "label": "Alternate No.",
+      "key": "alternateNumber"
+    },
+    {
+      "label": "Date of Birth",
+      "key": "dob"
+    },
+    {
+      "label": "Email",
+      "key": "email"
+    },
+    {
+      "label": "Address",
+      "key": "address"
+    },
+    {
+      "label": "Area",
+      "key": "area"
+    },
+    {
+      "label": "Assigned Department",
+      "key": "assignedDepartmentName"
+    },
+    {
+      "label": "isActive",
+      "key": "isActive"
+    },
+    {
+      "label": "Remarks",
+      "key": "remarks"
+    }
+  ],
+  "columnConfigSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "selectValue": {
+          "type": "boolean",
+          "title": "Select All",
+          "default": true
+        },
+        "visibleColumnConfig": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "ui:order": [
+        "selectValue",
+        "visibleColumnConfig"
+      ],
+      "selectValue": {
+        "ui:widget": "checkbox",
+        "classNames": "label",
+        "ui:options": {
+          "label": false
+        }
+      },
+      "visibleColumnConfig": {
+        "ui:options": {
+          "label": false
+        }
+      }
+    }
+  },
+  "isAdvanceSearchEnable": true,
+  "advanceSearchSchema": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "inputValue": {
+          "type": "string"
+        }
+      }
+    },
+    "uiSchema": {
+      "inputValue": {
+        "ui:field": "InputField",
+        "ui:options": {
+          "label": false,
+          "style": {
+            "fieldStyle": {
+              "color": "#848484",
+              "height": "35px",
+              "padding": "5px 10px 5px 5px",
+              "position": "relative",
+              "borderRadius": "4px 0 0 4px",
+              "margin": "8px 0 0 0"
+            },
+            "fieldWrapper": {
+              "padding": "0"
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

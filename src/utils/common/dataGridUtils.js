@@ -306,6 +306,36 @@ export const getAdvanceSearchResult = ({ members, options, formData, checkedIds 
         };
       }
     });
+
     return finalMemberObject;
   });
+};
+
+export const formatCoordinatorGridData = (coordinators = []) => {
+  return coordinators.map(coordinator => ({
+    ...coordinator,
+    isActive: String(coordinator.isActive)
+  }))
+};
+
+export const getCoordinatorsByAssignedDepartments = ({ coordinators = [] }) => {
+  const coordinatorsByAssignedDepartments = [];
+  coordinators.forEach(coordinator => {
+    if (coordinator.assignedDepartments.length) {
+      coordinator.assignedDepartments.forEach((department) => {
+        coordinatorsByAssignedDepartments.push({
+          ...coordinator,
+          assignedDepartmentName: department.displayName,
+          assignedDepartmentId: department.id,
+        });
+      })
+    } else {
+      coordinatorsByAssignedDepartments.push({
+        ...coordinator,
+        assignedDepartmentName: null,
+        assignedDepartmentId: null,
+      })
+    }
+  });
+  return formatCoordinatorGridData(coordinatorsByAssignedDepartments);
 };

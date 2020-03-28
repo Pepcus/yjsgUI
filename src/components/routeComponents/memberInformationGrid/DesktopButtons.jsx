@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
+import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 
 import Box from 'pepcus-core/lib/Box';
 import Button from 'pepcus-core/lib/Button';
@@ -36,6 +37,14 @@ const DesktopButtonsContainerStyled = styled(Box)`
     `}
 `;
 
+const CoordinatorViewStyled = styled(Button)`
+    ${({ theme }) => theme.media.down('xl')`
+       min-height: 30px;
+       padding: 0;
+       width: 160px;
+    `}
+`;
+
 const FilesButtonStyled = styled(Button)`
     ${({ theme }) => theme.media.down('xl')`
        min-height: 30px;
@@ -43,6 +52,7 @@ const FilesButtonStyled = styled(Button)`
        width: 55px;
     `}
 `;
+
 const IconButtonStyled = styled(Button)`
     ${({ theme }) => theme.media.down('xl')`
        min-height: 30px;
@@ -54,6 +64,7 @@ const IconButtonStyled = styled(Button)`
 const DesktopButtons = ({
   constants,
   redirectToFile,
+  redirectToCoordinatorView,
   openColumnOption,
   refreshMembersGrid,
   attendanceFileModalFormSchema,
@@ -61,28 +72,40 @@ const DesktopButtons = ({
   isUploadAttendanceFileEnable,
   isUploadOptInFileEnable,
 }) => {
-  const { FILES } = constants;
-
+  const { FILES, COORDINATOR, COORDINATOR_VIEW } = constants;
   return (
     <DesktopButtonsContainerStyled>
       <Box width="auto" borderStyle="none" backgroundColor="unset">
         {/**
          TODO: This will be use in future scope.
          */}
+
         <UploadMembersOptInFile
           optInFileModalFormSchema={optInFileModalFormSchema}
           acl={isUploadOptInFileEnable}
         />
+        <CoordinatorViewStyled
+          padding="10px"
+          width="160px"
+          noMinWidth
+          noMinHeight
+          height="36px"
+          margin="5px"
+          onClick={redirectToCoordinatorView}
+        >
+          <FaIcon padding="0 3px 0 0" icon={faUsers} />
+          {COORDINATOR_VIEW}
+        </CoordinatorViewStyled>
         <FilesButtonStyled
           padding="10px"
           width="68px"
           noMinWidth
           noMinHeight
           height="36px"
-          margin="0 0 0 10px"
+          margin="5px"
           onClick={redirectToFile}
         >
-          <FaIcon icon={faFile} />
+          <FaIcon padding="0 3px 0 0" icon={faFile} />
           {FILES}
         </FilesButtonStyled>
         <UploadMembersAttendanceFile
@@ -96,10 +119,10 @@ const DesktopButtons = ({
           noMinWidth
           noMinHeight
           height="36px"
-          margin="0 0 0 10px"
+          margin="5px"
           onClick={openColumnOption}
         >
-          <FaIcon icon={faCog} />
+          <FaIcon padding="0 3px 0 0" icon={faCog} />
         </IconButtonStyled>
         <IconButtonStyled
           width="36px"
@@ -107,11 +130,11 @@ const DesktopButtons = ({
           noMinWidth
           noMinHeight
           height="36px"
-          margin="0 0 0 10px"
+          margin="5px"
           title="Refresh Students Information"
           onClick={refreshMembersGrid}
         >
-          <FaIcon icon={faSync} />
+          <FaIcon padding="0 3px 0 0" icon={faSync} />
         </IconButtonStyled>
       </Box>
     </DesktopButtonsContainerStyled>
@@ -122,6 +145,7 @@ DesktopButtons.propTypes = {
   constants: PropTypes.object,
   openColumnOption: PropTypes.func,
   redirectToFile: PropTypes.func,
+  redirectToCoordinator: PropTypes.func,
   refreshMembersGrid: PropTypes.func,
   attendanceFileModalFormSchema: PropTypes.object,
   optInFileModalFormSchema: PropTypes.object,
@@ -133,6 +157,7 @@ DesktopButtons.defaultProps = {
   constants: {},
   openColumnOption: () => {},
   redirectToFile: () => {},
+  redirectToCoordinator: () => {},
   refreshMembersGrid: () => {},
   attendanceFileModalFormSchema: {},
   optInFileModalFormSchema: {},

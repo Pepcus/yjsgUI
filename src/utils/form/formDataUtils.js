@@ -4,7 +4,10 @@ import {
 import {
   USER_TYPES,
 } from 'constants/member';
-import { isUserMember } from './registrationFormUtils';
+import { 
+  isUserMember,
+  isUserCoordinator
+ } from './registrationFormUtils';
 // TODO: remove tenant check condition
 /**
  * TODO by Pratik: Need to be refactored
@@ -34,6 +37,7 @@ export const getFormData = ({
   let uiSchema = {};
   let formData = {};
   let defaultMemberDataFormat = [];
+  let defaultCoordinatorDataFormat =[];
   if (isUserMember({ user }) && onlyOptInForm) {
     // eslint-disable-next-line prefer-destructuring
     schema = formConfig.schema;

@@ -30,6 +30,7 @@ import {
 import { setAPIConfigAction } from 'actions/api';
 import { setDefaultUserData } from 'actions/userActions';
 import { getUpdatedAppConfig } from 'utils/core/coreUtils';
+import { fetchCoordinatorDepartmentsSaga } from 'sagas/coordinator';
 
 function* getAppConfigurableDataSaga() {
   const tenant = yield select(getTenantName);
@@ -96,6 +97,7 @@ export function* bootstrapApplication() {
     // GET application's configurable constants file
     yield getApplicationConstants();
     // TODO by Pratik: Remove this call from bootstrap
+    yield fetchCoordinatorDepartmentsSaga();
     yield getBusCoordinatorsConfigSaga();
     yield put(setBootstrappedFlag(true));
     // For resetting the user data after page refresh.
