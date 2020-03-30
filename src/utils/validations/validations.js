@@ -214,7 +214,8 @@ export const dobCoordinatorValidator = (value, constants) => {
   if (isEmpty(temporaryValue)) {
     message = '';
 
-  } else if (moment(temporaryValue).isAfter(new Date())) {
+  } else if (moment(temporaryValue, 'DD/MM/YYYY').isAfter(new Date()) ||
+    !moment(temporaryValue, 'DD/MM/YYYY').isValid()) {
     message = ENTER_A_VALID_DOB_MESSAGE;
 
   } else {

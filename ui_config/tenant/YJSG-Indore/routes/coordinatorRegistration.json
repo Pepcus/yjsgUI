@@ -40,7 +40,6 @@
         },
         "dob": {
           "title": "Date of Birth:",
-          "format": "date",
           "type": "string",
           "customValidation": "dobCoordinatorValidator"
         },
@@ -271,6 +270,7 @@
         }
       },
       "dob": {
+        "ui:placeholder": "DD/MM/YYYY",
         "ui:options": {
           "style": {
             "fieldStyle": {

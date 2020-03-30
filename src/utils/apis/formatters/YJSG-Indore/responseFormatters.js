@@ -40,7 +40,6 @@ export const updateCoordinatorResponseFormatter = (formData = {}) => {
     ...formData,
     interestedDepartments: formattedInterestedDepartments,
     assignedDepartments: formattedAssignedDepartments,
-    isActive: typeof formData.isActive === 'string' ? formData.isActive === 'true' : formData.isActive,
   }
   };
 
