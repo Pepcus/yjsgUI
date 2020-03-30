@@ -13,6 +13,7 @@ import { getConstants } from 'reducers/constants';
 
 const TextWrapper = styled(Typography)`
     font-size: 16px !important;
+    width: 100%;
 `;
 
 /**
@@ -50,11 +51,8 @@ const SuccessMessagePopup = ({
       <Popup>
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{REGISTRATION_SUCCESS_MESSAGE_COORDINATOR}</TextWrapper>
-          <br />
           <TextWrapper>{YOUR_ID_TEXT_COORDINATOR}<strong>{id}</strong></TextWrapper>
-          <br />
           <TextWrapper>{YOUR_SECRET_CODE_TEXT_COORDINATOR}<strong>{secretKey}</strong></TextWrapper>
-          <br />
           <TextWrapper>{ID_NOTE_MESSAGE_COORDINATOR}</TextWrapper>
           <Button
             color="tertiary"

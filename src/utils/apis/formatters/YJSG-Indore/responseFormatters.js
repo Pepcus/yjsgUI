@@ -20,7 +20,7 @@ export const updateCoordinatorResponseFormatter = (formData = {}) => {
     }))
   };
 
-  if (interestedDepartments.length) {
+  if (interestedDepartments && interestedDepartments.length) {
     interestedDepartments.forEach(element => {
       formattedInterestedDepartments.push({
           label: element.displayName,
@@ -28,7 +28,7 @@ export const updateCoordinatorResponseFormatter = (formData = {}) => {
       })
     });
   }
-  if (assignedDepartments.length) {
+  if (assignedDepartments && assignedDepartments.length) {
     assignedDepartments.forEach(element => {
       formattedAssignedDepartments.push({
         departmentType: element.id,

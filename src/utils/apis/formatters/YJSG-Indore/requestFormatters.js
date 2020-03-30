@@ -70,9 +70,9 @@ export const updateCoordinatorRequestFormatter = (formData = {}) => {
   const {
     interestedDepartments = [],
     assignedDepartments = [],
-    remarks = null,
-    email = null,
-    alternateNumber = null,
+    remarks,
+    email,
+    alternateNumber,
   } = formData;
   const formattedInterestedDepartments = [];
   const formattedAssignedDepartments = [];
@@ -81,7 +81,7 @@ export const updateCoordinatorRequestFormatter = (formData = {}) => {
       id: departmentValue.value,
     }))
   };
-  if (interestedDepartments.length) {
+  if (interestedDepartments && interestedDepartments.length) {
     interestedDepartments.forEach(element => {
       formattedInterestedDepartments.push({
         id: element.value,
@@ -89,7 +89,7 @@ export const updateCoordinatorRequestFormatter = (formData = {}) => {
     });
   }
 
-  if (assignedDepartments.length) {
+  if (assignedDepartments && assignedDepartments.length) {
     assignedDepartments.forEach(element => {
       formattedAssignedDepartments.push({
         id: element.departmentType,
@@ -102,9 +102,9 @@ export const updateCoordinatorRequestFormatter = (formData = {}) => {
     ...formData,
     interestedDepartments: formattedInterestedDepartments,
     assignedDepartments: formattedAssignedDepartments,
-    remarks,
-    email,
-    alternateNumber,
+    remarks: remarks ? remarks : '',
+    email: email ? email : '',
+    alternateNumber: alternateNumber ? alternateNumber : '',
   }
 };
 

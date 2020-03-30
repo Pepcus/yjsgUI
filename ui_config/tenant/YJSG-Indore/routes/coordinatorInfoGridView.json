@@ -83,6 +83,18 @@
       "key": "remarks",
       "emptyCells": "NA",
       "type": "string"
+    },
+    {
+      "label": "Created Date",
+      "key": "createdDate",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
+      "label": "Last Modified On",
+      "key": "lastModifiedDate",
+      "emptyCells": "NA",
+      "type": "string"
     }
   ],
   "columnList": [
@@ -137,6 +149,14 @@
     {
       "label": "Remarks",
       "key": "remarks"
+    },
+    {
+      "label": "Created Date",
+      "key": "createdDate"
+    },
+    {
+      "label": "Last Modified On",
+      "key": "lastModifiedDate"
     }
   ],
   "columnConfigSchema": {
