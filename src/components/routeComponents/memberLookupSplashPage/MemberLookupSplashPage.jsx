@@ -51,6 +51,7 @@ import MemberOptInDataGrid from 'components/routeComponents/memberLookupSplashPa
 import MembersOptInUpdateStatusPopup
   from 'components/routeComponents/memberLookupSplashPage/MembersOptInUpdateStatusPopup';
 import Popup from 'components/common/Popup';
+import { fetchCoordinatorDepartmentsAction } from 'actions/coordinatorRegistrationActions';
 
 
 const SubmitButtonStyled = styled(Button)`
@@ -154,7 +155,8 @@ class MemberLookupSplashPage extends Component {
 
 
   componentDidMount() {
-   this.props.resetMemberOptInStatusData();
+    this.props.fetchCoordinatorDepartments();
+    this.props.resetMemberOptInStatusData();
   }
 
   /** If member login through URL fetchMemberByURLParams method will call.
@@ -534,6 +536,7 @@ const mapDispatchToProps = dispatch => ({
   fetchMembersByMobileNumber: ({ mobile }) => dispatch(fetchMembersByMobileNumberAction({ mobile })),
   updateMembersOptInStatus: ({ optedInMembersIds, notOptedInMembersIds }) => dispatch(updateMembersOptInStatusAction({ optedInMembersIds, notOptedInMembersIds })),
   resetMemberOptInStatusData: () => dispatch(resetMemberOptInStatusDataAction()),
+  fetchCoordinatorDepartments: () => dispatch(fetchCoordinatorDepartmentsAction()),
   setMemberRegistrationCorrectionMode: ({ mode }) => dispatch(setMemberRegistrationCorrectionModeAction({ mode })),
 });
 

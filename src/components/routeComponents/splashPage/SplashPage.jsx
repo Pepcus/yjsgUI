@@ -23,7 +23,7 @@ import {
   setMemberRegistrationCorrectionModeAction,
 } from 'actions/memberRegistrationActions';
 import {
-  setHashLinkForNewRegistrationAction, 
+  setHashLinkForNewRegistrationAction,
   setHashLinkForNewCoordinatorAction,
   setHashLinkForEditCoordinatorAction,
 } from 'actions/appActions';
@@ -50,6 +50,7 @@ import { getApplicationConfiguration, getLogoPathConfig } from 'reducers/config'
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
+import { fetchCoordinatorDepartmentsAction } from 'actions/coordinatorRegistrationActions';
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
@@ -125,6 +126,10 @@ class SplashPage extends Component {
     if (id && secretCode) {
       this.fetchMemberByURLParams({ id, secretCode, mode});
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchCoordinatorDepartments();
   }
 
   /**
@@ -239,7 +244,7 @@ class SplashPage extends Component {
     resetMemberFetchedFromUrlParams();
     setHashLinkForNewRegistration(ADMIN);
   };
-  
+
   /**
    * Method set the value of isNewCoordinator true on Onclick of newCoordinatorRegistration button.
    */
@@ -369,6 +374,7 @@ SplashPage.propTypes = {
   setMemberFetchedFromUrlParams: PropTypes.func,
   resetMemberFetchedFromUrlParams: PropTypes.func,
   loginAdmin: PropTypes.func,
+  fetchCoordinatorDepartments: PropTypes.func,
 };
 
 SplashPage.defaultProps = {
@@ -387,6 +393,7 @@ SplashPage.defaultProps = {
   setMemberFetchedFromUrlParams: () => {},
   resetMemberFetchedFromUrlParams: () => {},
   loginAdmin: () => {},
+  fetchCoordinatorDepartments: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -410,6 +417,7 @@ const mapDispatchToProps = dispatch => ({
   loginAdmin: ({ adminId, adminPassword, preStoredAdminCredentials }) => dispatch(loginAdminAction({ adminId, adminPassword, preStoredAdminCredentials })),
   setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
   resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
+  fetchCoordinatorDepartments: () => dispatch(fetchCoordinatorDepartmentsAction()),
   setMemberRegistrationCorrectionMode: ({ mode }) => dispatch(setMemberRegistrationCorrectionModeAction({ mode })),
 });
 
