@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FaIcon from 'pepcus-core/lib/FaIcon';
-import Button from 'pepcus-core/package/lib/Button';
+import Button from 'pepcus-core/lib/Button';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 export const TrashIconButton = (props) => {

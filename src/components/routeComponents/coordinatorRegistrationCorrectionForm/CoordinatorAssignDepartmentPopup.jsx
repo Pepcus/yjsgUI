@@ -111,7 +111,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
       BACK,
       SUBMIT,
     } = constants;
-    const { FieldTemplate } = fields;
+    const { FieldTemplate, ArrayFieldTemplate } = fields;
     return (
       <BoxStyled
         elevation={1}
@@ -124,6 +124,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
         <RowStyled >
           <Row display="inline-block" width="100%" justify="center" margin="0">
           <Form
+            ArrayFieldTemplate={ArrayFieldTemplate}
             enableDirtyCheck
             externalSubmission
             FieldTemplate={FieldTemplate}
