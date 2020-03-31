@@ -1,11 +1,17 @@
 import React from 'react';
-
-import { getStyles } from 'constants/gridData';
+import { connect } from 'react-redux';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
+import isEmpty from 'lodash/isEmpty';
 import DataGrid from 'simple-react-data-grid';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Box from 'pepcus-core/lib/Box';
 import { getThemeProps } from 'pepcus-core/utils/theme';
+import Typography from 'pepcus-core/lib/Typography';
+import FaIcon from 'pepcus-core/lib/FaIcon';
+
+import { getStyles } from 'constants/gridData';
+import { getConstants } from 'reducers/constants';
 
 const MessageBoxStyled = styled(Box)`
     margin: 20px 10px;
@@ -44,6 +50,30 @@ const CoordinatorInfoGrid = ({
   getSelectedRow,
   onClickAllExport,
 }) => {
+  const {
+    NO_COLUMNS_SELECTED_MESSAGE,
+    INFORMATION_NOT_AVAILABLE_MESSAGE,
+  } = constants;
+
+  if (isEmpty(metaData.headerConfig)) {
+    return (
+      <MessageBoxStyled>
+        <Typography type="caption" padding="0 15px 0 0">
+          <FaIcon icon={faExclamationTriangle} />
+        </Typography>
+        {NO_COLUMNS_SELECTED_MESSAGE}
+      </MessageBoxStyled>
+    );
+  } else if (isEmpty(coordinators)) {
+    return (
+      <MessageBoxStyled>
+        <Typography type="caption" padding="0 15px 0 0">
+          <FaIcon icon={faExclamationTriangle} />
+        </Typography>
+        {INFORMATION_NOT_AVAILABLE_MESSAGE}
+      </MessageBoxStyled>
+    );
+  }
   return (
     <GridWrapperStyled padding="0" borderStyle="none" backgroundColor="unset">
       <DataGrid
@@ -73,5 +103,9 @@ CoordinatorInfoGrid.defaultProps = {
   onClickAllExport: () => {},
 };
 
+const mapStateToProps = state => ({
+  constants: getConstants(state),
+});
 
-export default (CoordinatorInfoGrid);
+
+export default connect(mapStateToProps)(CoordinatorInfoGrid);

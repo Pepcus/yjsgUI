@@ -323,11 +323,23 @@ export const getCoordinatorsByAssignedDepartments = ({ coordinators = [] }) => {
   coordinators.forEach(coordinator => {
     if (coordinator.assignedDepartments.length) {
       coordinator.assignedDepartments.forEach((department) => {
-        coordinatorsByAssignedDepartments.push({
-          ...coordinator,
-          assignedDepartmentName: department.displayName,
-          assignedDepartmentId: department.id,
-        });
+        if (department.departmentValues && department.departmentValues.length) {
+          department.departmentValues.forEach((departmentValue) => {
+            coordinatorsByAssignedDepartments.push({
+              ...coordinator,
+              assignedDepartmentName: department.displayName,
+              assignedDepartmentId: department.id,
+              assignedDepartmentValue: departmentValue.displayName,
+              assignedDepartmentValueId: departmentValue.id,
+            });
+          })
+        } else {
+          coordinatorsByAssignedDepartments.push({
+            ...coordinator,
+            assignedDepartmentName: department.displayName,
+            assignedDepartmentId: department.id,
+          });
+        }
       })
     } else {
       coordinatorsByAssignedDepartments.push({

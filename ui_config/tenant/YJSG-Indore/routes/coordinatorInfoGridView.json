@@ -49,6 +49,12 @@
       "type": "string"
     },
     {
+      "label": "Department Value",
+      "key": "assignedDepartmentValue",
+      "emptyCells": "NA",
+      "type": "string"
+    },
+    {
       "label": "Date of Birth",
       "key": "dob",
       "emptyCells": "NA",
@@ -141,6 +147,10 @@
     {
       "label": "Assigned Department",
       "key": "assignedDepartmentName"
+    },
+    {
+      "label": "Department Value",
+      "key": "assignedDepartmentValue"
     },
     {
       "label": "isActive",
