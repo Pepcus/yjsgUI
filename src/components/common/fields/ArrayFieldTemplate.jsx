@@ -13,6 +13,7 @@ import { getThemeProps } from 'pepcus-core/utils/theme';
 import FormGroupTitle from './FormGroupTitle';
 import FaIcon from 'pepcus-core/lib/FaIcon';
 
+
 const ArrayFieldTemplateStyled = styled.div`
     /**
      * Add all of the remaining styles from theme
@@ -20,9 +21,46 @@ const ArrayFieldTemplateStyled = styled.div`
     ${getThemeProps('ArrayFieldTemplate.styles')};
 `;
 
+const ArrayFieldContainer = styled.div`
+    display: flex;
+    align-items: center;
+    @media(max-width:768px) {
+       display: block;
+       border-bottom: 1px solid #c3b8b8;
+    }
+`;
+
 const ArrayFieldButtons = styled.div`
     padding: 10px 0;
+    width: 50px;
+    @media(max-width:768px) {
+        width: 100%;
+    }
 `;
+
+const ArrayFormContainer = styled.div`
+    width: calc(100% - 50px);
+    @media(max-width:768px) {
+       width: 100%;
+    }
+`;
+
+const buttonStyle = {
+  marginRight: "10px",
+  minWidth: "50px",
+  padding: "0",
+  background: "linear-gradient(to top,#f9570a,#f9570a)",
+  borderColor: "#d24c0c",
+  marginTop: "12px"
+};
+
+const addButtonStyle = {
+  minWidth: "50px",
+  padding: "0",
+  background: "linear-gradient(to top,#f9570a,#f9570a)",
+  borderColor: "#d24c0c",
+  marginTop: "12px",
+};
 
 function ArrayFieldTemplate(props) {
   const { canAdd, formContext, idSchema, items, onAddClick, required } = props;
@@ -46,16 +84,15 @@ function ArrayFieldTemplate(props) {
     <ArrayFieldTemplateStyled>
       {renderTitle()}
       {items.map(item => (
-        <div key={item.index}>
-          <div>{item.children}</div>
+        <ArrayFieldContainer key={item.index}>
+          <ArrayFormContainer style={{width: "100%"}}>{item.children}</ArrayFormContainer>
           <ArrayFieldButtons>
             {item.hasMoveDown && (
               <Button
                 noMinWidth
                 noPaddingY
                 onClick={item.onReorderClick(item.index, item.index + 1)}
-                style={{ marginRight: '10px' }}
-                width="47px"
+                style={buttonStyle}
               >
                 <FaIcon icon={faChevronDown} />
               </Button>
@@ -65,8 +102,7 @@ function ArrayFieldTemplate(props) {
                 noMinWidth
                 noPaddingY
                 onClick={item.onReorderClick(item.index, item.index - 1)}
-                style={{ marginRight: '10px' }}
-                width="47px"
+                style={buttonStyle}
               >
                 <FaIcon icon={faChevronUp} />
               </Button>
@@ -76,16 +112,16 @@ function ArrayFieldTemplate(props) {
               noPaddingY
               onClick={item.onDropIndexClick(item.index)}
               color="error"
+              style={buttonStyle}
             >
               <FaIcon icon={faTrash} />
             </Button>
           </ArrayFieldButtons>
-        </div>
+        </ArrayFieldContainer>
       ))}
-
       {canAdd && (
-        <div>
-          <Button onClick={onAddClick}>
+        <div style={{ textAlign: 'right' }}>
+          <Button onClick={onAddClick} style={addButtonStyle}>
             <FaIcon icon={faPlus} />
           </Button>
         </div>
