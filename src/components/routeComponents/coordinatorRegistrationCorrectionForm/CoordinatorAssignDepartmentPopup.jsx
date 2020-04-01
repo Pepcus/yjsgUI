@@ -112,6 +112,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
       }),
       formData: this.formatAssignDepartmentsFormData(formData),
       hasError: !isEmpty(errors),
+      isRequiredInfoUnavailable: false,
     });
   };
 
@@ -130,7 +131,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
     if (this.state.isRequiredInfoUnavailable) {
       return getTransformedErrors({ errors, transformErrors });
     }
-    return [];
+    return getTransformedErrors({errors});
   };
 
   onClickSubmit = () => {
