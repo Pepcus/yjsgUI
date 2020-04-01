@@ -27,11 +27,12 @@ const BoxStyled = styled(Box)`
 const RowStyled = styled(Row)`
     margin: 0 !important;
     border-radius: 4px;
-    padding: 50px;
+    padding: 30px;
     background: ${getThemeProps('palette.policyMuted.color')};
     max-width: 90%;
     text-align: center;
-    line-height: 30px;
+    line-height: 18px;
+    font-size: 14px;
     max-height: 80%;
     width: 80%;
     overflow: auto;
@@ -66,6 +67,20 @@ class CoordinatorAssignDepartmentPopup extends Component {
     };
   }
 
+  formatAssignDepartmentsFormData = (formData = {}) => {
+    const { coordinatorDepartmentsAssignment } = formData;
+    // Since the SelectList for departmentType always returns a string on change,
+    // we have to manually convert it into number
+    const formattedData = coordinatorDepartmentsAssignment.map((data) => ({
+      departmentType: Number(data.departmentType),
+      departmentValue: data.departmentValue,
+    }));
+    return {
+      ...formData,
+      coordinatorDepartmentsAssignment: formattedData,
+    };
+  };
+
   /**
    * Method handle on change of form fields
    * @param {Object} event
@@ -76,9 +91,8 @@ class CoordinatorAssignDepartmentPopup extends Component {
       formConfig: updateFormConfigForAssignDepartmentPopup({
         formConfig,
         coordinatorDepartments,
-        formData,
       }),
-      formData,
+      formData: this.formatAssignDepartmentsFormData(formData),
       hasError: !isEmpty(errors),
     });
   };

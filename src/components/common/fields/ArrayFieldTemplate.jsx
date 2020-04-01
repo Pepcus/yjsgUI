@@ -47,11 +47,11 @@ const ArrayFormContainer = styled.div`
 
 const buttonStyle = {
   marginRight: "10px",
+  marginLeft: "10px",
   minWidth: "50px",
   padding: "0",
   background: "linear-gradient(to top,#f9570a,#f9570a)",
   borderColor: "#d24c0c",
-  marginTop: "12px"
 };
 
 const addButtonStyle = {
@@ -60,6 +60,7 @@ const addButtonStyle = {
   background: "linear-gradient(to top,#f9570a,#f9570a)",
   borderColor: "#d24c0c",
   marginTop: "12px",
+  left: "10px",
 };
 
 function ArrayFieldTemplate(props) {

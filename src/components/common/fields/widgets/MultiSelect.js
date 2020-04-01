@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import ReactSelect from 'react-select';
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-// const TypographyStyled = styled(Typography)`
-//    color: ${getThemeProps('typography.titleFieldColor.color')}
-//    font-weight: bold !important;
-//    display: block;
-//   `;
 
 function MultiSelect(props) {
   const { options, onChange, value, placeholder, schema, uiSchema } = props;
-  const { enumOptions } = options;
-  const style = get(uiSchema, 'ui:options.style', {});
+  const { enumOptions, style } = options;
   const { fieldStyle } = style;
   const getEnumOptionsFromEnumValues = ({ enumValues = [], enumNames = [] }) => {
     return enumValues.map((enumValue, index) => ({
@@ -32,11 +25,30 @@ function MultiSelect(props) {
     }
   };
 
+  /**
+   * For more info on react-select style
+   * visit: https://react-select.com/styles
+   */
+  const getCustomStyles = () => {
+    return {
+      multiValue: (provided, state) => {
+        return {
+          ...provided,
+          width: '120px',
+        };
+      },
+      menu: (provided, state) => ({
+        ...provided,
+        textAlign: 'left',
+      }),
+    }
+  };
+
 
   return (
     <ReactSelect
       isMulti
-      style={{ ...fieldStyle }}
+      styles={{...getCustomStyles(), ...fieldStyle,}}
       onChange={(event) => onChange(event)}
       options={getEnumOptions()}
       value={value}

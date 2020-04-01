@@ -935,10 +935,13 @@
         },
         "items": {
           "departmentType": {
+            "ui:field": "SelectList",
             "ui:options": {
               "style": {
                 "fieldStyle": {
-                  "height": "auto"
+                  "height": "auto",
+                  "padding": "7px",
+                  "borderColor": "#ccc"
                 }
               },
               "col": {
