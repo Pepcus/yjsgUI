@@ -74,7 +74,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
     // Since the SelectList for departmentType always returns a string on change,
     // we have to manually convert it into number
     const formattedData = coordinatorDepartmentsAssignment.map((data = {}, index) => {
-      if (!isEmpty(data) && !isEmpty(previousData[index])) {
+      if (!isEmpty(data) && Number(data.departmentType)) {
         if (Number(data.departmentType) !== Number(previousData[index].departmentType)) {
           return {
             ...data,
