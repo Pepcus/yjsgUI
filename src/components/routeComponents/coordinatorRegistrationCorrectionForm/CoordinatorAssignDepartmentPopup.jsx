@@ -64,17 +64,35 @@ class CoordinatorAssignDepartmentPopup extends Component {
       coordinator: props.coordinator,
       coordinatorDepartments: props.coordinatorDepartments,
       hasError: true,
+      isRequiredInfoUnavailable: false,
     };
   }
 
   formatAssignDepartmentsFormData = (formData = {}) => {
     const { coordinatorDepartmentsAssignment } = formData;
+    const { coordinatorDepartmentsAssignment: previousData = [] } = this.state.formData;
     // Since the SelectList for departmentType always returns a string on change,
     // we have to manually convert it into number
-    const formattedData = coordinatorDepartmentsAssignment.map((data) => ({
-      departmentType: Number(data.departmentType),
-      departmentValue: data.departmentValue,
-    }));
+    const formattedData = coordinatorDepartmentsAssignment.map((data = {}, index) => {
+      if (!isEmpty(data) && !isEmpty(previousData[index])) {
+        if (Number(data.departmentType) !== Number(previousData[index].departmentType)) {
+          return {
+            ...data,
+            departmentType: Number(data.departmentType),
+            departmentValue: [],
+          }
+        } else {
+          return {
+            ...data,
+            departmentType: Number(data.departmentType),
+          }
+        }
+      } else {
+        return {
+          ...data,
+        }
+      }
+    });
     return {
       ...formData,
       coordinatorDepartmentsAssignment: formattedData,
@@ -109,12 +127,19 @@ class CoordinatorAssignDepartmentPopup extends Component {
     const transformErrors = {
       required: THIS_INFORMATION_IS_MANDATORY_MESSAGE,
     };
-    return getTransformedErrors({ errors, transformErrors });
+    if (this.state.isRequiredInfoUnavailable) {
+      return getTransformedErrors({ errors, transformErrors });
+    }
+    return [];
   };
 
   onClickSubmit = () => {
     if (!this.state.hasError) {
       this.props.onSubmit(this.state.formData.coordinatorDepartmentsAssignment);
+    } else {
+      this.setState({
+        isRequiredInfoUnavailable: true,
+      })
     }
   };
 
