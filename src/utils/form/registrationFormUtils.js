@@ -9,7 +9,9 @@ import {
 
 const {
   MEMBER_WITH_URL,
+  COORDINATOR_WITH_URL,
   MEMBER,
+  COORDINATOR,
 } = USER_TYPES;
 
 /**
@@ -76,6 +78,8 @@ export const getBusNumberFromBusStop = ({ busDetails = {}, busStop = '' }) => {
   });
   return requiredBusNumber;
 };
+
+export const isUserCoordinator = ({ user }) => user === COORDINATOR_WITH_URL || user === COORDINATOR;
 
 export const getOptInMembers = ({ members = [] }) => {
   return members.filter(member => member.optIn2020 === 'Y')

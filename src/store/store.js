@@ -21,10 +21,13 @@ if (window.localStorage.getItem('reduxState')) {
 
 const sagaMiddleware = createSagaMiddleware();
 
+const appliedMiddleware = process.env.NODE_ENV === 'development' ?
+  applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware);
+
 const store = createStore(
   rootReducer,
   persistedState,
-  applyMiddleware(sagaMiddleware, logger),
+  appliedMiddleware,
 );
 
 function* sagaWatchers() {

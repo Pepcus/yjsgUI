@@ -24,6 +24,8 @@ import {
 } from 'actions/memberRegistrationActions';
 import {
   setHashLinkForNewRegistrationAction,
+  setHashLinkForNewCoordinatorAction,
+  setHashLinkForEditCoordinatorAction,
 } from 'actions/appActions';
 import {
   loginAdminAction,
@@ -48,6 +50,7 @@ import { getApplicationConfiguration, getLogoPathConfig } from 'reducers/config'
 
 import LoginForm from './LoginForm';
 import ImageWrapper from './ImageWrapper';
+import { fetchCoordinatorDepartmentsAction } from 'actions/coordinatorRegistrationActions';
 
 const ContainerStyled = styled(Container)`
   background-color: ${getThemeProps('home.backgroundColor')};
@@ -101,6 +104,8 @@ class SplashPage extends Component {
       hasError: false,
       isAdmin: false,
       isNewRegistration: false,
+      isNewCoordinator: false,
+      isEditCoordinator: false,
       isURLParams: false,
       redirectToRoute: '',
     };
@@ -121,6 +126,10 @@ class SplashPage extends Component {
     if (id && secretCode) {
       this.fetchMemberByURLParams({ id, secretCode, mode});
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchCoordinatorDepartments();
   }
 
   /**
@@ -223,7 +232,7 @@ class SplashPage extends Component {
   };
 
   /**
-   * Method set the value of isNewRegistration true on Onclick of new registration button.
+   * Method set the value of isNewRegistration true on Onclick of newStudentRegistration button.
    */
   redirectToNewRegistrationPage = () => {
     const { setHashLinkForNewRegistration, resetMemberFetchedFromUrlParams } = this.props;
@@ -236,11 +245,39 @@ class SplashPage extends Component {
     setHashLinkForNewRegistration(ADMIN);
   };
 
+  /**
+   * Method set the value of isNewCoordinator true on Onclick of newCoordinatorRegistration button.
+   */
+  redirectToNewCoordinatorPage = () => {
+    const { setHashLinkForNewCoordinator } = this.props;
+    const { COORDINATOR } = USER_TYPES;
+
+    this.setState({
+      isNewCoordinator: true,
+    });
+    setHashLinkForNewCoordinator(COORDINATOR);
+  };
+
+  /**
+   * Method set the value of isEditCoordinator true on Onclick of editCoordinatorRegistration button.
+   */
+  redirectToEditCoordinatorPage = () => {
+    const { setHashLinkForEditCoordinator } = this.props;
+    const { COORDINATOR } = USER_TYPES;
+
+    this.setState({
+      isEditCoordinator: true,
+    });
+    setHashLinkForEditCoordinator(COORDINATOR);
+  };
+
   render() {
     const {
       admin,
       isAdmin,
       isNewRegistration,
+      isNewCoordinator,
+      isEditCoordinator,
       isURLParams,
     } = this.state;
     const {
@@ -299,8 +336,12 @@ class SplashPage extends Component {
               handleDisableAdminLoginButtons={this.handleDisableAdminLoginButtons}
               isAdmin={isAdmin}
               isNewRegistration={isNewRegistration}
+              isNewCoordinator={isNewCoordinator}
+              isEditCoordinator={isEditCoordinator}
               onChange={this.onChange}
               redirectToNewRegistrationPage={this.redirectToNewRegistrationPage}
+              redirectToNewCoordinatorPage={this.redirectToNewCoordinatorPage}
+              redirectToEditCoordinatorPage={this.redirectToEditCoordinatorPage}
               setAdminLogin={this.setAdminLogin}
               transformErrors={this.transformErrors}
               adminCredentialErrorMessage={this.state.adminCredentialErrorMessage}
@@ -327,10 +368,13 @@ SplashPage.propTypes = {
   password: PropTypes.string,
   setAdminCredentials: PropTypes.func,
   setHashLinkForNewRegistration: PropTypes.func,
+  setHashLinkForNewCoordinator: PropTypes.func,
+  setHashLinkForEditCoordinator: PropTypes.func,
   setMemberCredentials: PropTypes.func,
   setMemberFetchedFromUrlParams: PropTypes.func,
   resetMemberFetchedFromUrlParams: PropTypes.func,
   loginAdmin: PropTypes.func,
+  fetchCoordinatorDepartments: PropTypes.func,
 };
 
 SplashPage.defaultProps = {
@@ -343,10 +387,13 @@ SplashPage.defaultProps = {
   password: '',
   setAdminCredentials: () => {},
   setHashLinkForNewRegistration: () => {},
+  setHashLinkForNewCoordinator: () => {},
+  setHashLinkForEditCoordinator: () => {},
   setMemberCredentials: () => {},
   setMemberFetchedFromUrlParams: () => {},
   resetMemberFetchedFromUrlParams: () => {},
   loginAdmin: () => {},
+  fetchCoordinatorDepartments: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -364,10 +411,13 @@ const mapDispatchToProps = dispatch => ({
   fetchMemberData: ({ id, secretKey }) => dispatch(fetchMemberDataAction({ id, secretKey })),
   setAdminCredentials: ({ id, password }) => dispatch(setAdminCredentialsAction({ id, password })),
   setHashLinkForNewRegistration: userType => dispatch(setHashLinkForNewRegistrationAction(userType)),
+  setHashLinkForNewCoordinator: userType => dispatch(setHashLinkForNewCoordinatorAction(userType)),
+  setHashLinkForEditCoordinator: userType => dispatch(setHashLinkForEditCoordinatorAction(userType)),
   setMemberCredentials: ({ id, secretKey }) => dispatch(setMemberCredentialsAction({ id, secretKey })),
   loginAdmin: ({ adminId, adminPassword, preStoredAdminCredentials }) => dispatch(loginAdminAction({ adminId, adminPassword, preStoredAdminCredentials })),
   setMemberFetchedFromUrlParams: () => dispatch(setMemberFetchedFromUrlParamsAction()),
   resetMemberFetchedFromUrlParams: () => dispatch(resetMemberFetchedFromUrlParamsAction()),
+  fetchCoordinatorDepartments: () => dispatch(fetchCoordinatorDepartmentsAction()),
   setMemberRegistrationCorrectionMode: ({ mode }) => dispatch(setMemberRegistrationCorrectionModeAction({ mode })),
 });
 

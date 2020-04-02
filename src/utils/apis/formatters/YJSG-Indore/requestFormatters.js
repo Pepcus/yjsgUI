@@ -1,3 +1,5 @@
+import { isEmpty } from 'pepcus-core';
+
 export const formatUpdateMemberDataPayload = (updatedMember) => {
   const {
     address,
@@ -63,3 +65,50 @@ export const uploadOptInFileRequestFormatter = (data) => {
 export const markMemberOptStatusRequestFormatter = data => JSON.stringify(data);
 
 export const markMemberIdCardStatusRequestFormatter = data => JSON.stringify(data);
+
+export const updateCoordinatorRequestFormatter = (formData = {}) => {
+  const {
+    interestedDepartments = [],
+    assignedDepartments = [],
+    remarks,
+    email,
+    alternateNumber,
+  } = formData;
+  const formattedInterestedDepartments = [];
+  const formattedAssignedDepartments = [];
+  const getFormattedDepartmentValues = (departmentValues = []) => {
+    return departmentValues.map(departmentValue => ({
+      id: departmentValue.value,
+    }))
+  };
+  if (interestedDepartments && interestedDepartments.length) {
+    interestedDepartments.forEach(element => {
+      if (element.value) {
+        formattedInterestedDepartments.push({
+          id: element.value,
+        })
+      }
+    });
+  }
+
+  if (assignedDepartments && assignedDepartments.length) {
+    assignedDepartments.forEach(element => {
+      if (element.departmentType) {
+        formattedAssignedDepartments.push({
+          id: element.departmentType,
+          departmentValues: !isEmpty(element.departmentValue) ? getFormattedDepartmentValues(element.departmentValue) : undefined,
+        })
+      }
+    })
+  }
+
+  return {
+    ...formData,
+    interestedDepartments: formattedInterestedDepartments,
+    assignedDepartments: formattedAssignedDepartments,
+    remarks: remarks ? remarks : '',
+    email: email ? email : '',
+    alternateNumber: alternateNumber ? alternateNumber : '',
+  }
+};
+

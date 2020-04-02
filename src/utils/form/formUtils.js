@@ -23,9 +23,13 @@ export const getTransformedErrors = ({ errors = [], transformErrors }) => {
         transformedErrors.push(error);
       }
     });
-    return transformedErrors;
+    return suppressEnumErrors(transformedErrors);
   }
-  return errors;
+  return suppressEnumErrors(errors);
+};
+
+export const suppressEnumErrors = (errors) => {
+  return errors.filter(error => error.name !== 'enum' && error.name !== 'oneOf');
 };
 
 const applyValidators = (schemaItem, formData, errors, constants) => {

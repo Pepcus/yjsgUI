@@ -31,6 +31,7 @@ const BoxStyled = styled(Box)`
  ${({ theme }) => theme.media.down('lg')`
      margin: auto; 
      height: 100%;
+     margin-top: 20px;
  `}
  @media (max-width: 992px) and (orientation: landscape) {
         height: auto;
@@ -62,6 +63,7 @@ const TypographyHeadingStyled = styled(Typography)`
 
 const TypographyFormHeadingStyled = styled(Typography)`
    padding-left: 8px;
+   line-height: 25px !important;
 `;
 
 class SearchPage extends Component {
@@ -138,7 +140,16 @@ class SearchPage extends Component {
     if ((this.props.users).length > 0) {
       return (
         <div>
-          <div style={{ display: 'block', padding: '0 10px 0 10px', width: '100%', marginBottom: '10px', fontWeight: 'bold', color: '#4c4c4c' }}>
+          <div style={{
+            display: 'block',
+            padding: '0 10px 0 10px',
+            width: '100%',
+            marginBottom: '10px',
+            fontWeight: 'bold',
+            color: '#4c4c4c',
+            lineHeight: '25px',
+          }}
+          >
             <label>{this.props.constants.USER_LIST_HEADING}</label>
           </div>
           {this.renderUserList()}
