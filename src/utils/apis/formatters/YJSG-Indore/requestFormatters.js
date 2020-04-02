@@ -83,18 +83,22 @@ export const updateCoordinatorRequestFormatter = (formData = {}) => {
   };
   if (interestedDepartments && interestedDepartments.length) {
     interestedDepartments.forEach(element => {
-      formattedInterestedDepartments.push({
-        id: element.value,
-      })
+      if (element.value) {
+        formattedInterestedDepartments.push({
+          id: element.value,
+        })
+      }
     });
   }
 
   if (assignedDepartments && assignedDepartments.length) {
     assignedDepartments.forEach(element => {
-      formattedAssignedDepartments.push({
-        id: element.departmentType,
-        departmentValues: !isEmpty(element.departmentValue) ? getFormattedDepartmentValues(element.departmentValue) : undefined,
-      })
+      if (element.departmentType) {
+        formattedAssignedDepartments.push({
+          id: element.departmentType,
+          departmentValues: !isEmpty(element.departmentValue) ? getFormattedDepartmentValues(element.departmentValue) : undefined,
+        })
+      }
     })
   }
 

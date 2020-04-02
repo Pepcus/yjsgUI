@@ -63,7 +63,7 @@ class CoordinatorAssignDepartmentPopup extends Component {
       },
       coordinator: props.coordinator,
       coordinatorDepartments: props.coordinatorDepartments,
-      hasError: true,
+      hasError: false,
       isRequiredInfoUnavailable: false,
     };
   }
