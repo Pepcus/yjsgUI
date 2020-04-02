@@ -85,6 +85,12 @@
       "type": "boolean"
     },
     {
+      "label": "Secret Code",
+      "key": "secretKey",
+      "emptyCells": "NA",
+      "type": "boolean"
+    },
+    {
       "label": "Remarks",
       "key": "remarks",
       "emptyCells": "NA",
@@ -155,6 +161,10 @@
     {
       "label": "isActive",
       "key": "isActive"
+    },
+    {
+      "label": "Secret Code",
+      "key": "secretKey"
     },
     {
       "label": "Remarks",
