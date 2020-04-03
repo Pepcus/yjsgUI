@@ -496,7 +496,7 @@ class CoordinatorInfoGridView extends React.Component {
                 acl={isAdvanceSearchEnable}
                 advanceSearchSchema={advanceSearchSchema}
                 metaData={metaData}
-                members={this.props.coordinators}
+                members={getCoordinatorsByAssignedDepartments({ coordinators: this.props.coordinators })}
                 onFilter={this.onFilter}
                 checkedIds={checkedIds}
               />
