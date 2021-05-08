@@ -101,6 +101,7 @@ const CorrectionsForm = ({
     );
   };
 
+
   if (formConfig) {
     return (
       <ContainerStyled width="100%" ref={formRef}>

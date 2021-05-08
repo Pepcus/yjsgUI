@@ -29,7 +29,7 @@ import {
   getFormData,
   getTransformedErrors,
   formValidators,
-  getBusNumberFromBusStop,
+  // getBusNumberFromBusStop,
 } from 'utils/form';
 import { getApplicationTenant, getBusCoordinators } from 'reducers/assetFilesReducer';
 import {
@@ -366,7 +366,8 @@ class MemberRegistrationCorrectionForm extends Component {
       </BackButtonStyled>
     );
   };
-
+  /*
+  Commenting out this code for now as it could be useful in future.
   handleMemberBusStopChange = (busStopValue) => {
     const { ADMIN, MEMBER } = USER_TYPES;
     const { user } = this.props;
@@ -378,7 +379,7 @@ class MemberRegistrationCorrectionForm extends Component {
           isBusStopChangeWarningPopupVisible: true,
         });
       }
-      /*
+      /!*
       // TODO: This requirement is currently not been finalized. Waiting for the approval.
       // if user is admin then prepopulate the designated busNumber on change of busStop.
       if (user === ADMIN) {
@@ -397,10 +398,11 @@ class MemberRegistrationCorrectionForm extends Component {
           },
         })
       }
-      */
+      *!/
     }
   };
 
+  */
   onConfirmBusStopChangeWarning = () => {
     this.setState({
       hasUserSeenBusStopChangeWarning: true,
@@ -434,11 +436,12 @@ class MemberRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
       hasError: !isEmpty(errors),
     });
-    if (previousFormData.busStop !== formData.busStop) {
-      this.handleMemberBusStopChange(formData.busStop);
-    }
+    // if (previousFormData.busStop !== formData.busStop) {
+    //   this.handleMemberBusStopChange(formData.busStop);
+    // }
   };
-
+  /*
+  Commenting out this code for now as it could be useful in future
   renderBusStopChangeWarningPopup = () => {
     const {
       hasUserSeenBusStopChangeWarning,
@@ -455,7 +458,7 @@ class MemberRegistrationCorrectionForm extends Component {
     }
     return null;
   }
-
+  */
   render() {
     const {
       context,
@@ -466,7 +469,7 @@ class MemberRegistrationCorrectionForm extends Component {
       tenant,
       user,
       constants,
-      config
+      config,
     } = this.props;
 
     const {
@@ -510,9 +513,6 @@ class MemberRegistrationCorrectionForm extends Component {
             isUpdatedReset={isUpdatedReset}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
           />
-          {
-            this.renderBusStopChangeWarningPopup()
-          }
         </CorrectionsForm>
       );
     }
@@ -531,7 +531,7 @@ class MemberRegistrationCorrectionForm extends Component {
     }
     return (
       <Loader isLoading />
-    )
+    );
   }
 }
 

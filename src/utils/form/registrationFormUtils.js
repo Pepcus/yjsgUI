@@ -68,7 +68,8 @@ export const getRegisteredMemberData = ({ memberData }) => {
 };
 
 export const isUserMember = ({ user }) => user === MEMBER_WITH_URL || user === MEMBER;
-
+/*
+// Commenting out this code for now as it could be useful in future
 export const getBusNumberFromBusStop = ({ busDetails = {}, busStop = '' }) => {
   let requiredBusNumber = '';
   Object.entries(busDetails).map(([busNumber, busData]) => {
@@ -78,6 +79,7 @@ export const getBusNumberFromBusStop = ({ busDetails = {}, busStop = '' }) => {
   });
   return requiredBusNumber;
 };
+*/
 
 export const isUserCoordinator = ({ user }) => user === COORDINATOR_WITH_URL || user === COORDINATOR;
 
