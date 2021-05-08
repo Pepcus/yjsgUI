@@ -121,14 +121,8 @@ export const memberRegistrationReducer = (state = initialState, action) => {
     case 'FETCH_MEMBER_FAILED':
       sessionStorage.setItem('memberData', null);
       return {
-        ...state,
-        isLoading: false,
+        ...initialState,
         isFetched: true,
-        member: {},
-        id: '',
-        secretKey: '',
-        updatedMember: {},
-        isMemberFetchedFromUrlParams: false,
       };
 
     case 'SET_MEMBER_DATA':
@@ -159,8 +153,7 @@ export const memberRegistrationReducer = (state = initialState, action) => {
     case 'RESET_MEMBER_FETCHED_FROM_URL_PARAMS':
       return {
         ...state,
-        isMemberFetchedFromUrlParams: false,
-        registrationCorrectionMode: '',
+        ...initialState,
       };
 
     case 'FETCH_MEMBERS_BY_MOBILE_NUMBER_SUCCESS':

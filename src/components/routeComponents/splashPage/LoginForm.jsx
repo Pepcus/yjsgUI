@@ -47,7 +47,7 @@ const ButtonStyled = styled(Button)`
  * @param {String} password
  * @param {Boolean} isAdminLogin
  * @param {Function} setRedirectToRoute
- * @return {HTML}
+ * @return {JSX.Element}
  */
 const LoginForm = ({
   config,
@@ -97,18 +97,13 @@ const LoginForm = ({
       />
     );
 
-  }
-
-  else if (isNewRegistration) {
+  } else if (isNewRegistration) {
     return <Switch><Redirect to="/member-register" /></Switch>;
-  }
-  else if (isNewCoordinator) {
+  } else if (isNewCoordinator) {
     return <Switch><Redirect to="/coordinator-register" /></Switch>;
-  }
-  else if (isEditCoordinator) {
+  } else if (isEditCoordinator) {
     return <Switch><Redirect to="/coordinator-login" /></Switch>;
-  }
-  else if (!isAdmin) {
+  } else if (!isAdmin) {
     return (
       <Row justify="center" margin="0 0 25px 0">
         <ButtonStyled

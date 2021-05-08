@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-var path = require('path');
-const webpack = require('webpack');
+const path = require('path');
+// const webpack = require('webpack');
 
 
 module.exports = {
@@ -11,16 +12,16 @@ module.exports = {
     path: path.resolve(__dirname, './build'),
     filename: 'main.js',
   },
-  node: { fs: 'empty' },
+  // node: { fs: 'empty' },
   devtool: 'source-map',
   devServer: {
     port: 9000,
     proxy: {
-      '/v1': {
-        target: 'http://localhost:8081',
+      '/v1/': {
+        target: 'http://ec2-3-108-38-68.ap-south-1.compute.amazonaws.com:83',
       },
-	  '/api/gms': {
-        target: 'http://localhost:8081',
+      '/api/gms': {
+        target: 'http://ec2-3-108-38-68.ap-south-1.compute.amazonaws.com:83',
       },
     },
   },

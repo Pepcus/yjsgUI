@@ -120,7 +120,6 @@ export function* fetchCoordinatorDepartmentsSaga(action) {
   } catch (e) {
     yield put(fetchCoordinatorDepartmentsFailedAction(errorMessage));
     yield put(setLoadingStateAction(false));
-    throw e;
   }
 }
 

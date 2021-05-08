@@ -6,8 +6,8 @@
     {
       "name": "default",
       "path": "/",
-      "component": "MemberLookupSplashPage",
-      "config": "memberLookupSplashPage",
+      "component": "MemberPage",
+      "config": "home",
       "isActive": true,
       "header": {
         "titleStyle": {
