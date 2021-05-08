@@ -233,14 +233,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * Redirect to previous location
    */
   redirectToPreviousLocation = () => {
-    const { ADMIN } = USER_TYPES;
-    const { user } = this.props;
     this.setState({
       isPreviousLocation: true,
     });
-    if (user !== ADMIN) {
-      window.location.href = window.location.origin
-    }
   };
 
   /**
