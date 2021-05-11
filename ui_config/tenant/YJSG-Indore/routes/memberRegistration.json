@@ -8,8 +8,7 @@
         "gender",
         "age",
         "mobile",
-        "address",
-        "classAttended2020"
+        "address"
       ],
       "properties": {
         "name": {
@@ -55,34 +54,6 @@
           "title": "पूरा पता",
           "type": "string",
           "customValidation": "addressValidator"
-        },
-        "classAttended2020": {
-          "title": "आप क्या अध्ययन करना चाहते हैं ?",
-          "type": "string",
-          "enum": [
-            "Level 1",
-            "Level 2",
-            "Level 3",
-            "Level 4",
-            "Level 5",
-            "Level 6",
-            "Level 7",
-            "Level 8"
-          ],
-          "enumNames": [
-            "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
-            "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
-            "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
-            "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
-            "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
-            "Level 6 : छह ढाला-ढाल 1-2",
-            "Level 7 : छह ढाला-ढाल 3-4",
-            "Level 8 : छह ढाला-ढाल 5-6"
-          ]
-        },
-        "classAttended2019": {
-          "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-          "type": "string"
         }
       }
     },
@@ -96,9 +67,7 @@
         "occupation",
         "education",
         "email",
-        "address",
-        "classAttended2020",
-        "classAttended2019"
+        "address"
       ],
       "name": {
         "ui:field": "InputField",
@@ -280,52 +249,9 @@
             "padding": "0 10px 0 10px"
           }
         }
-      },
-      "classAttended2020": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "classAttended2019": {
-        "ui:field": "InputField",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
       }
     },
     "data": {
-      "optIn2020": "Y",
-      "classAttended2019": "",
       "education": "",
       "occupation": ""
     }

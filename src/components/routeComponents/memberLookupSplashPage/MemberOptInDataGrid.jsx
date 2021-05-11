@@ -36,15 +36,15 @@ const MemberOptInDataGrid = ({
    * @constructor
    */
   const MemberOptInGridSelectionRadio = (props) => {
-    const { rowData: { id, optIn2020 } } = props;
+    const { rowData: { id, optIn2021 } } = props;
     const { YES_HINDI, NO_HINDI } = constants;
-    const [optIn, setOptIn] = useState(optIn2020);
+    const [optIn, setOptIn] = useState(optIn2021);
 
     const onChangeOptIn = (event) => {
       setOptIn(event.target.value);
       onChangeGridOptIn(updateGridData({
         ...props.rowData,
-        optIn2020: event.target.value,
+        optIn2021: event.target.value,
       }))
     };
     return (

@@ -482,7 +482,7 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
@@ -1001,7 +1001,7 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {

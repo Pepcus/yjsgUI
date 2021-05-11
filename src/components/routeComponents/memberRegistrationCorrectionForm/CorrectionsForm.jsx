@@ -11,10 +11,12 @@ import fields from 'components/common/fields';
 import {
   USER_TYPES,
 } from 'constants/member';
-
+import MemberMarksDataGrid from 'components/routeComponents/memberRegistrationCorrectionForm/MemberMarksDataGrid';
+import Col from 'pepcus-core/lib/Col';
+import Row from 'pepcus-core/lib/Row';
 import OtherInformationEditLink from './OtherInformationEditLink';
 import OnlyOptInSubmitButton from './OnlyOptInSubmitButton';
-import MemberMarksDataGrid from 'components/routeComponents/memberRegistrationCorrectionForm/MemberMarksDataGrid';
+
 
 const { ADMIN } = USER_TYPES;
 
@@ -60,6 +62,7 @@ const ContainerStyled = styled(Container)`
 
 /**
  * CorrectionsForm is functional component which render the correction form according to user type
+ * @param {Object} constants
  * @param {Function} changeIsOnlyOptIn
  * @param {Node} children
  * @param {Object} formConfig
@@ -71,10 +74,12 @@ const ContainerStyled = styled(Container)`
  * @param {Function} transformErrors
  * @param {String} user
  * @param {Function} validate
+ * @param {Object} memberMarksGridMetaData
  * @return {HTML} correction form
  * @constructor
  */
 const CorrectionsForm = ({
+  constants,
   changeIsOnlyOptIn,
   children,
   formConfig,
@@ -87,6 +92,8 @@ const CorrectionsForm = ({
   user,
   validate,
   memberMarksGridMetaData,
+  renderBackButton,
+  renderSubmitButtons,
 }) => {
 
   const renderMemberMarksDataGrid = () => {
@@ -127,6 +134,14 @@ const CorrectionsForm = ({
             validate={validate}
             uiSchema={formConfig.uiSchema}
           />
+          <Row justify="center" margin="0 0 25px 0">
+            <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+              {renderBackButton()}
+            </Col>
+            <Col size={{ xs: 12, sm: 12, md: 6, lg: 2.3 }} padding="10px 15px 10px 15px">
+              {renderSubmitButtons()}
+            </Col>
+          </Row>
           {
             renderMemberMarksDataGrid()
           }
@@ -150,29 +165,37 @@ const CorrectionsForm = ({
 CorrectionsForm.propTypes = {
   changeIsOnlyOptIn: PropTypes.func,
   children: PropTypes.node,
+  constants: PropTypes.object,
   formConfig: PropTypes.object,
   formData: PropTypes.object,
   formRef: PropTypes.object,
+  memberMarksGridMetaData: PropTypes.object,
   onChange: PropTypes.func,
   onlyOptInForm: PropTypes.bool,
   submitMemberDataForOnlyOptInCase: PropTypes.func,
   transformErrors: PropTypes.func,
   user: PropTypes.string,
   validate: PropTypes.func,
+  renderBackButton: PropTypes.func,
+  renderSubmitButtons: PropTypes.func,
 };
 
 CorrectionsForm.defaultProps = {
   changeIsOnlyOptIn: () => {},
   children: null,
+  constants: {},
   formConfig: {},
   formData: {},
   formRef: {},
+  memberMarksGridMetaData: {},
   onChange: () => {},
   onlyOptInForm: false,
   submitMemberDataForOnlyOptInCase: () => {},
   transformErrors: () => {},
   user: PropTypes.string,
   validate: () => {},
+  renderBackButton: () => {},
+  renderSubmitButtons: () => {},
 };
 
 export default CorrectionsForm;

@@ -3,11 +3,11 @@
     "schema" : {
       "type": "object",
       "dependencies": {
-        "optIn2020": {
+        "optIn2021": {
           "oneOf": [
             {
               "properties": {
-                "optIn2020": {
+                "optIn2021": {
                   "enum": [
                     "Y"
                   ]
@@ -157,12 +157,12 @@
                     "निजी वाहन से"
                   ]
                 },
-                "classAttended2019": {
+                "classAttended2020": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
                   "type": "string"
                 },
-                "classAttended2020": {
-                  "title": "Class 2020",
+                "classAttended2021": {
+                  "title": "Class 2021",
                   "type": "string",
                   "enum": [
                     "Level 1",
@@ -251,8 +251,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2020": {
-                  "title": "Classroom 2020",
+                "classRoomNo2021": {
+                  "title": "Classroom 2021",
                   "type": "string",
                   "enum": [
                     "105",
@@ -344,7 +344,7 @@
             },
             {
               "properties": {
-                "optIn2020": {
+                "optIn2021": {
                   "enum": [
                     "N"
                   ]
@@ -489,12 +489,12 @@
                     "निजी वाहन से"
                   ]
                 },
-                "classAttended2019": {
+                "classAttended2020": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
                   "type": "string"
                 },
-                "classAttended2020": {
-                  "title": "Class 2020",
+                "classAttended2021": {
+                  "title": "Class 2021",
                   "type": "string",
                   "enum": [
                     "Level 1",
@@ -583,8 +583,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2020": {
-                  "title": "Classroom 2020",
+                "classRoomNo2021": {
+                  "title": "Classroom 2021",
                   "type": "string",
                   "enum": [
                     "105",
@@ -668,8 +668,8 @@
         }
       },
       "properties": {
-        "optIn2020": {
-          "title": "2020 के शिविर की स्वीकृति ?",
+        "optIn2021": {
+          "title": "2021 के शिविर की स्वीकृति ?",
           "type": "string",
           "enum": [
             "Y",
@@ -680,17 +680,12 @@
             "नहीं"
           ],
           "default": "Y"
-        },
-        "backButton": {
-          "type": "string"
-        },
-        "submitButton": {
-          "type": "string"
         }
       }
     },
     "uiSchema" : {
-      "ui:order": ["optIn2020",
+      "ui:order": [
+        "optIn2021",
         "id",
         "name",
         "fatherName",
@@ -701,45 +696,15 @@
         "education",
         "email",
         "busStop",
-        "classAttended2019",
         "classAttended2020",
+        "classAttended2021",
         "marks2019",
         "busNumber",
-        "classRoomNo2020",
+        "classRoomNo2021",
         "address",
-        "remark",
-        "backButton",
-        "submitButton"
+        "remark"
       ],
-      "backButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "submitButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "optIn2020": {
+      "optIn2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -965,7 +930,7 @@
           }
         }
       },
-      "classAttended2020": {
+      "classAttended2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -986,7 +951,7 @@
           }
         }
       },
-      "classAttended2019": {
+      "classAttended2020": {
         "ui:field": "InputField",
         "ui:options": {
           "style": {
@@ -1048,7 +1013,7 @@
           }
         }
       },
-      "classRoomNo2020": {
+      "classRoomNo2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -1096,7 +1061,7 @@
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -1140,11 +1105,11 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
-        "formField": "classAttended2020",
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {
@@ -1168,163 +1133,68 @@
   "memberFormConfig": {
     "schema" : {
       "type": "object",
-      "required": ["optIn2020"],
-      "dependencies": {
-        "optIn2020": {
-          "oneOf": [
-            {
-              "properties": {
-                "optIn2020": {
-                  "enum": [
-                    "Y"
-                  ]
-                },
-                "id": {
-                  "title": "आई.डी.",
-                  "type": "number"
-                },
-                "name": {
-                  "title": "नाम",
-                  "type": "string",
-                  "customValidation": "nameValidator"
-                },
-                "fatherName": {
-                  "title": "पिता / पति का नाम",
-                  "type": "string",
-                  "customValidation": "nameValidator"
-                },
-                "gender": {
-                  "title": "लिंग",
-                  "type": "string",
-                  "enum": ["Male", "Female"],
-                  "enumNames": ["पुरुष", "स्त्री"]
-                },
-                "age": {
-                  "title": "उम्र",
-                  "type": "string",
-                  "customValidation": "ageValidator"
-                },
-                "mobile": {
-                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-                  "type": "string",
-                  "customValidation": "mobileValidator"
-                },
-                "occupation": {
-                  "title": "व्यवसाय (युवा वर्ग हेतु)",
-                  "type": "string"
-                },
-                "education": {
-                  "title": "स्कूल शिक्षा",
-                  "type": "string"
-                },
-                "email": {
-                  "title": "ई-मेल",
-                  "type": "string",
-                  "customValidation": "optionalEmailValidator"
-                },
-                "classAttended2019": {
-                  "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-                  "type": "string"
-                },
-                "address": {
-                  "title": "पूरा पता",
-                  "type": "string",
-                  "customValidation": "addressValidator"
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "fatherName",
-                "gender",
-                "age",
-                "mobile",
-                "address"
-              ]
-            },
-            {
-              "properties": {
-                "optIn2020": {
-                  "enum": [
-                    "N"
-                  ]
-                },
-                "id": {
-                  "title": "आई.डी.",
-                  "type": "number"
-                },
-                "name": {
-                  "title": "नाम",
-                  "type": "string"
-                },
-                "fatherName": {
-                  "title": "पिता / पति का नाम",
-                  "type": "string"
-                },
-                "gender": {
-                  "title": "लिंग",
-                  "type": "string",
-                  "enum": ["Male", "Female"],
-                  "enumNames": ["पुरुष", "स्त्री"]
-                },
-                "age": {
-                  "title": "उम्र",
-                  "type": "string"
-                },
-                "mobile": {
-                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-                  "type": "string"
-                },
-                "occupation": {
-                  "title": "व्यवसाय (युवा वर्ग हेतु)",
-                  "type": "string"
-                },
-                "education": {
-                  "title": "स्कूल शिक्षा",
-                  "type": "string"
-                },
-                "email": {
-                  "title": "ई-मेल",
-                  "type": "string"
-                },
-                "classAttended2019": {
-                  "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-                  "type": "string"
-                },
-                "address": {
-                  "title": "पूरा पता",
-                  "type": "string"
-                }
-              }
-            }
-          ],
-          "default": "Y"
+      "properties": {
+        "id": {
+          "title": "आई.डी.",
+          "type": "number"
+        },
+        "name": {
+          "title": "नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        },
+        "fatherName": {
+          "title": "पिता / पति का नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        },
+        "gender": {
+          "title": "लिंग",
+          "type": "string",
+          "enum": ["Male", "Female"],
+          "enumNames": ["पुरुष", "स्त्री"]
+        },
+        "age": {
+          "title": "उम्र",
+          "type": "string",
+          "customValidation": "ageValidator"
+        },
+        "mobile": {
+          "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
+          "type": "string",
+          "customValidation": "mobileValidator"
+        },
+        "occupation": {
+          "title": "व्यवसाय (युवा वर्ग हेतु)",
+          "type": "string"
+        },
+        "education": {
+          "title": "स्कूल शिक्षा",
+          "type": "string"
+        },
+        "email": {
+          "title": "ई-मेल",
+          "type": "string",
+          "customValidation": "optionalEmailValidator"
+        },
+        "address": {
+          "title": "पूरा पता",
+          "type": "string",
+          "customValidation": "addressValidator"
         }
       },
-      "properties": {
-        "optIn2020": {
-          "title": "2020 के शिविर की स्वीकृति ?",
-          "type": "string",
-          "enum": [
-            "Y",
-            "N"
-          ],
-          "enumNames": [
-            "हाँ",
-            "नहीं"
-          ],
-          "default": "Y"
-        },
-        "backButton": {
-          "type": "string"
-        },
-        "submitButton": {
-          "type": "string"
-        }
-      }
+      "required": [
+        "id",
+        "name",
+        "fatherName",
+        "gender",
+        "age",
+        "mobile",
+        "address"
+      ]
     },
     "uiSchema" : {
-      "ui:order": ["optIn2020",
+      "ui:order": [
         "id",
         "name",
         "fatherName",
@@ -1334,60 +1204,8 @@
         "occupation",
         "education",
         "email",
-        "address",
-        "classAttended2019",
-        "backButton",
-        "submitButton"
+        "address"
       ],
-      "backButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "submitButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "optIn2020": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
       "name": {
         "ui:field": "InputField",
         "ui:options": {
@@ -1508,26 +1326,6 @@
           }
         }
       },
-      "classAttended2019": {
-        "ui:field": "InputField",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
       "address": {
         "ui:field": "InputField",
         "ui:options": {
@@ -1614,7 +1412,7 @@
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -1654,7 +1452,7 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
@@ -1678,16 +1476,16 @@
   "onlyOptInFormConfig": {
     "schema": {
       "type": "object",
-      "required": ["optIn2020"],
+      "required": ["optIn2021"],
       "properties": {
         "name": {
           "title": "नाम",
           "type": "string",
           "customValidation": "nameValidator"
         },
-        "optIn2020": {
+        "optIn2021": {
           "type": "string",
-          "title": "2020 के शिविर की स्वीकृति ?",
+          "title": "2021 के शिविर की स्वीकृति ?",
           "enum": [
             "Y",
             "N"
@@ -1701,7 +1499,7 @@
       }
     },
     "uiSchema": {
-      "optIn2020": {
+      "optIn2021": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true,
@@ -1732,7 +1530,7 @@
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -1776,11 +1574,11 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
-        "formField": "classAttended2020",
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {

@@ -175,8 +175,6 @@ class MemberRegistrationCorrectionForm extends Component {
             onlyOptInForm,
             tenant: tenant ? tenant : 'default',
             member: this.state.member,
-            renderBackButton: this.renderBackButton,
-            renderSubmitButtons: this.renderSubmitButtons,
             formConfig,
           }),
           onlyOptInForm,
@@ -271,7 +269,7 @@ class MemberRegistrationCorrectionForm extends Component {
     delete member.submitButton;
     event.preventDefault();
     if (isOptInEnable) {
-      if (member.optIn2020 === 'N') {
+      if (member.optIn2021 === 'N') {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -304,7 +302,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const { isOptInEnable } = config;
     event.preventDefault();
     if (isOptInEnable) {
-      if (!isEmpty(member.optIn2020)) {
+      if (!isEmpty(member.optIn2021)) {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -328,7 +326,7 @@ class MemberRegistrationCorrectionForm extends Component {
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
     if (isOptInEnable) {
-      if (member.optIn2020 === 'N') {
+      if (member.optIn2021 === 'N') {
         return [];
       }
       if (mandatoryField) {
@@ -485,6 +483,7 @@ class MemberRegistrationCorrectionForm extends Component {
     if (isMemberFetched && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
+          constants={constants}
           formData={formData}
           changeIsOnlyOptIn={this.changeIsOnlyOptIn}
           formConfig={formConfig}
