@@ -4,7 +4,7 @@ export const formatUpdateMemberDataPayload = (updatedMember) => {
   const {
     address,
     age,
-    // busStop,
+    busStop,
     education = '',
     email = '',
     mobile,
@@ -25,7 +25,7 @@ export const formatUpdateMemberDataPayload = (updatedMember) => {
   const newData = {
     address,
     age,
-    // busStop,
+    busStop,
     education,
     email,
     mobile,
