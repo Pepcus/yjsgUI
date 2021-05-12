@@ -216,10 +216,10 @@ class MemberPage extends Component {
               <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
-              <AlreadyRegisteredButton
-                isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
-                redirectToMemberLogin={this.redirectToMemberLogin}
-              />
+              {/*<AlreadyRegisteredButton*/}
+              {/*  isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}*/}
+              {/*  redirectToMemberLogin={this.redirectToMemberLogin}*/}
+              {/*/>*/}
               <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
                 {NEW_REGISTRATION}
               </ButtonStyled>
