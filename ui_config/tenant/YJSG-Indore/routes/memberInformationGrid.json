@@ -199,6 +199,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2021 Attendance",
+      "key": "attendance2021",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2016 Marks",
       "key": "marks2016",
       "type": "Number",
@@ -225,6 +231,12 @@
     {
       "label": "2020 Marks",
       "key": "marks2020",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2021 Marks",
+      "key": "marks2021",
       "type": "Number",
       "emptyCells": "NA"
     },
@@ -443,6 +455,10 @@
       "key": "attendance2020"
     },
     {
+      "label": "2021 Attendance",
+      "key": "attendance2021"
+    },
+    {
       "label": "2016 Marks",
       "key": "marks2016"
     },
@@ -462,6 +478,10 @@
     {
       "label": "2020 Marks",
       "key": "marks2020"
+    },
+    {
+      "label": "2021 Marks",
+      "key": "marks2021"
     },
     {
       "label": "2018 Opt In",
