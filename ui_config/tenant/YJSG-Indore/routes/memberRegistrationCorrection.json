@@ -346,7 +346,6 @@
                 "gender",
                 "age",
                 "mobile",
-                "busStop",
                 "address"
               ]
             },
