@@ -8,7 +8,8 @@
         "gender",
         "age",
         "mobile",
-        "address"
+        "address",
+        "classAttended2021"
       ],
       "properties": {
         "name": {
@@ -30,7 +31,7 @@
         "age": {
           "title": "उम्र",
           "type": "string",
-          "customValidation": "ageValidator"
+          "customValidation": "onlyNumbersAllowed"
         },
         "mobile": {
           "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
@@ -54,6 +55,38 @@
           "title": "पूरा पता",
           "type": "string",
           "customValidation": "addressValidator"
+        },
+        "classAttended2021": {
+          "title": "आप क्या अध्ययन करना चाहते हैं ?",
+          "type": "string",
+          "enum": [
+            "1",
+            "1E",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7.1",
+            "7.2",
+            "8",
+            "9",
+            "10"
+          ],
+          "enumNames": [
+            "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+            "Level 1 - Fundamentals of Jainism - English",
+            "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+            "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+            "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+            "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+            "Level 6 -  छहढाला",
+            "Level 7.1 – तत्त्वार्थसूत्र",
+            "Level 7.2 - वृहद द्रव्यसंग्रह",
+            "Level 8 – प्रवचनसार",
+            "Level 9 - गोम्मटसार जीवकांड",
+            "जैन धर्म की कहानियाँ"
+          ]
         }
       }
     },
@@ -67,7 +100,8 @@
         "occupation",
         "education",
         "email",
-        "address"
+        "address",
+        "classAttended2021"
       ],
       "name": {
         "ui:field": "InputField",
@@ -230,6 +264,27 @@
         }
       },
       "gender": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
+      },
+      "classAttended2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {

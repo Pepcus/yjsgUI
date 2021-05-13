@@ -53,9 +53,9 @@ const SuccessMessagePopup = ({
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{REGISTRATION_SUCCESS_MESSAGE}</TextWrapper>
           <TextWrapper>{YOUR_ID_TEXT}<strong>{id}</strong>{IS_THERE_TEXT}</TextWrapper>
-          <TextWrapper>{YOUR_SECRET_CODE_TEXT}<strong>{secretKey}</strong>{IS_THERE_TEXT}</TextWrapper>
-          <TextWrapper>{ID_NOTE_MESSAGE}</TextWrapper>
-          <TextWrapper>{ID_CARD_SUGGESTION_MESSAGE}</TextWrapper>
+          {/*<TextWrapper>{YOUR_SECRET_CODE_TEXT}<strong>{secretKey}</strong>{IS_THERE_TEXT}</TextWrapper>*/}
+          {/*<TextWrapper>{ID_NOTE_MESSAGE}</TextWrapper>*/}
+          {/*<TextWrapper>{ID_CARD_SUGGESTION_MESSAGE}</TextWrapper>*/}
           <Button
             color="tertiary"
             width="170px"

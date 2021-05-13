@@ -35,7 +35,7 @@
                 "age": {
                   "title": "उम्र",
                   "type": "string",
-                  "customValidation": "ageValidator"
+                  "customValidation": "onlyNumbersAllowed"
                 },
                 "mobile": {
                   "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
@@ -165,18 +165,18 @@
                   "title": "Class 2021",
                   "type": "string",
                   "enum": [
-                    "key 1",
-                    "key 1E",
-                    "key 2",
-                    "key 3",
-                    "key 4",
-                    "key 5",
-                    "key 6",
-                    "key 7.1",
-                    "key 7.2",
-                    "key 8",
-                    "key 9",
-                    "key 10"
+                    "1",
+                    "1E",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7.1",
+                    "7.2",
+                    "8",
+                    "9",
+                    "10"
                   ],
                   "enumNames": [
                     "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
@@ -502,27 +502,35 @@
                   "type": "string"
                 },
                 "classAttended2021": {
-                  "title": "Class 2021",
+                  "title": "आप क्या अध्ययन करना चाहते हैं ?",
                   "type": "string",
                   "enum": [
-                    "Level 1",
-                    "Level 2",
-                    "Level 3",
-                    "Level 4",
-                    "Level 5",
-                    "Level 6",
-                    "Level 7",
-                    "Level 8"
+                    "1",
+                    "1E",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7.1",
+                    "7.2",
+                    "8",
+                    "9",
+                    "10"
                   ],
                   "enumNames": [
-                    "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
-                    "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
-                    "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
-                    "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
-                    "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
-                    "Level 6 : छह ढाला-ढाल 1-2",
-                    "Level 7 : छह ढाला-ढाल 3-4",
-                    "Level 8 : छह ढाला-ढाल 5-6"
+                    "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+                    "Level 1 - Fundamentals of Jainism - English",
+                    "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+                    "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+                    "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+                    "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+                    "Level 6 -  छहढाला",
+                    "Level 7.1 – तत्त्वार्थसूत्र",
+                    "Level 7.2 - वृहद द्रव्यसंग्रह",
+                    "Level 8 – प्रवचनसार",
+                    "Level 9 - गोम्मटसार जीवकांड",
+                    "जैन धर्म की कहानियाँ"
                   ]
                 },
                 "busNumber": {
@@ -1165,7 +1173,7 @@
         "age": {
           "title": "उम्र",
           "type": "string",
-          "customValidation": "ageValidator"
+          "customValidation": "onlyNumbersAllowed"
         },
         "mobile": {
           "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
@@ -1189,6 +1197,38 @@
           "title": "पूरा पता",
           "type": "string",
           "customValidation": "addressValidator"
+        },
+        "classAttended2021": {
+          "title": "आप क्या अध्ययन करना चाहते हैं ?",
+          "type": "string",
+          "enum": [
+            "1",
+            "1E",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7.1",
+            "7.2",
+            "8",
+            "9",
+            "10"
+          ],
+          "enumNames": [
+            "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+            "Level 1 - Fundamentals of Jainism - English",
+            "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+            "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+            "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+            "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+            "Level 6 -  छहढाला",
+            "Level 7.1 – तत्त्वार्थसूत्र",
+            "Level 7.2 - वृहद द्रव्यसंग्रह",
+            "Level 8 – प्रवचनसार",
+            "Level 9 - गोम्मटसार जीवकांड",
+            "जैन धर्म की कहानियाँ"
+          ]
         }
       },
       "required": [
@@ -1198,7 +1238,8 @@
         "gender",
         "age",
         "mobile",
-        "address"
+        "address",
+        "classAttended2021"
       ]
     },
     "uiSchema" : {
@@ -1212,7 +1253,8 @@
         "occupation",
         "education",
         "email",
-        "address"
+        "address",
+        "classAttended2021"
       ],
       "name": {
         "ui:field": "InputField",
@@ -1415,6 +1457,27 @@
             "padding": "0 10px 0 10px"
           }
         }
+      },
+      "classAttended2021": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
       }
     },
     "data": {},
@@ -1461,6 +1524,10 @@
       },
       {
         "formField": "classAttended2020",
+        "dataType": "string"
+      },
+      {
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {

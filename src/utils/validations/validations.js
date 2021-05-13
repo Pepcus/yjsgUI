@@ -488,6 +488,28 @@ export const ageValidatorWithNoUpperLimit = (value, constants) => {
   return message;
 };
 
+export const onlyNumbersAllowed = (value, constants) => {
+  const { ONLY_NUMBERS_ALLOWED_MESSAGE } = constants;
+  let temporaryValue = !value ? null : String(value);
+  let message = '';
+
+  if (!isEmpty(temporaryValue)) {
+    temporaryValue = convertAgeToNumeric(temporaryValue);
+  }
+
+  if (isEmpty(temporaryValue)) {
+    message = '';
+
+  } else if (isNaN(temporaryValue)) {
+    message = ONLY_NUMBERS_ALLOWED_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
 export const blankValidator = (value, constants) => {
   const { INVALID_ADDRESS_MESSAGE } = constants;
   let message = '';
