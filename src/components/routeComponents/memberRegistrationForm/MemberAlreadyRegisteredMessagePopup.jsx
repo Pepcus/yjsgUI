@@ -51,7 +51,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
       <Popup>
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{PARTIAL_MEMBER_ALREADY_REGISTERED_MESSAGE}</TextWrapper>
-          <TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>
+          {/*<TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>*/}
           <TextWrapper>{CONTACT_YJSG_HELPLINE_MESSAGE}</TextWrapper>
           <Button
             color="tertiary"
@@ -69,7 +69,7 @@ const MemberAlreadyRegisteredMessagePopup = ({
       <Popup>
         <Row width="100%" justify="center" margin="0">
           <TextWrapper>{EXACT_MEMBER_ALREADY_REGISTERED_MESSAGE}</TextWrapper>
-          <TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>
+          {/*<TextWrapper>{INFO_CONVEYED_VIA_SMS_SHORTLY_MESSAGE}</TextWrapper>*/}
           <TextWrapper>{CONTACT_YJSG_HELPLINE_MESSAGE}</TextWrapper>
           <Button
             color="tertiary"

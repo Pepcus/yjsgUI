@@ -15,7 +15,7 @@ export const formatUpdateMemberDataPayload = (updatedMember) => {
     marks2019,
     busNumber,
     classRoomNo2019,
-    classAttended2019,
+    classAttended2020,
     secretKey,
     remark,
   } = updatedMember;
@@ -36,7 +36,7 @@ export const formatUpdateMemberDataPayload = (updatedMember) => {
     marks2019,
     busNumber,
     classRoomNo2019,
-    classAttended2019,
+    classAttended2020,
     secretKey,
     remark,
   };

@@ -406,12 +406,12 @@ export const prePopulateOptIn = ({ memberData }) => {
   if (memberData) {
 
     const {
-      optIn2020,
+      optIn2021,
     } = memberData;
 
     updatedMemberData = {
       ...memberData,
-      optIn2020: !optIn2020 ? 'Y' : optIn2020,
+      optIn2020: !optIn2021 ? 'Y' : optIn2021,
     };
   }
   return updatedMemberData;
@@ -477,6 +477,28 @@ export const ageValidatorWithNoUpperLimit = (value, constants) => {
 
   } else if (temporaryValue < 8) {
     message = ONLY_VALID_FOR_8_AND_ABOVE_YEARS_MESSAGE;
+
+  } else if (isNaN(temporaryValue)) {
+    message = ONLY_NUMBERS_ALLOWED_MESSAGE;
+
+  } else {
+    message = '';
+  }
+
+  return message;
+};
+
+export const onlyNumbersAllowed = (value, constants) => {
+  const { ONLY_NUMBERS_ALLOWED_MESSAGE } = constants;
+  let temporaryValue = !value ? null : String(value);
+  let message = '';
+
+  if (!isEmpty(temporaryValue)) {
+    temporaryValue = convertAgeToNumeric(temporaryValue);
+  }
+
+  if (isEmpty(temporaryValue)) {
+    message = '';
 
   } else if (isNaN(temporaryValue)) {
     message = ONLY_NUMBERS_ALLOWED_MESSAGE;

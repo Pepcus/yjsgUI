@@ -127,6 +127,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2021 Class Attended",
+      "key": "classAttended2021",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2016 Class Room No.",
       "key": "classRoomNo2016",
       "type": "Number",
@@ -153,6 +159,12 @@
     {
       "label": "2020 Class Room No.",
       "key": "classRoomNo2020",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2021 Class Room No.",
+      "key": "classRoomNo2021",
       "type": "Number",
       "emptyCells": "NA"
     },
@@ -187,6 +199,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2021 Attendance",
+      "key": "attendance2021",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2016 Marks",
       "key": "marks2016",
       "type": "Number",
@@ -217,6 +235,12 @@
       "emptyCells": "NA"
     },
     {
+      "label": "2021 Marks",
+      "key": "marks2021",
+      "type": "Number",
+      "emptyCells": "NA"
+    },
+    {
       "label": "2018 Opt In",
       "key": "optIn2018",
       "type": "string",
@@ -231,6 +255,12 @@
     {
       "label": "2020 Opt In",
       "key": "optIn2020",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2021 Opt In",
+      "key": "optIn2021",
       "type": "string",
       "emptyCells": "NA"
     },
@@ -377,6 +407,10 @@
       "key": "classAttended2020"
     },
     {
+      "label": "2021 Class Attended",
+      "key": "classAttended2021"
+    },
+    {
       "label": "2016 Class Room No.",
       "key": "classRoomNo2016"
     },
@@ -397,6 +431,10 @@
       "key": "classRoomNo2020"
     },
     {
+      "label": "2021 Class Room No.",
+      "key": "classRoomNo2021"
+    },
+    {
       "label": "2016 Attendance",
       "key": "attendance2016"
     },
@@ -415,6 +453,10 @@
     {
       "label": "2020 Attendance",
       "key": "attendance2020"
+    },
+    {
+      "label": "2021 Attendance",
+      "key": "attendance2021"
     },
     {
       "label": "2016 Marks",
@@ -438,6 +480,10 @@
       "key": "marks2020"
     },
     {
+      "label": "2021 Marks",
+      "key": "marks2021"
+    },
+    {
       "label": "2018 Opt In",
       "key": "optIn2018"
     },
@@ -448,6 +494,12 @@
     {
       "label": "2020 Opt In",
       "key": "optIn2020",
+      "type": "string",
+      "emptyCells": "NA"
+    },
+    {
+      "label": "2021 Opt In",
+      "key": "optIn2021",
       "type": "string",
       "emptyCells": "NA"
     },

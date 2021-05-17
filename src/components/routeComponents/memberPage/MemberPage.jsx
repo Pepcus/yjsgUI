@@ -63,7 +63,7 @@ const BoxStyled = styled(Box)`
  align-items: center;
  ${({ theme }) => theme.media.down('md')`
         margin: 60px auto auto auto;
-        height: 65%;
+        height: 50%;
         width: 97%;
     `};
     @media (max-width: 992px) and (orientation: landscape) {
@@ -75,6 +75,7 @@ const BoxStyled = styled(Box)`
 
 const ImageStyled = styled.img`
   width: 100%;
+  height: 50%;
 `;
 
 const TypographyStyled = styled(Typography)`
@@ -216,10 +217,10 @@ class MemberPage extends Component {
               <ImageStyled src={pageBodyLogo} alt="yjsg logo" />
             </ImageWrapper>
             <Row justify="center">
-              <AlreadyRegisteredButton
-                isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}
-                redirectToMemberLogin={this.redirectToMemberLogin}
-              />
+              {/*<AlreadyRegisteredButton*/}
+              {/*  isAlreadyRegisteredButtonEnabled={isAlreadyRegisteredButtonEnabled}*/}
+              {/*  redirectToMemberLogin={this.redirectToMemberLogin}*/}
+              {/*/>*/}
               <ButtonStyled margin="10px" onClick={this.redirectToNewRegistrationPage}>
                 {NEW_REGISTRATION}
               </ButtonStyled>

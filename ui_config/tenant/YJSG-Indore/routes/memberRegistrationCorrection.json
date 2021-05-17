@@ -3,11 +3,11 @@
     "schema" : {
       "type": "object",
       "dependencies": {
-        "optIn2020": {
+        "optIn2021": {
           "oneOf": [
             {
               "properties": {
-                "optIn2020": {
+                "optIn2021": {
                   "enum": [
                     "Y"
                   ]
@@ -35,7 +35,7 @@
                 "age": {
                   "title": "उम्र",
                   "type": "string",
-                  "customValidation": "ageValidator"
+                  "customValidation": "onlyNumbersAllowed"
                 },
                 "mobile": {
                   "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
@@ -157,32 +157,40 @@
                     "निजी वाहन से"
                   ]
                 },
-                "classAttended2019": {
+                "classAttended2020": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
                   "type": "string"
                 },
-                "classAttended2020": {
-                  "title": "Class 2020",
+                "classAttended2021": {
+                  "title": "Class 2021",
                   "type": "string",
                   "enum": [
-                    "Level 1",
-                    "Level 2",
-                    "Level 3",
-                    "Level 4",
-                    "Level 5",
-                    "Level 6",
-                    "Level 7",
-                    "Level 8"
+                    "1",
+                    "1E",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7.1",
+                    "7.2",
+                    "8",
+                    "9",
+                    "10"
                   ],
                   "enumNames": [
-                    "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
-                    "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
-                    "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
-                    "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
-                    "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
-                    "Level 6 : छह ढाला-ढाल 1-2",
-                    "Level 7 : छह ढाला-ढाल 3-4",
-                    "Level 8 : छह ढाला-ढाल 5-6"
+                    "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+                    "Level 1 - Fundamentals of Jainism - English",
+                    "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+                    "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+                    "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+                    "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+                    "Level 6 -  छहढाला",
+                    "Level 7.1 – तत्त्वार्थसूत्र",
+                    "Level 7.2 - वृहद द्रव्यसंग्रह",
+                    "Level 8 – प्रवचनसार",
+                    "Level 9 - गोम्मटसार जीवकांड",
+                    "जैन धर्म की कहानियाँ"
                   ]
                 },
                 "busNumber": {
@@ -251,8 +259,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2020": {
-                  "title": "Classroom 2020",
+                "classRoomNo2021": {
+                  "title": "Classroom 2021",
                   "type": "string",
                   "enum": [
                     "105",
@@ -338,13 +346,12 @@
                 "gender",
                 "age",
                 "mobile",
-                "busStop",
                 "address"
               ]
             },
             {
               "properties": {
-                "optIn2020": {
+                "optIn2021": {
                   "enum": [
                     "N"
                   ]
@@ -489,32 +496,40 @@
                     "निजी वाहन से"
                   ]
                 },
-                "classAttended2019": {
+                "classAttended2020": {
                   "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
                   "type": "string"
                 },
-                "classAttended2020": {
-                  "title": "Class 2020",
+                "classAttended2021": {
+                  "title": "आप क्या अध्ययन करना चाहते हैं ?",
                   "type": "string",
                   "enum": [
-                    "Level 1",
-                    "Level 2",
-                    "Level 3",
-                    "Level 4",
-                    "Level 5",
-                    "Level 6",
-                    "Level 7",
-                    "Level 8"
+                    "1",
+                    "1E",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7.1",
+                    "7.2",
+                    "8",
+                    "9",
+                    "10"
                   ],
                   "enumNames": [
-                    "Level 1 : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत",
-                    "Level 2 : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति",
-                    "Level 3 : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य-गुण-पर्याय, देव स्तुति",
-                    "Level 4 : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवश्यक, कर्म, देव स्तुति",
-                    "Level 5 : देव-शास्त्र-गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना",
-                    "Level 6 : छह ढाला-ढाल 1-2",
-                    "Level 7 : छह ढाला-ढाल 3-4",
-                    "Level 8 : छह ढाला-ढाल 5-6"
+                    "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+                    "Level 1 - Fundamentals of Jainism - English",
+                    "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+                    "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+                    "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+                    "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+                    "Level 6 -  छहढाला",
+                    "Level 7.1 – तत्त्वार्थसूत्र",
+                    "Level 7.2 - वृहद द्रव्यसंग्रह",
+                    "Level 8 – प्रवचनसार",
+                    "Level 9 - गोम्मटसार जीवकांड",
+                    "जैन धर्म की कहानियाँ"
                   ]
                 },
                 "busNumber": {
@@ -583,8 +598,8 @@
                     "B27"
                   ]
                 },
-                "classRoomNo2020": {
-                  "title": "Classroom 2020",
+                "classRoomNo2021": {
+                  "title": "Classroom 2021",
                   "type": "string",
                   "enum": [
                     "105",
@@ -668,8 +683,8 @@
         }
       },
       "properties": {
-        "optIn2020": {
-          "title": "2020 के शिविर की स्वीकृति ?",
+        "optIn2021": {
+          "title": "2021 के शिविर की स्वीकृति ?",
           "type": "string",
           "enum": [
             "Y",
@@ -680,17 +695,12 @@
             "नहीं"
           ],
           "default": "Y"
-        },
-        "backButton": {
-          "type": "string"
-        },
-        "submitButton": {
-          "type": "string"
         }
       }
     },
     "uiSchema" : {
-      "ui:order": ["optIn2020",
+      "ui:order": [
+        "optIn2021",
         "id",
         "name",
         "fatherName",
@@ -701,45 +711,15 @@
         "education",
         "email",
         "busStop",
-        "classAttended2019",
         "classAttended2020",
+        "classAttended2021",
         "marks2019",
         "busNumber",
-        "classRoomNo2020",
+        "classRoomNo2021",
         "address",
-        "remark",
-        "backButton",
-        "submitButton"
+        "remark"
       ],
-      "backButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "submitButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "optIn2020": {
+      "optIn2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -965,7 +945,7 @@
           }
         }
       },
-      "classAttended2020": {
+      "classAttended2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -986,7 +966,7 @@
           }
         }
       },
-      "classAttended2019": {
+      "classAttended2020": {
         "ui:field": "InputField",
         "ui:options": {
           "style": {
@@ -1048,7 +1028,7 @@
           }
         }
       },
-      "classRoomNo2020": {
+      "classRoomNo2021": {
         "ui:field": "SelectList",
         "ui:placeholder": "कृपया एक चुनिए . . .",
         "ui:options": {
@@ -1096,7 +1076,7 @@
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -1140,11 +1120,11 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
-        "formField": "classAttended2020",
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {
@@ -1168,368 +1148,101 @@
   "memberFormConfig": {
     "schema" : {
       "type": "object",
-      "required": ["optIn2020"],
-      "dependencies": {
-        "optIn2020": {
-          "oneOf": [
-            {
-              "properties": {
-                "optIn2020": {
-                  "enum": [
-                    "Y"
-                  ]
-                },
-                "id": {
-                  "title": "आई.डी.",
-                  "type": "number"
-                },
-                "name": {
-                  "title": "नाम",
-                  "type": "string",
-                  "customValidation": "nameValidator"
-                },
-                "fatherName": {
-                  "title": "पिता / पति का नाम",
-                  "type": "string",
-                  "customValidation": "nameValidator"
-                },
-                "gender": {
-                  "title": "लिंग",
-                  "type": "string",
-                  "enum": ["Male", "Female"],
-                  "enumNames": ["पुरुष", "स्त्री"]
-                },
-                "age": {
-                  "title": "उम्र",
-                  "type": "string",
-                  "customValidation": "ageValidator"
-                },
-                "mobile": {
-                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-                  "type": "string",
-                  "customValidation": "mobileValidator"
-                },
-                "occupation": {
-                  "title": "व्यवसाय (युवा वर्ग हेतु)",
-                  "type": "string"
-                },
-                "education": {
-                  "title": "स्कूल शिक्षा",
-                  "type": "string"
-                },
-                "email": {
-                  "title": "ई-मेल",
-                  "type": "string",
-                  "customValidation": "optionalEmailValidator"
-                },
-                "busStop": {
-                  "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
-                  "type": "string",
-                  "enum": [
-                    "Gandhi Nagar Mandir",
-                    "Kalani Mandir Gali Main Road",
-                    "Kaalani Nagar Mandir Gali Main Road - 2",
-                    "Sadhna Nagar Mandir Gali Main Road",
-                    "Anjani Nagar (60 Ft Road)",
-                    "Smarati Nagar Mandir Gali Bangarda Road",
-                    "Palhar Nagar Bangada Road (Pani Ki Tanki)",
-                    "Indore Wire Factory (Sangam Nagar)",
-                    "Ramchand Nagar Circle (Areodrum Rd)",
-                    "Chatrapati Nagar Main Road (Mahavir Bag)",
-                    "Bada Ganpati",
-                    "Raj Mohalla Opp. Chetyalaya",
-                    "Ramashah Mandir Main Road",
-                    "Kanch Mandir Main Road (Narsign Bajar)",
-                    "Ram Bag Choraha Kusum Takiz Road",
-                    "Chikmanglur Chauraha",
-                    "GSITS Circle",
-                    "Clerk Colony ITI Main Road",
-                    "Bajrang/Nanda Nagar Main Road (Mandir)",
-                    "Sukhaliya MR10 Mandir Gali",
-                    "Vijay Nagar - Krishna Milk Centre",
-                    "78 Scheme (Mandir)",
-                    "Satya Sai Square(Paanch Baalyati Mandir)",
-                    "Tulsi Nagar Main Road(Mahalaxmi Mandir)",
-                    "Jawrawala Mandir",
-                    "Samavsharan Mandir",
-                    "Geeta Bhawan",
-                    "Palasia Circle",
-                    "Kanadiya Road/ Patrakar Square",
-                    "Tilak Nagar Mandir",
-                    "Goyal Nagar Mandir",
-                    "Bangali Choraha (Wine Shop)",
-                    "Sukh Shanti/Uday Nagar Mandir",
-                    "Vaibhav Nagar (Sharma Sweets)",
-                    "Brajeshwari Mandir IDA 140 JMB",
-                    "Milan Heights",
-                    "Bhanwarkuwa BCM",
-                    "Sapna Sangeeta Tower Circle",
-                    "Jain Colony Ahinsa Gate",
-                    "Ranjit Hanuman (Gumashta Nagar)",
-                    "Mahavir Gate(Sudama Nagar)",
-                    "Parivahan Nagar (Nitin Traders Gali)",
-                    "Vaishali Nagar Gopur Choraha",
-                    "Choithram Circle",
-                    "Rajendra Nagar D-Mart Choraha",
-                    "Other Bus Stop",
-                    "Self Vehicle"
-                  ],
-                  "enumNames": [
-                    "गाँधी नगर मंदिर",
-                    "कालानी मंदिर गली मेन रोड",
-                    "कालानी नगर मंदिर गली मेन रोड - 2",
-                    "साधना नगर मंदिर गली मेन रोड",
-                    "अंजनी नगर (60 फुट रोड)",
-                    "स्मृति नगर मंदिर गली (बांगड़दा रोड)",
-                    "पल्हर नगर बांगड़दा रोड (पानी की टंकी)",
-                    "इंदौर तार फैक्टरी (संगम नगर)",
-                    "रामचंद नगर सर्किल (एरोड्रम रोड)",
-                    "छात्रपति नगर मेन रोड (महावीर बाग)",
-                    "बड़ा गणपति",
-                    "राजमोहल्ला (OPP चैत्यालय)",
-                    "रामशाह मंदिर मेन रोड",
-                    "कांच मंदिर मेन रोड (नरसिंह बाजार)",
-                    "रामबाग चौराहा (कुसुम टाकीज़)",
-                    "चिकमंगलूर चौराहा",
-                    "जीएसआईटीएस सर्किल",
-                    "क्लर्क कॉलोनी  ITI मेन रोड",
-                    "बजरंग/नंदा नगर मेन रोड (मंदिर)",
-                    "सुखलिया MR10 मंदिर गली",
-                    "विजय नगर-कृष्णा मिल्क सेंटर",
-                    "78 Scheme (मंदिर)",
-                    "सत्य साई चौराहा (पांच बालयति मदिर)",
-                    "तुलसी नगर मेन रोड (महालक्ष्मी मंदिर)",
-                    "जावरवाला मंदिर",
-                    "समवशरण मंदिर",
-                    "गीता भवन",
-                    "पलासिया सर्किल",
-                    "कनाड़िया रोड /पत्रकार चौराहा",
-                    "तिलक नगर  मंदिर",
-                    "गोयल नगर मंदिर",
-                    "बंगाली चौराहा (वाइन शॉप)",
-                    "सुख शांति/उदय नगर मंदिर",
-                    "वैभव नगर (शर्मा  स्वीट्स)",
-                    "ब्रजेशवरी मंदिर IDA 140 JMB",
-                    "मिलन हाईट्स",
-                    "भॅवरकुआ बीसीएम",
-                    "सपना संगीता टॉवर सर्किल",
-                    "जैन कोलोनी (अहिंसा  गेट)",
-                    "रंजीत हनुमान (गुमाश्ता नगर)",
-                    "महावीर गेट (सुदामा नगर )",
-                    "परिवहन नगर (नितिन ट्रेडर्स गली)",
-                    "वैशाली  नगर गोपुर चौराहा",
-                    "चोइथराम सर्किल",
-                    "राजेंद्र नगर D-MART चौराहा",
-                    "अन्य बस स्टॉप",
-                    "निजी वाहन से"
-                  ]
-                },
-                "classAttended2019": {
-                  "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-                  "type": "string"
-                },
-                "address": {
-                  "title": "पूरा पता",
-                  "type": "string",
-                  "customValidation": "addressValidator"
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "fatherName",
-                "gender",
-                "age",
-                "mobile",
-                "busStop",
-                "address"
-              ]
-            },
-            {
-              "properties": {
-                "optIn2020": {
-                  "enum": [
-                    "N"
-                  ]
-                },
-                "id": {
-                  "title": "आई.डी.",
-                  "type": "number"
-                },
-                "name": {
-                  "title": "नाम",
-                  "type": "string"
-                },
-                "fatherName": {
-                  "title": "पिता / पति का नाम",
-                  "type": "string"
-                },
-                "gender": {
-                  "title": "लिंग",
-                  "type": "string",
-                  "enum": ["Male", "Female"],
-                  "enumNames": ["पुरुष", "स्त्री"]
-                },
-                "age": {
-                  "title": "उम्र",
-                  "type": "string"
-                },
-                "mobile": {
-                  "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
-                  "type": "string"
-                },
-                "occupation": {
-                  "title": "व्यवसाय (युवा वर्ग हेतु)",
-                  "type": "string"
-                },
-                "education": {
-                  "title": "स्कूल शिक्षा",
-                  "type": "string"
-                },
-                "email": {
-                  "title": "ई-मेल",
-                  "type": "string"
-                },
-                "busStop": {
-                  "title": "बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)",
-                  "type": "string",
-                  "enum": [
-                    "Gandhi Nagar Mandir",
-                    "Kalani Mandir Gali Main Road",
-                    "Kaalani Nagar Mandir Gali Main Road - 2",
-                    "Sadhna Nagar Mandir Gali Main Road",
-                    "Anjani Nagar (60 Ft Road)",
-                    "Smarati Nagar Mandir Gali Bangarda Road",
-                    "Palhar Nagar Bangada Road (Pani Ki Tanki)",
-                    "Indore Wire Factory (Sangam Nagar)",
-                    "Ramchand Nagar Circle (Areodrum Rd)",
-                    "Chatrapati Nagar Main Road (Mahavir Bag)",
-                    "Bada Ganpati",
-                    "Raj Mohalla Opp. Chetyalaya",
-                    "Ramashah Mandir Main Road",
-                    "Kanch Mandir Main Road (Narsign Bajar)",
-                    "Ram Bag Choraha Kusum Takiz Road",
-                    "Chikmanglur Chauraha",
-                    "GSITS Circle",
-                    "Clerk Colony ITI Main Road",
-                    "Bajrang/Nanda Nagar Main Road (Mandir)",
-                    "Sukhaliya MR10 Mandir Gali",
-                    "Vijay Nagar - Krishna Milk Centre",
-                    "78 Scheme (Mandir)",
-                    "Satya Sai Square(Paanch Baalyati Mandir)",
-                    "Tulsi Nagar Main Road(Mahalaxmi Mandir)",
-                    "Jawrawala Mandir",
-                    "Samavsharan Mandir",
-                    "Geeta Bhawan",
-                    "Palasia Circle",
-                    "Kanadiya Road/ Patrakar Square",
-                    "Tilak Nagar Mandir",
-                    "Goyal Nagar Mandir",
-                    "Bangali Choraha (Wine Shop)",
-                    "Sukh Shanti/Uday Nagar Mandir",
-                    "Vaibhav Nagar (Sharma Sweets)",
-                    "Brajeshwari Mandir IDA 140 JMB",
-                    "Milan Heights",
-                    "Bhanwarkuwa BCM",
-                    "Sapna Sangeeta Tower Circle",
-                    "Jain Colony Ahinsa Gate",
-                    "Ranjit Hanuman (Gumashta Nagar)",
-                    "Mahavir Gate(Sudama Nagar)",
-                    "Parivahan Nagar (Nitin Traders Gali)",
-                    "Vaishali Nagar Gopur Choraha",
-                    "Choithram Circle",
-                    "Rajendra Nagar D-Mart Choraha",
-                    "Other Bus Stop",
-                    "Self Vehicle"
-                  ],
-                  "enumNames": [
-                    "गाँधी नगर मंदिर",
-                    "कालानी मंदिर गली मेन रोड",
-                    "कालानी नगर मंदिर गली मेन रोड - 2",
-                    "साधना नगर मंदिर गली मेन रोड",
-                    "अंजनी नगर (60 फुट रोड)",
-                    "स्मृति नगर मंदिर गली (बांगड़दा रोड)",
-                    "पल्हर नगर बांगड़दा रोड (पानी की टंकी)",
-                    "इंदौर तार फैक्टरी (संगम नगर)",
-                    "रामचंद नगर सर्किल (एरोड्रम रोड)",
-                    "छात्रपति नगर मेन रोड (महावीर बाग)",
-                    "बड़ा गणपति",
-                    "राजमोहल्ला (OPP चैत्यालय)",
-                    "रामशाह मंदिर मेन रोड",
-                    "कांच मंदिर मेन रोड (नरसिंह बाजार)",
-                    "रामबाग चौराहा (कुसुम टाकीज़)",
-                    "चिकमंगलूर चौराहा",
-                    "जीएसआईटीएस सर्किल",
-                    "क्लर्क कॉलोनी  ITI मेन रोड",
-                    "बजरंग/नंदा नगर मेन रोड (मंदिर)",
-                    "सुखलिया MR10 मंदिर गली",
-                    "विजय नगर-कृष्णा मिल्क सेंटर",
-                    "78 Scheme (मंदिर)",
-                    "सत्य साई चौराहा (पांच बालयति मदिर)",
-                    "तुलसी नगर मेन रोड (महालक्ष्मी मंदिर)",
-                    "जावरवाला मंदिर",
-                    "समवशरण मंदिर",
-                    "गीता भवन",
-                    "पलासिया सर्किल",
-                    "कनाड़िया रोड /पत्रकार चौराहा",
-                    "तिलक नगर  मंदिर",
-                    "गोयल नगर मंदिर",
-                    "बंगाली चौराहा (वाइन शॉप)",
-                    "सुख शांति/उदय नगर मंदिर",
-                    "वैभव नगर (शर्मा  स्वीट्स)",
-                    "ब्रजेशवरी मंदिर IDA 140 JMB",
-                    "मिलन हाईट्स",
-                    "भॅवरकुआ बीसीएम",
-                    "सपना संगीता टॉवर सर्किल",
-                    "जैन कोलोनी (अहिंसा  गेट)",
-                    "रंजीत हनुमान (गुमाश्ता नगर)",
-                    "महावीर गेट (सुदामा नगर )",
-                    "परिवहन नगर (नितिन ट्रेडर्स गली)",
-                    "वैशाली  नगर गोपुर चौराहा",
-                    "चोइथराम सर्किल",
-                    "राजेंद्र नगर D-MART चौराहा",
-                    "अन्य बस स्टॉप",
-                    "निजी वाहन से"
-                  ]
-                },
-                "classAttended2019": {
-                  "title": "पूर्व में किये गए धार्मिक अध्ययन का विवरण",
-                  "type": "string"
-                },
-                "address": {
-                  "title": "पूरा पता",
-                  "type": "string"
-                }
-              }
-            }
-          ],
-          "default": "Y"
-        }
-      },
       "properties": {
-        "optIn2020": {
-          "title": "2020 के शिविर की स्वीकृति ?",
+        "id": {
+          "title": "आई.डी.",
+          "type": "number"
+        },
+        "name": {
+          "title": "नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        },
+        "fatherName": {
+          "title": "पिता / पति का नाम",
+          "type": "string",
+          "customValidation": "nameValidator"
+        },
+        "gender": {
+          "title": "लिंग",
+          "type": "string",
+          "enum": ["Male", "Female"],
+          "enumNames": ["पुरुष", "स्त्री"]
+        },
+        "age": {
+          "title": "उम्र",
+          "type": "string",
+          "customValidation": "onlyNumbersAllowed"
+        },
+        "mobile": {
+          "title": "मोबाइल नं ( WhatsApp / SMS के लिये )",
+          "type": "string",
+          "customValidation": "mobileValidator"
+        },
+        "occupation": {
+          "title": "व्यवसाय (युवा वर्ग हेतु)",
+          "type": "string"
+        },
+        "education": {
+          "title": "स्कूल शिक्षा",
+          "type": "string"
+        },
+        "email": {
+          "title": "ई-मेल",
+          "type": "string",
+          "customValidation": "optionalEmailValidator"
+        },
+        "address": {
+          "title": "पूरा पता",
+          "type": "string",
+          "customValidation": "addressValidator"
+        },
+        "classAttended2021": {
+          "title": "आप क्या अध्ययन करना चाहते हैं ?",
           "type": "string",
           "enum": [
-            "Y",
-            "N"
+            "1",
+            "1E",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7.1",
+            "7.2",
+            "8",
+            "9",
+            "10"
           ],
           "enumNames": [
-            "हाँ",
-            "नहीं"
-          ],
-          "default": "Y"
-        },
-        "backButton": {
-          "type": "string"
-        },
-        "submitButton": {
-          "type": "string"
+            "Level 1 - णमोकार मंत्र, चार मंगल इत्यादि",
+            "Level 1 - Fundamentals of Jainism - English",
+            "Level 2 - पाप, कषाय, गति, द्रव्य इत्यादि",
+            "Level 3 - पंच परमेष्ठी, अष्ट मूलगुण इत्यादि",
+            "Level 4 - आत्मा परमात्मा, षट आवश्यक इत्यादि",
+            "Level 5 - देव, शास्त्र, गुरू ,सात तत्त्व की भूल इत्यादि",
+            "Level 6 -  छहढाला",
+            "Level 7.1 – तत्त्वार्थसूत्र",
+            "Level 7.2 - वृहद द्रव्यसंग्रह",
+            "Level 8 – प्रवचनसार",
+            "Level 9 - गोम्मटसार जीवकांड",
+            "जैन धर्म की कहानियाँ"
+          ]
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "fatherName",
+        "gender",
+        "age",
+        "mobile",
+        "address",
+        "classAttended2021"
+      ]
     },
     "uiSchema" : {
-      "ui:order": ["optIn2020",
+      "ui:order": [
         "id",
         "name",
         "fatherName",
@@ -1539,61 +1252,9 @@
         "occupation",
         "education",
         "email",
-        "busStop",
-        "classAttended2019",
         "address",
-        "backButton",
-        "submitButton"
+        "classAttended2021"
       ],
-      "backButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "submitButton": {
-        "ui:options": {
-          "label": false,
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 6
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "optIn2020": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
       "name": {
         "ui:field": "InputField",
         "ui:options": {
@@ -1714,67 +1375,15 @@
           }
         }
       },
-      "classAttended2019": {
+      "address": {
         "ui:field": "InputField",
         "ui:options": {
           "style": {
             "fieldStyle": {
               "height": "auto"
-            }
-          },
-          "type": "string",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 4
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "address": {
-        "ui:field": "InputField",
-        "ui:widget": "textarea",
-        "ui:options": {
-          "style": {
-            "titleStyle": {
-            },
-            "fieldStyle": {
-              "height": "35px"
-            },
-            "fieldWrapper": {
-              "size": {
-                "xs": 12,
-                "sm": 12,
-                "md": 12,
-                "lg": 5.9
-              }
             }
           },
           "type": "text",
-          "col": {
-            "size": {
-              "xs": 12,
-              "sm": 12,
-              "md": 6,
-              "lg": 8
-            },
-            "padding": "0 10px 0 10px"
-          }
-        }
-      },
-      "busStop": {
-        "ui:field": "SelectList",
-        "ui:placeholder": "कृपया एक चुनिए . . .",
-        "ui:options": {
-          "style": {
-            "fieldStyle": {
-              "height": "auto"
-            }
-          },
-          "type": "string",
           "col": {
             "size": {
               "xs": 12,
@@ -1847,12 +1456,33 @@
             "padding": "0 10px 0 10px"
           }
         }
+      },
+      "classAttended2021": {
+        "ui:field": "SelectList",
+        "ui:placeholder": "कृपया एक चुनिए . . .",
+        "ui:options": {
+          "style": {
+            "fieldStyle": {
+              "height": "auto"
+            }
+          },
+          "type": "string",
+          "col": {
+            "size": {
+              "xs": 12,
+              "sm": 12,
+              "md": 6,
+              "lg": 4
+            },
+            "padding": "0 10px 0 10px"
+          }
+        }
       }
     },
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -1892,11 +1522,11 @@
         "dataType": "string"
       },
       {
-        "formField": "busStop",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {
@@ -1920,16 +1550,16 @@
   "onlyOptInFormConfig": {
     "schema": {
       "type": "object",
-      "required": ["optIn2020"],
+      "required": ["optIn2021"],
       "properties": {
         "name": {
           "title": "नाम",
           "type": "string",
           "customValidation": "nameValidator"
         },
-        "optIn2020": {
+        "optIn2021": {
           "type": "string",
-          "title": "2020 के शिविर की स्वीकृति ?",
+          "title": "2021 के शिविर की स्वीकृति ?",
           "enum": [
             "Y",
             "N"
@@ -1943,7 +1573,7 @@
       }
     },
     "uiSchema": {
-      "optIn2020": {
+      "optIn2021": {
         "ui:widget": "radio",
         "ui:options": {
           "inline": true,
@@ -1974,7 +1604,7 @@
     "data": {},
     "defaultMemberDataFormat": [
       {
-        "formField": "optIn2020",
+        "formField": "optIn2021",
         "dataType": "string"
       },
       {
@@ -2018,11 +1648,11 @@
         "dataType": "string"
       },
       {
-        "formField": "classAttended2019",
+        "formField": "classAttended2020",
         "dataType": "string"
       },
       {
-        "formField": "classAttended2020",
+        "formField": "classAttended2021",
         "dataType": "string"
       },
       {

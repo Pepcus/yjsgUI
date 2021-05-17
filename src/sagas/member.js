@@ -347,11 +347,11 @@ export function* updateMembersOptInStatusSaga(action) {
     const tenant = yield select(getTenantName);
     const optInMembersConfig = { ...apiConfig, urlValuesMap: { selectedMembersId: optedInMembersIds }, data: JSON.stringify(
         {
-          optIn2020: 'Y'
+          optIn2021: 'Y'
         })};
     const notOptedInMembersConfig = { ...apiConfig, urlValuesMap: { selectedMembersId: notOptedInMembersIds }, data: JSON.stringify(
         {
-          optIn2020: 'N'
+          optIn2021: 'N'
         }
       ) };
     if (optedInMembersIds) {

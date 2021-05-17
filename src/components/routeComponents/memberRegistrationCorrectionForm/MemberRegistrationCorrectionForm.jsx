@@ -29,7 +29,7 @@ import {
   getFormData,
   getTransformedErrors,
   formValidators,
-  getBusNumberFromBusStop,
+  // getBusNumberFromBusStop,
 } from 'utils/form';
 import { getApplicationTenant, getBusCoordinators } from 'reducers/assetFilesReducer';
 import {
@@ -39,13 +39,13 @@ import {
 } from 'utils/validations';
 import { getConstants } from 'reducers/constants';
 
+import Loader from 'components/common/Loader';
+import BusStopChangeWarningPopUp
+  from 'components/routeComponents/memberRegistrationCorrectionForm/BusStopChangeWarningPopUp';
 import CorrectionsForm from './CorrectionsForm';
 import FormUpdateSuccessMessage from './FormUpdateSuccessMessage';
 import InvalidMemberPopUp from './InvalidMemberPopUp';
 import RedirectToRoute from './RedirectToRoute';
-import Loader from 'components/common/Loader';
-import BusStopChangeWarningPopUp
-  from 'components/routeComponents/memberRegistrationCorrectionForm/BusStopChangeWarningPopUp';
 
 const SubmitButtonStyled = styled(Button)`
     ${({ theme }) => theme.media.down('lg')`
@@ -74,7 +74,6 @@ const BackButtonStyled = styled(Button)`
 /**
  * MemberRegistrationCorrectionForm render member registration correction form.
  * @type {Class}
- * @return {HTML} Correction form
  */
 class MemberRegistrationCorrectionForm extends Component {
   constructor(props) {
@@ -103,27 +102,32 @@ class MemberRegistrationCorrectionForm extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    const { memberData, setLoadingState } = this.props;
+    const { memberData, setLoadingState, isMemberFetched } = this.props;
     const { onlyOptInForm } = this.state;
-    // If member data is not present in props then it will get from session store
-    // for maintain the member credential in case member get back to member correction form
-    const registeredMemberData = getRegisteredMemberData({ memberData });
-    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
+    if (isMemberFetched) {
+      // If member data is not present in props then it will get from session store
+      // for maintain the member credential in case member get back to member correction form
+      const registeredMemberData = getRegisteredMemberData({ memberData });
+      const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
 
-    setLoadingState(false);
-    this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
+      setLoadingState(false);
+      this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { memberData, setLoadingState } = nextProps;
+    const { memberData, setLoadingState, isMemberFetched } = nextProps;
     const { onlyOptInForm } = this.state;
-    // get member data from session if present
-    // If member data is not present in props then it will get from session store
-    // for maintain the member credential in case member get back to member correction form
-    const registeredMemberData = getRegisteredMemberData({ memberData });
-    const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
-    setLoadingState(false);
-    this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
+
+    if (isMemberFetched) {
+      // get member data from session if present
+      // If member data is not present in props then it will get from session store
+      // for maintain the member credential in case member get back to member correction form
+      const registeredMemberData = getRegisteredMemberData({ memberData });
+      const prePopulateOptInMemberData = prePopulateOptIn({ memberData: registeredMemberData });
+      setLoadingState(false);
+      this.getFormConfig({ prePopulateOptInMemberData, registeredMemberData, onlyOptInForm });
+    }
   }
 
   componentWillUnmount() {
@@ -171,8 +175,6 @@ class MemberRegistrationCorrectionForm extends Component {
             onlyOptInForm,
             tenant: tenant ? tenant : 'default',
             member: this.state.member,
-            renderBackButton: this.renderBackButton,
-            renderSubmitButtons: this.renderSubmitButtons,
             formConfig,
           }),
           onlyOptInForm,
@@ -229,14 +231,9 @@ class MemberRegistrationCorrectionForm extends Component {
    * Redirect to previous location
    */
   redirectToPreviousLocation = () => {
-    const { ADMIN } = USER_TYPES;
-    const { user } = this.props;
     this.setState({
       isPreviousLocation: true,
     });
-    if (user !== ADMIN) {
-      window.location.href = window.location.origin
-    }
   };
 
   /**
@@ -272,7 +269,7 @@ class MemberRegistrationCorrectionForm extends Component {
     delete member.submitButton;
     event.preventDefault();
     if (isOptInEnable) {
-      if (member.optIn2020 === 'N') {
+      if (member.optIn2021 === 'N') {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -305,7 +302,7 @@ class MemberRegistrationCorrectionForm extends Component {
     const { isOptInEnable } = config;
     event.preventDefault();
     if (isOptInEnable) {
-      if (!isEmpty(member.optIn2020)) {
+      if (!isEmpty(member.optIn2021)) {
         this.setState({
           isSubmitTriggered: true,
         });
@@ -329,7 +326,7 @@ class MemberRegistrationCorrectionForm extends Component {
       'enum': THIS_INFORMATION_IS_COMPULSORY_MESSAGE,
     };
     if (isOptInEnable) {
-      if (member.optIn2020 === 'N') {
+      if (member.optIn2021 === 'N') {
         return [];
       }
       if (mandatoryField) {
@@ -367,7 +364,8 @@ class MemberRegistrationCorrectionForm extends Component {
       </BackButtonStyled>
     );
   };
-
+  /*
+  Commenting out this code for now as it could be useful in future.
   handleMemberBusStopChange = (busStopValue) => {
     const { ADMIN, MEMBER } = USER_TYPES;
     const { user } = this.props;
@@ -379,7 +377,7 @@ class MemberRegistrationCorrectionForm extends Component {
           isBusStopChangeWarningPopupVisible: true,
         });
       }
-      /*
+      /!*
       // TODO: This requirement is currently not been finalized. Waiting for the approval.
       // if user is admin then prepopulate the designated busNumber on change of busStop.
       if (user === ADMIN) {
@@ -398,10 +396,11 @@ class MemberRegistrationCorrectionForm extends Component {
           },
         })
       }
-      */
+      *!/
     }
   };
 
+  */
   onConfirmBusStopChangeWarning = () => {
     this.setState({
       hasUserSeenBusStopChangeWarning: true,
@@ -435,11 +434,12 @@ class MemberRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
       hasError: !isEmpty(errors),
     });
-    if (previousFormData.busStop !== formData.busStop) {
-      this.handleMemberBusStopChange(formData.busStop);
-    }
+    // if (previousFormData.busStop !== formData.busStop) {
+    //   this.handleMemberBusStopChange(formData.busStop);
+    // }
   };
-
+  /*
+  Commenting out this code for now as it could be useful in future
   renderBusStopChangeWarningPopup = () => {
     const {
       hasUserSeenBusStopChangeWarning,
@@ -456,18 +456,18 @@ class MemberRegistrationCorrectionForm extends Component {
     }
     return null;
   }
-
+  */
   render() {
     const {
       context,
       isMemberUpdated,
-      isFetch,
+      isMemberFetched,
       isUpdatedReset,
       memberData,
       tenant,
       user,
       constants,
-      config
+      config,
     } = this.props;
 
     const {
@@ -480,9 +480,10 @@ class MemberRegistrationCorrectionForm extends Component {
       onlyOptInForm,
       formData,
     } = this.state;
-    if (isFetch && memberData && !isEmpty(formConfig)) {
+    if (isMemberFetched && memberData && !isEmpty(formConfig)) {
       return (
         <CorrectionsForm
+          constants={constants}
           formData={formData}
           changeIsOnlyOptIn={this.changeIsOnlyOptIn}
           formConfig={formConfig}
@@ -511,13 +512,10 @@ class MemberRegistrationCorrectionForm extends Component {
             isUpdatedReset={isUpdatedReset}
             redirectToPreviousLocation={this.redirectToPreviousLocation}
           />
-          {
-            this.renderBusStopChangeWarningPopup()
-          }
         </CorrectionsForm>
       );
     }
-    if (isFetch && isEmpty(memberData)) {
+    if (isMemberFetched && isEmpty(memberData)) {
       return (
         <Box>
           <InvalidMemberPopUp
@@ -532,7 +530,7 @@ class MemberRegistrationCorrectionForm extends Component {
     }
     return (
       <Loader isLoading />
-    )
+    );
   }
 }
 
@@ -544,7 +542,7 @@ MemberRegistrationCorrectionForm.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  isFetch: PropTypes.bool,
+  isMemberFetched: PropTypes.bool,
   isMemberUpdated: PropTypes.bool,
   isMemberFetchedFromUrlParams: PropTypes.bool,
   isUpdatedReset: PropTypes.func,
@@ -562,7 +560,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
   constants: {},
   context: {},
   id: '',
-  isFetch: false,
+  isMemberFetched: false,
   isMemberUpdated: false,
   isMemberFetchedFromUrlParams: false,
   isUpdatedReset: () => {},
@@ -577,7 +575,7 @@ MemberRegistrationCorrectionForm.defaultProps = {
 const mapStateToProps = state => ({
   constants: getConstants(state),
   id: getUserId(state),
-  isFetch: isFetched(state),
+  isMemberFetched: isFetched(state),
   isMemberUpdated: isUpdated(state),
   memberData: getMember(state),
   secretKey: getUserSecretKey(state),

@@ -84,6 +84,7 @@ const BoxStyled = styled(Box)`
 
 const ImageStyled = styled.img`
   width: 100%;
+  height: 50%;
 `;
 
 const TypographyStyled = styled(Typography)`

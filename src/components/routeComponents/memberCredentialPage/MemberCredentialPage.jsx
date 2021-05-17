@@ -296,7 +296,7 @@ class MemberCredentialPage extends Component {
                 uiSchema={uiSchema}
                 externalSubmission
                 showErrorList={false}
-                liveValidate
+                // liveValidate
                 formData={credentials}
                 onChange={this.onChange}
                 transformErrors={this.transformErrors}
